@@ -3073,6 +3073,836 @@ On iOS devices with os version < 8.0 battery level divisible by 5
 <p>Event received when device unplugged from charger and battery level less then
 5%</p>
 
+          <h2 id="camera-module">Camera Module</h2>
+
+<p>This module provides the ability to taking photos and videos from camera and getting its from photo album.</p>
+
+<p>Developer can receive photo&rsquo;s data directly to html in base64 format and can save photo and video file to <a href="#app-storage-module">App Storage</a>.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">DestinationType</code> constant</li>
+<li><code class="prettyprint">EncodingType</code> constant</li>
+<li><code class="prettyprint">MediaType</code> constant</li>
+<li><code class="prettyprint">PictureSourceType</code> constant</li>
+<li><code class="prettyprint">Direction</code> constant</li>
+<li><code class="prettyprint">getMedia</code> function</li>
+<li><code class="prettyprint">takeMedia</code> function</li>
+<li><code class="prettyprint">chooseMedia</code> function</li>
+<li><code class="prettyprint">recordVideo</code> function</li>
+<li><code class="prettyprint">chooseVideo</code> function</li>
+<li><code class="prettyprint">capturePhoto</code> function</li>
+<li><code class="prettyprint">choosePhoto</code> function</li>
+<li><code class="prettyprint">cleanup</code> function</li>
+</ul>
+
+<h3 id="constants">Constants</h3>
+
+<h4 id="destinationtype">DestinationType</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This enum contains all variants of saving media content.</p>
+
+<ul>
+<li><code class="prettyprint">camera.DestinationType.DATA_URL</code></li>
+</ul>
+
+<p>With this destination type methods will return photos directly to html in base64 encoding.</p>
+
+<p>This type supported only for photos. Videos is too large for it.</p>
+
+<ul>
+<li><code class="prettyprint">camera.DestinationType.APP_STORAGE</code></li>
+</ul>
+
+<p>With this destination type methods will save photos or video to <a href="#app-storage-module">App Storage</a>.</p>
+
+<h4 id="encodingtype">EncodingType</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This enum contains variants of photos file&rsquo;s encoding. Used only for image content.</p>
+
+<ul>
+<li><code class="prettyprint">camera.EncodingType.JPEG</code></li>
+</ul>
+
+<p>Photo will encoded in jpeg format.</p>
+
+<ul>
+<li><code class="prettyprint">camera.EncodingType.PNG</code></li>
+</ul>
+
+<p>Photo will encoded in png format.</p>
+
+<h4 id="mediatype">MediaType</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This enum contains variants of media to select from.</p>
+
+<ul>
+<li><code class="prettyprint">camera.MediaType.PICTURE</code></li>
+</ul>
+
+<p>Allows selection of still pictures only.</p>
+
+<ul>
+<li><code class="prettyprint">camera.MediaType.VIDEO</code></li>
+</ul>
+
+<p>Allows selection of video only.</p>
+
+<ul>
+<li><code class="prettyprint">camera.MediaType.ALLMEDIA</code></li>
+</ul>
+
+<p>Allows selection from all media types.</p>
+
+<h4 id="picturesourcetype">PictureSourceType</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This enum contains variants of sources.</p>
+
+<ul>
+<li><code class="prettyprint">camera.PictureSourceType.PHOTOLIBRARY</code></li>
+</ul>
+
+<p>Chooses media from photo library.</p>
+
+<ul>
+<li><code class="prettyprint">camera.PictureSourceType.CAMERA</code></li>
+</ul>
+
+<p>Takes media from camera.</p>
+
+<ul>
+<li><code class="prettyprint">camera.PictureSourceType.SAVEDPHOTOALBUM</code></li>
+</ul>
+
+<p>Chooses media from saved photo album.</p>
+
+<h4 id="direction">Direction</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Chooses the camera to use (front- or back-facing).</p>
+
+<ul>
+<li><code class="prettyprint">camera.Direction.BACK</code></li>
+</ul>
+
+<p>Chooses back camera to use.</p>
+
+<ul>
+<li><code class="prettyprint">camera.Direction.FRONT</code></li>
+</ul>
+
+<p>Chooses front camera to use.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="getmedia">getMedia</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">sourceType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">PictureSourceType</span><span class="p">.</span><span class="nx">CAMERA</span><span class="p">,</span>  
+    <span class="na">encodingType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">EncodingType</span><span class="p">.</span><span class="nx">JPEG</span><span class="p">,</span>  
+    <span class="na">mediaType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">MediaType</span><span class="p">.</span><span class="nx">PICTURE</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">cameraDirection</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">BACK</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">getMedia</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.getMedia( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows taking or choosing all types of media.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">destinationType</code></p>
+
+<p>See DestinationType constants. Chooses destination for saving media. By default this property is <strong>camera.DestinationType.APP_STORAGE</strong></p>
+
+<p>* <code class="prettyprint">sourceType</code></p>
+
+<p>See PictureSourceType constants. Chooses media source. By default this property is <strong>camera.PictureSourceType.CAMERA</strong></p>
+
+<p>* <code class="prettyprint">encodingType</code></p>
+
+<p>See EncodingType constants. Chooses photos file&rsquo;s encoding. Used only for image content. By default this property is <strong>camera.EncodingType.JPEG</strong></p>
+
+<p>* <code class="prettyprint">mediaType</code></p>
+
+<p>See MediaType constants. Chooses supported type of media. By default this property is <strong>camera.MediaType.PICTURE</strong></p>
+
+<p>* <code class="prettyprint">cameraDirection</code></p>
+
+<p>See Direction constants. Chooses the camera to use. By default this property is <strong>camera.Direction.BACK</strong></p>
+
+<p>* <code class="prettyprint">quality</code></p>
+
+<p>An Interger value. The value range is 0-100. Chooses quality for jpeg. By default this property is <strong>50</strong>.</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="takemedia">takeMedia</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">encodingType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">EncodingType</span><span class="p">.</span><span class="nx">JPEG</span><span class="p">,</span>  
+    <span class="na">mediaType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">MediaType</span><span class="p">.</span><span class="nx">PICTURE</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">cameraDirection</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">BACK</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">takeMedia</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.takeMedia( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows taking all types of media. It use <a href="#getmedia">getMedia</a> method with predefined options.sourceType = <strong>camera.PictureSourceType.CAMERA</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">destinationType</code></p>
+
+<p>See DestinationType constants. Chooses destination for saving media. By default this property is <strong>camera.DestinationType.APP_STORAGE</strong></p>
+
+<p>* <code class="prettyprint">encodingType</code></p>
+
+<p>See EncodingType constants. Chooses photos file&rsquo;s encoding. Used only for image content. By default this property is <strong>camera.EncodingType.JPEG</strong></p>
+
+<p>* <code class="prettyprint">mediaType</code></p>
+
+<p>See MediaType constants. Chooses supported type of media. By default this property is <strong>camera.MediaType.PICTURE</strong></p>
+
+<p>* <code class="prettyprint">cameraDirection</code></p>
+
+<p>See Direction constants. Chooses the camera to use. By default this property is <strong>camera.Direction.BACK</strong></p>
+
+<p>* <code class="prettyprint">quality</code></p>
+
+<p>An Interger value. The value range is 0-100. Chooses quality for jpeg. By default this property is <strong>50</strong>.</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="choosemedia">chooseMedia</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">encodingType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">EncodingType</span><span class="p">.</span><span class="nx">JPEG</span><span class="p">,</span>  
+    <span class="na">mediaType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">MediaType</span><span class="p">.</span><span class="nx">PICTURE</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">cameraDirection</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">BACK</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">chooseMedia</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.chooseMedia( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows choosing all types of media. It use <a href="#getmedia">getMedia</a> method with predefined options.sourceType = <strong>camera.PictureSourceType.PHOTOLIBRARY</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">destinationType</code></p>
+
+<p>See DestinationType constants. Chooses destination for saving media. By
+default this property is <strong>camera.DestinationType.APP_STORAGE</strong></p>
+
+<p>* <code class="prettyprint">encodingType</code></p>
+
+<p>See EncodingType constants. Chooses photos file&rsquo;s encoding. Used only for
+image content. By default this property is <strong>camera.EncodingType.JPEG</strong></p>
+
+<p>* <code class="prettyprint">mediaType</code></p>
+
+<p>See MediaType constants. Chooses supported type of media. By default this
+property is <strong>camera.MediaType.PICTURE</strong></p>
+
+<p>* <code class="prettyprint">quality</code></p>
+
+<p>An Interger value. The value range is 0-100. Chooses quality for jpeg. By
+default this property is <strong>50</strong>.</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default
+this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this
+property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="recordvideo">recordVideo</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">cameraDirection</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">BACK</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">recordVideo</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Video saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.recordVideo( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows recording video from camera. It use <a href="#takemedia">takeMedia</a> method with predefined options.mediaType = <strong>camera.MediaType.VIDEO</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">cameraDirection</code></p>
+
+<p>See Direction constants. Chooses the camera to use. By default this property
+is <strong>camera.Direction.BACK</strong></p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default
+this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this
+property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="choosevideo">chooseVideo</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">chooseVideo</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Video saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.chooseVideo( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows choosing video from photo library. It use <a href="#choosemedia">chooseMedia</a> method with predefined options.mediaType = <strong>camera.MediaType.VIDEO</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default
+this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this
+property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li>`errorCallback_optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="capturephoto">capturePhoto</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">encodingType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">EncodingType</span><span class="p">.</span><span class="nx">JPEG</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">cameraDirection</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">Direction</span><span class="p">.</span><span class="nx">BACK</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">capturePhoto</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.capturePhoto( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows capturing photo from camera. It use <a href="#takemedia">takeMedia</a> method with predefined options.mediaType = <strong>camera.MediaType.PICTURE</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">destinationType</code></p>
+
+<p>See DestinationType constants. Chooses destination for saving media. By
+default this property is <strong>camera.DestinationType.APP_STORAGE</strong></p>
+
+<p>* <code class="prettyprint">encodingType</code></p>
+
+<p>See EncodingType constants. Chooses photos file&rsquo;s encoding. Used only for
+image content. By default this property is <strong>camera.EncodingType.JPEG</strong></p>
+
+<p>* <code class="prettyprint">cameraDirection</code></p>
+
+<p>See Direction constants. Chooses the camera to use. By default this property
+is <strong>camera.Direction.BACK</strong></p>
+
+<p>* <code class="prettyprint">quality</code></p>
+
+<p>An Interger value. The value range is 0-100. Chooses quality for jpeg. By
+default this property is <strong>50</strong>.</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default
+this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this
+property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="choosephoto">choosePhoto</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">quality</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span>  
+    <span class="na">destinationType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">DestinationType</span><span class="p">.</span><span class="nx">APP_STORAGE</span><span class="p">,</span>  
+    <span class="na">encodingType</span><span class="p">:</span> <span class="nx">camera</span><span class="p">.</span><span class="nx">EncodingType</span><span class="p">.</span><span class="nx">JPEG</span><span class="p">,</span>  
+    <span class="na">allowEdit</span><span class="p">:</span> <span class="kc">true</span><span class="p">,</span>  
+    <span class="na">saveToPhotoAlbum</span><span class="p">:</span> <span class="kc">true</span><span class="p">};</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">choosePhoto</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Image saved for key: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">key</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.choosePhoto( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method allows choosing photo from photo library. It use <a href="#choosemedia">chooseMedia</a> method with predefined options.mediaType = <strong>camera.MediaType.PICTURE</strong></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">destinationTyp</code></p>
+
+<p>See DestinationType constants. Chooses destination for saving media. By
+default this property is <strong>camera.DestinationType.APP_STORAGE</strong></p>
+
+<p>* <code class="prettyprint">encodingType</code></p>
+
+<p>See EncodingType constants. Chooses photos file&rsquo;s encoding. Used only for
+image content. By default this property is <strong>camera.EncodingType.JPEG</strong></p>
+
+<p>* <code class="prettyprint">quality</code></p>
+
+<p>An Interger value. The value range is 0-100. Chooses quality for jpeg. By
+default this property is <strong>50</strong>.</p>
+
+<p>* <code class="prettyprint">allowEdit</code></p>
+
+<p>A Boolean value. Allows editing media after taking or choosing. By default
+this property is <strong>true</strong></p>
+
+<p>* <code class="prettyprint">saveToPhotoAlbum</code></p>
+
+<p>A Boolean value. Save media to photo album after taking it. By default this
+property is <strong>true</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">data</code> - Data in base64 returned if destinationType is equal to <strong>camera.DestinationType.DATA_URL</strong>. (String)</p>
+
+<p>* <code class="prettyprint">contentType</code> - Content Type of the data. (String)</p>
+
+<p>* <code class="prettyprint">key</code> - The key in <a href="#app-storage-module">App Storage</a> which was saved for media. (String)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="cleanup">cleanup</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+<span class="nx">camera</span><span class="p">.</span><span class="nx">cleanup</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"All media was deleted"</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">camera.cleanup( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Cleanup all records with media from <a href="#camera-module">Camera</a> in <a href="#app-storage-module">App Storage</a></p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always null.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+          <h2 id="compass-module">Compass Module</h2>
+
+<p>This module provides the ability to getting compass readings.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">headingInfo</code> object</li>
+<li><code class="prettyprint">watchHeading</code> function</li>
+<li><code class="prettyprint">clearWatch</code> function</li>
+</ul>
+
+<h3 id="objects">Objects</h3>
+
+<h4 id="headinginfo">headingInfo</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This Object contains information about compass heading.</p>
+
+<h5 id="keys">Keys</h5>
+
+<ul>
+<li><code class="prettyprint">timestamp</code> required</li>
+</ul>
+
+<p>A Date value. Timestamp of heading information.</p>
+
+<ul>
+<li><code class="prettyprint">heading</code> required</li>
+</ul>
+
+<p>A Float value. Universal heading. The value 0 means the device is pointed toward magnetic north, 90 means it is pointed east, 180 means it is pointed south, and so on. Must work on all device.</p>
+
+<ul>
+<li><code class="prettyprint">magneticHeading</code> optional</li>
+</ul>
+
+<p>A Float value. The value in this property represents the heading relative to the magnetic North Pole, which is different from the geographic North Pole. The value 0 means the device is pointed toward magnetic north, 90 means it is pointed east, 180 means it is pointed south, and so on.</p>
+
+<ul>
+<li><code class="prettyprint">trueHeading</code> optional</li>
+</ul>
+
+<p>A Float value. The value in this property represents the heading relative to the geographic North Pole. The value 0 means the device is pointed toward magnetic north, 90 means it is pointed east, 180 means it is pointed south, and so on.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="watchheading">watchHeading</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">watch_id</span> <span class="o">=</span> <span class="nx">compass</span><span class="p">.</span><span class="nx">watchHeading</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">headingInfo</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Heading: "</span> <span class="o">+</span> <span class="nx">headingInfo</span><span class="p">.</span><span class="nx">heading</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">compass.watchHeading( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Starts watching compass heading information.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is <code class="prettyprint">headingInfo</code> object.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>A String value. This value used as parameter of clearWatch method to stop updating.</li>
+</ul>
+
+<h4 id="clearwatch">clearWatch</h4>
+<pre class="highlight javascript"><code><span class="nx">compass</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span> <span class="nx">watch_id</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">compass.clearWatch( watchId )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stops heading updating.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">watchId</code> required</li>
+</ul>
+
+<p>Watch identifier which returned <code class="prettyprint">watchHeading</code> method.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>No return value.</li>
+</ul>
+
           <h2 id="device-module">Device Module</h2>
 
 <p>Getting basic information about device.<br>
@@ -4019,6 +4849,976 @@ the device entered or exited from the region and application was in background.<
 <li>No return value.</li>
 </ul>
 
+          <h2 id="launch-module">Launch Module</h2>
+
+<p>This module provides support for opening url in external browser and opening
+external map application with specific location coordinates or addresses.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">browser</code> function</li>
+<li><code class="prettyprint">map</code> function</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="browser">browser</h4>
+<pre class="highlight javascript"><code><span class="nx">launch</span><span class="p">.</span><span class="nx">browser</span><span class="p">(</span> <span class="p">{</span><span class="na">url</span><span class="p">:</span><span class="s2">"http://www.google.com"</span><span class="p">},</span>  
+<span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">launch.browser( options, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Opens links in external browser.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">url</code></p>
+
+<p>A String value. The key must contains URL.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="map">map</h4>
+<pre class="highlight javascript"><code><span class="nx">launch</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span> <span class="p">{</span><span class="na">address</span><span class="p">:</span><span class="s2">"1 Infinite Loop Cupertino"</span><span class="p">},</span>  
+<span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">launch.map( options, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Opens external map application with specific location coordinates or
+addresses.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code>required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">address</code></p>
+
+<p>A String value. The key can contains address.</p>
+
+<p>* <code class="prettyprint">coordinates</code></p>
+
+<p>An Object value. The key can contains location coordinates.</p>
+
+<p>Object must contains 2 properties:</p>
+
+<p>* <code class="prettyprint">latitude</code> - latitude. (Float)</p>
+
+<p>* <code class="prettyprint">longitude</code> - longitude. (Float)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+          <h2 id="main-menu-module">Main Menu Module</h2>
+
+<p>This module used for working with application main menu. Developer can add and remove custom menu items from it.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">menuItem</code> object</li>
+<li><code class="prettyprint">updateTitle</code> function</li>
+<li><code class="prettyprint">addCustomItem</code> function</li>
+<li><code class="prettyprint">removeCustomItem</code> function</li>
+<li><code class="prettyprint">removeAllCustomItems</code> function</li>
+<li><code class="prettyprint">showMenu</code> function</li>
+<li><code class="prettyprint">bounceMenu</code> function</li>
+<li><code class="prettyprint">mainMenu.customItemSelected</code> event</li>
+</ul>
+
+<h3 id="objects">Objects</h3>
+
+<h4 id="menuitem">menuItem</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">menuItem</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="s2">"1"</span><span class="p">,</span>  
+        <span class="na">title</span><span class="p">:</span> <span class="s2">"Favorites"</span><span class="p">,</span>  
+        <span class="na">icon</span><span class="p">:</span> <span class="s2">"http://server.com/path_to_icon"</span><span class="p">};</span>
+</code></pre>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This Object contains information about custom menu item.</p>
+
+<h5 id="keys">Keys</h5>
+
+<ul>
+<li><code class="prettyprint">id</code> optional</li>
+</ul>
+
+<p>The property with a String value. The identifier of the custom menu item.</p>
+
+<ul>
+<li><code class="prettyprint">title</code> required</li>
+</ul>
+
+<p>The property with a String value. The title of the custom menu item.</p>
+
+<ul>
+<li><code class="prettyprint">icon</code> optional</li>
+</ul>
+
+<p>The property with a String value. The icon URL of the custom menu item.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="updatetitle">updateTitle</h4>
+<pre class="highlight javascript"><code><span class="nx">mainMenu</span><span class="p">.</span><span class="nx">updateTitle</span><span class="p">(</span> <span class="s2">"Test Application"</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Title updated"</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.updateTitle( title, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Updates title for the items group in main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">title</code> required</li>
+</ul>
+
+<p>A String Value. New title for the items group in main menu.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always null.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="addcustomitem">addCustomItem</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">menuItem</span> <span class="o">=</span> <span class="p">{</span><span class="na">title</span><span class="p">:</span> <span class="s2">"Favorites"</span><span class="p">,</span> <span class="na">icon</span><span class="p">:</span> <span class="s2">"http://server.com/path_to_icon"</span><span class="p">};</span>
+
+<span class="nx">mainMenu</span><span class="p">.</span><span class="nx">addCustomItem</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Item added with id: "</span><span class="o">+</span><span class="nx">info</span><span class="p">.</span><span class="nx">item</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.addCustomItem( item, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Adds new application custom item to the main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">item</code> required</li>
+</ul>
+
+<p><code class="prettyprint">menuItem</code> object. Contains information about new custom menu item. If <code class="prettyprint">id</code> is not specified it will be generated in application.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">item</code> - The menuItem object. (Object)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="removecustomitem">removeCustomItem</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">item</span> <span class="o">=</span> <span class="p">{</span> <span class="na">id</span><span class="p">:</span> <span class="s2">"1"</span> <span class="p">};</span>  
+<span class="nx">mainMenu</span><span class="p">.</span><span class="nx">removeCustomItem</span><span class="p">(</span> <span class="nx">item</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Item removed."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.removeCustomItem( item, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Deletes exist item from the main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">item</code> required</li>
+</ul>
+
+<p><code class="prettyprint">menuItem</code> object. Contains information about the custom menu item. Must contain <code class="prettyprint">id</code>. Other fields ignored.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">item</code> - The menuItem object. (Object)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="removeallcustomitems">removeAllCustomItems</h4>
+<pre class="highlight javascript"><code><span class="nx">mainMenu</span><span class="p">.</span><span class="nx">removeAllCustomItem</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"All Items removed."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.removeAllCustomItems( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Deletes all items for the current application from the main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always <strong>null</strong></p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="showmenu">showMenu</h4>
+<pre class="highlight javascript"><code><span class="nx">mainMenu</span><span class="p">.</span><span class="nx">showMenu</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Menu showed."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.showMenu( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Opens the main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always <strong>null</strong></p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="bouncemenu">bounceMenu</h4>
+<pre class="highlight javascript"><code><span class="nx">mainMenu</span><span class="p">.</span><span class="nx">bounceMenu</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Menu bounced."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">mainMenu.bounceMenu( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Bounces the main menu.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always <strong>null</strong></p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h3 id="events">Events</h3>
+
+<h4 id="mainmenu.customitemselected">mainMenu.customItemSelected</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Event received when user selected application custom item in the main menu.</p>
+
+<h5 id="callback-arguments">Callback Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">item</code> - The <code class="prettyprint">menuItem</code> object. (Object)</li>
+</ul>
+
+          <h2 id="messaging-module">Messaging Module</h2>
+
+<p>This module provides the ability to send email and sms messages with
+attachments (If device supported its) from <a href="#app-storage-module">App Storage</a>.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">supportAttachments</code> function</li>
+<li><code class="prettyprint">sms</code> function</li>
+<li><code class="prettyprint">email</code> function</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="supportattachments">supportAttachments</h4>
+<pre class="highlight javascript"><code><span class="nx">messaging</span><span class="p">.</span><span class="nx">supportAttachments</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">sms</span> <span class="o">&amp;&amp;</span> <span class="nx">info</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"SMS and Email attachments supported"</span><span class="p">);</span>  
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">sms</span><span class="p">)</span> <span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"SMS attachments supported"</span><span class="p">);</span>  
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nx">info</span><span class="p">.</span><span class="nx">email</span><span class="p">)</span> <span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Email attachments supported"</span><span class="p">);</span>  
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>  
+        <span class="nx">alert</span><span class="p">(</span><span class="s2">"Attachments doesn't supported"</span><span class="p">);</span>  
+    <span class="p">}</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">messaging.supportAttachments( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method returns information about whether attachments are supported in SMS and email.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains keys:</p>
+
+<p>* <code class="prettyprint">sms</code> - True if application support attachments for SMS (or iMessage). (Boolean)
+    * <code class="prettyprint">email</code> - True if application support attachments for Email. (Boolean)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="sms">sms</h4>
+<pre class="highlight javascript"><code><span class="nx">messaging</span><span class="p">.</span><span class="nx">sms</span><span class="p">(</span> <span class="p">{</span><span class="na">to</span><span class="p">:[</span><span class="s2">"+1111111"</span><span class="p">],</span> <span class="na">body</span><span class="p">:</span><span class="s2">"Message Text"</span><span class="p">,</span> <span class="na">attachments</span><span class="p">:[</span><span class="s2">"image_key"</span><span class="p">]},</span> 
+<span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"SMS sent successfully."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">messaging.sms( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method opens a new sms composer window with predefined values.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">to</code></p>
+
+<p>An Array of Strings. The key can contains the list of recipients.</p>
+
+<p>* <code class="prettyprint">body</code></p>
+
+<p>A String value. The key can contains SMS message text.</p>
+
+<p>* <code class="prettyprint">attachments</code></p>
+
+<p>An Array of Strings. The key can contains the list of keys from <a href="#app-storage-module">App Storage</a> which will be added as attachments.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always null.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="email">email</h4>
+<pre class="highlight javascript"><code><span class="nx">messaging</span><span class="p">.</span><span class="nx">email</span><span class="p">(</span> <span class="p">{</span><span class="na">to</span><span class="p">:[</span><span class="s2">"test@test.com"</span><span class="p">],</span> <span class="na">subject</span><span class="p">:</span><span class="s2">"Test Email"</span><span class="p">,</span> <span class="na">body</span><span class="p">:</span><span class="s2">"Email Message Text"</span><span class="p">,</span> <span class="na">attachments</span><span class="p">:[</span><span class="s2">"image_key"</span><span class="p">]},</span>
+<span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Email sent successfully."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">messaging.email( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The method opens a new email composer window with predefined values.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">to</code></p>
+
+<p>An Array of Strings. The key can contains the list of recipients.</p>
+
+<p>* <code class="prettyprint">cc</code></p>
+
+<p>An Array of Strings. The key can contains the list of secondary (carbon copy)
+recipients.</p>
+
+<p>* <code class="prettyprint">bcc</code></p>
+
+<p>An Array of Strings. The key can contains the list of hidden secondary (blind
+carbon copy) recipients.</p>
+
+<p>* <code class="prettyprint">subject</code></p>
+
+<p>A String value. The key can contains Email subject.</p>
+
+<p>* <code class="prettyprint">body</code></p>
+
+<p>A String value. The key can contains Email message text.</p>
+
+<p>* <code class="prettyprint">attachments</code></p>
+
+<p>An Array of Strings. The key can contains the list of keys from <a href="#app-storage-module">App Storage</a> which will be added as attachments.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always null.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+          <h2 id="notifications-module">Notifications Module</h2>
+
+<p>This module used to notify user about some events in application.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">vibrate</code> function</li>
+<li><code class="prettyprint">beep</code> function</li>
+<li><code class="prettyprint">alert</code> function</li>
+<li><code class="prettyprint">showToast</code> function</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="vibrate">vibrate</h4>
+<pre class="highlight javascript"><code><span class="nx">notifications</span><span class="p">.</span><span class="nx">vibrate</span><span class="p">(</span> <span class="p">{</span><span class="na">vibrate</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="na">mute</span><span class="p">:</span><span class="mi">400</span><span class="p">,</span> <span class="na">repeatCount</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">notifications.vibrate( options )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Vibrates the device. Developer can configure vibration duration, mute duration
+and repeat count</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> optional</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">vibrate</code></p>
+
+<p>The property with a Number value. Determines vibration duration in ms. On iOS <code class="prettyprint">vibrate</code> always 400 ms.</p>
+
+<p>* <code class="prettyprint">mute</code></p>
+
+<p>The property with a Number value. Determines mute duration in ms between multimple vibrations.</p>
+
+<p>* <code class="prettyprint">repeatCount</code></p>
+
+<p>The property with a Number value. Determines number of repeating &ldquo;vibrate-mute&rdquo; operations.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="beep">beep</h4>
+<pre class="highlight javascript"><code><span class="nx">notifications</span><span class="p">.</span><span class="nx">beep</span><span class="p">(</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">notifications.beep( )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The device plays a beep sound.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="alert">alert</h4>
+<pre class="highlight javascript"><code><span class="nx">notifications</span><span class="p">.</span><span class="nx">alert</span><span class="p">(</span> <span class="s2">"Title"</span><span class="p">,</span> <span class="s2">"Message"</span><span class="p">,</span> <span class="s2">"Cancel"</span><span class="p">,</span> <span class="p">[</span><span class="s2">"OK"</span><span class="p">],</span>  
+<span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Pressed "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">button</span> <span class="o">+</span> <span class="s2">" button"</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">notifications.alert( title, message, cancelButton, otherButtons, callback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Shows a custom alert or dialog box.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">title</code> required</li>
+</ul>
+
+<p>Dialog title. (String)</p>
+
+<ul>
+<li><code class="prettyprint">message</code> optional</li>
+</ul>
+
+<p>Dialog message. (String)</p>
+
+<ul>
+<li><code class="prettyprint">cancelButton</code> required</li>
+</ul>
+
+<p>Dialog cancel button title. (String)</p>
+
+<ul>
+<li><code class="prettyprint">otherButtons</code> optional</li>
+</ul>
+
+<p>Dialog other button titles. (Array of Strings)</p>
+
+<ul>
+<li><code class="prettyprint">callback</code> optional</li>
+</ul>
+
+<p>Callback. Called when user pressed button in alert or dialog box</p>
+
+<p>Callback parameter is object and can contains keys:</p>
+
+<p>* <code class="prettyprint">button</code> - property with a String value. The name of pressed button.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="showtoast">showToast</h4>
+<pre class="highlight javascript"><code><span class="nx">notifications</span><span class="p">.</span><span class="nx">showToast</span><span class="p">(</span> <span class="s2">"Toast Message"</span><span class="p">,</span> <span class="mi">2000</span><span class="p">,</span> <span class="s2">"bottom"</span><span class="p">,</span>  
+<span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">notifications.showToast( message, duration, position, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Shows toast notification.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">message</code> required</li>
+</ul>
+
+<p>Toast message. (String)</p>
+
+<ul>
+<li><code class="prettyprint">duration</code> required</li>
+</ul>
+
+<p>Duration of toast on the screen in milliseconds. (Integer)</p>
+
+<ul>
+<li><code class="prettyprint">position</code> required</li>
+</ul>
+
+<p>Position of toast on the screen. (String)</p>
+
+<p>Supported values:</p>
+
+<p>* <strong>top</strong>
+    * <strong>center</strong>
+    * <strong>bottom</strong></p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+          <h2 id="printing-module">Printing Module</h2>
+
+<p>This module provides the support for documents printing. Currently working only on iOS with printers which support <strong>AirPrint</strong> technology.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">OutputType</code> constant</li>
+<li><code class="prettyprint">Orientation</code> constant</li>
+<li><code class="prettyprint">Duplex</code> constant</li>
+<li><code class="prettyprint">supported</code> property</li>
+<li><code class="prettyprint">getSupportedContentTypes</code> function</li>
+<li><code class="prettyprint">print</code> function</li>
+</ul>
+
+<h3 id="constants">Constants</h3>
+
+<h4 id="outputtype">OutputType</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The output type, which is an indication of the type of content the application is drawing or providing.</p>
+
+<ul>
+<li><code class="prettyprint">printing.OutputType.GENERAL</code></li>
+</ul>
+
+<p>Specifies that the printed content consists of mixed text, graphics, and images.</p>
+
+<ul>
+<li><code class="prettyprint">printing.OutputType.PHOTO</code></li>
+</ul>
+
+<p>Specifies that the printed content consists of black-and-white or color images.</p>
+
+<ul>
+<li><code class="prettyprint">printing.OutputType.GRAYSCALE</code></li>
+</ul>
+
+<p>Specifies that the printed content is grayscale. Set the output type to this value when your printable content contains no color—for example, it’s black text only.</p>
+
+<h4 id="orientation">Orientation</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The orientation of printing on a page.</p>
+
+<ul>
+<li><code class="prettyprint">printing.Orientation.PORTRAIT</code></li>
+</ul>
+
+<p>Pages are printed in portrait orientation.</p>
+
+<ul>
+<li><code class="prettyprint">printing.Orientation.LANDSCAPE</code></li>
+</ul>
+
+<p>Pages are printed in landscape orientation.</p>
+
+<h4 id="duplex">Duplex</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>The duplex mode of a selected printer.</p>
+
+<ul>
+<li><code class="prettyprint">printing.Duplex.NONE</code></li>
+</ul>
+
+<p>No double-sided (duplex) printing; single-sided printing only.</p>
+
+<ul>
+<li><code class="prettyprint">printing.Duplex.LONG_EDGE</code></li>
+</ul>
+
+<p>Duplex printing that flips the back page along the long edge of the paper.</p>
+
+<ul>
+<li><code class="prettyprint">printing.Duplex.SHORT_EDGE</code></li>
+</ul>
+
+<p>Duplex print that flips the back page along the short edge of the paper.</p>
+
+<h3 id="properties">Properties</h3>
+
+<h4 id="supported">supported</h4>
+
+<h5 id="discussion">Discussion</h5>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">supported</span> <span class="o">=</span> <span class="nx">printing</span><span class="p">.</span><span class="nx">supported</span><span class="p">;</span>
+</code></pre>
+
+<p>Returns whether the device supports printing.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="getsupportedcontenttypes">getSupportedContentTypes</h4>
+<pre class="highlight javascript"><code><span class="nx">printing</span><span class="p">.</span><span class="nx">getSupportedContentTypes</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Supported content types: "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">contentTypes</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">printing.getSupportedContentTypes( successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Returns the list of supported document&rsquo;s content types for printing.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is object which contains:</p>
+
+<p>* <code class="prettyprint">contentTypes</code> - The list of supported document&rsquo;s content types. (Array of Strings)</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="print">print</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">options</span> <span class="o">=</span> <span class="p">{</span>  
+    <span class="na">key</span><span class="p">:</span> <span class="s2">"document_key"</span><span class="p">,</span>  
+    <span class="na">outputType</span><span class="p">:</span> <span class="nx">printing</span><span class="p">.</span><span class="nx">OutputType</span><span class="p">.</span><span class="nx">GENERAL</span><span class="p">,</span>  
+    <span class="na">orientation</span><span class="p">:</span> <span class="nx">printing</span><span class="p">.</span><span class="nx">Orientation</span><span class="p">.</span><span class="nx">PORTRAIT</span><span class="p">,</span>  
+    <span class="na">duplex</span><span class="p">:</span> <span class="nx">printing</span><span class="p">.</span><span class="nx">Duplex</span><span class="p">.</span><span class="nx">LONG_EDGE</span><span class="p">,</span>  
+    <span class="na">showsPageRange</span><span class="p">:</span> <span class="kc">false</span><span class="p">};</span>  
+<span class="nx">printing</span><span class="p">.</span><span class="nx">print</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Document printed."</span><span class="p">);</span>  
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">printing.print( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Prints selected document.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">key</code></p>
+
+<p>A String value. Chooses document from <a href="#app-storage-module">App Storage</a> with key</p>
+
+<p>* <code class="prettyprint">outputType</code></p>
+
+<p>See OutputType constants. Chooses output type. By default this property is
+<strong>printing.OutputType.GENERAL</strong></p>
+
+<p>* <code class="prettyprint">orientation</code></p>
+
+<p>See Orientation constants. Chooses orientation of printing on a page. By
+default this property is <strong>printing.Orientation.PORTRAIT</strong></p>
+
+<p>* <code class="prettyprint">duplex</code></p>
+
+<p>See Duplex constants. Chooses the duplex mode of a selected printer. By
+default this property is <strong>printing.Duplex.LONG_EDGE</strong></p>
+
+<p>* <code class="prettyprint">showsPageRange</code></p>
+
+<p>A Boolean value. Prints the page number or not. By default this property is
+<strong>false</strong></p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors</p>
+
+<p>Callback parameter is always null.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
           <h2 id="shake-detector-module">Shake Detector Module</h2>
 
 <p>This module provides the ability to detecting when user shakes the device..</p>
@@ -4088,6 +5888,109 @@ the device entered or exited from the region and application was in background.<
 
 <ul>
 <li>No return value.</li>
+</ul>
+
+          <h2 id="web-view-module">Web View Module</h2>
+
+<p>This module contains methods for working with webview screens.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">present</code> function</li>
+<li><code class="prettyprint">dismiss</code> function</li>
+<li><code class="prettyprint">open</code> function</li>
+<li><code class="prettyprint">close</code> function</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="present">present</h4>
+<pre class="highlight javascript"><code><span class="nx">webview</span><span class="p">.</span><span class="nx">present</span><span class="p">(</span> <span class="s2">"http://www.google.com"</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">webview.present( url )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Shows new screen with webview over currently visible.<br>
+Current screen in this case continues working.</p>
+
+<p>Opened page must contains functionality for closing using dismiss method
+because iOS don&rsquo;t have hardware back button.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">url</code> required</li>
+</ul>
+
+<p>A String Value. Url of page which will be opened.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="dismiss">dismiss</h4>
+<pre class="highlight javascript"><code><span class="nx">webview</span><span class="p">.</span><span class="nx">dismiss</span><span class="p">(</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">webview.dismiss( )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Closes current page if it was opened with present method or from local
+notification about iBeacons.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="open">open</h4>
+<pre class="highlight javascript"><code><span class="nx">webview</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span> <span class="s2">"http://www.google.com"</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">webview.open( url )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Push new screen with webview after currently visible.</p>
+
+<p>Opened page must contains functionality for closing using close method because
+iOS don&rsquo;t have hardware back button.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">url</code> required</li>
+</ul>
+
+<p>A String Value. Url of page which will be opened.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="close">close</h4>
+<pre class="highlight javascript"><code><span class="nx">webview</span><span class="p">.</span><span class="nx">close</span><span class="p">(</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">webview.close( )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Closes current page if it was opened with open method.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
 </ul>
 
           <h1 id="bodhi-cloud-">Bodhi Cloud </h1>
