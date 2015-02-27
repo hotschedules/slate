@@ -21,24 +21,24 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <a class="bodhi-logo" href="http://redbookconnect.github.io"> <img src="../../../images/logo.png" /> </a>
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
       <div id="toc">
       </div>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h2 id="extending-the-agent">Extending the Agent</h2>
+        <h4 id="extending-the-agent">Extending the Agent</h4>
 
-<h4 id="concept">Concept</h4>
+<h3 id="concept">Concept</h3>
 
 <p>An Extension is an Object that adds on reusable configuration elements. These configuration elements are call plugins. An extension may provide one or more plugins to the agent or an application. Plugins are used to build runtime components (Sources, Services, Pipelines, Handlers, etc). Extensions are meant to be small reusable chuncks of code that follow in the tradition of Node Modules but conform to a specific interface so they can be loaded by node.js an the agent.</p>
 
-<h4 id="specification">Specification</h4>
+<h3 id="specification">Specification</h3>
 
 <p>An extension must be formally specified in an app or agent configuration file.</p>
 
-<h4 id="spec-rules">Spec Rules</h4>
+<h3 id="spec-rules">Spec Rules</h3>
 
 <ul>
 <li>An Extension specification MUST include a module or a file key</li>
@@ -60,13 +60,13 @@
 <li>file points at a at a JS file that exports a proper extension interface, the root directory of a CommonJS package (the directory containing the package.json</li>
 </ul>
 
-<h4 id="options">Options</h4>
+<h3 id="options">Options</h3>
 
 <p>An extension may receive options at attachment time. Options provide a means for declaring environment specific configuration data to the extension. </p>
 
 <p><strong>Note</strong>: Options are not resolved so they SHOULD NOT include references.</p>
 
-<h4 id="resolution-rules">Resolution Rules</h4>
+<h3 id="resolution-rules">Resolution Rules</h3>
 
 <ul>
 <li>A file path is resolved relative to the specifying containers home directory</li>
@@ -75,7 +75,7 @@
 
 <p>For complete detailed information check out the <a href="http://nodejs.org/api/modules.html">nodejs docs</a> </p>
 
-<h4 id="visibility-rules">Visibility Rules</h4>
+<h3 id="visibility-rules">Visibility Rules</h3>
 
 <ul>
 <li>If the extension is loaded by the agent then the agent and all applications can use the extensions plugins. </li>
@@ -83,7 +83,7 @@
 <li>If the extension is declared by both the app and the agent the app will use the plugins provided by the extension declared by the app.</li>
 </ul>
 
-<h2 id="implementation">Implementation</h2>
+<h3 id="implementation">Implementation</h3>
 
 <ul>
 <li>An Extension MUST declare a name</li>
@@ -94,7 +94,7 @@
 <li>An Extension MUST expose a method named attach that takes a call callback</li>
 </ul>
 
-<h4 id="prototypical-extension">Prototypical Extension</h4>
+<h3 id="prototypical-extension">Prototypical Extension</h3>
 <pre class="highlight plaintext"><code>module.exports = {
 
     name    : 'my-extension',
@@ -106,7 +106,7 @@
 }
 </code></pre>
 
-<h4 id="prototypical-extension-module">Prototypical Extension Module</h4>
+<h3 id="prototypical-extension-module">Prototypical Extension Module</h3>
 <pre class="highlight plaintext"><code>module.extension = function(){
         'use strict';
     return {
@@ -115,11 +115,11 @@
 }
 </code></pre>
 
-<h4 id="binding-mechanism">Binding Mechanism</h4>
+<h3 id="binding-mechanism">Binding Mechanism</h3>
 
 <p>The attach method adds plugins to a particular container</p>
 
-<h4 id="attach-signature">Attach Signature</h4>
+<h3 id="attach-signature">Attach Signature</h3>
 <pre class="highlight plaintext"><code>attach(options, function(err))
 </code></pre>
 
@@ -147,7 +147,7 @@
 
 <p>Callback takes the form of cb(err). The callback MUST be called.</p>
 
-<h4 id="context">Context</h4>
+<h3 id="context">Context</h3>
 
 <p>The value of <code class="prettyprint">this</code> provides the mechanism for adding plugins to the container. <code class="prettyprint">this</code> provides the following binding method:</p>
 <pre class="highlight plaintext"><code>this.registerPlugin(namespace, plugin)
@@ -175,7 +175,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="prototypical-attachment">Prototypical Attachment</h4>
+<h3 id="prototypical-attachment">Prototypical Attachment</h3>
 <pre class="highlight plaintext"><code>   attach: function(options, callback){
     var container = this;
     try{

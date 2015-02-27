@@ -21,14 +21,16 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <a class="bodhi-logo" href="http://redbookconnect.github.io"> <img src="../../../images/logo.png" /> </a>
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
       <div id="toc">
       </div>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h2 id="agent-app-structure">Agent App Structure</h2>
+        <h4 id="creating-an-app">Creating an App</h4>
+
+<h3 id="agent-app-structure">Agent App Structure</h3>
 
 <p>You can create an application for the agent by following the steps below. </p>
 
@@ -129,7 +131,7 @@
 }
 </code></pre>
 
-<h4 id="1.-descriptive-info">1. Descriptive Info</h4>
+<h3 id="1.-descriptive-info">1. Descriptive Info</h3>
 
 <p>This contains identification information for your app.</p>
 
@@ -181,7 +183,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="2.-logger-info">2. Logger Info</h4>
+<h3 id="2.-logger-info">2. Logger Info</h3>
 
 <p>These properties determine the log filename and amount of detail that would be recorded to the log file. </p>
 
@@ -221,7 +223,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="3.-app-settings">3. App Settings</h4>
+<h3 id="3.-app-settings">3. App Settings</h3>
 
 <p>Your app can have settings by declaring them within the settings object. These settings can then be used throughout your application&rsquo;s code. These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
 
@@ -258,7 +260,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="4.-extensions">4. Extensions</h4>
+<h3 id="4.-extensions">4. Extensions</h3>
 
 <p>Your application may use one or more extensions. Extensions can provide potential configuration components or actual runtime components. Extensions are a good way to design resuable components that can be shared and reused across projects. </p>
 
@@ -268,7 +270,7 @@
 
 <p>Extensions are loaded in the order in which they are specified. </p>
 
-<h4 id="5.-services">5. Services</h4>
+<h3 id="5.-services">5. Services</h3>
 
 <p>Your app can contain a service. A service is an object that represents a concrete extension of the API.</p>
 
@@ -335,7 +337,7 @@
 </tr>
 </tbody></table>
 
-<h4 id="6.-sources">6. Sources</h4>
+<h3 id="6.-sources">6. Sources</h3>
 
 <p>A source is an object that sources external events. By creating a source, you can bind events to listeners and start functions and pipelines once the events have been emitted.</p>
 
