@@ -1567,6 +1567,171 @@ user pressed close button instead selecting photo from library.</p>
 
 <p>Error with this code returned if some internal method returned error.</p>
 
+          <h2 id="accelerometer-module">Accelerometer Module</h2>
+
+<p>This module provides the ability to getting current readings of the accelerometer.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">accelerationItem</code> object</li>
+<li><code class="prettyprint">getCurrentAcceleration</code> function</li>
+<li><code class="prettyprint">watchAcceleration</code> function</li>
+<li><code class="prettyprint">clearWatch</code> function</li>
+</ul>
+
+<h3 id="objects">Objects</h3>
+
+<h4 id="accelerationitem">accelerationItem</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This Object contains information about triaxial acceleration.</p>
+
+<h5 id="keys">Keys</h5>
+
+<ul>
+<li><code class="prettyprint">x</code> required</li>
+</ul>
+
+<p>A Float value. Acceleration in the x axis.</p>
+
+<ul>
+<li><code class="prettyprint">y</code> required</li>
+</ul>
+
+<p>A Float value. Acceleration in the y axis.</p>
+
+<ul>
+<li><code class="prettyprint">z</code> required</li>
+</ul>
+
+<p>A Float value. Acceleration in the z axis.</p>
+
+<ul>
+<li><code class="prettyprint">timestamp</code> required</li>
+</ul>
+
+<p>A Date value. Timestamp of acceleration information.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="getcurrentacceleration">getCurrentAcceleration</h4>
+<pre class="highlight javascript"><code><span class="nx">accelerometer</span><span class="p">.</span><span class="nx">getCurrentAcceleration</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">accelerationItem</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"x: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s2">", y: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="s2">", z: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">z</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">accelerometer.getCurrentAcceleration( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Gets current readings of the device acceleration one time. To monitor acceleration changes use <code class="prettyprint">watchAcceleration</code>.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> optional</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">updateInterval</code></p>
+
+<p>A Float value. The maximum length of time (milliseconds) that is allowed to pass from the method call until the corresponding callbacks executes.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors.</p>
+
+<p>Callback parameter is <code class="prettyprint">accelerationItem</code> object.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="watchacceleration">watchAcceleration</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">watch_id</span> <span class="o">=</span> <span class="nx">accelerometer</span><span class="p">.</span><span class="nx">watchAcceleration</span><span class="p">(</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">positionInfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"x: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="s2">", y: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">y</span> <span class="o">+</span> <span class="s2">", z: "</span> <span class="o">+</span> <span class="nx">accelerationItem</span><span class="p">.</span><span class="nx">z</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">accelerometer.watchAcceleration( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Starts watching the device acceleration.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> optional</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">updateInterval</code></p>
+
+<p>A Float value. The time interval between calls of <code class="prettyprint">successCallback</code> function.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors.</p>
+
+<p>Callback parameter is <code class="prettyprint">accelerationItem</code> object.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>A String value. This value used as parameter of <code class="prettyprint">clearWatch</code> method to stop updating.</li>
+</ul>
+
+<h4 id="clearwatch">clearWatch</h4>
+<pre class="highlight javascript"><code><span class="nx">accelerometer</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span> <span class="nx">watch_id</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">accelerometer.clearWatch( watchId )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stops heading geolocation position.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">watchId</code> required</li>
+</ul>
+
+<p>Watch identifier which returned <code class="prettyprint">watchAcceleration</code> method.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>No return value.</li>
+</ul>
+
           <h2 id="app-storage-module">App Storage Module</h2>
 
 <p>This module provides the ability to store any kind of data.<br>
@@ -2506,9 +2671,9 @@ This property changed when authentication.usernameChanged event received.</p>
     <span class="na">username</span><span class="p">:</span> <span class="s2">"test_user"</span><span class="p">,</span>  
     <span class="na">password</span><span class="p">:</span> <span class="s2">"password"</span><span class="p">};</span>  
 <span class="nx">authentication</span><span class="p">.</span><span class="nx">login</span><span class="p">(</span> <span class="nx">options</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"User ("</span> <span class="err">\</span><span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">") authenticated."</span><span class="p">);</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"User ("</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">") authenticated."</span><span class="p">);</span>  
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Login failed! code: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Login failed! code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
 <span class="p">});</span>
 </code></pre>
 
@@ -2565,7 +2730,7 @@ application restart.</p>
 <pre class="highlight javascript"><code><span class="nx">authentication</span><span class="p">.</span><span class="nx">logout</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
     <span class="nx">alert</span><span class="p">(</span><span class="s2">"Finished."</span><span class="p">);</span>  
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Logout failed! code: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Logout failed! code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
 <span class="p">});</span>
 </code></pre>
 
@@ -2599,10 +2764,10 @@ application restart.</p>
 
 <h4 id="getcredentialsinfo">getCredentialsInfo</h4>
 <pre class="highlight javascript"><code><span class="nx">authentication</span><span class="p">.</span><span class="nx">getCredentialsInfo</span><span class="p">(</span> <span class="kd">function</span><span class="p">(</span><span class="nx">info</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Last username = "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">"\n"</span><span class="o">+</span>  
-         <span class="s2">"Last remember"</span> <span class="err">\</span><span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">remember</span><span class="p">);</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Last username = "</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">username</span> <span class="o">+</span> <span class="s2">"\n"</span><span class="o">+</span>  
+         <span class="s2">"Last remember"</span> <span class="o">+</span> <span class="nx">info</span><span class="p">.</span><span class="nx">remember</span><span class="p">);</span>  
 <span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>  
-    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Failed! code: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="err">\</span><span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Failed! code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>  
 <span class="p">});</span>
 </code></pre>
 
@@ -2623,8 +2788,9 @@ method.</p>
 
 <p>Callback parameter is object which contains:</p>
 
-<p>* <code class="prettyprint">username</code> - Username which was used in last login. (String)
-    * <code class="prettyprint">remember</code> - Last used remember flag state. (Boolean)</p>
+<p>* <code class="prettyprint">username</code> - Username which was used in last login. (String)</p>
+
+<p>* <code class="prettyprint">remember</code> - Last used remember flag state. (Boolean)</p>
 
 <ul>
 <li><code class="prettyprint">errorCallback</code> optional</li>
@@ -3631,6 +3797,297 @@ the device entered or exited from the region and application was in background.<
 
 <ul>
 <li><code class="prettyprint">region</code> - regionInfo object. (Object)</li>
+</ul>
+
+          <h2 id="geolocation-module">Geolocation Module</h2>
+
+<p>This module provides the ability to getting geolocation coordinates.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">coordinatesInfo</code> object</li>
+<li><code class="prettyprint">positionInfo</code> object</li>
+<li><code class="prettyprint">getCurrentPosition</code> function</li>
+<li><code class="prettyprint">watchPosition</code> function</li>
+<li><code class="prettyprint">clearWatch</code> function</li>
+</ul>
+
+<h3 id="objects">Objects</h3>
+
+<h4 id="coordinatesinfo">coordinatesInfo</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This Object contains information about geolocation coordinates.</p>
+
+<h5 id="keys">Keys</h5>
+
+<ul>
+<li><code class="prettyprint">latitude</code> required</li>
+</ul>
+
+<p>A Float value. The latitude in degrees. Positive values indicate latitudes north of the equator. Negative values indicate latitudes south of the equator.</p>
+
+<ul>
+<li><code class="prettyprint">longitude</code> required</li>
+</ul>
+
+<p>A Float value. The longitude in degrees. Measurements are relative to the zero meridian, with positive values extending east of the meridian and negative values extending west of the meridian.</p>
+
+<ul>
+<li><code class="prettyprint">accuracy</code> required</li>
+</ul>
+
+<p>A Float value. The radius of uncertainty for the location, measured in meters.</p>
+
+<ul>
+<li><code class="prettyprint">altitude</code> required</li>
+</ul>
+
+<p>A Float value. The altitude measured in meters. Positive values indicate altitudes above sea level. Negative values indicate altitudes below sea level.</p>
+
+<ul>
+<li><code class="prettyprint">altitudeAccuracy</code> required</li>
+</ul>
+
+<p>A Float value. The accuracy of the altitude value in meters.</p>
+
+<ul>
+<li><code class="prettyprint">speed</code> required</li>
+</ul>
+
+<p>A Float value. The instantaneous speed of the device in meters per second.</p>
+
+<ul>
+<li><code class="prettyprint">course</code> optional</li>
+</ul>
+
+<p>A Float value. The course of the location in degrees true North.</p>
+
+<h4 id="positioninfo">positionInfo</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>This Object contains information about geolocation position.</p>
+
+<h5 id="keys">Keys</h5>
+
+<ul>
+<li><code class="prettyprint">timestamp</code> required</li>
+</ul>
+
+<p>A Date value. Timestamp of coordinates information.</p>
+
+<ul>
+<li><code class="prettyprint">coordinates</code> required</li>
+</ul>
+
+<p>An <code class="prettyprint">coordinatesInfo</code> Object.</p>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="getcurrentposition">getCurrentPosition</h4>
+<pre class="highlight javascript"><code><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">positionInfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Latitude: "</span> <span class="o">+</span> <span class="nx">positionInfo</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">latitude</span> <span class="o">+</span> <span class="s2">", Longitude: "</span> <span class="o">+</span> <span class="nx">positionInfo</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">geolocation.getCurrentPosition( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Gets current geolocation position one time. To monitor position changes use <code class="prettyprint">watchPosition</code>.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">timeout</code></p>
+
+<p>A Float value. The maximum length of time (milliseconds) that is allowed to pass from the method call until the corresponding callbacks executes.</p>
+
+<p>* <code class="prettyprint">maximumAge</code></p>
+
+<p>A Float value. Accept a cached position whose age is no greater than the specified time in milliseconds.</p>
+
+<p>* <code class="prettyprint">enableHighAccuracy</code></p>
+
+<p>A Boolean value. Provides a hint that the application needs the best possible results.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors.</p>
+
+<p>Callback parameter is <code class="prettyprint">positionInfo</code> object.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li><a href="#kernel-promise">RBCPromise</a> object</li>
+</ul>
+
+<h4 id="watchposition">watchPosition</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">watch_id</span> <span class="o">=</span> <span class="nx">geolocation</span><span class="p">.</span><span class="nx">watchPosition</span><span class="p">(</span> <span class="p">{},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">positionInfo</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Latitude: "</span> <span class="o">+</span> <span class="nx">positionInfo</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">latitude</span> <span class="o">+</span> <span class="s2">", Longitude: "</span> <span class="o">+</span> <span class="nx">positionInfo</span><span class="p">.</span><span class="nx">coordinates</span><span class="p">.</span><span class="nx">longitude</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">geolocation.watchPosition( options, successCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Starts watching current geolocation position.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">options</code> required</li>
+</ul>
+
+<p>Object with key-value. Supported keys:</p>
+
+<p>* <code class="prettyprint">timeout</code></p>
+
+<p>A Float value. The maximum length of time (milliseconds) that is allowed to pass from the method call until the corresponding callbacks executes.</p>
+
+<p>* <code class="prettyprint">maximumAge</code></p>
+
+<p>A Float value. Accept a cached position whose age is no greater than the specified time in milliseconds.</p>
+
+<p>* <code class="prettyprint">enableHighAccuracy</code></p>
+
+<p>A Boolean value. Provides a hint that the application needs the best possible results.</p>
+
+<ul>
+<li><code class="prettyprint">succesCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors.</p>
+
+<p>Callback parameter is <code class="prettyprint">positionInfo</code> object.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>A String value. This value used as parameter of <code class="prettyprint">clearWatch</code> method to stop updating.</li>
+</ul>
+
+<h4 id="clearwatch">clearWatch</h4>
+<pre class="highlight javascript"><code><span class="nx">geolocation</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span> <span class="nx">watch_id</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">geolocation.clearWatch( watchId )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stops heading geolocation position.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">watchId</code> required</li>
+</ul>
+
+<p>Watch identifier which returned <code class="prettyprint">watchPosition</code> method.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>No return value.</li>
+</ul>
+
+          <h2 id="shake-detector-module">Shake Detector Module</h2>
+
+<p>This module provides the ability to detecting when user shakes the device..</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">startWatch</code> function</li>
+<li><code class="prettyprint">clearWatch</code> function</li>
+</ul>
+
+<h4 id="startwatch">startWatch</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">watch_id</span> <span class="o">=</span> <span class="nx">shakeDetector</span><span class="p">.</span><span class="nx">startWatch</span><span class="p">(</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"Shake detected"</span><span class="p">);</span>
+<span class="p">},</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">alert</span><span class="p">(</span><span class="s2">"code: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">code</span> <span class="o">+</span> <span class="s2">"\nmessage: "</span> <span class="o">+</span> <span class="nx">error</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">shakeDetector.startWatch( onDetectCallback, errorCallback )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Starts detecting device shaking.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">onDetectCallback</code> optional</li>
+</ul>
+
+<p>Success callback. Called when function finished without errors.</p>
+
+<p>Doesn&rsquo;t have any arguments.</p>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>A String value. This value used as parameter of <code class="prettyprint">clearWatch</code> method to stop updating.</li>
+</ul>
+
+<h4 id="clearwatch">clearWatch</h4>
+<pre class="highlight javascript"><code><span class="nx">shakeDetector</span><span class="p">.</span><span class="nx">clearWatch</span><span class="p">(</span> <span class="nx">watch_id</span> <span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">shakeDetector.clearWatch( watchId )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stops detecting device shaking.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">watchId</code> required</li>
+</ul>
+
+<p>Watch identifier which returned <code class="prettyprint">startWatch</code> method.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>No return value.</li>
 </ul>
 
           <h1 id="bodhi-cloud-">Bodhi Cloud </h1>
