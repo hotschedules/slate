@@ -1245,7 +1245,7 @@ figure 32  </p>
 
 <h4 id="mobile-app-store">Mobile App Store</h4>
 
-<iframe src="https://docs.google.com/a/redbookconnect.com/file/d/0B_-da_9QnvPBUlJNMkl5VW9BNFk/preview" width="640" height="480"></iframe>
+<iframe src="https://docs.google.com/a/redbookconnect.com/file/d/0B_-da_9QnvPBUlJNMkl5VW9BNFk/preview" width="30%"></iframe>
 
           <h2 id="kernel-promise">Kernel Promise</h2>
 
@@ -9916,6 +9916,501 @@ loading indicator in the space of right button.</p>
 <ul>
 <li>No arguments</li>
 </ul>
+
+          <h2 id="ndef-constants-and-functions">NDEF Constants and Functions</h2>
+
+<p>The <code class="prettyprint">ndef</code> object provides NDEF constants, functions for creating NdefRecords, and functions for converting data.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">record</code> function</li>
+<li><code class="prettyprint">textRecord</code> function</li>
+<li><code class="prettyprint">uriRecord</code> function</li>
+<li><code class="prettyprint">absoluteUriRecord</code> function</li>
+<li><code class="prettyprint">mimeMediaRecord</code> function</li>
+<li><code class="prettyprint">smartPoster</code> function</li>
+<li><code class="prettyprint">emptyRecord</code> function</li>
+<li><code class="prettyprint">encodeMessage</code> function</li>
+<li><code class="prettyprint">decodeMessage</code> function</li>
+</ul>
+
+<h3 id="constants">Constants</h3>
+
+<p>see <a href="http://developer.android.com/reference/android/nfc/NdefRecord.html">android.nfc.NdefRecord</a> for documentation about constants</p>
+
+<ul>
+<li>TNF_EMPTY: 0x0,</li>
+<li>TNF_WELL_KNOWN: 0x01,</li>
+<li>TNF_MIME_MEDIA: 0x02,</li>
+<li>TNF_ABSOLUTE_URI: 0x03,</li>
+<li>TNF_EXTERNAL_TYPE: 0x04,</li>
+<li>TNF_UNKNOWN: 0x05,</li>
+<li>TNF_UNCHANGED: 0x06,</li>
+<li>TNF_RESERVED: 0x07,</li>
+<li>RTD_TEXT: [0x54], // &ldquo;T&rdquo;</li>
+<li>RTD_URI: [0x55], // &ldquo;U&rdquo;</li>
+<li>RTD_SMART_POSTER: [0x53, 0x70], // &ldquo;Sp&rdquo;</li>
+<li>RTD_ALTERNATIVE_CARRIER: [0x61, 0x63], // &ldquo;ac&rdquo;</li>
+<li>RTD_HANDOVER_CARRIER: [0x48, 0x63], // &ldquo;Hc&rdquo;</li>
+<li>RTD_HANDOVER_REQUEST: [0x48, 0x72], // &ldquo;Hr&rdquo;</li>
+<li>RTD_HANDOVER_SELECT: [0x48, 0x73], // &ldquo;Hs&rdquo;</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="record">record</h4>
+
+<p><code class="prettyprint">ndef.record( tnf, type, id, payload )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Creates a JSON representation of a NDEF Record.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">tnf</code> required</p>
+
+<p>3-bit TNF (Type Name Format) - use one of the TNF_* constants</p>
+
+<p>* <code class="prettyprint">type</code> required</p>
+
+<p>byte array, containing zero to 255 bytes, must not be null</p>
+
+<p>* <code class="prettyprint">id</code> required</p>
+
+<p>byte array, containing zero to 255 bytes, must not be null</p>
+
+<p>* <code class="prettyprint">payload</code> required</p>
+
+<p>byte array, containing zero to (2 ** 32 - 1) bytes, must not be null</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="textrecord">textRecord</h4>
+
+<p><code class="prettyprint">ndef.textRecord( text, languageCode, id )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates an NDEF record containing plain text.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">text</code> required</p>
+
+<p>String of text to encode</p>
+
+<p>* <code class="prettyprint">languageCode</code> optional</p>
+
+<p>ISO/IANA language code. Examples: “fi”, “en-US”, “fr- CA”, “jp”.</p>
+
+<p>* <code class="prettyprint">id</code> optional</p>
+
+<p>byte array, containing zero to 255 bytes</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="urirecord">uriRecord</h4>
+
+<p><code class="prettyprint">ndef.uriRecord( uri, id )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates a NDEF record containing a URI.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">uri</code> required</p>
+
+<p>String represents URI</p>
+
+<p>* <code class="prettyprint">id</code> optional</p>
+
+<p>byte array, containing zero to 255 bytes</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="absoluteurirecord">absoluteUriRecord</h4>
+
+<p><code class="prettyprint">ndef.absoluteUriRecord( uri, payload, id )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates a NDEF record containing an absolute URI.
+An Absolute URI record means the URI describes the payload of the record.
+For example a SOAP message could use &ldquo;http://schemas.xmlsoap.org/soap/envelope/&rdquo;
+as the type and XML content for the payload.
+Absolute URI can also be used to write LaunchApp records for Windows.
+See 2.4.2 <a href="http://www.nfc-forum.org/specs/spec_list#ndefts">Payload Type of the NDEF Specification</a>
+Note that by default, Android will open the URI defined in the type
+field of an Absolute URI record (TNF=3) and ignore the payload.
+Windows do not open the browser for TNF=3.
+To write a URI as the payload use ndef.uriRecord(uri)</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">uri</code> required</p>
+
+<p>String represents URI</p>
+
+<p>* <code class="prettyprint">payload</code> optional</p>
+
+<p>byte array, containing zero to (2 ** 32 - 1) bytes</p>
+
+<p>* <code class="prettyprint">id</code> optional</p>
+
+<p>byte array, containing zero to 255 bytes</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<ul>
+<li>JSON representation of a NDEF Record.</li>
+</ul>
+
+<h4 id="mimemediarecord">mimeMediaRecord</h4>
+
+<p><code class="prettyprint">ndef.mimeMediaRecord( mimeType, payload, id )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates a NDEF record containing an mimeMediaRecord.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">mimeType</code> required</p>
+
+<p>Mime type</p>
+
+<p>* <code class="prettyprint">payload</code> optional</p>
+
+<p>byte array, containing zero to (2 ** 32 - 1) bytes</p>
+
+<p>* <code class="prettyprint">id</code> optional</p>
+
+<p>byte array, containing zero to 255 bytes</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="smartposter">smartPoster</h4>
+
+<p><code class="prettyprint">ndef.smartPoster( ndefRecords, id )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates an NDEF record containing an Smart Poster.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">ndefRecords</code> required</p>
+
+<p>array of NDEF Records</p>
+
+<p>* <code class="prettyprint">id</code> optional</p>
+
+<p>byte array, containing zero to 255 bytes</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="emptyrecord">emptyRecord</h4>
+
+<p><code class="prettyprint">ndef.emptyRecord()</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Helper that creates an empty NDEF record.</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* JSON representation of a NDEF Record.</p>
+
+<h4 id="encodemessage">encodeMessage</h4>
+
+<p><code class="prettyprint">ndef.encodeMessage( ndefRecords )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Encodes an NDEF Message into bytes that can be written to a NFC tag.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">ndefRecords</code> required</p>
+
+<p>array of NDEF Records</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* byte array ( see <a href="http://www.nfc-forum.org/specs/spec_list/">NFC Data Exchange Format (NDEF)</a> )</p>
+
+<h4 id="decodemessage">decodeMessage</h4>
+
+<p><code class="prettyprint">ndef.decodeMessage( bytes )</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Decodes an array bytes into an NDEF Message</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">bytes</code> required</p>
+
+<p>an array bytes read from a NFC tag</p>
+
+<h5 id="return-value">Return Value</h5>
+
+<p>* array of NDEF Records ( see <a href="http://www.nfc-forum.org/specs/spec_list/">NFC Data Exchange Format (NDEF)</a> )</p>
+
+          <h2 id="nfc-module">NFC Module</h2>
+
+<p>This module provides the ability to read and write NDEF messages to tags or share NDEF messages with peers.</p>
+
+<h3 id="tasks">Tasks</h3>
+
+<ul>
+<li><code class="prettyprint">write</code> function</li>
+<li><code class="prettyprint">share</code> function</li>
+<li><code class="prettyprint">unshare</code> function</li>
+<li><code class="prettyprint">erase</code> function</li>
+<li><code class="prettyprint">addTagDiscoveredListener</code> function</li>
+<li><code class="prettyprint">removeTagDiscoveredListener</code> function</li>
+<li><code class="prettyprint">addNdefListener</code> function</li>
+<li><code class="prettyprint">removeNdefListener</code> function</li>
+<li><code class="prettyprint">addNdefFormatableListener</code> function<br></li>
+<li><code class="prettyprint">handover</code> function</li>
+<li><code class="prettyprint">stopHandover</code> function</li>
+<li><code class="prettyprint">nfc.ndef</code> event</li>
+<li><code class="prettyprint">nfc.ndefformatable</code> event</li>
+<li><code class="prettyprint">nfc.tagdiscovered</code> event</li>
+</ul>
+
+<h3 id="functions">Functions</h3>
+
+<h4 id="write">write</h4>
+<pre class="highlight javascript"><code>    <span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nx">ndef</span><span class="p">.</span><span class="nx">textRecord</span><span class="p">(</span><span class="s2">"hello, world"</span><span class="p">),</span>
+        <span class="nx">ndef</span><span class="p">.</span><span class="nx">uriRecord</span><span class="p">(</span><span class="s2">"http://www.google.com"</span><span class="p">)</span>
+    <span class="p">];</span>
+    <span class="nx">nfc</span><span class="p">.</span><span class="nx">write</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">nfc.write(message, errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Writes an NDEF Message to a NFC tag.    </p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">errorCallback</code> optional</p>
+
+<p>Error Callback. Called when function return error.</p>
+
+<p>* <code class="prettyprint">message</code> required</p>
+
+<p>A NDEF Message is an array of one or more NDEF Records</p>
+
+<h4 id="share">share</h4>
+<pre class="highlight javascript"><code><span class="kd">var</span> <span class="nx">message</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="nx">ndef</span><span class="p">.</span><span class="nx">textRecord</span><span class="p">(</span><span class="s2">"hello, world"</span><span class="p">),</span>
+        <span class="nx">ndef</span><span class="p">.</span><span class="nx">uriRecord</span><span class="p">(</span><span class="s2">"http://www.google.com"</span><span class="p">)</span>
+    <span class="p">];</span>
+    <span class="nx">nfc</span><span class="p">.</span><span class="nx">share</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">nfc.share(message, errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Function writes an NdefMessage via peer-to-peer.  This should appear as an NFC tag to another device.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">errorCallback</code> optional</p>
+
+<p>Error Callback. Called when function return error.</p>
+
+<p>* <code class="prettyprint">message</code> required</p>
+
+<p>A NDEF Message is an array of one or more NDEF Records</p>
+
+<h4 id="unshare">unshare</h4>
+<pre class="highlight javascript"><code>    <span class="nx">nfc</span><span class="p">.</span><span class="nx">unshare</span><span class="p">(</span><span class="nx">errorCallback</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">nfc.unshare(errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stop sharing NDEF data via peer-to-peer.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">errorCallback</code> optional</p>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h4 id="erase">erase</h4>
+<pre class="highlight javascript"><code><span class="nx">nfc</span><span class="p">.</span><span class="nx">erase</span><span class="p">(</span><span class="nx">errorCallback</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">nfc.erase(errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Erase a tag by writing an empty message.  Will format unformatted tags before writing.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">errorCallback</code> optional</p>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h4 id="handover">handover</h4>
+<pre class="highlight javascript"><code>    <span class="kd">var</span> <span class="nx">uri</span> <span class="o">=</span> <span class="s2">"content://media/external/image/media/15"</span><span class="p">;</span>
+    <span class="nx">nfc</span><span class="p">.</span><span class="nx">handover</span><span class="p">(</span><span class="nx">uri</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">);</span>
+    <span class="kd">var</span> <span class="nx">uris</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s2">"content://media/external/image/media/15"</span><span class="p">,</span>
+        <span class="s2">"content://media/external/image/media/126"</span><span class="p">,</span>
+        <span class="s2">"content://media/external/image/media/345"</span>
+    <span class="p">];</span>
+    <span class="nx">nfc</span><span class="p">.</span><span class="nx">handover</span><span class="p">(</span><span class="nx">uris</span><span class="p">,</span> <span class="nx">errorCallback</span><span class="p">);</span>
+</code></pre>
+
+<p><code class="prettyprint">nfc.handover(uris, errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Send a file to another device via NFC handover. Function shares files to a NFC peer using handover. Files are sent by specifying a file:// or context:// URI or a list of URIs. The file transfer is initiated with NFC but the transfer is completed with over Bluetooth or WiFi which is handled by a NFC handover request. The Android code is responsible for building the handover NFC Message. Supported only on Android</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">errorCallback</code> optional</p>
+
+<p>Error Callback. Called when function return error.</p>
+
+<p>* <code class="prettyprint">uris</code> required</p>
+
+<p>A URI as a String, or an <em>array</em> of URIs.</p>
+
+<h4 id="stophandover">stopHandover</h4>
+
+<p><code class="prettyprint">nfc.stopHandover(errorCallback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Stop sharing NDEF data via NFC handover.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">errorCallback</code> optional</li>
+</ul>
+
+<p>Error Callback. Called when function return error.</p>
+
+<h4 id="addndeflistener">addNdefListener</h4>
+
+<p><code class="prettyprint">nfc.addNdefListener(callback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Registers an event listener for any NDEF tag.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">callback</code> required</p>
+
+<p>The callback that is called when an NDEF tag is read.</p>
+
+<h4 id="removendeflistener">removeNdefListener</h4>
+
+<p><code class="prettyprint">nfc.removeNdefListener(callback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Removes the event listener for NDEF tags added via <code class="prettyprint">nfc.addNdefListener</code>.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">callback</code> required</p>
+
+<p>The callback that is called when the listener is successfully removed.</p>
+
+<h4 id="addndefformatablelistener">addNdefFormatableListener</h4>
+
+<p><code class="prettyprint">nfc.addNdefFormatableListener(callback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Registers an event listener for formatable NDEF tags.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">callback</code> required</p>
+
+<p>The callback that is called when NDEF formatable tag is read.</p>
+
+<h4 id="addtagdiscoveredlistener">addTagDiscoveredListener</h4>
+
+<p><code class="prettyprint">nfc.addTagDiscoveredListener(callback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Registers the callback for tag events.</p>
+
+<p>This event occurs when any tag is detected by the phone.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>* <code class="prettyprint">callback</code> required</p>
+
+<p>The callback that is called when a tag is detected.</p>
+
+<h4 id="removetagdiscoveredlistener">removeTagDiscoveredListener</h4>
+
+<p><code class="prettyprint">nfc.removeTagDiscoveredListener(callback);</code></p>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Removes the event listener added via <code class="prettyprint">nfc.addTagDiscoveredListener</code>.</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ul>
+<li><code class="prettyprint">callback</code> required</li>
+</ul>
+
+<p>The callback that is called when the listener is successfully removed.</p>
+
+<h3 id="events">Events</h3>
+
+<h4 id="nfc.ndef">nfc.ndef</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>A ndef event is fired when a NDEF tag is read.</p>
+
+<h4 id="nfc.ndefformatable">nfc.ndefformatable</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>A ndef-formatable event occurs when a tag is read that can be NDEF formatted. This is not fired for tags that are already formatted as NDEF. The ndef-formatable event will not contain an NdefMessage.</p>
+
+<h4 id="nfc.tagdiscovered">nfc.tagdiscovered</h4>
+
+<h5 id="discussion">Discussion</h5>
+
+<p>Tagdiscovered event occurs when any tag is detected by the phone.</p>
 
           <h2 id="notifications-module">Notifications Module</h2>
 
