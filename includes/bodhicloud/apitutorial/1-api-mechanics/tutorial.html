@@ -28,23 +28,28 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="overview">Overview</h1>
+        <h4 id="api-mechanics-tutorial">API Mechanics Tutorial</h4>
 
-<h3 id="scope">Scope</h3>
+<h5 id="overview">Overview</h5>
 
 <p>In this tutorial you will explore the basics of the bodhi api using the command line tool.</p>
 
-<h3 id="intended-audience">Intended Audience</h3>
+<p><strong>Intended Audience</strong></p>
 
 <p>This tutorial is designed for a new developer looking to understand how to interact with data. The tutorial assumes the developer has valid credentials for a namespace, the bodhi command line tool, and has set up their environment.</p>
 
-<h2 id="resource-commands">Resource Commands</h2>
+<h5 id="how-to">How To</h5>
 
-<p>All resource commands take the following structure:</p>
-<pre class="highlight plaintext"><code>&gt; bodhi &lt;action&gt; [options] resources/:resource-name/[:id][?:query]
-</code></pre>
+<p><strong>Resource Commands</strong></p>
 
-<h3 id="actions">Actions</h3>
+<p>All resource commands take the following structure:
+&ldquo;&rdquo;</p>
+
+<blockquote>
+<p>bodhi <action> [options] resources/:resource-name/[:id][?:query]
+&ldquo;&rdquo;
+Actions</p>
+</blockquote>
 
 <ol>
 <li>get</li>
@@ -55,13 +60,13 @@
 <li>delete</li>
 </ol>
 
-<h3 id="resource-url&#39;s">Resource URL&rsquo;s</h3>
+<p><strong>Resource URL&rsquo;s::</strong></p>
 
 <p>All resource URL&rsquo;s should start with <code class="prettyprint">resources</code> and should take care not to prefix with the &rsquo;/&rsquo; character. The &rsquo;/&rsquo; character causes the cli to interpret the partial URL as absolute and will remove the namespace attributed.</p>
 
 <p>A resource collection is referred to by <code class="prettyprint">resources/:resource</code>. A resource instance is referred to by <code class="prettyprint">resources/:resource/:id</code>.</p>
 
-<h2 id="views">Views</h2>
+<p>Views</p>
 
 <p>Each command has a default that it presents on response from the service. These views can be overwritten when the CLI is invoked using the the <code class="prettyprint">--view</code> option. The table below shows the default view bindings for each action.</p>
 
@@ -104,43 +109,24 @@
 </tr>
 </tbody></table>
 
-<h2 id="options">Options</h2>
+<p>Options</p>
 
 <p>Below are a list of useful options when interacting with resources</p>
 
-<table><thead>
-<tr>
-<th>option</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>&ndash;file</td>
-<td>file containing resource instance</td>
-</tr>
-<tr>
-<td>&ndash;data</td>
-<td>describe the resource instance inline</td>
-</tr>
-<tr>
-<td>&ndash;color</td>
-<td>print the response object with syntax highlighting</td>
-</tr>
-<tr>
-<td>&ndash;flat</td>
-<td>print the response object without line breaks or indention</td>
-</tr>
-</tbody></table>
+<p>option     |  description
+&mdash;-       | &ndash;file     | file containing resource instance
+&ndash;data     | describe the resource instance inline
+&ndash;color    | print the response object with syntax highlighting
+&ndash;flat     | print the response object without line breaks or indention</p>
 
-<h2 id="reading-resources">Reading Resources</h2>
-
-<h3 id="reading-a-collection-of-resources">Reading a collection of Resources</h3>
+<p><strong>Reading Resources</strong><br>
+Reading a collection of Resources</p>
 
 <p>Our first query will attempt to extract all the resources in a given collection using the get action.</p>
 <pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource
 </code></pre>
 
-<h3 id="counting-resources">Counting Resources</h3>
+<p>Counting Resources</p>
 <pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/count
 { count: 3 }
 </code></pre>
@@ -150,15 +136,15 @@
 { count: INTEGER }
 </code></pre>
 
-<h3 id="fetch-a-resource-by-id">Fetch a Resource by ID</h3>
+<p>Fetch a Resource by ID</p>
 <pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id
 </code></pre>
 
-<h3 id="fetch-by-unique-attribute">Fetch by unique Attribute</h3>
+<p>Fetch by unique Attribute</p>
 <pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id?where={\"name\":\"My-Name\"}
 </code></pre>
 
-<h2 id="creating-resources">Creating Resources</h2>
+<p><strong>Creating Resources</strong></p>
 
 <p>Look inside the file resource.json to see the resource description.</p>
 <pre class="highlight plaintext"><code>{
@@ -187,13 +173,11 @@
 
 <p>Note there are a number of new system attributes that have been added to the resource. Those attributes are read only from an application perspective and are managed on your behalf by the system.</p>
 
-<h3 id="updating-resources">Updating Resources</h3>
-
-<hr>
+<p>** Updating Resources**</p>
 
 <p>The system supports two forms of update - replace and patch. When updating a resource it is not necessary to specify any of the system attributes (those that start with the prefix <code class="prettyprint">sys_</code>). Those attributes will be ignored by the API and will be updated by the service.</p>
 
-<h3 id="replacing-the-resource">Replacing the Resource</h3>
+<p>Replacing the Resource</p>
 
 <p>A complete update is performed using a PUT. If the command succeeds then the newly specified resource will be assigned to the resource&rsquo;s id. A resource&rsquo;s attributes may be created, changed, or deleted using this action.</p>
 <pre class="highlight plaintext"><code>&gt; bodhi put resources/MyResource/:id --file resource.json
@@ -222,9 +206,9 @@
   }
 </code></pre>
 
-<h2 id="deleting-resources">Deleting Resources</h2>
+<p><strong>Deleting Resources</strong></p>
 
-<h3 id="delete-a-resource">Delete a Resource</h3>
+<p>Delete a Resource</p>
 
 <p>Most of the time we will delete a resource by id. In this case we use a relative resource uri with an id at the end of the path. </p>
 <pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource/:id
@@ -233,7 +217,7 @@ Success 204 No Content
 
 <p>If an resource matching that id exists then you will receive an HTTP 204. If no resource with the specified id exists then the API will return a 404 Not Found status.</p>
 
-<h3 id="delete-the-entire-collection">Delete the entire Collection</h3>
+<p>Delete the entire Collection</p>
 
 <p>If you want to delete all resources in a particular collection the use the following command. </p>
 <pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource
