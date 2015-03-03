@@ -79,6 +79,379 @@ Your namespace utilizes user profiles that are configured by your namespace admi
 <p>The API Documentation can be found at here: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>
 To access them you need to login with your user and password provided by Hot Schedules.</p>
 
+          <h1 id="bodhi-cloud">Bodhi Cloud</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The Bodhi Cloud is a set of secure APIs that are used to store your data.  </p>
+
+<h2 id="getting-started">Getting Started</h2>
+
+<p>To access the Bodhi Cloud API, you need to login with you user and password which is provided by Hot Schedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>.  </p>
+
+<p>If you enter your credentials (username and password) and click Explore, you will see a list of API which you can access for your namespace.  The Bodhi Cloud APIs are REST APIs which returns JSON for all responses.  </p>
+
+<p>Each API has examples and an opportunity to <em><em>Try it out!</em></em>.  You can add data using our provided types or create your own type and add data.  NOTE: Should you create your own type, the new type will show up in the API Documentation for your namespace.</p>
+
+          <h2 id="how-to">How To</h2>
+
+<h4 id="bodhi-cloud-api-tutorials">Bodhi Cloud API Tutorials</h4>
+
+<h5 id="overview">Overview</h5>
+
+<p>These tutorials are designed to show a user how to log in, see all the users in a namespace, create a type, delete that type, and perform queries using the Bodhi Cloud APIs.  </p>
+
+<h5 id="getting-started">Getting Started</h5>
+
+<p><em>Prerequisites</em>: You will need your login credentials which are provided by your Hot Schedules representative.  </p>
+
+<p>Logging in to the Bodhi API Documentation is the firs step in accessing and reviewing the Bodhi APIs as well as the various data types provided by default.  This set of tutorials are designed to show you how to login to the API Documentation, how to view, query and access the APIs and data types, and how to create new types.</p>
+
+<p>The Bodhi Cloud API Documentation is a rich set of documentation geared towards REST API developers. The documetation is designed to both show the Bodhi&rsquo;s built-in types as well as shows your own custom types as well.  These simple tutorials are geared twoards showing how to use the documentation.  </p>
+
+<h5 id="how-to">How To</h5>
+
+<p><strong>How Do I Login to the Bodhi Cloud API Documentation?</strong></p>
+
+<ul>
+<li>Go to <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a></li>
+<li>Login using the credentials provided to you from your Hot Schedules Representative:</li>
+</ul>
+
+<p><img title="Logging in to the Bodhi API Documentation" alt="CloudAPI_LogginIn" src="images/CloudAPI_LoggingIn.png?raw=true" /></p>
+
+<p>Logging in to the Bodhi API Documentation</p>
+
+<p><em>Note:</em> Once you are logged in with a valid username and password, you will see your Namespace auto-fill. </p>
+
+<p><strong>How to access users in your namespace</strong></p>
+
+<p>Once Logged In to the Bodhi Cloud Documentation, you can test out the REST APIs directly in your Namespace.  This tutorial will show you how to acess the users in your namespace and see what access rights each user has.  In order to see all the users of your Namespace, you should be logged in as an administrator.  </p>
+
+<p>The following steps will show allow you to see the users in your Namespace and see what profile each user is assigned:
+* Pre-requistes: Ensure you have logged in to your Namespace, see How Do I Login to the Bodhi Cloud API Documentation (above)
+* Scroll down to the User type 
+<img title="Scroll to User, Click User" alt="CloudAPI_ClickUser" src="images/CloudAPI_ClickUser.png?raw=true" /></p>
+
+<p>Scroll to User, Click User</p>
+
+<ul>
+<li>Scroll to /Users</li>
+<li>Click Get /Users to expose the REST APIs available for that type
+<img title="Click GET /User" alt="CloudAPI_ClickGetUsers" src="images/CloudAPI_ClickGetUsers.png?raw=true" /></li>
+</ul>
+
+<p>Scroll to User, Click User</p>
+
+<ul>
+<li>Click Try it out!
+<img title="Click Try it out!" alt="CloudAPI_ClickGetUsersTryItOut" src="images/CloudAPI_ClickUsersTryItOut.png?raw=true" /></li>
+</ul>
+
+<p>Click Try it out!</p>
+
+<ul>
+<li>Scroll through the JSON output and note various users assigned to your namespace NOTE: The same output can be obtained just for your login using the Me type and click Get /me, you will see all information about your username and access</li>
+<li>Each user will have similar JSON as noted below, depending on their access, they may or may not have a <namespace>.admin profile.</li>
+</ul>
+<pre class="highlight plaintext"><code>"params": [
+      "User",
+      {
+        "sys_created_at": "2015-02-20T21:19:11+0000",
+        "profiles": [
+          "&lt;your namespace&gt;.admin",
+          "base.user",
+          "base.user__system"
+        ],
+        "authorizations": [
+          {
+            "namespace": "&lt;your namespace&gt;",
+            "read": true
+          }
+        ],
+        "usertype": "person",
+        "sys_id": "6cae6b8a-acd9-4a15-874e-73e933cd51af",
+        "password": "$2a$12$fLpPr1dWs5ULE1He5m1dwOy3wQK8q3yqWvo/VUvNo37l.ZP51pP..",
+        "sys_version": 2,
+        "sys_modified_at": "2015-02-20T21:19:11+0000",
+        "sys_modified_by": "system",
+        "sys_namespace": "system",
+        "email": "&lt;your email&gt;",
+        "sys_created_by": "system",
+        "username": "&lt;your username&gt;",
+        "sys_type_version": 2
+</code></pre>
+
+          <h4 id="api-mechanics-tutorial">API Mechanics Tutorial</h4>
+
+<h5 id="overview">Overview</h5>
+
+<p>In this tutorial you will explore the basics of the bodhi api using the command line tool.</p>
+
+<p><strong>Intended Audience</strong></p>
+
+<p>This tutorial is designed for a new developer looking to understand how to interact with data. The tutorial assumes the developer has valid credentials for a namespace, the bodhi command line tool, and has set up their environment.</p>
+
+<h5 id="how-to">How To</h5>
+
+<p><strong>Resource Commands</strong></p>
+
+<p>All resource commands take the following structure:
+&ldquo;&rdquo;</p>
+
+<blockquote>
+<p>bodhi <action> [options] resources/:resource-name/[:id][?:query]
+&ldquo;&rdquo;
+Actions</p>
+</blockquote>
+
+<ol>
+<li>get</li>
+<li>count</li>
+<li>post</li>
+<li>put</li>
+<li>put</li>
+<li>delete</li>
+</ol>
+
+<p><strong>Resource URL&rsquo;s::</strong></p>
+
+<p>All resource URL&rsquo;s should start with <code class="prettyprint">resources</code> and should take care not to prefix with the &rsquo;/&rsquo; character. The &rsquo;/&rsquo; character causes the cli to interpret the partial URL as absolute and will remove the namespace attributed.</p>
+
+<p>A resource collection is referred to by <code class="prettyprint">resources/:resource</code>. A resource instance is referred to by <code class="prettyprint">resources/:resource/:id</code>.</p>
+
+<p>Views</p>
+
+<p>Each command has a default that it presents on response from the service. These views can be overwritten when the CLI is invoked using the the <code class="prettyprint">--view</code> option. The table below shows the default view bindings for each action.</p>
+
+<table><thead>
+<tr>
+<th>view</th>
+<th>defaults for</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>status</td>
+<td>put, patch, delete</td>
+<td>print just the status code</td>
+</tr>
+<tr>
+<td>headers</td>
+<td></td>
+<td>print the headers and status code</td>
+</tr>
+<tr>
+<td>location</td>
+<td>post</td>
+<td>print the value of the location header</td>
+</tr>
+<tr>
+<td>id</td>
+<td></td>
+<td>print the id of the newly created object</td>
+</tr>
+<tr>
+<td>entity</td>
+<td>get</td>
+<td>print the content returned by the server</td>
+</tr>
+<tr>
+<td>all</td>
+<td></td>
+<td>print status, headers, and content</td>
+</tr>
+</tbody></table>
+
+<p>Options</p>
+
+<p>Below are a list of useful options when interacting with resources</p>
+
+<p>option     |  description
+&mdash;-       | &ndash;file     | file containing resource instance
+&ndash;data     | describe the resource instance inline
+&ndash;color    | print the response object with syntax highlighting
+&ndash;flat     | print the response object without line breaks or indention</p>
+
+<p><strong>Reading Resources</strong><br>
+Reading a collection of Resources</p>
+
+<p>Our first query will attempt to extract all the resources in a given collection using the get action.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource
+</code></pre>
+
+<p>Counting Resources</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/count
+{ count: 3 }
+</code></pre>
+
+<p>The CLI exposes a shorthand for this command using the count action.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi count resources/MyResource
+{ count: INTEGER }
+</code></pre>
+
+<p>Fetch a Resource by ID</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id
+</code></pre>
+
+<p>Fetch by unique Attribute</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id?where={\"name\":\"My-Name\"}
+</code></pre>
+
+<p><strong>Creating Resources</strong></p>
+
+<p>Look inside the file resource.json to see the resource description.</p>
+<pre class="highlight plaintext"><code>{
+  name     : ""
+  age      : 0,
+  eligible : false,
+}
+</code></pre>
+
+<p>You can create an instance of new resource instance by posting JSON data to the collection. The API will return the id of the newly created id in the form of a relative resource URI. The new resource to be created can be specified as a file using the -f &ndash;file option and pointing at the resource.json file.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi post resources/MyResource --file resource.json
+:namespace/resources/MyResource/:id
+</code></pre>
+
+<p>If you supply the <code class="prettyprint">--view id</code> option then you will only see the new resource&rsquo;s id.</p>
+<pre class="highlight plaintext"><code>{ eligible: true,
+  age: 12,
+  name: 'My Name',
+  sys_namespace: 'namespace',
+  sys_version: 1,
+  sys_created_at: '2015-01-24T06:57:39+0000',
+  sys_created_by: 'user_name',
+  sys_type_version: 1,
+  sys_id: 'de9a3e93-47fa-4537-a80d-3f3b49b446b1' }
+</code></pre>
+
+<p>Note there are a number of new system attributes that have been added to the resource. Those attributes are read only from an application perspective and are managed on your behalf by the system.</p>
+
+<p>** Updating Resources**</p>
+
+<p>The system supports two forms of update - replace and patch. When updating a resource it is not necessary to specify any of the system attributes (those that start with the prefix <code class="prettyprint">sys_</code>). Those attributes will be ignored by the API and will be updated by the service.</p>
+
+<p>Replacing the Resource</p>
+
+<p>A complete update is performed using a PUT. If the command succeeds then the newly specified resource will be assigned to the resource&rsquo;s id. A resource&rsquo;s attributes may be created, changed, or deleted using this action.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi put resources/MyResource/:id --file resource.json
+  Success 204 No Content
+</code></pre>
+<pre class="highlight plaintext"><code>{ eligible: false,
+  age: 12,
+  name: 'my-name',
+  sys_namespace: 'brian',
+  sys_version: 3,
+  sys_created_at: '2015-01-24T07:42:46+0000',
+  sys_created_by: 'admin__brian',
+  sys_type_version: 1,
+  sys_id: 'd5aea468-f165-4d97-af16-7caba756ca43',
+  sys_modified_at: '2015-01-24T08:18:57+0000',
+  sys_modified_by: 'admin__brian' }
+</code></pre>
+
+<p>If you then access the record you will see the last modified time stamp has been changed and the instance_version will be incremented.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resource/MyResource/:id
+  {
+    ...
+    sys_version    :  version++
+    sys_modified_at: 'ISO-TS-FOR-NOW'
+    sys_modified_by: 'your-user-id'
+  }
+</code></pre>
+
+<p><strong>Deleting Resources</strong></p>
+
+<p>Delete a Resource</p>
+
+<p>Most of the time we will delete a resource by id. In this case we use a relative resource uri with an id at the end of the path. </p>
+<pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource/:id
+Success 204 No Content
+</code></pre>
+
+<p>If an resource matching that id exists then you will receive an HTTP 204. If no resource with the specified id exists then the API will return a 404 Not Found status.</p>
+
+<p>Delete the entire Collection</p>
+
+<p>If you want to delete all resources in a particular collection the use the following command. </p>
+<pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource
+Success 204 No Content
+</code></pre>
+
+<p>If the command returns successfully then you will receive an HTTP 204 and all the records will be deleted. You can verify the results of this command by trying to read the entire collection</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get resource/MyResource
+[]
+</code></pre>
+
+<p>or by getting the count and verifying that it returns 0.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi count resources/MyResource
+{count: 0}
+</code></pre>
+
+          <h4 id="type-mechanics-tutorial">Type Mechanics Tutorial</h4>
+
+          <h2 id="tooling">Tooling</h2>
+
+<h4 id="bodhi.type">Bodhi.Type</h4>
+
+<h5 id="introduction">Introduction</h5>
+
+<p>Bodhi.Type is a user interface developed by the Bodhi team to allow customers to view their current data types on the cloud. The tool also allows for users to build new types and extend existing types using a user friendly interface that reads and writes to and from the Bodhi Cloud.</p>
+
+<p>Bodhi.Type is available to all users to view and interact with their data on a specific namespace</p>
+
+<h5 id="getting-started">Getting started</h5>
+
+<p>Bodhi.Type is currently available in beta as an OS X <a href="https://drive.google.com/file/d/0Bz2KGejeubT9alF5NGNlYzRvZEE/view">download</a> .</p>
+
+<h5 id="intended-audience">Intended Audience</h5>
+
+<p>Bodhi.Type is intended to be a complement to the existing Bodhi CLI. </p>
+
+<h5 id="steps-/-tutorial-to-install-(or-using-the-app)">Steps / tutorial to install (or Using the app)</h5>
+
+<p>Download the Bodhi.Type application. Double click on the Bodhi.Type icon to launch the app, or drag into the Applications folder to make the app available via the Launchpad.</p>
+
+<h5 id="using-this-software">Using this software</h5>
+
+<p>Follow screen prompts to Authenticate via the Preferences menu on the top of your screen. Once authenticated, you should have access to all of the types in your namespace via the left side navigation bar. </p>
+
+<p>Selecting a type will allow you to inspect the properties of that type. </p>
+
+<p><img alt="Type Selection" src="images/Bodhi.Type_1.png" /></p>
+
+<p>By using the download button, users can download the type as a JSON file.</p>
+
+<p><img alt="Download JSON" src="images/Bodhi.Type_2.png" /></p>
+
+<p>By clicking the inspect button, users can be taken to the full API documentation for that type.</p>
+
+<p><img alt="Inspect Type" src="images/Bodhi.Type_3.png" /></p>
+
+<p>Users can edit the type by making changes to the types&rsquo; properties, or adding new properties. </p>
+
+<p><img alt="Editing Type" src="images/Bodhi.Type_4.png" /></p>
+
+<p>When they have completed their changes, users can click the &lsquo;Publish&rsquo; button, which will then take them to a screen showing a JSON representation of their edits. Users will be notified whether their request succeeds or experiences errors before returning to the Type page.</p>
+
+<p><img alt="Publishing Type" src="images/Bodhi.Type_5.png" /></p>
+
+<p>Users can also create new types by clicking the New Type button on the topbar. </p>
+
+<p><img alt="Type Creation" src="images/Bodhi.Type_6.png" /></p>
+
+<p>This will take them to the type creation page, a blank form where they can add the name of their new type, select whether or not it is an embedded type or an independent type, and create properties for that type. By clicking the Publish button, they can review their proposed new type, and be notified of the success of their request.</p>
+
+<p>Newly created types should be instantly accessibly via the side navigation bar. Users can then edit or delete the type using the Publish or Delete buttons.</p>
+
+<p><img alt="Type Deletion" src="images/Bodhi.Type_7.png" /></p>
+
+<h5 id="future-releases">Future Releases</h5>
+
+<p>Future releases should add Windows support, as well as additional options for type creation and modification.</p>
+
+          
+          
           <h1 id="bodhi-agent">Bodhi Agent</h1>
 
 <h2 id="overview">Overview</h2>
@@ -1185,45 +1558,1672 @@ figure 32  </p>
 
 <h4 id="agent-console">Agent Console</h4>
 
-<h5 id="introduction">Introduction</h5>
+<p>The Agent Console is the application that users can use to manage their Agent&rsquo;s functionality and settings. The following sections describe how to use the Agent Console.</p>
 
-<p>What is this app?</p>
+<h6 id="getting-started">Getting Started</h6>
 
-<p>What are it&rsquo;s core features / purposes</p>
+<p>The Agent must be running for you to access the Agent Console. You can access the Agent Console by going to <a href="http://localhost:4444">http://localhost:4444</a> in your browser. If you installed the Agent for the first time, the console will automatically start if you selected the &ldquo;Start Console&rdquo; option during the installation.</p>
 
-<h5 id="getting-started">Getting started</h5>
+<p><em>Note: Agent Console works best in Google Chrome or Mozilla Firefox.</em></p>
 
-<p>intended Audience::</p>
+<h6 id="registering-your-agent">Registering Your Agent</h6>
 
-<p>Env Setup::</p>
+<p>Upon entering the console for the first time, you should see a registration token pop up. This six-digit registration code needs to be entered into your HS One App to connect your Agent to your HS One App and to the Bodhi Cloud. Once you&rsquo;ve successfully entered the token into the HS One App, the window will display a &ldquo;SUCCESS&rdquo; message and close. </p>
 
-<p>Steps / tutorial to install::</p>
+<p><strong>Important</strong>: If the window pops up and you don&rsquo;t see a token, wait 10 seconds and refresh your browser. If the window doesn&rsquo;t pop up, click on the Registration Code link in the left navigation bar to open the window.</p>
 
-<h5 id="tutorial-/-how-to-guides">Tutorial / How to guides</h5>
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/registrationcode.png" /></p>
 
-<p>Using this software</p>
+<p><em>The registration code should be entered in your HS One Mobile app.</em></p>
 
-<p>Future plans?</p>
+<h6 id="dashboard">Dashboard</h6>
 
-          <h4 id="agent-cli">Agent CLI</h4>
+<p>The Dashboard displays Agent software updates, your installed Agent Apps, and Customer Support information. </p>
 
-<h5 id="introduction">Introduction</h5>
+<p>Note that clicking the three lines next to the Bodhi Agent icon will enable you to minimize or expand the navigation bar.</p>
 
-<p>What is this tool for and what are it&rsquo;s core features / purposes?</p>
+<p>In the top right corner, you can see the Agent&rsquo;s connection status to the Internet (either Online or Offline).</p>
 
-<h5 id="getting-started">Getting started</h5>
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/dashboard.png" />
+<em>Screenshot: Agent Console Dashboard Page</em></p>
 
-<p>Intended Audience::</p>
+<h6 id="integration-apps">Integration Apps</h6>
 
-<p>Env Setup</p>
+<p>On the Integration Apps page, you can view and install Agent Apps that are available in the Bodhi App Store. You can install apps with one click by clicking the &ldquo;Install Now&rdquo; button. Upon clicking it, the app will start installing. When it has finished installing, you will see a green &ldquo;Installed&rdquo; button.</p>
 
-<p>Steps / tutorial to install</p>
+<p><em>Note: If you receive an red error message, then the App could not be found. Make sure you are connected to the internet and if you continue to have errors, contact Customer Support.</em></p>
 
-<h5 id="tutorial-/-how-to-guides">Tutorial / How to guides</h5>
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/integrationapps.png" />
+<em>Screenshot: Agent Console Integration Apps Page</em></p>
 
-<p>Using this software</p>
+<h6 id="settings">Settings</h6>
 
-<p>Future plans?</p>
+<p>On the Settings page, you can change settings that will determine how your Agent operates.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent Name</td>
+<td>Changes the Agent&rsquo;s name</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Determines the package bundles that the Agent will install</td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>Sets the timezone</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>Sets the currency for your Store</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/agentsettings.png" />
+<em>Screenshot: Agent Console Settings Page</em></p>
+
+<h6 id="connection">Connection</h6>
+
+<p>The Connection page displays important information about the Agent&rsquo;s connection details. The Connection panel displays connection status information for the Agent and the right-hand panel lists the connection protocols available to the Agent.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Base</td>
+<td>Lists the full URI path to the Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Endpoint URL</td>
+<td>Lists the Endpoint URL that the Agent is connected to</td>
+</tr>
+<tr>
+<td>Online Since</td>
+<td>Lists the date &amp; time since the Agent has been running</td>
+</tr>
+<tr>
+<td>Interruptions</td>
+<td>Lists the number of times the Agent had interrupted connections to the Internet</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/connection.png" />
+<em>Screenshot: Agent Console Connection Page</em></p>
+
+<h6 id="about">About</h6>
+
+<p>The About page displays information about your Agent&rsquo;s status. The Bodhi Agent panel lists information about your Agent&rsquo;s identity and structure, and the right-hand panel lists the plug-ins that are available to your Agent.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Your Agent&rsquo;s display name</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>The version number of the Agent</td>
+</tr>
+<tr>
+<td>Agent Directory</td>
+<td>Lists the directory path where the Agent is installed</td>
+</tr>
+<tr>
+<td>Namespace</td>
+<td>Your identifying space in the HS Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Agent ID</td>
+<td>The unique identifier for the Agent</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Displays whether your Agent is authorized to connect to Bodhi Cloud <em>(checkmark means authorized)</em></td>
+</tr>
+<tr>
+<td>Assigned</td>
+<td>Displays whether your Agent has been assigned a Store in the Bodhi Cloud <em>(checkmark means assigned)</em></td>
+</tr>
+<tr>
+<td>Extensions</td>
+<td>Lists the extensions available to the Agent (see <a href="http://redbookconnect.github.io/slate/#extending-the-agent">Extensions</a>)</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Lists the services implemented within the Agent</td>
+</tr>
+<tr>
+<td>Handlers</td>
+<td>Lists the event handlers implemented in the Agent</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Lists the NPM packages that the Agent is dependent upon</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/about.png" /> 
+<em>Screenshot: Agent Console About Page</em></p>
+
+<p>========</p>
+
+          <h4 id="agent-cli">Agent-CLI</h4>
+
+<p>The agent-cli provides administrators, support team members, and developers a tool for interacting with an agent.</p>
+
+<h5 id="general-usage">General Usage</h5>
+
+<p>The general structure of the agent-cli commands are as follows:</p>
+<pre class="highlight plaintext"><code>c:agent-cli [options] &lt;action&gt; [arguments]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<ul>
+<li>  Options are prefixed with <code class="prettyprint">-</code> or <code class="prettyprint">--</code> to separate them from arguments. </li>
+<li>  Each command or action defines the options it uses. </li>
+<li>  <strong>NOTE:</strong> the options are consistent in naming convention and usage across the commands.</li>
+</ul>
+
+<h6 id="common-options">Common Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>print help about the command</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>&ndash;home</td>
+<td>path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>directive to override safety logic</td>
+</tr>
+</tbody></table>
+
+<h6 id="arguments">Arguments</h6>
+
+<ul>
+<li>  The agent-cli interprets the first argument (non-option) as the action command. </li>
+<li>  All subsequent arguments are command specific. </li>
+</ul>
+
+<p>The commands are grouped into a sub group.
+The following Commands groups are;</p>
+
+<ul>
+<li><strong>Informational Commands</strong></li>
+<li><strong>Lifecycle Commands</strong></li>
+<li><strong>Diagnostic Commands</strong></li>
+<li><strong>Usage Commands</strong></li>
+<li><strong>Configuration Commands</strong></li>
+<li><strong>Update Commands</strong></li>
+</ul>
+
+<h5 id="informational-commands">Informational Commands</h5>
+
+<h6 id="help">help</h6>
+
+<p>The command line provides built in helper functions.</p>
+
+<h6 id="navigation-help">Navigation Help</h6>
+
+<p>For a descriptive list of the commands </p>
+<pre class="highlight plaintext"><code>c:agent-cli --help
+</code></pre>
+
+<h6 id="version">version</h6>
+
+<p>Displays the version information of the agent-cli.</p>
+<pre class="highlight plaintext"><code>c: agent-cli -V
+c: agent-cli --version 
+</code></pre>
+
+<p><strong>NOTE:</strong> The output is a simple version identifier following the semantic versioning rules of major, minor, and build.</p>
+<pre class="highlight plaintext"><code>Major.minor.build (e.g. 1.0.51)
+</code></pre>
+
+<h6 id="info">info</h6>
+
+<p>Used to display information of the Agent-CLI.</p>
+
+<ul>
+<li>Displays the agent-cli splash screen</li>
+<li>Displays the version of the agent-cli</li>
+<li>Displays the working directory of the agent</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli info
+</code></pre>
+
+<h6 id="lifecycle-commands">Lifecycle Commands</h6>
+
+<p>Lifecycle commands allow an administrator to change and check the run state of an agent.</p>
+
+<h6 id="start">start</h6>
+
+<p>Used to attempt to start an agent.</p>
+
+<ul>
+<li>Allows the selection of which agent configuration file to use</li>
+<li>Allows the selection of the agent working directory</li>
+<li>Allows the selection of the agent pidFile to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli start [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;pidFile</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s pidFileagent-cli</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>provides more detailed information output</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>provides only essential information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli start -h
+c:agent-cli start —-help
+c:agent-cli start -f c:\BodhiAgent\agent1.js
+c:agent-cli start —-config c:\BodhiAgent\agent1.js
+c:agent-cli start —-home c:\
+c:agent-cli start —-pidFile c:\BodhiAgent\agent.pid
+c:agent-cli start -v
+c:agent-cli start —verbose
+c:agent-cli start -q
+c:agent-cli start —-quiet
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Error: connect EADDRNOTAVAIL</td>
+<td>the connection url  in the configuration file is bad</td>
+</tr>
+<tr>
+<td>error: unknown option &lsquo;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="status">status</h6>
+
+<p>Used to retrieve the status of a running agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli status [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli status —h
+c:agent-cli status —-help
+c:agent-cli status -f c:\BodhiAgent\agent1.js
+c:agent-cli status —-config c:\BodhiAgent\agent1.js
+c:agent-cli status -v
+c:agent-cli status —verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent available</td>
+<td>agent is running and available</td>
+</tr>
+<tr>
+<td>agent unavailable</td>
+<td>agent has stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="stop">stop</h6>
+
+<p>Used to gracefully stop or shutdown an agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli stop [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli stop —h
+c:agent-cli stop —-help
+c:agent-cli stop -f c:\BodhiAgent\agent1.js
+c:agent-cli start —-config c:\BodhiAgent\agent1.js
+c:agent-cli start -v
+c:agent-cli start —verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent stopping now &hellip;</td>
+<td>agent is shutting down gracefully updated</td>
+</tr>
+<tr>
+<td>agent is unavailable</td>
+<td>agent is stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-name">set-name</h6>
+
+<p>Used to configure the name of an agent.</p>
+
+<ul>
+<li>Allows the setting of the name of the agent</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli set-name [options] &lt;name&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-name —h
+c:agent-cli set-name —-help
+c:agent-cli set-name Fred
+c:agent-cli set-name -f c:\BodhiAgent\agent1.js Teddy
+c:agent-cli set-name —config c:\BodhiAgent\agent1.js Herb
+c:agent-cli set-name -v Fred
+c:agent-cli set-name --verbose Fred
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-connection">set-connection</h6>
+
+<p>Used to configure a connection to an agent.</p>
+
+<ul>
+<li>Allows the setting of the http url for the connection</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the timeout value</li>
+<li>Allows the setting of the proxy http url</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli set-connection [options] connection]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;timeout</td>
+<td>value</td>
+<td>specifies the connections timeout value</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;proxy</td>
+<td>proxy</td>
+<td>specifies the http proxy url</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-connection —h
+c:agent-cli set-connection —-help
+c:agent-cli set-connection https://api.redbookcloud.com
+c:agent-cli set-connection -f c:\BodhiAgent\agent1.js
+c:agent-cli set-connection —-config c:\BodhiAgent\agent1.js
+c:agent-cli set-connection --timeout 20000
+c:agent-cli set-connection —-proxy http://proxy.redbookcloud.com
+c:agent-cli set-connection -v https://api.redbookcloud.com
+c:agent-cli set-connection --verbose https://api.redbookcloud.com
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-logger">set-logger</h6>
+
+<p>Used to configure the logging of an agent.</p>
+
+<ul>
+<li>  Allows the setting of the log file location </li>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the level of logging information</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: set-logger [options
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;file</td>
+<td>filename</td>
+<td>fully qualified filename of the the log file location</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;level</td>
+<td>level</td>
+<td>specifies the log level (error, warn, info, verbose, debug)</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-logger —h
+c:agent-cli set-logger —-help
+c:agent-cli set-logger Fred
+c:agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:agent-cli set-logger —-file c:\BodhiAgent\test.log
+c:agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:agent-cli set-logger --level error
+c:agent-cli set-logger —-level warn
+c:agent-cli set-logger —-level info
+c:agent-cli set-logger —-level verbose
+c:agent-cli set-logger —-level debug
+c:agent-cli set-logger -v
+c:agent-cli set-logger —-verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-management">set-management</h6>
+
+<p>Used to configure the management endpoint for an agent.</p>
+
+<ul>
+<li>  Allows the setting of the log file location </li>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the http port</li>
+<li>  Allows the setting of the http address to listen on</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: set-management [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;port</td>
+<td>port address</td>
+<td>specifies the management http port address</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;connection</td>
+<td>url:port</td>
+<td>specifies the mnagement url and port address</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-management https://api.bodhi.space
+c:agent-cli set-management —h
+c:agent-cli set-management —-help
+c:agent-cli set-management -f c:\BodhiAgent\agent1.js
+c:agent-cli set-management —-config c:\BodhiAgent\agent1.js
+c:agent-cli set-management —-port 4444
+c:agent-cli set-management —-connection https://api.bodhi.space:4444
+c:agent-cli set-management -v https://api.bodhi.space
+c:agent-cli set-management -- verbose https://api.bodhi.space
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="diagnostic-commands">Diagnostic Commands</h5>
+
+<p>Diagnostic commands are used by an administrator to troubleshoot an agent that is having trouble entering a running state or to test environmental specific details uniformly across platforms.</p>
+
+<h6 id="check-core">check-core</h6>
+
+<p>Used to retrieve information of the agent-core that is being used</p>
+
+<ul>
+<li>Displays the version of the current agent.</li>
+<li>Displays the working directory of the current agent.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli check-core [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-core
+c:agent-cli check-core —h
+c:agent-cli check-core —-help
+</code></pre>
+
+<h6 id="check-config">check-config</h6>
+
+<p>Used to check for configuration problems in the agent. </p>
+
+<ul>
+<li>The agent will load and process all configuration files, </li>
+<li>Displays agent apps that are installed</li>
+<li>Will not cause agent to enter into a ready state. </li>
+<li><strong>NOTE:</strong> This command is safe to run even if there is a agent currently running.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli check-config [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>full filename</td>
+<td>specifies the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>prints only essential information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-config
+c:agent-cli check-config —h
+c:agent-cli check-config —-help
+c:agent-cli check-config -f c:BodhiAgent\agent1.js
+c:agent-cli check-config —-config c:\BodhiAgent\agent1.js
+c:agent-cli check-config —-home c:\BodhiAgent
+c:agent-cli check-config -v
+c:agent-cli check-config —-verbose
+c:agent-cli check-config -q
+c:agent-cli check-config —-quiet
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="check-connection">check-connection</h6>
+
+<p>Used to check for connection issues with an agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli check-connection [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-config
+c:agent-cli check-config —h
+c:agent-cli check-config —-help
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution from the agent&rsquo;s host</li>
+<li>Check the TCP port is reachable by opening up a connection on host:port</li>
+<li>Issue a HTTP GET against the ping endpoint of the system</li>
+</ol>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="check-route">check-route</h6>
+
+<p>Used to check for network problems (firewalls &amp; proxy rules) from the perspective of the agent runtime. </p>
+<pre class="highlight plaintext"><code>c:agent-cli check-route &lt;scheme://host:port/path&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-route http://localhost:4444/#/dashboard
+c:agent-cli check-route —h
+c:agent-cli check-route —-help
+c:agent-cli check-route -v http://localhost:4444/#/dashboard
+c:agent-cli check-route —-verbose http://localhost:4444/#/dashboard
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution of host/IP</li>
+<li>Check that the TCP port reachable by opening up a connection on host:port</li>
+<li>If scheme is http of https then issue a HTTP GET against the specified URL</li>
+</ol>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Got <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+<td>resolved the provided <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+</tr>
+<tr>
+<td>null unresolved</td>
+<td>problem with the <a href="host:port/path">host:port/path</a></td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="usage-commands">Usage Commands</h5>
+
+<h6 id="console">console</h6>
+
+<p>Used to start the web console in the default browser that is set for the system. </p>
+<pre class="highlight plaintext"><code>c:agent-cli console
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli console
+c:agent-cli console -h
+c:agent-cli console --help
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="configuration-commands">Configuration Commands</h5>
+
+<h6 id="reset">reset</h6>
+
+<p>Used to reset an agent&rsquo;s state by deleting the .agent file from the specified working directory.</p>
+<pre class="highlight plaintext"><code>c:agent-cli reset [options]
+</code></pre>
+
+<p><strong>NOTE:</strong> Using this command will delete the .agent file which contains the agent&rsquo;s identity</p>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the agent to reset regardless of start</td>
+</tr>
+<tr>
+<td>-H</td>
+<td>&ndash;HARD</td>
+<td>none</td>
+<td>forces the reset the name and namespace of an agent</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli reset
+c:agent-cli reset -h
+c:agent-cli reset --help
+c:agent-cli reset --home c:\BodhiAgent
+c:agent-cli reset -F
+c:agent-cli reset -force
+c:agent-cli reset -H
+c:agent-cli reset -hard
+c:agent-cli reset -v
+c:agent-cli reset --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent reset</td>
+<td>.agent file as been deleted</td>
+</tr>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="revoke">revoke</h6>
+
+<p>Used to revoke an agent&rsquo;s access token.</p>
+
+<ul>
+<li><strong>NOTE:</strong> This command will leave all other agent data intact.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli revoke [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli revoke
+c:agent-cli revoke -h
+c:agent-cli revoke --help
+c:agent-cli revoke --home c:\BodhiAgent
+c:agent-cli revoke -v
+c:agent-cli revoke --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization revoke</td>
+<td>the Authorization token as been removed</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="unassign">unassign</h6>
+
+<p>Used to remove the agent&rsquo;s association to a namespace.</p>
+<pre class="highlight plaintext"><code>c:agent-cli unassign [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli unassign
+c:agent-cli unassign -h
+c:agent-cli unassign --help
+c:agent-cli unassign --home c:\BodhiAgent
+c:agent-cli unassign -v
+c:agent-cli unassign --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="init">init</h6>
+
+<p>Used to initialize or create the agent&rsquo;s configuration file.</p>
+<pre class="highlight plaintext"><code>c:agent-cli init [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli init
+c:agent-cli init -h
+c:agent-cli init --help
+c:agent-cli init --config c:\BodhiAgent\agent.js
+c:agent-cli init -f
+c:agent-cli init --force
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent created</td>
+<td>An agent configuration file as being created in the working directory</td>
+</tr>
+<tr>
+<td>Agent already exist Use -F or &ndash;force to recreate</td>
+<td>Configuration file already exists</td>
+</tr>
+<tr>
+<td>serror: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="install-app">install-app</h6>
+
+<p>Used to install an application into the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli install-app [options] &lt;app&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli install-app agent-app-weather
+c:agent-cli install-app -h
+c:agent-cli install-app --help
+c:agent-cli install-app --f c:\BodhiAgent\agent.js
+c:agent-cli install-app --config c:\BodhiAgent\agent.js
+c:agent-cli install-app -v agent-app-weather
+c:agent-cli install-app --verbose agent-app-weather
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Unable to locate the application [application]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="install-ext">install-ext</h6>
+
+<p>Used to install an extension into the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli install-ext [options] &lt;app&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli install-ext agent-ext-csv-to-json
+c:agent-cli install-ext -h
+c:agent-cli install-ext --help
+c:agent-cli install-ext --f c:\BodhiAgent\agent.js
+c:agent-cli install-ext --config c:\BodhiAgent\agent.js
+c:agent-cli install-ext -v agent-ext-csv-to-json
+c:agent-cli install-ext --verbose agent-ext-csv-to-json
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Unable to locate the extension [extension]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="update-commands">Update Commands</h5>
+
+<h6 id="update-core">update-core</h6>
+
+<p>Used to update to the latest version of the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli update-core [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli update-core
+c:agent-cli update-core -h
+c:agent-cli update-core --help
+c:agent-cli update-core -v
+c:agent-cli update-core --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent-core@x.x.x node_modules\agent-core</td>
+<td>version number and location of the console module</td>
+</tr>
+<tr>
+<td>agent-core updated</td>
+<td>Agent core was successfully updated</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="update-console">update-console</h6>
+
+<p>Used to update to the latest version of the web console.</p>
+<pre class="highlight plaintext"><code>c:agent-cli update-console [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli update-console
+c:agent-cli update-console -h
+c:agent-cli update-console --help
+c:agent-cli update-console -v
+c:agent-cli update-console --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent-console@x.x.x node_modules\agent-console</td>
+<td>version number and location of the console module</td>
+</tr>
+<tr>
+<td>agent-console updated</td>
+<td>Agent console was successfully updated</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
 
           
           
@@ -1237,17 +3237,41 @@ figure 32  </p>
 
 <p>There is only one API required to deliver applications on Android, iOs or Windows phones.</p>
 
-          <h4 id="getting-started">Getting Started</h4>
+          <h2 id="getting-started">Getting Started</h2>
 
 <p>Bodhi Mobile is a mobile application than allows users to access their data on any mobile device.</p>
+
+          <h2 id="environmental-setup">Environmental Setup</h2>
+
+<p>This is how you setup Bodhi mobile and do app store stuff and mobile container stuff etc</p>
+
+          <h2 id="how-to">How To</h2>
+
+<h4 id="how-do-i-install-bodhi-mobile?">How do I install Bodhi Mobile?</h4>
+
+<h4 id="how-do-i-login?">How do I login?</h4>
+
+<h4 id="how-do-i-hook-up-sales-data-to-bodhi.reveal">How do I hook up Sales Data to Bodhi.Reveal</h4>
+
+<h4 id="how-do-i-build-an-app?">How do I build an app?</h4>
 
           <h2 id="tools">Tools</h2>
 
 <h4 id="mobile-app-store">Mobile App Store</h4>
 
-<iframe src="https://docs.google.com/a/redbookconnect.com/file/d/0B_-da_9QnvPBUlJNMkl5VW9BNFk/preview" width="30%"></iframe>
+<p>What&rsquo;s the theory of apps?</p>
 
-          <h2 id="kernel-promise">Kernel Promise</h2>
+<h4 id="bodhi-builder">Bodhi Builder</h4>
+
+<p>Planned for the future</p>
+
+          <h2 id="mobile-api">Mobile API</h2>
+
+<p>The Bodhi Mobile API provides interface to the native features of a mobile device across 3 platforms. iOS, Android, and Windows Phone/</p>
+
+<p>See descriptions and info below:: (For full implementation details, see our repository on <a href="https://github.com/bodhi-space/slate/tree/master/source/includes/bodhimobile/MobileAPI">Github</a>)</p>
+
+          <h6 id="kernel-promise">Kernel Promise</h6>
 
 <p>Virtually all functions in modules return instance of RBCPromise object.<br>
 With it you can easy add success and finished callbacks for the function.</p>
@@ -11146,379 +13170,6 @@ iOS don&rsquo;t have hardware back button.</p>
 <li><a href="#kernel-promise">RBCPromise</a> object</li>
 </ul>
 
-          <h1 id="bodhi-cloud">Bodhi Cloud</h1>
-
-<h2 id="overview">Overview</h2>
-
-<p>The Bodhi Cloud is a set of secure APIs that are used to store your data.  </p>
-
-<h2 id="getting-started">Getting Started</h2>
-
-<p>To access the Bodhi Cloud API, you need to login with you user and password which is provided by Hot Schedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>.  </p>
-
-<p>If you enter your credentials (username and password) and click Explore, you will see a list of API which you can access for your namespace.  The Bodhi Cloud APIs are REST APIs which returns JSON for all responses.  </p>
-
-<p>Each API has examples and an opportunity to <em><em>Try it out!</em></em>.  You can add data using our provided types or create your own type and add data.  NOTE: Should you create your own type, the new type will show up in the API Documentation for your namespace.</p>
-
-          <h2 id="how-to">How To</h2>
-
-<h4 id="bodhi-cloud-api-tutorials">Bodhi Cloud API Tutorials</h4>
-
-<h5 id="overview">Overview</h5>
-
-<p>These tutorials are designed to show a user how to log in, see all the users in a namespace, create a type, delete that type, and perform queries using the Bodhi Cloud APIs.  </p>
-
-<h5 id="getting-started">Getting Started</h5>
-
-<p><em>Prerequisites</em>: You will need your login credentials which are provided by your Hot Schedules representative.  </p>
-
-<p>Logging in to the Bodhi API Documentation is the firs step in accessing and reviewing the Bodhi APIs as well as the various data types provided by default.  This set of tutorials are designed to show you how to login to the API Documentation, how to view, query and access the APIs and data types, and how to create new types.</p>
-
-<p>The Bodhi Cloud API Documentation is a rich set of documentation geared towards REST API developers. The documetation is designed to both show the Bodhi&rsquo;s built-in types as well as shows your own custom types as well.  These simple tutorials are geared twoards showing how to use the documentation.  </p>
-
-<h5 id="how-to">How To</h5>
-
-<p><strong>How Do I Login to the Bodhi Cloud API Documentation?</strong></p>
-
-<ul>
-<li>Go to <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a></li>
-<li>Login using the credentials provided to you from your Hot Schedules Representative:</li>
-</ul>
-
-<p><img title="Logging in to the Bodhi API Documentation" alt="CloudAPI_LogginIn" src="images/CloudAPI_LoggingIn.png?raw=true" /></p>
-
-<p>Logging in to the Bodhi API Documentation</p>
-
-<p><em>Note:</em> Once you are logged in with a valid username and password, you will see your Namespace auto-fill. </p>
-
-<p><strong>How to access users in your namespace</strong></p>
-
-<p>Once Logged In to the Bodhi Cloud Documentation, you can test out the REST APIs directly in your Namespace.  This tutorial will show you how to acess the users in your namespace and see what access rights each user has.  In order to see all the users of your Namespace, you should be logged in as an administrator.  </p>
-
-<p>The following steps will show allow you to see the users in your Namespace and see what profile each user is assigned:
-* Pre-requistes: Ensure you have logged in to your Namespace, see How Do I Login to the Bodhi Cloud API Documentation (above)
-* Scroll down to the User type 
-<img title="Scroll to User, Click User" alt="CloudAPI_ClickUser" src="images/CloudAPI_ClickUser.png?raw=true" /></p>
-
-<p>Scroll to User, Click User</p>
-
-<ul>
-<li>Scroll to /Users</li>
-<li>Click Get /Users to expose the REST APIs available for that type
-<img title="Click GET /User" alt="CloudAPI_ClickGetUsers" src="images/CloudAPI_ClickGetUsers.png?raw=true" /></li>
-</ul>
-
-<p>Scroll to User, Click User</p>
-
-<ul>
-<li>Click Try it out!
-<img title="Click Try it out!" alt="CloudAPI_ClickGetUsersTryItOut" src="images/CloudAPI_ClickUsersTryItOut.png?raw=true" /></li>
-</ul>
-
-<p>Click Try it out!</p>
-
-<ul>
-<li>Scroll through the JSON output and note various users assigned to your namespace NOTE: The same output can be obtained just for your login using the Me type and click Get /me, you will see all information about your username and access</li>
-<li>Each user will have similar JSON as noted below, depending on their access, they may or may not have a <namespace>.admin profile.</li>
-</ul>
-<pre class="highlight plaintext"><code>"params": [
-      "User",
-      {
-        "sys_created_at": "2015-02-20T21:19:11+0000",
-        "profiles": [
-          "&lt;your namespace&gt;.admin",
-          "base.user",
-          "base.user__system"
-        ],
-        "authorizations": [
-          {
-            "namespace": "&lt;your namespace&gt;",
-            "read": true
-          }
-        ],
-        "usertype": "person",
-        "sys_id": "6cae6b8a-acd9-4a15-874e-73e933cd51af",
-        "password": "$2a$12$fLpPr1dWs5ULE1He5m1dwOy3wQK8q3yqWvo/VUvNo37l.ZP51pP..",
-        "sys_version": 2,
-        "sys_modified_at": "2015-02-20T21:19:11+0000",
-        "sys_modified_by": "system",
-        "sys_namespace": "system",
-        "email": "&lt;your email&gt;",
-        "sys_created_by": "system",
-        "username": "&lt;your username&gt;",
-        "sys_type_version": 2
-</code></pre>
-
-          <h4 id="api-mechanics-tutorial">API Mechanics Tutorial</h4>
-
-<h5 id="overview">Overview</h5>
-
-<p>In this tutorial you will explore the basics of the bodhi api using the command line tool.</p>
-
-<p><strong>Intended Audience</strong></p>
-
-<p>This tutorial is designed for a new developer looking to understand how to interact with data. The tutorial assumes the developer has valid credentials for a namespace, the bodhi command line tool, and has set up their environment.</p>
-
-<h5 id="how-to">How To</h5>
-
-<p><strong>Resource Commands</strong></p>
-
-<p>All resource commands take the following structure:
-&ldquo;&rdquo;</p>
-
-<blockquote>
-<p>bodhi <action> [options] resources/:resource-name/[:id][?:query]
-&ldquo;&rdquo;
-Actions</p>
-</blockquote>
-
-<ol>
-<li>get</li>
-<li>count</li>
-<li>post</li>
-<li>put</li>
-<li>put</li>
-<li>delete</li>
-</ol>
-
-<p><strong>Resource URL&rsquo;s::</strong></p>
-
-<p>All resource URL&rsquo;s should start with <code class="prettyprint">resources</code> and should take care not to prefix with the &rsquo;/&rsquo; character. The &rsquo;/&rsquo; character causes the cli to interpret the partial URL as absolute and will remove the namespace attributed.</p>
-
-<p>A resource collection is referred to by <code class="prettyprint">resources/:resource</code>. A resource instance is referred to by <code class="prettyprint">resources/:resource/:id</code>.</p>
-
-<p>Views</p>
-
-<p>Each command has a default that it presents on response from the service. These views can be overwritten when the CLI is invoked using the the <code class="prettyprint">--view</code> option. The table below shows the default view bindings for each action.</p>
-
-<table><thead>
-<tr>
-<th>view</th>
-<th>defaults for</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>status</td>
-<td>put, patch, delete</td>
-<td>print just the status code</td>
-</tr>
-<tr>
-<td>headers</td>
-<td></td>
-<td>print the headers and status code</td>
-</tr>
-<tr>
-<td>location</td>
-<td>post</td>
-<td>print the value of the location header</td>
-</tr>
-<tr>
-<td>id</td>
-<td></td>
-<td>print the id of the newly created object</td>
-</tr>
-<tr>
-<td>entity</td>
-<td>get</td>
-<td>print the content returned by the server</td>
-</tr>
-<tr>
-<td>all</td>
-<td></td>
-<td>print status, headers, and content</td>
-</tr>
-</tbody></table>
-
-<p>Options</p>
-
-<p>Below are a list of useful options when interacting with resources</p>
-
-<p>option     |  description
-&mdash;-       | &ndash;file     | file containing resource instance
-&ndash;data     | describe the resource instance inline
-&ndash;color    | print the response object with syntax highlighting
-&ndash;flat     | print the response object without line breaks or indention</p>
-
-<p><strong>Reading Resources</strong><br>
-Reading a collection of Resources</p>
-
-<p>Our first query will attempt to extract all the resources in a given collection using the get action.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource
-</code></pre>
-
-<p>Counting Resources</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/count
-{ count: 3 }
-</code></pre>
-
-<p>The CLI exposes a shorthand for this command using the count action.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi count resources/MyResource
-{ count: INTEGER }
-</code></pre>
-
-<p>Fetch a Resource by ID</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id
-</code></pre>
-
-<p>Fetch by unique Attribute</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resources/MyResource/:id?where={\"name\":\"My-Name\"}
-</code></pre>
-
-<p><strong>Creating Resources</strong></p>
-
-<p>Look inside the file resource.json to see the resource description.</p>
-<pre class="highlight plaintext"><code>{
-  name     : ""
-  age      : 0,
-  eligible : false,
-}
-</code></pre>
-
-<p>You can create an instance of new resource instance by posting JSON data to the collection. The API will return the id of the newly created id in the form of a relative resource URI. The new resource to be created can be specified as a file using the -f &ndash;file option and pointing at the resource.json file.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi post resources/MyResource --file resource.json
-:namespace/resources/MyResource/:id
-</code></pre>
-
-<p>If you supply the <code class="prettyprint">--view id</code> option then you will only see the new resource&rsquo;s id.</p>
-<pre class="highlight plaintext"><code>{ eligible: true,
-  age: 12,
-  name: 'My Name',
-  sys_namespace: 'namespace',
-  sys_version: 1,
-  sys_created_at: '2015-01-24T06:57:39+0000',
-  sys_created_by: 'user_name',
-  sys_type_version: 1,
-  sys_id: 'de9a3e93-47fa-4537-a80d-3f3b49b446b1' }
-</code></pre>
-
-<p>Note there are a number of new system attributes that have been added to the resource. Those attributes are read only from an application perspective and are managed on your behalf by the system.</p>
-
-<p>** Updating Resources**</p>
-
-<p>The system supports two forms of update - replace and patch. When updating a resource it is not necessary to specify any of the system attributes (those that start with the prefix <code class="prettyprint">sys_</code>). Those attributes will be ignored by the API and will be updated by the service.</p>
-
-<p>Replacing the Resource</p>
-
-<p>A complete update is performed using a PUT. If the command succeeds then the newly specified resource will be assigned to the resource&rsquo;s id. A resource&rsquo;s attributes may be created, changed, or deleted using this action.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi put resources/MyResource/:id --file resource.json
-  Success 204 No Content
-</code></pre>
-<pre class="highlight plaintext"><code>{ eligible: false,
-  age: 12,
-  name: 'my-name',
-  sys_namespace: 'brian',
-  sys_version: 3,
-  sys_created_at: '2015-01-24T07:42:46+0000',
-  sys_created_by: 'admin__brian',
-  sys_type_version: 1,
-  sys_id: 'd5aea468-f165-4d97-af16-7caba756ca43',
-  sys_modified_at: '2015-01-24T08:18:57+0000',
-  sys_modified_by: 'admin__brian' }
-</code></pre>
-
-<p>If you then access the record you will see the last modified time stamp has been changed and the instance_version will be incremented.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resource/MyResource/:id
-  {
-    ...
-    sys_version    :  version++
-    sys_modified_at: 'ISO-TS-FOR-NOW'
-    sys_modified_by: 'your-user-id'
-  }
-</code></pre>
-
-<p><strong>Deleting Resources</strong></p>
-
-<p>Delete a Resource</p>
-
-<p>Most of the time we will delete a resource by id. In this case we use a relative resource uri with an id at the end of the path. </p>
-<pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource/:id
-Success 204 No Content
-</code></pre>
-
-<p>If an resource matching that id exists then you will receive an HTTP 204. If no resource with the specified id exists then the API will return a 404 Not Found status.</p>
-
-<p>Delete the entire Collection</p>
-
-<p>If you want to delete all resources in a particular collection the use the following command. </p>
-<pre class="highlight plaintext"><code>&gt; bodhi delete resources/MyResource
-Success 204 No Content
-</code></pre>
-
-<p>If the command returns successfully then you will receive an HTTP 204 and all the records will be deleted. You can verify the results of this command by trying to read the entire collection</p>
-<pre class="highlight plaintext"><code>&gt; bodhi get resource/MyResource
-[]
-</code></pre>
-
-<p>or by getting the count and verifying that it returns 0.</p>
-<pre class="highlight plaintext"><code>&gt; bodhi count resources/MyResource
-{count: 0}
-</code></pre>
-
-          <h4 id="type-mechanics-tutorial">Type Mechanics Tutorial</h4>
-
-          <h2 id="tooling">Tooling</h2>
-
-<h4 id="bodhi.type">Bodhi.Type</h4>
-
-<h5 id="introduction">Introduction</h5>
-
-<p>Bodhi.Type is a user interface developed by the Bodhi team to allow customers to view their current data types on the cloud. The tool also allows for users to build new types and extend existing types using a user friendly interface that reads and writes to and from the Bodhi Cloud.</p>
-
-<p>Bodhi.Type is available to all users to view and interact with their data on a specific namespace</p>
-
-<h5 id="getting-started">Getting started</h5>
-
-<p>Bodhi.Type is currently available in beta as an OS X <a href="https://drive.google.com/file/d/0Bz2KGejeubT9alF5NGNlYzRvZEE/view">download</a> .</p>
-
-<h5 id="intended-audience">Intended Audience</h5>
-
-<p>Bodhi.Type is intended to be a complement to the existing Bodhi CLI. </p>
-
-<h5 id="steps-/-tutorial-to-install-(or-using-the-app)">Steps / tutorial to install (or Using the app)</h5>
-
-<p>Download the Bodhi.Type application. Double click on the Bodhi.Type icon to launch the app, or drag into the Applications folder to make the app available via the Launchpad.</p>
-
-<h5 id="using-this-software">Using this software</h5>
-
-<p>Follow screen prompts to Authenticate via the Preferences menu on the top of your screen. Once authenticated, you should have access to all of the types in your namespace via the left side navigation bar. </p>
-
-<p>Selecting a type will allow you to inspect the properties of that type. </p>
-
-<p><img alt="Type Selection" src="images/Bodhi.Type_1.png" /></p>
-
-<p>By using the download button, users can download the type as a JSON file.</p>
-
-<p><img alt="Download JSON" src="images/Bodhi.Type_2.png" /></p>
-
-<p>By clicking the inspect button, users can be taken to the full API documentation for that type.</p>
-
-<p><img alt="Inspect Type" src="images/Bodhi.Type_3.png" /></p>
-
-<p>Users can edit the type by making changes to the types&rsquo; properties, or adding new properties. </p>
-
-<p><img alt="Editing Type" src="images/Bodhi.Type_4.png" /></p>
-
-<p>When they have completed their changes, users can click the &lsquo;Publish&rsquo; button, which will then take them to a screen showing a JSON representation of their edits. Users will be notified whether their request succeeds or experiences errors before returning to the Type page.</p>
-
-<p><img alt="Publishing Type" src="images/Bodhi.Type_5.png" /></p>
-
-<p>Users can also create new types by clicking the New Type button on the topbar. </p>
-
-<p><img alt="Type Creation" src="images/Bodhi.Type_6.png" /></p>
-
-<p>This will take them to the type creation page, a blank form where they can add the name of their new type, select whether or not it is an embedded type or an independent type, and create properties for that type. By clicking the Publish button, they can review their proposed new type, and be notified of the success of their request.</p>
-
-<p>Newly created types should be instantly accessibly via the side navigation bar. Users can then edit or delete the type using the Publish or Delete buttons.</p>
-
-<p><img alt="Type Deletion" src="images/Bodhi.Type_7.png" /></p>
-
-<h5 id="future-releases">Future Releases</h5>
-
-<p>Future releases should add Windows support, as well as additional options for type creation and modification.</p>
-
-          
-          
       </div>
       <div class="dark-box">
           <div class="lang-selector">
