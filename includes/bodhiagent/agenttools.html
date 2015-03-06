@@ -28,7 +28,177 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        
+        <h2 id="agent-tooling">Agent Tooling</h2>
+
+<h4 id="agent-console">Agent Console</h4>
+
+<p>The Agent Console is the application that users can use to manage their Agent&rsquo;s functionality and settings. The following sections describe how to use the Agent Console.</p>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>The Agent must be running for you to access the Agent Console. You can access the Agent Console by going to <a href="http://localhost:4444">http://localhost:4444</a> in your browser. If you installed the Agent for the first time, the console will automatically start if you selected the &ldquo;Start Console&rdquo; option during the installation.</p>
+
+<p><em>Note: Agent Console works best in Google Chrome or Mozilla Firefox.</em></p>
+
+<h3 id="registering-your-agent">Registering Your Agent</h3>
+
+<p>Upon entering the console for the first time, you should see a registration token pop up. This six-digit registration code needs to be entered into your Bodhi Mobile App to connect your Agent to your Bodhi Mobile App and to the Bodhi Cloud. Once you&rsquo;ve successfully entered the token into the Bodhi Mobile App, the window will display a &ldquo;SUCCESS&rdquo; message and close. </p>
+
+<p><strong>Important</strong>: If the window pops up and you don&rsquo;t see a token, wait 10 seconds and refresh your browser. If the window doesn&rsquo;t pop up, click on the Registration Code link (see circle #1)in the left navigation bar to open the window.</p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/registrationcode.png" /></p>
+
+<p><em>The registration code should be entered in your Bodhi Mobile App.</em></p>
+
+<h3 id="dashboard">Dashboard</h3>
+
+<p>The Dashboard displays Agent software updates, your installed Agent Apps, and Customer Support information. </p>
+
+<p>Note that clicking the three lines next to the Bodhi Agent icon (see circle #1) will enable you to minimize or expand the navigation bar.</p>
+
+<p>In the top right corner, you can see the Agent&rsquo;s connection status to the Internet (either Online or Offline, see circle #2).</p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/dashboard.png" />
+<em>Screenshot: Agent Console Dashboard Page</em></p>
+
+<h3 id="integration-apps">Integration Apps</h3>
+
+<p>On the Integration Apps page, you can view and install Agent Apps that are available in the Bodhi App Store. You can install apps with one click by clicking the &ldquo;Install Now&rdquo; button. Upon clicking it, the app will start installing. When it has finished installing, you will see a green &ldquo;Installed&rdquo; button.</p>
+
+<p><em>Note: If you receive an red error message, then the App could not be found. Make sure you are connected to the internet and if you continue to have errors, contact Customer Support.</em></p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/integrationapps.png" />
+<em>Screenshot: Agent Console Integration Apps Page</em></p>
+
+<h3 id="settings">Settings</h3>
+
+<p>On the Settings page, you can change settings that will determine how your Agent operates.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent Name</td>
+<td>Changes the Agent&rsquo;s name</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Determines the package bundles that the Agent will install</td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>Sets the timezone</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>Sets the currency for your Store</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/agentsettings.png" />
+<em>Screenshot: Agent Console Settings Page</em></p>
+
+<h3 id="connection">Connection</h3>
+
+<p>The Connection page displays important information about the Agent&rsquo;s connection details. The Connection panel displays connection status information for the Agent and the right-hand panel lists the connection protocols available to the Agent.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Base</td>
+<td>Lists the full URI path to the Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Endpoint URL</td>
+<td>Lists the Endpoint URL that the Agent is connected to</td>
+</tr>
+<tr>
+<td>Online Since</td>
+<td>Lists the date &amp; time since the Agent has been running</td>
+</tr>
+<tr>
+<td>Interruptions</td>
+<td>Lists the number of times the Agent had interrupted connections to the Internet</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/connection.png" />
+<em>Screenshot: Agent Console Connection Page</em></p>
+
+<h3 id="about">About</h3>
+
+<p>The About page displays information about your Agent&rsquo;s status. The Bodhi Agent panel lists information about your Agent&rsquo;s identity and structure, and the right-hand panel lists the plug-ins that are available to your Agent.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Your Agent&rsquo;s display name</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>The version number of the Agent</td>
+</tr>
+<tr>
+<td>Agent Directory</td>
+<td>Lists the directory path where the Agent is installed</td>
+</tr>
+<tr>
+<td>Namespace</td>
+<td>Your identifying space in the HS Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Agent ID</td>
+<td>The unique identifier for the Agent</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Displays whether your Agent is authorized to connect to Bodhi Cloud <em>(checkmark means authorized)</em></td>
+</tr>
+<tr>
+<td>Assigned</td>
+<td>Displays whether your Agent has been assigned a Store in the Bodhi Cloud <em>(checkmark means assigned)</em></td>
+</tr>
+<tr>
+<td>Extensions</td>
+<td>Lists the extensions available to the Agent (see <a href="http://redbookconnect.github.io/slate/#extending-the-agent">Extensions</a>)</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Lists the services implemented within the Agent</td>
+</tr>
+<tr>
+<td>Handlers</td>
+<td>Lists the event handlers implemented in the Agent</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Lists the NPM packages that the Agent is dependent upon</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/about.png" /> 
+<em>Screenshot: Agent Console About Page</em></p>
+
       </div>
       <div class="dark-box">
       </div>
