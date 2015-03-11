@@ -1,0 +1,150 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhicloud includes_bodhicloud_bodhijobengine">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h2 id="bodhi-job-engine">Bodhi Job Engine</h2>
+
+<h4 id="introduction">Introduction</h4>
+
+<p>Bodhi Job Engine is a job scheduler running on node.js and MongoDB. The
+engine is designed to run scheduled cloud-to-cloud data transactions,
+e.g. requesting data from web APIs, pushing data to the Bodhi cloud,
+etc.</p>
+
+<h4 id="getting-started">Getting started</h4>
+
+<p>Bodhi Job Engine is currently for internal Hot Schedules developers. Jobs
+are built on Node.js and are installed as rpms from Artifactory.</p>
+
+<p>Installation of Bodhi Job Engine requires access to the appropriate
+Artifactory account. To install:</p>
+
+<p>npm install bodhi-job-engine</p>
+
+<p>In your root directory, add file index.js containing one line of code &mdash;&ndash;&gt;</p>
+<pre class="highlight plaintext"><code>var engine = require('bodhi-job-engine');
+
+</code></pre>
+
+<p>Test your installation by running this command:</p>
+
+<p>node index.js</p>
+
+<p>You should see this logged in the console:</p>
+
+<hr>
+
+<p>Bodhi Job Engine listening at http://0.0.0.0:3000</p>
+
+<p>View the UI in a browser at http://0.0.0.0:3000 /job-engine-ui</p>
+
+<hr>
+
+<p>No jobs found</p>
+
+<h4 id="creating-a-job">Creating a job</h4>
+
+<p>Jobs must be built in a specific format in order for Bodhi Job Engine to
+recognize and run them properly. The job should contain an index.js file
+and a job-config.js file that follow this structure &ndash;&gt;</p>
+<pre class="highlight plaintext"><code>//index.js
+
+var jobconfig = require('./job-config.js');
+
+exports.config = jobconfig;
+
+exports.run = function(job, done){
+    try{
+        //do stuff here
+
+        //to post data to Bodhi cloud call the conn method. Parameters are
+        //your_object (the object holding your data), and
+        //the agent_config object (holds your authentication info), and
+        //YourType (the name of the type to post your data to):
+
+        jobconfig.conn(obj, jobconfig.agent_config, 'resources/YourType');
+
+        //you must call done() at the end of your code
+        done();
+
+    } catch (err) {
+        console.log('Error defining job: ', config.job_name, err);
+        done(err);
+    }
+};
+
+
+
+//job-config.js
+
+module.exports = {
+
+        //agent_config property required to post to the Bodhi cloud.
+    agent_config: {
+        target_url: 'https://your_target_url.com',  //where are you posting data to the cloud
+        namespace: 'your_bodhi_namespace', //your namespace
+        bearerToken: 'your_agent_bearerToken' //alpha numeric agent bearerToken for authentication
+    },
+    job_name: 'job-app-your_job_name', //the name of your job, must start with 'job-app-'
+    time_interval: '3 seconds', //how often do you want the job to run? Understands hours, minutes, seconds, days...
+    conn: require('../bodhi-job-engine/app.js').conn
+};
+
+</code></pre>
+
+<h4 id="loading-a-job">Loading a job</h4>
+
+<p>Once your job is ready and available in Artifactory, load the job into
+the job engine in the root directory of your project using npm install:</p>
+
+<p>npm install job-app-your_job_name</p>
+
+<p>After installation, edit the node_modules/bodhi-job-engine/engine-config.js to add
+your job and enable it (or disable it if necessary) &ndash;&gt;</p>
+<pre class="highlight plaintext"><code>//engine-config.js
+
+module.exports = {
+
+    jobs: {
+        'job-app-your_app_name': {
+            enabled: true
+        }
+    }
+};
+
+</code></pre>
+
+<p>That&rsquo;s it. Starting the job engine should now run your job on the schedule you specified.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
