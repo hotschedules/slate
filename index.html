@@ -451,16 +451,16 @@ Success 204 No Content
 <p>Future releases should add Windows support, as well as additional options for type creation and modification.</p>
 
           
-          <h2 id="bodhi-job-engine">Bodhi Job Engine</h2>
+          <h4 id="bodhi-job-engine">Bodhi Job Engine</h4>
 
-<h4 id="introduction">Introduction</h4>
+<h5 id="introduction">Introduction</h5>
 
 <p>Bodhi Job Engine is a job scheduler running on node.js and MongoDB. The
 engine is designed to run scheduled cloud-to-cloud data transactions,
 e.g. requesting data from web APIs, pushing data to the Bodhi cloud,
 etc.</p>
 
-<h4 id="getting-started">Getting started</h4>
+<h5 id="getting-started">Getting started</h5>
 
 <p>Bodhi Job Engine is currently for internal Hot Schedules developers. Jobs
 are built on Node.js and are installed as rpms from Artifactory.</p>
@@ -481,17 +481,15 @@ Artifactory account. To install:</p>
 
 <p>You should see this logged in the console:</p>
 
-<hr>
+<h6 id="outcome:">Outcome:</h6>
 
-<p>Bodhi Job Engine listening at http://0.0.0.0:3000</p>
+<p>&ldquo;Bodhi Job Engine listening at http://0.0.0.0:3000 </p>
 
 <p>View the UI in a browser at http://0.0.0.0:3000 /job-engine-ui</p>
 
-<hr>
+<p>No jobs found&rdquo;</p>
 
-<p>No jobs found</p>
-
-<h4 id="creating-a-job">Creating a job</h4>
+<h5 id="creating-a-job">Creating a job</h5>
 
 <p>Jobs must be built in a specific format in order for Bodhi Job Engine to
 recognize and run them properly. The job should contain an index.js file
@@ -541,7 +539,7 @@ module.exports = {
 
 </code></pre>
 
-<h4 id="loading-a-job">Loading a job</h4>
+<h5 id="loading-a-job">Loading a job</h5>
 
 <p>Once your job is ready and available in Artifactory, load the job into
 the job engine in the root directory of your project using npm install:</p>
