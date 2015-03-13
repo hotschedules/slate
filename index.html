@@ -85,7 +85,7 @@ To access them you need to login with your user and password provided by Hot Sch
 
 <p>The Bodhi Cloud is a set of secure APIs that are used to store your data.  </p>
 
-<h2 id="getting-started">Getting Started</h2>
+          <h2 id="getting-started">Getting Started</h2>
 
 <p>To access the Bodhi Cloud API, you need to login with you user and password which is provided by Hot Schedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>.  </p>
 
@@ -390,180 +390,6 @@ Success 204 No Content
 
           <h4 id="type-mechanics-tutorial">Type Mechanics Tutorial</h4>
 
-          <h2 id="tooling">Tooling</h2>
-
-<h4 id="bodhi.type">Bodhi.Type</h4>
-
-<h5 id="introduction">Introduction</h5>
-
-<p>Bodhi.Type is a user interface developed by the Bodhi team to allow customers to view their current data types on the cloud. The tool also allows for users to build new types and extend existing types using a user friendly interface that reads and writes to and from the Bodhi Cloud.</p>
-
-<p>Bodhi.Type is available to all users to view and interact with their data on a specific namespace</p>
-
-<h5 id="getting-started">Getting started</h5>
-
-<p>Bodhi.Type is currently available in beta as an OS X <a href="https://drive.google.com/file/d/0Bz2KGejeubT9alF5NGNlYzRvZEE/view">download</a> .</p>
-
-<h5 id="intended-audience">Intended Audience</h5>
-
-<p>Bodhi.Type is intended to be a complement to the existing Bodhi CLI. </p>
-
-<h5 id="steps-/-tutorial-to-install-(or-using-the-app)">Steps / tutorial to install (or Using the app)</h5>
-
-<p>Download the Bodhi.Type application. Double click on the Bodhi.Type icon to launch the app, or drag into the Applications folder to make the app available via the Launchpad.</p>
-
-<h5 id="using-this-software">Using this software</h5>
-
-<p>Follow screen prompts to Authenticate via the Preferences menu on the top of your screen. Once authenticated, you should have access to all of the types in your namespace via the left side navigation bar. </p>
-
-<p>Selecting a type will allow you to inspect the properties of that type. </p>
-
-<p><img alt="Type Selection" src="images/Bodhi.Type_1.png" /></p>
-
-<p>By using the download button, users can download the type as a JSON file.</p>
-
-<p><img alt="Download JSON" src="images/Bodhi.Type_2.png" /></p>
-
-<p>By clicking the inspect button, users can be taken to the full API documentation for that type.</p>
-
-<p><img alt="Inspect Type" src="images/Bodhi.Type_3.png" /></p>
-
-<p>Users can edit the type by making changes to the types&rsquo; properties, or adding new properties. </p>
-
-<p><img alt="Editing Type" src="images/Bodhi.Type_4.png" /></p>
-
-<p>When they have completed their changes, users can click the &lsquo;Publish&rsquo; button, which will then take them to a screen showing a JSON representation of their edits. Users will be notified whether their request succeeds or experiences errors before returning to the Type page.</p>
-
-<p><img alt="Publishing Type" src="images/Bodhi.Type_5.png" /></p>
-
-<p>Users can also create new types by clicking the New Type button on the topbar. </p>
-
-<p><img alt="Type Creation" src="images/Bodhi.Type_6.png" /></p>
-
-<p>This will take them to the type creation page, a blank form where they can add the name of their new type, select whether or not it is an embedded type or an independent type, and create properties for that type. By clicking the Publish button, they can review their proposed new type, and be notified of the success of their request.</p>
-
-<p>Newly created types should be instantly accessibly via the side navigation bar. Users can then edit or delete the type using the Publish or Delete buttons.</p>
-
-<p><img alt="Type Deletion" src="images/Bodhi.Type_7.png" /></p>
-
-<h5 id="future-releases">Future Releases</h5>
-
-<p>Future releases should add Windows support, as well as additional options for type creation and modification.</p>
-
-          
-          <h4 id="bodhi-job-engine">Bodhi Job Engine</h4>
-
-<h5 id="introduction">Introduction</h5>
-
-<p>Bodhi Job Engine is a job scheduler running on node.js and MongoDB. The
-engine is designed to run scheduled cloud-to-cloud data transactions,
-e.g. requesting data from web APIs, pushing data to the Bodhi cloud,
-etc.</p>
-
-<h5 id="getting-started">Getting started</h5>
-
-<p>Bodhi Job Engine is currently for internal Hot Schedules developers. Jobs
-are built on Node.js and are installed as rpms from Artifactory.</p>
-
-<p>Installation of Bodhi Job Engine requires access to the appropriate
-Artifactory account. To install:</p>
-
-<p>npm install bodhi-job-engine</p>
-
-<p>In your root directory, add file index.js containing one line of code &mdash;&ndash;&gt;</p>
-<pre class="highlight plaintext"><code>var engine = require('bodhi-job-engine');
-
-</code></pre>
-
-<p>Test your installation by running this command:</p>
-
-<p>node index.js</p>
-
-<p>You should see this logged in the console:</p>
-
-<h6 id="outcome:">Outcome:</h6>
-
-<p>&ldquo;Bodhi Job Engine listening at http://0.0.0.0:3000 </p>
-
-<p>View the UI in a browser at http://0.0.0.0:3000 /job-engine-ui</p>
-
-<p>No jobs found&rdquo;</p>
-
-<h5 id="creating-a-job">Creating a job</h5>
-
-<p>Jobs must be built in a specific format in order for Bodhi Job Engine to
-recognize and run them properly. The job should contain an index.js file
-and a job-config.js file that follow this structure &ndash;&gt;</p>
-<pre class="highlight plaintext"><code>//index.js
-
-var jobconfig = require('./job-config.js');
-
-exports.config = jobconfig;
-
-exports.run = function(job, done){
-    try{
-        //do stuff here
-
-        //to post data to Bodhi cloud call the conn method. Parameters are
-        //your_object (the object holding your data), and
-        //the agent_config object (holds your authentication info), and
-        //YourType (the name of the type to post your data to):
-
-        jobconfig.conn(obj, jobconfig.agent_config, 'resources/YourType');
-
-        //you must call done() at the end of your code
-        done();
-
-    } catch (err) {
-        console.log('Error defining job: ', config.job_name, err);
-        done(err);
-    }
-};
-
-
-
-//job-config.js
-
-module.exports = {
-
-        //agent_config property required to post to the Bodhi cloud.
-    agent_config: {
-        target_url: 'https://your_target_url.com',  //where are you posting data to the cloud
-        namespace: 'your_bodhi_namespace', //your namespace
-        bearerToken: 'your_agent_bearerToken' //alpha numeric agent bearerToken for authentication
-    },
-    job_name: 'job-app-your_job_name', //the name of your job, must start with 'job-app-'
-    time_interval: '3 seconds', //how often do you want the job to run? Understands hours, minutes, seconds, days...
-    conn: require('../bodhi-job-engine/app.js').conn
-};
-
-</code></pre>
-
-<h5 id="loading-a-job">Loading a job</h5>
-
-<p>Once your job is ready and available in Artifactory, load the job into
-the job engine in the root directory of your project using npm install:</p>
-
-<p>npm install job-app-your_job_name</p>
-
-<p>After installation, edit the node_modules/bodhi-job-engine/engine-config.js to add
-your job and enable it (or disable it if necessary) &ndash;&gt;</p>
-<pre class="highlight plaintext"><code>//engine-config.js
-
-module.exports = {
-
-    jobs: {
-        'job-app-your_app_name': {
-            enabled: true
-        }
-    }
-};
-
-</code></pre>
-
-<p>That&rsquo;s it. Starting the job engine should now run your job on the schedule you specified.</p>
-
-          
           <h1 id="bodhi-agent">Bodhi Agent</h1>
 
 <h2 id="overview">Overview</h2>
@@ -582,7 +408,7 @@ an in-store appliance and software agent.</p>
 <li>Above-store apps such as inventory management, ordering systems (e.g.Macromatix), accounting) and other internet connected services<br></li>
 </ul>
 
-<h2 id="getting-started">Getting Started</h2>
+          <h2 id="getting-started">Getting Started</h2>
 
 <p>Bodhi Agent provide a single integration point that enables in-store and near-store data collection. Bodhi agent is allowed you to integrate with in store data above store data and near store data. </p>
 
@@ -3371,7 +3197,6 @@ c:agent-cli update-console --verbose
 </tr>
 </tbody></table>
 
-          
           <h1 id="bodhi-mobile">Bodhi Mobile</h1>
 
 <h2 id="overview">Overview</h2>
@@ -3393,16 +3218,6 @@ c:agent-cli update-console --verbose
           <h2 id="environmental-setup">Environmental Setup</h2>
 
 <p>This is how you setup Bodhi mobile and do app store stuff and mobile container stuff etc</p>
-
-          <h2 id="tools">Tools</h2>
-
-<h4 id="mobile-app-store">Mobile App Store</h4>
-
-<p>What&rsquo;s the theory of apps?</p>
-
-<h4 id="bodhi-builder">Bodhi Builder</h4>
-
-<p>Planned for the future</p>
 
       </div>
       <div class="dark-box">
