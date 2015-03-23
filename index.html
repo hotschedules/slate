@@ -3217,9 +3217,17 @@ c:agent-cli update-console --verbose
 
 <p>With the Bodhi Mobile for iPhone and iPad, you can access Bodhi applications for restaurants, anywhere, anytime. The mobile app lets employees, managers and executives stay informed about their restaurant operations, sales and labor activities. </p>
 
-          <h2 id="environmental-setup">Environmental Setup</h2>
+          <h1 id="bodhi-cli">Bodhi CLI</h1>
 
-<p>This is how you setup Bodhi mobile and do app store stuff and mobile container stuff etc</p>
+<p>This documentation is intended for the developer wanting to integrate into the Bodhi PaaS (Platform as a Service) and SaaS (Software as a Service) by:</p>
+
+<ul>
+<li>Building applications to the the Bodhi Cloud APIs</li>
+<li>Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile</li>
+<li>Building a data integration application into your point of sale system to be stored and accessed from our cloud solution</li>
+</ul>
+
+<h3 id="command-tool">Command Tool</h3>
 
           <h2 id="bodhi-cli-tools">Bodhi CLI tools</h2>
 
@@ -3363,7 +3371,7 @@ Once you do this, all commands will be used under the default environment unless
 
 <p>Platform specific directory path to the newly initialized project.</p>
 
-<h2 id="environment-commands">Environment Commands</h2>
+<h3 id="environment-commands">Environment Commands</h3>
 
 <h3 id="general-command-signature">General Command Signature</h3>
 <pre class="highlight plaintext"><code>&gt; bodhi &lt;action&gt; &lt;environment&gt; [env-options] [processing-options]
@@ -3670,11 +3678,11 @@ Once you do this, all commands will be used under the default environment unless
 <pre class="highlight plaintext"><code>&gt; bodhi cmd
 </code></pre>
 
-<h1 id="rbc-types">rbc-types</h1>
+<h4 id="rbc-types">rbc-types</h4>
 
 <p>Basic command line tool for interacting with the RBC cloud services API</p>
 
-<h2 id="installation-&amp;-setup">Installation &amp; Setup</h2>
+<h5 id="installation-&amp;-setup">Installation &amp; Setup</h5>
 
 <p>rbc-types is included in the bodhi as a separate executable. To verify the availability of the tool use</p>
 <pre class="highlight plaintext"><code>&gt; rbc-types -V
@@ -4246,7 +4254,7 @@ default    |       | the default value of the property if not set</p>
 
 <p>The typename posted</p>
 
-<h1 id="app-tools">app-tools</h1>
+<h4 id="app-tools">app-tools</h4>
 
 <p>app-tools is a command line tool, bundled with bodhi-cli, that allows app developers to quickly generate
 an app and publish it to the cloud so that it can be viewed on the mobile container.</p>
