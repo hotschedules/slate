@@ -1,0 +1,2062 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhiagent includes_bodhiagent_agenttooling includes_bodhiagent_agenttooling_agent-cli2">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h4 id="agent-cli">Agent-CLI</h4>
+
+<p>The agent-cli provides administrators, support team members, and developers a tool for interacting with an agent from the command line. It allows the ability to get information, makes configuration changes and to interaction with the agent at a more direct level.</p>
+
+<h3 id="general-usage">General Usage</h3>
+
+<p>The general structure of the agent-cli commands are as follows:</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli [options] &lt;action&gt; [arguments]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<ul>
+<li>  Options are prefixed with <code class="prettyprint">-</code> or <code class="prettyprint">--</code> to separate them from arguments. </li>
+<li>  Each command or action defines the options it uses. </li>
+<li>  <strong>NOTE:</strong> the options are consistent in naming convention and usage across the commands.</li>
+</ul>
+
+<h5 id="common-options">Common Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">print help about the command</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">print more detailed output</td>
+</tr>
+<tr>
+<td style="text-align: center">-q</td>
+<td style="text-align: center">&ndash;quiet</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">print essential output</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">path</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-F</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">directive to override safety logic</td>
+</tr>
+</tbody></table>
+
+<h3 id="arguments">Arguments</h3>
+
+<ul>
+<li>  The agent-cli interprets the first argument (non-option) as the action command. </li>
+<li>  All subsequent arguments are command specific. </li>
+</ul>
+
+<h3 id="command-organization">Command Organization</h3>
+
+<p>The commands are grouped into a sub group.
+The following Commands groups are;</p>
+
+<ul>
+<li><strong>Informational Commands</strong></li>
+<li><strong>Lifecycle Commands</strong></li>
+<li><strong>Diagnostic Commands</strong></li>
+<li><strong>Usage Commands</strong></li>
+<li><strong>Configuration Commands</strong></li>
+<li><strong>Agent Application Commands</strong></li>
+<li><strong>Update &amp; Remove Commands</strong></li>
+</ul>
+
+<h3 id="informational-commands">Informational Commands</h3>
+
+<ul>
+<li>  help</li>
+<li>  version</li>
+<li>  info</li>
+</ul>
+
+<h3 id="help">help</h3>
+
+<p>The command line provides built in helper functions.</p>
+
+<h5 id="navigation-help">Navigation Help</h5>
+
+<p>For a descriptive list of the agent-cli commands </p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli --help
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">List of agent-cli commands</td>
+<td style="text-align: left">all the commands are listed</td>
+</tr>
+<tr>
+<td style="text-align: left">error: unknown option [options]</td>
+<td style="text-align: left">Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="version">version</h3>
+
+<p>Displays the version information of the agent-cli.</p>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli -V
+c:\[working directory]&gt;agent-cli --version 
+</code></pre>
+
+<p><strong>NOTE:</strong> The output is a simple version identifier following the semantic versioning rules of major, minor, and build.</p>
+<pre class="highlight plaintext"><code>Major.minor.build (e.g. 1.0.51)
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="info">info</h3>
+
+<p>Used to display information of the Agent-cli.</p>
+
+<ul>
+<li>Displays the agent-cli splash screen</li>
+<li>Displays the version of the agent-cli</li>
+</ul>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli info
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: left">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: left">error: unknown option [options]</td>
+<td style="text-align: left">Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="lifecycle-commands">Lifecycle Commands</h3>
+
+<p>Lifecycle commands allow an administrator to change and check the run state of an agent.</p>
+
+<ul>
+<li>start</li>
+<li>status</li>
+<li>stop</li>
+<li>set-name</li>
+<li>set-connection</li>
+<li>set-logger</li>
+<li>set-management</li>
+</ul>
+
+<h3 id="start">start</h3>
+
+<p>Used to attempt to start an agent.</p>
+
+<ul>
+<li>Allows the selection of which agent configuration file to use</li>
+<li>Allows the selection of the agent working directory</li>
+<li>Allows the selection of the agent pidFile to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli start [options] 
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">directory path</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;pidFile</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s pidFile</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">provides more detailed information output</td>
+</tr>
+<tr>
+<td style="text-align: center">-q</td>
+<td style="text-align: center">&ndash;quiet</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">provides only essential information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli start -h
+c:\[working directory]&gt;agent-cli start —-help
+c:\[working directory]&gt;agent-cli start -f c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli start —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli start —-home c:\
+c:\[working directory]&gt;agent-cli start —-pidFile c:\[working directory]\agent.pid
+c:\[working directory]&gt;agent-cli start -v
+c:\[working directory]&gt;agent-cli start —verbose
+c:\[working directory]&gt;agent-cli start -q
+c:\[working directory]&gt;agent-cli start —-quiet
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Error: connect EADDRNOTAVAIL</td>
+<td>the connection url in the configuration file is bad</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="status">status</h3>
+
+<p>Used to retrieve the status of a running agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli status [options] 
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli status —h
+c:\[working directory]&gt;agent-cli status —-help
+c:\[working directory]&gt;agent-cli status -f c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli status —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli status -v
+c:\[working directory]&gt;agent-cli status —verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent available</td>
+<td>agent is running and available</td>
+</tr>
+<tr>
+<td>agent unavailable</td>
+<td>agent has stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="stop">stop</h3>
+
+<p>Used to gracefully stop or shutdown an agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli stop [options] 
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli stop —h
+c:\[working directory]&gt;agent-cli stop —-help
+c:\[working directory]&gt;agent-cli stop -f c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli start —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli start -v
+c:\[working directory]&gt;agent-cli start —verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent stopping now &hellip;</td>
+<td>agent is shutting down gracefully updated</td>
+</tr>
+<tr>
+<td>agent is unavailable</td>
+<td>agent is stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="set-name">set-name</h3>
+
+<p>Used to configure the name of an agent.</p>
+
+<ul>
+<li>Allows the setting of the name of the agent</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-name [options] &lt;name&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-name —h
+c:\[working directory]&gt;agent-cli set-name —-help
+c:\[working directory]&gt;agent-cli set-name Fred
+c:\[working directory]&gt;agent-cli set-name -f c:\[working directory]\agent1.js Teddy
+c:\[working directory]&gt;agent-cli set-name —config c:\[working directory]\agent1.js Herb
+c:\[working directory]&gt;agent-cli set-name -v Fred
+c:\[working directory]&gt;agent-cli set-name --verbose Fred
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="set-connection">set-connection</h3>
+
+<p>Used to configure a connection to an agent.</p>
+
+<ul>
+<li>Allows the setting of the http url for the connection</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the timeout value</li>
+<li>Allows the setting of the proxy http url</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-connection [options] connection]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;timeout</td>
+<td style="text-align: center">value</td>
+<td style="text-align: left">specifies the connections timeout value</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;proxy</td>
+<td style="text-align: center">proxy</td>
+<td style="text-align: left">specifies the http proxy url</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-connection —h
+c:\[working directory]&gt;agent-cli set-connection —-help
+c:\[working directory]&gt;agent-cli set-connection https://api.redbookcloud.com
+c:\[working directory]&gt;agent-cli set-connection -f c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli set-connection —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli set-connection --timeout 20000
+c:\[working directory]&gt;agent-cli set-connection —-proxy http://proxy.redbookcloud.com
+c:\[working directory]&gt;agent-cli set-connection -v https://api.redbookcloud.com
+c:\[working directory]&gt;agent-cli set-connection --verbose https://api.redbookcloud.com
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="set-logger">set-logger</h3>
+
+<p>Used to configure the logging of an agent.</p>
+
+<ul>
+<li>  Allows the setting of the log file location </li>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the level of logging information</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-logger [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;file</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified filename of the the log file location</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;level</td>
+<td style="text-align: center">level</td>
+<td style="text-align: left">specifies the log level (error, warn, info, verbose, debug)</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-logger —h
+c:\[working directory]&gt;agent-cli set-logger —-help
+c:\[working directory]&gt;agent-cli set-logger Fred
+c:\[working directory]&gt;agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:\[working directory]&gt;agent-cli set-logger —-file c:\[working directory]\test.log
+c:\[working directory]&gt;agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:\[working directory]&gt;agent-cli set-logger --level error
+c:\[working directory]&gt;agent-cli set-logger —-level warn
+c:\[working directory]&gt;agent-cli set-logger —-level info
+c:\[working directory]&gt;agent-cli set-logger —-level verbose
+c:\[working directory]&gt;agent-cli set-logger —-level debug
+c:\[working directory]&gt;agent-cli set-logger -v
+c:\[working directory]&gt;agent-cli set-logger —-verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="set-management">set-management</h3>
+
+<p>Used to configure the management endpoint for an agent.</p>
+
+<ul>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the http port</li>
+<li>  Allows the setting of the http address to listen on</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-management [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">filename</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;port</td>
+<td style="text-align: center">port address</td>
+<td style="text-align: left">specifies the management http port address</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;connection</td>
+<td style="text-align: center">url:port</td>
+<td style="text-align: left">specifies the mnagement url and port address</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli set-management https://api.bodhi.space
+c:\[working directory]&gt;agent-cli set-management —h
+c:\[working directory]&gt;agent-cli set-management —-help
+c:\[working directory]&gt;agent-cli set-management -f c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli set-management —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli set-management —-port 4444
+c:\[working directory]&gt;agent-cli set-management —-connection https://api.bodhi.space:4444
+c:\[working directory]&gt;agent-cli set-management -v https://api.bodhi.space
+c:\[working directory]&gt;agent-cli set-management -- verbose https://api.bodhi.space
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="diagnostic-commands">Diagnostic Commands</h3>
+
+<p>Diagnostic commands are used by an administrator to troubleshoot an agent that is having trouble entering a running state or to test environmental specific details uniformly across platforms.</p>
+
+<ul>
+<li>check-core</li>
+<li>check-config</li>
+<li>check-connection</li>
+<li>check-route</li>
+</ul>
+
+<h3 id="check-core">check-core</h3>
+
+<p>Used to retrieve information of the agent-core that is being used</p>
+
+<ul>
+<li>Displays the version of the current agent.</li>
+<li>Displays the working directory of the current agent.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-core [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-core
+c:\[working directory]&gt;agent-cli check-core —h
+c:\[working directory]&gt;agent-cli check-core —-help
+</code></pre>
+
+<h3 id="check-config">check-config</h3>
+
+<p>Used to check for configuration problems in the agent. </p>
+
+<ul>
+<li>The agent will load and process all configuration files, </li>
+<li>Displays agent apps that are installed</li>
+<li>Will not cause agent to enter into a ready state. </li>
+<li><strong>NOTE:</strong> This command is safe to run even if there is a agent currently running.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-config [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">full filename</td>
+<td style="text-align: left">specifies the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">directory path</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+<tr>
+<td style="text-align: center">-q</td>
+<td style="text-align: center">&ndash;quiet</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints only essential information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-config
+c:\[working directory]&gt;agent-cli check-config —h
+c:\[working directory]&gt;agent-cli check-config —-help
+c:\[working directory]&gt;agent-cli check-config -f c:[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli check-config —-config c:\[working directory]\agent1.js
+c:\[working directory]&gt;agent-cli check-config —-home c:\[working directory]
+c:\[working directory]&gt;agent-cli check-config -v
+c:\[working directory]&gt;agent-cli check-config —-verbose
+c:\[working directory]&gt;agent-cli check-config -q
+c:\[working directory]&gt;agent-cli check-config —-quiet
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: Error loading the agent file c:&rsquo;[working directory]\agent.js&rsquo;</td>
+<td>there is an issue with the agent.js</td>
+</tr>
+<tr>
+<td>error: Error: Cannot find module c:[working directory]\agent.js</td>
+<td>THE agent.js file is missing or has been renamed</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="check-connection">check-connection</h3>
+
+<p>Used to check for connection issues with an agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-connection [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-config
+c:\[working directory]&gt;agent-cli check-config —h
+c:\[working directory]&gt;agent-cli check-config —-help
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution from the agent&rsquo;s host</li>
+<li>Check the TCP port is reachable by opening up a connection on host:port</li>
+<li>Issue a HTTP GET against the ping endpoint of the system</li>
+</ol>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="check-route">check-route</h3>
+
+<p>Used to check for network problems (firewalls &amp; proxy rules) from the perspective of the agent runtime. </p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-route &lt;scheme://host:port/path&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli check-route http://localhost:4444/#/dashboard
+c:\[working directory]&gt;agent-cli check-route —h
+c:\[working directory]&gt;agent-cli check-route —-help
+c:\[working directory]&gt;agent-cli check-route -v http://localhost:4444/#/dashboard
+c:\[working directory]&gt;agent-cli check-route —-verbose http://localhost:4444/#/dashboard
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution of host/IP</li>
+<li>Check that the TCP port reachable by opening up a connection on host:port</li>
+<li>If scheme is http of https then issue a HTTP GET against the specified URL</li>
+</ol>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Got <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+<td>resolved the provided <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+</tr>
+<tr>
+<td>null unresolved</td>
+<td>problem with the <a href="host:port/path">host:port/path</a></td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="usage-commands">Usage Commands</h3>
+
+<ul>
+<li>console</li>
+</ul>
+
+<h3 id="console">console</h3>
+
+<p>Used to start the web console in the default browser that is set for the system. </p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli console
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli console
+c:\[working directory]&gt;agent-cli console -h
+c:\[working directory]&gt;agent-cli console --help
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="configuration-commands">Configuration Commands</h3>
+
+<ul>
+<li>reset</li>
+<li>revoke</li>
+<li>unassign</li>
+<li>init</li>
+</ul>
+
+<h3 id="reset">reset</h3>
+
+<p>Used to reset an agent&rsquo;s state by deleting the .agent file from the specified working directory.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli reset [options]
+</code></pre>
+
+<p><strong>NOTE:</strong> Using this command will delete the .agent file which contains the agent&rsquo;s identity</p>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the agent to reset regardless of start</td>
+</tr>
+<tr>
+<td style="text-align: center">-H</td>
+<td style="text-align: center">&ndash;HARD</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the reset the name and namespace of an agent</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli reset
+c:\[working directory]&gt;agent-cli reset -h
+c:\[working directory]&gt;agent-cli reset --help
+c:\[working directory]&gt;agent-cli reset --home c:\[working directory]
+c:\[working directory]&gt;agent-cli reset -F
+c:\[working directory]&gt;agent-cli reset -force
+c:\[working directory]&gt;agent-cli reset -H
+c:\[working directory]&gt;agent-cli reset -hard
+c:\[working directory]&gt;agent-cli reset -v
+c:\[working directory]&gt;agent-cli reset --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent reset</td>
+<td>.agent file as been deleted</td>
+</tr>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="revoke">revoke</h3>
+
+<p>Used to revoke an agent&rsquo;s access token.</p>
+
+<ul>
+<li><strong>NOTE:</strong> This command will leave all other agent data intact.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli revoke [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli revoke
+c:\[working directory]&gt;agent-cli revoke -h
+c:\[working directory]&gt;agent-cli revoke --help
+c:\[working directory]&gt;agent-cli revoke --home c:\[working directory]
+c:\[working directory]&gt;agent-cli revoke -v
+c:\[working directory]&gt;agent-cli revoke --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization revoke</td>
+<td>the Authorization token as been removed</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="unassign">unassign</h3>
+
+<p>Used to remove the agent&rsquo;s association to a namespace.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli unassign [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;home</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli unassign
+c:\[working directory]&gt;agent-cli unassign -h
+c:\[working directory]&gt;agent-cli unassign --help
+c:\[working directory]&gt;agent-cli unassign --home c:\[working directory]
+c:\[working directory]&gt;agent-cli unassign -v
+c:\[working directory]&gt;agent-cli unassign --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="init">init</h3>
+
+<p>Used to initialize or create the agent&rsquo;s configuration file.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli init [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-F</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the creation of the agent.js</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli init
+c:\[working directory]&gt;agent-cli init -h
+c:\[working directory]&gt;agent-cli init --help
+c:\[working directory]&gt;agent-cli init --config c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli init -f
+c:\[working directory]&gt;agent-cli init --force
+c:\[working directory]&gt;agent-cli init -v
+c:\[working directory]&gt;agent-cli init --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent created</td>
+<td>An agent configuration file as being created in the working directory</td>
+</tr>
+<tr>
+<td>Agent already exist Use -F or &ndash;force to recreate</td>
+<td>Configuration file already exists</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="agent-application-commands">Agent Application Commands</h3>
+
+<ul>
+<li>download</li>
+<li>install-app</li>
+<li>configure-app</li>
+<li>uninstall-app</li>
+<li>update</li>
+<li>remove</li>
+</ul>
+
+<h5 id="here-are-the-steps-for-using-these-commands;">Here are the steps for using these commands;</h5>
+
+<ol>
+<li>Download the application package to the system</li>
+<li>Install the application package into the agent</li>
+<li>Configure the application package with the correct settings</li>
+</ol>
+
+<p>When the application package is no longer needed;</p>
+
+<ol>
+<li>Uninstall the application package from the agent</li>
+</ol>
+
+<p>If at anytime an update is need for a package;</p>
+
+<ol>
+<li>Update the specific package</li>
+</ol>
+
+<p>To remove a package from the system;</p>
+
+<ol>
+<li>Remove the application package for the system</li>
+</ol>
+
+<h3 id="application-commands">Application Commands</h3>
+
+<h3 id="download">download</h3>
+
+<p>Used to download a remote module.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli download [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-F</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the creation of the agent.js</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli download agent-app-weather
+c:\[working directory]&gt;agent-cli download -h
+c:\[working directory]&gt;agent-cli download --help
+c:\[working directory]&gt;agent-cli download --f c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli download -v agent-app-weather
+c:\[working directory]&gt;agent-cli download --verbose agent-app-weather
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Unable to locate the application [application]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="install-app">install-app</h3>
+
+<p>Used to install an application into the agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli install-app [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-n</td>
+<td style="text-align: center">&ndash;name</td>
+<td style="text-align: center">name of app</td>
+<td style="text-align: left">the name of the app</td>
+</tr>
+<tr>
+<td style="text-align: center">-F</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the creation of the agent.js</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli install-app agent-app-weather
+c:\[working directory]&gt;agent-cli install-app -h
+c:\[working directory]&gt;agent-cli install-app --help
+c:\[working directory]&gt;agent-cli install-app --f c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli install-app --config c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli install-app --n agent-compris
+c:\[working directory]&gt;agent-cli install-app --name agent-compris
+c:\[working directory]&gt;agent-cli install-app --F c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli install-app --force c:\[working directory]\agent.js
+c:\[working directory]&gt;agent-cli install-app -v agent-app-weather
+c:\[working directory]&gt;agent-cli install-app --verbose agent-app-weather
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Error: Can not find module [application] from [working directory]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="enable-app">enable-app</h3>
+
+<p>Used to enable the app for the agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli enable-app [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli enable-app agent-compris
+c:\[working directory]&gt;agent-cli enable-app -h
+c:\[working directory]&gt;agent-cli enable-app --help
+c:\[working directory]&gt;agent-cli enable-app --f c:\[working directory]\agent.js agent-compris
+c:\[working directory]&gt;agent-cli enable-app --config c:\[working directory]\agent.js agent-compris
+c:\[working directory]&gt;agent-cli enable-app -v agent-compris
+c:\[working directory]&gt;agent-cli enable-app --verbose agent-compris
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>App [app] not registered with agent</td>
+<td>App is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="disable-app">disable-app</h3>
+
+<p>Used to disable the app for the agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli disable-app [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli disable-app agent-compris
+c:\[working directory]&gt;agent-cli disable-app -h
+c:\[working directory]&gt;agent-cli disable-app --help
+c:\[working directory]&gt;agent-cli disable-app --f c:\[working directory]\agent.js agent-compris
+c:\[working directory]&gt;agent-cli disable-app --config c:\[working directory]\agent.js agent-compris
+c:\[working directory]&gt;agent-cli disable-app -v agent-compris
+c:\[working directory]&gt;agent-cli disable-app --verbose agent-compris
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>App [app] not registered with agent</td>
+<td>App is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="list-apps">list-apps</h3>
+
+<p>Used to list the app for the agent that are installed.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli list-apps [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli list-apps 
+c:\[working directory]&gt;agent-cli list-apps -h
+c:\[working directory]&gt;agent-cli list-apps --help
+c:\[working directory]&gt;agent-cli list-apps --f c:\[working directory]\agent.js 
+c:\[working directory]&gt;agent-cli list-apps --config c:\[working directory]\agent.js 
+c:\[working directory]&gt;agent-cli list-apps -v 
+c:\[working directory]&gt;agent-cli list-apps --verbose 
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="configure-app">configure-app</h3>
+
+<p>Used to configure the app for the agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli configure-app [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-F</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces the reconfiguration of the app</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli configure-app compris
+c:\[working directory]&gt;agent-cli configure-app -h
+c:\[working directory]&gt;agent-cli configure-app --help
+c:\[working directory]&gt;agent-cli configure-app -F c:\[working directory]\agent.js compris --force
+c:\[working directory]&gt;agent-cli configure-app --config c:\[working directory]\agent.js compris
+c:\[working directory]&gt;agent-cli configure-app compris --f
+c:\[working directory]&gt;agent-cli configure-app compris --force 
+c:\[working directory]&gt;agent-cli configure-app compris -v
+c:\[working directory]&gt;agent-cli configure-app compris --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>the app [app] already exists</td>
+<td>something</td>
+</tr>
+<tr>
+<td>unable to find application in c:\BodhiAgent</td>
+<td>could not find application in the confiuration file agent.js</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="uninstall-app">uninstall-app</h3>
+
+<p>Used to uninstall a downloaded app for the agent.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli uninstall-app [options] &lt;app&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;config</td>
+<td style="text-align: center">directory</td>
+<td style="text-align: left">fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli uninstall-app compris
+c:\[working directory]&gt;agent-cli uninstall-app -h
+c:\[working directory]&gt;agent-cli uninstall-app --help
+c:\[working directory]&gt;agent-cli uninstall-app --f c:\[working directory]\agent.js compris
+c:\[working directory]&gt;agent-cli uninstall-app --config c:\[working directory]\agent.js compris
+c:\[working directory]&gt;agent-cli uninstall-app -v compris
+c:\[working directory]&gt;agent-cli uninstall-app --verbose compris
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>App [application] removed from agent</td>
+<td>the application has been uninstall from the agents configuration file</td>
+</tr>
+<tr>
+<td>App not registered with the agent</td>
+<td>error: unknown option [options]</td>
+</tr>
+</tbody></table>
+
+<h3 id="update-&amp;-remove-commands">Update &amp; Remove Commands</h3>
+
+<ul>
+<li>update</li>
+<li>remove</li>
+</ul>
+
+<h3 id="update">update</h3>
+
+<p>Used to update to the latest version of a package or module.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli update [options] &lt;package&gt;
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli update agent-app-compris
+c:\[working directory]&gt;agent-cli update -h
+c:\[working directory]&gt;agent-cli update --help
+c:\[working directory]&gt;agent-cli update agent-app-compris -v
+c:\[working directory]&gt;agent-cli update agent-app-compris --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent-core@x.x.x node_modules\agent-core</td>
+<td>version number and location of the console module</td>
+</tr>
+<tr>
+<td>updated package [package]</td>
+<td>the specific package was successfully updated</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+<h3 id="remove">remove</h3>
+
+<p>Used to update to the package from the system.</p>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli update-console [options]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>c:\[working directory]&gt;agent-cli remove
+c:\[working directory]&gt;agent-cli update-console -h
+c:\[working directory]&gt;agent-cli update-console --help
+c:\[working directory]&gt;agent-cli update-console -v
+c:\[working directory]&gt;agent-cli update-console --verbose
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>npm WARN uninstall not installed in[working directory\node_modules: &ldquo;package&rdquo; package removed</td>
+<td>package not found</td>
+</tr>
+<tr>
+<td>[package] removed</td>
+<td>the specified package was successfully remove</td>
+</tr>
+<tr>
+<td>error: unknown option [options]</td>
+<td>Incorrect option</td>
+</tr>
+</tbody></table>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
