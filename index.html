@@ -44,7 +44,7 @@
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="getting-started">Getting Started</h1>
+          <h1 id="welcome-to-bodhi">Welcome to Bodhi</h1>
 
 <p>This documentation is intended for the developer wanting to integrate into the Bodhi PaaS (Platform as a Service) and SaaS (Software as a Service) by:</p>
 
@@ -79,7 +79,7 @@ Your namespace utilizes user profiles that are configured by your namespace admi
 <p>The API Documentation can be found at here: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>
 To access them you need to login with your user and password provided by Hot Schedules.</p>
 
-          <h2 id="bodhi-command-line-interface-(cli)-tools">Bodhi Command Line Interface (CLI) Tools</h2>
+          <h1 id="getting-started-with-bodhi-command-line">Getting Started with Bodhi Command Line</h1>
 
 <h3 id="overview">Overview</h3>
 
@@ -403,6 +403,1559 @@ Success 204 No Content
 </code></pre>
 
           <h4 id="type-mechanics-tutorial">Type Mechanics Tutorial</h4>
+
+          <h2 id="tooling">Tooling</h2>
+
+          <h4 id="bodhi-command-line-interface-tools">Bodhi Command Line Interface Tools</h4>
+
+<p>Command Line Tools for the Bodhi Cloud</p>
+
+<h3 id="installation">Installation</h3>
+
+<p>The Bodhi cli tools require a nodejs runtime and are installed using the node package manager (npm).</p>
+<pre class="highlight plaintext"><code>&gt; npm install -g bodhi-cli
+</code></pre>
+
+<p>On <em>nix based systems and Macs, a global install command *</em>MUST** be run using sudo.</p>
+<pre class="highlight plaintext"><code>&gt; sudo npm install -g bodhi-cli
+</code></pre>
+
+<p>Once the tools are installed, verify the installation using the version command. 
+The command SHOULD respond with a semantic version of the tools: M is the major version, m is the minor version, and b is the build increment.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi -V
+  M.m.b (e.g. 1.2.15)
+</code></pre>
+
+<h3 id="create-a-bodhi-cli-workspace">Create a bodhi-cli workspace</h3>
+
+<p>Create a directory for your bodhi-cli workspace. 
+Change directory to the new bodhi-cli workspace.</p>
+
+<p><strong>NOTE</strong> This is the directory where you will run all of your bodhi-cli commands.</p>
+<pre class="highlight plaintext"><code>&gt; mkdir [workspace]
+&gt; cd [workspace]
+</code></pre>
+
+<p>Initialize your bodhi-cli workspace. </p>
+
+<p>This will create a rbc-project.json which will store all your environment info. It will also create an /apps directory where your apps will reside (for app-tools) and a /model where all your type definitions will reside (for bodhi-types).</p>
+<pre class="highlight plaintext"><code>&gt; bodhi init
+/path/to/new/project/root
+</code></pre>
+
+<h3 id="create-a-new-environment">Create a new environment</h3>
+
+<p>This command will create a new environment</p>
+<pre class="highlight plaintext"><code>&gt; bodhi create [ENVIRONMENT NAME]
+[ENVIRONMENT NAME]  
+</code></pre>
+
+<h3 id="add-a-new-environment-to-the-project">Add a new environment to the project</h3>
+
+<p>Add a new environment to your rbc-project.json file. You will need to know you namespace credentials.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi new [ENVIRONMENT NAME] -s &lt;api.endpoint&gt; -n &lt;namespace&gt; -u &lt;user&gt; -p &lt;password&gt;
+
+</code></pre>
+
+<p>Open up rbc-project.json and see that the information entered with the bodhi new command is there and formatted.</p>
+
+<p>For example: <br></p>
+<pre class="highlight plaintext"><code>&gt; bodhi new Testing -s api.bodhi-space.io -n QA_Name -u fred -p apple
+Testing
+</code></pre>
+
+<p>In the rbc-project.json file you will see the information that the bodhi new command as inserted in the file.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7.10"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Testing"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"uri"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api.bodhi-space.io"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"fred"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"password"</span><span class="p">:</span><span class="w"> </span><span class="s2">"apple"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"namespace"</span><span class="p">:</span><span class="w"> </span><span class="s2">"QA_Name"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p><strong>NOTE:</strong>
+Once you do this, all commands will be used under the default environment unless you specify otherwise with the -e flag.</p>
+
+<h5 id="set-the-default-environment">Set the Default Environment</h5>
+
+<p>Set a default environment so that if you do not specify an environment for a command, it uses the default environment.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi set-default Testing
+Testing
+</code></pre>
+
+<p>In the rbc-project.json file you will see the thet the default evironment has been inserted in to the rbc-project.json file.</p>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.7.10"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"environments"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"Testing”: {
+      "</span><span class="err">uri</span><span class="s2">": "</span><span class="err">api.bodhi.space</span><span class="s2">",
+      "</span><span class="err">username</span><span class="s2">": "</span><span class="err">Teddy</span><span class="s2">",
+      "</span><span class="err">password</span><span class="s2">": "</span><span class="err">apple</span><span class="s2">",
+      "</span><span class="err">namespace</span><span class="s2">": "</span><span class="err">QA_testing</span><span class="s2">"
+    }
+  },
+  "</span><span class="err">default</span><span class="s2">": "</span><span class="err">Testing”</span><span class="w">
+</span><span class="err">}</span><span class="w">
+</span></code></pre>
+
+<h5 id="get-the-default-environment">Get the Default Environment</h5>
+
+<p>Check to see if we set the default environment correctly.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi set-default Testing
+Testing
+</code></pre>
+
+<h3 id="general-usage">General Usage</h3>
+<pre class="highlight plaintext"><code>&gt; bodhi [options] &lt;command&gt; [arguments ..]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<ul>
+<li>  Options are prefixed with <code class="prettyprint">-</code> or <code class="prettyprint">--</code> to separate them from arguments.<br></li>
+<li>  Options can be specified anywhere on the command line <strong>AFTER</strong> the tool designation.</li>
+<li>  Each command or action defines the options it uses.</li>
+<li>  <strong>NOTE:</strong> the options are consistent in naming convention and usage across the commands.</li>
+</ul>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-V</td>
+<td style="text-align: center">&ndash;version</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">request the version of a tool</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">execute the command with intermediate output</td>
+</tr>
+<tr>
+<td style="text-align: center">-e</td>
+<td style="text-align: center">&ndash;environment</td>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: left">the environment to use</td>
+</tr>
+<tr>
+<td style="text-align: center">-s</td>
+<td style="text-align: center">&ndash;uri</td>
+<td style="text-align: center">[url]</td>
+<td style="text-align: left">the service provider uri</td>
+</tr>
+<tr>
+<td style="text-align: center">-u</td>
+<td style="text-align: center">&ndash;username, &ndash;user</td>
+<td style="text-align: center">[username]</td>
+<td style="text-align: left">the remote username</td>
+</tr>
+<tr>
+<td style="text-align: center">-p</td>
+<td style="text-align: center">&ndash;password</td>
+<td style="text-align: center">[password]</td>
+<td style="text-align: left">the remote user&rsquo;s password</td>
+</tr>
+<tr>
+<td style="text-align: center">-n</td>
+<td style="text-align: center">&ndash;namespace</td>
+<td style="text-align: center">[namespace]</td>
+<td style="text-align: left">the active namespace</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;view</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">present the view in console colors</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;no-color</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">do not use color</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;flat</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">provide flat json structure</td>
+</tr>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">&ndash;status</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">include the staus</td>
+</tr>
+<tr>
+<td style="text-align: center">-d</td>
+<td style="text-align: center">&ndash;debug</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">execute the command in debug mode</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">force the command to ignore saftey considerations</td>
+</tr>
+<tr>
+<td style="text-align: center">-H</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">request help in the form of usage instructions</td>
+</tr>
+</tbody></table>
+
+<p>The following commands are considered equivalent.</p>
+<pre class="highlight plaintext"><code>bodhi -e my-environment -v command
+</code></pre>
+<pre class="highlight plaintext"><code>bodhi -v command -e my-environment
+</code></pre>
+<pre class="highlight plaintext"><code>bodhi command -v -e my-environment
+</code></pre>
+
+<h3 id="arguments">Arguments</h3>
+
+<p>The first entry is the name of the tool. The second argument is the command. All subsequent arguments are command specific.</p>
+
+<h3 id="command-organization">Command Organization</h3>
+
+<p>The commands are grouped into a sub group.
+The following Commands groups are;</p>
+
+<ul>
+<li><strong>Project Commands</strong></li>
+<li><strong>Environment Commands</strong></li>
+<li><strong>Environment Detail Commands</strong></li>
+<li><strong>HTTP Options Commands</strong></li>
+</ul>
+
+<h3 id="project-commands">Project Commands</h3>
+
+<ul>
+<li>pwd</li>
+<li>init</li>
+<li>set-default</li>
+<li>get-default</li>
+</ul>
+
+<h3 id="pwd">pwd</h3>
+
+<p><strong>Aliases</strong>: <em>home</em></p>
+
+<p>This command will print the home directory of the current project.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi pwd
+
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">none</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi pwd
+&gt; bodhi pwd -h
+&gt; bodhi pwd --help
+&gt; bodhi pwd -v
+&gt; bodhi pwd --verbose
+&gt; bodhi pwd -d
+&gt; bodhi pwd --debug
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">/path/to/project/root</td>
+<td style="text-align: left">Platform specific directory path of the current project.</td>
+</tr>
+</tbody></table>
+
+<h3 id="init">init</h3>
+
+<p>This command will establish the current directory as a new project by creating a new rbc-project.json file.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi init [options]
+</code></pre>
+
+<p><strong>NOTE:</strong> This command will fail safely if an existing rbc-project.json file exists up the directory tree. A user may create a project in a subfolder by using the &ndash;force command line option.</p>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">Force the initialization of the rbc-project.json</td>
+</tr>
+<tr>
+<td style="text-align: center">-d</td>
+<td style="text-align: center">&ndash;debug</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed debugging information output</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi init -f
+&gt; bodhi init --force
+&gt; bodhi init -v
+&gt; bodhi init --verbose
+&gt; bodhi init -d
+&gt; bodhi init --debug
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">creates a new rbc-project.json file in the current directory</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">forces bodhi-cli to reinitialize the rbc-project.json file in the current directory</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">/path/to/new/project/root</td>
+<td style="text-align: left">Platform specific directory path to the newly initialized project.</td>
+</tr>
+<tr>
+<td style="text-align: center">Cowardly refusing to overwrite an existing project file</td>
+<td style="text-align: left">a project file already exists in the current directory.</td>
+</tr>
+</tbody></table>
+
+<h3 id="set-default">set-default</h3>
+
+<p>This command will set the environment supplied as the default working environment.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi set-default [environment]
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: left">set the environment supplied as the default working environment</td>
+</tr>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">FOrce the initialization of the rbc-project.json</td>
+</tr>
+<tr>
+<td style="text-align: center">-d</td>
+<td style="text-align: center">&ndash;debug</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed debugging information output</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi set-default [Environment] -h
+&gt; bodhi set-default [Environment] --help
+&gt; bodhi set-default [Environment] -v
+&gt; bodhi set-default [Environment] -verbose
+&gt; bodhi set-default [Environment] -d
+&gt; bodhi set-default [Environment] -debug
+
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">none</td>
+<td style="text-align: center">none</td>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: left">set the environment supplied as the default working environment</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">/path/to/new/project/root</td>
+<td style="text-align: left">The name of the environment that is now the default.</td>
+</tr>
+<tr>
+<td style="text-align: center">Unknown Connection undefined</td>
+<td style="text-align: left">the [environment] was not supplied</td>
+</tr>
+</tbody></table>
+
+<h3 id="get-default">get-default</h3>
+
+<p>This command will get the directory supplied as the default working directory.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi get-default
+</code></pre>
+
+<h5 id="options">Options</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th style="text-align: center">arg</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-h</td>
+<td style="text-align: center">&ndash;help</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">FOrce the initialization of the rbc-project.json</td>
+</tr>
+<tr>
+<td style="text-align: center">-d</td>
+<td style="text-align: center">&ndash;debug</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed debugging information output</td>
+</tr>
+<tr>
+<td style="text-align: center">-v</td>
+<td style="text-align: center">&ndash;verbose</td>
+<td style="text-align: center">none</td>
+<td style="text-align: left">prints more detailed information output</td>
+</tr>
+</tbody></table>
+
+<h5 id="command-variations">Command Variations</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi get-default [Environment] -h
+&gt; bodhi get-default [Environment] --help
+&gt; bodhi get-default [Environment] -v
+&gt; bodhi get-default [Environment] -verbose
+&gt; bodhi get-default [Environment] -d
+&gt; bodhi get-default [Environment] -debug
+</code></pre>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">/path/to/new/project/root</td>
+<td style="text-align: left">Returns the default working environment.</td>
+</tr>
+<tr>
+<td style="text-align: center">Default Connection currently unspecified</td>
+<td style="text-align: left">the default evironment is not defined in the rbc-project.json file.</td>
+</tr>
+</tbody></table>
+
+<h3 id="environment-commands">Environment Commands</h3>
+
+<h3 id="general-command-signature">General Command Signature</h3>
+<pre class="highlight plaintext"><code>&gt; bodhi &lt;action&gt; &lt;environment&gt; [env-options] [processing-options]
+</code></pre>
+
+<h3 id="commands">Commands</h3>
+
+<ul>
+<li>new</li>
+<li>rename</li>
+<li>copy</li>
+<li>edit</li>
+<li>remove</li>
+<li>list</li>
+<li>view</li>
+<li>whoami</li>
+<li>whereami</li>
+<li>uri</li>
+<li>user</li>
+<li>namespace</li>
+</ul>
+
+<h3 id="environment-options">Environment Options</h3>
+
+<table><thead>
+<tr>
+<th style="text-align: center">short</th>
+<th style="text-align: center">long</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">-s</td>
+<td style="text-align: center">&ndash;uri</td>
+<td>request help in the form of usage instructions</td>
+</tr>
+<tr>
+<td style="text-align: center">-u</td>
+<td style="text-align: center">&ndash;username</td>
+<td>execute the command with intermediate output</td>
+</tr>
+<tr>
+<td style="text-align: center">-n</td>
+<td style="text-align: center">&ndash;namespace</td>
+<td>Selet the namespace for the environment</td>
+</tr>
+<tr>
+<td style="text-align: center">-d</td>
+<td style="text-align: center">&ndash;debug</td>
+<td>execute the command in debug mode</td>
+</tr>
+<tr>
+<td style="text-align: center">-f</td>
+<td style="text-align: center">&ndash;force</td>
+<td>force the command to ignore safety considerations</td>
+</tr>
+</tbody></table>
+
+<h3 id="new">new</h3>
+
+<p><strong>Aliases</strong>: <em>create</em></p>
+
+<p>This command will create a new environment in the project</p>
+<pre class="highlight plaintext"><code>&gt; bodhi new &lt;env-name&gt; [env-options] [processing-options]
+
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">arg</th>
+<th style="text-align: center">env-option</th>
+<th style="text-align: center">processing-options</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: center">env-options</td>
+<td style="text-align: center">processing-options</td>
+<td style="text-align: left">returns the new environment name</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The name of the newly created environment</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<h3 id="rename">rename</h3>
+
+<p><strong>Aliases</strong>: <em>mv</em>, <em>move</em></p>
+
+<p>This command will rename an existing environment and optionally update its configuration if environment options are present.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi rename &lt;from&gt; &lt;to&gt; [env-options] [processing-options]
+
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>from - the name of the environment to rename</li>
+<li>to   - the new name for the environment</li>
+</ol>
+
+<table><thead>
+<tr>
+<th style="text-align: center">args</th>
+<th style="text-align: center">env-option</th>
+<th style="text-align: center">processing-options</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">[from]  [to]</td>
+<td style="text-align: center">[env-options]</td>
+<td style="text-align: center">[processing-options]</td>
+<td style="text-align: left">returns the new environment name</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The new name of the existing environment</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<h3 id="copy">copy</h3>
+
+<p><strong>Aliases</strong>: <em>cp</em>, <em>clone</em></p>
+
+<p>This command will copy an existing environment and optionally update the copy with new setting if environment options are present.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi copy &lt;from&gt; &lt;to&gt; [env-options] [processing-options]
+
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>from - the name of the environment to copy</li>
+<li>to   - the name of the new environment</li>
+</ol>
+
+<table><thead>
+<tr>
+<th style="text-align: center">args</th>
+<th style="text-align: center">env-option</th>
+<th style="text-align: center">processing-options</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">[from]  [to]</td>
+<td style="text-align: center">[env-options]</td>
+<td style="text-align: center">[processing-options]</td>
+<td style="text-align: left">returns the new environment name</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The new name of the newly created environment</td>
+</tr>
+<tr>
+<td style="text-align: center">Connection [to environment] alread exists</td>
+<td style="text-align: left">The environment being copied to already exists</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<h3 id="edit">edit</h3>
+
+<p><strong>Aliases</strong>: <em>update</em>, <em>modify</em></p>
+
+<p>This command changes an exiting environment&rsquo;s settings based on the environment options that are supplied.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi edit &lt;environment&gt; [env-options] [processing-options]
+
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>environment - the name of the environment to change</li>
+</ol>
+
+<table><thead>
+<tr>
+<th style="text-align: center">args</th>
+<th style="text-align: center">env-option</th>
+<th style="text-align: center">processing-options</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: center">[env-options]</td>
+<td style="text-align: center">[processing-options]</td>
+<td style="text-align: left">returns the new environment name</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The name of the environment that was modified</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<h3 id="remove">remove</h3>
+
+<p><strong>Aliases</strong>: <em>rm</em>, <em>del</em></p>
+<pre class="highlight plaintext"><code>&gt; bodhi remove &lt;environment&gt; [env-options] [processing-options]
+&lt;env-name&gt;
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>environment - the name of the environment to remove</li>
+</ol>
+
+<table><thead>
+<tr>
+<th style="text-align: center">args</th>
+<th style="text-align: center">env-option</th>
+<th style="text-align: center">processing-options</th>
+<th style="text-align: left">description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center">[environment]</td>
+<td style="text-align: center">[env-options]</td>
+<td style="text-align: center">[processing-options]</td>
+<td style="text-align: left">the environment name that is to be removed</td>
+</tr>
+</tbody></table>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The name of the environment that was removed</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<h3 id="list">list</h3>
+
+<p><strong>Aliases</strong>: <em>ls</em>, <em>ll</em>, <em>dir</em></p>
+
+<p>Print the names of a project&rsquo;s environments</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>environment - the name of the environment to remove</li>
+</ol>
+
+<h5 id="return-response">Return Response</h5>
+
+<table><thead>
+<tr>
+<th style="text-align: center">Response</th>
+<th style="text-align: left">Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td style="text-align: center"><env-name></td>
+<td style="text-align: left">The name of the environment that was removed</td>
+</tr>
+<tr>
+<td style="text-align: center">undefined</td>
+<td style="text-align: left">No environment name given</td>
+</tr>
+</tbody></table>
+
+<p>A JSON array containing the names</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi list &lt;environment&gt; [processing-options]
+[
+  "env",
+  "env2"
+]
+</code></pre>
+
+<h3 id="view">view</h3>
+
+<p><strong>Aliases</strong>: <em>display</em>, <em>print</em>, <em>show</em>_</p>
+
+<p>Print the structure of the named enviroment</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>environment - the name of the environment to remove</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>A JSON object representation of the current environment.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; bodhi view &lt;environment&gt; [processing-options]
+{
+  "uri":"uri",
+  "user":"user",
+  "password":"password",
+  "namespace":"namespace",
+}
+</code></pre>
+
+<h3 id="special-print-commands">Special Print Commands</h3>
+
+<p>The following commands can be used to print/return a specific value of environment configuration.</p>
+
+<table><thead>
+<tr>
+<th>command</th>
+<th>prints</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>the name of the user</td>
+</tr>
+<tr>
+<td>username</td>
+<td>the name of the user</td>
+</tr>
+<tr>
+<td>whoami</td>
+<td>the name of the user</td>
+</tr>
+<tr>
+<td>whereami</td>
+<td>the base uri stem uri + namespace</td>
+</tr>
+<tr>
+<td>uri</td>
+<td>the envrionment&rsquo;s base uri</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>the envrionment&rsquo;s namespace</td>
+</tr>
+</tbody></table>
+
+<h5 id="signatures">Signatures</h5>
+
+<p>These commands have three possible signatures</p>
+
+<p>Preferred</p>
+<pre class="highlight plaintext"><code>&gt; bodhi &lt;cmd&gt; &lt;environment&gt; [processing-options]
+</code></pre>
+
+<p>Acceptable</p>
+<pre class="highlight plaintext"><code>&gt; bodhi &lt;cmd&gt; -e &lt;environment-name&gt;
+</code></pre>
+
+<p>Default (uses the default environment if set)</p>
+<pre class="highlight plaintext"><code>&gt; bodhi cmd
+</code></pre>
+
+          <h4 id="rbc-types">rbc-types</h4>
+
+<p>Basic command line tool for interacting with the RBC cloud services API</p>
+
+<h3 id="installation-&amp;-setup">Installation &amp; Setup</h3>
+
+<p>rbc-types is included in the bodhi as a separate executable. To verify the availability of the tool use</p>
+<pre class="highlight plaintext"><code>&gt; rbc-types -V
+M.m.b
+</code></pre>
+
+<ul>
+<li>or -</li>
+</ul>
+<pre class="highlight plaintext"><code>&gt; rbc-types info
+rbc-types v M.m.b
+...
+License Apache-2
+Copyright 2014 Redbook Connect
+</code></pre>
+
+<h3 id="local-commands">Local Commands</h3>
+
+<h5 id="usage">Usage</h5>
+
+<h5 id="type-commands">Type Commands</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [model-options]
+</code></pre>
+
+<h5 id="property-commands">Property Commands</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [prop-options] &lt;property&gt; [propery ...]
+</code></pre>
+
+<h3 id="commands">Commands</h3>
+
+<p>Local commands operate on JSON structures stored on the local filesystem.</p>
+
+<table><thead>
+<tr>
+<th>command</th>
+<th>aliases</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>new</td>
+<td>create</td>
+<td>create a new type</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>move, mv</td>
+<td>change the name of the type</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>modify</td>
+<td>edit the type metadata</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>rm</td>
+<td>remove a local type</td>
+</tr>
+<tr>
+<td>view</td>
+<td>print</td>
+<td>print the local type definition</td>
+</tr>
+<tr>
+<td>view-props</td>
+<td></td>
+<td>print all non-system properties of the type</td>
+</tr>
+<tr>
+<td>set-prop</td>
+<td></td>
+<td>create or replate a property</td>
+</tr>
+<tr>
+<td>mv-prop</td>
+<td></td>
+<td>rename an existing property</td>
+</tr>
+<tr>
+<td>rm-prop</td>
+<td></td>
+<td>remove an existing property</td>
+</tr>
+<tr>
+<td>gen-instance</td>
+<td></td>
+<td>generate a sample object based on the type</td>
+</tr>
+</tbody></table>
+
+<h5 id="type-name">Type Name</h5>
+
+<p>A typename is the just the system name for the type and not a file system name. The name SHOULD NOT include an directory information or the .json suffix when used by the commands.</p>
+
+<h5 id="type-options">Type Options</h5>
+
+<table><thead>
+<tr>
+<th>option</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>namespace</td>
+<td>the namespace of the type</td>
+</tr>
+<tr>
+<td>embedded</td>
+<td>this type does is not stored independently</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>instances of this type do not support updates</td>
+</tr>
+<tr>
+<td>encapsulated</td>
+<td>this type does not support normal CRUD operations</td>
+</tr>
+<tr>
+<td>extensible</td>
+<td>this type may be extended</td>
+</tr>
+</tbody></table>
+
+<h5 id="property-options">Property Options</h5>
+
+<p>option     | short | meaning
+&mdash;&ndash;      | ____  | &mdash;&mdash;&mdash;-
+type       |       | the type associated with the property
+required   | r     | property is required to have a value
+multi      | r     | the property is multi valued (json array)
+unique     | u     | the property contains a unique value within a collection
+scale      | s     | how many decimal places should be kept
+default    |       | the default value of the property if not set</p>
+
+<h5 id="short-hand-types">Short Hand Types</h5>
+
+<p>All system scalara have a special character designation to make them easier to describe. Those designators are listed below.</p>
+
+<table><thead>
+<tr>
+<th>option</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>B</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Real</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>S</td>
+<td>String</td>
+</tr>
+<tr>
+<td>T</td>
+<td>DateTime</td>
+</tr>
+<tr>
+<td>G</td>
+<td>GeoJSON</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Link</td>
+</tr>
+</tbody></table>
+
+<h3 id="remote-commands">Remote Commands</h3>
+
+<p>Remote commands operate on types store on an service installation. These commands share many of the same options as the http commands.</p>
+
+<h5 id="usage">Usage</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [env-options]
+</code></pre>
+
+<h5 id="commands">Commands</h5>
+
+<table><thead>
+<tr>
+<th>command</th>
+<th>aliases</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list</td>
+<td>ls</td>
+<td>list all the types on the remote system</td>
+</tr>
+<tr>
+<td>get</td>
+<td>read</td>
+<td>print a remote type</td>
+</tr>
+<tr>
+<td>fetch</td>
+<td>pull, download</td>
+<td>fetch a remote type and store locally</td>
+</tr>
+<tr>
+<td>post</td>
+<td>push, upload</td>
+<td>install a remote type on the server</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>destroy</td>
+<td>destroy the type on the system</td>
+</tr>
+<tr>
+<td>listp</td>
+<td>lp</td>
+<td>list the properties of a remote</td>
+</tr>
+</tbody></table>
+
+<h5 id="type-names">Type Names</h5>
+
+<p>The typename is the just the name and not a partial url path. The user MUST assume that <code class="prettyprint">/namespace/type/</code> will be prepended to the name prior to sending the request. Any initial slash will be tolerated but is not required. Any additional path elements will be appended to the <code class="prettyprint">namespace/types/</code> prior to executing the request.</p>
+
+<h5 id="options">Options</h5>
+
+<p>All remote commands require an environment. These options behave consistently with those in the  If none is specifed then the command will use the default. If no default is set then to command will fail.</p>
+
+<h3 id="command-details">Command Details</h3>
+
+<h3 id="new">New</h3>
+
+<p>Create a new type locally</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types new &lt;typename&gt; --namespace &lt;namespace&gt; [type-options]
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>create</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<ol>
+<li>namespace is a required parameter</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The name of the created model</p>
+
+<h3 id="rename">Rename</h3>
+
+<p>Rename an existing model.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types rename &lt;from&gt; &lt;to&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>mv</li>
+<li>move</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>from</li>
+<li>to</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The &lsquo;to&rsquo; name of the model</p>
+
+<h3 id="edit">Edit</h3>
+
+<p>Change the type&rsquo;s metadata</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types edit &lt;typename&gt; [type-options]
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>modify</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be modified</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The model&rsquo;s name</p>
+
+<h3 id="remove">Remove</h3>
+
+<p>Remove the model from the local filesystem.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types remove &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>rm</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be removed</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The removed model&rsquo;s name</p>
+
+<h3 id="echo">Echo</h3>
+
+<p>Print a type to the screen</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types echo &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>print</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be printed</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The model as a JSON object</p>
+
+<h3 id="set-prop">Set-Prop</h3>
+
+<p>Add or Replace a Property in a Type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types set-prop &lt;typename&gt; [property-options] &lt;propertyName&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>None</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type</li>
+<li>propertyName - the name of the property to add/replace</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename</p>
+
+<h3 id="mv-prop">Mv-Prop</h3>
+
+<p>Rename an existing property</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types mv-prop &lt;typename&gt; &lt;from&gt; &lt;to&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>rename-prop</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type that has the property</li>
+<li>from - the existing property&rsquo;s name</li>
+<li>to - the new property name</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="rm-prop">rm-Prop</h3>
+
+<p>Remove an existing property</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types rm-prop &lt;typename&gt; &lt;propertyName&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>remove-prop</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type that has the property</li>
+<li>propName - the name of the property to remove</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="gen-instance">gen-instance</h3>
+
+<p>Generate a sample instance of the type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types gen-instance &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>None</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type to be generated a insatnce from</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>Prints a sample instance as a JSON object</p>
+
+<h3 id="fetch">fetch</h3>
+
+<p>Download and store a copy of a type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] fetch &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>download, pull</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="get">get</h3>
+
+<p>Print a type stored on the server</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] get &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>read</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="list">list</h3>
+
+<p>List all the types on the server for the environment</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] list
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>ll</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None</p>
+
+<h5 id="return">Return</h5>
+
+<p>A JSON array of the current remote types for the environment</p>
+
+<h3 id="delete">delete</h3>
+
+<p>Destroys a remote type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] delete &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>destroy</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the type to be deleted</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename deleted</p>
+
+<h3 id="post">post</h3>
+
+<p>Posts a local type definition to the remote server</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] post &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>upload, push</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type to be sent to the server</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename posted</p>
 
           <h1 id="bodhi-agent">Bodhi Agent</h1>
 
@@ -4786,9 +6339,7 @@ default    |       | the default value of the property if not set</p>
 
           <h2 id="tooling">Tooling</h2>
 
-          <h4 id="mobile-app-store">Mobile App Store</h4>
-
-<h3 id="app-tools">app-tools</h3>
+          <h4 id="app-tools">app-tools</h4>
 
 <p>app-tools is a command line tool, bundled with bodhi-cli, that allows app developers to quickly generate
 an app and publish it to the cloud so that it can be viewed on the mobile container.</p>
@@ -4797,7 +6348,7 @@ an app and publish it to the cloud so that it can be viewed on the mobile contai
 
 <h3 id="app-creation-commands">App Creation Commands</h3>
 
-<h5 id="new-app">new-app</h5>
+<h3 id="new-app">new-app</h3>
 
 <p>Creates a new app skeleton in /apps folder based on the type of skeleton app specified. </p>
 
@@ -4881,7 +6432,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>The following commands allow the user to edit/view the local profile definition. When the user publishes the app, the cloud will create a unique profile (profile name will be the same as the app name) specifically for this app. Any user with this profile will then be able to use this app.</p>
 
-<h5 id="profile-action-options">Profile Action Options</h5>
+<h3 id="profile-action-options">Profile Action Options</h3>
 
 <table><thead>
 <tr>
@@ -4911,7 +6462,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 </tr>
 </tbody></table>
 
-<h5 id="view-profile-def">view-profile-def</h5>
+<h3 id="view-profile-def">view-profile-def</h3>
 
 <p>View the local app profile definition.</p>
 
@@ -4931,7 +6482,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>The local app profile definition.</p>
 
-<h5 id="add-type-to-profile">add-type-to-profile</h5>
+<h3 id="add-type-to-profile">add-type-to-profile</h3>
 
 <p>Add a type and its allowed actions to the local app profile definition. If the type already exists, it will overwrite it. Application type cannot be edited.</p>
 
@@ -4953,7 +6504,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>The local app profile definition.</p>
 
-<h5 id="remove-type-from-profile">remove-type-from-profile</h5>
+<h3 id="remove-type-from-profile">remove-type-from-profile</h3>
 
 <p>Remove a type from the local app profile definition. Application type cannot be removed.</p>
 
@@ -4977,7 +6528,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h3 id="app-metadata-commands">App Metadata Commands</h3>
 
-<h5 id="edit-title">edit-title</h5>
+<h3 id="edit-title">edit-title</h3>
 
 <p>Edit the app title.</p>
 
@@ -4999,7 +6550,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>Message stating the title has been changed to &lt;title&gt;.</p>
 
-<h5 id="view-title">view-title</h5>
+<h3 id="view-title">view-title</h3>
 
 <p>View the app title.</p>
 
@@ -5019,7 +6570,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>The app title.</p>
 
-<h5 id="edit-description">edit-description</h5>
+<h3 id="edit-description">edit-description</h3>
 
 <p>Edit the app description.</p>
 
@@ -5041,7 +6592,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>Message stating description has been changed to &lt;description&gt;.</p>
 
-<h5 id="view-description">view-description</h5>
+<h3 id="view-description">view-description</h3>
 
 <p>View the app description.</p>
 
@@ -5061,7 +6612,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>The app description.</p>
 
-<h5 id="edit-version">edit-version</h5>
+<h3 id="edit-version">edit-version</h3>
 
 <p>Edit the app version.</p>
 
@@ -5083,7 +6634,7 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>Message stating the app version has been changed to &lt;version&gt;.</p>
 
-<h5 id="view-version">view-version</h5>
+<h3 id="view-version">view-version</h3>
 
 <p>View the app version.</p>
 
@@ -5109,9 +6660,9 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h3 id="app-publishing-commands">App Publishing Commands</h3>
 
-<h5 id="publish-app">publish-app</h5>
+<h3 id="publish-app">publish-app</h3>
 
-<p>Publishes the app to the namespace specified by the environment or to the global app store if the -g flag is specified. This command must be run in the app folder.</p>
+<p>Publishes the app to the namespace specified by the environment. This command must be run in the app folder.</p>
 
 <p>Notes:</p>
 
@@ -5123,8 +6674,6 @@ The custom app skeleton just has the required files needed to publish the app.</
 <li>Max zip file size is 20mb.</li>
 <li>Max number of files is 1024.</li>
 <li>On publish, the cloud creates the profile specified by the package.json&rsquo;s profile definition and then assigns the profile to the developer who published the app.</li>
-<li>If autoVersionUpdate flag in package.json is set to true, each publish will bump up the patch version of the app.</li>
-<li>If you want to publish the app globally, the app must already be published in your custom namespace.</li>
 </ul>
 
 <h5 id="signature">Signature</h5>
@@ -5139,129 +6688,20 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>See environment options above.</p>
 
-<table><thead>
-<tr>
-<th>long</th>
-<th>short</th>
-<th>arg</th>
-<th>meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>global</td>
-<td>g</td>
-<td></td>
-<td>publish to global namespace</td>
-</tr>
-</tbody></table>
-
 <h5 id="return">Return</h5>
 
 <p>Message stating the app has been published, profile has been created and assigned to the developer who published it.</p>
-
-<h3 id="app-removing-commands">App Removing Commands</h3>
-
-<h5 id="remove-app">remove-app</h5>
-
-<p>Remove app from the cloud.</p>
-
-<h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools remove-app &lt;app-name&gt; [env-options]
-</code></pre>
-
-<h5 id="arguments">Arguments</h5>
-
-<ol>
-<li>app name</li>
-</ol>
-
-<h5 id="options">Options</h5>
-
-<p>See environment options above.</p>
-
-<h5 id="return">Return</h5>
-
-<p>Message stating the app has been successfully removed.</p>
-
-<h3 id="global-app-instalation/update-commands">Global App Instalation/Update Commands</h3>
-
-<h5 id="install-app">install-app</h5>
-
-<p>Install a global app into a custom namespace.</p>
-
-<p>Note:</p>
-
-<ul>
-<li>&ndash;name flag is optional. If name is not specified, it defaults to the original name specified by the publisher (ex. if the app&rsquo;s global name is testNamespace.appname, appname will be the name given to the app in your namespace).</li>
-<li>An app can be installed into a namespace multiple times as long as the name given to the app (specified by the &ndash;name flag) is unique.</li>
-</ul>
-
-<h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools install-app &lt;global app name&gt; --name &lt;app name&gt; [env-options]
-</code></pre>
-
-<h5 id="arguments">Arguments</h5>
-
-<ol>
-<li>global app name</li>
-</ol>
-
-<h5 id="options">Options</h5>
-
-<p>See environment options above.</p>
-
-<table><thead>
-<tr>
-<th>long</th>
-<th>short</th>
-<th>arg</th>
-<th>meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td></td>
-<td></td>
-<td>unique name of the app for your namespace</td>
-</tr>
-</tbody></table>
-
-<h5 id="return">Return</h5>
-
-<p>The metadata for the newly installed global app.</p>
-
-<h5 id="update-app">update-app</h5>
-
-<p>Update an already installed global app.</p>
-
-<h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools update-app &lt;app-name&gt; [env-options]
-</code></pre>
-
-<h5 id="arguments">Arguments</h5>
-
-<ol>
-<li>app name</li>
-</ol>
-
-<h5 id="options">Options</h5>
-
-<p>See environment options above.</p>
-
-<h5 id="return">Return</h5>
-
-<p>The metadata for the updated global app.</p>
 
 <h3 id="informational-commands">Informational Commands</h3>
 
 <p>Get data about the deployed app from the cloud.</p>
 
-<h5 id="list-apps">list-apps</h5>
+<h3 id="list-apps">list-apps</h3>
 
-<p>This command lists all the apps that you can see in your specified environment that are currently deployed in the cloud. If the -g flag is specified, the command lists all the global apps available for you to install.</p>
+<p>This command lists all the apps that you can see in your specified environment that are currently deployed in the cloud.</p>
 
 <h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools list-apps -g [env-options]
+<pre class="highlight plaintext"><code>&gt; app-tools list-apps [env-options]
 </code></pre>
 
 <h5 id="arguments">Arguments</h5>
@@ -5272,25 +6712,29 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <p>See environment options above.</p>
 
-<table><thead>
-<tr>
-<th>long</th>
-<th>short</th>
-<th>arg</th>
-<th>meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>global</td>
-<td>g</td>
-<td></td>
-<td>list the global apps</td>
-</tr>
-</tbody></table>
+<h5 id="return">Return</h5>
+
+<p>A list of apps currently in the cloud. Each app entry will show its meta data.</p>
+
+<h3 id="get-profile">get-profile</h3>
+
+<p>This command shows the profile that is associated with your deployed app. This command must be run in the app folder.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>$&gt; app-tools get-profile [env-option]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>See environment options above.</p>
 
 <h5 id="return">Return</h5>
 
-<p>A list of apps currently in your namespace or if the -g flag is specified the apps currently in the global store. Each app entry will show its meta data.</p>
+<p>The profile the deployed app is currently associated with.</p>
 
 <h3 id="profile-commands">Profile Commands</h3>
 
@@ -5298,10 +6742,10 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h5 id="assign-profile-to-user">assign-profile-to-user</h5>
 
-<p>Assign the deployed app&rsquo;s profile to an existing user in the cloud.</p>
+<p>Assign the deployed app&rsquo;s profile to an existing user in the cloud. This command must be run in the app folder.</p>
 
 <h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools assign-profile-to-user &lt;username&gt; --name &lt;app-name&gt; [env-options]
+<pre class="highlight plaintext"><code>&gt; app-tools assign-profile-to-user &lt;username&gt; [env-options]
 </code></pre>
 
 <h5 id="arguments">Arguments</h5>
@@ -5312,27 +6756,11 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h5 id="options">Options</h5>
 
-<table><thead>
-<tr>
-<th>long</th>
-<th>short</th>
-<th>arg</th>
-<th>meaning</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td></td>
-<td>app name</td>
-<td>Name of the app&rsquo;s profile you wish to assign the user.</td>
-</tr>
-</tbody></table>
-
 <p>See environment options above.</p>
 
 <h5 id="return">Return</h5>
 
-<p>Message stating the specified app&rsquo;s profile has been assigned to the specified user.</p>
+<p>The user definition.</p>
 
       </div>
       <div class="dark-box">

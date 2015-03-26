@@ -1,0 +1,612 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhicloud includes_bodhicloud_cloudtools includes_bodhicloud_cloudtools_rbc_types">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h4 id="rbc-types">rbc-types</h4>
+
+<p>Basic command line tool for interacting with the RBC cloud services API</p>
+
+<h3 id="installation-&amp;-setup">Installation &amp; Setup</h3>
+
+<p>rbc-types is included in the bodhi as a separate executable. To verify the availability of the tool use</p>
+<pre class="highlight plaintext"><code>&gt; rbc-types -V
+M.m.b
+</code></pre>
+
+<ul>
+<li>or -</li>
+</ul>
+<pre class="highlight plaintext"><code>&gt; rbc-types info
+rbc-types v M.m.b
+...
+License Apache-2
+Copyright 2014 Redbook Connect
+</code></pre>
+
+<h3 id="local-commands">Local Commands</h3>
+
+<h5 id="usage">Usage</h5>
+
+<h5 id="type-commands">Type Commands</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [model-options]
+</code></pre>
+
+<h5 id="property-commands">Property Commands</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [prop-options] &lt;property&gt; [propery ...]
+</code></pre>
+
+<h3 id="commands">Commands</h3>
+
+<p>Local commands operate on JSON structures stored on the local filesystem.</p>
+
+<table><thead>
+<tr>
+<th>command</th>
+<th>aliases</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>new</td>
+<td>create</td>
+<td>create a new type</td>
+</tr>
+<tr>
+<td>rename</td>
+<td>move, mv</td>
+<td>change the name of the type</td>
+</tr>
+<tr>
+<td>edit</td>
+<td>modify</td>
+<td>edit the type metadata</td>
+</tr>
+<tr>
+<td>remove</td>
+<td>rm</td>
+<td>remove a local type</td>
+</tr>
+<tr>
+<td>view</td>
+<td>print</td>
+<td>print the local type definition</td>
+</tr>
+<tr>
+<td>view-props</td>
+<td></td>
+<td>print all non-system properties of the type</td>
+</tr>
+<tr>
+<td>set-prop</td>
+<td></td>
+<td>create or replate a property</td>
+</tr>
+<tr>
+<td>mv-prop</td>
+<td></td>
+<td>rename an existing property</td>
+</tr>
+<tr>
+<td>rm-prop</td>
+<td></td>
+<td>remove an existing property</td>
+</tr>
+<tr>
+<td>gen-instance</td>
+<td></td>
+<td>generate a sample object based on the type</td>
+</tr>
+</tbody></table>
+
+<h5 id="type-name">Type Name</h5>
+
+<p>A typename is the just the system name for the type and not a file system name. The name SHOULD NOT include an directory information or the .json suffix when used by the commands.</p>
+
+<h5 id="type-options">Type Options</h5>
+
+<table><thead>
+<tr>
+<th>option</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>namespace</td>
+<td>the namespace of the type</td>
+</tr>
+<tr>
+<td>embedded</td>
+<td>this type does is not stored independently</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>instances of this type do not support updates</td>
+</tr>
+<tr>
+<td>encapsulated</td>
+<td>this type does not support normal CRUD operations</td>
+</tr>
+<tr>
+<td>extensible</td>
+<td>this type may be extended</td>
+</tr>
+</tbody></table>
+
+<h5 id="property-options">Property Options</h5>
+
+<p>option     | short | meaning
+&mdash;&ndash;      | ____  | &mdash;&mdash;&mdash;-
+type       |       | the type associated with the property
+required   | r     | property is required to have a value
+multi      | r     | the property is multi valued (json array)
+unique     | u     | the property contains a unique value within a collection
+scale      | s     | how many decimal places should be kept
+default    |       | the default value of the property if not set</p>
+
+<h5 id="short-hand-types">Short Hand Types</h5>
+
+<p>All system scalara have a special character designation to make them easier to describe. Those designators are listed below.</p>
+
+<table><thead>
+<tr>
+<th>option</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>B</td>
+<td>Boolean</td>
+</tr>
+<tr>
+<td>I</td>
+<td>Integer</td>
+</tr>
+<tr>
+<td>R</td>
+<td>Real</td>
+</tr>
+<tr>
+<td>D</td>
+<td>Decimal</td>
+</tr>
+<tr>
+<td>C</td>
+<td>Currency</td>
+</tr>
+<tr>
+<td>S</td>
+<td>String</td>
+</tr>
+<tr>
+<td>T</td>
+<td>DateTime</td>
+</tr>
+<tr>
+<td>G</td>
+<td>GeoJSON</td>
+</tr>
+<tr>
+<td>L</td>
+<td>Link</td>
+</tr>
+</tbody></table>
+
+<h3 id="remote-commands">Remote Commands</h3>
+
+<p>Remote commands operate on types store on an service installation. These commands share many of the same options as the http commands.</p>
+
+<h5 id="usage">Usage</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types &lt;cmd&gt; &lt;type-name&gt; [env-options]
+</code></pre>
+
+<h5 id="commands">Commands</h5>
+
+<table><thead>
+<tr>
+<th>command</th>
+<th>aliases</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>list</td>
+<td>ls</td>
+<td>list all the types on the remote system</td>
+</tr>
+<tr>
+<td>get</td>
+<td>read</td>
+<td>print a remote type</td>
+</tr>
+<tr>
+<td>fetch</td>
+<td>pull, download</td>
+<td>fetch a remote type and store locally</td>
+</tr>
+<tr>
+<td>post</td>
+<td>push, upload</td>
+<td>install a remote type on the server</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>destroy</td>
+<td>destroy the type on the system</td>
+</tr>
+<tr>
+<td>listp</td>
+<td>lp</td>
+<td>list the properties of a remote</td>
+</tr>
+</tbody></table>
+
+<h5 id="type-names">Type Names</h5>
+
+<p>The typename is the just the name and not a partial url path. The user MUST assume that <code class="prettyprint">/namespace/type/</code> will be prepended to the name prior to sending the request. Any initial slash will be tolerated but is not required. Any additional path elements will be appended to the <code class="prettyprint">namespace/types/</code> prior to executing the request.</p>
+
+<h5 id="options">Options</h5>
+
+<p>All remote commands require an environment. These options behave consistently with those in the  If none is specifed then the command will use the default. If no default is set then to command will fail.</p>
+
+<h3 id="command-details">Command Details</h3>
+
+<h3 id="new">New</h3>
+
+<p>Create a new type locally</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types new &lt;typename&gt; --namespace &lt;namespace&gt; [type-options]
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>create</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<ol>
+<li>namespace is a required parameter</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The name of the created model</p>
+
+<h3 id="rename">Rename</h3>
+
+<p>Rename an existing model.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types rename &lt;from&gt; &lt;to&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>mv</li>
+<li>move</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>from</li>
+<li>to</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The &lsquo;to&rsquo; name of the model</p>
+
+<h3 id="edit">Edit</h3>
+
+<p>Change the type&rsquo;s metadata</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types edit &lt;typename&gt; [type-options]
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>modify</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be modified</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The model&rsquo;s name</p>
+
+<h3 id="remove">Remove</h3>
+
+<p>Remove the model from the local filesystem.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types remove &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>rm</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be removed</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The removed model&rsquo;s name</p>
+
+<h3 id="echo">Echo</h3>
+
+<p>Print a type to the screen</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types echo &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<ol>
+<li>print</li>
+</ol>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - name of the type to be printed</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The model as a JSON object</p>
+
+<h3 id="set-prop">Set-Prop</h3>
+
+<p>Add or Replace a Property in a Type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types set-prop &lt;typename&gt; [property-options] &lt;propertyName&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>None</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type</li>
+<li>propertyName - the name of the property to add/replace</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename</p>
+
+<h3 id="mv-prop">Mv-Prop</h3>
+
+<p>Rename an existing property</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types mv-prop &lt;typename&gt; &lt;from&gt; &lt;to&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>rename-prop</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type that has the property</li>
+<li>from - the existing property&rsquo;s name</li>
+<li>to - the new property name</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="rm-prop">rm-Prop</h3>
+
+<p>Remove an existing property</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types rm-prop &lt;typename&gt; &lt;propertyName&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>remove-prop</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type that has the property</li>
+<li>propName - the name of the property to remove</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="gen-instance">gen-instance</h3>
+
+<p>Generate a sample instance of the type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types gen-instance &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>None</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type to be generated a insatnce from</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>Prints a sample instance as a JSON object</p>
+
+<h3 id="fetch">fetch</h3>
+
+<p>Download and store a copy of a type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] fetch &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>download, pull</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="get">get</h3>
+
+<p>Print a type stored on the server</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] get &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>read</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename modified</p>
+
+<h3 id="list">list</h3>
+
+<p>List all the types on the server for the environment</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] list
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>ll</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None</p>
+
+<h5 id="return">Return</h5>
+
+<p>A JSON array of the current remote types for the environment</p>
+
+<h3 id="delete">delete</h3>
+
+<p>Destroys a remote type</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] delete &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>destroy</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the type to be deleted</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename deleted</p>
+
+<h3 id="post">post</h3>
+
+<p>Posts a local type definition to the remote server</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; rbc-types [env-options] post &lt;typename&gt;
+</code></pre>
+
+<h5 id="aliases">Aliases</h5>
+
+<p>upload, push</p>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>typename - the name of the type to be sent to the server</li>
+</ol>
+
+<h5 id="return">Return</h5>
+
+<p>The typename posted</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

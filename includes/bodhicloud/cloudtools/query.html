@@ -1,0 +1,140 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhicloud includes_bodhicloud_cloudtools includes_bodhicloud_cloudtools_query">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h4 id="how-to-use-bodhi-query">How to Use Bodhi Query</h4>
+
+<p>========</p>
+
+<h5 id="overview">Overview</h5>
+
+<p>Bodhi Query is a REST client that helps you be more efficient while working with the Bodhi Cloud API. It allows you to easily retrieve and manipulate data within your individual namespace.</p>
+
+<h5 id="getting-started">Getting Started</h5>
+
+<p>The Bodhi Query tool can be accessed at https://tools.bodhi.space/query. You will need your Bodhi Cloud username and password in order to login and begin transfering data.</p>
+
+<h5 id="features">Features</h5>
+
+<p>Bodhi Query can be used for the following tasks:</p>
+
+<ul>
+<li>Create instances of types via POST request</li>
+<li>Delete instances of types via DELETE request</li>
+<li>Update instances of types via PUT request</li>
+<li>Update instance attributes via PATCH request</li>
+<li>Query for instances of types via GET request</li>
+</ul>
+
+<p>The Query request can be modified in the following ways:</p>
+
+<ul>
+<li>Restrict the attributes of instances returned using the &ldquo;Field&rdquo; input</li>
+<li>Restrict the instances returned to key/value matches using the &ldquo;Where&rdquo; input</li>
+<li>Sort the instances returned using the &ldquo;Sort&rdquo; input</li>
+<li>Limit the number of instances returned using the &ldquo;Limit&rdquo; input</li>
+<li>Filter the results by attribute value <strong>post</strong> API request using the &ldquo;Filter&rdquo; input</li>
+</ul>
+
+<h5 id="how-to-use-bodhi-query">How To Use Bodhi Query</h5>
+
+<h6 id="choose-an-action"><em>Choose an action</em></h6>
+
+<p>In order to start communicating with your data, you will have to pick an HTTP verb from the action dropdown located on the left of the first toolbar.  The default verb is GET.</p>
+
+<p><img alt="action menu" src="../../../images/bq_action.png?raw=true" /></p>
+
+<h6 id="pick-a-type"><em>Pick a Type</em></h6>
+
+<p>Next you need to specify the Type you are interested in retrieving data about. Enter the type name into the input in the middle of the first toolbar. A dropdown will appear to assist you.</p>
+
+<p><img alt="type list" src="../../../images/bq_type.png?raw=true" /></p>
+
+<h6 id="using-post"><em>Using POST</em></h6>
+
+<p>If you have chosen Post from the action dropdown and selected a Type to work with; you are ready to start creating instances. Enter JSON into the code box and click send. A successful POST will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.  </p>
+
+<p><img alt="post json" src="../../../images/bq_post.png?raw=true" /></p>
+
+<h6 id="using-put"><em>Using PUT</em></h6>
+
+<p>If you have chosen Put from the action dropdown and selected a Type to work with; you are ready to start updating instances. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.</p>
+
+<p><img alt="instance input" src="../../../images/bq_instance.png?raw=true" /></p>
+
+<h6 id="using-patch"><em>Using Patch</em></h6>
+
+<p>If you have chosen Patch from the action dropdown and selected a Type to work with; you are ready to start updating instance attributes. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. The patch JSON syntax is shown below. The &ldquo;op&rdquo; key specifies the operation, which include replace, add, and remove.  The &ldquo;path&rdquo; key specifies which attribute to change. For example to reach a nested JSON attribute your path would be formatted as such: &ldquo;/attribute/nested_attribute&rdquo;.  The &ldquo;value&rdquo; key specifies the new value. This this key can be removed when using the remove operation. </p>
+
+<p><img alt="patch json" src="../../../images/bq_patch.png?raw=true" /></p>
+
+<h6 id="using-delete"><em>Using Delete</em></h6>
+
+<p>If you have chosen Delete from the action dropdown and selected a Type to work with; you are ready to start deleting instances. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input and click send. A successful Delete will display a 201 in the response box. </p>
+
+<h6 id="querying-using-get"><em>Querying using GET</em></h6>
+
+<p>If you have chosen Get from the action dropdown and selected a Type to work with; you are ready to start querying. Click the send button in order to retreive a list of instances.</p>
+
+<h6 id="restricting-instance-attributes"><em>Restricting Instance Attributes</em></h6>
+
+<p>To restrict the attributes returned for each instance: simply click the Field input and pick the keys that you would like returned. Click the tags in the input box to remove them. Click send.</p>
+
+<p><img alt="fields selection" src="../../../images/bq_fields.png?raw=true" /></p>
+
+<h6 id="query-by-key/value-pairs"><em>Query by Key/Value Pairs</em></h6>
+
+<p>To restrict the instances returned to only those that have a specific key value match: Enter the attribute into the &ldquo;Where key&rdquo; input. Use dot notation for nested attributes (i.e. attribute.nested_attribute). Enter the value you would like to restrict by in the &ldquo;Where value&rdquo; input. Click send.</p>
+
+<p><img alt="where input" src="../../../images/bq_where.png?raw=true" /></p>
+
+<h6 id="sorting-queries"><em>Sorting Queries</em></h6>
+
+<p>To sort the instances returned: Enter the key that you would like to sort by into the Sort input. Use dot notation for nested attributes (i.e. attribute.nested_attribute). Append &ldquo;:desc&rdquo; to the key in order to reverse the sort order. Click send.</p>
+
+<p><img alt="sort input" src="../../../images/bq_sort.png?raw=true" /></p>
+
+<h6 id="limiting-query-responses"><em>Limiting Query responses</em></h6>
+
+<p>To limit the number of instances returned: Enter an amount into the Limit input. Click send. You can use the pagination on the bottom to traverse through subsets of the data equal in size to the number you specified in the limit input.</p>
+
+<p><img alt="limit input" src="../../../images/bq_limit.png?raw=true" /></p>
+
+<h6 id="search-queries"><em>Search Queries</em></h6>
+
+<p>To search queries for keywords after they have been returned: Enter the search term that you would like to filter by into the Filter input.</p>
+
+<p><img alt="filter input" src="../../../images/bq_filter.png?raw=true" /></p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
