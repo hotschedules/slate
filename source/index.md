@@ -19,6 +19,8 @@ includes:
   - bodhicloud/cloudtools/Tooling
   - bodhicloud/cloudtools/Bodhi-cli
   - bodhicloud/cloudtools/rbc_types
+  - bodhicloud/cloudtools/query
+  - bodhicloud/cloudtools/bodhitype
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
