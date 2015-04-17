@@ -79,7 +79,7 @@ Your namespace utilizes user profiles that are configured by your namespace admi
 <p>The API Documentation can be found at here: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>
 To access them you need to login with your user and password provided by Hot Schedules.</p>
 
-          <h1 id="getting-started-with-bodhi-command-line">Getting Started with Bodhi Command Line</h1>
+          <h1 id="getting-started">Getting Started</h1>
 
 <h3 id="overview">Overview</h3>
 
@@ -1957,166 +1957,6 @@ default    |       | the default value of the property if not set</p>
 <h5 id="return">Return</h5>
 
 <p>The typename posted</p>
-
-          <h4 id="bodhi-query">Bodhi Query</h4>
-
-<h5 id="overview">Overview</h5>
-
-<p>Bodhi Query is a REST client that helps you be more efficient while working with the Bodhi Cloud API. It allows you to easily retrieve and manipulate data within your individual namespace.</p>
-
-<h5 id="getting-started">Getting Started</h5>
-
-<p>The Bodhi Query tool can be accessed at https://tools.bodhi.space/query. You will need your Bodhi Cloud username and password in order to login and begin transfering data.</p>
-
-<h5 id="features">Features</h5>
-
-<p>Bodhi Query can be used for the following tasks:</p>
-
-<ul>
-<li>Create instances of types via POST request</li>
-<li>Delete instances of types via DELETE request</li>
-<li>Update instances of types via PUT request</li>
-<li>Update instance attributes via PATCH request</li>
-<li>Query for instances of types via GET request</li>
-</ul>
-
-<p>The Query request can be modified in the following ways:</p>
-
-<ul>
-<li>Restrict the attributes of instances returned using the &ldquo;Field&rdquo; input</li>
-<li>Restrict the instances returned to key/value matches using the &ldquo;Where&rdquo; input</li>
-<li>Sort the instances returned using the &ldquo;Sort&rdquo; input</li>
-<li>Limit the number of instances returned using the &ldquo;Limit&rdquo; input</li>
-<li>Filter the results by attribute value <strong>post</strong> API request using the &ldquo;Filter&rdquo; input</li>
-</ul>
-
-<h5 id="how-to-use-bodhi-query">How To Use Bodhi Query</h5>
-
-<h6 id="choose-an-action"><em>Choose an action</em></h6>
-
-<p>In order to start communicating with your data, you will have to pick an HTTP verb from the action dropdown located on the left of the first toolbar.  The default verb is GET.</p>
-
-<p><img alt="action menu" src="images/bq_action.png?raw=true" /></p>
-
-<h6 id="pick-a-type"><em>Pick a Type</em></h6>
-
-<p>Next you need to specify the Type you are interested in retrieving data about. Enter the type name into the input in the middle of the first toolbar. A dropdown will appear to assist you.</p>
-
-<p><img alt="type list" src="images/bq_type.png?raw=true" /></p>
-
-<h6 id="using-post"><em>Using POST</em></h6>
-
-<p>If you have chosen Post from the action dropdown and selected a Type to work with; you are ready to start creating instances. Enter JSON into the code box and click send. A successful POST will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.  </p>
-
-<p><img alt="post json" src="images/bq_post.png?raw=true" /></p>
-
-<h6 id="using-put"><em>Using PUT</em></h6>
-
-<p>If you have chosen Put from the action dropdown and selected a Type to work with; you are ready to start updating instances. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.</p>
-
-<p><img alt="instance input" src="images/bq_instance.png?raw=true" /></p>
-
-<h6 id="using-patch"><em>Using Patch</em></h6>
-
-<p>If you have chosen Patch from the action dropdown and selected a Type to work with; you are ready to start updating instance attributes. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. The patch JSON syntax is shown below. The &ldquo;op&rdquo; key specifies the operation, which include replace, add, and remove.  The &ldquo;path&rdquo; key specifies which attribute to change. For example to reach a nested JSON attribute your path would be formatted as such: &ldquo;/attribute/nested_attribute&rdquo;.  The &ldquo;value&rdquo; key specifies the new value. This this key can be removed when using the remove operation. </p>
-
-<p><img alt="patch json" src="images/bq_patch.png?raw=true" /></p>
-
-<h6 id="using-delete"><em>Using Delete</em></h6>
-
-<p>If you have chosen Delete from the action dropdown and selected a Type to work with; you are ready to start deleting instances. Enter an instance id key (sys_id) into the &ldquo;Instance&rdquo; input and click send. A successful Delete will display a 201 in the response box. </p>
-
-<h6 id="querying-using-get"><em>Querying using GET</em></h6>
-
-<p>If you have chosen Get from the action dropdown and selected a Type to work with; you are ready to start querying. Click the send button in order to retreive a list of instances.</p>
-
-<h6 id="restricting-instance-attributes"><em>Restricting Instance Attributes</em></h6>
-
-<p>To restrict the attributes returned for each instance: simply click the Field input and pick the keys that you would like returned. Click the tags in the input box to remove them. Click send.</p>
-
-<p><img alt="fields selection" src="images/bq_fields.png?raw=true" /></p>
-
-<h6 id="query-by-key/value-pairs"><em>Query by Key/Value Pairs</em></h6>
-
-<p>To restrict the instances returned to only those that have a specific key value match: Enter the attribute into the &ldquo;Where key&rdquo; input. Use dot notation for nested attributes (i.e. attribute.nested_attribute). Enter the value you would like to restrict by in the &ldquo;Where value&rdquo; input. Click send.</p>
-
-<p><img alt="where input" src="images/bq_where.png?raw=true" /></p>
-
-<h6 id="sorting-queries"><em>Sorting Queries</em></h6>
-
-<p>To sort the instances returned: Enter the key that you would like to sort by into the Sort input. Use dot notation for nested attributes (i.e. attribute.nested_attribute). Append &ldquo;:desc&rdquo; to the key in order to reverse the sort order. Click send.</p>
-
-<p><img alt="sort input" src="images/bq_sort.png?raw=true" /></p>
-
-<h6 id="limiting-query-responses"><em>Limiting Query responses</em></h6>
-
-<p>To limit the number of instances returned: Enter an amount into the Limit input. Click send. You can use the pagination on the bottom to traverse through subsets of the data equal in size to the number you specified in the limit input.</p>
-
-<p><img alt="limit input" src="images/bq_limit.png?raw=true" /></p>
-
-<h6 id="search-queries"><em>Search Queries</em></h6>
-
-<p>To search queries for keywords after they have been returned: Enter the search term that you would like to filter by into the Filter input.</p>
-
-<p><img alt="filter input" src="images/bq_filter.png?raw=true" /></p>
-
-          <h4 id="bodhi-type">Bodhi Type</h4>
-
-<h5 id="introduction">Introduction</h5>
-
-<p>Bodhi.Type is a user interface developed by the Bodhi team to allow customers to view their current data types on the cloud. The tool also allows for users to build new types and extend existing types using a user friendly interface that reads and writes to and from the Bodhi Cloud.</p>
-
-<p>Bodhi.Type is available to all users to view and interact with their data on a specific namespace</p>
-
-<h5 id="getting-started">Getting started</h5>
-
-<p>Bodhi.Type is currently available in beta as an OS X <a href="https://drive.google.com/file/d/0Bz2KGejeubT9alF5NGNlYzRvZEE/view">download</a> .</p>
-
-<h5 id="intended-audience">Intended Audience</h5>
-
-<p>Bodhi.Type is intended to be a complement to the existing Bodhi CLI. </p>
-
-<h5 id="steps-/-tutorial-to-install-(or-using-the-app)">Steps / tutorial to install (or Using the app)</h5>
-
-<p>Download the Bodhi.Type application. Double click on the Bodhi.Type icon to launch the app, or drag into the Applications folder to make the app available via the Launchpad.</p>
-
-<h5 id="using-this-software">Using this software</h5>
-
-<p>Follow screen prompts to Authenticate via the Preferences menu on the top of your screen. Once authenticated, you should have access to all of the types in your namespace via the left side navigation bar. </p>
-
-<p>Selecting a type will allow you to inspect the properties of that type. </p>
-
-<p><img alt="Type Selection" src="images/Bodhi.Type_1.png" /></p>
-
-<p>By using the download button, users can download the type as a JSON file.</p>
-
-<p><img alt="Download JSON" src="images/Bodhi.Type_2.png" /></p>
-
-<p>By clicking the inspect button, users can be taken to the full API documentation for that type.</p>
-
-<p><img alt="Inspect Type" src="images/Bodhi.Type_3.png" /></p>
-
-<p>Users can edit the type by making changes to the types&rsquo; properties, or adding new properties. </p>
-
-<p><img alt="Editing Type" src="images/Bodhi.Type_4.png" /></p>
-
-<p>When they have completed their changes, users can click the &lsquo;Publish&rsquo; button, which will then take them to a screen showing a JSON representation of their edits. Users will be notified whether their request succeeds or experiences errors before returning to the Type page.</p>
-
-<p><img alt="Publishing Type" src="images/Bodhi.Type_5.png" /></p>
-
-<p>Users can also create new types by clicking the New Type button on the topbar. </p>
-
-<p><img alt="Type Creation" src="images/Bodhi.Type_6.png" /></p>
-
-<p>This will take them to the type creation page, a blank form where they can add the name of their new type, select whether or not it is an embedded type or an independent type, and create properties for that type. By clicking the Publish button, they can review their proposed new type, and be notified of the success of their request.</p>
-
-<p>Newly created types should be instantly accessibly via the side navigation bar. Users can then edit or delete the type using the Publish or Delete buttons.</p>
-
-<p><img alt="Type Deletion" src="images/Bodhi.Type_7.png" /></p>
-
-<h5 id="future-releases">Future Releases</h5>
-
-<p>Future releases should add Windows support, as well as additional options for type creation and modification.</p>
 
           <h1 id="bodhi-agent">Bodhi Agent</h1>
 
@@ -6928,6 +6768,60 @@ The custom app skeleton just has the required files needed to publish the app.</
 <h5 id="return">Return</h5>
 
 <p>The user definition.</p>
+
+          <h1 id="performance-tuning-your-mobile-app">Performance tuning your mobile app</h1>
+
+<h3 id="overview">Overview</h3>
+
+<p>The Bodhi mobile application is a web application that runs in a native container on the user&rsquo;s mobile device. </p>
+
+<p>This means that, like any web application, it is bound by the same rules and potential inefficiencies of any web application - but exacerbated because the application is now running on a user&rsquo;s mobile device with reduced processing power and limited bandwidth when compared to a regular web application running on a desktop. </p>
+
+<p>When building and testing your application on a WIFI or 4G network it is easy to forget that 3G is the dominant network type globally, so you should assume your app is on a 3G network and that each network request will take, on average, 200 milliseconds.</p>
+
+<p>Additional time needs to be added for the DNS lookup to resolve the hostname (e.g. api.bodhi.space) to an IP address, a subsequent network roundtrip to perform the TCP handshake and a full network roundtrip to send the HTTP request. Finally, add an additional 600ms for the typical sequence of communication between your app and a server, for network overhead. With so much overhead you need to be conscious of simple mistakes that can impact the performance of the application - especially if you are taking an existing web application and moving it to a mobile device.   </p>
+
+<p>You have already made the first major improvement for performance - that is, using the Bodhi cloud as your back end service and working on the data model to collect, pre-process, massage and filter the data so that it is ready to be pulled, served or pushed to your mobile application. </p>
+
+<p>You have built your mobile app and happy with the functionality. So now you are ready to focus on performance testing and tuning of the app.</p>
+
+<p>There are many good articles and books that will help you improve the performance of your web app. We recommend starting with the following:</p>
+
+<ul>
+<li><p><strong>High Performance Web Sites</strong>  <a href="hhttp://stevesouders.com/hpws/">here</a>.</p></li>
+<li><p><strong>Measuring page load speed with Navigation Timing</strong>  <a href="http://www.html5rocks.com/en/tutorials/webperformance/basics/">here</a>. </p></li>
+<li><p><strong>Mobile Analysis in PageSpeed Insights</strong> <a href="https://developers.google.com/speed/docs/insights/mobile">here</a>.</p></li>
+</ul>
+
+<p>This article is not intended to cover all aspects of performance optimization but the following exercise will demonstrate the quick wins that you can accomplish by following the best practices discussed in the articles mentioned above. </p>
+
+<h3 id="example-exercise">Example exercise</h3>
+
+<p>The following application is a web application that we will optimize for mobile devices.</p>
+
+<p><img alt="p1" src="images/perf1.png" /></p>
+
+<p>When we run the application we can see that the application takes 1.51 seconds to load. </p>
+
+<p>Looking at the source code we can see that there are several webfonts being loaded - each is a separate request adding 60-70 ms to the load time of the application. On review we see that none of the additional fonts are used in our CSS. So we can remove those.</p>
+
+<p><img alt="p1b" src="images/perf1a.png" /></p>
+
+<p>Note: if you do need to load several fonts, you can do this in one request instead of making multiple individual requests as follows:</p>
+
+<p><link href='http://fonts.googleapis.com/css?family=Lato:100,400|Roboto:400,100' rel='stylesheet' type='text/css'></p>
+
+<p>Running the application we&rsquo;ve saved about 120ms by not loading fonts we don&rsquo;t need.</p>
+
+<p><img alt="p2" src="images/perf2.png" /></p>
+
+<p>The next step makes sure we load the web font before it is required in the CSS file.</p>
+
+<p><img alt="p2" src="images/perf3.png" /></p>
+
+<p><img alt="p2" src="images/perf4.png" /></p>
+
+<p>Next we can handle all those scripts. </p>
 
       </div>
       <div class="dark-box">
