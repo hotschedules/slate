@@ -406,7 +406,7 @@ Success 204 No Content
 
           <h2 id="tooling">Tooling</h2>
 
-          <h4 id="bodhi-command-line-interface-tools">Bodhi Command Line Interface Tools</h4>
+          <h4 id="bodhi-command-line-interface">Bodhi Command Line Interface</h4>
 
 <p>Command Line Tools for the Bodhi Cloud</p>
 
@@ -3007,11 +3007,11 @@ without implying a resource action or initisting s resource retrieval</p>
 </tr>
 </tbody></table>
 
-          <h1 id="bodhi-types">bodhi-types</h1>
+          <h4 id="bodhi-cli-types">Bodhi CLI types</h4>
 
 <p>Bodhi-types is a command line tool bundled with bodhi-cli, that allows developers to interact with the RBC cloud services API.</p>
 
-<h2 id="installation-&amp;-setup">Installation &amp; Setup</h2>
+<h3 id="installation-&amp;-setup">Installation &amp; Setup</h3>
 
 <p>bodhi-types is included in the bodhi as a separate executable. To verify the availability of the tool use the following commands;</p>
 <pre class="highlight plaintext"><code>&gt; bodhi-types -V
@@ -3086,11 +3086,11 @@ mv-prop    |          | rename an existing property
 rm-prop    |          | remove an existing property
 gen-instance</p>
 
-<h4 id="type-name">Type Name</h4>
+<h5 id="type-name">Type Name</h5>
 
 <p>A typename is the just the system name for the type and not a file system name. The name SHOULD NOT include an directory information or the .json suffix when used by the commands.</p>
 
-<h4 id="type-options">Type Options</h4>
+<h5 id="type-options">Type Options</h5>
 
 <table><thead>
 <tr>
@@ -3126,7 +3126,7 @@ gen-instance</p>
 </tr>
 </tbody></table>
 
-<h4 id="short-hand-types">Short Hand Types</h4>
+<h5 id="short-hand-types">Short Hand Types</h5>
 
 <p>All system scalara have a special character designation to make them easier to describe. Those designators are listed below.</p>
 
@@ -3174,7 +3174,7 @@ gen-instance</p>
 </tr>
 </tbody></table>
 
-<h2 id="local-commands">Local Commands</h2>
+<h3 id="local-commands">Local Commands</h3>
 
 <ul>
 <li>new<br></li>
@@ -3448,11 +3448,11 @@ gen-instance</p>
 
 <p>{ name: &lsquo;freddy&rsquo;, storage_name: &#39;freddy&rsquo;, properties: {} }</p>
 
-<h4 id="property-commands">Property Commands</h4>
+<h5 id="property-commands">Property Commands</h5>
 <pre class="highlight plaintext"><code>&gt; bodhi-types &lt;cmd&gt; &lt;type-name&gt; [prop-options] &lt;property&gt; [property ...]
 </code></pre>
 
-<h4 id="property-options">Property Options</h4>
+<h5 id="property-options">Property Options</h5>
 
 <table><thead>
 <tr>
@@ -3592,7 +3592,7 @@ typename | the existing property&rsquo;s name | the new property name | rename t
 <pre class="highlight plaintext"><code>&gt; bodhi-types &lt;cmd&gt; &lt;type-name&gt; [env-options]
 </code></pre>
 
-<h4 id="commands">Commands</h4>
+<h5 id="commands">Commands</h5>
 
 <table><thead>
 <tr>
@@ -3633,11 +3633,11 @@ typename | the existing property&rsquo;s name | the new property name | rename t
 </tr>
 </tbody></table>
 
-<h4 id="type-names">Type Names</h4>
+<h5 id="type-names">Type Names</h5>
 
 <p>The typename is just the name and not a partial url path. The user MUST assume that <code class="prettyprint">/namespace/type/</code> will be prepended to the name prior to sending the request. Any initial slash will be tolerated but is not required. Any additional path elements will be appended to the <code class="prettyprint">namespace/types/</code> prior to executing the request.</p>
 
-<h4 id="options">Options</h4>
+<h5 id="options">Options</h5>
 
 <p>All remote commands require an environment. These options behave consistently with those in the  If none is specifed then the command will use the default. If no default is set then the command will fail.</p>
 
