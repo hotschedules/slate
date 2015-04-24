@@ -365,6 +365,39 @@ The custom app skeleton just has the required files needed to publish the app.</
 <li>On publish, the cloud creates the profile specified by the package.json&rsquo;s profile definition and then assigns the profile to the developer who published the app.</li>
 </ul>
 
+<p>Within an application&rsquo;s package.json file, there is a settings object which contains valuable metadata about the application which the Global App Store and mobile container use to properly display the application.</p>
+
+<h3 id="package.json----general-info">Package.json &ndash; General Info</h3>
+
+<p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
+
+<p>offline=true/false
+Offlinemode controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
+
+<p>single_container_app=true/false
+single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+
+<p>hide_from_global_store=true/false
+hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+
+<p>new_type_required=true/false
+new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+
+<p>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;
+The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
+
+<p>categories { }
+The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, mangegement</p>
+
+<p>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;
+The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools.</p>
+
+<p>screenshots{ }
+The screenshots array containers relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools.</p>
+
 <h5 id="signature">Signature</h5>
 <pre class="highlight plaintext"><code>&gt; app-tools publish-app [env-options]
 </code></pre>
