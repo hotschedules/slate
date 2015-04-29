@@ -21,7 +21,7 @@
       </span>
     </a>
     <div class="tocify-wrapper">
-      <a class="bodhi-logo" href="http://bodhi-space.github.io/slate/"> <img src="../../../images/logo.png" /> </a>
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../../images/logo.png" /> </a>
       <div id="toc">
       </div>
     </div>
@@ -67,6 +67,34 @@ Copyright 2014 Redbook Connect
 
 <table><thead>
 <tr>
+<th>option</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>namespace</td>
+<td>the namespace of the type</td>
+</tr>
+<tr>
+<td>embedded</td>
+<td>this type does is not stored independently</td>
+</tr>
+<tr>
+<td>immutable</td>
+<td>instances of this type do not support updates</td>
+</tr>
+<tr>
+<td>encapsulated</td>
+<td>this type does not support normal CRUD operations</td>
+</tr>
+<tr>
+<td>extensible</td>
+<td>this type may be extended</td>
+</tr>
+</tbody></table>
+
+<table><thead>
+<tr>
 <th>command</th>
 <th>aliases</th>
 <th>description</th>
@@ -96,31 +124,6 @@ Copyright 2014 Redbook Connect
 <td>view</td>
 <td>print</td>
 <td>print the local type definition</td>
-</tr>
-<tr>
-<td>view-props</td>
-<td></td>
-<td>print all non-system properties of the type</td>
-</tr>
-<tr>
-<td>set-prop</td>
-<td></td>
-<td>create or replate a property</td>
-</tr>
-<tr>
-<td>mv-prop</td>
-<td></td>
-<td>rename an existing property</td>
-</tr>
-<tr>
-<td>rm-prop</td>
-<td></td>
-<td>remove an existing property</td>
-</tr>
-<tr>
-<td>gen-instance</td>
-<td></td>
-<td>generate a sample object based on the type</td>
 </tr>
 </tbody></table>
 
