@@ -17,6 +17,7 @@ includes:
   - bodhicloud/apitools
   - bodhicloud/bodhiapi
   - bodhicloud/bodhijobengine
+  - bodhicloud/bodhi-jobscli
   - bodhicloud/envsetup
 
   - bodhiagent/gettingstarted
