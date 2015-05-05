@@ -22,6 +22,8 @@ includes:
   - bodhicloud/cloudtools/bodhi-jobs-cli
   - bodhicloud/cloudtools/bodhitype
   - bodhicloud/cloudtools/query
+  - bodhicloud/howto/CreateAStore
+  - bodhicloud/howto/CreateEmployee
   
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
