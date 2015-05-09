@@ -339,6 +339,8 @@ The global_store_icon is the icon that the Global App Store will use for display
 **screenshots{ }** 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools.
 
+**Public Path'/xxx/xxx.png'** 
+The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
 
 ##### Signature
 
