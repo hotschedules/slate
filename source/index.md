@@ -22,8 +22,6 @@ includes:
   - bodhicloud/cloudtools/bodhi-jobs-cli
   - bodhicloud/cloudtools/bodhitype
   - bodhicloud/cloudtools/query
-  - bodhicloud/howto/CreateAStore
-  - bodhicloud/howto/CreateEmployee
   
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
@@ -39,7 +37,12 @@ includes:
   - bodhimobile/Mobile Tools/mobiletoolsoverview
   - bodhimobile/Mobile Tools/app-tools_cli
   - bodhimobile/Mobile Tools/performance
-   
+
+  - bodhitools/overview
+  - bodhitools/shop
+  - bodhitools/tools
+  - bodhicloud/cloudtools/bodhitype
+  - bodhicloud/cloudtools/query
 
 search: true
 ---

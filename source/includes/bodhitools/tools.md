@@ -1,0 +1,2 @@
+##Bodhi Tools
+Bodhi Tools is a launch pad destination for Bodhi Users. Bodhi Tools allows a user to navigate to Bodhi Types, Bodhi Query, and to the Bodhi API documentation. Bodhi Tools will be continually updated with new features and releases to enhance the Bodhi experience.
