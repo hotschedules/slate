@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhicloud includes_bodhicloud_cloudtools includes_bodhicloud_cloudtools_bodhi-jobs-cli">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="bodhi-jobs-cli-tool">Bodhi-Jobs CLI Tool</h1>
+
+<p>A Command Line Tool for Bodhi Cloud/Bodhi Job Engine. These commands communicate directly with the Bodhi Cloud API and some of them communicate indirectly with the Bodhi Job Engine.</p>
+
+<h2 id="installation">Installation</h2>
+
+<p>Bodhi-jobs CLI is included with the Bodhi cli tools. See the Bodhi cli documentation for installation instructions.</p>
+
+<h2 id="general-usage-of-commands">General Usage of Commands</h2>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs &lt;command&gt; [options][arguments ..]
+
+</code></pre>
+
+<h2 id="project-commands">Project Commands</h2>
+
+<ul>
+<li>register</li>
+<li>unregister</li>
+<li>setup</li>
+<li>remove</li>
+<li>schedule</li>
+<li>cancel</li>
+</ul>
+
+<h3 id="register">register</h3>
+
+<p>This command posts information about the job&rsquo;s npm package to the Bodhi Cloud API, placing it in the JobRegistry type. No arguments are options are needed. When this command is run, the CLI will prompt the user for information about the npm package to register, including the package name, who is registering the package, and a brief description of the purpose of the package. On success, the Bodhi Cloud API will respond with status code 201, indicating that the post to the JobRegistry type was successful.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs register
+</code></pre>
+
+<h3 id="unregister">unregister</h3>
+
+<p>This command (unsurprisingly) is the opposite of register. When a package is no longer needed, the unregister command deletes it&rsquo;s information from the JobRegistry type in the Bodhi Cloud API. On success, the Bodhi Cloud API will respond with status code 204, indicating that the delete was successful.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs unregister --name [package name]
+</code></pre>
+
+<h3 id="setup">setup</h3>
+
+<p>After registering an npm package, the next step is the setup command, which prompts the user for a name for the job and then posts the job info to the Bodhi Cloud API Job type. On success, the Bodhi Cloud API will respond with status code 201, indicating that the setup info was posted to the Job type successfully.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs setup --name [package name]
+</code></pre>
+
+<h3 id="remove">remove</h3>
+
+<p>The remove command is roughly the opposite of setup. When a job is no longer needed, running this command deletes the job from the Bodhi Cloud API Job type. It also cancels the job if it is currently running on the Bodhi Job Engine. NOTE: The user specifies the JOB name, not the package name, when running this command. This is the name the user assigned to the job during the setup step. On success, the CLI will indicate that the job was canceled and removed.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs remove --name [job name]
+</code></pre>
+
+<h3 id="schedule">schedule</h3>
+
+<p>The schedule command is used to run the job on the Bodhi Job Engine, either at specific intervals or ASAP. To run a job ASAP, the command looks like this:</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs schedule --name [job name] --now
+</code></pre>
+
+<p>To run a job on a set interval the command looks like this:</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs schedule --name [job name] --repeat '1 hour'
+</code></pre>
+
+<p>The user can specify a time interval in seconds, minutes, hours, or days. The example command will run the job hourly, with the first run beginning roughly 1 hour after the schedule command is executed. This command runs the job every 75 seconds:</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs schedule --name [job name] --repeat '75 seconds'
+</code></pre>
+
+<p>This command runs the job every 30 minutes:</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs schedule --name [job name] --repeat '30 minutes'
+</code></pre>
+
+<p>This command runs the job every 2 days:</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs schedule --name [job name] --repeat '2 days'
+</code></pre>
+
+<h3 id="cancel">cancel</h3>
+
+<p>The cancel command is the opposite of the schedule command. It removes the job from the Bodhi Job Engine and sets it to inactive.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs cancel --name [job name]
+</code></pre>
+
+<h3 id="available">available</h3>
+
+<p>Lists all the job packages registered with the Bodhi Cloud API and stored in the JobRegistry type.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs available
+</code></pre>
+
+<h3 id="list">list</h3>
+
+<p>Lists all the jobs that have been setup in the Bodhi Cloud API and stored in the Job type.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs list
+</code></pre>
+
+<h3 id="get">get</h3>
+
+<p>Displays info about a specific job that has been setup in the Bodhi Cloud API and stored in the Job type.</p>
+<pre class="highlight plaintext"><code>&gt; bodhi-jobs get --name [job name]
+</code></pre>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
