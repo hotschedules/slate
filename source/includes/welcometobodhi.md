@@ -16,7 +16,7 @@ A namespace is your secured storage location of HotSchedules’ cloud solution f
 Your namespace utilizes user profiles that are configured by your namespace administrator for different access levels to access your business data (e.g.stores, inventory, labor, and sales data)
 
 ### Creating your namespace 
-You need to provide two important details for the HotSchedules [sales team.](mailto:contactcenter@hotschedules.com):
+You need to provide two important details for the HotSchedules [sales team](mailto:contactcenter@hotschedules.com):
 
 * Name
 * Email Address
