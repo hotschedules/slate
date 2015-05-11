@@ -1,7 +1,7 @@
-Bodhi-Jobs CLI Tool
+Bodhi Job Engine
 =============
 
-A Command Line Tool for Bodhi Cloud/Bodhi Job Engine. These commands communicate directly with the Bodhi Cloud API and some of them communicate indirectly with the Bodhi Job Engine.
+The Bodhi Job Engine is a job scheduling tool that allows an application to run during a scheduled time against the Bodhi API Cloud Server or any cloud to cloud solution.  The Bodhi Job Engine has a command line interface (CLI) Tool which communicates both directly with the Bodhi Cloud API and indirectly through the Bodhi Job Engine.
 
 ##Installation
 
