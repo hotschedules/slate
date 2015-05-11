@@ -44,7 +44,7 @@ includes:
   - bodhitools/tools
   - bodhicloud/cloudtools/bodhitype
   - bodhicloud/cloudtools/query
-  - bodhicloud/cloudtools/bodhi_api_docs
+  - bodhitools/bodhi_api_docs
 
 search: true
 ---
