@@ -23,4 +23,4 @@ You need to provide two important details for the HotSchedules [sales team](mail
 
 ###Accessing Bodhi Tools
 
-The Bodhi product has a rich set of tools to access your namespace.  Once you have your namespace and administrator's credentials, go to [Bodhi Tools](https://tools.bodhi.space/#/) to use [Bodhi Query](http://docs.bodhi.space/#bodhi-query41) to manage and query your data, Manage your namespace's types and data using [Bodhi Types](http://docs.bodhi.space/#bodhi-types40), or to access to the [Bodhi API Documentation](https://api.bodhi.space/apidocs/index.html).  
+The Bodhi product has a rich set of tools to access your namespace.  Once you have your namespace and administrator's credentials, go to [Bodhi Tools](https://tools.bodhi.space/#/) to use [Bodhi Query](http://docs.bodhi.space/#bodhi-query41) to manage and query your data, manage your namespace's types and data using [Bodhi Types](http://docs.bodhi.space/#bodhi-types40), or to access to the [Bodhi API Documentation](https://api.bodhi.space/apidocs/index.html).  
