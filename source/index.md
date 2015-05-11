@@ -17,11 +17,12 @@ includes:
   - bodhicloud/apitutorial/1-api-mechanics/tutorial
   - bodhicloud/apitutorial/2-type-mechanics/tutorial
   - bodhicloud/cloudtools/Tooling
+  - bodhicloud/cloudtools/bodhitype
+  - bodhicloud/cloudtools/query
   - bodhicloud/cloudtools/Bodhi-cli
   - bodhicloud/cloudtools/bodhi_types-cli
   - bodhicloud/cloudtools/bodhi-jobs-cli
-  - bodhicloud/cloudtools/bodhitype
-  - bodhicloud/cloudtools/query
+
   
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
