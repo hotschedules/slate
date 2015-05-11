@@ -7,7 +7,7 @@
 These tutorials are designed to show a user how to log in, see all the users in a namespace, create a type, delete that type, and perform queries using the Bodhi Cloud APIs.  
 
 ##### Getting Started
-*Prerequisites*: You will need your login credentials which are provided by your Hot Schedules representative.  
+*Prerequisites*: You will need your login credentials which are provided by your HotSchedules [representative](mailto:contactcenter@hotschedules.com).  
 
 Logging in to the Bodhi API Documentation is the firs step in accessing and reviewing the Bodhi APIs as well as the various data types provided by default.  This set of tutorials are designed to show you how to login to the API Documentation, how to view, query and access the APIs and data types, and how to create new types.
 
@@ -18,7 +18,7 @@ The Bodhi Cloud API Documentation is a rich set of documentation geared towards 
 **How Do I Login to the Bodhi Cloud API Documentation?**
 
 * Go to [https://api.bodhi.space/apidocs/index.html](https://api.bodhi.space/apidocs/index.html)
-* Login using the credentials provided to you from your Hot Schedules Representative:
+* Login using the credentials provided to you from your HotSchedules [representative](mailto:contactcenter@hotschedules.com):
 
 ![CloudAPI_LogginIn](/images/CloudAPI_LoggingIn.png?raw=true "Logging in to the Bodhi API Documentation")
 
