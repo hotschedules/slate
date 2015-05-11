@@ -1,7 +1,7 @@
 ##Bodhi Shop
-Bodhi Shop (http://tools.bodhi.space/shop) is the where Bodhi Users can install Bodhi certified apps into Bodhi Mobile.
+[Bodhi Shop](http://tools.bodhi.space/shop) is the where Bodhi Users can install Bodhi certified applications into Bodhi Mobile.
 
-To get started, login to see the apps which are currenly installed.
+To get started, login to see the applications which are currently installed.
 
 Admin users can add new apps or remove apps.
 
