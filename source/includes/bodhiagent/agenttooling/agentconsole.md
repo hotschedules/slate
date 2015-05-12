@@ -14,7 +14,7 @@ Upon entering the console for the first time, you should see a registration toke
 
 __Important__: If the window pops up and you don't see a token, wait 10 seconds and refresh your browser. If the window doesn't pop up, click on the Registration Code link (see circle #1)in the left navigation bar to open the window.
 
-![agent-console-registrationcode](/images/agent-console-regristrationcode.png?raw=true"")
+![agent-console-registrationcode](/images/agent-console-registrationcode.png?raw=true"Registering Your Agent")
 
 _The registration code should be entered in your Bodhi Mobile App._
 
