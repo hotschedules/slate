@@ -324,7 +324,6 @@ public_path: 'global_store',
 screenshots: [Object],
 installation_urls: [Object],
 global_store_icon: 'global_store/global_store_icon.png' }
-
 ````
 
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
