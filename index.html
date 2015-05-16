@@ -7727,59 +7727,64 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h4 id="package.json">Package.json</h4>
 
-<p><strong>General info::</strong></p>
+<p><strong>General info::</strong>
+&ldquo;&rdquo;
+{ offline: true,
+navigationBar: &lsquo;auto&rsquo;,
+new_type_required: false,
+single_container_app: false,
+hide_from_global_store: false,
+troubleshooting_url: null,
+categories: [Object],
+public_path: &#39;global_store&rsquo;,
+screenshots: [Object],
+installation_urls: [Object],
+global_store_icon: &#39;global_store/global_store_icon.png&rsquo; }</p>
+<pre class="highlight plaintext"><code>Use the settings JSON object to communicate the meta data about an app. See definitions below:
 
-<p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
+**offline=true/false**  
+Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.
 
-<p><strong>offline=true/false</strong><br>
-Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
-
-<p><strong>single_container_app=true/false</strong><br>
+**single_container_app=true/false**  
 single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
-Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true
 
-<p>**installation_urls= {http://tools.bodhi.space/xxxx}
-For applications with single_container_app = true, developers can provide a set of installation url&rsquo;s to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.</p>
+**installation_urls= {http://tools.bodhi.space/xxxx}
+For applications with single_container_app = true, developers can provide a set of installation url's to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.
 
-<p><strong>hide_from_global_store=true/false</strong><br>
-hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+**hide_from_global_store=true/false**  
+hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true
 
-<p><strong>new_type_required=true/false</strong><br>
-new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
-NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+**new_type_required=true/false**  
+new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required
 
-<p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;</strong><br>
-The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
+**troubleshooting_url='http://tools.bodhi.space/xxxx'**  
+The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
 
-<p><strong>categories { }</strong><br>
+**categories { }**  
 The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, mangegement</p>
+Examples include financial, inventory, mangegement
 
-<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> 
-The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
+**public_path'/xxx/xxx'** 
+The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
 
-<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong><br>
-The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+**global_store_icon='/xxx/xxx.png'**  
+The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
-<p><strong>screenshots{ }</strong> 
-The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="err">offline</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-</span><span class="err">navigationBar</span><span class="p">:</span><span class="w"> </span><span class="err">'auto'</span><span class="p">,</span><span class="w">
-</span><span class="err">new_type_required</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">single_container_app</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">hide_from_global_store</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">troubleshooting_url</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-</span><span class="err">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">public_path</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store'</span><span class="p">,</span><span class="w">
-</span><span class="err">screenshots</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">installation_urls</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">global_store_icon</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store/global_store_icon.png'</span><span class="w"> </span><span class="p">}</span><span class="w">
+**screenshots{ }** 
+The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
-</span></code></pre>
 
-<h5 id="signature">Signature</h5>
-<pre class="highlight plaintext"><code>&gt; app-tools publish-app [env-options]
+
+##### Signature
+
 </code></pre>
+
+<blockquote>
+<p>app-tools publish-app [env-options]
+&ldquo;`</p>
+</blockquote>
 
 <h5 id="arguments">Arguments</h5>
 
