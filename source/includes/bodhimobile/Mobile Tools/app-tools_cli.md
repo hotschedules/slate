@@ -311,7 +311,20 @@ Within an application's package.json file, there is a settings object which cont
 #### Package.json
 
 **General info::**
+````
+{ offline: true,
+navigationBar: 'auto',
+new_type_required: false,
+single_container_app: false,
+hide_from_global_store: false,
+troubleshooting_url: null,
+categories: [Object],
+public_path: 'global_store',
+screenshots: [Object],
+installation_urls: [Object],
+global_store_icon: 'global_store/global_store_icon.png' }
 
+````
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
 
 **offline=true/false**  
@@ -347,20 +360,7 @@ The global_store_icon is the icon that the Global App Store will use for display
 **screenshots{ }** 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
-````
-{ offline: true,
-navigationBar: 'auto',
-new_type_required: false,
-single_container_app: false,
-hide_from_global_store: false,
-troubleshooting_url: null,
-categories: [Object],
-public_path: 'global_store',
-screenshots: [Object],
-installation_urls: [Object],
-global_store_icon: 'global_store/global_store_icon.png' }
 
-````
 
 ##### Signature
 
