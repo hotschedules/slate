@@ -308,7 +308,9 @@ Within an application's package.json file, there is a settings object which cont
 
 
 
-### Package.json -- General Info
+#### Package.json
+
+**General info::**
 
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
 
@@ -318,6 +320,9 @@ Offline controls whether the container will cache application information for of
 **single_container_app=true/false**  
 single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
 Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true
+
+**installation_urls= {http://tools.bodhi.space/xxxx}
+For applications with single_container_app = true, developers can provide a set of installation url's to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.
 
 **hide_from_global_store=true/false**  
 hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true
@@ -333,14 +338,29 @@ The troubleshooting_url is the URL where the customer can find additional inform
 The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
 Examples include financial, inventory, mangegement
 
+**public_path'/xxx/xxx'** 
+The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
+
 **global_store_icon='/xxx/xxx.png'**  
-The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools.
+The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
 **screenshots{ }** 
-The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools.
+The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
-**Public Path'/xxx/xxx.png'** 
-The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
+````
+{ offline: true,
+navigationBar: 'auto',
+new_type_required: false,
+single_container_app: false,
+hide_from_global_store: false,
+troubleshooting_url: null,
+categories: [Object],
+public_path: 'global_store',
+screenshots: [Object],
+installation_urls: [Object],
+global_store_icon: 'global_store/global_store_icon.png' }
+
+````
 
 ##### Signature
 
