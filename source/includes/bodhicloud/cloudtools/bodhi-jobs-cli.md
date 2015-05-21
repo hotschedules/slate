@@ -68,22 +68,22 @@ The schedule command is used to run the job on the Bodhi Job Engine, either at s
 To run a job on a set interval the command looks like this:
 
 ````
-> bodhi-jobs schedule --name [job name] --repeat '1 hour'
+> bodhi-jobs schedule --name [job name] --repeat -t '1 hour'
 ````
 The user can specify a time interval in seconds, minutes, hours, or days. The example command will run the job hourly, with the first run beginning roughly 1 hour after the schedule command is executed. This command runs the job every 75 seconds:
 
 ````
-> bodhi-jobs schedule --name [job name] --repeat '75 seconds'
+> bodhi-jobs schedule --name [job name] --repeat -t '75 seconds'
 ````
 This command runs the job every 30 minutes:
 
 ````
-> bodhi-jobs schedule --name [job name] --repeat '30 minutes'
+> bodhi-jobs schedule --name [job name] --repeat -t '30 minutes'
 ````
 This command runs the job every 2 days:
 
 ````
-> bodhi-jobs schedule --name [job name] --repeat '2 days'
+> bodhi-jobs schedule --name [job name] --repeat -t '2 days'
 ````
 ###cancel
 
