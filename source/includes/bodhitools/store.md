@@ -3,6 +3,7 @@
 - The namespace administrator(s) can easily and intuitively add their store(s) as well as update information about their store.
 	
 	![Store_1](Store_1.png =540x)
+
 	![Store_2](Store_2.png =540x)	
 	
 	__Note: Items in red above are the only required fields.__
