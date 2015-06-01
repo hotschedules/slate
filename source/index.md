@@ -41,6 +41,7 @@ includes:
 
   - bodhitools/overview
   - bodhitools/shop
+  - bodhitools/store
   - bodhitools/tools
   - bodhicloud/cloudtools/bodhitype
   - bodhicloud/cloudtools/query
