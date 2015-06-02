@@ -1,3 +1,4 @@
+##Bodhi Store
 [Body Store](https://tools.bodhi.space/store) is a tool that allows the administrator(s) of your namespace to add and update Store information for their namespace.  
 
 - The namespace administrator(s) can easily and intuitively add their store(s) as well as update information about their store.
