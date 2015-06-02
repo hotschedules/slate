@@ -13,7 +13,6 @@ Users with Administrative privileges can add any Bodhi user with access to their
 - As an administrator, install Mobile applications for users in your namespace
 
 	![Shop_1](/images/Shop_1.png?raw=true "")
-	/images/bq_post.png?raw=true ""
 
 - Clicking Shop Apps, shows a list of Bodhi Applications available that can be installed into your namespace and available on Bodhi Mobile.
 
