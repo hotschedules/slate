@@ -1,5 +1,4 @@
-
-# Performance tuning the app 
+# Performance tuning 
 
 ### Overview
 
