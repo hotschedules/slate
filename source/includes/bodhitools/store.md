@@ -2,22 +2,22 @@
 
 - The namespace administrator(s) can easily and intuitively add their store(s) as well as update information about their store.
 	
-	![Store_1](Store_1.png =540x)
+	![Store_1](/images/Store_1.png?raw=true "")
 
-	![Store_2](Store_2.png =540x)	
+	![Store_2](/images/Store_2.png?raw=true "")	
 	
 	__Note: Items in red above are the only required fields.__
 
 - The namespace administrator(s) can also bulk import or export their store(s) containing all their store information
 	
-	![Store_3](Store_3.png =540x)
+	![Store_3](/images/Store_3.png?raw=true "")
 
 - The namespace administrator(s) can also update their store data easily.
 	
-	![Store_5](Store_5.png =540x)
+	![Store_5](/images/Store_5.png?raw=true "")
 	
 	__NOTE: This is the data before I updated the Store Number and Country__
 	
-	![Store_6](Store_6.png =540x)
+	![Store_6](/images/Store_6.png?raw=true "")
 	
 	__NOTE: This is the data before I updated the Store Number and Country__
