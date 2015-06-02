@@ -17,8 +17,8 @@
 	
 	![Store_5](/images/Store_5.png?raw=true "")
 	
-	__NOTE: This is the data before I updated the Store Number and Country__
+	__NOTE: This is the data before updating the Store Number and Country__
 	
 	![Store_6](/images/Store_6.png?raw=true "")
 	
-	__NOTE: This is the data before I updated the Store Number and Country__
+	__NOTE: This is the data after updating the Store Number and Country__
