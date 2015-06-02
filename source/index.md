@@ -39,9 +39,9 @@ includes:
   - bodhimobile/MobileTools/app-tools_cli
 
   - bodhitools/overview
+  - bodhitools/tools
   - bodhitools/shop
   - bodhitools/store
-  - bodhitools/tools
   - bodhicloud/cloudtools/bodhitype
   - bodhicloud/cloudtools/query
   - bodhitools/bodhi_api_docs
