@@ -43,6 +43,7 @@ includes:
   - bodhitools/shop
   - bodhitools/store
   - bodhicloud/cloudtools/bodhitype
+  - bodhicloud/cloudtools/Tooling 
   - bodhicloud/cloudtools/query
   - bodhitools/bodhi_api_docs
 
