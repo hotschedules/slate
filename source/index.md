@@ -37,7 +37,6 @@ includes:
   - bodhimobile/gettingstarted 
   - bodhimobile/MobileTools/mobiletoolsoverview
   - bodhimobile/MobileTools/app-tools_cli
-  - bodhimobile/performance 
 
   - bodhitools/overview
   - bodhitools/shop
