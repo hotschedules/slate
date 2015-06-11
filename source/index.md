@@ -42,6 +42,7 @@ includes:
   - bodhitools/tools
   - bodhitools/shop
   - bodhitools/store
+  - bodhitools/profiles
 
   - bodhicloud/cloudtools/Tooling 
   - bodhicloud/cloudtools/bodhitype
