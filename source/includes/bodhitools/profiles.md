@@ -1,3 +1,4 @@
+##Bodhi Shop
 
 [Bodhi Profiles](https://tools.bodhi.space/profiles) allows the namespace administrator to manage profiles in their namespace. Profiles are groups of type-based permissions that can be edited and bulk-assigned to users in your namespace.
 
