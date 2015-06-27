@@ -331,9 +331,12 @@ Use the settings JSON object to communicate the meta data about an app. See defi
 **offline=true/false**  
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.
 
-**single_container_app=true/false**  
-single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
-Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true
+**single_container_app=1**  
+single_container_app allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.
+single_container_app will accept an interger of 0-2 and the container will translate that value as follows::
+1 = single container app
+2 = multiple container app
+0 = App can function in both single and multiple app containers
 
 **installation_urls= {http://tools.bodhi.space/xxxx}
 For applications with single_container_app = true, developers can provide a set of installation url's to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.
@@ -361,6 +364,8 @@ The global_store_icon is the icon that the Global App Store will use for display
 **screenshots{ }** 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
+**type{ }** 
+The type will value will contain one of four values:: 'mobile', 'job', 'agent', and 'web'.  For an application to display either in Bodhi Moblie or HotSchedules Reveal, the type value must = 'mobile'.
 
 
 ##### Signature
