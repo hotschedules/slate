@@ -316,14 +316,15 @@ Within an application's package.json file, there is a settings object which cont
 { offline: true,
 navigationBar: 'auto',
 new_type_required: false,
-single_container_app: false,
+container_type: 1,
 hide_from_global_store: false,
 troubleshooting_url: null,
 categories: [Object],
 public_path: 'global_store',
 screenshots: [Object],
 installation_urls: [Object],
-global_store_icon: 'global_store/global_store_icon.png' }
+global_store_icon: 'global_store/global_store_icon.png'
+type{'mobile'}}
 ````
 
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
@@ -331,12 +332,13 @@ Use the settings JSON object to communicate the meta data about an app. See defi
 **offline=true/false**  
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.
 
-**single_container_app=1**  
-single_container_app allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.
-single_container_app will accept an interger of 0-2 and the container will translate that value as follows::
-1 = single container app
-2 = multiple container app
-0 = App can function in both single and multiple app containers
+**container_type**    
+container_type allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.  
+
+container_type will accept an interger of 0-2 and the container will translate that value as follows::  
+1 = single container app  
+2 = multiple container app  
+0 = App can function in both single and multiple app containers  
 
 **installation_urls= {http://tools.bodhi.space/xxxx}
 For applications with single_container_app = true, developers can provide a set of installation url's to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.
