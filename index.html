@@ -7829,14 +7829,15 @@ The custom app skeleton just has the required files needed to publish the app.</
 <pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="err">offline</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
 </span><span class="err">navigationBar</span><span class="p">:</span><span class="w"> </span><span class="err">'auto'</span><span class="p">,</span><span class="w">
 </span><span class="err">new_type_required</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">single_container_app</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+</span><span class="err">container_type</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
 </span><span class="err">hide_from_global_store</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
 </span><span class="err">troubleshooting_url</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
 </span><span class="err">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
 </span><span class="err">public_path</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store'</span><span class="p">,</span><span class="w">
 </span><span class="err">screenshots</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
 </span><span class="err">installation_urls</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">global_store_icon</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store/global_store_icon.png'</span><span class="w"> </span><span class="p">}</span><span class="w">
+</span><span class="err">global_store_icon</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store/global_store_icon.png'</span><span class="w">
+</span><span class="err">type</span><span class="p">{</span><span class="err">'mobile'}</span><span class="p">}</span><span class="w">
 </span></code></pre>
 
 <p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
@@ -7844,12 +7845,13 @@ The custom app skeleton just has the required files needed to publish the app.</
 <p><strong>offline=true/false</strong><br>
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
 
-<p><strong>single_container_app=1</strong><br>
-single_container_app allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.
-single_container_app will accept an interger of 0-2 and the container will translate that value as follows::
-1 = single container app
-2 = multiple container app
-0 = App can function in both single and multiple app containers</p>
+<p><strong>container_type</strong><br>
+container_type allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.  </p>
+
+<p>container_type will accept an interger of 0-2 and the container will translate that value as follows::<br>
+1 = single container app<br>
+2 = multiple container app<br>
+0 = App can function in both single and multiple app containers  </p>
 
 <p>**installation_urls= {http://tools.bodhi.space/xxxx}
 For applications with single_container_app = true, developers can provide a set of installation url&rsquo;s to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.</p>
