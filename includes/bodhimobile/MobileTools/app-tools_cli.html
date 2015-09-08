@@ -498,14 +498,13 @@ NOTES: Add configure field to package.json in the form below:</p>
 { offline: true,
 navigationBar: 'auto',
 new_type_required: false,
-container_type: 1,
+single_container_app: false,
 hide_from_global_store: false,
 troubleshooting_url: null,
 categories: [Object],
 public_path: 'global_store',
 screenshots: [Object],
 installation_urls: [Object],
-&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
 global_store_icon: 'global_store/global_store_icon.png',
 "agent/job_parameters": {
 "data_dir":
@@ -514,10 +513,6 @@ global_store_icon: 'global_store/global_store_icon.png',
 "data_dir":
 { "description": "", "required": true, "type": "string", "default": "" }
 }
-=======
-global_store_icon: 'global_store/global_store_icon.png'
-type{'mobile'}}
-&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/master
 </code></pre>
 
 <p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
@@ -525,68 +520,53 @@ type{'mobile'}}
 <p><strong>offline=true/false</strong><br>
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
 
-<p><strong>container_type</strong><br>
-container_type allows the container know whether the app should be displayed with a menu (a collection of apps), as a standalone single app, or both.  </p>
+<p><strong>single_container_app=true/false</strong>  </p>
 
-<p>container_type will accept an interger of 0-2 and the container will translate that value as follows::<br>
-1 = single container app<br>
-2 = multiple container app<br>
-0 = App can function in both single and multiple app containers  </p>
+<p>single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
 
-<p>**installation_urls= {http://tools.bodhi.space/xxxx}
-For applications with single_container_app = true, developers can provide a set of installation url&rsquo;s to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.</p>
+<p><strong>installation_urls= {http://tools.bodhi.space/xxxx}</strong></p>
 
-<p><strong>hide_from_global_store=true/false</strong><br>
-hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+<p>For applications with single_container_app = true, developers can provide a set of installation url&rsquo;s to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.</p>
+
+<p><strong>hide_from_global_store=true/false</strong>  </p>
+
+<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
 
 <p><strong>new_type_required=true/false</strong><br>
 new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 
-<p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;</strong><br>
-The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
+<p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;</strong>  </p>
 
-<p><strong>categories { }</strong><br>
-The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
+<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
+
+<p><strong>categories { }</strong>  </p>
+
+<p>The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
 Examples include financial, inventory, mangagement</p>
 
-<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> 
-The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
+<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> </p>
 
-<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong><br>
-The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+<p>The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
 
-<p><strong>screenshots{ }</strong> 
-The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong>  </p>
 
-<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
-<strong>agent/job_parameters:{} &amp; agent/job_paraments_hidden:{ }</strong>
-The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+<p>The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>screenshots{}</strong> </p>
+
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>agent/job_parameters:{} &amp; agent/job_paraments_hidden:{}</strong></p>
+
+<p>The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
 
 <p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
 
-<p><strong>data_dir:{ }</strong></p>
+<p><strong>data_dir:{}</strong></p>
 
-<h1 id="the-data_dir-formatted-information-contains-a-description,-a-required-flag,-type-string-and-an-optional-position-which-is-set-will-position-the-parameter-in-the-order-set-0,-1,-2,-etc-if-not-set-then-the-parameter-will-be-displayed-in-the-order-it&#39;s-defined.">The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</h1>
-
-<p><strong>type{ }</strong> 
-The type will value will contain one of four values:: &#39;mobile&rsquo;, &#39;job&rsquo;, &#39;agent&rsquo;, and &#39;web&rsquo;.  For an application to display either in Bodhi Moblie or HotSchedules Reveal, the type value must = &#39;mobile&rsquo;.</p>
-
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<blockquote>
-<p>origin/master</p>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
-</blockquote>
+<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
 
 <h5 id="signature">Signature</h5>
 <pre class="highlight plaintext"><code>&gt; app-tools publish-app [env-options]
