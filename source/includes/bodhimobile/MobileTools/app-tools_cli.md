@@ -311,8 +311,135 @@ Within an application's package.json file, there is a settings object which cont
 #### Package.json
 
 **General info::**
+NOTES: Add configure field to package.json in the form below:
+
+- Path references are all relative to the www/public folder
+
+- Type references must avoid collisions with other apps; to accomplish this, types should be prefixed with some kind of publisher key which will be validated by the store at install time - this ensures that publishers clobber only the types published by them
+
+- For "install" builds, install is normal
+
+- If there is an upgrade property, the process is as follows:
+  * find the currently installed version
+  * for each version number between current version and newest version, apply each script in sequence pre-install, then post-install
+  * if current version == most recent version, apply the pre-install, then update the dml, then install the app, then apply post-install script
+  * if current version > most recent version, apply all changes in sequence, then update dml and install app
+
+- Upgrade json and data/scripts pertaining to a version will be maintained in the public folder under version/{version}
+
 
 ````
+Example JSON for versioning (This is the Inventory App's package.json):
+
+{
+  "configure": {
+    "version": "0.09.03",
+    "install": {
+      "icon": "assets/Icon_BodhiInventory.png", 
+      "model": {
+        "custom_types": [
+          "Types/{key}-InventoryCount.json", 
+          "Types/{key}-InventoryCountTypeNew.json", 
+          "Types/{key}-InventoryPurchaseOrder.json", 
+          "Types/{key}-InventoryVendor.json"
+        ], 
+        "embedded_types": [
+          "Types/{key}-InventoryCountTypeNode.json", 
+          "Types/{key}-InventoryProduct.json", 
+          "Types/{key}-InventoryProductCount.json"
+        ], 
+        "enumerations": [
+          "Enumerations/{key}-InventoryUOMType.json", 
+          "Enumerations/{key}-InventoryPurchaseOrderStatus.json"
+        ]
+      }, 
+      "post-install": [
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeDaily.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeWeekly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeMonthly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeSpot.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }
+      ]
+    }, 
+    "upgrade": [
+      {
+        "version":"0.02",
+        "description": "change count type Type, migrate data",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.02/Types/{key}-InventoryCountTypeNew.json"
+          },
+        ],
+        "post-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/migrate/from/old/to/new"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryCountTypeOld"
+          }
+        ]
+      },
+      {
+        "version":"0.03.05",
+        "description": "add recipes",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.03/Types/{key}-InventoryRecipes.json"
+          }
+        ]
+      },
+      {
+        "version":"0.07",
+        "description": "we don't support recipes anymore - remove them and associated data",
+        "post-install": [
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryRecipes"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/resources/{key}-InventoryRecipes"
+          }
+        ]
+      },
+      {
+        "version":"0.08",
+        "description": "whoops - we are collecting PII -  emergency update",
+        "pre-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/remove/bad/data"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+````
+
+````
+Generic package.son example:
+
 { offline: true,
 navigationBar: 'auto',
 new_type_required: false,
@@ -323,7 +450,14 @@ categories: [Object],
 public_path: 'global_store',
 screenshots: [Object],
 installation_urls: [Object],
-global_store_icon: 'global_store/global_store_icon.png' }
+global_store_icon: 'global_store/global_store_icon.png',
+"agent/job_parameters": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" "position": }
+"agent/job_parameters_hidden": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" }
+}
 ````
 
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
@@ -350,7 +484,7 @@ The troubleshooting_url is the URL where the customer can find additional inform
 
 **categories { }**  
 The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, mangegement
+Examples include financial, inventory, mangagement
 
 **public_path'/xxx/xxx'** 
 The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
@@ -361,6 +495,13 @@ The global_store_icon is the icon that the Global App Store will use for display
 **screenshots{ }** 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
+**agent/job_parameters:{} & agent/job_paraments_hidden:{ }**
+The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined. Application parameters will be saved under settings so the application should use parameters from settings.
+
+NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.
+
+**data_dir:{ }**
+The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined.
 
 
 ##### Signature
