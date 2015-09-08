@@ -369,20 +369,156 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h4 id="package.json">Package.json</h4>
 
-<p><strong>General info::</strong></p>
-<pre class="highlight json"><code><span class="p">{</span><span class="w"> </span><span class="err">offline</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-</span><span class="err">navigationBar</span><span class="p">:</span><span class="w"> </span><span class="err">'auto'</span><span class="p">,</span><span class="w">
-</span><span class="err">new_type_required</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">container_type</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-</span><span class="err">hide_from_global_store</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-</span><span class="err">troubleshooting_url</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-</span><span class="err">categories</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">public_path</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store'</span><span class="p">,</span><span class="w">
-</span><span class="err">screenshots</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">installation_urls</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">Object</span><span class="p">],</span><span class="w">
-</span><span class="err">global_store_icon</span><span class="p">:</span><span class="w"> </span><span class="err">'global_store/global_store_icon.png'</span><span class="w">
-</span><span class="err">type</span><span class="p">{</span><span class="err">'mobile'}</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p><strong>General info::</strong>
+NOTES: Add configure field to package.json in the form below:</p>
+
+<ul>
+<li><p>Path references are all relative to the www/public folder</p></li>
+<li><p>Type references must avoid collisions with other apps; to accomplish this, types should be prefixed with some kind of publisher key which will be validated by the store at install time - this ensures that publishers clobber only the types published by them</p></li>
+<li><p>For &ldquo;install&rdquo; builds, install is normal</p></li>
+<li><p>If there is an upgrade property, the process is as follows:</p>
+
+<ul>
+<li>find the currently installed version</li>
+<li>for each version number between current version and newest version, apply each script in sequence pre-install, then post-install</li>
+<li>if current version == most recent version, apply the pre-install, then update the dml, then install the app, then apply post-install script</li>
+<li>if current version &gt; most recent version, apply all changes in sequence, then update dml and install app</li>
+</ul></li>
+<li><p>Upgrade json and data/scripts pertaining to a version will be maintained in the public folder under version/{version}</p></li>
+</ul>
+<pre class="highlight plaintext"><code>Example JSON for versioning (This is the Inventory App's package.json):
+
+{
+  "configure": {
+    "version": "0.09.03",
+    "install": {
+      "icon": "assets/Icon_BodhiInventory.png", 
+      "model": {
+        "custom_types": [
+          "Types/{key}-InventoryCount.json", 
+          "Types/{key}-InventoryCountTypeNew.json", 
+          "Types/{key}-InventoryPurchaseOrder.json", 
+          "Types/{key}-InventoryVendor.json"
+        ], 
+        "embedded_types": [
+          "Types/{key}-InventoryCountTypeNode.json", 
+          "Types/{key}-InventoryProduct.json", 
+          "Types/{key}-InventoryProductCount.json"
+        ], 
+        "enumerations": [
+          "Enumerations/{key}-InventoryUOMType.json", 
+          "Enumerations/{key}-InventoryPurchaseOrderStatus.json"
+        ]
+      }, 
+      "post-install": [
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeDaily.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeWeekly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeMonthly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeSpot.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }
+      ]
+    }, 
+    "upgrade": [
+      {
+        "version":"0.02",
+        "description": "change count type Type, migrate data",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.02/Types/{key}-InventoryCountTypeNew.json"
+          },
+        ],
+        "post-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/migrate/from/old/to/new"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryCountTypeOld"
+          }
+        ]
+      },
+      {
+        "version":"0.03.05",
+        "description": "add recipes",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.03/Types/{key}-InventoryRecipes.json"
+          }
+        ]
+      },
+      {
+        "version":"0.07",
+        "description": "we don't support recipes anymore - remove them and associated data",
+        "post-install": [
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryRecipes"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/resources/{key}-InventoryRecipes"
+          }
+        ]
+      },
+      {
+        "version":"0.08",
+        "description": "whoops - we are collecting PII -  emergency update",
+        "pre-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/remove/bad/data"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+</code></pre>
+<pre class="highlight plaintext"><code>Generic package.son example:
+
+{ offline: true,
+navigationBar: 'auto',
+new_type_required: false,
+container_type: 1,
+hide_from_global_store: false,
+troubleshooting_url: null,
+categories: [Object],
+public_path: 'global_store',
+screenshots: [Object],
+installation_urls: [Object],
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+global_store_icon: 'global_store/global_store_icon.png',
+"agent/job_parameters": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" "position": }
+"agent/job_parameters_hidden": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" }
+}
+=======
+global_store_icon: 'global_store/global_store_icon.png'
+type{'mobile'}}
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; origin/master
+</code></pre>
 
 <p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
 
@@ -412,7 +548,7 @@ The troubleshooting_url is the URL where the customer can find additional inform
 
 <p><strong>categories { }</strong><br>
 The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, mangegement</p>
+Examples include financial, inventory, mangagement</p>
 
 <p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> 
 The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
@@ -423,8 +559,34 @@ The global_store_icon is the icon that the Global App Store will use for display
 <p><strong>screenshots{ }</strong> 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
 
+<p>&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+<strong>agent/job_parameters:{} &amp; agent/job_paraments_hidden:{ }</strong>
+The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p><strong>data_dir:{ }</strong></p>
+
+<h1 id="the-data_dir-formatted-information-contains-a-description,-a-required-flag,-type-string-and-an-optional-position-which-is-set-will-position-the-parameter-in-the-order-set-0,-1,-2,-etc-if-not-set-then-the-parameter-will-be-displayed-in-the-order-it&#39;s-defined.">The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</h1>
+
 <p><strong>type{ }</strong> 
 The type will value will contain one of four values:: &#39;mobile&rsquo;, &#39;job&rsquo;, &#39;agent&rsquo;, and &#39;web&rsquo;.  For an application to display either in Bodhi Moblie or HotSchedules Reveal, the type value must = &#39;mobile&rsquo;.</p>
+
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>origin/master</p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
 
 <h5 id="signature">Signature</h5>
 <pre class="highlight plaintext"><code>&gt; app-tools publish-app [env-options]
