@@ -439,7 +439,7 @@ Example JSON for versioning (This is the Inventory App's package.json):
 ````
 
 ````
-Generic package.son example:
+Generic package.json example:
 
 { offline: true,
 navigationBar: 'auto',
