@@ -311,6 +311,7 @@ Within an application's package.json file, there is a settings object which cont
 #### Package.json
 
 **General info::**
+
 NOTES: Add configure field to package.json in the form below:
 
 - Path references are all relative to the www/public folder
@@ -462,6 +463,7 @@ global_store_icon: 'global_store/global_store_icon.png',
 Use the settings JSON object to communicate the meta data about an app. See definitions below:
 
 **offline=true/false**  
+
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.
 
 **single_container_app=true/false**  
@@ -478,6 +480,7 @@ For applications with single_container_app = true, developers can provide a set 
 hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true
 
 **new_type_required=true/false**  
+
 new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required
 
@@ -485,7 +488,7 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required
 
 The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
 
-**categories { }**  
+**categories {}**  
 
 The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
 Examples include financial, inventory, mangagement
@@ -502,7 +505,7 @@ The global_store_icon is the icon that the Global App Store will use for display
 
 The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
-**agent/job_parameters:{} & agent/job_paraments_hidden:{}**
+**agent/job_parameters:{}** and **agent/job_parameters_hidden:{}**
 
 The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined. Application parameters will be saved under settings so the application should use parameters from settings.
 
@@ -513,6 +516,7 @@ NOTE: The hidden parameter option will not be visible to the user in the install
 The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined.
 
 
+----
 
 ##### Signature
 
