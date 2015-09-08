@@ -369,8 +369,9 @@ The custom app skeleton just has the required files needed to publish the app.</
 
 <h4 id="package.json">Package.json</h4>
 
-<p><strong>General info::</strong>
-NOTES: Add configure field to package.json in the form below:</p>
+<p><strong>General info::</strong></p>
+
+<p>NOTES: Add configure field to package.json in the form below:</p>
 
 <ul>
 <li><p>Path references are all relative to the www/public folder</p></li>
@@ -517,8 +518,9 @@ global_store_icon: 'global_store/global_store_icon.png',
 
 <p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
 
-<p><strong>offline=true/false</strong><br>
-Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
+<p><strong>offline=true/false</strong>  </p>
+
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
 
 <p><strong>single_container_app=true/false</strong>  </p>
 
@@ -533,15 +535,16 @@ Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container
 
 <p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
 
-<p><strong>new_type_required=true/false</strong><br>
-new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+<p><strong>new_type_required=true/false</strong>  </p>
+
+<p>new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 
 <p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;</strong>  </p>
 
 <p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
 
-<p><strong>categories { }</strong>  </p>
+<p><strong>categories {}</strong>  </p>
 
 <p>The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
 Examples include financial, inventory, mangagement</p>
@@ -558,7 +561,7 @@ Examples include financial, inventory, mangagement</p>
 
 <p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
 
-<p><strong>agent/job_parameters:{} &amp; agent/job_paraments_hidden:{}</strong></p>
+<p><strong>agent/job_parameters:{}</strong> and <strong>agent/job_parameters_hidden:{}</strong></p>
 
 <p>The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
 
@@ -567,6 +570,8 @@ Examples include financial, inventory, mangagement</p>
 <p><strong>data_dir:{}</strong></p>
 
 <p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
+
+<hr>
 
 <h5 id="signature">Signature</h5>
 <pre class="highlight plaintext"><code>&gt; app-tools publish-app [env-options]
