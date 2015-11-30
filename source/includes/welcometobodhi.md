@@ -5,7 +5,7 @@ This documentation is intended for the developer wanting to integrate into the H
 * Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile
 * Building a data integration application into your point of sale system to be stored and accessed from our cloud solution
 
-##Pre-requisites 
+###Pre-requisites 
 
 ### Creating a namespace
 Contact your HotSchedules [sales-team ](mailto:contactcenter@hotschedules.com) or [Customer Support ](https://www.hotschedules.com/customer-care/) 

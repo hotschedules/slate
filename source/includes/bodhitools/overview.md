@@ -1,7 +1,7 @@
 
-# Bodhi Tools
+#HotSchedules IoT Platform Tools
 
 ##Overview
-Bodhi Tools give users full access to instore, above store, and near store data.
+HotSchedules IoT Tools give users full access to instore, above store, and near store data.
 
-Bodhi tools can be accessed at http://tools.bodhi.space
+HotSchedules IoT Tools can be accessed at http://tools.bodhi.space
