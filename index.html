@@ -1,1040 +1,2982 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><style>body {
-  width: 45em;
-  border: 1px solid #ddd;
-  outline: 1300px solid #fff;
-  margin: 16px auto;
-}
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Reference</title>
+
+    <link href="stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="javascripts/all.js" type="text/javascript"></script>
+
+      <script>
+        $(function() {
+          setupLanguages(["javascript"]);
+        });
+      </script>
+  </head>
+
+  <body class="index">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="images/logo.png" /> </a>
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="welcome-to-hotschedules-iot-(internet-of-things)-platform">Welcome to HotSchedules IoT (Internet of Things) Platform</h1>
+
+          <h1 id="bodhi-cloud">Bodhi Cloud</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The Bodhi Cloud is a set of secure APIs that are used to store your data.  </p>
+
+          <h2 id="getting-started">Getting Started</h2>
+
+<p>To access the Bodhi Cloud API, you need to login with you user and password which is provided by HotSchedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a> and can also be accessed through <a href="https://tools.bodhi.space/#/">Bodhi Tools</a>.  </p>
+
+<p>If you enter your credentials (username and password) and click Explore, you will see a list of APIs which you can access for your namespace.  The Bodhi Cloud APIs are REST APIs which returns JSON for all responses.  </p>
+
+<p>Each API has examples and an opportunity to <em><em>Try it out!</em></em>.  You can add data using our provided types or create your own type and add data.  NOTE: Should you create your own type, the new type will show up in the API Documentation for your namespace.</p>
+
+          <h1 id="bodhi-agent">Bodhi Agent</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Bodhi Agent provides a single integration point that enables in-store and near-store data collection.</p>
+
+<p>Bodhi provides real time bi-directional connections between the cloud and POS via
+existing Macromatix Livelink and HotSchedules Connect integrations, as well as an
+an in-store appliance and software agent.</p>
+
+<p><strong>Bodhi is built on open standards and integrates with:</strong></p>
 
-body .markdown-body
-{
-  padding: 30px;
-}
-
-@font-face {
-  font-family: fontawesome-mini;
-  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
-}
-
-@font-face {
-  font-family: octicons-anchor;
-  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
-}
-
-.markdown-body {
-  font-family: sans-serif;
-  -ms-text-size-adjust: 100%;
-  -webkit-text-size-adjust: 100%;
-  color: #333333;
-  overflow: hidden;
-  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif;
-  font-size: 16px;
-  line-height: 1.6;
-  word-wrap: break-word;
-}
-
-.markdown-body a {
-  background: transparent;
-}
-
-.markdown-body a:active,
-.markdown-body a:hover {
-  outline: 0;
-}
-
-.markdown-body b,
-.markdown-body strong {
-  font-weight: bold;
-}
-
-.markdown-body mark {
-  background: #ff0;
-  color: #000;
-  font-style: italic;
-  font-weight: bold;
-}
-
-.markdown-body sub,
-.markdown-body sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-.markdown-body sup {
-  top: -0.5em;
-}
-.markdown-body sub {
-  bottom: -0.25em;
-}
-
-.markdown-body h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-.markdown-body img {
-  border: 0;
-}
-
-.markdown-body hr {
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  height: 0;
-}
-
-.markdown-body pre {
-  overflow: auto;
-}
-
-.markdown-body code,
-.markdown-body kbd,
-.markdown-body pre,
-.markdown-body samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-.markdown-body input {
-  color: inherit;
-  font: inherit;
-  margin: 0;
-}
-
-.markdown-body html input[disabled] {
-  cursor: default;
-}
-
-.markdown-body input {
-  line-height: normal;
-}
-
-.markdown-body input[type="checkbox"] {
-  box-sizing: border-box;
-  padding: 0;
-}
-
-.markdown-body table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-
-.markdown-body td,
-.markdown-body th {
-  padding: 0;
-}
-
-.markdown-body .codehilitetable {
-  border: 0;
-  border-spacing: 0;
-}
-
-.markdown-body .codehilitetable tr {
-  border: 0;
-}
-
-.markdown-body .codehilitetable pre,
-.markdown-body .codehilitetable div.codehilite {
-  margin: 0;
-}
-
-.markdown-body .linenos,
-.markdown-body .code,
-.markdown-body .codehilitetable td {
-  border: 0;
-  padding: 0;
-}
-
-.markdown-body td:not(.linenos) .linenodiv {
-  padding: 0 !important;
-}
-
-.markdown-body .code {
-  width: 100%;
-}
-
-.markdown-body .linenos div pre,
-.markdown-body .linenodiv pre,
-.markdown-body .linenodiv {
-  border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-bottom-left-radius: 3px;
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-bottomleft: 3px;
-  border-top-left-radius: 3px;
-  border-bottom-left-radius: 3px;
-}
-
-.markdown-body .code div pre,
-.markdown-body .code div {
-  border: 0;
-  -webkit-border-radius: 0;
-  -moz-border-radius: 0;
-  border-radius: 0;
-  -webkit-border-top-right-radius: 3px;
-  -webkit-border-bottom-right-radius: 3px;
-  -moz-border-radius-topright: 3px;
-  -moz-border-radius-bottomright: 3px;
-  border-top-right-radius: 3px;
-  border-bottom-right-radius: 3px;
-}
-
-.markdown-body * {
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.markdown-body input {
-  font: 13px Helvetica, arial, freesans, clean, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol";
-  line-height: 1.4;
-}
-
-.markdown-body a {
-  color: #4183c4;
-  text-decoration: none;
-}
-
-.markdown-body a:hover,
-.markdown-body a:focus,
-.markdown-body a:active {
-  text-decoration: underline;
-}
-
-.markdown-body hr {
-  height: 0;
-  margin: 15px 0;
-  overflow: hidden;
-  background: transparent;
-  border: 0;
-  border-bottom: 1px solid #ddd;
-}
-
-.markdown-body hr:before,
-.markdown-body hr:after {
-  display: table;
-  content: " ";
-}
-
-.markdown-body hr:after {
-  clear: both;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  margin-top: 15px;
-  margin-bottom: 15px;
-  line-height: 1.1;
-}
-
-.markdown-body h1 {
-  font-size: 30px;
-}
-
-.markdown-body h2 {
-  font-size: 21px;
-}
-
-.markdown-body h3 {
-  font-size: 16px;
-}
-
-.markdown-body h4 {
-  font-size: 14px;
-}
-
-.markdown-body h5 {
-  font-size: 12px;
-}
-
-.markdown-body h6 {
-  font-size: 11px;
-}
-
-.markdown-body blockquote {
-  margin: 0;
-}
-
-.markdown-body ul,
-.markdown-body ol {
-  padding: 0;
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body ol ol,
-.markdown-body ul ol {
-  list-style-type: lower-roman;
-}
-
-.markdown-body ul ul ol,
-.markdown-body ul ol ol,
-.markdown-body ol ul ol,
-.markdown-body ol ol ol {
-  list-style-type: lower-alpha;
-}
-
-.markdown-body dd {
-  margin-left: 0;
-}
-
-.markdown-body code,
-.markdown-body pre,
-.markdown-body samp {
-  font-family: Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  font-size: 12px;
-}
-
-.markdown-body pre {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body kbd {
-  background-color: #e7e7e7;
-  background-image: -moz-linear-gradient(#fefefe, #e7e7e7);
-  background-image: -webkit-linear-gradient(#fefefe, #e7e7e7);
-  background-image: linear-gradient(#fefefe, #e7e7e7);
-  background-repeat: repeat-x;
-  border-radius: 2px;
-  border: 1px solid #cfcfcf;
-  color: #000;
-  padding: 3px 5px;
-  line-height: 10px;
-  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
-  display: inline-block;
-}
-
-.markdown-body>*:first-child {
-  margin-top: 0 !important;
-}
-
-.markdown-body>*:last-child {
-  margin-bottom: 0 !important;
-}
-
-.markdown-body .headeranchor-link {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  display: block;
-  padding-right: 6px;
-  padding-left: 30px;
-  margin-left: -30px;
-}
-
-.markdown-body .headeranchor-link:focus {
-  outline: none;
-}
-
-.markdown-body h1,
-.markdown-body h2,
-.markdown-body h3,
-.markdown-body h4,
-.markdown-body h5,
-.markdown-body h6 {
-  position: relative;
-  margin-top: 1em;
-  margin-bottom: 16px;
-  font-weight: bold;
-  line-height: 1.4;
-}
-
-.markdown-body h1 .headeranchor,
-.markdown-body h2 .headeranchor,
-.markdown-body h3 .headeranchor,
-.markdown-body h4 .headeranchor,
-.markdown-body h5 .headeranchor,
-.markdown-body h6 .headeranchor {
-  display: none;
-  color: #000;
-  vertical-align: middle;
-}
-
-.markdown-body h1:hover .headeranchor-link,
-.markdown-body h2:hover .headeranchor-link,
-.markdown-body h3:hover .headeranchor-link,
-.markdown-body h4:hover .headeranchor-link,
-.markdown-body h5:hover .headeranchor-link,
-.markdown-body h6:hover .headeranchor-link {
-  height: 1em;
-  padding-left: 8px;
-  margin-left: -30px;
-  line-height: 1;
-  text-decoration: none;
-}
-
-.markdown-body h1:hover .headeranchor-link .headeranchor,
-.markdown-body h2:hover .headeranchor-link .headeranchor,
-.markdown-body h3:hover .headeranchor-link .headeranchor,
-.markdown-body h4:hover .headeranchor-link .headeranchor,
-.markdown-body h5:hover .headeranchor-link .headeranchor,
-.markdown-body h6:hover .headeranchor-link .headeranchor {
-  display: inline-block;
-}
-
-.markdown-body h1 {
-  padding-bottom: 0.3em;
-  font-size: 2.25em;
-  line-height: 1.2;
-  border-bottom: 1px solid #eee;
-}
-
-.markdown-body h2 {
-  padding-bottom: 0.3em;
-  font-size: 1.75em;
-  line-height: 1.225;
-  border-bottom: 1px solid #eee;
-}
-
-.markdown-body h3 {
-  font-size: 1.5em;
-  line-height: 1.43;
-}
-
-.markdown-body h4 {
-  font-size: 1.25em;
-}
-
-.markdown-body h5 {
-  font-size: 1em;
-}
-
-.markdown-body h6 {
-  font-size: 1em;
-  color: #777;
-}
-
-.markdown-body p,
-.markdown-body blockquote,
-.markdown-body ul,
-.markdown-body ol,
-.markdown-body dl,
-.markdown-body table,
-.markdown-body pre,
-.markdown-body .admonition {
-  margin-top: 0;
-  margin-bottom: 16px;
-}
-
-.markdown-body hr {
-  height: 4px;
-  padding: 0;
-  margin: 16px 0;
-  background-color: #e7e7e7;
-  border: 0 none;
-}
-
-.markdown-body ul,
-.markdown-body ol {
-  padding-left: 2em;
-}
-
-.markdown-body ul ul,
-.markdown-body ul ol,
-.markdown-body ol ol,
-.markdown-body ol ul {
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.markdown-body li>p {
-  margin-top: 16px;
-}
-
-.markdown-body dl {
-  padding: 0;
-}
-
-.markdown-body dl dt {
-  padding: 0;
-  margin-top: 16px;
-  font-size: 1em;
-  font-style: italic;
-  font-weight: bold;
-}
-
-.markdown-body dl dd {
-  padding: 0 16px;
-  margin-bottom: 16px;
-}
-
-.markdown-body blockquote {
-  padding: 0 15px;
-  color: #777;
-  border-left: 4px solid #ddd;
-}
-
-.markdown-body blockquote>:first-child {
-  margin-top: 0;
-}
-
-.markdown-body blockquote>:last-child {
-  margin-bottom: 0;
-}
-
-.markdown-body table {
-  display: block;
-  width: 100%;
-  overflow: auto;
-  word-break: normal;
-  word-break: keep-all;
-}
-
-.markdown-body table th {
-  font-weight: bold;
-}
-
-.markdown-body table th,
-.markdown-body table td {
-  padding: 6px 13px;
-  border: 1px solid #ddd;
-}
-
-.markdown-body table tr {
-  background-color: #fff;
-  border-top: 1px solid #ccc;
-}
-
-.markdown-body table tr:nth-child(2n) {
-  background-color: #f8f8f8;
-}
-
-.markdown-body img {
-  max-width: 100%;
-  -moz-box-sizing: border-box;
-  box-sizing: border-box;
-}
-
-.markdown-body code,
-.markdown-body samp {
-  padding: 0;
-  padding-top: 0.2em;
-  padding-bottom: 0.2em;
-  margin: 0;
-  font-size: 85%;
-  background-color: rgba(0,0,0,0.04);
-  border-radius: 3px;
-}
-
-.markdown-body code:before,
-.markdown-body code:after {
-  letter-spacing: -0.2em;
-  content: "\00a0";
-}
-
-.markdown-body pre>code {
-  padding: 0;
-  margin: 0;
-  font-size: 100%;
-  word-break: normal;
-  white-space: pre;
-  background: transparent;
-  border: 0;
-}
-
-.markdown-body .codehilite {
-  margin-bottom: 16px;
-}
-
-.markdown-body .codehilite pre,
-.markdown-body pre {
-  padding: 16px;
-  overflow: auto;
-  font-size: 85%;
-  line-height: 1.45;
-  background-color: #f7f7f7;
-  border-radius: 3px;
-}
-
-.markdown-body .codehilite pre {
-  margin-bottom: 0;
-  word-break: normal;
-}
-
-.markdown-body pre {
-  word-wrap: normal;
-}
-
-.markdown-body pre code {
-  display: inline;
-  max-width: initial;
-  padding: 0;
-  margin: 0;
-  overflow: initial;
-  line-height: inherit;
-  word-wrap: normal;
-  background-color: transparent;
-  border: 0;
-}
-
-.markdown-body pre code:before,
-.markdown-body pre code:after {
-  content: normal;
-}
-
-/* Admonition */
-.markdown-body .admonition {
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  position: relative;
-  border-radius: 3px;
-  border: 1px solid #e0e0e0;
-  border-left: 6px solid #333;
-  padding: 10px 10px 10px 30px;
-}
-
-.markdown-body .admonition table {
-  color: #333;
-}
-
-.markdown-body .admonition p {
-  padding: 0;
-}
-
-.markdown-body .admonition-title {
-  font-weight: bold;
-  margin: 0;
-}
-
-.markdown-body .admonition>.admonition-title {
-  color: #333;
-}
-
-.markdown-body .attention>.admonition-title {
-  color: #a6d796;
-}
-
-.markdown-body .caution>.admonition-title {
-  color: #d7a796;
-}
-
-.markdown-body .hint>.admonition-title {
-  color: #96c6d7;
-}
-
-.markdown-body .danger>.admonition-title {
-  color: #c25f77;
-}
-
-.markdown-body .question>.admonition-title {
-  color: #96a6d7;
-}
-
-.markdown-body .note>.admonition-title {
-  color: #d7c896;
-}
-
-.markdown-body .admonition:before,
-.markdown-body .attention:before,
-.markdown-body .caution:before,
-.markdown-body .hint:before,
-.markdown-body .danger:before,
-.markdown-body .question:before,
-.markdown-body .note:before {
-  font: normal normal 16px fontawesome-mini;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-  line-height: 1.5;
-  color: #333;
-  position: absolute;
-  left: 0;
-  top: 0;
-  padding-top: 10px;
-  padding-left: 10px;
-}
-
-.markdown-body .admonition:before {
-  content: "\f056\00a0";
-  color: 333;
-}
-
-.markdown-body .attention:before {
-  content: "\f058\00a0";
-  color: #a6d796;
-}
-
-.markdown-body .caution:before {
-  content: "\f06a\00a0";
-  color: #d7a796;
-}
-
-.markdown-body .hint:before {
-  content: "\f05a\00a0";
-  color: #96c6d7;
-}
-
-.markdown-body .danger:before {
-  content: "\f057\00a0";
-  color: #c25f77;
-}
-
-.markdown-body .question:before {
-  content: "\f059\00a0";
-  color: #96a6d7;
-}
-
-.markdown-body .note:before {
-  content: "\f040\00a0";
-  color: #d7c896;
-}
-
-.markdown-body .admonition::after {
-  content: normal;
-}
-
-.markdown-body .attention {
-  border-left: 6px solid #a6d796;
-}
-
-.markdown-body .caution {
-  border-left: 6px solid #d7a796;
-}
-
-.markdown-body .hint {
-  border-left: 6px solid #96c6d7;
-}
-
-.markdown-body .danger {
-  border-left: 6px solid #c25f77;
-}
-
-.markdown-body .question {
-  border-left: 6px solid #96a6d7;
-}
-
-.markdown-body .note {
-  border-left: 6px solid #d7c896;
-}
-
-.markdown-body .admonition>*:first-child {
-  margin-top: 0 !important;
-}
-
-.markdown-body .admonition>*:last-child {
-  margin-bottom: 0 !important;
-}
-
-/* progress bar*/
-.markdown-body .progress {
-  display: block;
-  width: 300px;
-  margin: 10px 0;
-  height: 24px;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background-color: #ededed;
-  position: relative;
-  box-shadow: inset -1px 1px 3px rgba(0, 0, 0, .1);
-}
-
-.markdown-body .progress-label {
-  position: absolute;
-  text-align: center;
-  font-weight: bold;
-  width: 100%; margin: 0;
-  line-height: 24px;
-  color: #333;
-  text-shadow: 1px 1px 0 #fefefe, -1px -1px 0 #fefefe, -1px 1px 0 #fefefe, 1px -1px 0 #fefefe, 0 1px 0 #fefefe, 0 -1px 0 #fefefe, 1px 0 0 #fefefe, -1px 0 0 #fefefe, 1px 1px 2px #000;
-  -webkit-font-smoothing: antialiased !important;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-.markdown-body .progress-bar {
-  height: 24px;
-  float: left;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-  background-color: #96c6d7;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .5), inset 0 -1px 0 rgba(0, 0, 0, .1);
-  background-size: 30px 30px;
-  background-image: -webkit-linear-gradient(
-    135deg, rgba(255, 255, 255, .4) 27%,
-    transparent 27%,
-    transparent 52%, rgba(255, 255, 255, .4) 52%,
-    rgba(255, 255, 255, .4) 77%,
-    transparent 77%, transparent
-  );
-  background-image: -moz-linear-gradient(
-    135deg,
-    rgba(255, 255, 255, .4) 27%, transparent 27%,
-    transparent 52%, rgba(255, 255, 255, .4) 52%,
-    rgba(255, 255, 255, .4) 77%, transparent 77%,
-    transparent
-  );
-  background-image: -ms-linear-gradient(
-    135deg,
-    rgba(255, 255, 255, .4) 27%, transparent 27%,
-    transparent 52%, rgba(255, 255, 255, .4) 52%,
-    rgba(255, 255, 255, .4) 77%, transparent 77%,
-    transparent
-  );
-  background-image: -o-linear-gradient(
-    135deg,
-    rgba(255, 255, 255, .4) 27%, transparent 27%,
-    transparent 52%, rgba(255, 255, 255, .4) 52%,
-    rgba(255, 255, 255, .4) 77%, transparent 77%,
-    transparent
-  );
-  background-image: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, .4) 27%, transparent 27%,
-    transparent 52%, rgba(255, 255, 255, .4) 52%,
-    rgba(255, 255, 255, .4) 77%, transparent 77%,
-    transparent
-  );
-}
-
-.markdown-body .progress-100plus .progress-bar {
-  background-color: #a6d796;
-}
-
-.markdown-body .progress-80plus .progress-bar {
-  background-color: #c6d796;
-}
-
-.markdown-body .progress-60plus .progress-bar {
-  background-color: #d7c896;
-}
-
-.markdown-body .progress-40plus .progress-bar {
-  background-color: #d7a796;
-}
-
-.markdown-body .progress-20plus .progress-bar {
-  background-color: #d796a6;
-}
-
-.markdown-body .progress-0plus .progress-bar {
-  background-color: #c25f77;
-}
-
-.markdown-body .candystripe-animate .progress-bar{
-  -webkit-animation: animate-stripes 3s linear infinite;
-  -moz-animation: animate-stripes 3s linear infinite;
-  animation: animate-stripes 3s linear infinite;
-}
-
-@-webkit-keyframes animate-stripes {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: 60px 0;
-  }
-}
-
-@-moz-keyframes animate-stripes {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: 60px 0;
-  }
-}
-
-@keyframes animate-stripes {
-  0% {
-    background-position: 0 0;
-  }
-
-  100% {
-    background-position: 60px 0;
-  }
-}
-
-.markdown-body .gloss .progress-bar {
-  box-shadow:
-    inset 0 4px 12px rgba(255, 255, 255, .7),
-    inset 0 -12px 0 rgba(0, 0, 0, .05);
-}
-
-/* Multimarkdown Critic Blocks */
-.markdown-body .critic_mark {
-  background: #ff0;
-}
-
-.markdown-body .critic_delete {
-  color: #c82829;
-  text-decoration: line-through;
-}
-
-.markdown-body .critic_insert {
-  color: #718c00 ;
-  text-decoration: underline;
-}
-
-.markdown-body .critic_comment {
-  color: #8e908c;
-  font-style: italic;
-}
-
-.markdown-body .headeranchor {
-  font: normal normal 16px octicons-anchor;
-  line-height: 1;
-  display: inline-block;
-  text-decoration: none;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
-}
-
-.headeranchor:before {
-  content: '\f05c';
-}
-
-.markdown-body .task-list-item {
-  list-style-type: none;
-}
-
-.markdown-body .task-list-item+.task-list-item {
-  margin-top: 3px;
-}
-
-.markdown-body .task-list-item input {
-  margin: 0 4px 0.25em -20px;
-  vertical-align: middle;
-}
-
-/* Media */
-@media only screen and (min-width: 480px) {
-  .markdown-body {
-    font-size:14px;
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .markdown-body {
-    font-size:16px;
-  }
-}
-
-@media print {
-  .markdown-body * {
-    background: transparent !important;
-    color: black !important;
-    filter:none !important;
-    -ms-filter: none !important;
-  }
-
-  .markdown-body {
-    font-size:12pt;
-    max-width:100%;
-    outline:none;
-    border: 0;
-  }
-
-  .markdown-body a,
-  .markdown-body a:visited {
-    text-decoration: underline;
-  }
-
-  .markdown-body .headeranchor-link {
-    display: none;
-  }
-
-  .markdown-body a[href]:after {
-    content: " (" attr(href) ")";
-  }
-
-  .markdown-body abbr[title]:after {
-    content: " (" attr(title) ")";
-  }
-
-  .markdown-body .ir a:after,
-  .markdown-body a[href^="javascript:"]:after,
-  .markdown-body a[href^="#"]:after {
-    content: "";
-  }
-
-  .markdown-body pre {
-    white-space: pre;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-
-  .markdown-body pre,
-  .markdown-body blockquote {
-    border: 1px solid #999;
-    padding-right: 1em;
-    page-break-inside: avoid;
-  }
-
-  .markdown-body .progress,
-  .markdown-body .progress-bar {
-    -moz-box-shadow: none;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-  }
-
-  .markdown-body .progress {
-    border: 1px solid #ddd;
-  }
-
-  .markdown-body .progress-bar {
-    height: 22px;
-    border-right: 1px solid #ddd;
-  }
-
-  .markdown-body tr,
-  .markdown-body img {
-    page-break-inside: avoid;
-  }
-
-  .markdown-body img {
-    max-width: 100% !important;
-  }
-
-  .markdown-body p,
-  .markdown-body h2,
-  .markdown-body h3 {
-    orphans: 3;
-    widows: 3;
-  }
-
-  .markdown-body h2,
-  .markdown-body h3 {
-    page-break-after: avoid;
-  }
-}
-</style><title>index</title></head><body><article class="markdown-body"><hr />
-<p>title: API Reference</p>
-<p>language_tabs:<br />
-  - javascript</p>
-<p>toc_footers:<br />
-  - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a></p>
-<p>includes:</p>
 <ul>
-<li>bodhimobile/Mobile API/kernelPromise</li>
-<li>mobileAPI/kernelEvents</li>
-<li>mobileAPI/kernelErrors</li>
-<li>mobileAPI/appStorage</li>
-<li>mobileAPI/archiving</li>
-<li>mobileAPI/authentication</li>
-<li>mobileAPI/barcode</li>
-<li>mobileAPI/battery</li>
-<li>mobileAPI/device</li>
-<li>mobileAPI/deviceOrientation</li>
-<li>mobileAPI/geofencing</li>
+<li>In-store data sources, such as POS systems, equipment, scheduling systems (e.g. HotSchedules) and sensors (e.g., thermometers, energy meters, batteries, HVAC)<br></li>
+<li>Near-store apps (e.g. Yelp, weather data, traffic data, Facebook) and<br></li>
+<li>Above-store apps such as inventory management, ordering systems (e.g.Macromatix), accounting) and other internet connected services<br></li>
 </ul>
-<h2 id="search-true"><a name="user-content-search-true" href="#search-true" class="headeranchor-link" aria-hidden="true"><span class="headeranchor"></span></a>search: true</h2></article></body>
- 
-  
+
+          <h2 id="getting-started">Getting Started</h2>
+
+<p>Bodhi Agent provide a single integration point that enables in-store and near-store data collection. Bodhi agent is allowed you to integrate with in store data above store data and near store data. </p>
+
+<p><img title="figure  2" alt="alt text" src="images/agentdiagram.png?raw=true" /><br>
+figure 2</p>
+
+          <h2 id="environment-setup">Environment Setup</h2>
+
+<h3 id="installation">Installation</h3>
+
+<p>The agent cli is installed via a platform specific installer or via node package manager (NPM). The cli prefers to be installed globally.</p>
+<pre class="highlight plaintext"><code>$&gt; npm install -g agent-cli
+</code></pre>
+
+<h3 id="general-usage">General Usage</h3>
+
+<p>The general structure of the a command is as follows:</p>
+<pre class="highlight plaintext"><code>$&gt; npm install agent-cli [options] &lt;action&gt; [arguments]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<p>Options are prefixed with <code class="prettyprint">-</code> or <code class="prettyprint">--</code> to separate them from arguments. Each action defines the options it uses, but the options are consistent in naming and usage across the commands.</p>
+
+<h3 id="common-options">Common Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;help</td>
+<td>none</td>
+<td>none</td>
+<td>print help about the command</td>
+</tr>
+<tr>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+<td>print more detailed output</td>
+</tr>
+<tr>
+<td>&ndash;quiet</td>
+<td>-q</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>&ndash;home</td>
+<td>-h</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>&ndash;force</td>
+<td>-F</td>
+<td>none</td>
+<td>directive to override safety logic</td>
+</tr>
+</tbody></table>
+
+<h3 id="arguments">Arguments</h3>
+
+<p>The cli interprets the first argument (non-option) as the action. All subseuqent arguements are command specific. </p>
+
+<p>Each action is described below</p>
+
+<h3 id="informational-commands">Informational Commands</h3>
+
+<h3 id="help">help</h3>
+
+<p>The command line provides built in helper functions.</p>
+
+<h3 id="navigation-help">Navigation Help</h3>
+
+<p>For a descriptive list of the commands </p>
+<pre class="highlight plaintext"><code>$&gt; npm install agent-cli --help
+</code></pre>
+
+<h3 id="action-specific-help">Action Specific Help</h3>
+
+<p>Action specific help can be requested using the following structure.</p>
+<pre class="highlight plaintext"><code>$&gt; npm install agent-cli &lt;action&gt; --help
+</code></pre>
+
+<h3 id="version">version</h3>
+
+<p>Print version information.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli --version 
+$&gt; agent-cli -V
+</code></pre>
+
+<p>The output is a simple version identifier following the semantic versioning rules of major, minor, and build.</p>
+<pre class="highlight plaintext"><code>vM.m.b
+</code></pre>
+
+<h3 id="info">info</h3>
+
+<p>CLI splash screen for the agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli info
+</code></pre>
+
+<h3 id="lifecycle-commands">Lifecycle Commands</h3>
+
+<p>Lifecycle commands allow an administrator to change and check the run state of an agent.</p>
+
+<h3 id="start">start</h3>
+
+<p>Attempts to start an agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli start [options] 
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+<td>print more detailed output</td>
+</tr>
+<tr>
+<td>&ndash;quiet</td>
+<td>-q</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>&ndash;home</td>
+<td>-h</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s working directory</td>
+</tr>
+</tbody></table>
+
+<h3 id="status">status</h3>
+
+<p>Provides status about a running agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli status [options] 
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+<td>print more detailed output</td>
+</tr>
+<tr>
+<td>&ndash;quiet</td>
+<td>-q</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+</tbody></table>
+
+<h3 id="stop">stop</h3>
+
+<p>Gracefully shutdown the agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli stop [options] 
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+<td>print more detailed output</td>
+</tr>
+<tr>
+<td>&ndash;quiet</td>
+<td>-q</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+</tbody></table>
+
+<h3 id="diagnostic-commands">Diagnostic Commands</h3>
+
+<p>Diagnostic commands are used by an admin to troubleshoot an agent having trouble entering a running state or to test environmental specific details uniformly across platforms.</p>
+
+<h3 id="check-core">check-core</h3>
+
+<p>Used to check the version of agent-core being used and where that file is located on the file system.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli check-core [options]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+</tbody></table>
+
+<h3 id="check-config">check-config</h3>
+
+<p>Used to check for configuration problems in the agent. The agent will load and process all configuration files, but will not enter into a ready state. This command is safe to run even if there is a currently running agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli check-cofig [options]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+</tbody></table>
+
+<h3 id="check-connection">check-connection</h3>
+
+<p>Used to check for configuration problems in the agent.</p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli check-connection [options]
+</code></pre>
+
+<h3 id="options">Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>deacription</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>&ndash;config</td>
+<td>-f</td>
+<td>path</td>
+<td>specifies the agent&rsquo;s configuration file</td>
+</tr>
+</tbody></table>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution from the agent&rsquo;s host</li>
+<li>Check the TCP port is reachable by opening up a connection on host:port</li>
+<li>Issue a HTTP GET against the ping endpoint of the system</li>
+</ol>
+
+<h3 id="check-route">check-route</h3>
+
+<p>Used to check for network problems (firewalls &amp; proxy rules) from the perspective of the agent runtime. </p>
+<pre class="highlight plaintext"><code>$&gt; agent-cli check-route &lt;scheme://host:port/path&gt;
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Parse</li>
+<li>DNS resolve of host/IP</li>
+<li>TCP port reachable by opening up a connection on host:port</li>
+<li>If scheme is http of https then issue a HTTP GET against the specified URL</li>
+</ol>
+
+          <h2 id="how-to">How To</h2>
+
+<h4 id="installing-bodhi-agent">Installing Bodhi Agent</h4>
+
+<p><strong>Agent Installer and Registration User Guide</strong></p>
+
+<p>Welcome to the User Guide for Installing and registering the Bodhi agent</p>
+
+<p><strong>System Requirements for computer</strong>
+OS: Windows XP SP3, Windows 7, Windows 8.1<br>
+Memory: 2GB or more<br>
+Disk Space: 10 GB  </p>
+
+<p><strong>System requirements for Mobile</strong>
+iOS 7.x, 8.x<br>
+Android 4.x<br>
+Windows Phone</p>
+
+<h5 id="step-1:-download-bodhi-installer-and-the-bodhi-mobile-application">Step 1: Download Bodhi Installer and the Bodhi Mobile Application</h5>
+
+<p>Go <a href="http://developer.bodhi.space">developer.bodhi.space</a> to get the correct installer for your system</p>
+
+<p><img alt="alt text" src="images/agent_dl_01.png?raw=true" /></p>
+
+<p><strong>NOTE:</strong> if the system you are using to download the installer is not a Windows system you will get the Not Supported.</p>
+
+<p>Just select the Windows system that matches the system you will be installer the Bodhi Agent on.</p>
+
+<p>For the mobile applications here is where you can download them to your device.</p>
+
+<p>Bodhi Mobile - iOS          Apple Apps Store<br>
+Bodhi Mobile - Android      Google Play Store</p>
+
+<h5 id="step-2:-run-the-installer">Step 2:  Run the installer</h5>
+
+<ul>
+<li>You will be presented with the Installer Welcome screen.<br></li>
+<li>This will show the version number of the installer</li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_ver_01.png?raw=true" />  </p>
+
+<h5 id="step-3:-select-the-next-button-to-move-to-the-next-button">Step 3: Select the Next button to move to the next Button</h5>
+
+<p><img alt="alt text" src="images/agent_inst_01.png?raw=true" />  </p>
+
+<h5 id="step-4:-license-agreement-screen">Step 4:  License agreement screen</h5>
+
+<ul>
+<li>The user needs to agree to the user agreement before proceeding.</li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_legal_01.png?raw=true" />  </p>
+
+<p><strong>NOTE:</strong> the Next Button will be greyed out, until the, I accept the agreement radio button is selected.</p>
+
+<h5 id="step-5:-select-the-i-accept-the-agreement-radio-button">Step 5:  Select the I accept the agreement Radio Button</h5>
+
+<p><img alt="alt text" src="images/agent_legal_02.png?raw=true" />  </p>
+
+<h5 id="step-6:-select-the-next-button">Step 6: Select the Next Button</h5>
+
+<p><img alt="alt text" src="images/agent_legal_03.png?raw=true" />  </p>
+
+<h5 id="step-7:-selecting-the-destination-location-for-the-agent">Step 7:  Selecting the Destination location for the Agent</h5>
+
+<ul>
+<li>A default destination location is already provided for the agent. </li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_dest_01.png?raw=true" />  </p>
+
+<p><strong>NOTE:</strong> If this destination location is OK, then select the Next Button.  </p>
+
+<p><img alt="alt text" src="images/agent_dest_02.png?raw=true" />  </p>
+
+<p><strong>Go to Step 8</strong></p>
+
+<h6 id="step-7a:-if-you-wish-to-change-the-location-of-the-destination-location">Step 7a: If you wish to change the location of the destination location</h6>
+
+<h6 id="7a.-select-the-browse-button">7a. Select the Browse Button</h6>
+
+<p><img alt="alt text" src="images/agent_dest_03.png?raw=true" /></p>
+
+<h6 id="7b.-select-the-folder-you-wish-to-install-the-bodhi-agent-into-or-you-can-open-a-different-folder.">7b. Select the folder you wish to install the Bodhi Agent into or you can open a different folder.</h6>
+
+<p><img alt="alt text" src="images/agent_dest_04.jpg?raw=true" />  </p>
+
+<h6 id="7c.-after-you-have-selected-the-folder">7c. After you have selected the folder</h6>
+
+<p><img alt="alt text" src="images/agent_dest_05.jpg?raw=true" /></p>
+
+<h6 id="7d.-select-the-ok-button">7d. Select the OK Button</h6>
+
+<p><img alt="alt text" src="images/agent_dest_06.jpg?raw=true" />  </p>
+
+<p>The New destination location should be displayed  </p>
+
+<p><img alt="alt text" src="images/agent_dest_01.png?raw=true" /> </p>
+
+<h6 id="7e.-select-the-next-button-to-continue">7e. Select the Next Button to continue</h6>
+
+<p><img alt="alt text" src="images/agent_dest_02.png?raw=true" />  </p>
+
+<h5 id="step-8:-review-of-destination-location.">Step 8: Review of Destination location.</h5>
+
+<ul>
+<li>The destination location for the install is displayed.</li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_install_01.png?raw=true" /> </p>
+
+<h5 id="step-9:-select-the-install-button">Step 9: Select the Install Button</h5>
+
+<ul>
+<li>If the Destination location is correct, then </li>
+<li>Select the Install Button</li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_install_02.png?raw=true" /> </p>
+
+<h5 id="9a.-a-progress-bar-will-be-displayed">9a. A Progress bar will be displayed</h5>
+
+<p><img alt="alt text" src="images/agent_install_03.png?raw=true" />  </p>
+
+<h5 id="step-10:-installing-nodejs-page">Step 10: Installing Nodejs page</h5>
+
+<ul>
+<li>After the Setup Wizard has completed installing the agent and it parts, the installer for NodeJS is started.</li>
+</ul>
+
+<p><img alt="alt text" src="images/node_splash_1.png?raw=true" /></p>
+
+<h5 id="step-11:-selecting-the-next-button">Step 11: Selecting the Next Button</h5>
+
+<ul>
+<li>Select the Next button to continue the install of Nodejs.</li>
+</ul>
+
+<p><img alt="alt text" src="images/node_splash_2.png?raw=true" />  </p>
+
+<h5 id="step-12:-license-agreement-screen">Step 12:  License agreement screen</h5>
+
+<ul>
+<li>The user needs to agree to the user agreement before proceeding </li>
+</ul>
+
+<p><img alt="alt text" src="images/node_license_1.png?raw=true" />  </p>
+
+<p><strong>NOTE:</strong> the Next Button will be greyed out, until the, I accept the agreement checkbox is selected.</p>
+
+<h5 id="step-13:-select-the-i-accept-the-agreement-radio-button">Step 13:  Select the I accept the agreement Radio Button</h5>
+
+<p><img alt="alt text" src="images/node_license_2.png?raw=true" />  </p>
+
+<h5 id="step-14:-select-the-next-button">Step 14: Select the Next Button</h5>
+
+<p><img alt="alt text" src="images/node_license_3.png?raw=true" />  </p>
+
+<h5 id="step-15:-selecting-the-destination-location-for-nodejs">Step 15: Selecting the Destination location for Nodejs</h5>
+
+<ul>
+<li>A default destination location is already provided for Nodejs. </li>
+</ul>
+
+<p><img alt="alt text" src="images/node_dest_1.png?raw=true" />  </p>
+
+<p><strong>NOTE:</strong> If this destination location is OK, then select the Next Button.  </p>
+
+<p><img alt="alt text" src="images/node_dest_3.png?raw=true" /></p>
+
+<p><strong>Go to Step 16</strong></p>
+
+<h6 id="step-15a:-if-you-wish-to-change-the-location-of-the-destination-location,-select-the-change-button">Step 15a: If you wish to change the location of the destination location, Select the change Button</h6>
+
+<p><img alt="alt text" src="images/node_dest_2.png?raw=true" />  </p>
+
+<h6 id="step-15b.-select-the-folder-you-wish-to-install-nodejs-into-or-you-can-open-a-different-folder">Step 15b. Select the folder you wish to install nodejs into or you can open a different folder</h6>
+
+<p><img alt="alt text" src="images/node_dest_4.png?raw=true" /></p>
+
+<h6 id="step-15c.-after-you-have-selected-the-new-folder">Step 15c. After you have selected the new folder</h6>
+
+<p><img alt="alt text" src="images/node_dest_5.png?raw=true" /></p>
+
+<h6 id="step-15d.-after-you-have-selected-the-folder-in-the-new-selected-folder">Step 15d. After you have selected the folder in the new selected folder</h6>
+
+<p><img alt="alt text" src="images/node_change_dest_folder_1.png?raw=true" /></p>
+
+<h6 id="step-15e.-select-the-ok-button">Step 15e. Select the OK Button</h6>
+
+<p><img alt="alt text" src="images/node_change_3.png?raw=true" /></p>
+
+<h6 id="step-15f.-review-the-destination-location">Step 15f. Review the Destination location</h6>
+
+<p><img alt="alt text" src="images/node_dest_1.png?raw=true" /> </p>
+
+<h5 id="step-16:-review-of-the-custom-setup.">Step 16: Review of the Custom Setup.</h5>
+
+<ul>
+<li>The Custom Setup page for the install is displayed.</li>
+</ul>
+
+<p><img alt="alt text" src="images/nodejs_custom_1.png?raw=true" /> </p>
+
+<h5 id="step-17:-select-the-install-button">Step 17: Select the Install Button</h5>
+
+<ul>
+<li>If all the information is correct, then </li>
+<li>Select the Install Button</li>
+</ul>
+
+<p><img alt="alt text" src="images/nodejs_install_1.png?raw=true" /> </p>
+
+<h6 id="15h.-a-progress-bar-will-be-displayed">15h. A Progress bar will be displayed</h6>
+
+<p><img alt="alt text" src="images/nodejs_progress_1.png?raw=true" />  </p>
+
+<h5 id="step-16:-completing-the-hotschedules-link-setup-wizard-page">Step 16: Completing the HotSchedules Link Setup Wizard page</h5>
+
+<ul>
+<li>After the Setup Wizard has completed, a checkbox is presented, by default it is selected.</li>
+</ul>
+
+<p><img alt="alt text" src="images/agent_run_01.png?raw=true" /></p>
+
+<h5 id="10a.-completing-the-hotschedules-link-install">10a. Completing the HotSchedules Link install</h5>
+
+<ul>
+<li>If no change is required, then Select the Finish Button<br></li>
+</ul>
+
+<p><img title="figure 19" alt="alt text" src="images/agent_finished_01.png?raw=true" /><br>
+figure 19  </p>
+
+<h5 id="10b.-command-line-interface-is-opened">10b. Command Line Interface is opened</h5>
+
+<ul>
+<li>A Diagnostics is run</li>
+<li>The Windows Service is started</li>
+<li>Follow the instructions to press any key to continue </li>
+</ul>
+
+<p><img title="figure 20" alt="alt text" src="images/agent_any_01.png?raw=true" /><br>
+figure 20  </p>
+
+<h5 id="10c.-the-command-line-window-should-close-and-you-will-be-at-the-desktop.">10c.  The command line window should close and you will be at the Desktop.</h5>
+
+<p><img title="figure 21" alt="alt text" src="images/agent_desktop_01.png?raw=true" /><br>
+figure 21  </p>
+
+<h5 id="step-1:-register-the-agent-with-a-mobile-device">Step 1: Register the Agent with a Mobile Device</h5>
+
+<ul>
+<li>If you had selected to start the console at the end of the install, then the console will be started in the default browser.</li>
+</ul>
+
+<p><strong>Note:</strong> If your agent is not registered, it will be unable to send any data to the cloud</p>
+
+<ul>
+<li>A Registration Code will be displayed which is used to register the POS with the Mobile Device.</li>
+</ul>
+
+<p><img title="figure 22" alt="alt text" src="images/agent_active_01.png?raw=true" /><br>
+figure 22  </p>
+
+<p><strong>Note:</strong>  If the registration dialog is dismissed before registration
+* Select the Registration Code Menu item on the left to redisplay it</p>
+
+<p><img title="figure 23" alt="alt text" src="images/agent_reg_01.png?raw=true" /><br>
+figure 23  </p>
+
+<h5 id="step-2:-start-the-bodhi-mobile-app">Step 2: Start the Bodhi Mobile App</h5>
+
+<ul>
+<li>This is the Mobile Application that was downloaded earlier to your Mobile Device</li>
+</ul>
+
+<p><img title="figure 23" alt="alt text" src="images/iphone_home_01.png?raw=true" /><br>
+figure 24  </p>
+
+<h5 id="step-3:-enter-the-a-mobile-device">Step 3: Enter the a Mobile Device</h5>
+
+<ul>
+<li>Enter the UserID </li>
+<li>Enter the Password </li>
+<li>Select the Log in Button</li>
+</ul>
+
+<p><img title="figure 25" alt="alt text" src="images/app_login_01.png?raw=true" /><br>
+figure 25  </p>
+
+<h5 id="step-4:-select-the-pos-manager">Step 4: Select the POS Manager</h5>
+
+<p><img title="figure 26" alt="alt text" src="images/pos_mgr_01.png?raw=true" /><br>
+figure 26  </p>
+
+<h5 id="step-5:-select-the-the-plus-sign-to-add-a-pos-to-the-manager">Step 5: Select the the Plus Sign to add a POS to the Manager</h5>
+
+<p><img title="figure 27" alt="alt text" src="images/pos_mgr_02.png?raw=true" /><br>
+figure 27  </p>
+
+<h5 id="step-6:-select-a-store-to-associate-the-pos-with.">Step 6: Select a store to associate the POS with.</h5>
+
+<p><img title="Flowers" alt="Flowers" src="images/pos_mgr_03.png?raw=true" />
+figure 28  </p>
+
+<h5 id="step-7:-enter-the-activation-code-that-is-displayed-in-the-browser.">Step 7: Enter the Activation code that is displayed in the Browser.</h5>
+
+<p><img title="figure 29" alt="alt text" src="images/agent_active_02.png?raw=true" /><br>
+figure 29  </p>
+
+<h5 id="step-8:-select-the-request-button.">Step 8: Select the Request Button.</h5>
+
+<p><img title="figure 30" alt="alt text" src="images/agent_active_03.png?raw=true" /><br>
+figure 30  </p>
+
+<h5 id="step-9:-verify-that-pos-agent-with-the-selected-store-and-is-displayed">Step 9: Verify that POS agent with the selected store and is displayed</h5>
+
+<p><img title="figure 31" alt="alt text" src="images/agent_active_04.png?raw=true" /><br>
+figure 31  </p>
+
+<h5 id="step-20:-the-browser-will-display-the-console-dashboard">Step 20: The Browser will display the console dashboard</h5>
+
+<ul>
+<li>A Success message will briefly flash on the screen</li>
+<li>The Registration Code Menu item will be removed</li>
+<li>The Dashboard will be displayed</li>
+</ul>
+
+<p><img title="figure 32" alt="alt text" src="images/agent_console_01.png?raw=true" /><br>
+figure 32  </p>
+
+<h3 id="console-dashboard-legend">Console Dashboard Legend</h3>
+
+<ol>
+<li>This is the status of the agent (e.g. Online, Offline)<br></li>
+<li>This changes the Left Menu from Icon Only to Icons and Text<br></li>
+</ol>
+
+<p><strong>Congratulations on your successful installation of Bodhi Agent</strong></p>
+
+          <h4 id="creating-an-app">Creating an App</h4>
+
+<h3 id="agent-app-structure">Agent App Structure</h3>
+
+<p>You can create an application for the agent by following the steps below. </p>
+
+<p>App Structure</p>
+
+<p>Apps have 9 major categories:</p>
+
+<ul>
+<li>Descriptive Information</li>
+<li>Logger Settings</li>
+<li>App Settings</li>
+<li>Extensions</li>
+<li>Services</li>
+<li>Sources</li>
+<li>Pipelines</li>
+<li>Handlers</li>
+<li>The init function</li>
+</ul>
+
+<p>These categories are described below. </p>
+
+<h3 id="starting-structure">Starting Structure</h3>
+
+<ol>
+<li>Create a file called app.js.</li>
+<li>Insert the following code into the app.js file.</li>
+</ol>
+<pre class="highlight plaintext"><code>  //- Descriptive Information
+  name   : 'app-name',
+  version: '0.0.1',
+
+  //- Logger Settings
+  logger : {
+    filename: 'logger-filename.log',
+    level   : '' // The level of logging for the app
+  },
+
+  //- App Settings
+  settings: [
+    {property  : '',
+     value     : ''},
+  ],
+
+  //- Extensions
+  extensions: [
+    {file      : ''}
+  ],
+
+  //- Services
+  services: [
+    {
+     name     : '',
+     provider : '',
+    } 
+  ],
+
+  //- Sources
+  sources: [
+    { 
+    name   : '',
+    factory: '',
+    provider: {
+        bind: '',
+        listen : '',
+        close  : ''
+      },
+      bindings: {'eventName'}
+    }
+  ],
+
+  //- Pipelines
+  pipelines: [
+    {
+      name: 'name-of-pipeline',
+      subscriptions: ['name-of-event-that-the-pipeline-subscribes-to'],
+      steps: [
+        {fn: 'extension:name-of-function', props: {key: 'value'},
+        {fn: 'extension:name-of-function', props: {key: 'value'},
+      ]
+    }
+  ],
+
+  //- Handlers
+  handlers: [
+    name: 'name-of-handler',
+    subscriptions: 'name-of-event-the-handler-subscribes-to',
+    fn: '',
+    props: { name: '$key:value' }
+
+  ],
+
+  //- init function, this function is executed after the agent is done with setup
+  init: function(done) {
+    // statements here
+    done();
+  }
+
+}
+</code></pre>
+
+<h3 id="1.-descriptive-info">1. Descriptive Info</h3>
+
+<p>This contains identification information for your app.</p>
+
+<h5 id="sample">Sample</h5>
+<pre class="highlight plaintext"><code>  name   : 'app-name',
+  version: '0.0.1',
+  dir    : '',
+  enabled: 
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Your name for the application</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Yes</td>
+<td>The version number for the application</td>
+</tr>
+<tr>
+<td>dir</td>
+<td>string</td>
+<td>Yes</td>
+<td>Root filesystem path for the application</td>
+</tr>
+<tr>
+<td>enabled</td>
+<td>Boolean</td>
+<td>Preferred</td>
+<td>Whether the app is enabled or not</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>Preferred</td>
+<td>Your organization&rsquo;s name</td>
+</tr>
+</tbody></table>
+
+<h3 id="2.-logger-info">2. Logger Info</h3>
+
+<p>These properties determine the log filename and amount of detail that would be recorded to the log file. </p>
+
+<p>The levels of logging are as follows, listed from the least amount of detail to the most.</p>
+
+<ol>
+<li>error</li>
+<li>warning</li>
+<li>info</li>
+<li>verbose</li>
+<li>debug</li>
+</ol>
+
+<p>Note: The logger cannot include a reference to the settings, since it is loaded prior to the settings.</p>
+
+<h5 id="sample">Sample</h5>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>level</td>
+<td>string</td>
+<td>Yes</td>
+<td>Your name for the application</td>
+</tr>
+<tr>
+<td>version</td>
+<td>string</td>
+<td>Yes</td>
+<td>The version number for the application</td>
+</tr>
+</tbody></table>
+
+<h3 id="3.-app-settings">3. App Settings</h3>
+
+<p>Your app can have settings by declaring them within the settings object. These settings can then be used throughout your application&rsquo;s code. These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
+
+<ol>
+<li>App.js settings object (highest precedence)</li>
+<li>Any settings within the js/json files in the settings folder</li>
+<li>Any settings added by an extension (lowest precedence)</li>
+</ol>
+
+<h5 id="sample">Sample</h5>
+<pre class="highlight plaintext"><code>[ {property: 'keys:consumerKey', value: 'wWbo8MBQ0nQ' },
+  {property: 'rootPath', value: path.join(process.cwd(), 'input') }]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>property</td>
+<td>string</td>
+<td>Yes</td>
+<td>Your name for your property</td>
+</tr>
+<tr>
+<td>value</td>
+<td>string, function, Boolean, number, object</td>
+<td>Yes</td>
+<td>The value of your setting</td>
+</tr>
+</tbody></table>
+
+<h3 id="4.-extensions">4. Extensions</h3>
+
+<p>Your application may use one or more extensions. Extensions can provide potential configuration components or actual runtime components. Extensions are a good way to design resuable components that can be shared and reused across projects. </p>
+
+<h5 id="sample">Sample</h5>
+<pre class="highlight plaintext"><code>extensions: [ file: {}]
+</code></pre>
+
+<p>Extensions are loaded in the order in which they are specified. </p>
+
+<h3 id="5.-services">5. Services</h3>
+
+<p>Your app can contain a service. A service is an object that represents a concrete extension of the API.</p>
+
+<h5 id="sample">Sample</h5>
+<pre class="highlight plaintext"><code>[ { name: 'keys:consumerKey', value: 'wWbo8MBQ0nQ' },
+  {property: 'rootPath', value: path.join(process.cwd(), 'input') }]
+</code></pre>
+
+<h5 id="specification">Specification</h5>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Your name of your service</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>Yes</td>
+<td>A function or reference to a plugin that creates an object</td>
+</tr>
+<tr>
+<td>args</td>
+<td>array of strings, functions, objects, booleans</td>
+<td>Optional</td>
+<td>a list of the dependencies used by the service</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>string (constructor, function, literal)</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service</td>
+</tr>
+</tbody></table>
+
+<h5 id="implicit-properties">Implicit Properties</h5>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>this.name</td>
+<td>the name of the service</td>
+</tr>
+<tr>
+<td>this.logger</td>
+<td>A reference to the context&rsquo;s logger</td>
+</tr>
+<tr>
+<td>this.publish</td>
+<td>a handle to publish a message to the context</td>
+</tr>
+</tbody></table>
+
+<h3 id="6.-sources">6. Sources</h3>
+
+<p>A source is an object that sources external events. By creating a source, you can bind events to listeners and start functions and pipelines once the events have been emitted.</p>
+
+<h5 id="sample">Sample</h5>
+<pre class="highlight plaintext"><code>[ {
+   name: 'sampleSource',
+   provider: 'compris:dir',
+   args: ['$settings:rootPath'],
+   bindings: { 'created' : 'read' }
+   } ]
+</code></pre>
+
+<h5 id="specification">Specification</h5>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>string</td>
+<td>Yes</td>
+<td>Your name of your service</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>string</td>
+<td>Yes</td>
+<td>A function or reference to a plugin that creates an object</td>
+</tr>
+<tr>
+<td>args</td>
+<td>array of strings, functions, objects, booleans</td>
+<td>Optional</td>
+<td>a list of the dependencies used by the service</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>string (constructor, function, literal)</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service</td>
+</tr>
+</tbody></table>
+
+          <h4 id="extending-the-agent">Extending the Agent</h4>
+
+<h3 id="concept">Concept</h3>
+
+<p>An Extension is an Object that adds on reusable configuration elements. These configuration elements are call plugins. An extension may provide one or more plugins to the agent or an application. Plugins are used to build runtime components (Sources, Services, Pipelines, Handlers, etc). Extensions are meant to be small reusable chuncks of code that follow in the tradition of Node Modules but conform to a specific interface so they can be loaded by node.js an the agent.</p>
+
+<h3 id="specification">Specification</h3>
+
+<p>An extension must be formally specified in an app or agent configuration file.</p>
+
+<h3 id="spec-rules">Spec Rules</h3>
+
+<ul>
+<li>An Extension specification MUST include a module or a file key</li>
+<li>A module and file attributes are mutually exclusive</li>
+<li>An Extension specification MAY include (configuration) options</li>
+</ul>
+<pre class="highlight plaintext"><code>extensions: [     
+  { module : 'module-id', options : {enabled : true, silent: true}},
+  { file   : './path/to/file', options : {env : debug}},
+],
+</code></pre>
+
+<p><strong>Notes on the module id</strong></p>
+
+<p>Module and file really do the same thing. They are both included for semantic reasons. In general, they are used as follows:</p>
+
+<ul>
+<li>module indicates this is a packaged module resolves using the node module algorithm living (most likely) in the node_modules folder of the agent or app directory.</li>
+<li>file points at a at a JS file that exports a proper extension interface, the root directory of a CommonJS package (the directory containing the package.json</li>
+</ul>
+
+<h3 id="options">Options</h3>
+
+<p>An extension may receive options at attachment time. Options provide a means for declaring environment specific configuration data to the extension. </p>
+
+<p><strong>Note</strong>: Options are not resolved so they SHOULD NOT include references.</p>
+
+<h3 id="resolution-rules">Resolution Rules</h3>
+
+<ul>
+<li>A file path is resolved relative to the specifying containers home directory</li>
+<li>A module or file path that points at a CommonJS package will use the main file or index.js as the extension entry point</li>
+</ul>
+
+<p>For complete detailed information check out the <a href="http://nodejs.org/api/modules.html">nodejs docs</a> </p>
+
+<h3 id="visibility-rules">Visibility Rules</h3>
+
+<ul>
+<li>If the extension is loaded by the agent then the agent and all applications can use the extensions plugins. </li>
+<li>If the extension is declared by the app then only the app can use the extension&rsquo;s plugins.</li>
+<li>If the extension is declared by both the app and the agent the app will use the plugins provided by the extension declared by the app.</li>
+</ul>
+
+<h3 id="implementation">Implementation</h3>
+
+<ul>
+<li>An Extension MUST declare a name</li>
+<li>An Extension SHOULD declare a version</li>
+<li>An Extension MAY declare a description</li>
+<li>An Extension MAY declare a provider</li>
+<li>An Extension MUST be either and object of a function that produces an object</li>
+<li>An Extension MUST expose a method named attach that takes a call callback</li>
+</ul>
+
+<h3 id="prototypical-extension">Prototypical Extension</h3>
+<pre class="highlight plaintext"><code>module.exports = {
+
+    name    : 'my-extension',
+    version : 'major.minor.patch',
+    provider: 'my organization',
+
+    attach: function(options, callback){
+        }   
+}
+</code></pre>
+
+<h3 id="prototypical-extension-module">Prototypical Extension Module</h3>
+<pre class="highlight plaintext"><code>module.extension = function(){
+        'use strict';
+    return {
+        ... prototypical extension
+    }
+}
+</code></pre>
+
+<h3 id="binding-mechanism">Binding Mechanism</h3>
+
+<p>The attach method adds plugins to a particular container</p>
+
+<h3 id="attach-signature">Attach Signature</h3>
+<pre class="highlight plaintext"><code>attach(options, function(err))
+</code></pre>
+
+<table><thead>
+<tr>
+<th>argument</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>options</td>
+<td>object</td>
+<td>optional</td>
+<td>provides the env specific configurations</td>
+</tr>
+<tr>
+<td>callback</td>
+<td>function</td>
+<td>required</td>
+<td>provides a way of returning an runtime error to the container</td>
+</tr>
+</tbody></table>
+
+<p>Callback takes the form of cb(err). The callback MUST be called.</p>
+
+<h3 id="context">Context</h3>
+
+<p>The value of <code class="prettyprint">this</code> provides the mechanism for adding plugins to the container. <code class="prettyprint">this</code> provides the following binding method:</p>
+<pre class="highlight plaintext"><code>this.registerPlugin(namespace, plugin)
+</code></pre>
+
+<table><thead>
+<tr>
+<th>argument</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>namespace</td>
+<td>string, array</td>
+<td>required</td>
+<td>unique naming</td>
+</tr>
+<tr>
+<td>plugin</td>
+<td>object or function</td>
+<td>required</td>
+<td>provides a way of returning an runtime error to the container</td>
+</tr>
+</tbody></table>
+
+<h3 id="prototypical-attachment">Prototypical Attachment</h3>
+<pre class="highlight plaintext"><code>   attach: function(options, callback){
+    var container = this;
+    try{
+             container.registerPlugin(namespace, object)
+             container.registerPlugin([ns, ns, ns], object)
+             callback &amp;&amp; callback()
+    } catch (err){
+         callback &amp;&amp; callback(err)
+    }
+   }    
+</code></pre>
+
+          <h2 id="tooling">Tooling</h2>
+
+<h4 id="agent-console">Agent Console</h4>
+
+<p>The Agent Console is the application that users can use to manage their Agent&rsquo;s functionality and settings. The following sections describe how to use the Agent Console.</p>
+
+<h3 id="getting-started">Getting Started</h3>
+
+<p>The Agent must be running for you to access the Agent Console. You can access the Agent Console by going to <a href="http://localhost:4444">http://localhost:4444</a> in your browser. If you installed the Agent for the first time, the console will automatically start if you selected the &ldquo;Start Console&rdquo; option during the installation.</p>
+
+<p><em>Note: Agent Console works best in Google Chrome or Mozilla Firefox.</em></p>
+
+<h3 id="registering-your-agent">Registering Your Agent</h3>
+
+<p>Upon entering the console for the first time, you should see a registration token pop up. This six-digit registration code needs to be entered into your Bodhi Mobile App to connect your Agent to your Bodhi Mobile App and to the Bodhi Cloud. Once you&rsquo;ve successfully entered the token into the Bodhi Mobile App, the window will display a &ldquo;SUCCESS&rdquo; message and close. </p>
+
+<p><strong>Important</strong>: If the window pops up and you don&rsquo;t see a token, wait 10 seconds and refresh your browser. If the window doesn&rsquo;t pop up, click on the Registration Code link (see circle #1)in the left navigation bar to open the window.</p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/registrationcode.png" /></p>
+
+<p><em>The registration code should be entered in your Bodhi Mobile App.</em></p>
+
+<h3 id="dashboard">Dashboard</h3>
+
+<p>The Dashboard displays Agent software updates, your installed Agent Apps, and Customer Support information. </p>
+
+<p>Note that clicking the three lines next to the Bodhi Agent icon (see circle #1) will enable you to minimize or expand the navigation bar.</p>
+
+<p>In the top right corner, you can see the Agent&rsquo;s connection status to the Internet (either Online or Offline, see circle #2).</p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/dashboard.png" />
+<em>Screenshot: Agent Console Dashboard Page</em></p>
+
+<h3 id="integration-apps">Integration Apps</h3>
+
+<p>On the Integration Apps page, you can view and install Agent Apps that are available in the Bodhi App Store. You can install apps with one click by clicking the &ldquo;Install Now&rdquo; button. Upon clicking it, the app will start installing. When it has finished installing, you will see a green &ldquo;Installed&rdquo; button.</p>
+
+<p><em>Note: If you receive an red error message, then the App could not be found. Make sure you are connected to the internet and if you continue to have errors, contact Customer Support.</em></p>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/integrationapps.png" />
+<em>Screenshot: Agent Console Integration Apps Page</em></p>
+
+<h3 id="settings">Settings</h3>
+
+<p>On the Settings page, you can change settings that will determine how your Agent operates.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent Name</td>
+<td>Changes the Agent&rsquo;s name</td>
+</tr>
+<tr>
+<td>Role</td>
+<td>Determines the package bundles that the Agent will install</td>
+</tr>
+<tr>
+<td>Timezone</td>
+<td>Sets the timezone</td>
+</tr>
+<tr>
+<td>Currency</td>
+<td>Sets the currency for your Store</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/agentsettings.png" />
+<em>Screenshot: Agent Console Settings Page</em></p>
+
+<h3 id="connection">Connection</h3>
+
+<p>The Connection page displays important information about the Agent&rsquo;s connection details. The Connection panel displays connection status information for the Agent and the right-hand panel lists the connection protocols available to the Agent.</p>
+
+<table><thead>
+<tr>
+<th>Setting</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Base</td>
+<td>Lists the full URI path to the Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Endpoint URL</td>
+<td>Lists the Endpoint URL that the Agent is connected to</td>
+</tr>
+<tr>
+<td>Online Since</td>
+<td>Lists the date &amp; time since the Agent has been running</td>
+</tr>
+<tr>
+<td>Interruptions</td>
+<td>Lists the number of times the Agent had interrupted connections to the Internet</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/connection.png" />
+<em>Screenshot: Agent Console Connection Page</em></p>
+
+<h3 id="about">About</h3>
+
+<p>The About page displays information about your Agent&rsquo;s status. The Bodhi Agent panel lists information about your Agent&rsquo;s identity and structure, and the right-hand panel lists the plug-ins that are available to your Agent.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Status</td>
+<td>Displays the Agent&rsquo;s connection to the Internet (Online/Offline)</td>
+</tr>
+<tr>
+<td>Name</td>
+<td>Your Agent&rsquo;s display name</td>
+</tr>
+<tr>
+<td>Version</td>
+<td>The version number of the Agent</td>
+</tr>
+<tr>
+<td>Agent Directory</td>
+<td>Lists the directory path where the Agent is installed</td>
+</tr>
+<tr>
+<td>Namespace</td>
+<td>Your identifying space in the HS Bodhi Cloud</td>
+</tr>
+<tr>
+<td>Agent ID</td>
+<td>The unique identifier for the Agent</td>
+</tr>
+<tr>
+<td>Authorization</td>
+<td>Displays whether your Agent is authorized to connect to Bodhi Cloud <em>(checkmark means authorized)</em></td>
+</tr>
+<tr>
+<td>Assigned</td>
+<td>Displays whether your Agent has been assigned a Store in the Bodhi Cloud <em>(checkmark means assigned)</em></td>
+</tr>
+<tr>
+<td>Extensions</td>
+<td>Lists the extensions available to the Agent (see <a href="http://redbookconnect.github.io/slate/#extending-the-agent">Extensions</a>)</td>
+</tr>
+<tr>
+<td>Services</td>
+<td>Lists the services implemented within the Agent</td>
+</tr>
+<tr>
+<td>Handlers</td>
+<td>Lists the event handlers implemented in the Agent</td>
+</tr>
+<tr>
+<td>Dependencies</td>
+<td>Lists the NPM packages that the Agent is dependent upon</td>
+</tr>
+</tbody></table>
+
+<p><img alt="image" src="http://redbookconnect.github.io/docs/console/about.png" /> 
+<em>Screenshot: Agent Console About Page</em></p>
+
+          <h4 id="agent-cli">Agent-CLI</h4>
+
+<p>The agent-cli provides administrators, support team members, and developers a tool for interacting with an agent.</p>
+
+<h5 id="general-usage">General Usage</h5>
+
+<p>The general structure of the agent-cli commands are as follows:</p>
+<pre class="highlight plaintext"><code>c:agent-cli [options] &lt;action&gt; [arguments]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<ul>
+<li>  Options are prefixed with <code class="prettyprint">-</code> or <code class="prettyprint">--</code> to separate them from arguments. </li>
+<li>  Each command or action defines the options it uses. </li>
+<li>  <strong>NOTE:</strong> the options are consistent in naming convention and usage across the commands.</li>
+</ul>
+
+<h6 id="common-options">Common Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>none</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>print help about the command</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>-v</td>
+<td>none</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>print essential output</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-h</td>
+<td>&ndash;home</td>
+<td>path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>directive to override safety logic</td>
+</tr>
+</tbody></table>
+
+<h6 id="arguments">Arguments</h6>
+
+<ul>
+<li>  The agent-cli interprets the first argument (non-option) as the action command. </li>
+<li>  All subsequent arguments are command specific. </li>
+</ul>
+
+<p>The commands are grouped into a sub group.
+The following Commands groups are;</p>
+
+<ul>
+<li><strong>Informational Commands</strong></li>
+<li><strong>Lifecycle Commands</strong></li>
+<li><strong>Diagnostic Commands</strong></li>
+<li><strong>Usage Commands</strong></li>
+<li><strong>Configuration Commands</strong></li>
+<li><strong>Update Commands</strong></li>
+</ul>
+
+<h5 id="informational-commands">Informational Commands</h5>
+
+<h6 id="help">help</h6>
+
+<p>The command line provides built in helper functions.</p>
+
+<h6 id="navigation-help">Navigation Help</h6>
+
+<p>For a descriptive list of the commands </p>
+<pre class="highlight plaintext"><code>c:agent-cli --help
+</code></pre>
+
+<h6 id="version">version</h6>
+
+<p>Displays the version information of the agent-cli.</p>
+<pre class="highlight plaintext"><code>c: agent-cli -V
+c: agent-cli --version 
+</code></pre>
+
+<p><strong>NOTE:</strong> The output is a simple version identifier following the semantic versioning rules of major, minor, and build.</p>
+<pre class="highlight plaintext"><code>Major.minor.build (e.g. 1.0.51)
+</code></pre>
+
+<h6 id="info">info</h6>
+
+<p>Used to display information of the Agent-CLI.</p>
+
+<ul>
+<li>Displays the agent-cli splash screen</li>
+<li>Displays the version of the agent-cli</li>
+<li>Displays the working directory of the agent</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli info
+</code></pre>
+
+<h6 id="lifecycle-commands">Lifecycle Commands</h6>
+
+<p>Lifecycle commands allow an administrator to change and check the run state of an agent.</p>
+
+<h6 id="start">start</h6>
+
+<p>Used to attempt to start an agent.</p>
+
+<ul>
+<li>Allows the selection of which agent configuration file to use</li>
+<li>Allows the selection of the agent working directory</li>
+<li>Allows the selection of the agent pidFile to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli start [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;pidFile</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s pidFileagent-cli</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>provides more detailed information output</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>provides only essential information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli start -h
+c:agent-cli start —-help
+c:agent-cli start -f c:\BodhiAgent\agent1.js
+c:agent-cli start —-config c:\BodhiAgent\agent1.js
+c:agent-cli start —-home c:\
+c:agent-cli start —-pidFile c:\BodhiAgent\agent.pid
+c:agent-cli start -v
+c:agent-cli start —verbose
+c:agent-cli start -q
+c:agent-cli start —-quiet
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Error: connect EADDRNOTAVAIL</td>
+<td>the connection url  in the configuration file is bad</td>
+</tr>
+<tr>
+<td>error: unknown option &lsquo;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="status">status</h6>
+
+<p>Used to retrieve the status of a running agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli status [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli status —h
+c:agent-cli status —-help
+c:agent-cli status -f c:\BodhiAgent\agent1.js
+c:agent-cli status —-config c:\BodhiAgent\agent1.js
+c:agent-cli status -v
+c:agent-cli status —verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent available</td>
+<td>agent is running and available</td>
+</tr>
+<tr>
+<td>agent unavailable</td>
+<td>agent has stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="stop">stop</h6>
+
+<p>Used to gracefully stop or shutdown an agent.</p>
+
+<ul>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli stop [options] 
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli stop —h
+c:agent-cli stop —-help
+c:agent-cli stop -f c:\BodhiAgent\agent1.js
+c:agent-cli start —-config c:\BodhiAgent\agent1.js
+c:agent-cli start -v
+c:agent-cli start —verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent stopping now &hellip;</td>
+<td>agent is shutting down gracefully updated</td>
+</tr>
+<tr>
+<td>agent is unavailable</td>
+<td>agent is stopped</td>
+</tr>
+<tr>
+<td>agent unable to start using fully qualified configuration path</td>
+<td>No configuration file at fully qualified configuration path</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-name">set-name</h6>
+
+<p>Used to configure the name of an agent.</p>
+
+<ul>
+<li>Allows the setting of the name of the agent</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli set-name [options] &lt;name&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-name —h
+c:agent-cli set-name —-help
+c:agent-cli set-name Fred
+c:agent-cli set-name -f c:\BodhiAgent\agent1.js Teddy
+c:agent-cli set-name —config c:\BodhiAgent\agent1.js Herb
+c:agent-cli set-name -v Fred
+c:agent-cli set-name --verbose Fred
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-connection">set-connection</h6>
+
+<p>Used to configure a connection to an agent.</p>
+
+<ul>
+<li>Allows the setting of the http url for the connection</li>
+<li>Allows the selection of the agent configuration file to use</li>
+<li>Allows the setting of the timeout value</li>
+<li>Allows the setting of the proxy http url</li>
+<li>Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: agent-cli set-connection [options] connection]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;timeout</td>
+<td>value</td>
+<td>specifies the connections timeout value</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;proxy</td>
+<td>proxy</td>
+<td>specifies the http proxy url</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-connection —h
+c:agent-cli set-connection —-help
+c:agent-cli set-connection https://api.redbookcloud.com
+c:agent-cli set-connection -f c:\BodhiAgent\agent1.js
+c:agent-cli set-connection —-config c:\BodhiAgent\agent1.js
+c:agent-cli set-connection --timeout 20000
+c:agent-cli set-connection —-proxy http://proxy.redbookcloud.com
+c:agent-cli set-connection -v https://api.redbookcloud.com
+c:agent-cli set-connection --verbose https://api.redbookcloud.com
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-logger">set-logger</h6>
+
+<p>Used to configure the logging of an agent.</p>
+
+<ul>
+<li>  Allows the setting of the log file location </li>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the level of logging information</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: set-logger [options
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;file</td>
+<td>filename</td>
+<td>fully qualified filename of the the log file location</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;level</td>
+<td>level</td>
+<td>specifies the log level (error, warn, info, verbose, debug)</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-logger —h
+c:agent-cli set-logger —-help
+c:agent-cli set-logger Fred
+c:agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:agent-cli set-logger —-file c:\BodhiAgent\test.log
+c:agent-cli set-logger -f c:\BohiAgent\agent1.js
+c:agent-cli set-logger --level error
+c:agent-cli set-logger —-level warn
+c:agent-cli set-logger —-level info
+c:agent-cli set-logger —-level verbose
+c:agent-cli set-logger —-level debug
+c:agent-cli set-logger -v
+c:agent-cli set-logger —-verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="set-management">set-management</h6>
+
+<p>Used to configure the management endpoint for an agent.</p>
+
+<ul>
+<li>  Allows the setting of the log file location </li>
+<li>  Allows the selection of the agent configuration file to use</li>
+<li>  Allows the setting of the http port</li>
+<li>  Allows the setting of the http address to listen on</li>
+<li>  Allows the setting of the level of detail to output</li>
+</ul>
+<pre class="highlight plaintext"><code>c: set-management [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>filename</td>
+<td>fully qualified path of the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;port</td>
+<td>port address</td>
+<td>specifies the management http port address</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;connection</td>
+<td>url:port</td>
+<td>specifies the mnagement url and port address</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli set-management https://api.bodhi.space
+c:agent-cli set-management —h
+c:agent-cli set-management —-help
+c:agent-cli set-management -f c:\BodhiAgent\agent1.js
+c:agent-cli set-management —-config c:\BodhiAgent\agent1.js
+c:agent-cli set-management —-port 4444
+c:agent-cli set-management —-connection https://api.bodhi.space:4444
+c:agent-cli set-management -v https://api.bodhi.space
+c:agent-cli set-management -- verbose https://api.bodhi.space
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent updated</td>
+<td>the agent configuration file has be successfully updated</td>
+</tr>
+<tr>
+<td>No agent available at <location></td>
+<td>there is no agent configuration file at the specific location</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="diagnostic-commands">Diagnostic Commands</h5>
+
+<p>Diagnostic commands are used by an administrator to troubleshoot an agent that is having trouble entering a running state or to test environmental specific details uniformly across platforms.</p>
+
+<h6 id="check-core">check-core</h6>
+
+<p>Used to retrieve information of the agent-core that is being used</p>
+
+<ul>
+<li>Displays the version of the current agent.</li>
+<li>Displays the working directory of the current agent.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli check-core [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-core
+c:agent-cli check-core —h
+c:agent-cli check-core —-help
+</code></pre>
+
+<h6 id="check-config">check-config</h6>
+
+<p>Used to check for configuration problems in the agent. </p>
+
+<ul>
+<li>The agent will load and process all configuration files, </li>
+<li>Displays agent apps that are installed</li>
+<li>Will not cause agent to enter into a ready state. </li>
+<li><strong>NOTE:</strong> This command is safe to run even if there is a agent currently running.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli check-config [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>full filename</td>
+<td>specifies the agent&rsquo;s configuration file to use</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory path</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+<tr>
+<td>-q</td>
+<td>&ndash;quiet</td>
+<td>none</td>
+<td>prints only essential information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-config
+c:agent-cli check-config —h
+c:agent-cli check-config —-help
+c:agent-cli check-config -f c:BodhiAgent\agent1.js
+c:agent-cli check-config —-config c:\BodhiAgent\agent1.js
+c:agent-cli check-config —-home c:\BodhiAgent
+c:agent-cli check-config -v
+c:agent-cli check-config —-verbose
+c:agent-cli check-config -q
+c:agent-cli check-config —-quiet
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="check-connection">check-connection</h6>
+
+<p>Used to check for connection issues with an agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli check-connection [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-config
+c:agent-cli check-config —h
+c:agent-cli check-config —-help
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution from the agent&rsquo;s host</li>
+<li>Check the TCP port is reachable by opening up a connection on host:port</li>
+<li>Issue a HTTP GET against the ping endpoint of the system</li>
+</ol>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="check-route">check-route</h6>
+
+<p>Used to check for network problems (firewalls &amp; proxy rules) from the perspective of the agent runtime. </p>
+<pre class="highlight plaintext"><code>c:agent-cli check-route &lt;scheme://host:port/path&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli check-route http://localhost:4444/#/dashboard
+c:agent-cli check-route —h
+c:agent-cli check-route —-help
+c:agent-cli check-route -v http://localhost:4444/#/dashboard
+c:agent-cli check-route —-verbose http://localhost:4444/#/dashboard
+</code></pre>
+
+<p>The provided URL will go through the following checks:</p>
+
+<ol>
+<li>Check the URL format</li>
+<li>Check the DNS resolution of host/IP</li>
+<li>Check that the TCP port reachable by opening up a connection on host:port</li>
+<li>If scheme is http of https then issue a HTTP GET against the specified URL</li>
+</ol>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Got <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+<td>resolved the provided <a href="scheme://host:port/path">scheme://host:port/path</a></td>
+</tr>
+<tr>
+<td>null unresolved</td>
+<td>problem with the <a href="host:port/path">host:port/path</a></td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="usage-commands">Usage Commands</h5>
+
+<h6 id="console">console</h6>
+
+<p>Used to start the web console in the default browser that is set for the system. </p>
+<pre class="highlight plaintext"><code>c:agent-cli console
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli console
+c:agent-cli console -h
+c:agent-cli console --help
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="configuration-commands">Configuration Commands</h5>
+
+<h6 id="reset">reset</h6>
+
+<p>Used to reset an agent&rsquo;s state by deleting the .agent file from the specified working directory.</p>
+<pre class="highlight plaintext"><code>c:agent-cli reset [options]
+</code></pre>
+
+<p><strong>NOTE:</strong> Using this command will delete the .agent file which contains the agent&rsquo;s identity</p>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the agent to reset regardless of start</td>
+</tr>
+<tr>
+<td>-H</td>
+<td>&ndash;HARD</td>
+<td>none</td>
+<td>forces the reset the name and namespace of an agent</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli reset
+c:agent-cli reset -h
+c:agent-cli reset --help
+c:agent-cli reset --home c:\BodhiAgent
+c:agent-cli reset -F
+c:agent-cli reset -force
+c:agent-cli reset -H
+c:agent-cli reset -hard
+c:agent-cli reset -v
+c:agent-cli reset --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent reset</td>
+<td>.agent file as been deleted</td>
+</tr>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="revoke">revoke</h6>
+
+<p>Used to revoke an agent&rsquo;s access token.</p>
+
+<ul>
+<li><strong>NOTE:</strong> This command will leave all other agent data intact.</li>
+</ul>
+<pre class="highlight plaintext"><code>c:agent-cli revoke [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli revoke
+c:agent-cli revoke -h
+c:agent-cli revoke --help
+c:agent-cli revoke --home c:\BodhiAgent
+c:agent-cli revoke -v
+c:agent-cli revoke --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Authorization revoke</td>
+<td>the Authorization token as been removed</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="unassign">unassign</h6>
+
+<p>Used to remove the agent&rsquo;s association to a namespace.</p>
+<pre class="highlight plaintext"><code>c:agent-cli unassign [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>none</td>
+<td>&ndash;home</td>
+<td>directory</td>
+<td>fully qualified path of the agent&rsquo;s working directory</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli unassign
+c:agent-cli unassign -h
+c:agent-cli unassign --help
+c:agent-cli unassign --home c:\BodhiAgent
+c:agent-cli unassign -v
+c:agent-cli unassign --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>No agent available at working directory</td>
+<td>agent.js file missing from the working directory</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="init">init</h6>
+
+<p>Used to initialize or create the agent&rsquo;s configuration file.</p>
+<pre class="highlight plaintext"><code>c:agent-cli init [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli init
+c:agent-cli init -h
+c:agent-cli init --help
+c:agent-cli init --config c:\BodhiAgent\agent.js
+c:agent-cli init -f
+c:agent-cli init --force
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Agent created</td>
+<td>An agent configuration file as being created in the working directory</td>
+</tr>
+<tr>
+<td>Agent already exist Use -F or &ndash;force to recreate</td>
+<td>Configuration file already exists</td>
+</tr>
+<tr>
+<td>serror: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="install-app">install-app</h6>
+
+<p>Used to install an application into the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli install-app [options] &lt;app&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli install-app agent-app-weather
+c:agent-cli install-app -h
+c:agent-cli install-app --help
+c:agent-cli install-app --f c:\BodhiAgent\agent.js
+c:agent-cli install-app --config c:\BodhiAgent\agent.js
+c:agent-cli install-app -v agent-app-weather
+c:agent-cli install-app --verbose agent-app-weather
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Unable to locate the application [application]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="install-ext">install-ext</h6>
+
+<p>Used to install an extension into the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli install-ext [options] &lt;app&gt;
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-f</td>
+<td>&ndash;config</td>
+<td>directory</td>
+<td>fully qualified filename of the agent&rsquo;s configuration file</td>
+</tr>
+<tr>
+<td>-F</td>
+<td>&ndash;force</td>
+<td>none</td>
+<td>forces the creation of the agent.js</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli install-ext agent-ext-csv-to-json
+c:agent-cli install-ext -h
+c:agent-cli install-ext --help
+c:agent-cli install-ext --f c:\BodhiAgent\agent.js
+c:agent-cli install-ext --config c:\BodhiAgent\agent.js
+c:agent-cli install-ext -v agent-ext-csv-to-json
+c:agent-cli install-ext --verbose agent-ext-csv-to-json
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Unable to locate the extension [extension]</td>
+<td>Name is not found or is incorrect</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h5 id="update-commands">Update Commands</h5>
+
+<h6 id="update-core">update-core</h6>
+
+<p>Used to update to the latest version of the agent.</p>
+<pre class="highlight plaintext"><code>c:agent-cli update-core [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli update-core
+c:agent-cli update-core -h
+c:agent-cli update-core --help
+c:agent-cli update-core -v
+c:agent-cli update-core --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent-core@x.x.x node_modules\agent-core</td>
+<td>version number and location of the console module</td>
+</tr>
+<tr>
+<td>agent-core updated</td>
+<td>Agent core was successfully updated</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+<h6 id="update-console">update-console</h6>
+
+<p>Used to update to the latest version of the web console.</p>
+<pre class="highlight plaintext"><code>c:agent-cli update-console [options]
+</code></pre>
+
+<h6 id="options">Options</h6>
+
+<table><thead>
+<tr>
+<th>short</th>
+<th>long</th>
+<th>arg</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>-h</td>
+<td>&ndash;help</td>
+<td>none</td>
+<td>prints a descriptive list of the commands</td>
+</tr>
+<tr>
+<td>-v</td>
+<td>&ndash;verbose</td>
+<td>none</td>
+<td>prints more detailed information output</td>
+</tr>
+</tbody></table>
+<pre class="highlight plaintext"><code>c:agent-cli update-console
+c:agent-cli update-console -h
+c:agent-cli update-console --help
+c:agent-cli update-console -v
+c:agent-cli update-console --verbose
+</code></pre>
+
+<h6 id="return-response">Return Response</h6>
+
+<table><thead>
+<tr>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>agent-console@x.x.x node_modules\agent-console</td>
+<td>version number and location of the console module</td>
+</tr>
+<tr>
+<td>agent-console updated</td>
+<td>Agent console was successfully updated</td>
+</tr>
+<tr>
+<td>error: unknown option &#39;option&rsquo;</td>
+<td>Bad option</td>
+</tr>
+</tbody></table>
+
+          <h1 id="bodhi-mobile">Bodhi Mobile</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>Mobile Container API</p>
+
+<p>The <strong><a href="http://mobileapi.bodhi.space">Bodhi Mobile API</a></strong> provides application developers access to native device features for use in web applications. These features are typically unavailable in the HTML5 specification, not uniformly supported across all mobile browsers or improve on the orginal HTML5 spec. In some cases new features have been added that combine several device characteristics into one, for example bar code scanning uses camera storage and image recognition.</p>
+
+<p>There is only one API required to deliver applications on Android, iOs or Windows phones.</p>
+
+<p>The Bodhi Mobile API provides interface to the native features of a mobile device across 3 platforms. iOS, Android, and Windows Phone/</p>
+
+<p>See descriptions and info below:: (For full implementation details, see our detailed docs on </p>
+
+<p><strong><a href="http://mobileapi.bodhi.space">Bodhi Mobile API</a></strong></p>
+
+          <h2 id="getting-started">Getting Started</h2>
+
+<p>Bodhi Mobile is a mobile application than allows users to access their data on any mobile device.</p>
+
+<p>With the Bodhi Mobile for iPhone and iPad, you can access Bodhi applications for restaurants, anywhere, anytime. The mobile app lets employees, managers and executives stay informed about their restaurant operations, sales and labor activities. </p>
+
+<h5 id="the-easiest-way-to-get-your-app-out-to-customers">The easiest way to get your app out to customers</h5>
+
+<p><a href="https://itunes.apple.com/us/app/bodhi-mobile/id967184526?mt=8"><img src="../images/btn_itunes.png"></a>
+<a href="https://market.android.com/details?id=com.bodhi.mobile.android"><img src="../images/btn_play.png"></a>
+<a href="http://www.windowsphone.com/en-us/store/app/bodhi-mobile/aed07efa-99ad-482d-95a9-90b37fe96722"><img src="../images/btn_windows.png"></a></p>
+
+          <h2 id="environmental-setup">Environmental Setup</h2>
+
+<p>This is how you setup Bodhi mobile and do app store stuff and mobile container stuff etc</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+          </div>
+      </div>
+    </div>
+  </body>
 </html>
