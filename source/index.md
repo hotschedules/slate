@@ -25,7 +25,6 @@ includes:
   
   - bodhimobile/overview
   - bodhimobile/gettingstarted
-  - bodhimobile/envsetup
 
 search: true
 ---
