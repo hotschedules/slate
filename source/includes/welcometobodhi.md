@@ -1,7 +1,7 @@
-#Welcome to Bodhi
-This documentation is intended for the developer wanting to integrate into the Bodhi PaaS (Platform as a Service) and SaaS (Software as a Service) by:
+#Welcome to HotSchedules IoT (Internet of Things) Platform 
+This documentation is intended for the developer wanting to integrate into the HotSchedules IoT Platform by:
 
-* Building applications to the the Bodhi Cloud APIs
+* Building applications to the the HotSchedules IoT Platform Cloud APIs
 * Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile
 * Building a data integration application into your point of sale system to be stored and accessed from our cloud solution
 
@@ -20,7 +20,3 @@ You need to provide two important details for the HotSchedules [sales team](mail
 
 * Name
 * Email Address
-
-###Accessing Bodhi Tools
-
-The Bodhi product has a rich set of tools to access your namespace.  Once you have your namespace and administrator's credentials, go to [Bodhi Tools](https://tools.bodhi.space/#/) to use [Bodhi Query](http://docs.bodhi.space/#bodhi-query41) to manage and query your data, manage your namespace's types and data using [Bodhi Types](http://docs.bodhi.space/#bodhi-types40), or to access to the [Bodhi API Documentation](https://api.bodhi.space/apidocs/index.html).  
