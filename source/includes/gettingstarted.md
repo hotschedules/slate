@@ -1,4 +1,4 @@
-#Welcome to HotSchedules IoT Platform
+#HotSchedules IoT Platform
 This documentation is intended for the developer wanting to integrate into the HotSchedules IoT (Internet of Things) Platform by:
 
 * Building applications to the the HotSchedules IoT Platform Cloud APIs
