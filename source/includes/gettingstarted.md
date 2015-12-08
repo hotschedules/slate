@@ -1,5 +1,5 @@
-#Welcome to HotSchedules IoT (Internet of Things) Platform
-This documentation is intended for the developer wanting to integrate into the HotSchedules IoT Platform by:
+#Welcome to HotSchedules IoT Platform
+This documentation is intended for the developer wanting to integrate into the HotSchedules IoT (Internet of Things) Platform by:
 
 * Building applications to the the HotSchedules IoT Platform Cloud APIs
 * Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile
