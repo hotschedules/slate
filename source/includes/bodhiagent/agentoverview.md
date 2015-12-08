@@ -1,4 +1,4 @@
-#HotSchedules IoT Platform Agent
+#Agent
 
 ## Overview
 HotSchedules IoT Platform Agent provides a single integration point that enables in-store and near-store data collection.
