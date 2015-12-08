@@ -8,7 +8,6 @@ With the Bodhi Mobile for iPhone and iPad, you can access Bodhi applications for
 
 
 #####The easiest way to get your app out to customers 
-
  
 [<img src="../../images/btn_itunes.png">](https://itunes.apple.com/us/app/bodhi-mobile/id967184526?mt=8)
 [<img src="../../images/btn_play.png">](https://market.android.com/details?id=com.bodhi.mobile.android)
