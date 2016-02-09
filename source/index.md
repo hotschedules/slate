@@ -21,8 +21,10 @@ includes:
   - bodhiagent/Howto/extensions
   - bodhiagent/agenttooling/agenttools
   - bodhiagent/agenttooling/agentcli
- 
-  
+  - command-line/app-tools
+  - command-line/publishingapps
+  - command-line/bodhi-cli
+  - command-line/bodhi-types 
   - bodhimobile/overview
   - bodhimobile/gettingstarted
 
