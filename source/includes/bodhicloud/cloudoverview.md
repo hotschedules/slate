@@ -1,5 +1,4 @@
-#APIServer 
+#IOT Platform's APIServer 
 
 ## Overview
-The HotSchedules IoT Platform APIServer is a set of secure APIs that are used to store your data.  
-
+The HotSchedules IoT Platform APIServer is a set of secure REST APIs that are used to store your data.  

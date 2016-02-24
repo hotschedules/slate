@@ -13,7 +13,7 @@ Each API has examples and an opportunity to _*Try it out!*_.  You can add data u
 - Enter username
 - Enter password
 - Click Try it out!
-- You should see a Response Code 200;  Now you are logged into the APIDocs
+- You should see a Response Code 200
 - Scroll back to the top of the page and enter your Namespace in the box provided and click Explore 
 
 ### Exploring the APIDocs
