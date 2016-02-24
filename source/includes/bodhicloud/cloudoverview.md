@@ -10,7 +10,7 @@ If you enter your credentials (username and password) and click Explore, you wil
 
 Each API has examples and an opportunity to _*Try it out!*_.  You can add data using our provided types or create your own type and add data.  NOTE: Should you create your own type, the new type will show up in the API Documentation for your namespace.
 
-### LogIn to the IoT Platform Cloud API Documentation
+### Logging into the IoT Platform Cloud API Documentation
 
 - Go to  <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>
 - Click Loginform from the list of Bodhi Cloud API docs
