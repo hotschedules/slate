@@ -44,36 +44,30 @@
       <div class="dark-box"></div>
       <div class="content">
         
-          <h1 id="hotschedules-iot-platform">HotSchedules IoT Platform</h1>
+          <h1 id="hotschedules-iot-platform-for-developers">HotSchedules IoT Platform for Developers</h1>
+
+<p>Restaurant operators need access to data that helps them work more productively and efficiently. Your job is to deliver it.  The HotSchedules IoT Platform for Developers can help you deliver work more productively and efficiently through a set of software modules that collect data from virtually any source in real-time and then deliver select data that is relevant, timely and actionable.</p>
+
+<p>Whether you work for a restaurant, a software company or for yourself - wherever you are, whatever you do - IoT Platform gives you the power to innovate faster and cheaper than ever before.</p>
+
+<h3 id="getting-started">Getting Started</h3>
 
 <p>This documentation is intended for the developer wanting to integrate into the HotSchedules IoT (Internet of Things) Platform by:</p>
 
 <ul>
-<li>Building applications to the the HotSchedules IoT Platform Cloud APIs</li>
-<li>Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile</li>
-<li>Building a data integration application into your point of sale system to be stored and accessed from our cloud solution</li>
+<li>Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.<br></li>
+<li>Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile.  Build applications for restaurants, anywhere and anytime.</li>
+<li>Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection</li>
 </ul>
 
-<h3 id="pre-requisites">Pre-requisites</h3>
-
-<h3 id="creating-a-namespace">Creating a namespace</h3>
-
-<p>Contact your HotSchedules <a href="mailto:contactcenter@hotschedules.com">sales-team </a> or <a href="https://www.hotschedules.com/customer-care/">Customer Support </a></p>
-
-<h3 id="what-is-a-namespace?">What is a namespace?</h3>
+<h4 id="what-is-a-namespace?">What is a namespace?</h4>
 
 <p>A namespace is your secured storage location of HotSchedules’ cloud solution for your business.
 Your namespace utilizes user profiles that are configured by your namespace administrator for different access levels to access your business data (e.g.stores, inventory, labor, and sales data)</p>
 
-<h3 id="creating-your-namespace">Creating your namespace</h3>
+<h4 id="creating-your-namespace">Creating your namespace</h4>
 
-<p>You need to provide two important details for the HotSchedules <a href="mailto:contactcenter@hotschedules.com">sales team</a>:</p>
-
-<ul>
-<li>Name</li>
-<li>Email Address
-~<br></li>
-</ul>
+<p>The <a href="http://developer.bodhi.space/">HotSchedules IoT Plaltform Developer Portal</a> has an easy sign up process to quickly get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.</p>
 
           <h1 id="apiserver">APIServer</h1>
 
@@ -83,11 +77,35 @@ Your namespace utilizes user profiles that are configured by your namespace admi
 
           <h2 id="getting-started">Getting Started</h2>
 
-<p>To access the HotSchedules IoT Platform Cloud API, you need to login with you user and password which is provided by HotSchedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a> and can also be accessed through <a href="https://tools.bodhi.space/#/">Bodhi Tools</a>.  </p>
+<p>To access the HotSchedules IoT Platform Cloud API, you need to login with you user and password which is provided by HotSchedules.  The API docs are available at this location: <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a>.  </p>
 
 <p>If you enter your credentials (username and password) and click Explore, you will see a list of APIs which you can access for your namespace.  The Bodhi Cloud APIs are REST APIs which returns JSON for all responses.  </p>
 
 <p>Each API has examples and an opportunity to <em><em>Try it out!</em></em>.  You can add data using our provided types or create your own type and add data.  NOTE: Should you create your own type, the new type will show up in the API Documentation for your namespace.</p>
+
+<h3 id="login-to-the-iot-platform-cloud-api-documentation">LogIn to the IoT Platform Cloud API Documentation</h3>
+
+<ul>
+<li>Go to  <a href="https://api.bodhi.space/apidocs/index.html">https://api.bodhi.space/apidocs/index.html</a></li>
+<li>Click Loginform from the list of Bodhi Cloud API docs</li>
+<li>Click POST</li>
+<li>Enter username</li>
+<li>Enter password</li>
+<li>Click Try it out!</li>
+<li>You should see a Response Code 200;  Now you are logged into the APIDocs</li>
+<li>Scroll back to the top of the page and enter your Namespace in the box provided and click Explore </li>
+</ul>
+
+<h3 id="exploring-the-apidocs">Exploring the APIDocs</h3>
+
+<p>Once logged into the APIDocs you can both explore the provided types and their respective restful verbs: GET, PUT, DELETE, PATCH.</p>
+
+<ul>
+<li>Click BodhiType</li>
+<li>Click GET /resources/BodhiType</li>
+<li>Click Try it out!</li>
+<li>You can scroll through the Response Body to see all the standard types that the IoT Platform team uses.</li>
+</ul>
 
           <h1 id="agent">Agent</h1>
 
@@ -1961,7 +1979,7 @@ c:agent-cli set-name --verbose Fred
 </tbody></table>
 <pre class="highlight plaintext"><code>c:agent-cli set-connection —h
 c:agent-cli set-connection —-help
-c:agent-cli set-connection https://api.redbookcloud.com
+c:agent-cli set-connection https://api.bodhi.space
 c:agent-cli set-connection -f c:\BodhiAgent\agent1.js
 c:agent-cli set-connection —-config c:\BodhiAgent\agent1.js
 c:agent-cli set-connection --timeout 20000
@@ -2967,6 +2985,543 @@ c:agent-cli update-console --verbose
 <td>Bad option</td>
 </tr>
 </tbody></table>
+
+          <h1 id="publishing-applications">Publishing Applications</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>The IoT Platform product family has command line tools that allow administrators, support team members and developers to interact with the Bodhi Agent, Cloud APIs and Mobile Application tools directly.  These tools allows the user access to information about the tool itself, to make configuration changes and to interact at a more direct level to the products. </p>
+
+<p>The command line tools allow users to customize the products to their environment and specifications.  The tools are designed to be simple commands that save the user time and the need to look up documentation.  Each command line tool has a rich set of help and quick descriptions of each of the commands allowing the user to quickly use the products.  Many of the tools encapsulate complicated curl and json. </p>
+
+<ul>
+<li><p><strong>Agent Command Line Interface (CLI)</strong> are a complete set command line tools to work with the Agent after it is installed. For more information on the Agent CLI <a href="http://docs.bodhi.space/#agent-cli">click here</a>.</p></li>
+<li><p><strong>Bodhi Command Line Interface (CLI)</strong> is a rich set of command line tools that work with the Bodhi Cloud APIs and allows the user to be able to interact with the cloud api&rsquo;s directly setting up the environment and managing types, data and information quickly and directly: <a href="http://docs.bodhi.space/#bodhi-command-line-interface">http://docs.bodhi.space/#bodhi-command-line-interface</a>. </p></li>
+<li><p><strong>Mobile Applications Command Line Interface (CLI)</strong> are command line tools enabling the mobile application developer to create, build and publish their mobile applications to the IoT Platform Cloud and immediately accessbible by Bodhi Mobile.  For more information on  Mobile Application CLI <a href="http://docs.bodhi.space/#app-tools">click here</a>.</p></li>
+</ul>
+
+          <h4 id="app-tools">app-tools</h4>
+
+<p>app-tools is a command line tool, bundled with bodhi-cli, that allows app developers to quickly generate
+an app and publish it to the cloud so that it can be installed by the developer into their namespace.</p>
+
+<h3 id="local-commands">Local Commands</h3>
+
+<h3 id="app-creation-commands">App Creation Commands</h3>
+
+<h3 id="new-app">new-app</h3>
+
+<p>Creates a new app skeleton in /apps folder based on the type of skeleton app specified. </p>
+
+<p>Notes:</p>
+
+<ul>
+<li>App name must be unique to the namespace.</li>
+<li>The app&rsquo;s profile name is the same as the app name.</li>
+<li>Once app name and profile name has been specified, it cannot be changed.</li>
+</ul>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools new-app &lt;app-name&gt; [meta-data-options] [env-options]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>app name</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>See environment options above (environment options are only needed for app-generator).</p>
+
+<p>Meta Data Options:</p>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>short</th>
+<th>arg</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>type</td>
+<td>t</td>
+<td>custom (default), app generator, angular</td>
+<td>specifies the type of skeleton project to create</td>
+</tr>
+<tr>
+<td>model</td>
+<td>m</td>
+<td>resource type</td>
+<td>specifies the resource type for the app generator function</td>
+</tr>
+</tbody></table>
+
+<h5 id="return">Return</h5>
+
+<p>None.</p>
+
+<h5 id="custom-app">Custom App</h5>
+
+<p>Creates a custom app skeleton in /apps/&lt;app-name&gt;.
+The custom app skeleton just has the required files needed to publish the app.</p>
+<pre class="highlight plaintext"><code>&gt; app-tools new-app &lt;app-name&gt; [meta-data-options]
+</code></pre>
+
+<h5 id="angular-app">Angular App</h5>
+
+<p>Creates an angular app skeleton in /apps/&lt;app-name&gt;.</p>
+<pre class="highlight plaintext"><code>&gt; app-tools new-app &lt;app-name&gt; -t angular [meta-data-options]
+</code></pre>
+
+<h5 id="app-generator">App Generator</h5>
+
+<p>Creates a list-detail app based on the specified type (-m). The app will list the 20 most recent records fo the specified type. The user can then drill down and see the record in more detail. </p>
+
+<p>Notes:</p>
+
+<ul>
+<li>Environment information is used to grab the type definition remotely from the environment&rsquo;s namespace.</li>
+<li>The model with the select action (specified by the -m flag) will be added to the profile definition upon app creation.</li>
+</ul>
+<pre class="highlight plaintext"><code>&gt; app-tools new-app &lt;app-name&gt; -t app-generator -m &lt;type name&gt; [meta-data-options] [env-options]
+</code></pre>
+
+<h3 id="profile-definition-commands">Profile Definition Commands</h3>
+
+<p>The following commands allow the user to edit/view the local profile definition. When the user publishes the app, the cloud will create a unique profile (profile name will be the same as the app name) specifically for this app. Any user with this profile will then be able to use this app.</p>
+
+<h3 id="profile-action-options">Profile Action Options</h3>
+
+<table><thead>
+<tr>
+<th>long</th>
+<th>meaning</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>select</td>
+<td>select action allowed on type</td>
+</tr>
+<tr>
+<td>update</td>
+<td>update action allowed on type</td>
+</tr>
+<tr>
+<td>delete</td>
+<td>delete action allowed on type</td>
+</tr>
+<tr>
+<td>insert</td>
+<td>insert action allowed on type</td>
+</tr>
+<tr>
+<td>aggregate</td>
+<td>aggregate action allowed on type</td>
+</tr>
+</tbody></table>
+
+<h3 id="view-profile-def">view-profile-def</h3>
+
+<p>View the local app profile definition.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools view-profile-def
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The local app profile definition.</p>
+
+<h3 id="add-type-to-profile">add-type-to-profile</h3>
+
+<p>Add a type and its allowed actions to the local app profile definition. If the type already exists, it will overwrite it. Application type cannot be edited.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools add-type-to-profile &lt;type&gt; [profile-action-options]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>type</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>See profile action options above.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The local app profile definition.</p>
+
+<h3 id="remove-type-from-profile">remove-type-from-profile</h3>
+
+<p>Remove a type from the local app profile definition. Application type cannot be removed.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools remove-type-from-profile &lt;type&gt;
+</code></pre>
+
+<h6 id="arguments">Arguments</h6>
+
+<ol>
+<li>type</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The local app profile definition.</p>
+
+<h3 id="app-metadata-commands">App Metadata Commands</h3>
+
+<h3 id="edit-title">edit-title</h3>
+
+<p>Edit the app title.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools edit-title &lt;title&gt;
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>title</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>Message stating the title has been changed to &lt;title&gt;.</p>
+
+<h3 id="view-title">view-title</h3>
+
+<p>View the app title.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools view-title
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The app title.</p>
+
+<h3 id="edit-description">edit-description</h3>
+
+<p>Edit the app description.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools edit-description &lt;description&gt;
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>description</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>Message stating description has been changed to &lt;description&gt;.</p>
+
+<h3 id="view-description">view-description</h3>
+
+<p>View the app description.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools view-description
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The app description.</p>
+
+<h3 id="edit-version">edit-version</h3>
+
+<p>Edit the app version.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools edit-version &lt;version&gt;
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>version</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>Message stating the app version has been changed to &lt;version&gt;.</p>
+
+<h3 id="view-version">view-version</h3>
+
+<p>View the app version.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools view-version
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>version</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>None.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The app version.</p>
+
+<h3 id="package.json">Package.json</h3>
+
+<p><strong>General info::</strong></p>
+
+<p>NOTES: Add configure field to package.json in the form below:</p>
+
+<ul>
+<li><p>Path references are all relative to the www/public folder</p></li>
+<li><p>Type references must avoid collisions with other apps; to accomplish this, types should be prefixed with some kind of publisher key which will be validated by the store at install time - this ensures that publishers clobber only the types published by them</p></li>
+<li><p>For &ldquo;install&rdquo; builds, install is normal</p></li>
+<li><p>If there is an upgrade property, the process is as follows:</p>
+
+<ul>
+<li>find the currently installed version</li>
+<li>for each version number between current version and newest version, apply each script in sequence pre-install, then post-install</li>
+<li>if current version == most recent version, apply the pre-install, then update the dml, then install the app, then apply post-install script</li>
+<li>if current version &gt; most recent version, apply all changes in sequence, then update dml and install app</li>
+</ul></li>
+<li><p>Upgrade json and data/scripts pertaining to a version will be maintained in the public folder under version/{version}</p></li>
+</ul>
+<pre class="highlight plaintext"><code>Example JSON for versioning (This is the Inventory App's package.json):
+
+{
+  "configure": {
+    "version": "0.09.03",
+    "install": {
+      "icon": "assets/Icon_BodhiInventory.png", 
+      "model": {
+        "custom_types": [
+          "Types/{key}-InventoryCount.json", 
+          "Types/{key}-InventoryCountTypeNew.json", 
+          "Types/{key}-InventoryPurchaseOrder.json", 
+          "Types/{key}-InventoryVendor.json"
+        ], 
+        "embedded_types": [
+          "Types/{key}-InventoryCountTypeNode.json", 
+          "Types/{key}-InventoryProduct.json", 
+          "Types/{key}-InventoryProductCount.json"
+        ], 
+        "enumerations": [
+          "Enumerations/{key}-InventoryUOMType.json", 
+          "Enumerations/{key}-InventoryPurchaseOrderStatus.json"
+        ]
+      }, 
+      "post-install": [
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeDaily.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeWeekly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeMonthly.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }, 
+        {
+          "action": "POST", 
+          "object": "/{key}-InventoryCountTypeSpot.json", 
+          "path": "/resources/{key}-InventoryCountType"
+        }
+      ]
+    }, 
+    "upgrade": [
+      {
+        "version":"0.02",
+        "description": "change count type Type, migrate data",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.02/Types/{key}-InventoryCountTypeNew.json"
+          },
+        ],
+        "post-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/migrate/from/old/to/new"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryCountTypeOld"
+          }
+        ]
+      },
+      {
+        "version":"0.03.05",
+        "description": "add recipes",
+        "pre-install": [
+          {
+            "action": "POST",
+            "path": "version/0.03/Types/{key}-InventoryRecipes.json"
+          }
+        ]
+      },
+      {
+        "version":"0.07",
+        "description": "we don't support recipes anymore - remove them and associated data",
+        "post-install": [
+          {
+            "action": "DELETE", 
+            "path": "/types/{key}-InventoryRecipes"
+          },
+          {
+            "action": "DELETE", 
+            "path": "/resources/{key}-InventoryRecipes"
+          }
+        ]
+      },
+      {
+        "version":"0.08",
+        "description": "whoops - we are collecting PII -  emergency update",
+        "pre-install": [
+          {
+            "action": "PUT", 
+            "path": "/some/script/path/to/remove/bad/data"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+</code></pre>
+<pre class="highlight plaintext"><code>Generic package.json example:
+
+{ offline: true,
+navigationBar: 'auto',
+new_type_required: false,
+single_container_app: false,
+hide_from_global_store: false,
+troubleshooting_url: null,
+categories: [Object],
+public_path: 'global_store',
+screenshots: [Object],
+installation_urls: [Object],
+global_store_icon: 'global_store/global_store_icon.png',
+"agent/job_parameters": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" "position": }
+"agent/job_parameters_hidden": {
+"data_dir":
+{ "description": "", "required": true, "type": "string", "default": "" }
+}
+</code></pre>
+
+<p>Use the settings JSON object to communicate the meta data about an app. See definitions below:</p>
+
+<p><strong>offline=true/false</strong>  </p>
+
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
+
+<p><strong>single_container_app=true/false</strong>  </p>
+
+<p>single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+
+<p><strong>installation_urls= {http://tools.bodhi.space/xxxx}</strong></p>
+
+<p>For applications with single_container_app = true, developers can provide a set of installation url&rsquo;s to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.</p>
+
+<p><strong>hide_from_global_store=true/false</strong>  </p>
+
+<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+
+<p><strong>new_type_required=true/false</strong>  </p>
+
+<p>new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+
+<p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo;</strong>  </p>
+
+<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p>
+
+<p><strong>categories {}</strong>  </p>
+
+<p>The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, mangagement</p>
+
+<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> </p>
+
+<p>The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
+
+<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong>  </p>
+
+<p>The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>screenshots{}</strong> </p>
+
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>agent/job_parameters:{}</strong> and <strong>agent/job_parameters_hidden:{}</strong></p>
+
+<p>The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p><strong>data_dir:{}</strong></p>
+
+<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
+
+<hr>
 
           <h1 id="bodhi-mobile">Bodhi Mobile</h1>
 

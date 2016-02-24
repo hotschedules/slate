@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_command-line includes_command-line_publishingapps">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h3 id="remote-commands">Remote Commands</h3>
+
+<h3 id="app-publishing-commands">App Publishing Commands</h3>
+
+<h3 id="publish-app">publish-app</h3>
+
+<p>Publishes the app to the namespace specified by the environment. This command must be run in the app folder.</p>
+
+<p>Notes:</p>
+
+<ul>
+<li>Publish-ready app files must be located in a /www folder in the root of the app directory so that the publish-app command can zip it up and send it to the cloud.</li>
+<li>Need to have version, name, profile, and title specified in the package.json when publishing (use the app metadata commands and profile commands above to do this).</li>
+<li>LICENSE, index.html, and package.json are required and must be located in the root of the app directory.</li>
+<li>Only users with the admin profile are allowed to publish apps.</li>
+<li>Max zip file size is 20mb.</li>
+<li>Max number of files is 1024.</li>
+<li>On publish, the cloud creates the profile specified by the package.json&rsquo;s profile definition and then assigns the profile to the developer who published the app.</li>
+</ul>
+
+<p>Within an application&rsquo;s package.json file, there is a settings object which contains valuable metadata about the application which the Global App Store and mobile container use to properly display the application.</p>
+
+<h3 id="informational-commands">Informational Commands</h3>
+
+<p>Get data about the deployed app from the cloud.</p>
+
+<h3 id="list-apps">list-apps</h3>
+
+<p>This command lists all the apps that you can see in your specified environment that are currently deployed in the cloud.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools list-apps [env-options]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>See environment options above.</p>
+
+<h5 id="return">Return</h5>
+
+<p>A list of apps currently in the cloud. Each app entry will show its meta data.</p>
+
+<h3 id="get-profile">get-profile</h3>
+
+<p>This command shows the profile that is associated with your deployed app. This command must be run in the app folder.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>$&gt; app-tools get-profile [env-option]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<p>None.</p>
+
+<h5 id="options">Options</h5>
+
+<p>See environment options above.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The profile the deployed app is currently associated with.</p>
+
+<h3 id="profile-commands">Profile Commands</h3>
+
+<p>Remote commands dealing with the profile associated with the deployed app.</p>
+
+<h5 id="assign-profile-to-user">assign-profile-to-user</h5>
+
+<p>Assign the deployed app&rsquo;s profile to an existing user in the cloud. This command must be run in the app folder.</p>
+
+<h5 id="signature">Signature</h5>
+<pre class="highlight plaintext"><code>&gt; app-tools assign-profile-to-user &lt;username&gt; [env-options]
+</code></pre>
+
+<h5 id="arguments">Arguments</h5>
+
+<ol>
+<li>username</li>
+</ol>
+
+<h5 id="options">Options</h5>
+
+<p>See environment options above.</p>
+
+<h5 id="return">Return</h5>
+
+<p>The user definition.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
