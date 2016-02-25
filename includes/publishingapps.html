@@ -32,14 +32,182 @@
 
 <h2 id="overview">Overview</h2>
 
-<p>The IoT Platform product family has command line tools that allow administrators, support team members and developers to interact with the Bodhi Agent, Cloud APIs and Mobile Application tools directly.  These tools allows the user access to information about the tool itself, to make configuration changes and to interact at a more direct level to the products. </p>
+<h3 id="publishing-your-application">Publishing Your Application</h3>
 
-<p>The command line tools allow users to customize the products to their environment and specifications.  The tools are designed to be simple commands that save the user time and the need to look up documentation.  Each command line tool has a rich set of help and quick descriptions of each of the commands allowing the user to quickly use the products.  Many of the tools encapsulate complicated curl and json. </p>
+<p>If you don&rsquo;t have an app to publish yet please go to the step &ldquo;Agent/Job apps setup&rdquo;</p>
+
+<p><strong>Setup Your Workspace</strong></p>
+
+<blockquote>
+<p>npm install -g bodhi-cli* (sudo npm install -g bodhi-cli) </p>
+</blockquote>
 
 <ul>
-<li><p><strong>Agent Command Line Interface (CLI)</strong> are a complete set command line tools to work with the Agent after it is installed. For more information on the Agent CLI <a href="http://docs.bodhi.space/#agent-cli">click here</a>.</p></li>
-<li><p><strong>Mobile Applications Command Line Interface (CLI)</strong> are command line tools enabling the mobile application developer to create, build and publish their mobile applications to the IoT Platform Cloud and immediately accessbible by Bodhi Mobile.  For more information on  Mobile Application CLI <a href="http://docs.bodhi.space/#app-tools">click here</a>.</p></li>
+<li><p>Initialize your bodhi-cli workspace.</p>
+
+<blockquote>
+<p>mkdir [workspace]
+cd [workspace]</p>
+</blockquote></li>
+<li><p>Use this command to create a new environment ::</p>
+
+<blockquote>
+<p>bodhi init</p>
+</blockquote></li>
+<li><p>This will create a rbc-project.json which will store all your environment info. It will also create an /apps directory where you can add your app for publication.</p></li>
 </ul>
+
+<h3 id="agent/job-apps-setup">Agent/Job apps setup</h3>
+
+<p>List of things we need to have in the folder to be able to submit app to the Bodhi Shop::</p>
+
+<ul>
+<li>Folder (npm app-name)</li>
+<li>index.html (could be empty)</li>
+<li>LICENSE</li>
+<li>package.json (example provided below) </li>
+<li>public (folder) (If no new types are created, skip this step)</li>
+<li> - NewType1.json file</li>
+<li> - NewType2.json file</li>
+<li> - NewType3.json file</li>
+<li> - app icon.png</li>
+<li>www (this folder have all the files above copied to this folder)</li>
+</ul>
+
+<p>Example of Package.json :: </p>
+<pre class="highlight plaintext"><code>#!javascript
+
+{
+  "name": "app-package-name",
+  "version": "0.0.1",
+  "title": "Application Title",
+  "description": "Short Application Description.",
+  "profile": {
+    "name": "app-package-name",
+    "dml": {
+      “BodhiApplication": {
+       "select": {},
+       "update":{},
+       "delete":{},
+       "insert":{}
+      },
+      "NewType1": {
+        "select": {}
+      },
+      "NewType2": {
+        "select": {}
+      }
+    }
+  },
+  "settings": {
+    "categories": [
+      "Aloha",
+      "POS"
+    ],
+    "publisher": "HotSchedules",
+    "npm_package_name": "app-package-name",
+
+
+if you have any related apps you want to install together::
+"related-apps": [
+      "bodhi.aloha-app-transactions",
+      "bodhi.aloha-app-store"
+    ],
+    "public_path": "public",
+    "global_store_icon": "public/icon.png",
+   "type": "agent",    
+(type can be “job”, “agent”, “mobile”, “web” )   
+ "new_type_required": true,
+  "install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+if you have any parameters required to be used with the app we add this section:: 
+ "agent_parameters": {
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 15 minutes",
+        "position": 1
+      }
+    }
+  },
+  "autoUpdateVersion": false
+}
+
+</code></pre>
+
+<h3 id="generic-package.json-flags##">Generic package.json flags##</h3>
+
+<p><strong>offline=true/false</strong>  </p>
+
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
+
+<p><strong>single_container_app=true/false</strong>  </p>
+
+<p>single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+
+<p><strong>hide_from_global_store=true/false</strong>  </p>
+
+<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+
+<p><strong>new_type_required=true/false</strong>  </p>
+
+<p>new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+
+<p><strong>categories {}</strong>  </p>
+
+<p>The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, mangagement</p>
+
+<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> </p>
+
+<p>The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
+
+<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong>  </p>
+
+<p>The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>screenshots{}</strong> </p>
+
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+
+<p><strong>agent/job_parameters:{}</strong> and <strong>agent/job_parameters_hidden:{}</strong></p>
+
+<p>The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p><strong>data_dir:{}</strong></p>
+
+<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
+
+<p><strong>autoUpdateVersion&quot;: false</strong></p>
+
+<p>This flag prevents autoUpdate version of the app each time you are publishing it</p>
 
       </div>
       <div class="dark-box">
