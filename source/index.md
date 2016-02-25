@@ -11,6 +11,7 @@ includes:
 
   - gettingstarted
   - bodhicloud/cloudoverview
+  - bodhicloud/gettingstarted
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
