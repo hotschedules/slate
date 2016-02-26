@@ -2,6 +2,8 @@
 
 ## Overview
 
+To publish application for the IoT Platform, you need to follow a few simple steps to describe your application: 
+
 ### Publishing Your Application
 If you don't have an app to publish yet please go to the step "Agent/Job apps setup"
 
