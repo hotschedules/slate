@@ -2,8 +2,7 @@
 
 ## Overview
 
-To publish application for the IoT Platform, you need to follow a few simple steps to describe your application: 
-
+To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  
 ### Publishing Your Application
 If you don't have an app to publish yet please go to the step "Agent/Job apps setup"
 
@@ -33,6 +32,22 @@ List of things we need to have in the folder to be able to submit app to the Bod
 *  - NewType3.json file
 *  - app icon.png
 * www (this folder have all the files above copied to this folder)
+
+
+To publish an app into the IoT Platform you have to zip up a folder containing the following:
+{code}
+
+	<folder=app-name>
+		<www>
+			index.html (could be empty)
+			LICENSE
+			package.json
+			
+			<public>
+				app_icon.png
+				NewType1.json file
+				NewType2.json file
+				...
 
 Example of Package.json :: 
 
@@ -66,7 +81,7 @@ Example of Package.json ::
       "Aloha",
       "POS"
     ],
-    "publisher": "HotSchedules",
+    "publisher": "your company",
     "npm_package_name": "app-package-name",
     
 
@@ -169,5 +184,5 @@ The data_dir formatted information contains a description, a required flag, type
 
 **autoUpdateVersion": false**
 
-This flag prevents autoUpdate version of the app each time you are publishing it
+This flag prevents autoUpdate version of the app each time you are publishing it.  If you mark this false, you need to manually bump the version of the app each time you update it.  
 
