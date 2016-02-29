@@ -5,35 +5,38 @@
 To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  
 ### Publishing Your Application
 To publish your application you must have the following directory structure for your application:
-{code}
-	<app-name>
-		/www/
-		    /public/
 
+```
+	/<app-name>/
+			/www/
+		    	/public/
+```
 * Folder (npm app-name)
 * Inside the www folder under app-name must contain the following:
-	* index.html (could be empty)
-	* LICENSE (standard apache license file)
-	* package.json (example provided below) 
-	* public (folder) 
-		*  - NewType1.json file
-		*  - NewType2.json file
-		*  - NewType3.json file
-		*  - app icon.png
+	- index.html (could be empty)
+	- LICENSE (standard apache license file)
+	- package.json (example provided below) 
+	- public (folder) 
+		- app icon.png
+		- NewType1.json file
+		- NewType2.json file
+		- NewType3.json file
+
 
 To publish an app into the IoT Platform you have to zip up a folder containing the following:
 {code}
 
-	<folder=app-name>
-		<www>
+	folder=<app-name>
+		folder=<www>
 			index.html (could be empty)
 			LICENSE
 			package.json
 			
-			<public>
+			folder=<public>
 				app_icon.png
 				NewType1.json file
 				NewType2.json file
+				NewType3.josn file
 				...
 
 Example of Package.json :: 
