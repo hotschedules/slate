@@ -4,35 +4,22 @@
 
 To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  
 ### Publishing Your Application
-If you don't have an app to publish yet please go to the step "Agent/Job apps setup"
-
-**Setup Your Workspace**
-
-> npm install -g bodhi-cli* (sudo npm install -g bodhi-cli) 
-
-* Initialize your bodhi-cli workspace.
-> mkdir [workspace]
-> cd [workspace]
-
-* Use this command to create a new environment ::
-> bodhi init
-
-* This will create a rbc-project.json which will store all your environment info. It will also create an /apps directory where you can add your app for publication.
-
-### Agent/Job apps setup ###
-List of things we need to have in the folder to be able to submit app to the Bodhi Shop::
+To publish your application you must have the following directory structure for your application:
+{code}
+	<app-name>
+		/www/
+		    /public/
 
 * Folder (npm app-name)
-* index.html (could be empty)
-* LICENSE
-* package.json (example provided below) 
-* public (folder) (If no new types are created, skip this step)
-*  - NewType1.json file
-*  - NewType2.json file
-*  - NewType3.json file
-*  - app icon.png
-* www (this folder have all the files above copied to this folder)
-
+* Inside the www folder under app-name must contain the following:
+	* index.html (could be empty)
+	* LICENSE (standard apache license file)
+	* package.json (example provided below) 
+	* public (folder) 
+		*  - NewType1.json file
+		*  - NewType2.json file
+		*  - NewType3.json file
+		*  - app icon.png
 
 To publish an app into the IoT Platform you have to zip up a folder containing the following:
 {code}
