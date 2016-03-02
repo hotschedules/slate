@@ -32,47 +32,50 @@
 
 <h2 id="overview">Overview</h2>
 
+<p>To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  </p>
+
 <h3 id="publishing-your-application">Publishing Your Application</h3>
 
-<p>If you don&rsquo;t have an app to publish yet please go to the step &ldquo;Agent/Job apps setup&rdquo;</p>
-
-<p><strong>Setup Your Workspace</strong></p>
-
-<blockquote>
-<p>npm install -g bodhi-cli* (sudo npm install -g bodhi-cli) </p>
-</blockquote>
-
-<ul>
-<li><p>Initialize your bodhi-cli workspace.</p>
-
-<blockquote>
-<p>mkdir [workspace]
-cd [workspace]</p>
-</blockquote></li>
-<li><p>Use this command to create a new environment ::</p>
-
-<blockquote>
-<p>bodhi init</p>
-</blockquote></li>
-<li><p>This will create a rbc-project.json which will store all your environment info. It will also create an /apps directory where you can add your app for publication.</p></li>
-</ul>
-
-<h3 id="agent/job-apps-setup">Agent/Job apps setup</h3>
-
-<p>List of things we need to have in the folder to be able to submit app to the Bodhi Shop::</p>
+<p>To publish your application you must have the following directory structure for your application:</p>
+<pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
+            /www/
+                /public/
+</code></pre>
 
 <ul>
 <li>Folder (npm app-name)</li>
+<li>Inside the www folder under app-name must contain the following:
+
+<ul>
 <li>index.html (could be empty)</li>
-<li>LICENSE</li>
+<li>LICENSE (standard apache license file)</li>
 <li>package.json (example provided below) </li>
-<li>public (folder) (If no new types are created, skip this step)</li>
-<li> - NewType1.json file</li>
-<li> - NewType2.json file</li>
-<li> - NewType3.json file</li>
-<li> - app icon.png</li>
-<li>www (this folder have all the files above copied to this folder)</li>
+<li>public (folder) 
+
+<ul>
+<li>app icon.png</li>
+<li>NewType1.json file</li>
+<li>NewType2.json file</li>
+<li>NewType3.json file</li>
+</ul></li>
+</ul></li>
 </ul>
+
+<p>To publish an app into the IoT Platform you have to zip up a folder containing the following:
+{code}</p>
+
+<p>folder=<app-name>
+        folder=<www>
+            index.html (could be empty)
+            LICENSE
+            package.json</p>
+
+<p>folder=<public>
+                app_icon.png
+                NewType1.json file
+                NewType2.json file
+                NewType3.josn file
+                &hellip;</p>
 
 <p>Example of Package.json :: </p>
 <pre class="highlight plaintext"><code>#!javascript
@@ -104,7 +107,7 @@ cd [workspace]</p>
       "Aloha",
       "POS"
     ],
-    "publisher": "HotSchedules",
+    "publisher": "your company",
     "npm_package_name": "app-package-name",
 
 
@@ -158,7 +161,85 @@ if you have any parameters required to be used with the app we add this section:
 
 </code></pre>
 
-<h3 id="generic-package.json-flags##">Generic package.json flags##</h3>
+<h3 id="generic-package.json-flags">Generic package.json flags</h3>
+
+<p><strong>type=job/agent/mobile/web</strong></p>
+
+<p>In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually Bodhi Mobile.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p>
+
+<p><strong>agent_parameters/job_parameters</strong></p>
+
+<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The following are examples of parameters that can be set for agent or the job applications respectively:</p>
+
+<p>Agent Parameters example:</p>
+<pre class="highlight plaintext"><code>    "agent_parameters": {
+      "config_file_path": {
+        "description": "Config file location",
+        "required": true,
+        "type": "string",
+        "default": "",
+        "setting": "config_file_path"
+      },
+      "data_dir": {
+        "description": "Folder location to save database files for the agent app",
+        "required": true,
+        "type": "string",
+        "default": "C:/bodhiAgent/node_modules/merit-agent-labor/_xmloutput/",
+        "setting": "data_dir"
+      },
+      "number_of_days_to_query": {
+        "description": "Limit query to this number of days",
+        "required": true,
+        "type": "integer",
+        "default": 60,
+        "setting": "number_of_days_to_query"
+      },
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 12 hours",
+        "setting": "interval"
+      },
+      "local_storage_ignore_flag": {
+        "description": "Ignore local storage and write all data",
+        "required": true,
+        "type": "boolean",
+        "default": false,
+        "setting": "local_storage_ignore_flag"
+      }
+    }
+</code></pre>
+
+<p>This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
+Job Parameters example:</p>
+<pre class="highlight plaintext"><code>    "job_parameters": {
+      "timing_expression": {
+        "description": "How often to execute a job",
+        "repeat": true,
+        "type": "string",
+        "default": "60 minutes"
+      },
+      "brink_location": {
+        "description": "The alpha numeric string provided by the Brink POS API to identify the store location, e.g. tSm8y1TMSk7J4ZMyQBpeTg==",
+        "type": "string",
+        "required": true,
+        "setting": "brink_location"
+      },
+      "accessToken": {
+        "description": "The alpha numeric string provided by the Brink POS API to authenticate the user",
+        "type": "string",
+        "required": true,
+        "setting": "accessToken"
+      },
+      "uri": {
+        "description": "The url for the Brink POS API service e.g. https://api2.brinkpos.net/",
+        "type": "string",
+        "required": true,
+        "setting": "uri"
+      }
+    }
+</code></pre>
 
 <p><strong>offline=true/false</strong>  </p>
 
@@ -207,7 +288,7 @@ Examples include financial, inventory, mangagement</p>
 
 <p><strong>autoUpdateVersion&quot;: false</strong></p>
 
-<p>This flag prevents autoUpdate version of the app each time you are publishing it</p>
+<p>This flag prevents autoUpdate version of the app each time you are publishing it.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
 
       </div>
       <div class="dark-box">
