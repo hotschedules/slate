@@ -17,8 +17,6 @@ includes:
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
   - bodhiagent/Howto/installingbodhiagent
-  - bodhiagent/Howto/createingagentapps
-  - bodhiagent/Howto/extensions
   - bodhiagent/agenttooling/agenttools
   - bodhiagent/agenttooling/agentcli
   - publishingapps
