@@ -125,7 +125,90 @@ if you have any parameters required to be used with the app we add this section:
 
 ```
 
-### Generic package.json flags## 
+### Generic package.json flags
+
+**type=job/agent/mobile/web**
+
+In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually Bodhi Mobile.  The "type"="web" defines your application to run as a web application. 
+
+**agent_parameters/job_parameters**
+
+Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The following are examples of parameters that can be set for agent or the job applications respectively:
+
+Agent Parameters example:
+
+```
+    "agent_parameters": {
+      "config_file_path": {
+        "description": "Config file location",
+        "required": true,
+        "type": "string",
+        "default": "",
+        "setting": "config_file_path"
+      },
+      "data_dir": {
+        "description": "Folder location to save database files for the agent app",
+        "required": true,
+        "type": "string",
+        "default": "C:/bodhiAgent/node_modules/merit-agent-labor/_xmloutput/",
+        "setting": "data_dir"
+      },
+      "number_of_days_to_query": {
+        "description": "Limit query to this number of days",
+        "required": true,
+        "type": "integer",
+        "default": 60,
+        "setting": "number_of_days_to_query"
+      },
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 12 hours",
+        "setting": "interval"
+      },
+      "local_storage_ignore_flag": {
+        "description": "Ignore local storage and write all data",
+        "required": true,
+        "type": "boolean",
+        "default": false,
+        "setting": "local_storage_ignore_flag"
+      }
+    }
+```
+
+This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
+Job Parameters example:
+
+```
+    "job_parameters": {
+      "timing_expression": {
+        "description": "How often to execute a job",
+        "repeat": true,
+        "type": "string",
+        "default": "60 minutes"
+      },
+      "brink_location": {
+        "description": "The alpha numeric string provided by the Brink POS API to identify the store location, e.g. tSm8y1TMSk7J4ZMyQBpeTg==",
+        "type": "string",
+        "required": true,
+        "setting": "brink_location"
+      },
+      "accessToken": {
+        "description": "The alpha numeric string provided by the Brink POS API to authenticate the user",
+        "type": "string",
+        "required": true,
+        "setting": "accessToken"
+      },
+      "uri": {
+        "description": "The url for the Brink POS API service e.g. https://api2.brinkpos.net/",
+        "type": "string",
+        "required": true,
+        "setting": "uri"
+      }
+    }
+```
+
 
 **offline=true/false**  
 
