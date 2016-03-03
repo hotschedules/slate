@@ -2477,13 +2477,11 @@ c:agent-cli update-console --verbose
 
 <p>To publish your application you must have the following directory structure for your application:</p>
 <pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
-            /www/
-                /public/
+            /public/
 </code></pre>
 
 <ul>
-<li>Folder (npm app-name)</li>
-<li>Inside the www folder under app-name must contain the following:
+<li>Folder (npm app-name)
 
 <ul>
 <li>index.html (could be empty)</li>
@@ -2500,21 +2498,18 @@ c:agent-cli update-console --verbose
 </ul></li>
 </ul>
 
-<p>To publish an app into the IoT Platform you have to zip up a folder containing the following:
-{code}</p>
-
-<p>folder=<app-name>
-        folder=<www>
-            index.html (could be empty)
-            LICENSE
-            package.json</p>
+<p>To publish an app into the IoT Platform you have to zip up the following:
+{code}
+        index.html (could be empty)
+        LICENSE
+        package.json</p>
 
 <p>folder=<public>
-                app_icon.png
-                NewType1.json file
-                NewType2.json file
-                NewType3.josn file
-                &hellip;</p>
+            app_icon.png
+            NewType1.json file (optional)
+            NewType2.json file (optional)
+            NewType3.josn file (optional)
+            &hellip;</p>
 
 <p>Example of Package.json :: </p>
 <pre class="highlight plaintext"><code>#!javascript
@@ -2600,11 +2595,54 @@ if you have any parameters required to be used with the app we add this section:
 
 </code></pre>
 
-<h3 id="generic-package.json-flags">Generic package.json flags</h3>
+<h3 id="description-of-package.json-contents">Description of package.json contents</h3>
+
+<p><strong>name=&ldquo;app-package-name&rdquo; <em>required</em></strong></p>
+
+<p>The name of your application must match the name of the profile</p>
+
+<p><strong>&ldquo;version&rdquo;: &ldquo;0.0.1&rdquo; <em>required</em></strong></p>
+
+<p>Ideally this is the version of your application that gets posted as versions show for Agent Application in the Agent Event Logs so keeping this version the same as your Agent Application that is published is highly recommended.</p>
+
+<p><strong>&ldquo;title&rdquo;: &ldquo;Application Title&rdquo; <em>required</em></strong></p>
+
+<p>This is the title that will show on the HotSchedules Store once you publish your application to the HotSchedules Store.</p>
+
+<p><strong>&ldquo;description&rdquo;: &ldquo;Short Application Description.&rdquo; <em>required</em></strong></p>
+
+<p>The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of &ldquo;Learn More&rdquo; button. </p>
+
+<p><strong>&ldquo;profile&rdquo;: {&hellip;} <em>required</em></strong></p>
+
+<p>The profile section contains the following required sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;name&rdquo;: &ldquo;app-package-name&rdquo; <em>required</em> and must match name above</strong></p>
+
+<p>The profile name must match the application name that is described in the main part of the package.json (see name=&ldquo;app-package-name&rdquo; <em>required</em> above)</p></li>
+<li><p><strong>&ldquo;dml&rdquo;: {..}</strong>
+DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
+</ul>
+
+<p><strong>&ldquo;settings&rdquo;:{&hellip;} <em>required</em></strong></p>
+
+<p>The settings is the main section of package.json contains the following sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;categories&rdquo;: [&hellip;] <em>optional</em></strong></p>
+
+<p>A list of comma separated categories your application would fit into. </p>
+
+<p>Example:&ldquo;Aloha&rdquo;, &ldquo;POS&rdquo;, &ldquo;Agent Applications&rdquo;</p></li>
+<li><p><strong>&ldquo;publisher&rdquo;: &ldquo;your company&rdquo; <em>required</em></strong></p>
+
+<p>This is the name of your company or your name if you are self-represented.</p></li>
+</ul>
 
 <p><strong>type=job/agent/mobile/web</strong></p>
 
-<p>In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually Bodhi Mobile.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p>
+<p>In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p>
 
 <p><strong>agent_parameters/job_parameters</strong></p>
 
@@ -2700,8 +2738,8 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 
 <p><strong>categories {}</strong>  </p>
 
-<p>The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, mangagement</p>
+<p>The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management</p>
 
 <p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> </p>
 
@@ -2713,7 +2751,7 @@ Examples include financial, inventory, mangagement</p>
 
 <p><strong>screenshots{}</strong> </p>
 
-<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
 
 <p><strong>agent/job_parameters:{}</strong> and <strong>agent/job_parameters_hidden:{}</strong></p>
 
@@ -2727,7 +2765,7 @@ Examples include financial, inventory, mangagement</p>
 
 <p><strong>autoUpdateVersion&quot;: false</strong></p>
 
-<p>This flag prevents autoUpdate version of the app each time you are publishing it.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
+<p>This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
 
           <h1 id="bodhi-mobile">Bodhi Mobile</h1>
 
