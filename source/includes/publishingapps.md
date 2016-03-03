@@ -1,9 +1,11 @@
 #Publishing Applications 
 
-## Overview
+##Overview
 
 To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  
-## Publishing Your Application
+
+##Publishing Your Application
+
 To publish your application you must have the following directory structure for your application:
 
 ```
