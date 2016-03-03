@@ -8,11 +8,9 @@ To publish your application you must have the following directory structure for 
 
 ```
 	/<app-name>/
-			/www/
-		    	/public/
+	    	/public/
 ```
 * Folder (npm app-name)
-* Inside the www folder under app-name must contain the following:
 	- index.html (could be empty)
 	- LICENSE (standard apache license file)
 	- package.json (example provided below) 
@@ -23,21 +21,18 @@ To publish your application you must have the following directory structure for 
 		- NewType3.json file
 
 
-To publish an app into the IoT Platform you have to zip up a folder containing the following:
+To publish an app into the IoT Platform you have to zip up the following:
 {code}
-
-	folder=<app-name>
-		folder=<www>
-			index.html (could be empty)
-			LICENSE
-			package.json
+		index.html (could be empty)
+		LICENSE
+		package.json
 			
-			folder=<public>
-				app_icon.png
-				NewType1.json file
-				NewType2.json file
-				NewType3.josn file
-				...
+		folder=<public>
+			app_icon.png
+			NewType1.json file (optional)
+			NewType2.json file (optional)
+			NewType3.josn file (optional)
+			...
 
 Example of Package.json :: 
 
@@ -125,11 +120,53 @@ if you have any parameters required to be used with the app we add this section:
 
 ```
 
-### Generic package.json flags
+
+### Description of package.json contents
+
+**name="app-package-name" _required_**
+
+The name of your application must match the name of the profile
+
+**"version": "0.0.1" _required_**
+
+Ideally this is the version of your application that gets posted as versions show for Agent Application in the Agent Event Logs so keeping this version the same as your Agent Application that is published is highly recommended.
+
+**"title": "Application Title" _required_**
+
+This is the title that will show on the HotSchedules Store once you publish your application to the HotSchedules Store.
+
+**"description": "Short Application Description." _required_**
+
+The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of "Learn More" button. 
+
+**"profile": {...} _required_**
+
+The profile section contains the following required sections:
+
+- **"name": "app-package-name" _required_ and must match name above**
+	
+	The profile name must match the application name that is described in the main part of the package.json (see name="app-package-name" _required_ above)
+
+- **"dml": {..}**
+	DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.
+	
+
+**"settings":{...} _required_**
+
+The settings is the main section of package.json contains the following sections:
+
+- **"categories": [...] _optional_**
+
+	A list of comma separated categories your application would fit into. 
+
+	Example:"Aloha", "POS", "Agent Applications"
+	
+- **"publisher": "your company" _required_**
+	This is the name of your company or your name if you are self-represented.
 
 **type=job/agent/mobile/web**
 
-In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually Bodhi Mobile.  The "type"="web" defines your application to run as a web application. 
+In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually HotSchedules Passbook.  The "type"="web" defines your application to run as a web application. 
 
 **agent_parameters/job_parameters**
 
@@ -230,8 +267,8 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required
 
 **categories {}**  
 
-The categories array allows you to give the Bodhi app store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, mangagement
+The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management
 
 **public_path'/xxx/xxx'** 
 
@@ -243,7 +280,7 @@ The global_store_icon is the icon that the Global App Store will use for display
 
 **screenshots{}** 
 
-The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. This files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
+The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
 
 **agent/job_parameters:{}** and **agent/job_parameters_hidden:{}**
 
@@ -257,5 +294,5 @@ The data_dir formatted information contains a description, a required flag, type
 
 **autoUpdateVersion": false**
 
-This flag prevents autoUpdate version of the app each time you are publishing it.  If you mark this false, you need to manually bump the version of the app each time you update it.  
+This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  
 
