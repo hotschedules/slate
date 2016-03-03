@@ -163,6 +163,59 @@ The settings is the main section of package.json contains the following sections
 	
 - **"publisher": "your company" _required_**
 	This is the name of your company or your name if you are self-represented.
+- **"npm_package_name": "app-package-name" _required if building an Agent App or Job App_**
+    
+
+if you have any related apps you want to install together::
+"related-apps": [
+      "bodhi.aloha-app-transactions",
+      "bodhi.aloha-app-store"
+    ],
+    "public_path": "public",
+    "global_store_icon": "public/icon.png",
+   "type": "agent",    
+(type can be “job”, “agent”, “mobile”, “web” )   
+ "new_type_required": true,
+  "install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+if you have any parameters required to be used with the app we add this section:: 
+ "agent_parameters": {
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 15 minutes",
+        "position": 1
+      }
+    }
+  },
+  "autoUpdateVersion": false
+}
+
+
+
 
 **type=job/agent/mobile/web**
 
