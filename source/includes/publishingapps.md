@@ -328,6 +328,8 @@ The following are examples of parameters that can be set for agent or the job ap
 Agent Parameters example:
 
 ```
+Example of agent parameters that can be defined for an agent application:
+
     "agent_parameters": {
       "config_file_path": {
         "description": "Config file location",
@@ -369,9 +371,9 @@ Agent Parameters example:
 
 - All Parameters have the following 
 This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
-Job Parameters example:
 
 ```
+Job Parameters example:
     "job_parameters": {
       "timing_expression": {
         "description": "How often to execute a job",
@@ -434,9 +436,10 @@ This flag prevents autoUpdate version of the app each time you publish.  If you 
 
 This is an example of an enumeration, embedded_type and custom_type.  
 
-_NOTE:_ All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: 
+_NOTE:_ All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: This example shows the objects as folders under the application's root directory.  This is where you define your json for each type.  There is a one to one correspondence of the type declared in package.json to the json defining that type in the folder under the application.
 
 ```
+Defining your custom schema/types example:
 "install": {
 "new": {
 "model": [
