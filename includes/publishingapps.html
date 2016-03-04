@@ -89,8 +89,39 @@ This is the apache2 license file that needs to be with all applications you plan
 Image_home.png is the background image for index.html</p></li>
 <li><p><strong>package.json</strong>:</p>
 
-<p>This is the example package.json that you will cutomize based on your application needs.  See Descriptions of package.json contents below to see what each packge.json entry is for:</p></li>
+<p>This is the example package.json that you will cutomize based on your application needs.  To the right is a formatted version of the sample package.json that is included in HS Template&rsquo;s zip file.</p></li>
 </ul>
+<pre class="highlight plaintext"><code>package.json that gets includes with HS Template's zip file:
+
+{
+    "name": "HSappTemplate",
+    "version": "0.0.0",
+    "title": "HSappTemplate",
+    "description": "New application Hello, World!",
+    "profile": {
+        "name": "HSappTemplate",
+        "dml": {
+            "BodhiApplication": {
+                "select": {}
+            }
+        }
+    },
+    "settings": {
+        "publisher": "",
+        "categories": [""],
+        "offline": false,
+        "navigationBar": "auto",
+        "type":"mobile"
+    },
+    "dependencies": {
+        "bodhi-mobile":"*" 
+        },
+    "autoUpdateVersion": true
+}
+
+</code></pre>
+
+<p>See Descriptions of package.json contents below to see what each packge.json entry is for:</p>
 
 <p>{</p>
 
@@ -143,7 +174,8 @@ Image_home.png is the background image for index.html</p></li>
 <p>}</p>
 
 <h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
-<pre class="highlight plaintext"><code>#!javascript
+<pre class="highlight plaintext"><code>Example of package.json for agent or job applications:
+#!javascript
 
 {
   "name": "app-package-name",
