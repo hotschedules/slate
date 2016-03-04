@@ -36,7 +36,7 @@ To publish an app into the IoT Platform you have to zip up the following:
 			NewType3.josn file (optional)
 			...
 
-Example of Package.json :: 
+###Example of Package.json
 
 ```
 #!javascript
@@ -141,7 +141,7 @@ This is the title that will show on the HotSchedules Store once you publish your
 
 The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of "Learn More" button. 
 
-**"profile": {...} _required_**
+**"profile": {} _required_**
 
 The profile section contains the following required sections:
 
@@ -149,15 +149,16 @@ The profile section contains the following required sections:
 	
 	The profile name must match the application name that is described in the main part of the package.json (see name="app-package-name" _required_ above)
 
-- **"dml": {..}**
+- **"dml": {}**
+
 	DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.
 	
 
-**"settings":{...} _required_**
+**"settings":{} _required_**
 
 The settings is the main section of package.json contains the following sections:
 
-- **"categories": [...] _optional_**
+- **"categories": [] _optional_**
 
 	A list of comma separated categories your application would fit into. 
 
@@ -167,9 +168,32 @@ The settings is the main section of package.json contains the following sections
 
 	This is the name of your company or your name if you are self-represented.
 
-**type=job/agent/mobile/web**
+- **"npm_package_name": "app-package-name" _required if building an Agent App or Job App_**
+    
 
-In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually HotSchedules Passbook.  The "type"="web" defines your application to run as a web application. 
+- **"related-apps": [] _optional_**
+	Define the array of related applications as a comma separated based on the application(s)' global package name. 
+	Example: 
+		"related-apps": [
+      		"bodhi.aloha-app-transactions",
+      		"bodhi.aloha-app-store"
+    		]
+- **"public_path": "public" _required_**
+
+	Public path is the folder that hold any screenshots, icons, and/or type definition
+	
+- **"global_store_icon": "public/icon.png" _required_**
+
+	In the settings section, Global Store Icon is your icon for your application.
+
+- **"type": "agent" _required_**
+
+	In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually HotSchedules Passbook.  The "type"="web" defines your application to run as a web application. 
+
+	 
+- **"new_type_required": true _optional_**
+
+	In the settings section, if you are adding new types as described below, then this flag should be set to true.
 
 **agent_parameters/job_parameters**
 
@@ -217,6 +241,7 @@ Agent Parameters example:
     }
 ```
 
+- All Parameters have the following 
 This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
 Job Parameters example:
 
@@ -252,11 +277,11 @@ Job Parameters example:
 
 **offline=true/false**  
 
-Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.
+Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.
 
 **single_container_app=true/false**  
 
-single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+single_container_app tells the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
 Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true
 
 **hide_from_global_store=true/false**  
@@ -295,7 +320,39 @@ NOTE: The hidden parameter option will not be visible to the user in the install
 
 The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined.
 
-**autoUpdateVersion": false**
+**"autoUpdateVersion": "false"**
 
 This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  
 
+**Example Type Definition**
+
+This is an example of an enumeration, embedded_type and custom_type.  
+
+_NOTE:_ All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: 
+
+```
+"install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+```
