@@ -52,9 +52,9 @@
 
 <ul>
 <li>app icon.png</li>
-<li>NewType1.json file</li>
-<li>NewType2.json file</li>
-<li>NewType3.json file</li>
+<li>NewType1.json file (optional)</li>
+<li>NewType2.json file (optional)</li>
+<li>NewType3.json file (optional)</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -72,7 +72,35 @@
             NewType3.josn file (optional)
             &hellip;</p>
 
-<p>Example of Package.json :: </p>
+<h3 id="example-of-package.json-for-mobile-applications">Example of package.json for Mobile Applications</h3>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New application Hello, World!"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"dml"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"BodhiApplication"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="s2">"select"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">""</span><span class="p">],</span><span class="w">
+        </span><span class="s2">"offline"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"navigationBar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auto"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"mobile"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"bodhi-mobile"</span><span class="p">:</span><span class="s2">"*"</span><span class="w"> 
+        </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"autoUpdateVersion"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
 <pre class="highlight plaintext"><code>#!javascript
 
 {
@@ -158,7 +186,7 @@ if you have any parameters required to be used with the app we add this section:
 
 <h3 id="description-of-package.json-contents">Description of package.json contents</h3>
 
-<p><strong>name=&ldquo;app-package-name&rdquo; <em>required</em></strong></p>
+<p><strong>name=&ldquo;HSappTemplate&rdquo; <em>required</em></strong></p>
 
 <p>The name of your application must match the name of the profile</p>
 
@@ -174,40 +202,67 @@ if you have any parameters required to be used with the app we add this section:
 
 <p>The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of &ldquo;Learn More&rdquo; button. </p>
 
-<p><strong>&ldquo;profile&rdquo;: {&hellip;} <em>required</em></strong></p>
+<p><strong>&ldquo;profile&rdquo;: {} <em>required</em></strong></p>
 
 <p>The profile section contains the following required sections:</p>
 
 <ul>
-<li><p><strong>&ldquo;name&rdquo;: &ldquo;app-package-name&rdquo; <em>required</em> and must match name above</strong></p>
+<li><p><strong>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo; <em>required</em> and must match name above</strong></p>
 
 <p>The profile name must match the application name that is described in the main part of the package.json (see name=&ldquo;app-package-name&rdquo; <em>required</em> above)</p></li>
-<li><p><strong>&ldquo;dml&rdquo;: {..}</strong>
-DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
+<li><p><strong>&ldquo;dml&rdquo;: {}</strong></p>
+
+<p>DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
 </ul>
 
-<p><strong>&ldquo;settings&rdquo;:{&hellip;} <em>required</em></strong></p>
+<p><strong>&ldquo;settings&rdquo;:{} <em>required</em></strong></p>
 
 <p>The settings is the main section of package.json contains the following sections:</p>
 
 <ul>
-<li><p><strong>&ldquo;categories&rdquo;: [&hellip;] <em>optional</em></strong></p>
+<li><p><strong>&ldquo;categories&rdquo;: [] <em>optional</em></strong></p>
 
-<p>A list of comma separated categories your application would fit into. </p>
-
-<p>Example:&ldquo;Aloha&rdquo;, &ldquo;POS&rdquo;, &ldquo;Agent Applications&rdquo;</p></li>
+<p>A list of comma separated categories your application would fit into. The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management</p></li>
 <li><p><strong>&ldquo;publisher&rdquo;: &ldquo;your company&rdquo; <em>required</em></strong></p>
 
 <p>This is the name of your company or your name if you are self-represented.</p></li>
+<li><p><strong>&ldquo;npm_package_name&rdquo;: &ldquo;app-package-name&rdquo; <em>required if building an Agent App or Job App</em></strong></p></li>
+<li><p><strong>&ldquo;related-apps&rdquo;: [] <em>optional</em></strong>
+Define the array of related applications as a comma separated based on the application(s)&rsquo; global package name. 
+Example: 
+    &ldquo;related-apps&rdquo;: [
+        &ldquo;bodhi.aloha-app-transactions&rdquo;,
+        &ldquo;bodhi.aloha-app-store&rdquo;
+        ]</p></li>
+<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> 
+Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
+<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong>
+NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
+<li><p><strong>&ldquo;public_path&rdquo;: &ldquo;public&rdquo; <em>required</em></strong></p>
+
+<p>Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.   </p></li>
+<li><p><strong>&ldquo;global_store_icon&rdquo;: &ldquo;public/icon.png&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, Global Store Icon is your icon for your application.</p></li>
+<li><p><strong>&ldquo;type&rdquo;: &ldquo;mobile&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p></li>
+<li><p><strong>&ldquo;new_type_required&rdquo;: true <em>optional</em></strong></p>
+
+<p>In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace. <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</p></li>
+<li><p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo; <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</strong></p>
+
+<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p></li>
 </ul>
-
-<p><strong>type=job/agent/mobile/web</strong></p>
-
-<p>In the setting section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p>
 
 <p><strong>agent_parameters/job_parameters</strong></p>
 
-<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The following are examples of parameters that can be set for agent or the job applications respectively:</p>
+<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p>The following are examples of parameters that can be set for agent or the job applications respectively:</p>
 
 <p>Agent Parameters example:</p>
 <pre class="highlight plaintext"><code>    "agent_parameters": {
@@ -249,8 +304,11 @@ DML=Data Manipulation Language and this section describes what operations you pl
     }
 </code></pre>
 
-<p>This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
-Job Parameters example:</p>
+<ul>
+<li>All Parameters have the following 
+This example sets up four parameters: timing_expression, brink_location, accessToken and uri.
+Job Parameters example:</li>
+</ul>
 <pre class="highlight plaintext"><code>    "job_parameters": {
       "timing_expression": {
         "description": "How often to execute a job",
@@ -281,11 +339,11 @@ Job Parameters example:</p>
 
 <p><strong>offline=true/false</strong>  </p>
 
-<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.</p>
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.</p>
 
 <p><strong>single_container_app=true/false</strong>  </p>
 
-<p>single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+<p>single_container_app tells the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
 Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
 
 <p><strong>hide_from_global_store=true/false</strong>  </p>
@@ -294,39 +352,51 @@ Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container
 
 <p><strong>new_type_required=true/false</strong>  </p>
 
-<p>new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+<p>new_type_required tells the installer of the app in the global app store if the app will run &#39;out of the box&rsquo; or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
-
-<p><strong>categories {}</strong>  </p>
-
-<p>The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, management</p>
-
-<p><strong>public_path&rsquo;/xxx/xxx&rsquo;</strong> </p>
-
-<p>The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.</p>
-
-<p><strong>global_store_icon=&rsquo;/xxx/xxx.png&rsquo;</strong>  </p>
-
-<p>The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
 
 <p><strong>screenshots{}</strong> </p>
 
-<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published via app tools and the path should be relative to the public_path.</p>
-
-<p><strong>agent/job_parameters:{}</strong> and <strong>agent/job_parameters_hidden:{}</strong></p>
-
-<p>The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
-
-<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published and the path should be relative to the public_path.</p>
 
 <p><strong>data_dir:{}</strong></p>
 
 <p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
 
-<p><strong>autoUpdateVersion&quot;: false</strong></p>
+<p><strong>&ldquo;autoUpdateVersion&rdquo;: &ldquo;false&rdquo;</strong></p>
 
 <p>This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
+
+<p><strong>Example Type Definition</strong></p>
+
+<p>This is an example of an enumeration, embedded_type and custom_type.  </p>
+
+<p><em>NOTE:</em> All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: </p>
+<pre class="highlight plaintext"><code>"install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+</code></pre>
 
       </div>
       <div class="dark-box">
