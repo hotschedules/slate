@@ -36,34 +36,81 @@ To publish an app into the IoT Platform you have to zip up the following:
 			NewType3.josn file (optional)
 			...
 
-###Example of package.json for Mobile Applications
-```
+###Example package.json for Mobile Applications
+By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:
+
+- **index.html**
+
+	If you open this file it say Click Me and a Welcome will appear above Click Me
+
+- **LICENSE**
+	This is the apache2 license file that needs to be with all applications you plan to build
+	
+- **README.md**
+
+	README.md are directions to get started developing your mobile application
+	
+- **image_home.png**
+	Image_home.png is the background image for index.html
+
+
+
+- **package.json**:
+
+	This is the example package.json that you will cutomize based on your application needs.  See Descriptions of package.json contents below to see what each packge.json entry is for:
+   
 {
+
     "name": "HSappTemplate",
+
     "version": "0.0.0",
+
     "title": "HSappTemplate",
+
+
     "description": "New application Hello, World!",
+
     "profile": {
+
         "name": "HSappTemplate",
+
         "dml": {
+
             "BodhiApplication": {
+
                 "select": {}
+
             }
+
         }
+
     },
+
     "settings": {
+
         "publisher": "",
+
         "categories": [""],
+
         "offline": false,
+
         "navigationBar": "auto",
+
         "type":"mobile"
+
     },
+
     "dependencies": {
+
         "bodhi-mobile":"*" 
+
         },
+
     "autoUpdateVersion": true
+
 }
-```
+
+
 ###Example of Package.json for agent or job Applications
 
 ```
@@ -206,9 +253,11 @@ Examples include financial, inventory, management
       		"bodhi.aloha-app-store"
     		]
 -  **"offline": false _Required for mobile application_** 
+
 	Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  
 	
 -  **"navigationBar": "auto"**
+
 	NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.
 
 - **"public_path": "public" _required_**
