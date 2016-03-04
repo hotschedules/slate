@@ -2511,33 +2511,75 @@ c:agent-cli update-console --verbose
             NewType3.josn file (optional)
             &hellip;</p>
 
-<h3 id="example-of-package.json-for-mobile-applications">Example of package.json for Mobile Applications</h3>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"version"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"New application Hello, World!"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"profile"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"HSappTemplate"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"dml"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="s2">"BodhiApplication"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-                </span><span class="s2">"select"</span><span class="p">:</span><span class="w"> </span><span class="p">{}</span><span class="w">
-            </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"settings"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"publisher"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"categories"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s2">""</span><span class="p">],</span><span class="w">
-        </span><span class="s2">"offline"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"navigationBar"</span><span class="p">:</span><span class="w"> </span><span class="s2">"auto"</span><span class="p">,</span><span class="w">
-        </span><span class="s2">"type"</span><span class="p">:</span><span class="s2">"mobile"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"dependencies"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="s2">"bodhi-mobile"</span><span class="p">:</span><span class="s2">"*"</span><span class="w"> 
-        </span><span class="p">},</span><span class="w">
-    </span><span class="s2">"autoUpdateVersion"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<h3 id="example-package.json-for-mobile-applications">Example package.json for Mobile Applications</h3>
+
+<p>By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:</p>
+
+<ul>
+<li><p><strong>index.html</strong></p>
+
+<p>If you open this file it say Click Me and a Welcome will appear above Click Me</p></li>
+<li><p><strong>LICENSE</strong>
+This is the apache2 license file that needs to be with all applications you plan to build</p></li>
+<li><p><strong>README.md</strong></p>
+
+<p>README.md are directions to get started developing your mobile application</p></li>
+<li><p><strong>image_home.png</strong>
+Image_home.png is the background image for index.html</p></li>
+<li><p><strong>package.json</strong>:</p>
+
+<p>This is the example package.json that you will cutomize based on your application needs.  See Descriptions of package.json contents below to see what each packge.json entry is for:</p></li>
+</ul>
+
+<p>{</p>
+
+<p>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;version&rdquo;: &ldquo;0.0.0&rdquo;,</p>
+
+<p>&ldquo;title&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;description&rdquo;: &ldquo;New application Hello, World!&rdquo;,</p>
+
+<p>&ldquo;profile&rdquo;: {</p>
+
+<p>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;dml&rdquo;: {</p>
+
+<p>&ldquo;BodhiApplication&rdquo;: {</p>
+
+<p>&ldquo;select&rdquo;: {}</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>},</p>
+
+<p>&ldquo;settings&rdquo;: {</p>
+
+<p>&ldquo;publisher&rdquo;: &ldquo;&rdquo;,</p>
+
+<p>&ldquo;categories&rdquo;: [&ldquo;&rdquo;],</p>
+
+<p>&ldquo;offline&rdquo;: false,</p>
+
+<p>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;,</p>
+
+<p>&ldquo;type&rdquo;:&ldquo;mobile&rdquo;</p>
+
+<p>},</p>
+
+<p>&ldquo;dependencies&rdquo;: {</p>
+
+<p>&ldquo;bodhi-mobile&rdquo;:&ldquo;*&rdquo; </p>
+
+<p>},</p>
+
+<p>&ldquo;autoUpdateVersion&rdquo;: true</p>
+
+<p>}</p>
 
 <h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
 <pre class="highlight plaintext"><code>#!javascript
@@ -2674,10 +2716,12 @@ Example:
         &ldquo;bodhi.aloha-app-transactions&rdquo;,
         &ldquo;bodhi.aloha-app-store&rdquo;
         ]</p></li>
-<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> 
-Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
-<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong>
-NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
+<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> </p>
+
+<p>Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
+<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong></p>
+
+<p>NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
 <li><p><strong>&ldquo;public_path&rdquo;: &ldquo;public&rdquo; <em>required</em></strong></p>
 
 <p>Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.   </p></li>
