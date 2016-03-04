@@ -57,7 +57,40 @@ By Clicking on HS Template you get a package.zip file that is downloaded to your
 
 - **package.json**:
 
-	This is the example package.json that you will cutomize based on your application needs.  See Descriptions of package.json contents below to see what each packge.json entry is for:
+	This is the example package.json that you will cutomize based on your application needs.  To the right is a formatted version of the sample package.json that is included in HS Template's zip file.
+	
+```
+package.json that gets includes with HS Template's zip file:
+
+{
+    "name": "HSappTemplate",
+    "version": "0.0.0",
+    "title": "HSappTemplate",
+    "description": "New application Hello, World!",
+    "profile": {
+        "name": "HSappTemplate",
+        "dml": {
+            "BodhiApplication": {
+                "select": {}
+            }
+        }
+    },
+    "settings": {
+        "publisher": "",
+        "categories": [""],
+        "offline": false,
+        "navigationBar": "auto",
+        "type":"mobile"
+    },
+    "dependencies": {
+        "bodhi-mobile":"*" 
+        },
+    "autoUpdateVersion": true
+}
+
+```
+	
+See Descriptions of package.json contents below to see what each packge.json entry is for:
    
 {
 
@@ -114,6 +147,7 @@ By Clicking on HS Template you get a package.zip file that is downloaded to your
 ###Example of Package.json for agent or job Applications
 
 ```
+Example of package.json for agent or job applications:
 #!javascript
 
 {
