@@ -18,9 +18,9 @@ To publish your application you must have the following directory structure for 
 	- package.json (example provided below) 
 	- public (folder) 
 		- app icon.png
-		- NewType1.json file
-		- NewType2.json file
-		- NewType3.json file
+		- NewType1.json file (optional)
+		- NewType2.json file (optional)
+		- NewType3.json file (optional)
 
 
 To publish an app into the IoT Platform you have to zip up the following:
@@ -36,7 +36,35 @@ To publish an app into the IoT Platform you have to zip up the following:
 			NewType3.josn file (optional)
 			...
 
-###Example of Package.json
+###Example of package.json for Mobile Applications
+```
+{
+    "name": "HSappTemplate",
+    "version": "0.0.0",
+    "title": "HSappTemplate",
+    "description": "New application Hello, World!",
+    "profile": {
+        "name": "HSappTemplate",
+        "dml": {
+            "BodhiApplication": {
+                "select": {}
+            }
+        }
+    },
+    "settings": {
+        "publisher": "",
+        "categories": [""],
+        "offline": false,
+        "navigationBar": "auto",
+        "type":"mobile"
+    },
+    "dependencies": {
+        "bodhi-mobile":"*" 
+        },
+    "autoUpdateVersion": true
+}
+```
+###Example of Package.json for agent or job Applications
 
 ```
 #!javascript
@@ -125,7 +153,7 @@ if you have any parameters required to be used with the app we add this section:
 
 ### Description of package.json contents
 
-**name="app-package-name" _required_**
+**name="HSappTemplate" _required_**
 
 The name of your application must match the name of the profile
 
@@ -145,7 +173,7 @@ The description is the application description that will be displayed with the t
 
 The profile section contains the following required sections:
 
-- **"name": "app-package-name" _required_ and must match name above**
+- **"name": "HSappTemplate" _required_ and must match name above**
 	
 	The profile name must match the application name that is described in the main part of the package.json (see name="app-package-name" _required_ above)
 
@@ -160,9 +188,8 @@ The settings is the main section of package.json contains the following sections
 
 - **"categories": [] _optional_**
 
-	A list of comma separated categories your application would fit into. 
-
-	Example:"Aloha", "POS", "Agent Applications"
+	A list of comma separated categories your application would fit into. The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management
 	
 - **"publisher": "your company" _required_**
 
@@ -178,26 +205,42 @@ The settings is the main section of package.json contains the following sections
       		"bodhi.aloha-app-transactions",
       		"bodhi.aloha-app-store"
     		]
+-  **"offline": false _Required for mobile application_** 
+	Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  
+	
+-  **"navigationBar": "auto"**
+	NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.
+
 - **"public_path": "public" _required_**
 
-	Public path is the folder that hold any screenshots, icons, and/or type definition
+	Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.	
 	
 - **"global_store_icon": "public/icon.png" _required_**
 
 	In the settings section, Global Store Icon is your icon for your application.
 
-- **"type": "agent" _required_**
+- **"type": "mobile" _required_**
 
 	In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The "type"="job" define your application to run inside job engine through Job Engine Manager.  The "type"="agent" defines your application to run with the agent based on a defined role.  The "type"="mobile" defines your application to run in a mobile container usually HotSchedules Passbook.  The "type"="web" defines your application to run as a web application. 
 
 	 
 - **"new_type_required": true _optional_**
 
-	In the settings section, if you are adding new types as described below, then this flag should be set to true.
+	In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace. _NOTE:: if new_type_required=true, troubleshooting_url should be required_
+
+- **troubleshooting_url='http://tools.bodhi.space/xxxx' _NOTE:: if new_type_required=true, troubleshooting_url should be required_**
+
+	The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
+
+
 
 **agent_parameters/job_parameters**
 
-Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The following are examples of parameters that can be set for agent or the job applications respectively:
+Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined. Application parameters will be saved under settings so the application should use parameters from settings.
+
+NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.
+
+The following are examples of parameters that can be set for agent or the job applications respectively:
 
 Agent Parameters example:
 
@@ -274,7 +317,6 @@ Job Parameters example:
     }
 ```
 
-
 **offline=true/false**  
 
 Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.
@@ -293,28 +335,9 @@ hide_from_global_store controls whether the app is available to the general publ
 new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required
 
-**categories {}**  
-
-The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, management
-
-**public_path'/xxx/xxx'** 
-
-The Public Path is a location off of root that allows developers to save items that should be publically visable and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.
-
-**global_store_icon='/xxx/xxx.png'**  
-
-The global_store_icon is the icon that the Global App Store will use for display purposes. This file should be included in the app folder that is published via app tools and the path should be relative to the public_path.
-
 **screenshots{}** 
 
-The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published via app tools and the path should be relative to the public_path.
-
-**agent/job_parameters:{}** and **agent/job_parameters_hidden:{}**
-
-The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it's defined. Application parameters will be saved under settings so the application should use parameters from settings.
-
-NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.
+The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published and the path should be relative to the public_path.
 
 **data_dir:{}**
 
