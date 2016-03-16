@@ -467,15 +467,17 @@ Defining your custom schema/types example:
 ```
 **Adding Scripts and Versioning: "versions": [..]**
 
-To make an application script available set the following in the setting section of your package.json:
+To make an application script available set the following in the settings section of your package.json:
 
 - version - current script version (might be bound to the current application version)
 - bundle - a jar name (by default it is "script-<version>.jar")
 - pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.
 - post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.
 - main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:
+- Example json can be found to in the javascript section >>>>>>
 
 ```
+Template for adding scripts/versions to package.json
 versions:[
 {
     "version": "<script_version>",
@@ -488,9 +490,9 @@ versions:[
     }
 ]
 ```
-Example of using seed-data:
 
 ```
+Example of versions/scripts using seed-data:
     "versions": [
       {
         "bundle": "installer.jar", 
