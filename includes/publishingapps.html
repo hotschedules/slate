@@ -477,6 +477,61 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 ]
 </code></pre>
 
+<p><strong>Adding Scripts and Versioning: &ldquo;versions&rdquo;: [..]</strong></p>
+
+<p>To make an application script available set the following in the setting section of your package.json:</p>
+
+<ul>
+<li>version - current script version (might be bound to the current application version)</li>
+<li>bundle - a jar name (by default it is &ldquo;script-<version>.jar&rdquo;)</li>
+<li>pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.</li>
+<li>post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.</li>
+<li>main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:</li>
+</ul>
+<pre class="highlight plaintext"><code>versions:[
+{
+    "version": "&lt;script_version&gt;",
+    "bundle": "&lt;jar_name&gt;",
+    "pre-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    },
+    "post-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    }
+]
+</code></pre>
+
+<p>Example of using seed-data:
+<code class="prettyprint">
+    &quot;versions&quot;: [
+      {
+        &quot;bundle&quot;: &quot;installer.jar&quot;, 
+        &quot;post-type-install&quot;: {}, 
+        &quot;pre-type-install&quot;: {}, 
+        &quot;seed-data&quot;: [
+          {
+            &quot;action&quot;: &quot;POST&quot;, 
+            &quot;object&quot;: &quot;Data/measurements.json&quot;, 
+            &quot;path&quot;: &quot;/resources/InventoryUnitOfMeasure&quot;
+          }, 
+          {
+            &quot;action&quot;: &quot;POST&quot;, 
+            &quot;object&quot;: &quot;Data/conversions.json&quot;, 
+            &quot;path&quot;: &quot;/resources/InventoryUomConversion&quot;
+          }
+        ], 
+        &quot;version&quot;: &quot;new&quot;
+      }, 
+      {
+        &quot;bundle&quot;: &quot;upgrade-3.0.0.jar&quot;, 
+        &quot;post-type-install&quot;: {
+          &quot;main&quot;: &quot;com.bodhi.vertx.appinstaller.script.DeveloperScript&quot;
+        }, 
+        &quot;version&quot;: &quot;2.7.19&quot;
+      }
+    ]
+</code></p>
+
       </div>
       <div class="dark-box">
       </div>
