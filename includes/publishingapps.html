@@ -479,7 +479,7 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 
 <p><strong>Adding Scripts and Versioning: &ldquo;versions&rdquo;: [..]</strong></p>
 
-<p>To make an application script available set the following in the setting section of your package.json:</p>
+<p>To make an application script available set the following in the settings section of your package.json:</p>
 
 <ul>
 <li>version - current script version (might be bound to the current application version)</li>
@@ -487,8 +487,10 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
 <li>pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.</li>
 <li>post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.</li>
 <li>main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:</li>
+<li>Example json can be found to in the javascript section &gt;&gt;&gt;&gt;&gt;&gt;</li>
 </ul>
-<pre class="highlight plaintext"><code>versions:[
+<pre class="highlight plaintext"><code>Template for adding scripts/versions to package.json
+versions:[
 {
     "version": "&lt;script_version&gt;",
     "bundle": "&lt;jar_name&gt;",
@@ -500,9 +502,8 @@ NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
     }
 ]
 </code></pre>
-
-<p>Example of using seed-data:</p>
-<pre class="highlight plaintext"><code>    "versions": [
+<pre class="highlight plaintext"><code>Example of versions/scripts using seed-data:
+    "versions": [
       {
         "bundle": "installer.jar", 
         "post-type-install": {}, 
