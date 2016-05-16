@@ -16,11 +16,10 @@ includes:
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
-  - bodhiagent/super-agent-driver
   - bodhiagent/Howto/installingbodhiagent
   - bodhiagent/agenttooling/agenttools
   - bodhiagent/agenttooling/agentcli
-  - 
+  - bodhiagent/super-agent-driver
   - publishingapps
   - bodhimobile/overview
   - bodhimobile/gettingstarted
