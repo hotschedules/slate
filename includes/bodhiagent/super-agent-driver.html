@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_bodhiagent includes_bodhiagent_super-agent-driver">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h2 id="installation">Installation</h2>
+
+<p>This library lives in artifactory now and will become public soon</p>
+<pre class="highlight plaintext"><code>npm install bodhi-rest-superagent
+</code></pre>
+
+<h2 id="basic-api">Basic API</h2>
+
+<p>var api      = require(&lsquo;bodhi-rest-superagent&rsquo;)
+var Client   = api.Client;
+var Basic    = api.BasicCredential;
+var Bearer   = api.BearerToken;
+var agent    = api.createAgentClient(&#39;token&rsquo;, &#39;my-ns&rsquo;);
+var user     = api.createUserClient(&#39;username&rsquo;, &#39;password&rsquo;, &#39;my-ns&rsquo;);</p>
+<pre class="highlight plaintext"><code>var api      = require('bodhi-rest-superagent')
+var Client   = api.Client;
+var Basic    = api.BasicCredential;
+var Bearer   = api.BearerToken;
+var agent    = api.createAgentClient('token', 'my-ns');
+var user     = api.createUserClient('username', 'password', 'my-ns');
+</code></pre>
+
+<h3 id="simple-setup">Simple Setup</h3>
+
+<p>Let the package do the standard setup and supply the credentials plus the namespace</p>
+
+<p>var agent    = api.createAgentClient(&#39;token&rsquo;, &#39;my-ns&rsquo;);
+var user     = api.createUserClient(&#39;username&rsquo;, &#39;password&rsquo;, &#39;my-ns&rsquo;);</p>
+<pre class="highlight plaintext"><code>var agent    = api.createAgentClient('token', 'my-ns');
+var user     = api.createUserClient('username', 'password', 'my-ns');
+</code></pre>
+
+<h3 id="custom-setup">Custom Setup</h3>
+
+<p>Take control of the entire setup process.</p>
+
+<p>var Client   = api.Client;
+var Basic    = api.BasicCredential;</p>
+
+<p>var client = new Client({
+    uri          : &#39;https://local:1337&rsquo;
+    namespace    : &ldquo;miles&rdquo;,
+    credentials  : new Basic(&#39;me&rsquo;, &#39;secret&rsquo;)
+});</p>
+<pre class="highlight plaintext"><code>var Client   = api.Client;
+var Basic    = api.BasicCredential;
+
+var client = new Client({
+    uri          : 'https://local:1337'
+    namespace    : "miles",
+    credentials  : new Basic('me', 'secret')
+});
+</code></pre>
+
+<h3 id="resource-identifiers">Resource Identifiers</h3>
+
+<p>The api is tolerant of both absolute and relative URLs. </p>
+
+<h4 id="relative-uris">Relative URIs</h4>
+
+<p>A relative URIs can be specified as a string or an array of path elements. Relative URIs are relative to the namespace.</p>
+
+<p>client.<a href="'relative/url',%20function(err,%20data,%20ctx){}"><http-operation></a>
+client.<a href="['resources',%20'Store',%20id],%20function(err,%20data,%20ctx"><http-operation></a>{})</p>
+<pre class="highlight plaintext"><code>client.[&lt;http-operation&gt;]('relative/url', function(err, data, ctx){})
+client.[&lt;http-operation&gt;](['resources', 'Store', id], function(err, data, ctx){})
+</code></pre>
+
+<h4 id="absolute-uris">Absolute URIs</h4>
+
+<p>Absolute URIs start with a &rsquo;/&rsquo; character. They ignore the established namespace but honor the authority. It can be used for public API calls , /me, anything that wants to bypass the namespace. When using arrays the first element MUST include the &rsquo;/&rsquo; character as the first character.</p>
+
+<p>client.<a href="'/absolute/url',%20function(err,%20data,%20ctx){}"><http-operation></a>
+client.<a href="['/me'],%20function(err,%20data,%20ctx){}"><http-operation></a></p>
+<pre class="highlight plaintext"><code>client.[&lt;http-operation&gt;]('/absolute/url', function(err, data, ctx){})
+client.[&lt;http-operation&gt;](['/me'], function(err, data, ctx){})
+</code></pre>
+
+<h3 id="reading-data">Reading Data</h3>
+
+<p>fetch: Get a single document</p>
+
+<p>client.fetch(uri, function(err, jsonObject, res))</p>
+<pre class="highlight plaintext"><code>client.fetch(uri, function(err, jsonObject, res))
+</code></pre>
+
+<p>get: get a set of documents</p>
+
+<p>client.get(uri, function(err, jsonArray, res))</p>
+<pre class="highlight plaintext"><code>client.get(uri, function(err, jsonArray, res))
+</code></pre>
+
+<p>getPages: get a few pages of documents</p>
+
+<p>client.getPages(uri, function(err, jsonArray, res))</p>
+<pre class="highlight plaintext"><code>client.getPages(uri, function(err, jsonArray, res))
+</code></pre>
+
+<p>getAll: get all pages of documents</p>
+
+<p>client.getAll(resources/:type?where={/<em>scope</em>/}, function(err, jsonArray, res))</p>
+<pre class="highlight plaintext"><code>client.getAll(resources/:type?where={/*scope*/}, function(err, jsonArray, res))
+</code></pre>
+
+<p>gather: get several objects concurrently</p>
+
+<p>var resources = {
+  a: &ldquo;resource/:type?where={/<em>scope</em>/},
+  b: &quot;resource/:type?where={/<em>scope</em>/},
+  c: &quot;resource/:type?where={/<em>scope</em>/},
+}</p>
+
+<p>client.gather(resources, function(err, json, res){
+    console.log(json.a)  //= [/* results of a <em>/]
+    console.log(json.b)  //= [/</em> results of b <em>/]
+    console.log(json.c)  //= [/</em> results of c */]
+})</p>
+<pre class="highlight plaintext"><code>var resources = {
+  a: "resource/:type?where={/*scope*/},
+  b: "resource/:type?where={/*scope*/},
+  c: "resource/:type?where={/*scope*/},
+}
+
+client.gather(resources, function(err, json, res){
+    console.log(json.a)  //= [/* results of a */]
+    console.log(json.b)  //= [/* results of b */]
+    console.log(json.c)  //= [/* results of c */]
+})
+</code></pre>
+
+<p>gatherAll: get all pages of all object concurrently</p>
+
+<p>client.getAll(resources, function(err, json, res){
+    console.log(json.a)  //= [/* results of a <em>/]
+    console.log(json.b)  //= [/</em> results of b <em>/]
+    console.log(json.c)  //= [/</em> results of c */]
+})</p>
+<pre class="highlight plaintext"><code>client.getAll(resources, function(err, json, res){
+    console.log(json.a)  //= [/* results of a */]
+    console.log(json.b)  //= [/* results of b */]
+    console.log(json.c)  //= [/* results of c */]
+})
+</code></pre>
+
+<h3 id="sending-data">Sending Data</h3>
+
+<p>post: Create a new instance of the document</p>
+
+<p>client.post(&#39;resources/:type&rsquo; , {/* your data here */}, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.post('resources/:type' , {/* your data here */}, function(err, data, ctx){})
+</code></pre>
+
+<p>postAll: Create new instances of new types on the system</p>
+
+<p>var bag = {
+    &#39;resources/MyType&rsquo;: {name: &quot;name&rdquo;, uri: &ldquo;http://localhost/a/b&rdquo;, system_v: true }
+    &#39;resources/AType&rsquo; : [{a: &#39;A&rsquo;}, {a: &#39;B&rsquo;}, {a: &#39;C&rsquo;}]
+    &#39;resources/DType&rsquo; : [{d: &rsquo;D&rsquo;}, {d: &#39;E&rsquo;}, {d: &#39;F&rsquo;}]
+}</p>
+
+<p>client.postAll(bag, function(err, data, ctx){
+        data[&#39;resources/MyType&rsquo;] //= header
+        data[&#39;resources/AType&rsquo;] //= [location, location, location]
+        data[&#39;resources/DType&rsquo;] //= [location, location, location]
+})</p>
+<pre class="highlight plaintext"><code>var bag = {
+    'resources/MyType': {name: "name", uri: "http://localhost/a/b", system_v: true }
+    'resources/AType' : [{a: 'A'}, {a: 'B'}, {a: 'C'}]
+    'resources/DType' : [{d: 'D'}, {d: 'E'}, {d: 'F'}]
+}
+
+client.postAll(bag, function(err, data, ctx){
+        data['resources/MyType'] //= header
+        data['resources/AType'] //= [location, location, location]
+        data['resources/DType'] //= [location, location, location]
+})
+</code></pre>
+
+<p>put: Replace an existing document by id</p>
+
+<p>client.put(&#39;resources/:type/:id&rsquo;, {/* your updated resource here */}, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.put('resources/:type/:id', {/* your updated resource here */}, function(err, data, ctx){})
+</code></pre>
+
+<p>patch: Patch an exising document by id</p>
+
+<p>client.patch(&#39;resources/:type/:id&rsquo;, {/* your patch document here */}, function(err, response, ctx){})</p>
+<pre class="highlight plaintext"><code>client.patch('resources/:type/:id', {/* your patch document here */}, function(err, response, ctx){})
+</code></pre>
+
+<p>upsert: Create new or update existing document. Will produce an error if the system encounters more than one matchin document.</p>
+
+<p>client.upsert(&rsquo;/absolute/url?where={/<em>scope</em>/}&rsquo;, {/* your updated resource here */}, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.upsert('/absolute/url?where={/*scope*/}', {/* your updated resource here */}, function(err, data, ctx){})
+</code></pre>
+
+<h4 id="composite-operations">Composite Operations</h4>
+
+<p>Update one or multiple documents. </p>
+
+<p>client.fetchAndUpdate(&rsquo;/absolute/url?where={/<em>scope</em>/}&rsquo;, updateFunction, function(err, data, ctx){})</p>
+
+<p>client.findAndUpdate(&rsquo;/absolute/url?where={/<em>scopt\e</em>/}&rsquo;, updateFunction, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.fetchAndUpdate('/absolute/url?where={/*scope*/}', updateFunction, function(err, data, ctx){})
+client.findAndUpdate('/absolute/url?where={/*scopt\e*/}', updateFunction, function(err, data, ctx){})
+</code></pre>
+
+<p>Patch a document by query. Will produce an error if the system encounters more than one matchin document.</p>
+
+<p>client.fetchAndPatch(&rsquo;/absolute/url?where={/<em>scope</em>/}&rsquo;, updateFunction, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.fetchAndPatch('/absolute/url?where={/*scope*/}', updateFunction, function(err, data, ctx){})
+</code></pre>
+
+<p>fetchAndExtend: grab a document and change the properties in the mergeObject then update it. Will produce an error if the system encounters more than one matchin document.</p>
+
+<p>var mergeObject = {
+    a: &#39;A&rsquo;,
+    flag: true
+    my_date: new Date().now()
+}</p>
+
+<p>client.fethcAndExtend(&rsquo;/absolute/url?where={/<em>scopt\e</em>/}&rsquo;, mergeObject, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>var mergeObject = {
+    a: 'A',
+    flag: true
+    my_date: new Date().now()
+}
+
+client.fethcAndExtend('/absolute/url?where={/*scopt\e*/}', mergeObject, function(err, data, ctx){})
+</code></pre>
+
+<h3 id="removing-data">Removing Data</h3>
+
+<p>Remove a document by sys_id</p>
+
+<p>client.remove(&rsquo;/absolute/url/id&rsquo; , {/* your data here */}, function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.remove('/absolute/url/id' , {/* your data here */}, function(err, data, ctx){})
+</code></pre>
+
+<p>Remove document(s) that match a specific URL with scope</p>
+
+<p>client.fetchAndRemove(&rsquo;/absolute/url?where={/<em>scope</em>/}&rsquo; , function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.fetchAndRemove('/absolute/url?where={/*scope*/}' , function(err, data, ctx){})
+</code></pre>
+
+<p>Remove a set of documents that mactch a specific URL with scope</p>
+
+<p>client.findAndRemove(&rsquo;/absolute/url?where={/<em>scope</em>/}&rsquo; , function(err, data, ctx){})</p>
+<pre class="highlight plaintext"><code>client.findAndRemove('/absolute/url?where={/*scope*/}' , function(err, data, ctx){})
+</code></pre>
+
+<h2 id="responses">Responses</h2>
+
+<p>The service response is available via a callback of the form:</p>
+
+<p>function(err, data, ctx)</p>
+<pre class="highlight plaintext"><code>function(err, data, ctx)
+</code></pre>
+
+<h3 id="error-object">Error Object</h3>
+
+<h4 id="system-errors">System Errors</h4>
+
+<p>Same as before &hellip; bad things happen at the infrastructure/runtime layer. The error will have a few elements added to it.</p>
+
+<h4 id="protocol-errors">Protocol Errors</h4>
+
+<p>Anything with a 4XX or 5XX error code</p>
+
+<ul>
+<li>err.api     true</li>
+<li>err.status  http status code (deprecated)</li>
+<li>err.statusCode  to be consistent with the other </li>
+<li>err.source  method, resource, and representation of the request</li>
+<li>err.message the message from the API server error</li>
+<li>err.code    code from the api server</li>
+<li>err.context parameters returned by the api server</li>
+</ul>
+
+<h3 id="data-element">Data Element</h3>
+
+<ul>
+<li>for a 200 data        = the returned JSON</li>
+<li>for a 201 or 202 data = content of the location header</li>
+<li>for a 204 data        = null</li>
+</ul>
+
+<h3 id="context-element">Context Element</h3>
+
+<ol>
+<li>ctx.statusCode,</li>
+<li>ctx.headers,</li>
+<li>ctx.request = the method, resource, and representation of the original request</li>
+</ol>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
