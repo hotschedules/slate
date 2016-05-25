@@ -13,6 +13,13 @@ includes:
   - bodhicloud/cloudoverview
   - bodhicloud/gettingstarted
 
+  - making-a-call/getting-started
+  - making-a-call/store-example
+  - making-a-call/sales-example
+  - making-a-call/hs-example
+  - making-a-call/social-example
+
+
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
