@@ -1,0 +1,118 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_making-a-call includes_making-a-call_sales-example">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h2 id="working-with-sales-data">Working with Sales data</h2>
+
+<p>Storing and accessing Sales data is a critical function of the HotSchedule IoT Platform. To access your sales data, you will use the following types:  </p>
+
+<ul>
+<li>Store<br></li>
+<li>SalesTransaction<br></li>
+<li>SalesItem<br></li>
+<li>SalesCategory<br></li>
+<li>RevenueCenter</li>
+</ul>
+
+<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
+
+<ol>
+<li>Create a Store<br></li>
+<li>Create a SalesTransaction<br></li>
+<li>Create a SalesItem<br></li>
+</ol>
+
+<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
+
+<p>SalesTransaction is a reference table for looking up items sold and the meta data about those items as they refer to a specific order on a specific business day.  Ideally, this should be the first place you look for information when querying Sales data.</p>
+
+<p>A Store has many SalesTransactions<br>
+&ndash;  SalesTransaction.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesTransactions for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many SalesItem<br>
+&ndash;  SalesItem.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesItem for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItem?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many entries in SalesCategory<br>
+&ndash;  SalesCategory.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesCategories for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesCategory?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many RevenueCenters<br>
+&ndash;  RevenueCenter.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all RevenueCenters for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/RevenueCenter?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has many SalesItems<br>
+&ndash;  SalesTransaction.transaction_id maps to SalesItem.transaction_id</p>
+
+<p>&ndash; Example Query: Return all SalesItems for a SalesTransaction<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;transaction_id&#39;:&#39;&lt;SalesTransaction.transaction_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has a RevenueCenter<br>
+&ndash;  SalesTransaction.revenue_center.id maps to RevenueCenter.instore_id<br>
+&ndash;  SalesTransaction.revenue_center.name maps to RevenueCenter.display_name  </p>
+
+<p>&ndash; Example Query: Return all SalesTransactions for a RevenueCenter
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;revenue_center.id&#39;:&#39;&lt;RevenueCenter.instore_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has an Employee<br>
+&ndash;  SalesTransaction.employee.id maps to Employee.external_ids.key<br>
+&ndash;  SalesTransaction.employee.name maps to Employee.name.formatted_name  </p>
+
+<p>&ndash; Example Query: Return all SalesTransaction for an Employee
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;employee.id&#39;:&#39;&lt;Employee.external_ids.key&gt;&#39;}</code></p>
+
+<p>A SalesTransaction AND SalesItem have a day of business<br>
+&ndash; Example Query: Return all SalesTransactions for business day 05/21/2016
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
+
+<p>&ndash; Example Query: Return all SalesItems for business day 05/21/2016
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
+
+<p>A SalesItem has a SalesCategory<br>
+&ndash;  SalesItem.sales_category.id maps to SalesCategory.instore_id<br>
+&ndash;  SalesItem.sales_category.name maps to SalesCategory.display_name  </p>
+
+<p>&ndash; Example Query: Return all SalesItems for a SalesCategory
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;sales_category.id&#39;:&#39;&lt;SalesCategory.instore_id&gt;&#39;}</code></p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>

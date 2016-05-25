@@ -106,6 +106,638 @@
 <li>You can scroll through the Response Body to see all the standard types that the IoT Platform team uses.</li>
 </ul>
 
+          <h1 id="getting-started-with-the-hotschedules-iot-platform-rest-api">Getting started with the HotSchedules IoT Platform REST API</h1>
+
+<p>The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores. You can also do some fancy things like get social information, upload files, send push notifications and emails, and even make payments.</p>
+
+<h3 id="base-url">Base URL</h3>
+
+<p>All URLs referenced in the documentation have the following base:</p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;</code></p>
+
+<p>The Bodhi REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.</p>
+
+<h2 id="authenticating-to-the-api">Authenticating to the API</h2>
+
+<p>HTTP requests to the REST API are protected with HTTP Basic and HTTP Cookie authentication.  In short, you will use your HotSchedules IoT Platform account credentials (username and password) for HTTP Basic authentication. If you do not have credentials, you can signup at bodhi.space or directly here https://bodhi.space/signup/ </p>
+
+<p>Syntax:
+<code class="prettyprint">curl -ik -u username:password -X GET https://api.bodhi.space/me</code></p>
+
+<p>For example:
+<code class="prettyprint">curl -ik -u platform:user -X GET https://api.bodhi.space/me</code></p>
+
+<p>Your results will look like this:<br>
+HTTP/1.1 200 OK<br>
+Server: nginx/1.8.0<br>
+Date: Sat, 21 May 2016 15:22:26 GMT<br>
+Content-Type: application/json; charset=utf-8<br>
+Content-Length: 456<br>
+Connection: keep-alive<br>
+Access-Control-Allow-Credentials: true<br>
+Access-Control-Allow-Headers:<br>
+Access-Control-Allow-Methods: *<br>
+Access-Control-Allow-Origin: 
+Access-Control-Expose-Headers: WWW-Authenticate, Server-Authorization, Location<br>
+Request-Time: 383<br>
+Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&rdquo;; Path=/; Domain=.bodhi.space; Secure; HTTPOnly</p>
+
+<p><code class="prettyprint">{&quot;lastName&quot;:&quot;User&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:22:11.157Z&quot;,&quot;authorizations&quot;:[{&quot;namespace&quot;:&quot;bodhi-social&quot;,&quot;read&quot;:true}],&quot;profiles&quot;:[&quot;bodhi-social.user&quot;],&quot;usertype&quot;:&quot;person&quot;,&quot;firstName&quot;:&quot;Platform&quot;,&quot;sys_id&quot;:&quot;57407d23b3b82c51e5cb3afb&quot;,&quot;password&quot;:&quot;$2a$12$C/ZJYSZ4qkR5pU5yHQEkLuvcOVjP4rqLdOHlPq4zcDZt9dcYpBeMC&quot;,&quot;sys_version&quot;:1,&quot;email&quot;:&quot;customercare@hotschedules.com&quot;,&quot;username&quot;:&quot;platform&quot;,&quot;sys_type_version&quot;:12}</code></p>
+
+<p>Next, read the Set-Cookie header to get your cookie string:<br>
+<code class="prettyprint">RUSK=&quot;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot;</code> in the example</p>
+
+<p>Now use the cookie auth to authenticate to the API<br>
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/me</code></p>
+
+<p>Cookie authorization does not expire and can be used to authenticate moving forward.</p>
+
+<p>Once your Organization is setup in the platform (you can signup for free at https://developer.bodhi.space) you can access your data at https://api.bodhi.space/<organization_name> .</p>
+
+<p>So for example, if your organization name is my-deli, your URL would be <code class="prettyprint">https://api.bodhi.space/my-deli</code></p>
+
+<p>Now that you&rsquo;ve authenticated to the API, it&rsquo;s time to look at some data.</p>
+
+<h2 id="making-a-call">Making a call</h2>
+
+<p>The HotSchedules REST API supports all the standard REST verbs<br>
+<strong>GET</strong><br>
+<strong>POST</strong><br>
+<strong>PUT</strong><br>
+<strong>PATCH</strong><br>
+<strong>DELETE</strong>  </p>
+
+<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <code class="prettyprint">https://api.bodhi.space/apidocs/index.html</code></p>
+
+<h4 id="get">GET</h4>
+
+<p>As an example, let&rsquo;s do a <strong>GET</strong> on a store via CURL
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/bodhi-social/resources/Store</code></p>
+
+<p>This call will return the information about a store that&rsquo;s been created for the bodhi-social organization</p>
+
+<p><code class="prettyprint">[{&quot;sys_version&quot;:1,&quot;image_url&quot;:&quot;https://upload.wikimedia.org/wikipedia/commons/5/54/Golden_Gate_Bridge_0002.jpg&quot;,&quot;sys_type_version&quot;:12,&quot;address&quot;:{&quot;street_address&quot;:&quot;555 Mission&quot;,&quot;extended_address&quot;:&quot;&quot;,&quot;locality&quot;:&quot;San Francisco&quot;,&quot;region&quot;:&quot;CA&quot;,&quot;postal_code&quot;:&quot;94111&quot;,&quot;country&quot;:&quot;US&quot;},&quot;store_hours&quot;:[{&quot;days&quot;:[7,1],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;},{&quot;days&quot;:[1,2],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[2,3],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[3,4],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[4,5],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[5,6],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[6,7],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;}],&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:37:15.560Z&quot;,&quot;name&quot;:&quot;platformstore&quot;,&quot;store_number&quot;:&quot;1&quot;,&quot;display_name&quot;:&quot;Platform Store&quot;,&quot;sys_id&quot;:&quot;574080abb9a19e2dadee775b&quot;}]</code></p>
+
+<p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/Store</code>  </p>
+
+<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/resources/Store</code> or using our free store manager tool at <code class="prettyprint">https://bodhi.space/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
+
+<p>Next let&rsquo;s look up a sale for our store in bodhi-social</p>
+
+<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/bodhi-social/resources/SalesTransaction</code></p>
+
+<p>RESULT:</p>
+
+<p><code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>We can also look up our Store using query parameters in our URL</p>
+
+<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET &#39;https://api.bodhi.space/bodhi-social/resources/SalesTransaction&#39; --data-urlencode &#39;where={&quot;business_day&quot;:&quot;2016-05-20&quot;}&#39;</code></p>
+
+<p>RESULT:<br>
+<code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>So <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={%27business_day%27:%272016-05-20%27}</code> would return all SalesTransaction&rsquo;s for the business day of 2016-05-20.
+The URL <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={%27store_id%27:%27574080abb9a19e2dadee775b%27}</code> would return all SalesTransaction&rsquo;s for the store 574080abb9a19e2dadee775b (our Platform test store).</p>
+
+<p>All Types can be queried by any parameter within the type using a ?where={} clause. It&rsquo;s <strong>EXTREMELY</strong> important for efficiency and performance to query using indexes on your types. You can review the Types for your organization as well as the Indexes and Parameters by using our free Type Tool located at <code class="prettyprint">https://tools.bodhi.space/types</code> or by inspecting <code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/resources/BodhiType</code></p>
+
+<h4 id="post">POST</h4>
+
+<p>To <strong>POST</strong> to a type you need to add the the header: &#39;Content-Type: application/json&rsquo; to your cURL Command</p>
+
+<p><code class="prettyprint">curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X POST -d &#39;{
+  &quot;store_id&quot;: &quot;l8zeL&quot;,
+  &quot;business_day&quot;: &quot;2016-05-13&quot;,
+  &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;,
+  &quot;transaction_id&quot;: &quot;FGHG012&quot;,
+     &quot;tender_total&quot;: {
+      &quot;code&quot;: &quot;USD&quot;,
+      &quot;scale&quot;: 2,
+      &quot;value&quot;: 620
+    }
+}&#39; https://api.bodhi.space/&lt;organization_name&gt;/resources/SalesTransaction</code></p>
+
+<p>That command will post the json object to the SalesTransaction type. You can now GET on this type either using cURL or the free query tools available at https://tools.bodhi.space/query</p>
+
+<h4 id="bulk-post">Bulk Post</h4>
+
+<p>All bulk operations are accessible through https://api.bodhi.space<br>
+The size limitation for the body is 17MB  </p>
+
+<h3 id="syntax:">Syntax:</h3>
+
+<p><strong>POST</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk</code> with json body<br>
+<code class="prettyprint">{
+    &quot;config&quot;: {
+        &quot;op&quot;: &quot;insert&quot; or &quot;update&quot; or &quot;upsert&quot; or &quot;invite&quot;,  * see below
+         &quot;report&quot;: true,                &lt;- optional, need a report? (default false) 
+         &quot;target&quot;: &quot;target_name”      &lt;- the name of the type (not for invite)
+    },
+    &quot;payload&quot;: [{
+        &quot;the_field&quot;: &quot;my first thing to insert or upsert or invite&quot;,
+        &quot;other_field&quot;: &quot;the_other_field&quot;
+    }, {
+        &quot;the_field&quot;: &quot;my second thing to insert or upsert&quot;,
+        &quot;other_field&quot;: &quot;the_other_field2&quot;
+    }]
+}</code>  </p>
+
+<p>The payload varies depending on the type of operation and Returns 202 with header <code class="prettyprint">bulk_id:&lt;the bulk id&gt;</code></p>
+
+<p>The result of a report, if requested, is accessible as soon as the processing is done on:</p>
+
+<p><strong>GET</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk/&lt;bulk_id&gt;</code></p>
+
+<p><strong>RESPONSE:</strong><br>
+returns <strong>200</strong> with a json array body where the order of the cells matches the order of the payload. The report can be accessed only once.<br>
+returns <strong>204</strong> if the report is not ready yet<br>
+returns <strong>404</strong> if no report was found with that id  </p>
+
+<ul>
+<li>update/upsert is only available for types not encapsulated </li>
+<li>insert on system types only BodhiUser, BodhiType and BodhiEnumeration and any not encapsulated type</li>
+</ul>
+
+<h3 id="example:">Example:</h3>
+
+<p><code class="prettyprint">{
+    &quot;config&quot;: {
+        &quot;op&quot;: &quot;insert&quot;,
+        &quot;report&quot;: true,
+        &quot;target&quot;:  &quot;BulkTest&quot;
+    },
+    &quot;payload&quot;: [{
+        &quot;name&quot;: &quot;leo&quot;,
+        &quot;other_field&quot;: &quot;mauris non&quot;
+    }, {
+        &quot;name&quot;: &quot;orci&quot;,
+        &quot;other_field&quot;: &quot;sit amet justo&quot;
+    }, {
+        &quot;name&quot;: &quot;nulla&quot;,
+        &quot;other_field&quot;: &quot;pulvinar sed nisl nunc rhoncus&quot;
+    }, {
+        &quot;name&quot;: &quot;nulla&quot;,
+        &quot;other_field&quot;: &quot;diam cras&quot;
+    }, {
+        &quot;name&quot;: &quot;est&quot;,
+        &quot;other_field&quot;: &quot;dui nec nisi volutpat&quot;
+    }, {
+        &quot;name&quot;: &quot;lorem&quot;,
+        &quot;other_field&quot;: &quot;cursus id&quot;
+    }, {
+        &quot;name&quot;: &quot;molestie&quot;,
+        &quot;other_field&quot;: &quot;potenti nullam porttitor lacus at&quot;
+    }, {
+        &quot;name&quot;: &quot;sapien&quot;,
+        &quot;other_field&quot;: &quot;ultrices aliquet maecenas leo&quot;
+    }, {
+        &quot;name&quot;: &quot;nibh&quot;,
+        &quot;other_field&quot;: &quot;consectetuer eget rutrum at&quot;
+    }, {
+        &quot;name&quot;: &quot;luctus&quot;,
+        &quot;other_field&quot;: &quot;nisl nunc&quot;
+    }]
+}</code></p>
+
+<h4 id="put">PUT</h4>
+
+<p>The HTTP verb PUT can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PUT on sys_id</p>
+
+<p>As an example, in the above SalesTransaction example, the sys_id is 574086965eacd06aa3db036b, a PUT to the SalesTransaction based on sys_id would be as follows:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.bodhi.space/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b
+</code> </p>
+
+<h4 id="put-upsert">PUT Upsert</h4>
+
+<p>Upsert is a safe way to replace an existing record, or POST a record if the entry does not currently exist.</p>
+
+<p>You can upsert by appending your URL with ?upsert=true</p>
+
+<p>As an example, the above PUT example can be changed to a replace by appending the ?upsert=true to the cURL command:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.bodhi.space/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b?upsert=true
+</code></p>
+
+<h4 id="patch">PATCH</h4>
+
+<p>the HTTP verb PATCH will allow you to alter single parameters or fields within a record in your type. Patch commands follow the following sytax:
+[ { &ldquo;op&rdquo;: &ldquo;replace&rdquo;, &ldquo;path&rdquo;: &ldquo;/baz&rdquo;, &ldquo;value&rdquo;: &ldquo;boo&rdquo; }, { &ldquo;op&rdquo;: &ldquo;add&rdquo;, &ldquo;path&rdquo;: &ldquo;/hello&rdquo;, &ldquo;value&rdquo;: [&ldquo;world&rdquo;] }, { &ldquo;op&rdquo;: &ldquo;remove&rdquo;, &ldquo;path&rdquo;: &ldquo;/foo&rdquo;} ]</p>
+
+<p>The HTTP verb PATCH can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PATCH on sys_id</p>
+
+<h4 id="delete">DELETE</h4>
+
+<p>the HTTP verb DELETE will allow you to remove a record in your type. DELETE commands follow the following sytax:</p>
+
+<p>To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.</p>
+
+<h4 id="file-upload">File Upload</h4>
+
+<p>The Platform BodhiFileUpload endpoints are special types that allow a user to upload and download any file (like a dbf file from your store&rsquo;s POS).</p>
+
+<p>Metadata of your file is posted to type BodhiFileUpload on successful upload  </p>
+
+<p><strong>BodhiFileUpload example record:</strong><br>
+<code class="prettyprint">{ &quot;namespace&quot;: &quot;bodhi&quot;, &quot;original_name&quot;: &quot;profile_pic5.jpg&quot;, &quot;sys_version&quot;: 1, &quot;location&quot;: &quot;bodhi/profile_pic5.jpg&quot;, &quot;uploaded_at&quot;: &quot;2015-09-10T19:42:48+0000&quot;, &quot;sys_created_by&quot;: &quot;admin__bodhi&quot;, &quot;sys_created_at&quot;: &quot;2015-09-10T19:42:49+0000&quot;, &quot;name&quot;: &quot;profile_pic5.jpg&quot;, &quot;media_type&quot;: &quot;image/jpeg&quot;, &quot;sys_id&quot;: &quot;55f1dd39b9b5904f64c8212f&quot; }</code></p>
+
+<p><strong>Examples:</strong><br>
+The following are curl examples of how to specify file location in your upload/download/delete commands.  Everything after “upload/” or “download/” in the url is used as the destination.  Note that filename is always specified in the url.  </p>
+
+<p><code class="prettyprint">curl -X POST -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code>  </p>
+
+<p><code class="prettyprint">curl -X PUT -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code></p>
+
+<p><strong>Download by path:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/download/recipes/food/BurritoRecipe.txt</code></p>
+
+<p><strong>Download by sys_id:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/download/56f9c2b4fa92ec27934a76ae</code>  </p>
+
+<p><strong>Delete a file:</strong><br>
+<code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
+
+          <h2 id="working-with-labor-data">Working with Labor data</h2>
+
+<p>Storing and accessing labor data is a critical function of the HotSchedule IoT Platform. To access your labor data, you will use the following types:  </p>
+
+<ul>
+<li>Store<br></li>
+<li>StoreJob<br></li>
+<li>Employee<br></li>
+<li>EmployeePosition<br></li>
+<li>Timecard<br></li>
+</ul>
+
+<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
+
+<ol>
+<li>Create a Store<br></li>
+<li>Create a StoreJob<br></li>
+<li>Create a Employee<br></li>
+<li>Create EmployeePosition using the Employee, Store, and StoreJob data<br>
+
+<ul>
+<li>Patch Store.employee_ids with the new employee&rsquo;s sys_id<br></li>
+<li>Patch Employee.positions with the new EmployeePosition<br></li>
+</ul></li>
+<li>Create Timecard using EmployeePosition data<br></li>
+</ol>
+
+<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
+
+<p>EmployeePosition is a reference table for looking up stores, employees, jobs, and pay rates.  Ideally, this should be the first place you look for information when querying labor data.</p>
+
+<p>A Store has many employees (Array of sys_ids)
+&ndash; Store.employee_ids maps to each Employee.sys_id</p>
+
+<p>&ndash; Example Query: Return all stores that the specified employee is associated with<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Store?where={&#39;employee_ids&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+
+<p>A Store has <strong>many</strong> jobs
+&ndash;  Store.sys_id maps to StoreJob.store_id</p>
+
+<p>&ndash; Example Query: Return all jobs at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/StoreJob?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p>An Employee has many positions (Array of EmployeePosition)</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id<br></li>
+<li>Employee.name.family_name maps to EmployeePosition.employee_reference.name<br></li>
+<li>Employee.external_ids maps to EmployeePosition.employee_reference.id<br></li>
+<li>Store.sys_id maps to EmployeePosition.store_id<br></li>
+<li>Store.store_number maps to EmployeePosition.store_reference.id<br></li>
+<li>Store.name maps to EmployeePosition.store_reference.name<br></li>
+<li>StoreJob.sys_id maps to EmployeePosition.job_id<br></li>
+<li>StoreJob.instore_id maps to EmployeePosition.job_reference.id<br></li>
+<li>StoreJob.instore_name maps to EmployeePosition.job_reference.name<br></li>
+</ul>
+
+<p><strong>Example Queries:</strong>  </p>
+
+<p>Return all positions for a specified employee across all stores<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.name&#39;:&#39;&lt;EMPLOYEE_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.id&#39;:&#39;&lt;EMPLOYEE_EXTERNAL_ID&gt;&#39;}</code>  </p>
+
+<p>Return all positions at a specified store across all employees and jobs.<br>
+<strong>(NOTE: May include duplicates if employees have multiple positions at the same store)</strong><br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.name&#39;:&#39;&lt;STORE_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.id&#39;:&#39;&lt;STORE_NUMBER&gt;&#39;}</code>  </p>
+
+<p>Return all employees with a specified job across all stores
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_id&#39;:&#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.name&#39;:&#39;&lt;JOB_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.id&#39;:&#39;&lt;JOB_EXTERNAL_ID&gt;&#39;}</code>  </p>
+
+<p>An Employee has many Stores through EmployeePosition</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
+<li>EmployeePosition.store_id maps to Store.sys_id</li>
+<li>Therefore: Employee.sys_id maps to Store.sys_id</li>
+</ul>
+
+<p>&ndash; Example Query: Return an array of Store.sys_id that the employee works at
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=store_id</code></p>
+
+<p>An Employee has many StoreJobs through EmployeePosition</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
+<li>EmployeePosition.job_id maps to StoreJob.sys_id</li>
+<li>Therefore: Employee.sys_id maps to StoreJob.sys_id</li>
+</ul>
+
+<p>&ndash; Example Query: Return an array of StoreJob.sys_id for the specified employee<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=job_id</code></p>
+
+<p>(Same as the two previous examples)  </p>
+
+<ul>
+<li>A Store has many StoreJobs through EmployeePosition</li>
+<li>A Store has many Employees through EmployeePosition</li>
+<li>A StoreJob has many Employees through EmployeePosition</li>
+</ul>
+
+<p>An Employee has many Timecards
+* Employee.sys_id maps to Timecard.employee_id
+* Employee.external_ids maps to Timecard.employee_reference.id
+* Employee.name.family_name maps to Timecard.employee_reference.name</p>
+
+<p>&ndash; Example Query: Return all timecards for a specified employee<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;employee_id&#39;: &#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+
+<p>A Store has many Timecards</p>
+
+<ul>
+<li>Store.sys_id maps to Timecard.store_id</li>
+<li>Store.store_number maps to Timecard.store_reference.id</li>
+<li>Store.name maps to Timecard.store_reference.name</li>
+</ul>
+
+<p>&ndash; Example Query:Return all timecards for all employees at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code></p>
+
+<p>A StoreJob has many Timecards</p>
+
+<ul>
+<li>StoreJob.sys_id maps to Timecard.job_id</li>
+<li>StoreJob.instore_id maps to Timecard.job_reference.id</li>
+<li>StoreJob.instore_name maps to Timecard.job_reference.name</li>
+</ul>
+
+<p>&ndash; Example Query:Return all timecards for all employees with the specified job across all stores<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+
+<p>&ndash; Example Query:Return all timecards for all employees with the specified job at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;, &#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p>Employee payment rates:
+Base payment rates for a position are defined in the StoreJob type.  When an EmployeePosition is created, the regular, overtime, and double time rates are copied from the StoreJob and adjusted for that employee.  This allows for multiple employees to have the same job, but different payment rates.</p>
+
+          <h2 id="working-with-sales-data">Working with Sales data</h2>
+
+<p>Storing and accessing Sales data is a critical function of the HotSchedule IoT Platform. To access your sales data, you will use the following types:  </p>
+
+<ul>
+<li>Store<br></li>
+<li>SalesTransaction<br></li>
+<li>SalesItem<br></li>
+<li>SalesCategory<br></li>
+<li>RevenueCenter</li>
+</ul>
+
+<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
+
+<ol>
+<li>Create a Store<br></li>
+<li>Create a SalesTransaction<br></li>
+<li>Create a SalesItem<br></li>
+</ol>
+
+<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
+
+<p>SalesTransaction is a reference table for looking up items sold and the meta data about those items as they refer to a specific order on a specific business day.  Ideally, this should be the first place you look for information when querying Sales data.</p>
+
+<p>A Store has many SalesTransactions<br>
+&ndash;  SalesTransaction.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesTransactions for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many SalesItem<br>
+&ndash;  SalesItem.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesItem for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItem?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many entries in SalesCategory<br>
+&ndash;  SalesCategory.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all SalesCategories for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesCategory?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A Store has many RevenueCenters<br>
+&ndash;  RevenueCenter.store_id maps to Store.sys_id</p>
+
+<p>&ndash; Example Query: Return all RevenueCenters for a store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/RevenueCenter?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has many SalesItems<br>
+&ndash;  SalesTransaction.transaction_id maps to SalesItem.transaction_id</p>
+
+<p>&ndash; Example Query: Return all SalesItems for a SalesTransaction<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;transaction_id&#39;:&#39;&lt;SalesTransaction.transaction_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has a RevenueCenter<br>
+&ndash;  SalesTransaction.revenue_center.id maps to RevenueCenter.instore_id<br>
+&ndash;  SalesTransaction.revenue_center.name maps to RevenueCenter.display_name  </p>
+
+<p>&ndash; Example Query: Return all SalesTransactions for a RevenueCenter
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;revenue_center.id&#39;:&#39;&lt;RevenueCenter.instore_id&gt;&#39;}</code></p>
+
+<p>A SalesTransaction has an Employee<br>
+&ndash;  SalesTransaction.employee.id maps to Employee.external_ids.key<br>
+&ndash;  SalesTransaction.employee.name maps to Employee.name.formatted_name  </p>
+
+<p>&ndash; Example Query: Return all SalesTransaction for an Employee
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;employee.id&#39;:&#39;&lt;Employee.external_ids.key&gt;&#39;}</code></p>
+
+<p>A SalesTransaction AND SalesItem have a day of business<br>
+&ndash; Example Query: Return all SalesTransactions for business day 05/21/2016
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
+
+<p>&ndash; Example Query: Return all SalesItems for business day 05/21/2016
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
+
+<p>A SalesItem has a SalesCategory<br>
+&ndash;  SalesItem.sales_category.id maps to SalesCategory.instore_id<br>
+&ndash;  SalesItem.sales_category.name maps to SalesCategory.display_name  </p>
+
+<p>&ndash; Example Query: Return all SalesItems for a SalesCategory
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;sales_category.id&#39;:&#39;&lt;SalesCategory.instore_id&gt;&#39;}</code></p>
+
+          <h2 id="working-with-hotschedules-data">Working with HotSchedules data</h2>
+
+<p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
+
+<h3 id="examples">Examples</h3>
+
+<p>For now, the HotSchedules API username and password must be entered as url parameters hsusr and hspwd respectively. (<strong>Just for demo purposes. This will eventually change.</strong>)  </p>
+
+<p>The url path can look like any of the following, depending on which type is being queried:<br>
+<code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;store_id&gt;/&lt;type_method&gt;?</code>  </p>
+
+<p>example:<br>
+<code class="prettyprint">../hotschedules/1/1/getDriversByInterval?..</code></p>
+
+<p><code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;type_method&gt;</code></p>
+
+<p>example:<br>
+<code class="prettyprint">../hotschedules/1/getStores?..</code>  </p>
+
+<p><code class="prettyprint">../hotschedules/&lt;type_method&gt;</code>  </p>
+
+<p>example:<br>
+<code class="prettyprint">../hotschedules/getConcept?..</code></p>
+
+<h4 id="getconcept">getConcept</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/getConcept?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getdriversbyinterval">getDriversByInterval</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getDriversByInterval?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;volume_type=TABLE&amp;data_type=ACTUAL&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getempavailability">getEmpAvailability</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpAvailability?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getempinfo">getEmpInfo</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpInfo?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getempjobs">getEmpJobs</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpJobs?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getgroups">getGroups</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/getGroups?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getguestcounts">getGuestCounts</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getGuestCounts?start_date=2016-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h3 id="getlaborbybusday">getLaborByBusDay</h3>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getLaborByBusDay?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getLaborByJobAndInterval?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getprojectedsales">getProjectedSales</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getProjectedSales?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getrcv">getRCV</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getRCV?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getsalescats">getSalesCats</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getSalesCats?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getschedule">getSchedule</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getSchedule?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getstoreemployees">getStoreEmployees</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getstorejobs">getStoreJobs</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getstores">getStores</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="gettimecards">getTimeCards</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+<h4 id="getvolumecounts">getVolumeCounts</h4>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+
+          <h2 id="working-with-social-data">Working with Social data</h2>
+
+<p>The HotSchedules REST API provides a user-friendly way to obtain Social data from GooglePlaces,Yelp, and WUnderground.  </p>
+
+<h3 id="api-endpoint">API endpoint</h3>
+
+<p><code class="prettyprint">https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver?where=&lt;query_json&gt;</code>  </p>
+
+<h4 id="yelp-data">Yelp Data</h4>
+
+<h3 id="yelp-query-format">Yelp query format</h3>
+
+<p>By term and location:<br>
+    <code class="prettyprint">{  
+       &quot;term&quot;:&lt;search term, for instance KFC, McDonalds etc&gt; - mandatory field
+       &quot;location&quot;:&lt;location, for instance Emeryville&gt; - mandatory field
+       &quot;limit&quot;:&lt;number of results to return (default:10) - optional field
+       &quot;radius&quot;:&lt;search radius in meters&gt; (default:100) - optional field
+    }</code></p>
+
+<p>By phone:<br>
+<code class="prettyprint">{
+   &quot;phone&quot;:&lt;phone number in full format&gt; (for example +15555555555)
+}</code></p>
+
+<h3 id="yelp-query-example:">Yelp query example:</h3>
+
+<p>By term and location:<br>
+<code class="prettyprint">https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/yelp?where={&quot;term&quot;:&quot;KFC&quot;,&quot;location&quot;:&quot;Emeryville&quot;,&quot;limit&quot;:3}</code></p>
+
+<p>By phone:<br>
+<code class="prettyprint">https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/yelp?where={&quot;phone&quot;:&quot;+15555555555&quot;}</code></p>
+
+<h4 id="wunderground-data">Wunderground Data</h4>
+
+<h3 id="wunderground-query-format:">Wunderground query format:</h3>
+
+<p><code class="prettyprint">{&quot;query&quot;:&lt;query_in_wunderground format&gt;}</code></p>
+
+<p>More details about WU queries could be found here:
+<code class="prettyprint">http://www.wunderground.com/weather/api/d/docs?d=data/index</code></p>
+
+<h3 id="wunderground-query-example:">Wunderground query example:</h3>
+
+<p><code class="prettyprint">https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/wu?where={&quot;query&quot;:&quot;conditions/q/CA/San_Francisco.json&quot;}</code></p>
+
+<h4 id="googleplaces-data">GooglePlaces data</h4>
+
+<h3 id="google-places-query-example">Google Places query example</h3>
+
+<p><code class="prettyprint">https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/googleplaces?where={&quot;query&quot;:&quot;Empire state building&quot;}</code></p>
+
           <h1 id="agent">Agent</h1>
 
 <h2 id="overview">Overview</h2>

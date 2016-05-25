@@ -1,0 +1,183 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_making-a-call includes_making-a-call_store-example">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h2 id="working-with-labor-data">Working with Labor data</h2>
+
+<p>Storing and accessing labor data is a critical function of the HotSchedule IoT Platform. To access your labor data, you will use the following types:  </p>
+
+<ul>
+<li>Store<br></li>
+<li>StoreJob<br></li>
+<li>Employee<br></li>
+<li>EmployeePosition<br></li>
+<li>Timecard<br></li>
+</ul>
+
+<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
+
+<ol>
+<li>Create a Store<br></li>
+<li>Create a StoreJob<br></li>
+<li>Create a Employee<br></li>
+<li>Create EmployeePosition using the Employee, Store, and StoreJob data<br>
+
+<ul>
+<li>Patch Store.employee_ids with the new employee&rsquo;s sys_id<br></li>
+<li>Patch Employee.positions with the new EmployeePosition<br></li>
+</ul></li>
+<li>Create Timecard using EmployeePosition data<br></li>
+</ol>
+
+<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
+
+<p>EmployeePosition is a reference table for looking up stores, employees, jobs, and pay rates.  Ideally, this should be the first place you look for information when querying labor data.</p>
+
+<p>A Store has many employees (Array of sys_ids)
+&ndash; Store.employee_ids maps to each Employee.sys_id</p>
+
+<p>&ndash; Example Query: Return all stores that the specified employee is associated with<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Store?where={&#39;employee_ids&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+
+<p>A Store has <strong>many</strong> jobs
+&ndash;  Store.sys_id maps to StoreJob.store_id</p>
+
+<p>&ndash; Example Query: Return all jobs at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/StoreJob?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p>An Employee has many positions (Array of EmployeePosition)</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id<br></li>
+<li>Employee.name.family_name maps to EmployeePosition.employee_reference.name<br></li>
+<li>Employee.external_ids maps to EmployeePosition.employee_reference.id<br></li>
+<li>Store.sys_id maps to EmployeePosition.store_id<br></li>
+<li>Store.store_number maps to EmployeePosition.store_reference.id<br></li>
+<li>Store.name maps to EmployeePosition.store_reference.name<br></li>
+<li>StoreJob.sys_id maps to EmployeePosition.job_id<br></li>
+<li>StoreJob.instore_id maps to EmployeePosition.job_reference.id<br></li>
+<li>StoreJob.instore_name maps to EmployeePosition.job_reference.name<br></li>
+</ul>
+
+<p><strong>Example Queries:</strong>  </p>
+
+<p>Return all positions for a specified employee across all stores<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.name&#39;:&#39;&lt;EMPLOYEE_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.id&#39;:&#39;&lt;EMPLOYEE_EXTERNAL_ID&gt;&#39;}</code>  </p>
+
+<p>Return all positions at a specified store across all employees and jobs.<br>
+<strong>(NOTE: May include duplicates if employees have multiple positions at the same store)</strong><br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.name&#39;:&#39;&lt;STORE_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.id&#39;:&#39;&lt;STORE_NUMBER&gt;&#39;}</code>  </p>
+
+<p>Return all employees with a specified job across all stores
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_id&#39;:&#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.name&#39;:&#39;&lt;JOB_NAME&gt;&#39;}</code>  </p>
+
+<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.id&#39;:&#39;&lt;JOB_EXTERNAL_ID&gt;&#39;}</code>  </p>
+
+<p>An Employee has many Stores through EmployeePosition</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
+<li>EmployeePosition.store_id maps to Store.sys_id</li>
+<li>Therefore: Employee.sys_id maps to Store.sys_id</li>
+</ul>
+
+<p>&ndash; Example Query: Return an array of Store.sys_id that the employee works at
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=store_id</code></p>
+
+<p>An Employee has many StoreJobs through EmployeePosition</p>
+
+<ul>
+<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
+<li>EmployeePosition.job_id maps to StoreJob.sys_id</li>
+<li>Therefore: Employee.sys_id maps to StoreJob.sys_id</li>
+</ul>
+
+<p>&ndash; Example Query: Return an array of StoreJob.sys_id for the specified employee<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=job_id</code></p>
+
+<p>(Same as the two previous examples)  </p>
+
+<ul>
+<li>A Store has many StoreJobs through EmployeePosition</li>
+<li>A Store has many Employees through EmployeePosition</li>
+<li>A StoreJob has many Employees through EmployeePosition</li>
+</ul>
+
+<p>An Employee has many Timecards
+* Employee.sys_id maps to Timecard.employee_id
+* Employee.external_ids maps to Timecard.employee_reference.id
+* Employee.name.family_name maps to Timecard.employee_reference.name</p>
+
+<p>&ndash; Example Query: Return all timecards for a specified employee<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;employee_id&#39;: &#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+
+<p>A Store has many Timecards</p>
+
+<ul>
+<li>Store.sys_id maps to Timecard.store_id</li>
+<li>Store.store_number maps to Timecard.store_reference.id</li>
+<li>Store.name maps to Timecard.store_reference.name</li>
+</ul>
+
+<p>&ndash; Example Query:Return all timecards for all employees at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code></p>
+
+<p>A StoreJob has many Timecards</p>
+
+<ul>
+<li>StoreJob.sys_id maps to Timecard.job_id</li>
+<li>StoreJob.instore_id maps to Timecard.job_reference.id</li>
+<li>StoreJob.instore_name maps to Timecard.job_reference.name</li>
+</ul>
+
+<p>&ndash; Example Query:Return all timecards for all employees with the specified job across all stores<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+
+<p>&ndash; Example Query:Return all timecards for all employees with the specified job at a specified store<br>
+<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;, &#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+
+<p>Employee payment rates:
+Base payment rates for a position are defined in the StoreJob type.  When an EmployeePosition is created, the regular, overtime, and double time rates are copied from the StoreJob and adjusted for that employee.  This allows for multiple employees to have the same job, but different payment rates.</p>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
