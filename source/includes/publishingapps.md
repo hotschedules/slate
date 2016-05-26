@@ -38,8 +38,11 @@ To publish an app into the IoT Platform you have to zip up the following:
 
 ###Example package.json for Mobile Applications
 By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:
+
 - **"location":"S3" & "storage":"s3"**
+
 	Add to your settings section of your package.json, "location":"S3" and "storage":"s3" to publish your app to the platform which is the preferred location.
+
 - **index.html**
 
 	If you open this file it say Click Me and a Welcome will appear above Click Me
