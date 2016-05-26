@@ -6,7 +6,7 @@ To publish application for the IoT Platform, you need to follow a few simple ste
 
 ##Publishing Your Application
 
-To publish your application you must have the following directory structure for your application:
+To publish your application you add the following directory structure for your application:
 
 ```
 	/<app-name>/
