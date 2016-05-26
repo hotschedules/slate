@@ -39,9 +39,6 @@ To publish an app into the IoT Platform you have to zip up the following:
 ###Example package.json for Mobile Applications
 By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:
 
-- **"location":"S3" & "storage":"s3"**
-
-	Add to your settings section of your package.json, "location":"S3" and "storage":"s3" to publish your app to the platform which is the preferred location.
 
 - **index.html**
 
@@ -84,6 +81,8 @@ package.json that gets includes with HS Template's zip file:
         "categories": [""],
         "offline": false,
         "navigationBar": "auto",
+        "location": "S3",
+        "storage": "s3",
         "type":"mobile"
     },
     "dependencies": {
@@ -132,6 +131,10 @@ See Descriptions of package.json contents below to see what each packge.json ent
         "offline": false,
 
         "navigationBar": "auto",
+
+	"location": "S3",
+
+	"storage": "s3",
 
         "type":"mobile"
 
@@ -192,6 +195,8 @@ if you have any related apps you want to install together::
     ],
     "public_path": "public",
     "global_store_icon": "public/icon.png",
+   "location": "S3",
+   "storage": "s3",
    "type": "agent",    
 (type can be “job”, “agent”, “mobile”, “web” )   
  "new_type_required": true,
@@ -305,6 +310,10 @@ Examples include financial, inventory, management
 - **"global_store_icon": "public/icon.png" _required_**
 
 	In the settings section, Global Store Icon is your icon for your application.
+
+- **"location": "S3" _optional_**
+
+	In the settings section, you define where your published app resides (S3 or artifactory).  S3 is the preferred location.  The Agent Apps used to use "storage": "s3", so that needs to be included in the settings sections as well for agent apps to compatibility.
 
 - **"type": "mobile" _required_**
 
