@@ -19,7 +19,6 @@ includes:
   - making-a-call/hs-example
   - making-a-call/social-example
 
-
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
@@ -27,6 +26,7 @@ includes:
   - bodhiagent/agenttooling/agenttools
   - bodhiagent/agenttooling/agentcli
   - bodhiagent/super-agent-driver
+
   - publishingapps
   - bodhimobile/overview
   - bodhimobile/gettingstarted
