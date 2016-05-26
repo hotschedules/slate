@@ -3477,6 +3477,8 @@ Image_home.png is the background image for index.html</p></li>
         "categories": [""],
         "offline": false,
         "navigationBar": "auto",
+        "location": "S3",
+        "storage": "s3",
         "type":"mobile"
     },
     "dependencies": {
@@ -3524,6 +3526,10 @@ Image_home.png is the background image for index.html</p></li>
 <p>&ldquo;offline&rdquo;: false,</p>
 
 <p>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;,</p>
+
+<p>&ldquo;location&rdquo;: &ldquo;S3&rdquo;,</p>
+
+<p>&ldquo;storage&rdquo;: &ldquo;s3&rdquo;,</p>
 
 <p>&ldquo;type&rdquo;:&ldquo;mobile&rdquo;</p>
 
@@ -3581,6 +3587,8 @@ if you have any related apps you want to install together::
     ],
     "public_path": "public",
     "global_store_icon": "public/icon.png",
+   "location": "S3",
+   "storage": "s3",
    "type": "agent",    
 (type can be “job”, “agent”, “mobile”, “web” )   
  "new_type_required": true,
@@ -3687,6 +3695,9 @@ Example:
 <li><p><strong>&ldquo;global_store_icon&rdquo;: &ldquo;public/icon.png&rdquo; <em>required</em></strong></p>
 
 <p>In the settings section, Global Store Icon is your icon for your application.</p></li>
+<li><p><strong>&ldquo;location&rdquo;: &ldquo;S3&rdquo; <em>optional</em></strong></p>
+
+<p>In the settings section, you define where your published app resides (S3 or artifactory).  S3 is the preferred location.  The Agent Apps used to use &ldquo;storage&rdquo;: &ldquo;s3&rdquo;, so that needs to be included in the settings sections as well for agent apps to compatibility.</p></li>
 <li><p><strong>&ldquo;type&rdquo;: &ldquo;mobile&rdquo; <em>required</em></strong></p>
 
 <p>In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p></li>
