@@ -23,9 +23,6 @@ includes:
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
   - bodhiagent/Howto/installingbodhiagent
-  - bodhiagent/agenttooling/agenttools
-  - bodhiagent/agenttooling/agentcli
-  - bodhiagent/super-agent-driver
 
   - publishingapps
   - bodhimobile/overview
