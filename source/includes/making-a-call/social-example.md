@@ -2,13 +2,14 @@
 
 The HotSchedules REST API provides a user-friendly way to obtain Social data from GooglePlaces,Yelp, and WUnderground.  
 
+If "refresh=true" query option is specified - cache will be invalidated and refreshed.
+
+If "proxy=true" query option is specified - no cache will be used at all and requests will be forwarded directly to the endpoint.
+
 ### API endpoint
 
 `https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver?where=<query_json>`  
 
-If "refresh=true" query option is specified - cache will be invalidated and refreshed.
-
-If "proxy=true" query option is specified - no cache will be used at all and requests will be forwarded directly to the endpoint.
 
 #### Yelp Data
 
