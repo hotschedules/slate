@@ -686,21 +686,19 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 
 <p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
 
-          <p>[TOC]</p>
-
-<h1 id="mx-rds-api">MX RDS API</h1>
+          <h2 id="mx-rds-api">MX RDS API</h2>
 
 <p>The mxrds api provides a RESTful way to access data stored in Macromatix RDS database</p>
 
-<h2 id="access-control">Access Control</h2>
+<h3 id="access-control">Access Control</h3>
 
 <p>A Bearer Token is required to make calls to the service, ask the team to generate one for you</p>
 
-<h2 id="store-endpoints">Store endpoints</h2>
+<h3 id="store-endpoints">Store endpoints</h3>
 
 <p>Returns store information as well as store roster</p>
 
-<h3 id="get-all-stores">Get all stores</h3>
+<h4 id="get-all-stores">Get all stores</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores
 </code></pre>
 
@@ -709,7 +707,7 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores
 </code></p>
 
-<h3 id="get-store-by-store-id">Get store by store id</h3>
+<h4 id="get-store-by-store-id">Get store by store id</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;
 </code></pre>
 
@@ -718,7 +716,7 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;
 </code></p>
 
-<h3 id="get-store-roster">Get store roster</h3>
+<h4 id="get-store-roster">Get store roster</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;/roster
 </code></pre>
 
@@ -727,11 +725,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;/roster
 </code></p>
 
-<h2 id="employee-endpoints">Employee endpoints</h2>
+<h3 id="employee-endpoints">Employee endpoints</h3>
 
 <p>Returns employee information</p>
 
-<h3 id="get-all-employees">Get all employees</h3>
+<h4 id="get-all-employees">Get all employees</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/employees
 </code></pre>
 
@@ -740,7 +738,7 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/employees
 </code></p>
 
-<h3 id="get-employee-by-employee-id">Get employee by employee id</h3>
+<h4 id="get-employee-by-employee-id">Get employee by employee id</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/employees/&lt;employee-id&gt;
 </code></pre>
 
@@ -749,11 +747,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/employees
 </code></p>
 
-<h2 id="calendar-endpoints">Calendar endpoints</h2>
+<h3 id="calendar-endpoints">Calendar endpoints</h3>
 
 <p>Returns the fiscal calendar</p>
 
-<h3 id="get-fiscal-calendar-by-year">Get fiscal calendar by year</h3>
+<h4 id="get-fiscal-calendar-by-year">Get fiscal calendar by year</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/calendar/&lt;year&gt;
 </code></pre>
 
@@ -762,17 +760,17 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/calendar/&lt;year&gt;
 </code></p>
 
-<h2 id="resources-endpoints">Resources endpoints</h2>
+<h3 id="resources-endpoints">Resources endpoints</h3>
 
 <p>Returns resources filtered by store id and date of business</p>
 
-<h3 id="get-resource-by-store-id-and-date-of-business">Get resource by store id and date of business</h3>
+<h4 id="get-resource-by-store-id-and-date-of-business">Get resource by store id and date of business</h4>
 
 <p>Store is required, DOB will use the current day if not specified</p>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/resources/&lt;resource&gt;?store=&lt;store-id&gt;&amp;dob=&lt;yyyy-mm-dd&gt;
 </code></pre>
 
-<h3 id="list-of-resources">List of resources</h3>
+<h4 id="list-of-resources">List of resources</h4>
 <pre class="highlight plaintext"><code>/waste
 /transfer
 /inventorycount
@@ -790,11 +788,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 /storesettlementdetails
 </code></pre>
 
-<h2 id="admin-endpoints">Admin endpoints</h2>
+<h3 id="admin-endpoints">Admin endpoints</h3>
 
 <p>These endpoints can only be accessed by the mxrds api admin, they are meant to add or update customer configurations</p>
 
-<h3 id="new-user-config">New user config</h3>
+<h4 id="new-user-config">New user config</h4>
 <pre class="highlight plaintext"><code>POST https://api.mxrds.io/&lt;namespace&gt;/settings
 </code></pre>
 
@@ -803,11 +801,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl -X POST -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings -d &#39;{&quot;token&quot;:&quot;&lt;bearer-token&gt;&quot;,&quot;host&quot;:&quot;&lt;rds-host&gt;&quot;,&quot;port&quot;:&lt;rds-port&gt;,&quot;database&quot;:&quot;&lt;database&gt;&quot;}&#39;
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 201
 </code></pre>
 
-<h3 id="update-existing-config">Update existing config</h3>
+<h4 id="update-existing-config">Update existing config</h4>
 <pre class="highlight plaintext"><code>PUT https://api.mxrds.io/&lt;namespace&gt;/settings
 </code></pre>
 
@@ -816,11 +814,11 @@ curl -X POST -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Be
 curl -X PUT -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings -d &#39;{&quot;token&quot;:&quot;&lt;bearer-token&gt;&quot;,&quot;host&quot;:&quot;&lt;rds-host&gt;&quot;,&quot;port&quot;:&lt;rds-port&gt;,&quot;database&quot;:&quot;&lt;database&gt;&quot;}&#39;
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 204
 </code></pre>
 
-<h3 id="get-existing-config">Get existing config</h3>
+<h4 id="get-existing-config">Get existing config</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/settings
 </code></pre>
 
@@ -829,7 +827,7 @@ curl -X PUT -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Bea
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 200 {
   token: &lt;token&gt;,
   host: &lt;host&gt;,
@@ -838,11 +836,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 }
 </code></pre>
 
-<h2 id="public-endpoints">Public endpoints</h2>
+<h3 id="public-endpoints">Public endpoints</h3>
 
 <p>The following endpoints are the only ones that do not require bearer token authorization</p>
 
-<h3 id="healthcheck">Healthcheck</h3>
+<h4 id="healthcheck">Healthcheck</h4>
 <pre class="highlight plaintext"><code>GET https://api.mxrds.io/
 </code></pre>
 
@@ -851,14 +849,14 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 curl https://api.mxrds.io/
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 200
 Response {
   ping: true
 }
 </code></pre>
 
-<h3 id="app-info">App Info</h3>
+<h4 id="app-info">App Info</h4>
 
 <p>Returns the name and version of the app
 <code class="prettyprint">
@@ -869,7 +867,7 @@ ie.
 curl https://api.mxrds.io/info
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 200
 Response {
   "name":"&lt;app-name&gt;",
@@ -877,7 +875,7 @@ Response {
 }
 </code></pre>
 
-<h3 id="facts">Facts</h3>
+<h4 id="facts">Facts</h4>
 
 <p>Returns the system and environment information
 <code class="prettyprint">
@@ -888,7 +886,7 @@ ie.
 curl https://api.mxrds.io/facts
 </code></p>
 
-<h5 id="response">response</h5>
+<h6 id="response">response</h6>
 <pre class="highlight plaintext"><code>Code 200
 Response ie. {
     "os": "Linux",
