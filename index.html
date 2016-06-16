@@ -686,7 +686,7 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 
 <p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
 
-          <h2 id="working-with-macromatix">Working with Macromatix</h2>
+          <h2 id="working-with-macromatix-data">Working with Macromatix Data</h2>
 
 <h3 id="mx-rds-api">MX RDS API</h3>
 
@@ -701,28 +701,31 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 <p>Returns store information as well as store roster</p>
 
 <h5 id="get-all-stores">Get all stores</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/stores
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores
 </code></p>
 
 <h5 id="get-store-by-store-id">Get store by store id</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;
 </code></p>
 
 <h5 id="get-store-roster">Get store roster</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;/roster
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;/roster
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/stores/&lt;store-id&gt;/roster
 </code></p>
@@ -732,19 +735,21 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 <p>Returns employee information</p>
 
 <h5 id="get-all-employees">Get all employees</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/employees
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/employees
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/employees
 </code></p>
 
 <h5 id="get-employee-by-employee-id">Get employee by employee id</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/employees/&lt;employee-id&gt;
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/employees/&lt;employee-id&gt;
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/employees
 </code></p>
@@ -754,10 +759,11 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 <p>Returns the fiscal calendar</p>
 
 <h5 id="get-fiscal-calendar-by-year">Get fiscal calendar by year</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/calendar/&lt;year&gt;
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/calendar/&lt;year&gt;
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/calendar/&lt;year&gt;
 </code></p>
@@ -769,94 +775,109 @@ curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/
 <h5 id="get-resource-by-store-id-and-date-of-business">Get resource by store id and date of business</h5>
 
 <p>Store is required, DOB will use the current day if not specified</p>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/resources/&lt;resource&gt;?store=&lt;store-id&gt;&amp;dob=&lt;yyyy-mm-dd&gt;
-</code></pre>
+
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/resources/&lt;resource&gt;?store=&lt;store-id&gt;&amp;dob=&lt;yyyy-mm-dd&gt;
+</code></p>
 
 <h5 id="list-of-resources">List of resources</h5>
-<pre class="highlight plaintext"><code>/waste
+
+<p><code class="prettyprint">
+/waste
 /transfer
 /inventorycount
 /forecast
 /salesitemforecast
 /inventoryforecast
 /roster
-/salestransaction
-/salesitem
+/salestransaction /salesitem
 /depletion
 /schedule
 /timecards
 /paidinpaidout
 /settlement
 /storesettlementdetails
-</code></pre>
+</code></p>
 
 <h4 id="admin-endpoints">Admin endpoints</h4>
 
 <p>These endpoints can only be accessed by the mxrds api admin, they are meant to add or update customer configurations</p>
 
 <h5 id="new-user-config">New user config</h5>
-<pre class="highlight plaintext"><code>POST https://api.mxrds.io/&lt;namespace&gt;/settings
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+POST https://api.mxrds.io/&lt;namespace&gt;/settings
+</code>
+ie.
 <code class="prettyprint">
 curl -X POST -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings -d &#39;{&quot;token&quot;:&quot;&lt;bearer-token&gt;&quot;,&quot;host&quot;:&quot;&lt;rds-host&gt;&quot;,&quot;port&quot;:&lt;rds-port&gt;,&quot;database&quot;:&quot;&lt;database&gt;&quot;}&#39;
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 201
-</code></pre>
+
+<p><code class="prettyprint">
+Code 201
+</code></p>
 
 <h5 id="update-existing-config">Update existing config</h5>
-<pre class="highlight plaintext"><code>PUT https://api.mxrds.io/&lt;namespace&gt;/settings
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+PUT https://api.mxrds.io/&lt;namespace&gt;/settings
+</code>
+ie.
 <code class="prettyprint">
 curl -X PUT -H &#39;Content-Type:application/json&#39; -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings -d &#39;{&quot;token&quot;:&quot;&lt;bearer-token&gt;&quot;,&quot;host&quot;:&quot;&lt;rds-host&gt;&quot;,&quot;port&quot;:&lt;rds-port&gt;,&quot;database&quot;:&quot;&lt;database&gt;&quot;}&#39;
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 204
-</code></pre>
+
+<p><code class="prettyprint">
+Code 204 
+</code></p>
 
 <h5 id="get-existing-config">Get existing config</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/&lt;namespace&gt;/settings
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/&lt;namespace&gt;/settings
+</code>
+ie.
 <code class="prettyprint">
 curl -H &#39;Authorization:Bearer &lt;admin-token&gt;&#39; https://api.mxrds.io/&lt;namespace&gt;/settings
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 200 {
+
+<p><code class="prettyprint">
+Code 200 {
   token: &lt;token&gt;,
   host: &lt;host&gt;,
   port: &lt;port&gt;,
   database: &lt;database&gt;
 }
-</code></pre>
+</code></p>
 
 <h4 id="public-endpoints">Public endpoints</h4>
 
 <p>The following endpoints are the only ones that do not require bearer token authorization</p>
 
 <h5 id="healthcheck">Healthcheck</h5>
-<pre class="highlight plaintext"><code>GET https://api.mxrds.io/
-</code></pre>
 
-<p>ie.
+<p><code class="prettyprint">
+GET https://api.mxrds.io/
+</code>
+ie.
 <code class="prettyprint">
 curl https://api.mxrds.io/
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 200
+
+<p><code class="prettyprint">
+Code 200
 Response {
   ping: true
 }
-</code></pre>
+</code></p>
 
 <h5 id="app-info">App Info</h5>
 
@@ -870,12 +891,14 @@ curl https://api.mxrds.io/info
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 200
+
+<p><code class="prettyprint">
+Code 200
 Response {
-  "name":"&lt;app-name&gt;",
-  "version":"&lt;version&gt;"
+  &quot;name&quot;:&quot;&lt;app-name&gt;&quot;,
+  &quot;version&quot;:&quot;&lt;version&gt;&quot;
 }
-</code></pre>
+</code></p>
 
 <h5 id="facts">Facts</h5>
 
@@ -889,31 +912,33 @@ curl https://api.mxrds.io/facts
 </code></p>
 
 <h6 id="#response">#response</h6>
-<pre class="highlight plaintext"><code>Code 200
+
+<p><code class="prettyprint">
+Code 200
 Response ie. {
-    "os": "Linux",
-    "isWindows": false,
-    "isMac": false,
-    "isLinux": true,
-    "isBSD": false,
-    "isSolaris": false,
-    "platform": "linux/4.4.8-20.46.amzn1.x86_64",
-    "title": "rds-api",
-    "pid": 16849,
-    "hostname": "ip-172-31-10-180",
-    "arch": "x64",
-    "cpu": "Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz",
-    "speed": 1795,
-    "cores": 1,
-    "ram": 605.948,
-    "cwd": "/var/app/current",
-    "main": "/var/app/current/index.js",
-    "paths": ["/var/app/current/node_modules", "/var/app/node_modules", "/var/node_modules", "/node_modules"],
-    "process": "node/v4.4.3",
-    "node_env": "not-set",
-    "startedAt": "2016-06-14T23:02:19.021Z"
+    &quot;os&quot;: &quot;Linux&quot;,
+    &quot;isWindows&quot;: false,
+    &quot;isMac&quot;: false,
+    &quot;isLinux&quot;: true,
+    &quot;isBSD&quot;: false,
+    &quot;isSolaris&quot;: false,
+    &quot;platform&quot;: &quot;linux/4.4.8-20.46.amzn1.x86_64&quot;,
+    &quot;title&quot;: &quot;rds-api&quot;,
+    &quot;pid&quot;: 16849,
+    &quot;hostname&quot;: &quot;ip-172-31-10-180&quot;,
+    &quot;arch&quot;: &quot;x64&quot;,
+    &quot;cpu&quot;: &quot;Intel(R) Xeon(R) CPU E5-2650 0 @ 2.00GHz&quot;,
+    &quot;speed&quot;: 1795,
+    &quot;cores&quot;: 1,
+    &quot;ram&quot;: 605.948,
+    &quot;cwd&quot;: &quot;/var/app/current&quot;,
+    &quot;main&quot;: &quot;/var/app/current/index.js&quot;,
+    &quot;paths&quot;: [&quot;/var/app/current/node_modules&quot;, &quot;/var/app/node_modules&quot;, &quot;/var/node_modules&quot;, &quot;/node_modules&quot;],
+    &quot;process&quot;: &quot;node/v4.4.3&quot;,
+    &quot;node_env&quot;: &quot;not-set&quot;,
+    &quot;startedAt&quot;: &quot;2016-06-14T23:02:19.021Z&quot;
 }
-</code></pre>
+</code>`</p>
 
           <h2 id="working-with-social-data">Working with Social data</h2>
 
