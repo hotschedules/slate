@@ -4,7 +4,7 @@ The HotSchedules REST API provides a user-friendly way to obtain HS Data.
 
 
 ### Examples  
-For now, the HotSchedules API username and password must be entered as url parameters hsusr and hspwd respectively. (**Just for demo purposes. This will eventually change.**)  
+Please ensure that API access has been enabled for your HotSchedules account. Contact customer service 1-866-753-3853 for access or questions.
 
 The url path can look like any of the following, depending on which type is being queried:  
 `../hotschedules/<concept_id>/<store_id>/<type_method>?`  
