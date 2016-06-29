@@ -671,30 +671,29 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 <p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getScheduleV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
 
 <h4 id="example-results">Example Results</h4>
-<pre class="highlight plaintext"><code>[{
-    "outDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 2
+
+<p><code class="prettyprint">[{&quot;outDate&quot;: {  
+        &quot;month&quot;: 5,
+        &quot;year&quot;: 2016,
+        &quot;day&quot;: 2
     },
-    "jobHsId": 1111111,
-    "payRate": 1,
-    "inDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 2
+    &quot;jobHsId&quot;: 1111111,
+    &quot;payRate&quot;: 1,
+    &quot;inDate&quot;: {
+        &quot;month&quot;: 5,
+        &quot;year&quot;: 2016,
+        &quot;day&quot;: 2
     },
-    "specialPay": 0,
-    "empHSId": 222222,
-    "ovtMinutes": 0,
-    "inTime": {
-        "hours": 9,
-        "seconds": 0,
-        "militaryTime": true,
-        "minutes": 0
-    }
- ]
-</code></pre>
+    &quot;specialPay&quot;: 0,
+    &quot;empHSId&quot;: 222222,
+    &quot;ovtMinutes&quot;: 0,
+    &quot;inTime&quot;: {
+        &quot;hours&quot;: 9,
+        &quot;seconds&quot;: 0,
+        &quot;militaryTime&quot;: true,
+        &quot;minutes&quot;: 0
+    }  ]
+</code></p>
 
 <h4 id="getshiftsv3">getShiftsV3</h4>
 
