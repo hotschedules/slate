@@ -235,7 +235,7 @@ Response ie. {
     "node_env": "not-set",
     "startedAt": "2016-06-14T23:02:19.021Z"
 }
-``
+`
 
 ###getSalesItem
 
@@ -243,9 +243,8 @@ Response ie. {
 `curl -H '<bearer_toke>' https://api.mxrds.io/walmart/resources/salesitem?store=1&dob=2016-06-24`
 
 #####Response  
-```[{
-	"storeid": "1",
-	"businessday": "2016-06-24T00:00:00.000Z",
+```[{  "storeid": "1",
+	"businessday": "2016-06-24T00:00:00.000Z",  
 	"itemcode": "Undefined",
 	"description": "All undefined sales items",
 	"postransactionid": "1221",
@@ -271,34 +270,6 @@ Response ie. {
 	"quantity": 1,
 	"tax": "0.0000",
 	"salescost": "0.1129"
-}, {
-	"storeid": "179",
-	"businessday": "2016-06-24T00:00:00.000Z",
-	"itemcode": "84659",
-	"description": "Or foot",
-	"postransactionid": "1616",
-	"registernumber": 2,
-	"clerkkey": "3350",
-	"clerkname": "sastry",
-	"clerkid": null,
-	"amount": "0.0000",
-	"quantity": 1,
-	"tax": "0.0000",
-	"salescost": "0.3268"
-}, {
-	"storeid": "179",
-	"businessday": "2016-06-24T00:00:00.000Z",
-	"itemcode": "70923",
-	"description": "1 tail spin",
-	"postransactionid": "01011991",
-	"registernumber": 2,
-	"clerkkey": "3350",
-	"clerkname": "brandon",
-	"clerkid": null,
-	"amount": "0.0000",
-	"quantity": 1,
-	"tax": "0.0000",
-	"salescost": "0.1166"
 }]```
 
 ###getSalesItemForecast   
@@ -307,7 +278,7 @@ Response ie. {
 `curl -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y' "https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&dob=2016-06-24"`
 
 #####Response  
-```[{
+``` [{
 	"description": "All undefined sales items",
 	"itemcode": "Undefined",
 	"intervalstart": "2016-06-24T10:30:00.000Z",
