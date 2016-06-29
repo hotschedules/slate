@@ -237,7 +237,7 @@ Response ie. {
 }
 `
 
-###getSalesItem
+####getSalesItem
 
 #####Request  
 `curl -H '<bearer_toke>' https://api.mxrds.io/walmart/resources/salesitem?store=1&dob=2016-06-24`
@@ -272,7 +272,7 @@ Response ie. {
 	"salescost": "0.1129"
 }]`
 
-###getSalesItemForecast   
+####getSalesItemForecast   
 
 #####Request  
 `curl -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y' "https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&dob=2016-06-24"`
