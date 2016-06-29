@@ -670,59 +670,75 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 
 <p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getScheduleV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
 
-<h4 id="getshiftsv3">getShiftsV3</h4>
+<h4 id="example-results">Example Results</h4>
+<pre class="highlight plaintext"><code>    "outDate": {
+        "month": 5,
+        "year": 2016,
+        "day": 2
+    },
+    "jobHsId": 1111111,
+    "payRate": 1,
+    "inDate": {
+        "month": 5,
+        "year": 2016,
+        "day": 2
+    },
+    "specialPay": 0,
+    "empHSId": 222222,
+    "ovtMinutes": 0,
+    "inTime": {
+        "hours": 9,
+        "seconds": 0,
+        "militaryTime": true,
+        "minutes": 0
+    }
+ ]```
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getShiftsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+#### getShiftsV3
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getShiftsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"```
 
-<h4 id="getstoreemployees">getStoreEmployees</h4>
+#### getStoreEmployees
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true"```
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true&quot;</code></p>
+#### getStoreJobs
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs"```
 
-<h4 id="getstorejobs">getStoreJobs</h4>
+#### getStores
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0"```
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs&quot;</code></p>
+#### getTimeCards
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"```
 
-<h4 id="getstores">getStores</h4>
+#### getVolumeCounts
+```curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE"```
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0&quot;</code></p>
-
-<h4 id="gettimecards">getTimeCards</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
-
-<h4 id="getvolumecounts">getVolumeCounts</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&quot;</code></p>
-
-<h3 id="writing-data-(examples)">Writing Data (Examples)</h3>
-
-<h4 id="settimecardsv3">setTimeCardsV3</h4>
-
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{
-  \&quot;jobName\&quot;: \&quot;Cook\&quot;,
-  \&quot;ovtTtl\&quot;: 0,
-  \&quot;ovtHrs\&quot;: 0,
-  \&quot;clockOut\&quot;: \&quot;2016-07-31T22:05:00-05:00\&quot;,
-  \&quot;regWage\&quot;: 9,
-  \&quot;clockIn\&quot;: \&quot;2016-07-30T15:56:00-05:00\&quot;,
-  \&quot;ovtWage\&quot;: 13.5,
-  \&quot;breakMinutes\&quot;: 0,
-  \&quot;jobId\&quot;: 16921407,
-  \&quot;businessDate\&quot;: {
-    \&quot;month\&quot;: 7,
-    \&quot;year\&quot;: 2016,
-    \&quot;day\&quot;: 31
+### Writing Data (Examples)  
+#### setTimeCardsV3
+```curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{
+  \"jobName\": \"Cook\",
+  \"ovtTtl\": 0,
+  \"ovtHrs\": 0,
+  \"clockOut\": \"2016-07-31T22:05:00-05:00\",
+  \"regWage\": 9,
+  \"clockIn\": \"2016-07-30T15:56:00-05:00\",
+  \"ovtWage\": 13.5,
+  \"breakMinutes\": 0,
+  \"jobId\": 16921407,
+  \"businessDate\": {
+    \"month\": 7,
+    \"year\": 2016,
+    \"day\": 31
   },
-  \&quot;regHrs\&quot;: 6.15,
-  \&quot;spcTtl\&quot;: 0,
-  \&quot;hsId\&quot;: 929931334634,
-  \&quot;spcHrs\&quot;: 0,
-  \&quot;ovtMins\&quot;: 0,
-  \&quot;storeNum\&quot;: 1,
-  \&quot;empPosId\&quot;: 1052,
-  \&quot;regTtl\&quot;: 55.35
-}]&quot;
-</code></p>
+  \"regHrs\": 6.15,
+  \"spcTtl\": 0,
+  \"hsId\": 929931334634,
+  \"spcHrs\": 0,
+  \"ovtMins\": 0,
+  \"storeNum\": 1,
+  \"empPosId\": 1052,
+  \"regTtl\": 55.35
+}]"
+</code></pre>
 
 <h4 id="setempjobs">setEmpJobs</h4>
 
@@ -856,22 +872,22 @@ GET https://api.mxrds.io/&lt;namespace&gt;/resources/&lt;resource&gt;?store=&lt;
 
 <h5 id="list-of-resources">List of resources</h5>
 
-<p><code class="prettyprint">
-/waste
-/transfer
-/inventorycount
-/forecast
-/salesitemforecast
-/inventoryforecast
-/roster
-/salestransaction /salesitem
-/depletion
-/schedule
-/timecards
-/paidinpaidout
-/settlement
-/storesettlementdetails
-</code></p>
+<p>/waste<br>
+/transfer<br>
+/inventorycount<br>
+/forecast<br>
+/salesitemforecast<br>
+/inventoryforecast<br>
+/roster<br>
+/salestransaction<br>
+/salesitem<br>
+/depletion<br>
+/schedule<br>
+/timecards<br>
+/paidinpaidout<br>
+/settlement<br>
+/storesettlementdetails<br>
+`</p>
 
 <h4 id="admin-endpoints">Admin endpoints</h4>
 
@@ -1013,6 +1029,107 @@ Response ie. {
     &quot;startedAt&quot;: &quot;2016-06-14T23:02:19.021Z&quot;
 }
 </code>`</p>
+
+<h3 id="getsalesitem">getSalesItem</h3>
+
+<h5 id="request">Request</h5>
+
+<p><code class="prettyprint">curl -H &#39;&lt;bearer_toke&gt;&#39; https://api.mxrds.io/walmart/resources/salesitem?store=1&amp;dob=2016-06-24</code></p>
+
+<h5 id="response">Response</h5>
+<pre class="highlight plaintext"><code>    "storeid": "1",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "Undefined",
+    "description": "All undefined sales items",
+    "postransactionid": "1221",
+    "registernumber": 4,
+    "clerkkey": "3141414",
+    "clerkname": "Brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.0000"
+}, {
+    "storeid": "1",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "52791",
+    "description": "Green Bns Sm",
+    "postransactionid": "01011991",
+    "registernumber": 4,
+    "clerkkey": "28928",
+    "clerkname": "Brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.1129"
+}, {
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "84659",
+    "description": "Or foot",
+    "postransactionid": "1616",
+    "registernumber": 2,
+    "clerkkey": "3350",
+    "clerkname": "sastry",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.3268"
+}, {
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "70923",
+    "description": "1 tail spin",
+    "postransactionid": "01011991",
+    "registernumber": 2,
+    "clerkkey": "3350",
+    "clerkname": "brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.1166"
+}]
+</code></pre>
+
+<h3 id="getsalesitemforecast">getSalesItemForecast</h3>
+
+<h5 id="request">Request</h5>
+
+<p><code class="prettyprint">curl -H &#39;Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y&#39; &quot;https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&amp;dob=2016-06-24&quot;</code></p>
+
+<h5 id="response">Response</h5>
+<pre class="highlight plaintext"><code>    "description": "All undefined sales items",
+    "itemcode": "Undefined",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "23232",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 2,
+    "system_forecast": 2,
+    "user_forecast": 2
+}, {
+    "description": "Or foo",
+    "itemcode": "232323",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "23233",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 0.6,
+    "system_forecast": 1,
+    "user_forecast": 1
+}, {
+    "description": "Or stuff",
+    "itemcode": "12121",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 0.6,
+    "system_forecast": 1,
+    "user_forecast": 1
+}]```
+</code></pre>
 
           <h2 id="working-with-social-data">Working with Social data</h2>
 

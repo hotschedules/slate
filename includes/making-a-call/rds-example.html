@@ -124,22 +124,22 @@ GET https://api.mxrds.io/&lt;namespace&gt;/resources/&lt;resource&gt;?store=&lt;
 
 <h5 id="list-of-resources">List of resources</h5>
 
-<p><code class="prettyprint">
-/waste
-/transfer
-/inventorycount
-/forecast
-/salesitemforecast
-/inventoryforecast
-/roster
-/salestransaction /salesitem
-/depletion
-/schedule
-/timecards
-/paidinpaidout
-/settlement
-/storesettlementdetails
-</code></p>
+<p>/waste<br>
+/transfer<br>
+/inventorycount<br>
+/forecast<br>
+/salesitemforecast<br>
+/inventoryforecast<br>
+/roster<br>
+/salestransaction<br>
+/salesitem<br>
+/depletion<br>
+/schedule<br>
+/timecards<br>
+/paidinpaidout<br>
+/settlement<br>
+/storesettlementdetails<br>
+`</p>
 
 <h4 id="admin-endpoints">Admin endpoints</h4>
 
@@ -281,6 +281,107 @@ Response ie. {
     &quot;startedAt&quot;: &quot;2016-06-14T23:02:19.021Z&quot;
 }
 </code>`</p>
+
+<h3 id="getsalesitem">getSalesItem</h3>
+
+<h5 id="request">Request</h5>
+
+<p><code class="prettyprint">curl -H &#39;&lt;bearer_toke&gt;&#39; https://api.mxrds.io/walmart/resources/salesitem?store=1&amp;dob=2016-06-24</code></p>
+
+<h5 id="response">Response</h5>
+<pre class="highlight plaintext"><code>    "storeid": "1",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "Undefined",
+    "description": "All undefined sales items",
+    "postransactionid": "1221",
+    "registernumber": 4,
+    "clerkkey": "3141414",
+    "clerkname": "Brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.0000"
+}, {
+    "storeid": "1",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "52791",
+    "description": "Green Bns Sm",
+    "postransactionid": "01011991",
+    "registernumber": 4,
+    "clerkkey": "28928",
+    "clerkname": "Brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.1129"
+}, {
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "84659",
+    "description": "Or foot",
+    "postransactionid": "1616",
+    "registernumber": 2,
+    "clerkkey": "3350",
+    "clerkname": "sastry",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.3268"
+}, {
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "itemcode": "70923",
+    "description": "1 tail spin",
+    "postransactionid": "01011991",
+    "registernumber": 2,
+    "clerkkey": "3350",
+    "clerkname": "brandon",
+    "clerkid": null,
+    "amount": "0.0000",
+    "quantity": 1,
+    "tax": "0.0000",
+    "salescost": "0.1166"
+}]
+</code></pre>
+
+<h3 id="getsalesitemforecast">getSalesItemForecast</h3>
+
+<h5 id="request">Request</h5>
+
+<p><code class="prettyprint">curl -H &#39;Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y&#39; &quot;https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&amp;dob=2016-06-24&quot;</code></p>
+
+<h5 id="response">Response</h5>
+<pre class="highlight plaintext"><code>    "description": "All undefined sales items",
+    "itemcode": "Undefined",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "23232",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 2,
+    "system_forecast": 2,
+    "user_forecast": 2
+}, {
+    "description": "Or foo",
+    "itemcode": "232323",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "23233",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 0.6,
+    "system_forecast": 1,
+    "user_forecast": 1
+}, {
+    "description": "Or stuff",
+    "itemcode": "12121",
+    "intervalstart": "2016-06-24T10:30:00.000Z",
+    "storeid": "179",
+    "businessday": "2016-06-24T00:00:00.000Z",
+    "raw_forecast": 0.6,
+    "system_forecast": 1,
+    "user_forecast": 1
+}]```
+</code></pre>
 
       </div>
       <div class="dark-box">
