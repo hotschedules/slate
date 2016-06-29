@@ -22,6 +22,9 @@ A Store has many SalesTransactions
 -- Example Query: Return all SalesTransactions for a store  
 `https://api.bodhi.space/<organization_name>/SalesTransaction?where={'store_id':'<store.sys_id>'}`
 
+-- Example Query: Return all the sums of all SalesTransactions for per store for a day
+`https://api.bodhi.space/<organization_name>/resources/SalesTransaction/aggregate?pipeline=[       { $match:{'business_day':'2016-06-24'} },       { $group: { _id: '$store_id', total: { $sum: '$net_total.value' } } }    ]`
+
 A Store has many SalesItem  
 --  SalesItem.store_id maps to Store.sys_id
 
