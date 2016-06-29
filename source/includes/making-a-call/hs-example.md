@@ -65,7 +65,8 @@ Note: Results are currently cached with a TTL of 60 minutes.
 ```curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/1/1/getScheduleV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"```
 
 #### Example Results
-```[{
+```
+[{
 	"outDate": {
 		"month": 5,
 		"year": 2016,
@@ -87,7 +88,8 @@ Note: Results are currently cached with a TTL of 60 minutes.
 		"militaryTime": true,
 		"minutes": 0
 	}
- ]```
+ ]
+ ```
 
 #### getShiftsV3
 ```curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/1/1/getShiftsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"```
