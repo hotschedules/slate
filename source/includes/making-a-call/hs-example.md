@@ -22,9 +22,6 @@ example:
 example:  
 `../hotschedules/getConcept?..`
 
-### Getting Data (Examples)  
-Note: Results are currently cached with a TTL of 60 minutes.  
-
 ### Getting Data (Examples)
 Note: Results are currently cached with a TTL of 60 minutes.
 
