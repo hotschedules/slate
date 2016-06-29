@@ -301,7 +301,7 @@ Response ie. {
 	"salescost": "0.1166"
 }]```
 
-###getSalesItemForecast
+###getSalesItemForecast   
 
 #####Request  
 `curl -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y' "https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&dob=2016-06-24"`
