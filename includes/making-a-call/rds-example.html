@@ -326,34 +326,35 @@ Response ie. {
 <p><code class="prettyprint">curl -H &#39;Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y&#39; &quot;https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&amp;dob=2016-06-24&quot;</code></p>
 
 <h5 id="response">Response</h5>
-<pre class="highlight plaintext"><code>    "description": "All undefined sales items",
-    "itemcode": "Undefined",
-    "intervalstart": "2016-06-24T10:30:00.000Z",
-    "storeid": "23232",
-    "businessday": "2016-06-24T00:00:00.000Z",
-    "raw_forecast": 2,
-    "system_forecast": 2,
-    "user_forecast": 2
+
+<p><code class="prettyprint">[{
+    &quot;description&quot;: &quot;All undefined sales items&quot;,
+    &quot;itemcode&quot;: &quot;Undefined&quot;,
+    &quot;intervalstart&quot;: &quot;2016-06-24T10:30:00.000Z&quot;,
+    &quot;storeid&quot;: &quot;23232&quot;,
+    &quot;businessday&quot;: &quot;2016-06-24T00:00:00.000Z&quot;,
+    &quot;raw_forecast&quot;: 2,
+    &quot;system_forecast&quot;: 2,
+    &quot;user_forecast&quot;: 2
 }, {
-    "description": "Or foo",
-    "itemcode": "232323",
-    "intervalstart": "2016-06-24T10:30:00.000Z",
-    "storeid": "23233",
-    "businessday": "2016-06-24T00:00:00.000Z",
-    "raw_forecast": 0.6,
-    "system_forecast": 1,
-    "user_forecast": 1
+    &quot;description&quot;: &quot;Or foo&quot;,
+    &quot;itemcode&quot;: &quot;232323&quot;,
+    &quot;intervalstart&quot;: &quot;2016-06-24T10:30:00.000Z&quot;,
+    &quot;storeid&quot;: &quot;23233&quot;,
+    &quot;businessday&quot;: &quot;2016-06-24T00:00:00.000Z&quot;,
+    &quot;raw_forecast&quot;: 0.6,
+    &quot;system_forecast&quot;: 1,
+    &quot;user_forecast&quot;: 1
 }, {
-    "description": "Or stuff",
-    "itemcode": "12121",
-    "intervalstart": "2016-06-24T10:30:00.000Z",
-    "storeid": "179",
-    "businessday": "2016-06-24T00:00:00.000Z",
-    "raw_forecast": 0.6,
-    "system_forecast": 1,
-    "user_forecast": 1
-}]```
-</code></pre>
+    &quot;description&quot;: &quot;Or stuff&quot;,
+    &quot;itemcode&quot;: &quot;12121&quot;,
+    &quot;intervalstart&quot;: &quot;2016-06-24T10:30:00.000Z&quot;,
+    &quot;storeid&quot;: &quot;179&quot;,
+    &quot;businessday&quot;: &quot;2016-06-24T00:00:00.000Z&quot;,
+    &quot;raw_forecast&quot;: 0.6,
+    &quot;system_forecast&quot;: 1,
+    &quot;user_forecast&quot;: 1
+}]</code></p>
 
       </div>
       <div class="dark-box">
