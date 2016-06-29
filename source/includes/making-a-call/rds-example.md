@@ -299,8 +299,7 @@ Response ie. {
 	"quantity": 1,
 	"tax": "0.0000",
 	"salescost": "0.1166"
-}]
-```
+}]```
 
 ###getSalesItemForecast
 
