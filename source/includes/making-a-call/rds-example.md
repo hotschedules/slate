@@ -278,7 +278,7 @@ Response ie. {
 `curl -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y' "https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&dob=2016-06-24"`
 
 #####Response  
-``` [{
+`[{
 	"description": "All undefined sales items",
 	"itemcode": "Undefined",
 	"intervalstart": "2016-06-24T10:30:00.000Z",
@@ -305,4 +305,4 @@ Response ie. {
 	"raw_forecast": 0.6,
 	"system_forecast": 1,
 	"user_forecast": 1
-}]```
+}]`
