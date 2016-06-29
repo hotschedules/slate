@@ -1100,17 +1100,16 @@ Response ie. {
     "quantity": 1,
     "tax": "0.0000",
     "salescost": "0.1166"
-}]
-</code></pre>
+}]```
 
-<h3 id="getsalesitemforecast">getSalesItemForecast</h3>
+###getSalesItemForecast
 
-<h5 id="request">Request</h5>
+#####Request  
+`curl -H 'Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y' "https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&amp;dob=2016-06-24"`
 
-<p><code class="prettyprint">curl -H &#39;Authorization:Bearer eyJhbGciOiJIUzI1NiJ9.cmRzLWFwaS1rZmNsdmw.AMtNZJqloEmC8hqfe6QbpxyBHytmU7RQqhZQD4nVO_Y&#39; &quot;https://api.mxrds.io/kfclvl/resources/salesitemforecast?store=179&amp;dob=2016-06-24&quot;</code></p>
-
-<h5 id="response">Response</h5>
-<pre class="highlight plaintext"><code>    "description": "All undefined sales items",
+#####Response  
+```[{
+    "description": "All undefined sales items",
     "itemcode": "Undefined",
     "intervalstart": "2016-06-24T10:30:00.000Z",
     "storeid": "23232",
