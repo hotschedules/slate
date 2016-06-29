@@ -243,7 +243,7 @@ Response ie. {
 `curl -H '<bearer_toke>' https://api.mxrds.io/walmart/resources/salesitem?store=1&dob=2016-06-24`
 
 #####Response  
-```[{  "storeid": "1",
+`[{  "storeid": "1",
 	"businessday": "2016-06-24T00:00:00.000Z",  
 	"itemcode": "Undefined",
 	"description": "All undefined sales items",
@@ -270,7 +270,7 @@ Response ie. {
 	"quantity": 1,
 	"tax": "0.0000",
 	"salescost": "0.1129"
-}]```
+}]`
 
 ###getSalesItemForecast   
 
