@@ -614,77 +614,154 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 <p>example:<br>
 <code class="prettyprint">../hotschedules/getConcept?..</code></p>
 
-<h4 id="getconcept">getConcept</h4>
+<h3 id="getting-data-(examples)">Getting Data (Examples)</h3>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/getConcept?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<p>Note: Results are currently cached with a TTL of 60 minutes.  </p>
+
+<h3 id="getting-data-(examples)">Getting Data (Examples)</h3>
+
+<p>Note: Results are currently cached with a TTL of 60 minutes.</p>
+
+<h4 id="getconcept">getConcept</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/getConcept"
+</code></pre>
 
 <h4 id="getdriversbyinterval">getDriversByInterval</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getDriversByInterval?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;volume_type=TABLE&amp;data_type=ACTUAL&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getDriversByInterval?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;volume_type=TABLE&amp;data_type=ACTUAL"
+</code></pre>
 
 <h4 id="getempavailability">getEmpAvailability</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpAvailability?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpAvailability?active_only=true"
+</code></pre>
 
 <h4 id="getempinfo">getEmpInfo</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpInfo?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpInfo?active_only=true"
+</code></pre>
 
 <h4 id="getempjobs">getEmpJobs</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getEmpJobs?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpJobs?active_only=true"
+</code></pre>
 
 <h4 id="getgroups">getGroups</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/getGroups?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getGroups"
+</code></pre>
 
 <h4 id="getguestcounts">getGuestCounts</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getGuestCounts?start_date=2016-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00"
+</code></pre>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getGuestCounts?start_date=2016-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
-
-<h3 id="getlaborbybusday">getLaborByBusDay</h3>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getLaborByBusDay?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h4 id="getlaborbybusday">getLaborByBusDay</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getLaborByBusDay?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal"
+</code></pre>
 
 <h4 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getLaborByJobAndInterval?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal"
+</code></pre>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getLaborByJobAndInterval?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h4 id="getprojectedsalesv3">getProjectedSalesV3</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getProjectedSalesV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"
+</code></pre>
 
-<h4 id="getprojectedsales">getProjectedSales</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getProjectedSales?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
-
-<h4 id="getrcv">getRCV</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getRCV?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h4 id="getrcvs">getRCVs</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getRCVs"
+</code></pre>
 
 <h4 id="getsalescats">getSalesCats</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getSalesCats"
+</code></pre>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getSalesCats?hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h4 id="getschedulev3">getScheduleV3</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getScheduleV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"
+</code></pre>
 
-<h4 id="getschedule">getSchedule</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getSchedule?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h4 id="getshiftsv3">getShiftsV3</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getShiftsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"
+</code></pre>
 
 <h4 id="getstoreemployees">getStoreEmployees</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true"
+</code></pre>
 
 <h4 id="getstorejobs">getStoreJobs</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs?active_only=true&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs"
+</code></pre>
 
 <h4 id="getstores">getStores</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0"
+</code></pre>
 
 <h4 id="gettimecards">getTimeCards</h4>
-
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016"
+</code></pre>
 
 <h4 id="getvolumecounts">getVolumeCounts</h4>
+<pre class="highlight plaintext"><code>curl -X GET -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE"
+</code></pre>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&amp;hsusr=&lt;hs_api_username&gt;&amp;hspwd=&lt;hs_api_password&gt;&quot;</code></p>
+<h3 id="writing-data-(examples)">Writing Data (Examples)</h3>
+
+<h4 id="settimecardsv3">setTimeCardsV3</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{
+  \"jobName\": \"Cook\",
+  \"ovtTtl\": 0,
+  \"ovtHrs\": 0,
+  \"clockOut\": \"2016-07-31T22:05:00-05:00\",
+  \"regWage\": 9,
+  \"clockIn\": \"2016-07-30T15:56:00-05:00\",
+  \"ovtWage\": 13.5,
+  \"breakMinutes\": 0,
+  \"jobId\": 16921407,
+  \"businessDate\": {
+    \"month\": 7,
+    \"year\": 2016,
+    \"day\": 31
+  },
+  \"regHrs\": 6.15,
+  \"spcTtl\": 0,
+  \"hsId\": 929931334634,
+  \"spcHrs\": 0,
+  \"ovtMins\": 0,
+  \"storeNum\": 1,
+  \"empPosId\": 1052,
+  \"regTtl\": 55.35
+}]"
+</code></pre>
+
+<h4 id="setempjobs">setEmpJobs</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setEmpJobs?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setemps">setEmps</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setEmps?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setforecastdriversv2">setForecastDriversV2</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setForecastDriversV2?start_day=30&amp;start_month=4&amp;start_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setguestcounts">setGuestCounts</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setGuestCounts?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setrvc">setRVC</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setRVC?group=1&amp;rvcId=1&amp;rvcName=1&amp;isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setsalescat">setSalesCat</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setSalesCat?group=1&amp;salesCatId=1&amp;salesCatName=1&amp;isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setsalesitemsv4">setSalesItemsV4</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setSalesItemsV4?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="settimecardsdeclaredtips">setTimeCardsDeclaredTips</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsDeclaredTips?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
+
+<h4 id="setvolumecountsv2">setVolumeCountsV2</h4>
+<pre class="highlight plaintext"><code>curl -X PUT -H "Content-Type:application/json" -u &lt;username&gt;:&lt;password&gt; "https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setVolumeCountsV2" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"
+</code></pre>
 
           <h2 id="working-with-macromatix-data">Working with Macromatix Data</h2>
 
