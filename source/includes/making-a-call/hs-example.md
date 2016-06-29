@@ -66,25 +66,25 @@ Note: Results are currently cached with a TTL of 60 minutes.
 
 #### Example Results
 ```[{"outDate": {  
-		"month": 5,
-		"year": 2016,
-		"day": 2
-	},
-	"jobHsId": 1111111,
-	"payRate": 1,
-	"inDate": {
-		"month": 5,
-		"year": 2016,
-		"day": 2
-	},
-	"specialPay": 0,
-	"empHSId": 222222,
-	"ovtMinutes": 0,
-	"inTime": {
-		"hours": 9,
-		"seconds": 0,
-		"militaryTime": true,
-		"minutes": 0
+		"month": 5,  
+		"year": 2016,  
+		"day": 2  
+	},  
+	"jobHsId": 1111111,  
+	"payRate": 1,  
+	"inDate": {  
+		"month": 5,  
+		"year": 2016,  
+		"day": 2  
+	},  
+	"specialPay": 0,  
+	"empHSId": 222222,  
+	"ovtMinutes": 0,  
+	"inTime": {  
+		"hours": 9,  
+		"seconds": 0,  
+		"militaryTime": true,  
+		"minutes": 0  
 	}  ]```
 
 #### getShiftsV3
