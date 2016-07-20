@@ -86,8 +86,8 @@ GET https://api.mxrds.io/<namespace>/resources/<resource>?store=<store-id>&dob=<
 `
 
 #####List of resources  
-/waste  
-/transfer  
+/inventorywaste  
+/inventorytransfer  
 /inventorycount  
 /forecast  
 /salesitemforecast  
@@ -101,7 +101,7 @@ GET https://api.mxrds.io/<namespace>/resources/<resource>?store=<store-id>&dob=<
 /paidinpaidout  
 /settlement  
 /storesettlementdetails  
-`
+
 
 ####Admin endpoints
 These endpoints can only be accessed by the mxrds api admin, they are meant to add or update customer configurations
