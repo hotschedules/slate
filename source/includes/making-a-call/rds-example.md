@@ -95,7 +95,7 @@ GET https://api.mxrds.io/<namespace>/resources/<resource>?store=<store-id>&dob=<
 /roster  
 /salestransaction  
 /salesitem  
-/salestransactiondiscount
+/salestransactiondiscount  
 /transactiontender  
 /salesitemvoid  
 /depletion  
