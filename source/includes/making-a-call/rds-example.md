@@ -104,6 +104,11 @@ GET https://api.mxrds.io/<namespace>/resources/<resource>?store=<store-id>&dob=<
 /paidinpaidout  
 /settlement  
 /storesettlementdetails  
+/inventorypurchasereturnline       
+/inventorypurchasereturn  
+/transactioncontrolinformation     
+/Inventorypurchaseorder  
+/inventorypurchaseorderline endpoint  
 
 
 ####Admin endpoints
