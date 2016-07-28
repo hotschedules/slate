@@ -108,7 +108,7 @@ GET https://api.mxrds.io/<namespace>/resources/<resource>?store=<store-id>&dob=<
 /inventorypurchasereturn  
 /transactioncontrolinformation     
 /Inventorypurchaseorder  
-/inventorypurchaseorderline endpoint  
+/inventorypurchaseorderline    
 
 
 ####Admin endpoints
