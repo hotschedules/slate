@@ -25,8 +25,8 @@ example:
 ### Getting Data (Examples)
 Note: Results are currently cached with a TTL of 60 minutes.
 
-#### getConcept  
-```curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/getConcept"```
+#### getConcepts  
+```curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/getConcepts"```
 
 #### getDriversByInterval  
 ```curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/1/1/getDriversByInterval?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&volume_type=TABLE&data_type=ACTUAL"```  
