@@ -29,7 +29,6 @@ includes:
   - bodhimobile/overview
   - bodhimobile/gettingstarted
 
-  - workshops
 
 search: true
 ---
