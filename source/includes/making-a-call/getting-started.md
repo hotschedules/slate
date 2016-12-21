@@ -84,7 +84,11 @@ RESULT:
 
 We can also look up our Store using query parameters in our URL
 
-`curl -ik --cookie "RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform" -X GET 'https://api.bodhi.space/bodhi-social/resources/SalesTransaction' --data-urlencode 'where={"business_day":"2016-05-20"}'`
+`curl --cookie "RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform" 'https://api.bodhi.space.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:"2016-05-20"%7D&fields=business_day'`
+
+OR alternatively:
+
+`curl -g --cookie "RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform" 'https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={business_day:"2016-05-20"}&fields=business_day'`
 
 RESULT:    
 `[{"order_number":10184,"item_count":1,"store_id":"574080abb9a19e2dadee775b","employee":{"id":"5151","name":"Ted Morrison"},"business_day":"2016-05-20","revenue_center":{"id":"2","name":"Restaraunt"},"type":{"id":"4","name":"1"},"timestamp":"2016-05-21T03:34:00.000Z","transaction_id":"557605fc4c32e071180a46042016-05-2010184","net_total":{"value":325,"code":"USD","scale":2},"discount_total":{"value":0,"code":"USD","scale":2},"tax_total":{"value":23,"code":"USD","scale":2},"gross_total":{"value":348,"code":"USD","scale":2},"tender_total":{"value":348,"code":"USD","scale":2},"order_opened_at":"2016-05-21T03:33:00.000Z","order_closed_at":"2016-05-21T03:34:00.000Z","guest_count":1,"sys_version":1,"sys_created_at":"2016-05-21T16:02:30.800Z","sys_created_by":"admin__bodhi-social","sys_type_version":12,"sys_id":"574086965eacd06aa3db036b"}]`
