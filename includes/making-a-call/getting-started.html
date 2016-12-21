@@ -115,7 +115,11 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 
 <p>We can also look up our Store using query parameters in our URL</p>
 
-<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET &#39;https://api.bodhi.space/bodhi-social/resources/SalesTransaction&#39; --data-urlencode &#39;where={&quot;business_day&quot;:&quot;2016-05-20&quot;}&#39;</code></p>
+<p><code class="prettyprint">curl --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.bodhi.space.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:&quot;2016-05-20&quot;%7D&amp;fields=business_day&#39;</code></p>
+
+<p>OR alternatively:</p>
+
+<p><code class="prettyprint">curl -g --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={business_day:&quot;2016-05-20&quot;}&amp;fields=business_day&#39;</code></p>
 
 <p>RESULT:<br>
 <code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
