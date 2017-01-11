@@ -32,195 +32,3193 @@
 
 <p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
 
-<h3 id="examples">Examples</h3>
-
 <p>Please ensure that API access has been enabled for your HotSchedules account. Contact customer service 1-866-753-3853 for access or questions.</p>
 
-<p>The url path can look like any of the following, depending on which type is being queried:<br>
-<code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;store_id&gt;/&lt;type_method&gt;?</code>  </p>
+<p>The url path can look like any of the following, depending on which type is being queried:
+<br>
+<code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;store_id&gt;/&lt;type_method&gt;?</code>
+<br>
+<code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;type_method&gt;?</code>
+<br>
+<code class="prettyprint">../hotschedules/&lt;type_method&gt;?</code></p>
 
-<p>example:<br>
-<code class="prettyprint">../hotschedules/1/1/getDriversByInterval?..</code></p>
-
-<p><code class="prettyprint">../hotschedules/&lt;concept_id&gt;/&lt;type_method&gt;</code></p>
-
-<p>example:<br>
-<code class="prettyprint">../hotschedules/1/getStores?..</code>  </p>
-
-<p><code class="prettyprint">../hotschedules/&lt;type_method&gt;</code>  </p>
-
-<p>example:<br>
-<code class="prettyprint">../hotschedules/getConcept?..</code></p>
-
-<h3 id="getting-data-(examples)">Getting Data (Examples)</h3>
+<aside class="notice"> <strong>FETCHING DATA METHODS</strong> </aside>
 
 <p>Note: Results are currently cached with a TTL of 60 minutes.</p>
 
 <h4 id="getconcepts">getConcepts</h4>
 
+<p>This method returns a list of concepts for a company.</p>
+
 <p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/getConcepts&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      name: "HotSchedules",
+      extId: 13
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Concept Name</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Concept external ID</td>
+</tr>
+</tbody></table>
 
 <h4 id="getdriversbyinterval">getDriversByInterval</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getDriversByInterval?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;volume_type=TABLE&amp;data_type=ACTUAL&quot;</code>  </p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong>, <strong>volume type</strong>, and <strong>data type</strong> and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.</p>
+
+<p>Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+<tr>
+<td>startDate</td>
+<td>hsSimpleDate</td>
+<td>Start date for the range of data requested</td>
+</tr>
+<tr>
+<td>endDate</td>
+<td>hsSimpleDate</td>
+<td>End date for the range of data requested</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>driverClass</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”</td>
+</tr>
+<tr>
+<td>dataType</td>
+<td>driverType</td>
+<td>Type of driver requested.  Allowed types are “ACTUAL”, “ADJ_FORECASTED”, and “PRE_ADJ_FORECASTED”</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getDriversByInterval?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;volume_type=TABLE&amp;data_type=ACTUAL&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      driverAmount: 0,
+      driverClass: "TABLE",
+      intervalStartTime: {
+        hours: 0,
+        seconds: 0,
+        militaryTime: true,
+        minutes: 0
+      },
+      intervalEndDate: {
+        month: 4,
+        year: 2016,
+        day: 30
+      },
+      intervalEndTime: {
+        hours: 0,
+        seconds: 0,
+        militaryTime: true,
+        minutes: 15
+      },
+      conceptExtRef: 1,
+      storeExtRef: 3,
+      companyExtRef: 234542,
+      driverType: "ACTUAL",
+      intervalStartDate: {
+        month: 4,
+        year: 2016,
+        day: 30
+      }
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>driverAmount</td>
+<td>Number</td>
+<td>Quantity of driver for interval expressed in the record</td>
+</tr>
+<tr>
+<td>driverClass</td>
+<td>String</td>
+<td>Description of driver type supplied for the interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalStartTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds corresponding to the start of the interval expressed in the record.  Interval times are local to the store’s time zone</td>
+</tr>
+<tr>
+<td>intervalEndTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds corresponding to the end of the interval expressed in the record.  Interval times are local to the store’s time zone</td>
+</tr>
+<tr>
+<td>intervalStartDate</td>
+<td>Object</td>
+<td>The date corresponding to the start of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalEndDate</td>
+<td>Object</td>
+<td>The date corresponding to the end of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>conceptExtRef</td>
+<td>Number</td>
+<td>The concept ID configured by HotSchedules for the concept of the store owning the data of the record., contact HotSchedules if Concept IDs need to be defined or configured</td>
+</tr>
+<tr>
+<td>storeExtRef</td>
+<td>Number</td>
+<td>The store ID configured within HotSchedules for the store owning the data of the record., contact HotSchedules if Store IDs need to be defined or configured</td>
+</tr>
+<tr>
+<td>companyExtRef</td>
+<td>Number</td>
+<td>The company ID defined by HotSchedules for the store owning the data of the record., contact HotSchedules if the Company ID needs to be defined.  This ID cannot be customized or configured</td>
+</tr>
+<tr>
+<td>driverType</td>
+<td>String</td>
+<td>Type of driver requested. Allowed types are: “ACTUAL” - Corresponds to the actual values produced by the store. “ADJ_FORECASTED”- Corresponds to the final forecasted driver amount that the schedules were based off from for the driver. “PRE_ADJ_FORECASTED”- Corresponds to the original forecasted driver amount previous to any forecast adjustments</td>
+</tr>
+</tbody></table>
 
 <h4 id="getempavailability">getEmpAvailability</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpAvailability?active_only=true&quot;</code>  </p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpAvailability objects</strong>. It is meant to get a list of all employee availability for that store.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+<tr>
+<td>active_only</td>
+<td>Boolean</td>
+<td>Boolean that defines whether or not to include terminated employees in response</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getEmpAvailability?active_only=true&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    empNum: 2013,
+    availabilities: [
+      {
+        parHoursMax: -1,
+        parShiftsMax: -1,
+        shiftId: 781691610,
+        shiftName: "PM",
+        parHoursMin: -1,
+        parShiftsMin: -1,
+        dayName: "Friday",
+        partialBeforeAfter: "",
+        statusName: "Not Available",
+        dayNum: 6,
+        partialTime: "",
+        statusNum: 3
+      }
+    ],
+    empHrId: -1
+  }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>empNum</td>
+<td>Number</td>
+<td>Employee POS ID</td>
+</tr>
+<tr>
+<td>availabilities</td>
+<td>Array</td>
+<td>Returns an array of availability for an employee</td>
+</tr>
+<tr>
+<td>empHrId</td>
+<td>Number</td>
+<td>Employee HR ID</td>
+</tr>
+</tbody></table>
 
 <h4 id="getempinfo">getEmpInfo</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpInfo?active_only=true&quot;</code>  </p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpInfo</strong> objects. It is meant to get a list of all employees for that store.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>active_only</td>
+<td>Boolean</td>
+<td>Boolean that defines whether or not to include terminated employees in response.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getEmpInfo?active_only=true&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      lastUpdated: "2015-07-10T17:32:55.753-05:00",
+      accountCreated: "2012-12-28T13:31:25.913-06:00",
+      permissionSetName: "Employee",
+      empNum: 2001,
+      assignedSchedules: [
+        {
+          hsId: 781691496,
+          name: "Bartender",
+          extId: 0
+        },
+        {
+          hsId: 781691492,
+          name: "Server",
+          extId: 0
+        }
+      ],
+      empHrId: -1
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>lastUpdated</td>
+<td>String</td>
+<td>Last time the employee record was updated</td>
+</tr>
+<tr>
+<td>accountCreated</td>
+<td>String</td>
+<td>Date/time the account was created</td>
+</tr>
+<tr>
+<td>permissionSetName</td>
+<td>String</td>
+<td>Permission set name assigned to the employee</td>
+</tr>
+<tr>
+<td>empNum</td>
+<td>Number</td>
+<td>Employee POS ID</td>
+</tr>
+<tr>
+<td>assignedSchedules</td>
+<td>Array</td>
+<td>The schedule in which the employee is assigned. Array contains extId, hsId and name</td>
+</tr>
+<tr>
+<td>empHrId</td>
+<td>Number</td>
+<td>Employees HR ID</td>
+</tr>
+</tbody></table>
 
 <h4 id="getempjobs">getEmpJobs</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getEmpJobs?active_only=true&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpJob</strong> objects. It is meant to get a list of all jobs assigned to all employees for that store.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;getEmpJobs?active_only=true&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[ 
+  {
+    hsJobId: 11878523,
+    clientId: 14935376,
+    regWage: 1,
+    posEmpId: 2069,
+    hsEmpId: 4177214,
+    storeNum: 3,
+    ovtWage: 1.5,
+    posJobId: 18,
+    primary: true
+  }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hsJobId</td>
+<td>Number</td>
+<td>HotSchedules internal job code ID</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posEmpId</td>
+<td>Number</td>
+<td>POS numeric ID for employee</td>
+</tr>
+<tr>
+<td>hsEmpId</td>
+<td>Number</td>
+<td>HotSchedules internal employee account ID</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules, generally set up to mirror the client internal store IDs</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Overtime hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posJobId</td>
+<td>Number</td>
+<td>POS numeric ID for the job code</td>
+</tr>
+<tr>
+<td>primary</td>
+<td>Boolean</td>
+<td>Boolean flag to designate if the job code is the primary job for the employee</td>
+</tr>
+</tbody></table>
 
 <h4 id="getgroups">getGroups</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getGroups&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong> and returns group information for the concept.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/getGroups&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      name: "HotSchedules",
+      extId: 0,
+      conceptExtId: 1
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Group name</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Group external ID</td>
+</tr>
+<tr>
+<td>conceptExtId</td>
+<td>Number</td>
+<td>Concept external ID</td>
+</tr>
+</tbody></table>
 
 <h4 id="getguestcounts">getGuestCounts</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getGuestCounts?start_date=2016-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&quot;</code></p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and return a list of guest counts for the date range requested.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>dateTime</td>
+<td>Start date for the range of data requested.  This is a basic dateTime object.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>dateTime</td>
+<td>End date for the range of data requested.  This is a basic dateTime object.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getGuestCounts?start_date=2016-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      dateTime: "2016-04-30T11:00:00-05:00",
+      businessDate: "2016-04-30T00:00:00-05:00",
+      rvcExtId: 1,
+      guestCount: 2
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dateTime</td>
+<td>String</td>
+<td>Date time of the transaction</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>String</td>
+<td>Business date of transaction</td>
+</tr>
+<tr>
+<td>rvcExtId</td>
+<td>Number</td>
+<td>Represents the numeric revenue center ID associated with the guest</td>
+</tr>
+<tr>
+<td>guestCount</td>
+<td>Number</td>
+<td>Number of guests for the transaction</td>
+</tr>
+</tbody></table>
 
 <h4 id="getlaborbybusday">getLaborByBusDay</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getLaborByBusDay?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&quot;</code></p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>labor type</strong> and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
+
+<p>Intervals are configured during initial setup for the customer and are typically 30 minutes.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>Start date for the range of data requested</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>End date for the range of data requested</td>
+</tr>
+<tr>
+<td>laborType</td>
+<td>laborType</td>
+<td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getLaborByBusDay?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong> </p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "interval": {
+      "intervalDate": {
+        "day": "1",
+        "month": "2",
+        "year": "2016"
+      },
+      "intervalTime": {
+        "hours": "0",
+        "militaryTime": "true",
+        "minutes": "0",
+        "seconds": "0"
+      },
+      "laborType": "forecasted",
+      "volume": "0.0"
+    }
+  }
+]  
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>intervalDate</td>
+<td>Object</td>
+<td>Date expressed in the record</td>
+</tr>
+<tr>
+<td>intervalTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds expressed in record</td>
+</tr>
+<tr>
+<td>laborType</td>
+<td>String</td>
+<td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>String</td>
+<td>Number of employees based on demand at that interval</td>
+</tr>
+</tbody></table>
 
 <h4 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getLaborByJobAndInterval?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&quot;</code></p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>labor type</strong> and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
+
+<p>Intervals are configured during initial setup for the customer and are typically 30 minutes.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>Start date for the range of data requested</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>End date for the range of data requested</td>
+</tr>
+<tr>
+<td>laborType</td>
+<td>laborType</td>
+<td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getLaborByJobAndInterval?start_day=30&amp;start_month=1&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;labor_type=optimal&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "interval": {
+      "intervalDate": {
+        "day": "1",
+        "month": "2",
+        "year": "2016"
+      },
+      "intervalTime": {
+        "hours": "12",
+        "militaryTime": "true",
+        "minutes": "0",
+        "seconds": "0"
+      },
+      "laborType": "scheduled",
+      "volume": "0.0"
+    }
+  }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>intervalDate</td>
+<td>Object</td>
+<td>Date expressed in the record</td>
+</tr>
+<tr>
+<td>intervalTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds expressed in record</td>
+</tr>
+<tr>
+<td>laborType</td>
+<td>String</td>
+<td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td>
+</tr>
+<tr>
+<td>volume</td>
+<td>String</td>
+<td>Number of employees based on demand at that interval</td>
+</tr>
+</tbody></table>
 
 <h4 id="getprojectedsalesv3">getProjectedSalesV3</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getProjectedSalesV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong>. This method uses hsSimpleDate objects for dates and hsSimpleTime objects for times.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>First day of projected sales requested. This is an hsSimpleDate object.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>Last day of projected sales requested. This is an hsSimpleDate object.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getProjectedSalesV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      businessDate: {
+        month: 4,
+        year: 2016,
+        day: 30
+      },
+      dayPartTotals: [
+        {
+          summaryItemTotals: {
+            summaryItemTotal: 5246.26,
+            summaryItemName: "Take out Drive through"
+          },
+          dayPartEndTime: {
+            hours: 4,
+            seconds: 0,
+            amPm: "",
+            militaryTime: true,
+            minutes: 0
+          },
+          dayPartName: "Evening",
+          dayPartTotal: 5246.26,
+          dayPartStartTime: {
+            hours: 18,
+            seconds: 0,
+            amPm: "",
+            militaryTime: true,
+            minutes: 0
+          }
+        }
+      ],
+      dateTotal: 9934.779
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>businessDate</td>
+<td>Object</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>dayPartTotals</td>
+<td>Array</td>
+<td>Array of the day part total. Start Time and End Time</td>
+</tr>
+<tr>
+<td>dateTotal</td>
+<td>Number</td>
+<td>Total projected sales for the day part</td>
+</tr>
+</tbody></table>
 
 <h4 id="getrcvs">getRCVs</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getRCVs&quot;</code></p>
+<p>Revenue center information defined for a group.</p>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getRCVs&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      revenueCenterName: "Take Out",
+      extId: 0,
+      groupLevel: true
+    },
+    {
+      revenueCenterName: "Drive Thru",
+      extId: 1,
+      groupLevel: true
+    },
+    {
+      revenueCenterName: "Beverage",
+      extId: 2,
+      groupLevel: true
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>revenueCenterName</td>
+<td>String</td>
+<td>Revenue center name</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Revenue center ID</td>
+</tr>
+<tr>
+<td>groupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the revenue center was created at a group level</td>
+</tr>
+</tbody></table>
 
 <h4 id="getsalescats">getSalesCats</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getSalesCats&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of sales categories</strong> for that store. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise.Sales categories can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group-level sales categories).</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getSalesCats&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      salesCategoryName: "Beverages",
+      extId: 1,
+      groupLevel: true
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>salesCategoryName</td>
+<td>String</td>
+<td>Name of the sales category</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>External ID associated with the category</td>
+</tr>
+<tr>
+<td>groupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the revenue center was created at a group level</td>
+</tr>
+</tbody></table>
 
 <h4 id="getschedulev3">getScheduleV3</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getScheduleV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of WSScheduleItem3 objects</strong>, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.This method uses hsSimpleDate objects for dates.</p>
 
-<h4 id="example-results">Example Results</h4>
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>First day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>Last day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.</td>
+</tr>
+</tbody></table>
 
-<p><code class="prettyprint">[{&quot;outDate&quot;: {  
-        &quot;month&quot;: 5,  
-        &quot;year&quot;: 2016,  
-        &quot;day&quot;: 2  
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getScheduleV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+    "outDate": {  
+      "month": 5,  
+      "year": 2016,  
+      "day": 2  
     },  
-    &quot;jobHsId&quot;: 1111111,  
-    &quot;payRate&quot;: 1,  
-    &quot;inDate&quot;: {  
-        &quot;month&quot;: 5,  
-        &quot;year&quot;: 2016,  
-        &quot;day&quot;: 2  
+    "jobHsId": 1111111,  
+    "payRate": 1,  
+    "inDate": {  
+      "month": 5,  
+      "year": 2016,  
+      "day": 2  
     },  
-    &quot;specialPay&quot;: 0,  
-    &quot;empHSId&quot;: 222222,  
-    &quot;ovtMinutes&quot;: 0,  
-    &quot;inTime&quot;: {  
-        &quot;hours&quot;: 9,  
-        &quot;seconds&quot;: 0,  
-        &quot;militaryTime&quot;: true,  
-        &quot;minutes&quot;: 0  
-    }  ]</code></p>
+    "specialPay": 0,  
+    "empHSId": 222222,  
+    "ovtMinutes": 0,  
+    "inTime": {  
+      "hours": 9,  
+      "seconds": 0,  
+      "militaryTime": true,  
+      "minutes": 0  
+    }  
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>outDate</td>
+<td>Object</td>
+<td>Schedules out date</td>
+</tr>
+<tr>
+<td>jobHsId</td>
+<td>Number</td>
+<td>HotSchedules internal job code ID</td>
+</tr>
+<tr>
+<td>payRate</td>
+<td>Number</td>
+<td>Regular hourly pay rate for employee</td>
+</tr>
+<tr>
+<td>inDate</td>
+<td>Object</td>
+<td>Scheduled in date</td>
+</tr>
+<tr>
+<td>specialPay</td>
+<td>Number</td>
+<td>Special Pay amounts</td>
+</tr>
+<tr>
+<td>empHsId</td>
+<td>Number</td>
+<td>HotSchedules internal employee account ID</td>
+</tr>
+<tr>
+<td>ovtMinutes</td>
+<td>Number</td>
+<td>Total Overtime Minutes for employee</td>
+</tr>
+<tr>
+<td>inTime</td>
+<td>Object</td>
+<td>Scheduled in time</td>
+</tr>
+</tbody></table>
 
 <h4 id="getshiftsv3">getShiftsV3</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getShiftsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong> and three flags (<strong>isHouse</strong>, <strong>isScheduled</strong> and <strong>isPosted</strong>). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
+
+<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &lsquo;house shifts&rsquo; in HotSchedules).
+isScheduled - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted
+isPosted - includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</p>
+
+<p>This method returns extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+<tr>
+<td>isHouse</td>
+<td>Boolean</td>
+<td>Include house shifts? These are shifts which were never assigned to someone on a schedule, or were once assigned but removed from an employee when their status, job, etc. changed.</td>
+</tr>
+<tr>
+<td>isScheduled</td>
+<td>Boolean</td>
+<td>Include scheduled shifts? These are shifts which are on a schedule that has been saved in HotSchedules, but might not have been posted</td>
+</tr>
+<tr>
+<td>isPosted</td>
+<td>Boolean</td>
+<td>These are shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</td>
+</tr>
+<tr>
+<td>jobCodes</td>
+<td>IntArray</td>
+<td>Integer array of job codes to be included in this method&rsquo;s return. if this parameter is null or empty, all jobs will be included.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi-dev.io/chewy/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getShiftsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&amp;is_house=true&amp;is_scheduled=true&amp;is_posted=true&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      hsJobId: 11878523,
+      clientId: 14935376,
+      regWage: 1,
+      posEmpId: 2069,
+      hsEmpId: 4177214,
+      storeNum: 3,
+      ovtWage: 1.5,
+      posJobId: 18,
+      primary: true
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hsJobId</td>
+<td>Number</td>
+<td>HotSchedules internal job code ID</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules.</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posEmpId</td>
+<td>Number</td>
+<td>POS numeric ID for employee</td>
+</tr>
+<tr>
+<td>hsEmpId</td>
+<td>Number</td>
+<td>HotSchedules internal employee account ID</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Overtime hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posJobId</td>
+<td>Number</td>
+<td>POS numeric ID for the job code</td>
+</tr>
+<tr>
+<td>primary</td>
+<td>Boolean</td>
+<td>Boolean flag to designate if the job code is the primary job for the employee</td>
+</tr>
+</tbody></table>
 
 <h4 id="getstoreemployees">getStoreEmployees</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreEmployees?active_only=true&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a flag to determine if only active employees are returned, and returns an <strong>array of WSEmployee objects</strong>.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>active_only</td>
+<td>Boolean</td>
+<td>Boolean that defines whether or not to include terminated employees in response.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getStoreEmployees?active_only=true&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+      zipCode: 12345,
+      hireDate: "2016-11-03T10:16:38.533-05:00",
+      address: "111 Addy Way",
+      clientId: 87654321,
+      LName: "Lockman",
+      address2: "Unit 3",
+      city: "Austin",
+      mobile: "(222) 222-2222",
+      NName: "Jay",
+      altId: -1,
+      FName: "Harrison",
+      empNum: -1,
+      phone: "(333) 333-3333",
+      hsId: 987654321,
+      dob: "1981-09-16T00:00:00-05:00",
+      state: "TX",
+      storeNum: 3,
+      email: "harrison.lockman@email.com",
+      status: 1
+    }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>zipCode</td>
+<td>Number</td>
+<td>Zip Code</td>
+</tr>
+<tr>
+<td>hireDate</td>
+<td>String</td>
+<td>Employee Hire Date</td>
+</tr>
+<tr>
+<td>address</td>
+<td>String</td>
+<td>Employee Address line 1</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>LName</td>
+<td>String</td>
+<td>Employee Last Name</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>String</td>
+<td>Employee Address line 2</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>City field for Address</td>
+</tr>
+<tr>
+<td>mobile</td>
+<td>String</td>
+<td>Employees Mobile Phone</td>
+</tr>
+<tr>
+<td>NName</td>
+<td>String</td>
+<td>Employee Nickname</td>
+</tr>
+<tr>
+<td>altId</td>
+<td>Number</td>
+<td>Employee HR ID. This must be a unique value across the company. It is used for HotSchedules Shared Employees.</td>
+</tr>
+<tr>
+<td>FName</td>
+<td>String</td>
+<td>Employee First Name</td>
+</tr>
+<tr>
+<td>empNum</td>
+<td>Number</td>
+<td>Employee POS ID</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Phone Number</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional HotSchedule Unique employee account ID</td>
+</tr>
+<tr>
+<td>dob</td>
+<td>String</td>
+<td>Date of birth</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>State</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Employee’s email address</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>Active = 1, Inactive = 0, Terminated = 1</td>
+</tr>
+</tbody></table>
 
 <h4 id="getstorejobs">getStoreJobs</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getStoreJobs&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong>, and returns an array of all jobs currently defined in HotSchedules for the given concept/store.</p>
 
-<h4 id="getstores">getStores</h4>
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody></table>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/getStores?group_id=0&quot;</code></p>
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getStoreJobs&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      jobName: "Manager",
+      posId: 11,
+      clientId: 14935376,
+      hsId: 786323133,
+      defRate: 0,
+      storeNum: 3
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobName</td>
+<td>String</td>
+<td>Name for Job Code</td>
+</tr>
+<tr>
+<td>posId</td>
+<td>Number</td>
+<td>Numeric POS ID for Job Code</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional HotSchedule Unique employee account ID</td>
+</tr>
+<tr>
+<td>defRate</td>
+<td>Number</td>
+<td>Default Pay Rate for a Job Code</td>
+</tr>
+</tbody></table>
+
+<h4 id="getstoresv2">getStoresV2</h4>
+
+<p>Returns information about the stores within a group.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>group_id</td>
+<td>Number</td>
+<td>Group in which the store is assigned</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/getStoresV2?group_id=0&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      groupName: "HS Grill",
+      active: true,
+      groupExtId: 1,
+      storeName: "Sales Demo - Bug Test",
+      storeNum: -1,
+      city: "Fremont",
+      postalCode: "94555",
+      stateProvince: "CA",
+      streetAddress1: "1 st. address",
+      streetAddress2: "Unit 3",
+      timeZone: "US/Central"
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>groupName</td>
+<td>String</td>
+<td>Name of the group</td>
+</tr>
+<tr>
+<td>active</td>
+<td>Boolean</td>
+<td>Indicates if the store is active</td>
+</tr>
+<tr>
+<td>groupExtId</td>
+<td>Number</td>
+<td>The external ID for the store</td>
+</tr>
+<tr>
+<td>storeName</td>
+<td>String</td>
+<td>The name of the store</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>City</td>
+</tr>
+<tr>
+<td>postalCode</td>
+<td>Number</td>
+<td>Zip code / postal code</td>
+</tr>
+<tr>
+<td>stateProvince</td>
+<td>String</td>
+<td>State province</td>
+</tr>
+<tr>
+<td>streetAddress1</td>
+<td>String</td>
+<td>Main street adress</td>
+</tr>
+<tr>
+<td>streetAddress2</td>
+<td>String</td>
+<td>Apartment number, Suite, Unit, etc..</td>
+</tr>
+<tr>
+<td>timeZone</td>
+<td>String</td>
+<td>Store timezone</td>
+</tr>
+</tbody></table>
 
 <h4 id="gettimecards">getTimeCards</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of wsTimeCard3 objects</strong>, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in and clock out times. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getTimeCards?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+      jobName: "Bartender",
+      ovtTtl: 0,
+      ovtHrs: 0,
+      clockOut: "2016-05-01T23:48:00-05:00",
+      regWage: 0,
+      clockIn: "2016-05-01T16:36:00-05:00",
+      ovtWage: 7.5,
+      breakMinutes: 0,
+      jobExtId: 18,
+      jobId: -1,
+      businessDate: {
+        month: 5,
+        year: 2016,
+        day: 1
+      },
+      regHrs: 7.2,
+      spcTtl: 7.25,
+      hsId: 929931332168,
+      spcHrs: 0,
+      ovtMins: 0,
+      extId: -2005922,
+      storeNum: 3,
+      empPosId: 2068,
+      regTtl: 0
+    }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobName</td>
+<td>String</td>
+<td>POS job code name</td>
+</tr>
+<tr>
+<td>ovtTtl</td>
+<td>Number</td>
+<td>Optional-Overtime total pay amount</td>
+</tr>
+<tr>
+<td>ovtHrs</td>
+<td>Number</td>
+<td>Optional-Overtime hours in shift</td>
+</tr>
+<tr>
+<td>clockOut</td>
+<td>String</td>
+<td>Clock out timestamp for the shift</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly pay rate</td>
+</tr>
+<tr>
+<td>clockIn</td>
+<td>String</td>
+<td>Clock in timestamp for the shift</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Optional-Overtime hourly pay rate</td>
+</tr>
+<tr>
+<td>breakMinutes</td>
+<td>Number</td>
+<td>Number of non-paid break minutes in shift</td>
+</tr>
+<tr>
+<td>JobId</td>
+<td>Number</td>
+<td>POS numeric identifier for the job</td>
+</tr>
+<tr>
+<td>jobExtId</td>
+<td>Number</td>
+<td>POS numeric Job Code ID</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Array</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>regHours</td>
+<td>Number</td>
+<td>Regular hours represented in shift</td>
+</tr>
+<tr>
+<td>spcTtl</td>
+<td>Number</td>
+<td>Optional-Special Pay total pay amount</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.</td>
+</tr>
+<tr>
+<td>spcHrs</td>
+<td>Number</td>
+<td>Optional-Special Pay Hours</td>
+</tr>
+<tr>
+<td>ovtMins</td>
+<td>Number</td>
+<td>Optional-Overtime minutes in shift</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store identifier. Generally set up to mirror the client internal store ID.</td>
+</tr>
+<tr>
+<td>empPosId</td>
+<td>Number</td>
+<td>POS numeric Employee ID</td>
+</tr>
+<tr>
+<td>regTtl</td>
+<td>Number</td>
+<td>Regular total pay amount</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+</tbody></table>
 
 <h4 id="getvolumecounts">getVolumeCounts</h4>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&quot;</code></p>
+<p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>volume type</strong> and return a list of volume counts for the date range requested.
+Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”.</p>
 
-<h3 id="writing-data-(examples)">Writing Data (Examples)</h3>
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>volumeType</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>Start date for the range of data requested</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>End date for the range of data requested</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getVolumeCounts?start_date=2015-04-30T00:00:00&amp;end_date=2016-05-03T00:00:00&amp;volume_type=TABLE&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      dateTime: "2016-05-03T23:30:00-05:00",
+      volumeAmount: 5,
+      businessDate: "2016-05-03T00:00:00-05:00",
+      volumeType: "Guests",
+      rvcExtId: 0
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>dateTime</td>
+<td>String</td>
+<td>Date of business</td>
+</tr>
+<tr>
+<td>volumeAmount</td>
+<td>Number</td>
+<td>Value of the volume count for the transaction</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>String</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>String</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”.</td>
+</tr>
+<tr>
+<td>rvcExtId</td>
+<td>Number</td>
+<td>Represents the numeric revenue center ID associated with the volume count</td>
+</tr>
+</tbody></table>
+
+<aside class="notice"> <strong>WRITING DATA METHODS</strong> </aside>
 
 <h4 id="settimecardsv3">setTimeCardsV3</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{
-  \&quot;jobName\&quot;: \&quot;Cook\&quot;,
-  \&quot;ovtTtl\&quot;: 0,
-  \&quot;ovtHrs\&quot;: 0,
-  \&quot;clockOut\&quot;: \&quot;2016-07-31T22:05:00-05:00\&quot;,
-  \&quot;regWage\&quot;: 9,
-  \&quot;clockIn\&quot;: \&quot;2016-07-30T15:56:00-05:00\&quot;,
-  \&quot;ovtWage\&quot;: 13.5,
-  \&quot;breakMinutes\&quot;: 0,
-  \&quot;jobId\&quot;: 16921407,
-  \&quot;businessDate\&quot;: {
-    \&quot;month\&quot;: 7,
-    \&quot;year\&quot;: 2016,
-    \&quot;day\&quot;: 31
-  },
-  \&quot;regHrs\&quot;: 6.15,
-  \&quot;spcTtl\&quot;: 0,
-  \&quot;hsId\&quot;: 929931334634,
-  \&quot;spcHrs\&quot;: 0,
-  \&quot;ovtMins\&quot;: 0,
-  \&quot;storeNum\&quot;: 1,
-  \&quot;empPosId\&quot;: 1052,
-  \&quot;regTtl\&quot;: 55.35
-}]&quot;
-</code></p>
+<p>Extends dataTimeCard (includes business date and clock in and clockout date/times).</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{ \&quot;jobName\&quot;: \&quot;Cook\&quot;, \&quot;ovtTtl\&quot;: 0, \&quot;ovtHrs\&quot;: 0, \&quot;clockOut\&quot;: \&quot;2016-07-31T22:05:00-05:00\&quot;, \&quot;regWage\&quot;: 9, \&quot;clockIn\&quot;: \&quot;2016-07-30T15:56:00-05:00\&quot;, \&quot;ovtWage\&quot;: 13.5, \&quot;breakMinutes\&quot;: 0, \&quot;jobId\&quot;: 16921407, \&quot;businessDate\&quot;: { \&quot;month\&quot;: 7, \&quot;year\&quot;: 2016, \&quot;day\&quot;: 31 }, \&quot;regHrs\&quot;: 6.15, \&quot;spcTtl\&quot;: 0, \&quot;hsId\&quot;: 929931334634, \&quot;spcHrs\&quot;: 0, \&quot;ovtMins\&quot;: 0, \&quot;storeNum\&quot;: 1, \&quot;empPosId\&quot;: 1052, \&quot;regTtl\&quot;: 55.35 }]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      jobName: "Cook",
+      ovtTtl: 0,
+      ovtHrs: 0,
+      clockOut: "2016-07-31T22:05:00-05:00",
+      regWage: 9,
+      clockIn: "2016-07-30T15:56:00-05:00",
+      ovtWage: 13.5,
+      breakMinutes: 0,
+      JobId: 16921407,
+      businessDate: {
+        month: 7,
+        year: 2016,
+        day: 31,
+      },
+      regHours: 6.15,
+      spcTtl: 0,
+      hsId: 929931334634,
+      spcHrs: 0,
+      ovtMins: 0,
+      storeNum: 1,
+      empPosId: 1052,
+      regTtl: 55.35
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobName</td>
+<td>String</td>
+<td>POS job code name</td>
+</tr>
+<tr>
+<td>ovtTtl</td>
+<td>Number</td>
+<td>Optional-Overtime total pay amount</td>
+</tr>
+<tr>
+<td>ovtHrs</td>
+<td>Number</td>
+<td>Optional-Overtime hours in shift</td>
+</tr>
+<tr>
+<td>clockOut</td>
+<td>String</td>
+<td>Clock out timestamp for the shift</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly pay rate</td>
+</tr>
+<tr>
+<td>clockIn</td>
+<td>String</td>
+<td>Clock in timestamp for the shift</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Optional-Overtime hourly pay rate</td>
+</tr>
+<tr>
+<td>breakMinutes</td>
+<td>Number</td>
+<td>Number of non-paid break minutes in shift</td>
+</tr>
+<tr>
+<td>JobId</td>
+<td>Number</td>
+<td>POS numeric identifier for the job</td>
+</tr>
+<tr>
+<td>jobExtId</td>
+<td>Number</td>
+<td>POS numeric Job Code ID</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Array</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>regHours</td>
+<td>Number</td>
+<td>Regular hours represented in shift</td>
+</tr>
+<tr>
+<td>spcTtl</td>
+<td>Number</td>
+<td>Optional-Special Pay total pay amount</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.</td>
+</tr>
+<tr>
+<td>spcHrs</td>
+<td>Number</td>
+<td>Optional-Special Pay Hours</td>
+</tr>
+<tr>
+<td>ovtMins</td>
+<td>Number</td>
+<td>Optional-Overtime minutes in shift</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store identifier. Generally set up to mirror the client internal store ID.</td>
+</tr>
+<tr>
+<td>empPosId</td>
+<td>Number</td>
+<td>POS numeric Employee ID</td>
+</tr>
+<tr>
+<td>regTtl</td>
+<td>Number</td>
+<td>Regular total pay amount</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+</tbody></table>
 
 <h4 id="setempjobs">setEmpJobs</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setEmpJobs?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, and an <strong>array of WSEmpJob</strong> objects to assign jobs to individual employees. This method returns a WSReturn object.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setEmpJobs?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      hsJobId: 11878523,
+      clientId: 14935376,
+      regWage: 1,
+      posEmpId: 2069,
+      hsEmpId: 4177214,
+      storeNum: 3,
+      ovtWage: 1.5,
+      posJobId: 18,
+      primary: true
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>hsJobId</td>
+<td>Number</td>
+<td>HotSchedules internal job code ID</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posEmpId</td>
+<td>Number</td>
+<td>POS numeric ID for employee</td>
+</tr>
+<tr>
+<td>hsEmpId</td>
+<td>Number</td>
+<td>HotSchedules internal employee account ID</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Overtime hourly wage rate for employee</td>
+</tr>
+<tr>
+<td>posJobId</td>
+<td>Number</td>
+<td>POS numeric ID for the job code</td>
+</tr>
+<tr>
+<td>primary</td>
+<td>Boolean</td>
+<td>Boolean flag to designate if the job code is the primary job for the employee</td>
+</tr>
+</tbody></table>
 
 <h4 id="setemps">setEmps</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setEmps?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong> and an <strong>array of WSEmployee objects</strong>. Using the authentication from the username token and the conecpt and store IDs, the server will resolve which HotSchedules client this sync is for. The array of employees will be parsed on the server side to employees who need to be inserted or updated in the HS database. This method returns a WSReturn object.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>emps</td>
+<td>wsEmployeeArray</td>
+<td>Array of WSEmployee objects. Each object represents an employee at this store.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setEmps?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      zipCode: 12345,
+      hireDate: "2016-11-03T10:16:38.533-05:00",
+      address: "111 Addy Way",
+      clientId: 87654321,
+      LName: "Lockman",
+      address2: "Unit 3",
+      city: "Austin",
+      mobile: "(222) 222-2222",
+      NName: "Jay",
+      altId: -1,
+      FName: "Harrison",
+      empNum: -1,
+      phone: "(333) 333-3333",
+      hsId: 987654321,
+      dob: "1981-09-16T00:00:00-05:00",
+      state: "TX",
+      storeNum: 3,
+      email: "harrison.lockman@email.com",
+      status: 1
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>zipCode</td>
+<td>Number</td>
+<td>Zip Code</td>
+</tr>
+<tr>
+<td>hireDate</td>
+<td>String</td>
+<td>Employee Hire Date</td>
+</tr>
+<tr>
+<td>address</td>
+<td>String</td>
+<td>Employee Address line 1</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>LName</td>
+<td>String</td>
+<td>Employee Last Name</td>
+</tr>
+<tr>
+<td>address2</td>
+<td>String</td>
+<td>Employee Address line 2</td>
+</tr>
+<tr>
+<td>city</td>
+<td>String</td>
+<td>City field for Address</td>
+</tr>
+<tr>
+<td>mobile</td>
+<td>String</td>
+<td>Employees Mobile Phone</td>
+</tr>
+<tr>
+<td>NName</td>
+<td>String</td>
+<td>Employee Nickname</td>
+</tr>
+<tr>
+<td>altId</td>
+<td>Number</td>
+<td>Employee HR ID. This must be a unique value across the company. It is used for HotSchedules Shared Employees.</td>
+</tr>
+<tr>
+<td>FName</td>
+<td>String</td>
+<td>Employee First Name</td>
+</tr>
+<tr>
+<td>empNum</td>
+<td>Number</td>
+<td>Employee POS ID</td>
+</tr>
+<tr>
+<td>phone</td>
+<td>String</td>
+<td>Phone Number</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional HotSchedule Unique employee account ID</td>
+</tr>
+<tr>
+<td>dob</td>
+<td>String</td>
+<td>Date of birth</td>
+</tr>
+<tr>
+<td>state</td>
+<td>String</td>
+<td>State</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+</tr>
+<tr>
+<td>email</td>
+<td>String</td>
+<td>Employee’s email address</td>
+</tr>
+<tr>
+<td>status</td>
+<td>Number</td>
+<td>Active = 1, Inactive = 0, Terminated = 1</td>
+</tr>
+</tbody></table>
 
 <h4 id="setforecastdriversv2">setForecastDriversV2</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setForecastDriversV2?start_day=30&amp;start_month=4&amp;start_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>workweek</strong>, <strong>startdate</strong>, <strong>enddate</strong>, <strong>starttime</strong>, <strong>endtime</strong>, <strong>volume amount</strong>, <strong>volume type</strong>, and a <strong>revenue center</strong> for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setForecastDriversV2?start_day=30&amp;start_month=4&amp;start_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      "concept": "1",
+      "storeNum": "1",
+      "workweekStartDate": {
+        "day": "11",
+        "month": "10",
+        "year": "2016"
+      },
+      "driverAmount": "10",
+      "intervalStartTime" : {
+        "day": "1",
+        "month": "5",
+        "year": "2016"
+      }
+      "intervalEndDate": {
+        "day": "11",
+        "month": "10",
+        "year": "2016"
+      },
+      intervalStartTime: {
+        hours: 0,
+        seconds: 0,
+        militaryTime: true,
+        minutes: 0
+      },
+      intervalEndTime: {
+        hours: 0,
+        seconds: 0,
+        militaryTime: true,
+        minutes: 15
+      },
+      "rvcId": "1",
+      "volumeType": "Guests"
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>workweekStartDate</td>
+<td>Object</td>
+<td>Start date of the work week</td>
+</tr>
+<tr>
+<td>driverAmount</td>
+<td>Number</td>
+<td>Quantity of driver for interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalStartTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds corresponding to the start of the interval expressed in the record. Interval times are local to the store’s time zone.</td>
+</tr>
+<tr>
+<td>intervalEndTime</td>
+<td>Object</td>
+<td>The hour, minutes, and seconds corresponding to the end of the interval expressed in the record. Interval times are local to the store’s time zone.</td>
+</tr>
+<tr>
+<td>intervalStartDate</td>
+<td>Object</td>
+<td>The date corresponding to the start of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalEndDate</td>
+<td>Object</td>
+<td>The date corresponding to the end of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>rvcId</td>
+<td>Number</td>
+<td>Numeric ID for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>String</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”.</td>
+</tr>
+</tbody></table>
 
 <h4 id="setguestcounts">setGuestCounts</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setGuestCounts?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>guest count</strong> and a <strong>revenue center</strong> for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setGuestCounts?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      dateTime: "2016-05-03T23:30:00-05:00",
+      businessDate: "2016-05-03T00:00:00-05:00",
+      guestCount: 113,
+      rvcExtID: 123
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>businessDate</td>
+<td>String</td>
+<td>Business date of transaction</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>String</td>
+<td>Date Time of the transaction</td>
+</tr>
+<tr>
+<td>guestCount</td>
+<td>Number</td>
+<td>Number of guests for the transaction</td>
+</tr>
+<tr>
+<td>rvcExtID</td>
+<td>Number</td>
+<td>Numeric ID for the revenue center associated with the transaction</td>
+</tr>
+</tbody></table>
 
 <h4 id="setrvc">setRVC</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setRVC?group=1&amp;rvcId=1&amp;rvcName=1&amp;isGroupLevel=true&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of revenue centers</strong> for that store.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Number</td>
+<td>Numeric ID group in which the store is assigned</td>
+</tr>
+<tr>
+<td>rvcId</td>
+<td>Number</td>
+<td>Numeric ID for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>rvcName</td>
+<td>String</td>
+<td>Name for the revenue center associated with the location within the restaurant. <br> i.e. Bar, Togo etc&hellip;</td>
+</tr>
+<tr>
+<td>isGroupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the revenue center is assigned at the group level. <br> i.e. Bar used across all locations</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setRVC?group=1&amp;rvcId=1&amp;rvcName=1&amp;isGroupLevel=true&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong> </p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+      "concept": "1",
+      "group": "1",
+      "isGroupLevel": "true",
+      "store": "13",
+      "rvcId": "11",
+      "rvcName": "Bar"
+    }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Number</td>
+<td>Numeric ID group in which the store is assigned</td>
+</tr>
+<tr>
+<td>rvcId</td>
+<td>Number</td>
+<td>Numeric ID for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>rvcName</td>
+<td>String</td>
+<td>Name for the revenue center associated with the location within the restaurant. <br> i.e. Bar, Togo etc&hellip;</td>
+</tr>
+<tr>
+<td>isGroupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the revenue center is assigned at the group level. <br> i.e. Bar used across all locations</td>
+</tr>
+</tbody></table>
 
 <h4 id="setsalescat">setSalesCat</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setSalesCat?group=1&amp;salesCatId=1&amp;salesCatName=1&amp;isGroupLevel=true&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code>  </p>
+<p>This method allows you to add the sales category associated with menu items. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise. Sales categories can be local to a particular store.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Number</td>
+<td>Numeric ID group in which the store is assigned</td>
+</tr>
+<tr>
+<td>salesCatId</td>
+<td>Number</td>
+<td>Numeric ID for the sales category associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>salesCatName</td>
+<td>String</td>
+<td>Name for the sales category associated with the item sold within the restaurant. <br> i.e. Liquor, Beer, etc..</td>
+</tr>
+<tr>
+<td>isGroupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the sales category is assigned at the group level. <br> i.e. Liquor ID 2 used across all locations</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setSalesCat?group=1&amp;salesCatId=1&amp;salesCatName=1&amp;isGroupLevel=true&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong> </p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "concept": "1",
+    "group": "1",
+    "isGroupLevel": "true",
+    "store": "13",
+    "salesCatId": "9",
+    "salesCatName": "Liquor"
+  }
+]
+
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>group</td>
+<td>Number</td>
+<td>Numeric ID group in which the store is assigned</td>
+</tr>
+<tr>
+<td>salesCatId</td>
+<td>Number</td>
+<td>Numeric ID for the sales category associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>salesCatName</td>
+<td>String</td>
+<td>Name for the sales category associated with the item sold within the restaurant. <br> i.e. Liquor, Beer, etc..</td>
+</tr>
+<tr>
+<td>isGroupLevel</td>
+<td>Boolean</td>
+<td>Indicates if the sales category is assigned at the group level. <br> i.e. Liquor ID 2 used across all locations</td>
+</tr>
+</tbody></table>
 
 <h4 id="setsalesitemsv4">setSalesItemsV4</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setSalesItemsV4?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a <strong>start</strong> and <strong>end date</strong> and an <strong>array of WSSalesItem objects</strong>. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains sales items for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of sales, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
+This method uses hsSimpleDate objects for dates.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setSalesItemsV4?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong> (COMING SOON)</p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    "concept": "1",
+    "storeNum": "1",
+    "sales": {
+    "item": {
+      "catName": "Beer",
+      "clientId": "3",
+      "empId": "123",
+        "extId": "333",
+        "rvc": "Revenue",
+        "rvcName": "Bar",
+        "salesCat": "Beer",
+        "storeNum": "3",
+        "ttl": "0",
+        "businessDate": {
+          "day": "1",
+          "month": "7",
+          "year": "2016"
+        },
+        "transDate": {
+          "day": "1",
+          "month": "7",
+          "year": "2015"
+        },
+        "transTime": {
+          "amPm": "am",
+          "hours": "1",
+          "militaryTime": "true",
+          "minutes": "15",
+          "seconds": "0"
+        }
+      }
+    },
+      "start": {
+        "day": "1",
+        "month": "7",
+        "year": "2016"
+      },
+      "end": {
+        "day": "1",
+        "month": "8",
+        "year": "2016"
+      }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept</td>
+</tr>
+<tr>
+<td>catName</td>
+<td>String</td>
+<td>Category name</td>
+</tr>
+<tr>
+<td>clientId</td>
+<td>Number</td>
+<td>Unique identifier for client provided via HotSchedules</td>
+</tr>
+<tr>
+<td>empId</td>
+<td>Number</td>
+<td>Employee ID</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>External ID</td>
+</tr>
+<tr>
+<td>rvc</td>
+<td>String</td>
+<td>Revenue Center</td>
+</tr>
+<tr>
+<td>rvcName</td>
+<td>String</td>
+<td>Name for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>salesCat</td>
+<td>String</td>
+<td>Sales category</td>
+</tr>
+<tr>
+<td>ttl</td>
+<td>String</td>
+<td>Total sales for the sales category</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Object</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>transDate</td>
+<td>Object</td>
+<td>Transaction date</td>
+</tr>
+<tr>
+<td>transTime</td>
+<td>Object</td>
+<td>Transaction time</td>
+</tr>
+<tr>
+<td>start</td>
+<td>Object</td>
+<td>Start date for the range of data requested</td>
+</tr>
+<tr>
+<td>end</td>
+<td>Object</td>
+<td>End date for the range of data requested</td>
+</tr>
+</tbody></table>
 
 <h4 id="settimecardsdeclaredtips">setTimeCardsDeclaredTips</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setTimeCardsDeclaredTips?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code>  </p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a <strong>start</strong> and <strong>end date</strong> and an <strong>array of WSTimeCardsDeclaredTips</strong> objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setTimeCardsDeclaredTips?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      jobName: "Bartender",
+      ovtTtl: 0,
+      ovtHrs: 0,
+      clockOut: "2016-05-01T23:48:00-05:00",
+      regWage: 0,
+      clockIn: "2016-05-01T16:36:00-05:00",
+      ovtWage: 7.5,
+      breakMinutes: 0,
+      jobExtId: 18,
+      jobId: -1,
+      businessDate: {
+        month: 5,
+        year: 2016,
+        day: 1
+      },
+      regHrs: 7.2,
+      spcTtl: 7.25,
+      hsId: 929931332168,
+      spcHrs: 0,
+      ovtMins: 0,
+      extId: -2005922,
+        storeNum: 3,
+      empPosId: 2068,
+      regTtl: 0
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobName</td>
+<td>String</td>
+<td>POS job code name</td>
+</tr>
+<tr>
+<td>ovtTtl</td>
+<td>Number</td>
+<td>Optional-Overtime total pay amount</td>
+</tr>
+<tr>
+<td>ovtHrs</td>
+<td>Number</td>
+<td>Optional-Overtime hours in shift</td>
+</tr>
+<tr>
+<td>clockOut</td>
+<td>String</td>
+<td>Clock out timestamp for the shift</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly pay rate</td>
+</tr>
+<tr>
+<td>clockIn</td>
+<td>String</td>
+<td>Clock in timestamp for the shift</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Optional-Overtime hourly pay rate</td>
+</tr>
+<tr>
+<td>breakMinutes</td>
+<td>Number</td>
+<td>Number of non-paid break minutes in shift</td>
+</tr>
+<tr>
+<td>JobId</td>
+<td>Number</td>
+<td>POS numeric identifier for the job</td>
+</tr>
+<tr>
+<td>jobExtId</td>
+<td>Number</td>
+<td>POS numeric Job Code ID</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Array</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>regHours</td>
+<td>Number</td>
+<td>Regular hours represented in shift</td>
+</tr>
+<tr>
+<td>spcTtl</td>
+<td>Number</td>
+<td>Optional-Special Pay total pay amount</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.</td>
+</tr>
+<tr>
+<td>spcHrs</td>
+<td>Number</td>
+<td>Optional-Special Pay Hours</td>
+</tr>
+<tr>
+<td>ovtMins</td>
+<td>Number</td>
+<td>Optional-Overtime minutes in shift</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store identifier.  Generally set up to mirror the client internal store ID.</td>
+</tr>
+<tr>
+<td>empPosId</td>
+<td>Number</td>
+<td>POS numeric Employee ID</td>
+</tr>
+<tr>
+<td>regTtl</td>
+<td>Number</td>
+<td>Regular total pay amount</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+</tbody></table>
 
 <h4 id="setvolumecountsv2">setVolumeCountsV2</h4>
 
-<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/1/1/setVolumeCountsV2&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>volume amount</strong>, <strong>volume type</strong>, and a <strong>revenue center</strong> for the purpose of submitting actual volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setVolumeCountsV2&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      "businessDate": "2014-10-05T00:00:00",
+      "dateTime": "2014-10-05T06:41:00-05:00",
+      "rvcExtId": "4",
+      "volumeAmount": "1",
+      "volumeType": "GUESTS"
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>businessDate</td>
+<td>String</td>
+<td>Business date of transaction</td>
+</tr>
+<tr>
+<td>dateTime</td>
+<td>String</td>
+<td>Date time of transaction</td>
+</tr>
+<tr>
+<td>rvcExtId</td>
+<td>Number</td>
+<td>Represents the numeric revenue center ID associated with the guest</td>
+</tr>
+<tr>
+<td>volumeAmount</td>
+<td>Number</td>
+<td>Value of the volume count for the transaction</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>String</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”.</td>
+</tr>
+</tbody></table>
 
       </div>
       <div class="dark-box">
