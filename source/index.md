@@ -14,8 +14,6 @@ includes:
   - bodhicloud/gettingstarted
 
   - making-a-call/getting-started
-  - making-a-call/store-example
-  - making-a-call/sales-example
   - making-a-call/hs-example
   - making-a-call/rds-example
   - making-a-call/social-example

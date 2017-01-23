@@ -218,7 +218,7 @@ Query parameter | Type   | Description
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>getEmpJobs?active_only=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpJobs?active_only=true"`
   
 > **Sample JSON response:**
 
@@ -711,7 +711,7 @@ dob      | String | Date of birth
 state    | String | State 
 storeNum | Number | Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.
 email    | String | Employee’s email address
-status   | Number | Active = 1, Inactive = 0, Terminated = 1
+status   | Number | Active = 1, Inactive = 0, Terminated = -1
 
 
 
@@ -1091,7 +1091,7 @@ dob      | String | Date of birth
 state    | String | State 
 storeNum | Number | Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.
 email    | String | Employee’s email address
-status   | Number | Active = 1, Inactive = 0, Terminated = 1
+status   | Number | Active = 1, Inactive = 0, Terminated = -1
 
 
 
@@ -1296,14 +1296,12 @@ Year            | Number | Year formated yyyy
 
   `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesItemsV4?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
-> **Sample JSON object** (COMING SOON)
-
+> **Sample JSON object**
 ```
   [
     "concept": "1",
     "storeNum": "1",
     "sales": {
-    "item": {
       "catName": "Beer",
       "clientId": "3",
       "empId": "123",
@@ -1330,7 +1328,6 @@ Year            | Number | Year formated yyyy
           "minutes": "15",
           "seconds": "0"
         }
-      }
     },
       "start": {
         "day": "1",
