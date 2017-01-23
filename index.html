@@ -365,238 +365,6 @@ The following are curl examples of how to specify file location in your upload/d
 <p><strong>Delete a file:</strong><br>
 <code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
 
-          <h2 id="working-with-labor-data">Working with Labor data</h2>
-
-<p>Storing and accessing labor data is a critical function of the HotSchedule IoT Platform. To access your labor data, you will use the following types:  </p>
-
-<ul>
-<li>Store<br></li>
-<li>StoreJob<br></li>
-<li>Employee<br></li>
-<li>EmployeePosition<br></li>
-<li>Timecard<br></li>
-</ul>
-
-<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
-
-<ol>
-<li>Create a Store<br></li>
-<li>Create a StoreJob<br></li>
-<li>Create a Employee<br></li>
-<li>Create EmployeePosition using the Employee, Store, and StoreJob data<br>
-
-<ul>
-<li>Patch Store.employee_ids with the new employee&rsquo;s sys_id<br></li>
-<li>Patch Employee.positions with the new EmployeePosition<br></li>
-</ul></li>
-<li>Create Timecard using EmployeePosition data<br></li>
-</ol>
-
-<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
-
-<p>EmployeePosition is a reference table for looking up stores, employees, jobs, and pay rates.  Ideally, this should be the first place you look for information when querying labor data.</p>
-
-<p>A Store has many employees (Array of sys_ids)
-&ndash; Store.employee_ids maps to each Employee.sys_id</p>
-
-<p>&ndash; Example Query: Return all stores that the specified employee is associated with<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Store?where={&#39;employee_ids&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
-
-<p>A Store has <strong>many</strong> jobs
-&ndash;  Store.sys_id maps to StoreJob.store_id</p>
-
-<p>&ndash; Example Query: Return all jobs at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/StoreJob?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
-
-<p>An Employee has many positions (Array of EmployeePosition)</p>
-
-<ul>
-<li>Employee.sys_id maps to EmployeePosition.employee_id<br></li>
-<li>Employee.name.family_name maps to EmployeePosition.employee_reference.name<br></li>
-<li>Employee.external_ids maps to EmployeePosition.employee_reference.id<br></li>
-<li>Store.sys_id maps to EmployeePosition.store_id<br></li>
-<li>Store.store_number maps to EmployeePosition.store_reference.id<br></li>
-<li>Store.name maps to EmployeePosition.store_reference.name<br></li>
-<li>StoreJob.sys_id maps to EmployeePosition.job_id<br></li>
-<li>StoreJob.instore_id maps to EmployeePosition.job_reference.id<br></li>
-<li>StoreJob.instore_name maps to EmployeePosition.job_reference.name<br></li>
-</ul>
-
-<p><strong>Example Queries:</strong>  </p>
-
-<p>Return all positions for a specified employee across all stores<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.name&#39;:&#39;&lt;EMPLOYEE_NAME&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.id&#39;:&#39;&lt;EMPLOYEE_EXTERNAL_ID&gt;&#39;}</code>  </p>
-
-<p>Return all positions at a specified store across all employees and jobs.<br>
-<strong>(NOTE: May include duplicates if employees have multiple positions at the same store)</strong><br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.name&#39;:&#39;&lt;STORE_NAME&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.id&#39;:&#39;&lt;STORE_NUMBER&gt;&#39;}</code>  </p>
-
-<p>Return all employees with a specified job across all stores
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_id&#39;:&#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.name&#39;:&#39;&lt;JOB_NAME&gt;&#39;}</code>  </p>
-
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.id&#39;:&#39;&lt;JOB_EXTERNAL_ID&gt;&#39;}</code>  </p>
-
-<p>An Employee has many Stores through EmployeePosition</p>
-
-<ul>
-<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
-<li>EmployeePosition.store_id maps to Store.sys_id</li>
-<li>Therefore: Employee.sys_id maps to Store.sys_id</li>
-</ul>
-
-<p>&ndash; Example Query: Return an array of Store.sys_id that the employee works at
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=store_id</code></p>
-
-<p>An Employee has many StoreJobs through EmployeePosition</p>
-
-<ul>
-<li>Employee.sys_id maps to EmployeePosition.employee_id</li>
-<li>EmployeePosition.job_id maps to StoreJob.sys_id</li>
-<li>Therefore: Employee.sys_id maps to StoreJob.sys_id</li>
-</ul>
-
-<p>&ndash; Example Query: Return an array of StoreJob.sys_id for the specified employee<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=job_id</code></p>
-
-<p>(Same as the two previous examples)  </p>
-
-<ul>
-<li>A Store has many StoreJobs through EmployeePosition</li>
-<li>A Store has many Employees through EmployeePosition</li>
-<li>A StoreJob has many Employees through EmployeePosition</li>
-</ul>
-
-<p>An Employee has many Timecards
-* Employee.sys_id maps to Timecard.employee_id
-* Employee.external_ids maps to Timecard.employee_reference.id
-* Employee.name.family_name maps to Timecard.employee_reference.name</p>
-
-<p>&ndash; Example Query: Return all timecards for a specified employee<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;employee_id&#39;: &#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
-
-<p>A Store has many Timecards</p>
-
-<ul>
-<li>Store.sys_id maps to Timecard.store_id</li>
-<li>Store.store_number maps to Timecard.store_reference.id</li>
-<li>Store.name maps to Timecard.store_reference.name</li>
-</ul>
-
-<p>&ndash; Example Query:Return all timecards for all employees at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code></p>
-
-<p>A StoreJob has many Timecards</p>
-
-<ul>
-<li>StoreJob.sys_id maps to Timecard.job_id</li>
-<li>StoreJob.instore_id maps to Timecard.job_reference.id</li>
-<li>StoreJob.instore_name maps to Timecard.job_reference.name</li>
-</ul>
-
-<p>&ndash; Example Query:Return all timecards for all employees with the specified job across all stores<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
-
-<p>&ndash; Example Query:Return all timecards for all employees with the specified job at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;, &#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
-
-<p>Employee payment rates:
-Base payment rates for a position are defined in the StoreJob type.  When an EmployeePosition is created, the regular, overtime, and double time rates are copied from the StoreJob and adjusted for that employee.  This allows for multiple employees to have the same job, but different payment rates.</p>
-
-          <h2 id="working-with-sales-data">Working with Sales data</h2>
-
-<p>Storing and accessing Sales data is a critical function of the HotSchedule IoT Platform. To access your sales data, you will use the following types:  </p>
-
-<ul>
-<li>Store<br></li>
-<li>SalesTransaction<br></li>
-<li>SalesItem<br></li>
-<li>SalesCategory<br></li>
-<li>RevenueCenter</li>
-</ul>
-
-<h3 id="steps-to-create-new-data:">Steps to create new data:</h3>
-
-<ol>
-<li>Create a Store<br></li>
-<li>Create a SalesTransaction<br></li>
-<li>Create a SalesItem<br></li>
-</ol>
-
-<h4 id="how-does-the-data-map-together?">How does the data map together?</h4>
-
-<p>SalesTransaction is a reference table for looking up items sold and the meta data about those items as they refer to a specific order on a specific business day.  Ideally, this should be the first place you look for information when querying Sales data.</p>
-
-<p>A Store has many SalesTransactions<br>
-&ndash;  SalesTransaction.store_id maps to Store.sys_id</p>
-
-<p>&ndash; Example Query: Return all SalesTransactions for a store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
-
-<p>&ndash; Example Query: Return all the sums of all SalesTransactions for per store for a day
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/resources/SalesTransaction/aggregate?pipeline=[       { $match:{&#39;business_day&#39;:&#39;2016-06-24&#39;} },       { $group: { _id: &#39;$store_id&#39;, total: { $sum: &#39;$net_total.value&#39; } } }    ]</code></p>
-
-<p>A Store has many SalesItem<br>
-&ndash;  SalesItem.store_id maps to Store.sys_id</p>
-
-<p>&ndash; Example Query: Return all SalesItem for a store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItem?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
-
-<p>A Store has many entries in SalesCategory<br>
-&ndash;  SalesCategory.store_id maps to Store.sys_id</p>
-
-<p>&ndash; Example Query: Return all SalesCategories for a store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesCategory?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
-
-<p>A Store has many RevenueCenters<br>
-&ndash;  RevenueCenter.store_id maps to Store.sys_id</p>
-
-<p>&ndash; Example Query: Return all RevenueCenters for a store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/RevenueCenter?where={&#39;store_id&#39;:&#39;&lt;store.sys_id&gt;&#39;}</code></p>
-
-<p>A SalesTransaction has many SalesItems<br>
-&ndash;  SalesTransaction.transaction_id maps to SalesItem.transaction_id</p>
-
-<p>&ndash; Example Query: Return all SalesItems for a SalesTransaction<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;transaction_id&#39;:&#39;&lt;SalesTransaction.transaction_id&gt;&#39;}</code></p>
-
-<p>A SalesTransaction has a RevenueCenter<br>
-&ndash;  SalesTransaction.revenue_center.id maps to RevenueCenter.instore_id<br>
-&ndash;  SalesTransaction.revenue_center.name maps to RevenueCenter.display_name  </p>
-
-<p>&ndash; Example Query: Return all SalesTransactions for a RevenueCenter
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;revenue_center.id&#39;:&#39;&lt;RevenueCenter.instore_id&gt;&#39;}</code></p>
-
-<p>A SalesTransaction has an Employee<br>
-&ndash;  SalesTransaction.employee.id maps to Employee.external_ids.key<br>
-&ndash;  SalesTransaction.employee.name maps to Employee.name.formatted_name  </p>
-
-<p>&ndash; Example Query: Return all SalesTransaction for an Employee
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;employee.id&#39;:&#39;&lt;Employee.external_ids.key&gt;&#39;}</code></p>
-
-<p>A SalesTransaction AND SalesItem have a day of business<br>
-&ndash; Example Query: Return all SalesTransactions for business day 05/21/2016
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesTransaction?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
-
-<p>&ndash; Example Query: Return all SalesItems for business day 05/21/2016
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;business_day&#39;:&#39;2016-05-21&#39;}</code></p>
-
-<p>A SalesItem has a SalesCategory<br>
-&ndash;  SalesItem.sales_category.id maps to SalesCategory.instore_id<br>
-&ndash;  SalesItem.sales_category.name maps to SalesCategory.display_name  </p>
-
-<p>&ndash; Example Query: Return all SalesItems for a SalesCategory
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/SalesItems?where={&#39;sales_category.id&#39;:&#39;&lt;SalesCategory.instore_id&gt;&#39;}</code></p>
-
           <h2 id="working-with-hotschedules-data">Working with HotSchedules data</h2>
 
 <p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
@@ -993,7 +761,7 @@ Base payment rates for a position are defined in the StoreJob type.  When an Emp
 </tr>
 </tbody></table>
 
-<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;getEmpJobs?active_only=true&quot;</code></p>
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getEmpJobs?active_only=true&quot;</code></p>
 
 <blockquote>
 <p><strong>Sample JSON response:</strong></p>
@@ -2010,7 +1778,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <tr>
 <td>status</td>
 <td>Number</td>
-<td>Active = 1, Inactive = 0, Terminated = 1</td>
+<td>Active = 1, Inactive = 0, Terminated = -1</td>
 </tr>
 </tbody></table>
 
@@ -2935,7 +2703,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <tr>
 <td>status</td>
 <td>Number</td>
-<td>Active = 1, Inactive = 0, Terminated = 1</td>
+<td>Active = 1, Inactive = 0, Terminated = -1</td>
 </tr>
 </tbody></table>
 
@@ -3402,53 +3170,52 @@ This method uses hsSimpleDate objects for dates.</p>
 <p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setSalesItemsV4?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
 
 <blockquote>
-<p><strong>Sample JSON object</strong> (COMING SOON)</p>
-</blockquote>
-<pre class="highlight plaintext"><code>  [
-    "concept": "1",
-    "storeNum": "1",
-    "sales": {
-    "item": {
-      "catName": "Beer",
-      "clientId": "3",
-      "empId": "123",
-        "extId": "333",
-        "rvc": "Revenue",
-        "rvcName": "Bar",
-        "salesCat": "Beer",
-        "storeNum": "3",
-        "ttl": "0",
-        "businessDate": {
-          "day": "1",
-          "month": "7",
-          "year": "2016"
+<p><strong>Sample JSON object</strong>
+<code class="prettyprint">
+  [
+    &quot;concept&quot;: &quot;1&quot;,
+    &quot;storeNum&quot;: &quot;1&quot;,
+    &quot;sales&quot;: {
+      &quot;catName&quot;: &quot;Beer&quot;,
+      &quot;clientId&quot;: &quot;3&quot;,
+      &quot;empId&quot;: &quot;123&quot;,
+        &quot;extId&quot;: &quot;333&quot;,
+        &quot;rvc&quot;: &quot;Revenue&quot;,
+        &quot;rvcName&quot;: &quot;Bar&quot;,
+        &quot;salesCat&quot;: &quot;Beer&quot;,
+        &quot;storeNum&quot;: &quot;3&quot;,
+        &quot;ttl&quot;: &quot;0&quot;,
+        &quot;businessDate&quot;: {
+          &quot;day&quot;: &quot;1&quot;,
+          &quot;month&quot;: &quot;7&quot;,
+          &quot;year&quot;: &quot;2016&quot;
         },
-        "transDate": {
-          "day": "1",
-          "month": "7",
-          "year": "2015"
+        &quot;transDate&quot;: {
+          &quot;day&quot;: &quot;1&quot;,
+          &quot;month&quot;: &quot;7&quot;,
+          &quot;year&quot;: &quot;2015&quot;
         },
-        "transTime": {
-          "amPm": "am",
-          "hours": "1",
-          "militaryTime": "true",
-          "minutes": "15",
-          "seconds": "0"
+        &quot;transTime&quot;: {
+          &quot;amPm&quot;: &quot;am&quot;,
+          &quot;hours&quot;: &quot;1&quot;,
+          &quot;militaryTime&quot;: &quot;true&quot;,
+          &quot;minutes&quot;: &quot;15&quot;,
+          &quot;seconds&quot;: &quot;0&quot;
         }
-      }
     },
-      "start": {
-        "day": "1",
-        "month": "7",
-        "year": "2016"
+      &quot;start&quot;: {
+        &quot;day&quot;: &quot;1&quot;,
+        &quot;month&quot;: &quot;7&quot;,
+        &quot;year&quot;: &quot;2016&quot;
       },
-      "end": {
-        "day": "1",
-        "month": "8",
-        "year": "2016"
+      &quot;end&quot;: {
+        &quot;day&quot;: &quot;1&quot;,
+        &quot;month&quot;: &quot;8&quot;,
+        &quot;year&quot;: &quot;2016&quot;
       }
   ]
-</code></pre>
+</code></p>
+</blockquote>
 
 <table><thead>
 <tr>
