@@ -23,6 +23,9 @@ includes:
   - bodhiagent/envsetup
   - bodhiagent/Howto/installingbodhiagent
 
+  - bodhijobengine/gettingstarted
+  - bodhijobengine/creatingjobengineapp
+
   - publishingapps
   - bodhimobile/overview
   - bodhimobile/gettingstarted

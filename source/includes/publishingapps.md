@@ -4,37 +4,38 @@
 
 To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  
 
-##Publishing Your Application
+##Configuring package.json
 
-To publish your application you add the following directory structure for your application:
+To publish your application, add the following directory structure for your application:
 
 ```
 	/<app-name>/
 	    	/public/
 ```
 * Folder (npm app-name)
-	- index.html (could be empty)
+	- index.js
 	- LICENSE (standard apache license file)
 	- package.json (example provided below) 
 	- public (folder) 
-		- app icon.png
+		- app_icon.png
 		- NewType1.json file (optional)
 		- NewType2.json file (optional)
 		- NewType3.json file (optional)
 
 
-To publish an app into the IoT Platform you have to zip up the following:
-{code}
-		index.html (could be empty)
-		LICENSE
-		package.json
-			
-		folder=<public>
-			app_icon.png
-			NewType1.json file (optional)
-			NewType2.json file (optional)
-			NewType3.josn file (optional)
-			...
+To publish an app into the IoT Platform you have to zip up the following: <br>
+index.js  <br>
+LICENSE <br>
+package.json
+
+```
+    folder=<public>
+      app_icon.png
+      NewType1.json file (optional)
+      NewType2.json file (optional)
+      NewType3.json file (optional)
+      ...
+```
 
 ###Example package.json for Mobile Applications
 By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:
@@ -534,3 +535,46 @@ Example of versions/scripts using seed-data:
       }
     ]
 ```
+
+
+##Publishing to shop
+
+
+**1** - Ensure that you have your package.json, LICENSE and index.html in the root folder of your application. Note that index.html can be an empty file.
+
+<img src="/images/Step1.png" height=250 width="250">
+
+**2** - Zip/compress your files. Note that the files we are compressing are the files itself not the project folder.
+
+<img src="/images/Step2.png" height=400 width="350">
+
+**3** - Login to Bodhi Shop: [https://tools.bodhi.space/shop/#/my](https://tools.bodhi.space/shop/#/my)
+
+![alt text](/images/Step3.png?raw=true)
+
+**4** - Click Publish App.
+
+![alt text](/images/Step4.png?raw=true)
+
+**5** - Upload zip file.
+
+![alt text](/images/Step5.png?raw=true)
+
+**6** - Verify fields are correct then publish.
+
+![alt text](/images/Step6.png?raw=true)
+
+**7a** - Verify that your application is successfully published.
+
+![alt text](/images/Step7a.png?raw=true)
+
+**7b** - Make sure your file is found in [https://tools.bodhi.space/file-upload/#/files](https://tools.bodhi.space/file-upload/#/files). If it doesn’t exist refer back to configuring your package.json file 
+
+![alt text](/images/Step7b.png?raw=true)
+
+
+##Monitoring Application
+
+Logs can be found here: [https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all](https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all)
+
+![alt text](/images/Logs.png?raw=true)
