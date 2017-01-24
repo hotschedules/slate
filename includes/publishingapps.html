@@ -34,9 +34,9 @@
 
 <p>To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  </p>
 
-<h2 id="publishing-your-application">Publishing Your Application</h2>
+<h2 id="configuring-package.json">Configuring package.json</h2>
 
-<p>To publish your application you add the following directory structure for your application:</p>
+<p>To publish your application, add the following directory structure for your application:</p>
 <pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
             /public/
 </code></pre>
@@ -45,13 +45,13 @@
 <li>Folder (npm app-name)
 
 <ul>
-<li>index.html (could be empty)</li>
+<li>index.js</li>
 <li>LICENSE (standard apache license file)</li>
 <li>package.json (example provided below) </li>
 <li>public (folder) 
 
 <ul>
-<li>app icon.png</li>
+<li>app_icon.png</li>
 <li>NewType1.json file (optional)</li>
 <li>NewType2.json file (optional)</li>
 <li>NewType3.json file (optional)</li>
@@ -59,18 +59,17 @@
 </ul></li>
 </ul>
 
-<p>To publish an app into the IoT Platform you have to zip up the following:
-{code}
-        index.html (could be empty)
-        LICENSE
-        package.json</p>
-
-<p>folder=<public>
-            app_icon.png
-            NewType1.json file (optional)
-            NewType2.json file (optional)
-            NewType3.josn file (optional)
-            &hellip;</p>
+<p>To publish an app into the IoT Platform you have to zip up the following: <br>
+index.js  <br>
+LICENSE <br>
+package.json</p>
+<pre class="highlight plaintext"><code>    folder=&lt;public&gt;
+      app_icon.png
+      NewType1.json file (optional)
+      NewType2.json file (optional)
+      NewType3.json file (optional)
+      ...
+</code></pre>
 
 <h3 id="example-package.json-for-mobile-applications">Example package.json for Mobile Applications</h3>
 
@@ -542,6 +541,46 @@ versions:[
       }
     ]
 </code></pre>
+
+<h2 id="publishing-to-shop">Publishing to shop</h2>
+
+<p><strong>1</strong> - Ensure that you have your package.json, LICENSE and index.html in the root folder of your application. Note that index.html can be an empty file.</p>
+
+<p><img src="/images/Step1.png" height=250 width="250"></p>
+
+<p><strong>2</strong> - Zip/compress your files. Note that the files we are compressing are the files itself not the project folder.</p>
+
+<p><img src="/images/Step2.png" height=400 width="350"></p>
+
+<p><strong>3</strong> - Login to Bodhi Shop: <a href="https://tools.bodhi.space/shop/#/my">https://tools.bodhi.space/shop/#/my</a></p>
+
+<p><img alt="alt text" src="../images/Step3.png?raw=true" /></p>
+
+<p><strong>4</strong> - Click Publish App.</p>
+
+<p><img alt="alt text" src="../images/Step4.png?raw=true" /></p>
+
+<p><strong>5</strong> - Upload zip file.</p>
+
+<p><img alt="alt text" src="../images/Step5.png?raw=true" /></p>
+
+<p><strong>6</strong> - Verify fields are correct then publish.</p>
+
+<p><img alt="alt text" src="../images/Step6.png?raw=true" /></p>
+
+<p><strong>7a</strong> - Verify that your application is successfully published.</p>
+
+<p><img alt="alt text" src="../images/Step7a.png?raw=true" /></p>
+
+<p><strong>7b</strong> - Make sure your file is found in <a href="https://tools.bodhi.space/file-upload/#/files">https://tools.bodhi.space/file-upload/#/files</a>. If it doesn’t exist refer back to configuring your package.json file </p>
+
+<p><img alt="alt text" src="../images/Step7b.png?raw=true" /></p>
+
+<h2 id="monitoring-application">Monitoring Application</h2>
+
+<p>Logs can be found here: <a href="https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all">https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all</a></p>
+
+<p><img alt="alt text" src="../images/Logs.png?raw=true" /></p>
 
       </div>
       <div class="dark-box">
