@@ -26,7 +26,11 @@ includes:
   - bodhijobengine/gettingstarted
   - bodhijobengine/creatingjobengineapp
 
-  - publishingapps
+  - publishing/overview
+  - publishing/configurepkgjson
+  - publishing/publishtoshop
+  - publishing/monitorapp
+
   - bodhimobile/overview
   - bodhimobile/gettingstarted
 
