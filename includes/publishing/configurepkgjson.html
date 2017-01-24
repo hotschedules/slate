@@ -1,0 +1,544 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_publishing includes_publishing_configurepkgjson">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h2 id="configuring-package.json">Configuring package.json</h2>
+
+<p>To publish your application, add the following directory structure for your application:</p>
+<pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
+            /public/
+</code></pre>
+
+<ul>
+<li>Folder (npm app-name)
+
+<ul>
+<li>index.js</li>
+<li>LICENSE (standard apache license file)</li>
+<li>package.json (example provided below) </li>
+<li>public (folder) 
+
+<ul>
+<li>app_icon.png</li>
+<li>NewType1.json file (optional)</li>
+<li>NewType2.json file (optional)</li>
+<li>NewType3.json file (optional)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>To publish an app into the IoT Platform you have to zip up the following: <br>
+index.js  <br>
+LICENSE <br>
+package.json</p>
+<pre class="highlight plaintext"><code>    folder=&lt;public&gt;
+      app_icon.png
+      NewType1.json file (optional)
+      NewType2.json file (optional)
+      NewType3.json file (optional)
+      ...
+</code></pre>
+
+<h3 id="example-package.json-for-mobile-applications">Example package.json for Mobile Applications</h3>
+
+<p>By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:</p>
+
+<ul>
+<li><p><strong>index.html</strong></p>
+
+<p>If you open this file it say Click Me and a Welcome will appear above Click Me</p></li>
+<li><p><strong>LICENSE</strong>
+This is the apache2 license file that needs to be with all applications you plan to build</p></li>
+<li><p><strong>README.md</strong></p>
+
+<p>README.md are directions to get started developing your mobile application</p></li>
+<li><p><strong>image_home.png</strong>
+Image_home.png is the background image for index.html</p></li>
+<li><p><strong>package.json</strong>:</p>
+
+<p>This is the example package.json that you will cutomize based on your application needs.  To the right is a formatted version of the sample package.json that is included in HS Template&rsquo;s zip file.</p></li>
+</ul>
+<pre class="highlight plaintext"><code>package.json that gets includes with HS Template's zip file:
+
+{
+    "name": "HSappTemplate",
+    "version": "0.0.0",
+    "title": "HSappTemplate",
+    "description": "New application Hello, World!",
+    "profile": {
+        "name": "HSappTemplate",
+        "dml": {
+            "BodhiApplication": {
+                "select": {}
+            }
+        }
+    },
+    "settings": {
+        "publisher": "",
+        "categories": [""],
+        "offline": false,
+        "navigationBar": "auto",
+        "location": "S3",
+        "storage": "s3",
+        "type":"mobile"
+    },
+    "dependencies": {
+        "bodhi-mobile":"*" 
+        },
+    "autoUpdateVersion": true
+}
+
+</code></pre>
+
+<p>See Descriptions of package.json contents below to see what each packge.json entry is for:</p>
+
+<p>{</p>
+
+<p>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;version&rdquo;: &ldquo;0.0.0&rdquo;,</p>
+
+<p>&ldquo;title&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;description&rdquo;: &ldquo;New application Hello, World!&rdquo;,</p>
+
+<p>&ldquo;profile&rdquo;: {</p>
+
+<p>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo;,</p>
+
+<p>&ldquo;dml&rdquo;: {</p>
+
+<p>&ldquo;BodhiApplication&rdquo;: {</p>
+
+<p>&ldquo;select&rdquo;: {}</p>
+
+<p>}</p>
+
+<p>}</p>
+
+<p>},</p>
+
+<p>&ldquo;settings&rdquo;: {</p>
+
+<p>&ldquo;publisher&rdquo;: &ldquo;&rdquo;,</p>
+
+<p>&ldquo;categories&rdquo;: [&ldquo;&rdquo;],</p>
+
+<p>&ldquo;offline&rdquo;: false,</p>
+
+<p>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;,</p>
+
+<p>&ldquo;location&rdquo;: &ldquo;S3&rdquo;,</p>
+
+<p>&ldquo;storage&rdquo;: &ldquo;s3&rdquo;,</p>
+
+<p>&ldquo;type&rdquo;:&ldquo;mobile&rdquo;</p>
+
+<p>},</p>
+
+<p>&ldquo;dependencies&rdquo;: {</p>
+
+<p>&ldquo;bodhi-mobile&rdquo;:&ldquo;*&rdquo; </p>
+
+<p>},</p>
+
+<p>&ldquo;autoUpdateVersion&rdquo;: true</p>
+
+<p>}</p>
+
+<h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
+<pre class="highlight plaintext"><code>Example of package.json for agent or job applications:
+#!javascript
+
+{
+  "name": "app-package-name",
+  "version": "0.0.1",
+  "title": "Application Title",
+  "description": "Short Application Description.",
+  "profile": {
+    "name": "app-package-name",
+    "dml": {
+      “BodhiApplication": {
+       "select": {},
+       "update":{},
+       "delete":{},
+       "insert":{}
+      },
+      "NewType1": {
+        "select": {}
+      },
+      "NewType2": {
+        "select": {}
+      }
+    }
+  },
+  "settings": {
+    "categories": [
+      "Aloha",
+      "POS"
+    ],
+    "publisher": "your company",
+    "npm_package_name": "app-package-name",
+
+
+if you have any related apps you want to install together::
+"related-apps": [
+      "bodhi.aloha-app-transactions",
+      "bodhi.aloha-app-store"
+    ],
+    "public_path": "public",
+    "global_store_icon": "public/icon.png",
+   "location": "S3",
+   "storage": "s3",
+   "type": "agent",    
+(type can be “job”, “agent”, “mobile”, “web” )   
+ "new_type_required": true,
+  "install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+if you have any parameters required to be used with the app we add this section:: 
+ "agent_parameters": {
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 15 minutes",
+        "position": 1
+      }
+    }
+  },
+  "autoUpdateVersion": false
+}
+
+</code></pre>
+
+<h3 id="description-of-package.json-contents">Description of package.json contents</h3>
+
+<p><strong>name=&ldquo;HSappTemplate&rdquo; <em>required</em></strong></p>
+
+<p>The name of your application must match the name of the profile</p>
+
+<p><strong>&ldquo;version&rdquo;: &ldquo;0.0.1&rdquo; <em>required</em></strong></p>
+
+<p>Ideally this is the version of your application that gets posted as versions show for Agent Application in the Agent Event Logs so keeping this version the same as your Agent Application that is published is highly recommended.</p>
+
+<p><strong>&ldquo;title&rdquo;: &ldquo;Application Title&rdquo; <em>required</em></strong></p>
+
+<p>This is the title that will show on the HotSchedules Store once you publish your application to the HotSchedules Store.</p>
+
+<p><strong>&ldquo;description&rdquo;: &ldquo;Short Application Description.&rdquo; <em>required</em></strong></p>
+
+<p>The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of &ldquo;Learn More&rdquo; button. </p>
+
+<p><strong>&ldquo;profile&rdquo;: {} <em>required</em></strong></p>
+
+<p>The profile section contains the following required sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo; <em>required</em> and must match name above</strong></p>
+
+<p>The profile name must match the application name that is described in the main part of the package.json (see name=&ldquo;app-package-name&rdquo; <em>required</em> above)</p></li>
+<li><p><strong>&ldquo;dml&rdquo;: {}</strong></p>
+
+<p>DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
+</ul>
+
+<p><strong>&ldquo;settings&rdquo;:{} <em>required</em></strong></p>
+
+<p>The settings is the main section of package.json contains the following sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;categories&rdquo;: [] <em>optional</em></strong></p>
+
+<p>A list of comma separated categories your application would fit into. The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management</p></li>
+<li><p><strong>&ldquo;publisher&rdquo;: &ldquo;your company&rdquo; <em>required</em></strong></p>
+
+<p>This is the name of your company or your name if you are self-represented.</p></li>
+<li><p><strong>&ldquo;npm_package_name&rdquo;: &ldquo;app-package-name&rdquo; <em>required if building an Agent App or Job App</em></strong></p></li>
+<li><p><strong>&ldquo;related-apps&rdquo;: [] <em>optional</em></strong>
+Define the array of related applications as a comma separated based on the application(s)&rsquo; global package name. 
+Example: 
+    &ldquo;related-apps&rdquo;: [
+        &ldquo;bodhi.aloha-app-transactions&rdquo;,
+        &ldquo;bodhi.aloha-app-store&rdquo;
+        ]</p></li>
+<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> </p>
+
+<p>Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
+<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong></p>
+
+<p>NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
+<li><p><strong>&ldquo;public_path&rdquo;: &ldquo;public&rdquo; <em>required</em></strong></p>
+
+<p>Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.   </p></li>
+<li><p><strong>&ldquo;global_store_icon&rdquo;: &ldquo;public/icon.png&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, Global Store Icon is your icon for your application.</p></li>
+<li><p><strong>&ldquo;location&rdquo;: &ldquo;S3&rdquo; <em>optional</em></strong></p>
+
+<p>In the settings section, you define where your published app resides (S3 or artifactory).  S3 is the preferred location.  The Agent Apps used to use &ldquo;storage&rdquo;: &ldquo;s3&rdquo;, so that needs to be included in the settings sections as well for agent apps to compatibility.</p></li>
+<li><p><strong>&ldquo;type&rdquo;: &ldquo;mobile&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p></li>
+<li><p><strong>&ldquo;new_type_required&rdquo;: true <em>optional</em></strong></p>
+
+<p>In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace. <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</p></li>
+<li><p><strong>troubleshooting_url=&#39;http://tools.bodhi.space/xxxx&rsquo; <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</strong></p>
+
+<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p></li>
+</ul>
+
+<p><strong>agent_parameters/job_parameters</strong></p>
+
+<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p>The following are examples of parameters that can be set for agent or the job applications respectively:</p>
+
+<p>Agent Parameters example:</p>
+<pre class="highlight plaintext"><code>Example of agent parameters that can be defined for an agent application:
+
+    "agent_parameters": {
+      "config_file_path": {
+        "description": "Config file location",
+        "required": true,
+        "type": "string",
+        "default": "",
+        "setting": "config_file_path"
+      },
+      "data_dir": {
+        "description": "Folder location to save database files for the agent app",
+        "required": true,
+        "type": "string",
+        "default": "C:/bodhiAgent/node_modules/merit-agent-labor/_xmloutput/",
+        "setting": "data_dir"
+      },
+      "number_of_days_to_query": {
+        "description": "Limit query to this number of days",
+        "required": true,
+        "type": "integer",
+        "default": 60,
+        "setting": "number_of_days_to_query"
+      },
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 12 hours",
+        "setting": "interval"
+      },
+      "local_storage_ignore_flag": {
+        "description": "Ignore local storage and write all data",
+        "required": true,
+        "type": "boolean",
+        "default": false,
+        "setting": "local_storage_ignore_flag"
+      }
+    }
+</code></pre>
+
+<ul>
+<li>All Parameters have the following 
+This example sets up four parameters: timing_expression, brink_location, accessToken and uri.</li>
+</ul>
+<pre class="highlight plaintext"><code>Job Parameters example:
+    "job_parameters": {
+      "timing_expression": {
+        "description": "How often to execute a job",
+        "repeat": true,
+        "type": "string",
+        "default": "60 minutes"
+      },
+      "brink_location": {
+        "description": "The alpha numeric string provided by the Brink POS API to identify the store location, e.g. tSm8y1TMSk7J4ZMyQBpeTg==",
+        "type": "string",
+        "required": true,
+        "setting": "brink_location"
+      },
+      "accessToken": {
+        "description": "The alpha numeric string provided by the Brink POS API to authenticate the user",
+        "type": "string",
+        "required": true,
+        "setting": "accessToken"
+      },
+      "uri": {
+        "description": "The url for the Brink POS API service e.g. https://api2.brinkpos.net/",
+        "type": "string",
+        "required": true,
+        "setting": "uri"
+      }
+    }
+</code></pre>
+
+<p><strong>offline=true/false</strong>  </p>
+
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.</p>
+
+<p><strong>single_container_app=true/false</strong>  </p>
+
+<p>single_container_app tells the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+
+<p><strong>hide_from_global_store=true/false</strong>  </p>
+
+<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+
+<p><strong>new_type_required=true/false</strong>  </p>
+
+<p>new_type_required tells the installer of the app in the global app store if the app will run &#39;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+
+<p><strong>screenshots{}</strong> </p>
+
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published and the path should be relative to the public_path.</p>
+
+<p><strong>data_dir:{}</strong></p>
+
+<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
+
+<p><strong>&ldquo;autoUpdateVersion&rdquo;: &ldquo;false&rdquo;</strong></p>
+
+<p>This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
+
+<p><strong>Example Type Definition</strong></p>
+
+<p>This is an example of an enumeration, embedded_type and custom_type.  </p>
+
+<p><em>NOTE:</em> All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: This example shows the objects as folders under the application&rsquo;s root directory.  This is where you define your json for each type.  There is a one to one correspondence of the type declared in package.json to the json defining that type in the folder under the application.</p>
+<pre class="highlight plaintext"><code>Defining your custom schema/types example:
+"install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+</code></pre>
+
+<p><strong>Adding Scripts and Versioning: &ldquo;versions&rdquo;: [..]</strong></p>
+
+<p>To make an application script available set the following in the settings section of your package.json:</p>
+
+<ul>
+<li>version - current script version (might be bound to the current application version)</li>
+<li>bundle - a jar name (by default it is &ldquo;script-<version>.jar&rdquo;)</li>
+<li>pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.</li>
+<li>post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.</li>
+<li>main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:</li>
+<li>Example json can be found to in the javascript section &gt;&gt;&gt;&gt;&gt;&gt;</li>
+</ul>
+<pre class="highlight plaintext"><code>Template for adding scripts/versions to package.json
+versions:[
+{
+    "version": "&lt;script_version&gt;",
+    "bundle": "&lt;jar_name&gt;",
+    "pre-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    },
+    "post-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    }
+]
+</code></pre>
+<pre class="highlight plaintext"><code>Example of versions/scripts using seed-data:
+    "versions": [
+      {
+        "bundle": "installer.jar", 
+        "post-type-install": {}, 
+        "pre-type-install": {}, 
+        "seed-data": [
+          {
+            "action": "POST", 
+            "object": "Data/measurements.json", 
+            "path": "/resources/InventoryUnitOfMeasure"
+          }, 
+          {
+            "action": "POST", 
+            "object": "Data/conversions.json", 
+            "path": "/resources/InventoryUomConversion"
+          }
+        ], 
+        "version": "new"
+      }, 
+      {
+        "bundle": "upgrade-3.0.0.jar", 
+        "post-type-install": {
+          "main": "com.bodhi.vertx.appinstaller.script.DeveloperScript"
+        }, 
+        "version": "2.7.19"
+      }
+    ]
+</code></pre>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
