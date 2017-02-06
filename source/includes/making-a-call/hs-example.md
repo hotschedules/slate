@@ -412,6 +412,69 @@ volume       | String | Number of employees based on demand at that interval
 
 
 
+#### getSalesItemsV3
+
+This method takes in a **concept ID**, **store ID**, **start** and **end dates**.It returns an array of sales for that store. 
+
+Query parameter | Type         | Description
+----------------|--------------|------------
+concept         | Number       | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
+storeNum        | Number       | Numeric (integer) identifier for the store. Must be unique within the concept.
+start           | hsSimpleDate | First day of projected sales requested. This is an hsSimpleDate object.
+end             | hsSimpleDate | Last day of projected sales requested. This is an hsSimpleDate object.
+
+
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getSalesItemsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+
+
+> **Sample JSON response:**
+
+```
+[
+  {
+    clientId: 1234567,
+    empId: 7,
+    extId: -3,
+    rvc: 1,
+    rvcName: "TAKE OUT",
+    salesCat: 1,
+    storeNum: 13,
+    ttl: 7.99,
+    businessDate: {
+      day: 30,
+      month: 4,
+      year: 2016
+    },
+    transDate: {
+      day: 30,
+      month: 4,
+      year: 2016
+    },
+    transTime: {
+      hours: 7,
+      militaryTime: true,
+      minutes: 33,
+      seconds: 0
+    }
+  }
+]
+```
+
+Key          | Type   | Description
+-------------|--------|-------------
+clientId     | Object | Business Date information, Day, Months and Year
+empId        | Array  | Array of the day part total. Start Time and End Time
+extId        | Number | Total projected sales for the day part
+rvc          | Number | Revenue center
+rvcName      | String | Name for the revenue center associated with the location within the restaurant
+salesCat     | Number | Sales category
+storeNum     | Number | Store number
+ttl          | Number | Total sales for the sales category
+businessDate | Object | Business Date information, Day, Months and Year
+transDate    | Object | Transaction data
+transTime    | Object | Transaction time
+
+
 #### getProjectedSalesV3
 
 This method will take a **concept ID**, **store number**, **start** and **end dates**. This method uses hsSimpleDate objects for dates and hsSimpleTime objects for times.
