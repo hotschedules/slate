@@ -1158,6 +1158,138 @@ The following are curl examples of how to specify file location in your upload/d
 </tr>
 </tbody></table>
 
+<h4 id="getsalesitemsv3">getSalesItemsV3</h4>
+
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>.It returns an array of sales for that store. </p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>start</td>
+<td>hsSimpleDate</td>
+<td>First day of projected sales requested. This is an hsSimpleDate object.</td>
+</tr>
+<tr>
+<td>end</td>
+<td>hsSimpleDate</td>
+<td>Last day of projected sales requested. This is an hsSimpleDate object.</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X GET -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getSalesItemsV3?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON response:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    clientId: 1234567,
+    empId: 7,
+    extId: -3,
+    rvc: 1,
+    rvcName: "TAKE OUT",
+    salesCat: 1,
+    storeNum: 13,
+    ttl: 7.99,
+    businessDate: {
+      day: 30,
+      month: 4,
+      year: 2016
+    },
+    transDate: {
+      day: 30,
+      month: 4,
+      year: 2016
+    },
+    transTime: {
+      hours: 7,
+      militaryTime: true,
+      minutes: 33,
+      seconds: 0
+    }
+  }
+]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>clientId</td>
+<td>Object</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>empId</td>
+<td>Array</td>
+<td>Array of the day part total. Start Time and End Time</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Total projected sales for the day part</td>
+</tr>
+<tr>
+<td>rvc</td>
+<td>Number</td>
+<td>Revenue center</td>
+</tr>
+<tr>
+<td>rvcName</td>
+<td>String</td>
+<td>Name for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>salesCat</td>
+<td>Number</td>
+<td>Sales category</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Store number</td>
+</tr>
+<tr>
+<td>ttl</td>
+<td>Number</td>
+<td>Total sales for the sales category</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Object</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>transDate</td>
+<td>Object</td>
+<td>Transaction data</td>
+</tr>
+<tr>
+<td>transTime</td>
+<td>Object</td>
+<td>Transaction time</td>
+</tr>
+</tbody></table>
+
 <h4 id="getprojectedsalesv3">getProjectedSalesV3</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong>. This method uses hsSimpleDate objects for dates and hsSimpleTime objects for times.</p>
