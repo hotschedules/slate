@@ -933,6 +933,78 @@ extId        | Number | Optional-Unique transaction ID for the time card record
 
 
 
+#### getTimeCardsDeclaredTips
+This method takes in a **concept ID**, **store ID**, **start** and **end dates**. It returns an **array of wsTimeCard3 objects**, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules' web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.
+
+Query parameter | Type   | Description
+----------------|--------|------------
+concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
+storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept.
+Day             | Number | Day formatted dd
+Month           | Number | Month formatted mm
+Year            | Number | Year formated yyyy
+
+
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getTimeCardsDeclaredTips?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  
+> **Sample JSON object**
+
+```
+  [
+    {
+      jobName: "Bartender",
+      ovtTtl: 0,
+      ovtHrs: 0,
+      clockOut: "2016-05-01T23:48:00-05:00",
+      regWage: 0,
+      clockIn: "2016-05-01T16:36:00-05:00",
+      ovtWage: 7.5,
+      breakMinutes: 0,
+      jobExtId: 18,
+      jobId: -1,
+      businessDate: {
+        month: 5,
+        year: 2016,
+        day: 1
+      },
+      regHrs: 7.2,
+      spcTtl: 7.25,
+      hsId: 929931332168,
+      spcHrs: 0,
+      ovtMins: 0,
+      extId: -2005922,
+        storeNum: 3,
+      empPosId: 2068,
+      regTtl: 0
+    }
+  ]
+```  
+  
+Key          | Type   | Description 
+-------------|--------|-------------
+jobName      | String | POS job code name
+ovtTtl       | Number | Optional-Overtime total pay amount
+ovtHrs       | Number | Optional-Overtime hours in shift
+clockOut     | String | Clock out timestamp for the shift
+regWage      | Number | Regular hourly pay rate
+clockIn      | String | Clock in timestamp for the shift
+ovtWage      | Number | Optional-Overtime hourly pay rate
+breakMinutes | Number | Number of non-paid break minutes in shift
+JobId        | Number | POS numeric identifier for the job
+jobExtId     | Number | POS numeric Job Code ID
+businessDate | Array  | Business Date information, Day, Months and Year
+regHours     | Number | Regular hours represented in shift
+spcTtl       | Number | Optional-Special Pay total pay amount
+hsId         | Number | Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.
+spcHrs       | Number | Optional-Special Pay Hours
+ovtMins      | Number | Optional-Overtime minutes in shift
+storeNum     | Number | Unique numeric store identifier.  Generally set up to mirror the client internal store ID.  
+empPosId     | Number | POS numeric Employee ID
+regTtl       | Number | Regular total pay amount
+extId        | Number | Optional-Unique transaction ID for the time card record
+
+
+
 
 #### getVolumeCounts
 This method will take a **concept ID**, **store number**, **start** and **end dates** and a **volume type** and return a list of volume counts for the date range requested.
