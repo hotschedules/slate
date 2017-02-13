@@ -49,7 +49,7 @@ extensions  : [
 
 
 ###Settings
-An array of environmental variables that have assigned default values. Parameters can overwrite a setting if the property matches a parameter key.
+A Setting is an Object that represents static configuration data. Parameters can overwrite a setting if the property matches a parameter key.
 These values will take the highest precedence in the processing of settings. The precedence rules are:
 
 1. Agent.json settings object (highest precedence)
@@ -100,10 +100,11 @@ An object that sources external events. Sources bind events to listeners and emi
 
 Property | Type   | Required | Description
 ---------|--------|----------|-----------
-name     | String | Yes      | Name of your service
+name     | String | Yes      | Unique identifier (within the context's handler)
 provider | String or Function | Yes      | A function or reference to a plugin that creates an object
-args     | Array of Strings, Functions, Objects, Booleans | Optional | A list of dependencies used by the service
-bindings | Object | Optional | Map of internal source events to application level events
+args     | Array of Strings, Functions, Objects, Booleans | Optional | a list of dependencies used by the service
+bindings | Object | Optional | A Map that routes external events to internal topics
+factory  | String | Optional | An enumeration that describes alternate instantiation behavior for the service constructor, function, literal
 
 
 > **Sources example**
@@ -123,14 +124,15 @@ sources: [
 
 
 ###Services
-Services are singletons. They are functions that return an object that is reusable across your application. It's an object that represents a concrete extension of the API.
+A Service is an Object that represents a concrete extension of the API. Services are singletons.
 
 Property |	Type |	Required|	Description
 ---------|--------|----------|--------------
-name     | String |	Yes      |	Your name of your service
-provider | String or Function |	Yes      |	A function or reference to a plugin that creates an object
+name     | String |	Yes      | Unique identifier (within the context's handler)
+provider | String or Function |	Yes      | A function or reference to a plugin that creates an object
 args     | Array of Strings, Functions, Objects, Booleans | Optional | A list of the dependencies used by the service
 factory	| string (constructor, function, literal) |	Optional |	An enumeration that describes alternate instantiation behavior for the service
+
 
 > **Services example**
 
@@ -145,14 +147,14 @@ services: [
 
 
 ###Handlers
-Handlers subscribe to event(s) and executes its one function.
+A Handler is a Function that responds to events within an application. 
 
 Property      |	Type   | Required |	Description
 --------------|--------|----------|--------------
-name          | String | Yes      | Name of your handler
+name          | String | Yes      | Unique identifier (within the context's handler)
 subscriptions | Array  | Yes      | String of application level events that will initiate this handler
-fn            | String or Function| Yes | A function or reference to a plugin function
-props         | Object | Optional | Key value pair that will be injected into the function context referenced in the keyword "this"        
+fn            | String or Function| Yes | A function or reference to a plugin will handle the events
+props         | Object | Optional | A list of properties available to the instance
 
 
 > **Handlers example**
