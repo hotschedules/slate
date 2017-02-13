@@ -4951,12 +4951,6 @@ figure 32  </p>
 
 <p><strong>Congratulations on your successful installation of Bodhi Agent</strong></p>
 
-          <h2 id="creating-an-agent-application">Creating an Agent application</h2>
-
-<h4 id="understanding-agent-application-structure">Understanding Agent application structure</h4>
-
-<h3 id="application-event-bus">Application Event Bus</h3>
-
           <h4 id="configuring-agent-application">Configuring Agent Application</h4>
 
 <h3 id="parameters">Parameters</h3>
@@ -5047,7 +5041,7 @@ figure 32  </p>
 
 <h3 id="settings">Settings</h3>
 
-<p>An array of environmental variables that have assigned default values. Parameters can overwrite a setting if the property matches a parameter key.
+<p>A Setting is an Object that represents static configuration data. Parameters can overwrite a setting if the property matches a parameter key.
 These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
 
 <ol>
@@ -5124,7 +5118,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Name of your service</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>provider</td>
@@ -5136,13 +5130,19 @@ These values will take the highest precedence in the processing of settings. The
 <td>args</td>
 <td>Array of Strings, Functions, Objects, Booleans</td>
 <td>Optional</td>
-<td>A list of dependencies used by the service</td>
+<td>a list of dependencies used by the service</td>
 </tr>
 <tr>
 <td>bindings</td>
 <td>Object</td>
 <td>Optional</td>
-<td>Map of internal source events to application level events</td>
+<td>A Map that routes external events to internal topics</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>String</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service constructor, function, literal</td>
 </tr>
 </tbody></table>
 
@@ -5161,7 +5161,7 @@ These values will take the highest precedence in the processing of settings. The
 
 <h3 id="services">Services</h3>
 
-<p>Services are singletons. They are functions that return an object that is reusable across your application. It&rsquo;s an object that represents a concrete extension of the API.</p>
+<p>A Service is an Object that represents a concrete extension of the API. Services are singletons.</p>
 
 <table><thead>
 <tr>
@@ -5175,7 +5175,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Your name of your service</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>provider</td>
@@ -5210,7 +5210,7 @@ These values will take the highest precedence in the processing of settings. The
 
 <h3 id="handlers">Handlers</h3>
 
-<p>Handlers subscribe to event(s) and executes its one function.</p>
+<p>A Handler is a Function that responds to events within an application. </p>
 
 <table><thead>
 <tr>
@@ -5224,7 +5224,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Name of your handler</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>subscriptions</td>
@@ -5236,13 +5236,13 @@ These values will take the highest precedence in the processing of settings. The
 <td>fn</td>
 <td>String or Function</td>
 <td>Yes</td>
-<td>A function or reference to a plugin function</td>
+<td>A function or reference to a plugin will handle the events</td>
 </tr>
 <tr>
 <td>props</td>
 <td>Object</td>
 <td>Optional</td>
-<td>Key value pair that will be injected into the function context referenced in the keyword &ldquo;this&rdquo;</td>
+<td>A list of properties available to the instance</td>
 </tr>
 </tbody></table>
 
@@ -5380,6 +5380,152 @@ The keyword &ldquo;this&rdquo; refers to the application&rsquo;s reactive contex
 
         done();
 }
+</code></pre>
+
+          <h4 id="creating-an-agent-source">Creating an Agent Source</h4>
+
+<p>Returns a function that instantiates an Agent source. See sample code that watches for any directory changes using npm watch.</p>
+
+<blockquote>
+<p><strong>Sample Code:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>var fs      = require('fs-extra');
+var watch   = require('watch');
+
+module.exports = function dirSrc() {
+    var path        = arguments[0];
+    var source      = {};
+    source.routers  = {};
+
+    var bind = function bindDir(bindings, emitter, done) {
+        var logger = this.logger;
+
+        logger.info('Ensuring ', path, 'exists...');
+
+        if (!path) return done('Expected path to exist. Please ensure args array is properly configured.');
+
+        fs.ensureDir(path, function (err) {
+            if (err) return done(err);
+
+            logger.info(path, 'ensured.');
+            /*
+                bindings = { 'created' : 'read' }
+                emitter = fn()  { context.emit.apply(context, arguments); }
+                done = fn()      { return exit(done, source); }
+
+                YOU HAVE TO CALL DONE OR ELSE THE REST OF THE APP WILL NOT LOAD
+                KICK LISTEN OR IT WILL NOT HEAR
+            */
+
+            // routes = ['created']
+            var routes = Object.keys(bindings);
+
+            /*
+                routers = {
+
+                        emitter(event, arguments);
+                    }
+                }
+            */
+            routes.forEach(function (event) {
+                source.routers[event] = function () {
+                    emitter(bindings[event], { path: arguments[0], detail: arguments[1] });
+                }
+            });
+
+            done();
+        });
+    };
+
+    /*
+        SOURCES GET LOADED BEFORE INIT
+            ENSURE DIR BEFORE SETTING MONITORS
+    */
+    var listen = function listenDir(cb) {
+        watch.createMonitor(path, function (monitor) {
+            source.monitor = monitor;
+            ['created', 'changed', 'removed'].forEach(function (e) {
+                if (source.routers[e]) {
+                    source.monitor.on(e, function (file, detail) {
+                        source.routers[e](file, detail);
+                    });
+                }
+            });
+        });
+    };
+
+    var close = function closeDir() {
+        source.monitor.stop();
+    };
+
+    return function (cb) {
+        cb(null, { bind: bind, listen: listen, close: close})
+    }
+};
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bind</td>
+<td>Function</td>
+<td>Responsible for binding application level events when a source level event occurs</td>
+</tr>
+<tr>
+<td>listen</td>
+<td>Function</td>
+<td>Creates EventEmitter that emit application level events based on bind</td>
+</tr>
+<tr>
+<td>close</td>
+<td>Function</td>
+<td>Destroy existing EventEmitter for the source</td>
+</tr>
+</tbody></table>
+
+          <h4 id="creating-an-agent-extension">Creating an Agent Extension</h4>
+
+<p>Returns an Agent extension object.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of extension used primarily for debugging purposes</td>
+</tr>
+<tr>
+<td>attach</td>
+<td>Function</td>
+<td>Attach the specified extension to this instance, extending the <code class="prettyprint">ReactiveContext</code> with new functionality with the implicit registerPlugin method</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Sample Code:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>module.exports = {
+    name        : 'plugin',
+
+    attach      : function (overloads, done) {
+
+        /** LOAD HANDLERS **/
+        this.registerPlugin(['handler', 'monitor'   ], require('./handlers/monitor.js'  ));
+        this.registerPlugin(['handler', 'update'    ], require('./handlers/update.js'   ));
+
+        done();
+    }
+};
 </code></pre>
 
           <h1 id="job-engine">Job Engine</h1>

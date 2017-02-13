@@ -118,7 +118,7 @@
 
 <h3 id="settings">Settings</h3>
 
-<p>An array of environmental variables that have assigned default values. Parameters can overwrite a setting if the property matches a parameter key.
+<p>A Setting is an Object that represents static configuration data. Parameters can overwrite a setting if the property matches a parameter key.
 These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
 
 <ol>
@@ -195,7 +195,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Name of your service</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>provider</td>
@@ -207,13 +207,19 @@ These values will take the highest precedence in the processing of settings. The
 <td>args</td>
 <td>Array of Strings, Functions, Objects, Booleans</td>
 <td>Optional</td>
-<td>A list of dependencies used by the service</td>
+<td>a list of dependencies used by the service</td>
 </tr>
 <tr>
 <td>bindings</td>
 <td>Object</td>
 <td>Optional</td>
-<td>Map of internal source events to application level events</td>
+<td>A Map that routes external events to internal topics</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>String</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service constructor, function, literal</td>
 </tr>
 </tbody></table>
 
@@ -232,7 +238,7 @@ These values will take the highest precedence in the processing of settings. The
 
 <h3 id="services">Services</h3>
 
-<p>Services are singletons. They are functions that return an object that is reusable across your application. It&rsquo;s an object that represents a concrete extension of the API.</p>
+<p>A Service is an Object that represents a concrete extension of the API. Services are singletons.</p>
 
 <table><thead>
 <tr>
@@ -246,7 +252,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Your name of your service</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>provider</td>
@@ -281,7 +287,7 @@ These values will take the highest precedence in the processing of settings. The
 
 <h3 id="handlers">Handlers</h3>
 
-<p>Handlers subscribe to event(s) and executes its one function.</p>
+<p>A Handler is a Function that responds to events within an application. </p>
 
 <table><thead>
 <tr>
@@ -295,7 +301,7 @@ These values will take the highest precedence in the processing of settings. The
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Name of your handler</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
 </tr>
 <tr>
 <td>subscriptions</td>
@@ -307,13 +313,13 @@ These values will take the highest precedence in the processing of settings. The
 <td>fn</td>
 <td>String or Function</td>
 <td>Yes</td>
-<td>A function or reference to a plugin function</td>
+<td>A function or reference to a plugin will handle the events</td>
 </tr>
 <tr>
 <td>props</td>
 <td>Object</td>
 <td>Optional</td>
-<td>Key value pair that will be injected into the function context referenced in the keyword &ldquo;this&rdquo;</td>
+<td>A list of properties available to the instance</td>
 </tr>
 </tbody></table>
 
