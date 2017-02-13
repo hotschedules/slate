@@ -1942,6 +1942,188 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 </tr>
 </tbody></table>
 
+<h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
+
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of wsTimeCard3 objects</strong>, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
+
+<table><thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>Number</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>Number</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>Number</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>Number</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.bodhi.space/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/getTimeCardsDeclaredTips?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot;</code></p>
+
+<blockquote>
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>  [
+    {
+      jobName: "Bartender",
+      ovtTtl: 0,
+      ovtHrs: 0,
+      clockOut: "2016-05-01T23:48:00-05:00",
+      regWage: 0,
+      clockIn: "2016-05-01T16:36:00-05:00",
+      ovtWage: 7.5,
+      breakMinutes: 0,
+      jobExtId: 18,
+      jobId: -1,
+      businessDate: {
+        month: 5,
+        year: 2016,
+        day: 1
+      },
+      regHrs: 7.2,
+      spcTtl: 7.25,
+      hsId: 929931332168,
+      spcHrs: 0,
+      ovtMins: 0,
+      extId: -2005922,
+        storeNum: 3,
+      empPosId: 2068,
+      regTtl: 0
+    }
+  ]
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>jobName</td>
+<td>String</td>
+<td>POS job code name</td>
+</tr>
+<tr>
+<td>ovtTtl</td>
+<td>Number</td>
+<td>Optional-Overtime total pay amount</td>
+</tr>
+<tr>
+<td>ovtHrs</td>
+<td>Number</td>
+<td>Optional-Overtime hours in shift</td>
+</tr>
+<tr>
+<td>clockOut</td>
+<td>String</td>
+<td>Clock out timestamp for the shift</td>
+</tr>
+<tr>
+<td>regWage</td>
+<td>Number</td>
+<td>Regular hourly pay rate</td>
+</tr>
+<tr>
+<td>clockIn</td>
+<td>String</td>
+<td>Clock in timestamp for the shift</td>
+</tr>
+<tr>
+<td>ovtWage</td>
+<td>Number</td>
+<td>Optional-Overtime hourly pay rate</td>
+</tr>
+<tr>
+<td>breakMinutes</td>
+<td>Number</td>
+<td>Number of non-paid break minutes in shift</td>
+</tr>
+<tr>
+<td>JobId</td>
+<td>Number</td>
+<td>POS numeric identifier for the job</td>
+</tr>
+<tr>
+<td>jobExtId</td>
+<td>Number</td>
+<td>POS numeric Job Code ID</td>
+</tr>
+<tr>
+<td>businessDate</td>
+<td>Array</td>
+<td>Business Date information, Day, Months and Year</td>
+</tr>
+<tr>
+<td>regHours</td>
+<td>Number</td>
+<td>Regular hours represented in shift</td>
+</tr>
+<tr>
+<td>spcTtl</td>
+<td>Number</td>
+<td>Optional-Special Pay total pay amount</td>
+</tr>
+<tr>
+<td>hsId</td>
+<td>Number</td>
+<td>Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.</td>
+</tr>
+<tr>
+<td>spcHrs</td>
+<td>Number</td>
+<td>Optional-Special Pay Hours</td>
+</tr>
+<tr>
+<td>ovtMins</td>
+<td>Number</td>
+<td>Optional-Overtime minutes in shift</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Number</td>
+<td>Unique numeric store identifier.  Generally set up to mirror the client internal store ID.</td>
+</tr>
+<tr>
+<td>empPosId</td>
+<td>Number</td>
+<td>POS numeric Employee ID</td>
+</tr>
+<tr>
+<td>regTtl</td>
+<td>Number</td>
+<td>Regular total pay amount</td>
+</tr>
+<tr>
+<td>extId</td>
+<td>Number</td>
+<td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+</tbody></table>
+
 <h4 id="getvolumecounts">getVolumeCounts</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>volume type</strong> and return a list of volume counts for the date range requested.

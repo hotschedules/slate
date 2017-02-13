@@ -41,22 +41,81 @@ Jobs must be built in a specific format in order for Bodhi Job Engine to recogni
 
 </code></pre>
 
-<p><strong>Context Object</strong> <br>
-{ <br>
- connection: bodhi-js-client <br>
- settings  : Object - immutable configuration options associated with this job <br>
- state     : Object - mutable persistent state from previous runs <br>
- meta      : Object - immutable metadata about the job <br>
-}</p>
+<p><strong>Context Object</strong> <br></p>
 
-<p><strong>Job Metadata</strong> <br>
-{ <br>
-    name      : String - name of the job <br>
-    package   : String - package name <br>
-    version   : String - semantic package version <br>
-    namespace : String - namespace of the job <br>
-    lastRun   : Data   - last time the job ran <br>
-} <br></p>
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>connection</td>
+<td>bodhi-js-client</td>
+<td><a href="https://www.npmjs.com/package/bodhi-driver-superagent">https://www.npmjs.com/package/bodhi-driver-superagent</a></td>
+</tr>
+<tr>
+<td>settings</td>
+<td>Object</td>
+<td>immutable configuration options associated with this job</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Object</td>
+<td>mutable persistent state from previous runs</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>Object</td>
+<td>immutable metadata about the job</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>meta</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p><strong>Job Metadata</strong> <br></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>name of the job</td>
+</tr>
+<tr>
+<td>package</td>
+<td>String</td>
+<td>package name</td>
+</tr>
+<tr>
+<td>version</td>
+<td>String</td>
+<td>semantic package version</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>String</td>
+<td>namespace of the job</td>
+</tr>
+<tr>
+<td>lastRun</td>
+<td>Data</td>
+<td>last time the job ran</td>
+</tr>
+</tbody></table>
 
 <p><strong>Callback</strong> <br>
 A job must be completed by calling the callback</p>
