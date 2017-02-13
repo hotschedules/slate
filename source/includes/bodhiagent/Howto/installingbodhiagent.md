@@ -1,6 +1,4 @@
-##How To
-
-#### Installing Bodhi Agent
+## Installing Bodhi Agent
 **Agent Installer and Registration User Guide**
 
 Welcome to the User Guide for Installing and registering the Bodhi agent

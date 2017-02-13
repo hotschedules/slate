@@ -12,21 +12,33 @@ module.exports = function work(context, done){
 ```
 
 **Context Object** <br>
-{ <br>
- connection: bodhi-js-client <br>
- settings  : Object - immutable configuration options associated with this job <br>
- state     : Object - mutable persistent state from previous runs <br>
- meta      : Object - immutable metadata about the job <br>
+
+Key        | Type            | Description
+-----------|-----------------|------------
+connection | bodhi-js-client | [https://www.npmjs.com/package/bodhi-driver-superagent](https://www.npmjs.com/package/bodhi-driver-superagent)
+settings   | Object          | immutable configuration options associated with this job
+state      | Object          | mutable persistent state from previous runs
+meta       | Object          | immutable metadata about the job
+
+> **meta**
+
+```
+{
+
 }
 
+```
+
 **Job Metadata** <br>
-{ <br>
-    name      : String - name of the job <br>
-    package   : String - package name <br>
-    version   : String - semantic package version <br>
-    namespace : String - namespace of the job <br>
-    lastRun   : Data   - last time the job ran <br>
-} <br>
+
+
+Key       | Type   | Description
+----------|--------|------------
+name      | String | name of the job
+package   | String | package name
+version   | String | semantic package version
+namespace | String | namespace of the job
+lastRun   | Data   | last time the job ran
 
 **Callback** <br>
 A job must be completed by calling the callback

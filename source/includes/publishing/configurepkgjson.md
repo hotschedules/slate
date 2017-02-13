@@ -88,62 +88,6 @@ package.json that gets includes with HS Template's zip file:
 
 ```
 	
-See Descriptions of package.json contents below to see what each packge.json entry is for:
-   
-{
-
-    "name": "HSappTemplate",
-
-    "version": "0.0.0",
-
-    "title": "HSappTemplate",
-
-
-    "description": "New application Hello, World!",
-
-    "profile": {
-
-        "name": "HSappTemplate",
-
-        "dml": {
-
-            "BodhiApplication": {
-
-                "select": {}
-
-            }
-
-        }
-
-    },
-
-    "settings": {
-
-        "publisher": "",
-
-        "categories": [""],
-
-        "offline": false,
-
-        "navigationBar": "auto",
-
-	"location": "S3",
-
-	"storage": "s3",
-
-        "type":"mobile"
-
-    },
-
-    "dependencies": {
-
-        "bodhi-mobile":"*" 
-
-        },
-
-    "autoUpdateVersion": true
-
-}
 
 
 ###Example of Package.json for agent or job Applications
