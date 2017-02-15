@@ -26,6 +26,7 @@ includes:
   - bodhiagent/create-agent/agent-configure
   - bodhiagent/create-agent/agent-source
   - bodhiagent/create-agent/agent-extension
+  - bodhiagent/create-agent/agent-path-resolution
 
   - bodhijobengine/gettingstarted
   - bodhijobengine/creatingjobengineapp
