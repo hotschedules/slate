@@ -5528,6 +5528,34 @@ module.exports = function dirSrc() {
 };
 </code></pre>
 
+          <h4 id="agent-path-resolution">Agent Path Resolution</h4>
+
+<p>Every extension, service and setting can be injected through namespacing </p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Reference</th>
+<th>Sample</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>extension</td>
+<td>&ldquo;$plugins&rdquo;</td>
+<td>&ldquo;$plugins:myFunction&rdquo;</td>
+</tr>
+<tr>
+<td>service</td>
+<td>&ldquo;$service&rdquo;</td>
+<td>&ldquo;$service:cloud&rdquo;</td>
+</tr>
+<tr>
+<td>setting</td>
+<td>&ldquo;$setting&rdquo;</td>
+<td>&ldquo;$setting:jobInterval&rdquo;</td>
+</tr>
+</tbody></table>
+
           <h1 id="job-engine">Job Engine</h1>
 
 <h2 id="creating-a-job-engine-application">Creating a job engine application</h2>
