@@ -7,7 +7,7 @@ Property    | Type    | Description
 ------------|---------|-----------
 description | String  | Description in Agent manager application
 type        | String  | Expected data type of parameter value
-setting     | String  | Assigend variable name to this parameter
+setting     | String  | Assigned variable name to this parameter
 required    | Boolean | True or False
 default     | String  | The default value of the parameter if not set
 
@@ -35,7 +35,7 @@ Extensions are injected dependencies that your application can refer to. Your ap
 
 Property | Type    | Required | Description
 ---------|---------|----------|-----------
-module   | String  | Yes      | By default seraches node_modules folder. Relative path also accepted
+module   | String  | Yes      | By default searches node_modules folder. Relative path also accepted.
 
 
 > **Extensions example**
@@ -80,7 +80,7 @@ settings: [
 
 
 ###Counters
-Tracks the number of times specific application events occur and are logged in the Agent heartbeat. Each event can subscribe to an array of application events. 
+Tracks the number of times specific application events occur and are logged found in the Agent heartbeat. Each counter can subscribe to an array of application events.
 
 > **Counters example**
 
@@ -101,8 +101,8 @@ An object that sources external events. Sources bind events to listeners and emi
 Property | Type   | Required | Description
 ---------|--------|----------|-----------
 name     | String | Yes      | Unique identifier (within the context's handler)
-provider | String or Function | Yes      | A function or reference to a plugin that creates an object
-args     | Array of Strings, Functions, Objects, Booleans | Optional | a list of dependencies used by the service
+provider | String or Function | Yes | A function or reference to a plugin that creates an object
+args     | Array of Strings, Functions, Objects, Booleans | Optional | A list of dependencies used by the source
 bindings | Object | Optional | A Map that routes external events to internal topics
 factory  | String | Optional | An enumeration that describes alternate instantiation behavior for the service constructor, function, literal
 
@@ -129,9 +129,9 @@ A Service is an Object that represents a concrete extension of the API. Services
 Property |	Type |	Required|	Description
 ---------|--------|----------|--------------
 name     | String |	Yes      | Unique identifier (within the context's handler)
-provider | String or Function |	Yes      | A function or reference to a plugin that creates an object
+provider | String or Function |	Yes | A function or reference to a plugin that creates an object
 args     | Array of Strings, Functions, Objects, Booleans | Optional | A list of the dependencies used by the service
-factory	| string (constructor, function, literal) |	Optional |	An enumeration that describes alternate instantiation behavior for the service
+factory	 | String (Constructor, Function, Literal) | Optional |	An enumeration that describes alternate instantiation behavior for the service
 
 
 > **Services example**
@@ -152,7 +152,7 @@ A Handler is a Function that responds to events within an application.
 Property      |	Type   | Required |	Description
 --------------|--------|----------|--------------
 name          | String | Yes      | Unique identifier (within the context's handler)
-subscriptions | Array  | Yes      | String of application level events that will initiate this handler
+subscriptions | Array <String> | Yes | String of application level events that will initiate this handler
 fn            | String or Function| Yes | A function or reference to a plugin will handle the events
 props         | Object | Optional | A list of properties available to the instance
 
@@ -236,7 +236,7 @@ done          | String | Optional | Emits mapped event based on the state of the
 
 ###Init
 
-Init is a function that is given a callback as its only argument 
+Init is a function that is given a callback as its only argument.
 This callback must be invoked in order to intialize the application. 
 The keyword "this" refers to the application's reactive context
 

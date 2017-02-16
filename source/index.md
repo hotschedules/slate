@@ -22,6 +22,7 @@ includes:
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
   - bodhiagent/Howto/installingbodhiagent
+  - bodhiagent/create-agent/create-app
 
   - bodhiagent/create-agent/agent-configure
   - bodhiagent/create-agent/agent-source
