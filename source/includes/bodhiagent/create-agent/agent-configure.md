@@ -193,13 +193,43 @@ Each pipeline step should follow the single responsiblity principle. Each step i
 
 Property      |	Type   | Required |	Description
 --------------|--------|----------|--------------
-name          | String | Yes      | Name of your pipeline
+name          | String | Yes      | Unique identifier 
 subscriptions | Array  | Yes      | String of application level events that will initiate this pipeline
-steps         | Array  | Yes      | Takes an array of objects that refer to function plugin references as well as an optional injected props referenced by the keyword "this"
-stopped       | String | Optional | Emits mapped event based on the state of the pipeline
+steps         | Array  | Yes      | Takes an array of objects described below
 failed        | String | Optional | Emits mapped event based on the state of the pipeline
 success       | String | Optional | Emits mapped event based on the state of the pipeline
 done          | String | Optional | Emits mapped event based on the state of the pipeline
+
+
+**Pipeline.steps**
+
+*pipeline* | Object <br>
+
+Property | Description
+---------|---------------
+fn       | Functional plugin reference. See pipeline and fn description below
+props    | Optional dependencies to be injected in the pipeline function context
+
+
+**Pipeline.fn(input, callback)** 
+
+*input* | Object <br>
+Initially an empty object. Later becomes whatever the result of the previous pipeline step is.
+
+
+*callback* | Function <br>
+Needs to be invoked with a possible error arguement and an optional result to be passed in to the next step. 
+If an error is passed in, it will stop the pipeline and the failed event will be emitted.
+
+Context of this callback includes core methods described below as well as Pipeline.props injected during configuration.
+
+Property | Description
+---------|--------------
+logger   | Logs viewable in Agent Manager
+publish  | EventEmitter that takes in a event and message 
+name     | Pipeline.name
+event    | Name of event that triggered the pipeline
+
 
 > **Pipelines example**
 
