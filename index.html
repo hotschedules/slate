@@ -4901,7 +4901,7 @@ Each pipeline step should follow the single responsiblity principle. Each step i
 <td>name</td>
 <td>String</td>
 <td>Yes</td>
-<td>Name of your pipeline</td>
+<td>Unique identifier</td>
 </tr>
 <tr>
 <td>subscriptions</td>
@@ -4913,13 +4913,7 @@ Each pipeline step should follow the single responsiblity principle. Each step i
 <td>steps</td>
 <td>Array</td>
 <td>Yes</td>
-<td>Takes an array of objects that refer to function plugin references as well as an optional injected props referenced by the keyword &ldquo;this&rdquo;</td>
-</tr>
-<tr>
-<td>stopped</td>
-<td>String</td>
-<td>Optional</td>
-<td>Emits mapped event based on the state of the pipeline</td>
+<td>Takes an array of objects described below</td>
 </tr>
 <tr>
 <td>failed</td>
@@ -4938,6 +4932,61 @@ Each pipeline step should follow the single responsiblity principle. Each step i
 <td>String</td>
 <td>Optional</td>
 <td>Emits mapped event based on the state of the pipeline</td>
+</tr>
+</tbody></table>
+
+<p><strong>Pipeline.steps</strong></p>
+
+<p><em>pipeline</em> | Object <br></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fn</td>
+<td>Functional plugin reference. See pipeline and fn description below</td>
+</tr>
+<tr>
+<td>props</td>
+<td>Optional dependencies to be injected in the pipeline function context</td>
+</tr>
+</tbody></table>
+
+<p><strong>Pipeline.fn(input, callback)</strong> </p>
+
+<p><em>input</em> | Object <br>
+Initially an empty object. Later becomes whatever the result of the previous pipeline step is.</p>
+
+<p><em>callback</em> | Function <br>
+Needs to be invoked with a possible error arguement and an optional result to be passed in to the next step. 
+If an error is passed in, it will stop the pipeline and the failed event will be emitted.</p>
+
+<p>Context of this callback includes core methods described below as well as Pipeline.props injected during configuration.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>logger</td>
+<td>Logs viewable in Agent Manager</td>
+</tr>
+<tr>
+<td>publish</td>
+<td>EventEmitter that takes in a event and message</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Pipeline.name</td>
+</tr>
+<tr>
+<td>event</td>
+<td>Name of event that triggered the pipeline</td>
 </tr>
 </tbody></table>
 
