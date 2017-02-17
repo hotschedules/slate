@@ -15,8 +15,6 @@ includes:
 
   - making-a-call/getting-started
   - making-a-call/hs-example
-  - making-a-call/rds-example
-  - making-a-call/social-example
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
