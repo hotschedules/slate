@@ -29,8 +29,8 @@ This method returns a list of concepts for a company.
 ```
   [
     {
-      name: "HotSchedules",
-      extId: 13
+      "name": "HotSchedules",
+      "extId": 13
     }
   ]
 ```
@@ -64,33 +64,33 @@ dataType        | driverType   | Type of driver requested.  Allowed types are â€
 ```
   [
     {
-      driverAmount: 0,
-      driverClass: "TABLE",
-      intervalStartTime: {
-        hours: 0,
-        seconds: 0,
-        militaryTime: true,
-        minutes: 0
+      "driverAmount": 0,
+      "driverClass": "TABLE",
+      "intervalStartTime": {
+        "hours": 0,
+        "seconds": 0,
+        "militaryTime": true,
+        "minutes": 0
       },
-      intervalEndDate: {
-        month: 4,
-        year: 2016,
-        day: 30
+      "intervalEndDate": {
+        "month": 4,
+        "year": 2016,
+        "day": 30
       },
-      intervalEndTime: {
-        hours: 0,
-        seconds: 0,
-        militaryTime: true,
-        minutes: 15
+      "intervalEndTime": {
+        "hours": 0,
+        "seconds": 0,
+        "militaryTime": true,
+        "minutes": 15
       },
-      conceptExtRef: 1,
-      storeExtRef: 3,
-      companyExtRef: 234542,
-      driverType: "ACTUAL",
-      intervalStartDate: {
-        month: 4,
-        year: 2016,
-        day: 30
+      "conceptExtRef": 1,
+      "storeExtRef": 3,
+      "companyExtRef": 234542,
+      "driverType": "ACTUAL",
+      "intervalStartDate": {
+        "month": 4,
+        "year": 2016,
+        "day": 30
       }
     }
   ]
@@ -129,24 +129,24 @@ active_only     | Boolean | Boolean that defines whether or not to include termi
 ```
 [
   {
-    empNum: 2013,
-    availabilities: [
+    "empNum": 2013,
+    "availabilities": [
       {
-        parHoursMax: -1,
-        parShiftsMax: -1,
-        shiftId: 781691610,
-        shiftName: "PM",
-        parHoursMin: -1,
-        parShiftsMin: -1,
-        dayName: "Friday",
-        partialBeforeAfter: "",
-        statusName: "Not Available",
-        dayNum: 6,
-        partialTime: "",
-        statusNum: 3
+        "parHoursMax": -1,
+        "parShiftsMax": -1,
+        "shiftId": 781691610,
+        "shiftName": "PM",
+        "parHoursMin": -1,
+        "parShiftsMin": -1,
+        "dayName": "Friday",
+        "partialBeforeAfter": "",
+        "statusName": "Not Available",
+        "dayNum": 6,
+        "partialTime": "",
+        "statusNum": 3
       }
     ],
-    empHrId: -1
+    "empHrId": -1
   }
 ]
 ```
@@ -177,23 +177,23 @@ active_only     | Boolean | Boolean that defines whether or not to include termi
 ```  
   [
     {
-      lastUpdated: "2015-07-10T17:32:55.753-05:00",
-      accountCreated: "2012-12-28T13:31:25.913-06:00",
-      permissionSetName: "Employee",
-      empNum: 2001,
-      assignedSchedules: [
+      "lastUpdated": "2015-07-10T17:32:55.753-05:00",
+      "accountCreated": "2012-12-28T13:31:25.913-06:00",
+      "permissionSetName": "Employee",
+      "empNum": 2001,
+      "assignedSchedules": [
         {
-          hsId: 781691496,
-          name: "Bartender",
-          extId: 0
+          "hsId": 781691496,
+          "name": "Bartender",
+          "extId": 0
         },
         {
-          hsId: 781691492,
-          name: "Server",
-          extId: 0
+          "hsId": 781691492,
+          "name": "Server",
+          "extId": 0
         }
       ],
-      empHrId: -1
+      "empHrId": -1
     }
   ]
 ```
@@ -225,15 +225,15 @@ storeNum        | Number | Numeric (integer) identifier for the store. Must be u
 ``` 
 [ 
   {
-    hsJobId: 11878523,
-    clientId: 14935376,
-    regWage: 1,
-    posEmpId: 2069,
-    hsEmpId: 4177214,
-    storeNum: 3,
-    ovtWage: 1.5,
-    posJobId: 18,
-    primary: true
+    "hsJobId": 11878523,
+    "clientId": 14935376,
+    "regWage": 1,
+    "posEmpId": 2069,
+    "hsEmpId": 4177214,
+    "storeNum": 3,
+    "ovtWage": 1.5,
+    "posJobId": 18,
+    "primary": true
   }
 ]
 ```  
@@ -266,9 +266,9 @@ concept         | Number | The identifier for the location's concept. Must be un
 ```
   [
     {
-      name: "HotSchedules",
-      extId: 0,
-      conceptExtId: 1
+      "name": "HotSchedules",
+      "extId": 0,
+      "conceptExtId": 1
     }
   ]
 ```  
@@ -299,10 +299,10 @@ end             | dateTime | End date for the range of data requested.  This is 
 ```
   [
     {
-      dateTime: "2016-04-30T11:00:00-05:00",
-      businessDate: "2016-04-30T00:00:00-05:00",
-      rvcExtId: 1,
-      guestCount: 2
+      "dateTime": "2016-04-30T11:00:00-05:00",
+      "businessDate": "2016-04-30T00:00:00-05:00",
+      "rvcExtId": 1,
+      "guestCount": 2
     }
   ]
 ```  
@@ -339,18 +339,18 @@ laborType       | laborType    | Type of labor requested. Allowed types are "opt
   {
     "interval": {
       "intervalDate": {
-        "day": "1",
-        "month": "2",
-        "year": "2016"
+        "day": 1,
+        "month": 2,
+        "year": 2016
       },
       "intervalTime": {
-        "hours": "0",
-        "militaryTime": "true",
-        "minutes": "0",
-        "seconds": "0"
+        "hours": 0,
+        "militaryTime": true,
+        "minutes": 0,
+        "seconds": 0
       },
       "laborType": "forecasted",
-      "volume": "0.0"
+      "volume": 0
     }
   }
 ]  
@@ -386,18 +386,18 @@ laborType       | laborType    | Type of labor requested. Allowed types are "opt
   {
     "interval": {
       "intervalDate": {
-        "day": "1",
-        "month": "2",
-        "year": "2016"
+        "day": 1,
+        "month": 2,
+        "year": 2016
       },
       "intervalTime": {
-        "hours": "12",
-        "militaryTime": "true",
-        "minutes": "0",
-        "seconds": "0"
+        "hours": 12,
+        "militaryTime": true,
+        "minutes": 0,
+        "seconds": 0
       },
       "laborType": "scheduled",
-      "volume": "0.0"
+      "volume": 0
     }
   }
 ]
@@ -432,29 +432,29 @@ end             | hsSimpleDate | Last day of projected sales requested. This is 
 ```
 [
   {
-    clientId: 1234567,
-    empId: 7,
-    extId: -3,
-    rvc: 1,
-    rvcName: "TAKE OUT",
-    salesCat: 1,
-    storeNum: 13,
-    ttl: 7.99,
-    businessDate: {
-      day: 30,
-      month: 4,
-      year: 2016
+    "clientId": 1234567,
+    "empId": 7,
+    "extId": -3,
+    "rvc": 1,
+    "rvcName": "TAKE OUT",
+    "salesCat": 1,
+    "storeNum": 13,
+    "ttl": 7.99,
+    "businessDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
     },
-    transDate: {
-      day: 30,
-      month: 4,
-      year: 2016
+    "transDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
     },
-    transTime: {
-      hours: 7,
-      militaryTime: true,
-      minutes: 33,
-      seconds: 0
+    "transTime": {
+      "hours": 7,
+      "militaryTime": true,
+      "minutes": 33,
+      "seconds": 0
     }
   }
 ]
@@ -495,36 +495,36 @@ end             | hsSimpleDate | Last day of projected sales requested. This is 
 ```
   [
     {
-      businessDate: {
-        month: 4,
-        year: 2016,
-        day: 30
+      "businessDate": {
+        "month": 4,
+        "year": 2016,
+        "day": 30
       },
-      dayPartTotals: [
+      "dayPartTotals": [
         {
-          summaryItemTotals: {
-            summaryItemTotal: 5246.26,
-            summaryItemName: "Take out Drive through"
+          "summaryItemTotals": {
+            "summaryItemTotal": 5246.26,
+            "summaryItemName": "Take out Drive through"
           },
-          dayPartEndTime: {
-            hours: 4,
-            seconds: 0,
-            amPm: "",
-            militaryTime: true,
-            minutes: 0
+          "dayPartEndTime": {
+            "hours": 4,
+            "seconds": 0,
+            "amPm": "pm",
+            "militaryTime": true,
+            "minutes": 0
           },
-          dayPartName: "Evening",
-          dayPartTotal: 5246.26,
-          dayPartStartTime: {
-            hours: 18,
-            seconds: 0,
-            amPm: "",
-            militaryTime: true,
-            minutes: 0
+          "dayPartName": "Evening",
+          "dayPartTotal": 5246.26,
+          "dayPartStartTime": {
+            "hours": 18,
+            "seconds": 0,
+            "amPm": "am",
+            "militaryTime": true,
+            "minutes": 0
           }
         }
       ],
-      dateTotal: 9934.779
+      "dateTotal": 9934.779
     }
   ]
 ```
@@ -547,19 +547,19 @@ Revenue center information defined for a group.
 ```
   [
     {
-      revenueCenterName: "Take Out",
-      extId: 0,
-      groupLevel: true
+      "revenueCenterName": "Take Out",
+      "extId": 0,
+      "groupLevel": true
     },
     {
-      revenueCenterName: "Drive Thru",
-      extId: 1,
-      groupLevel: true
+      "revenueCenterName": "Drive Thru",
+      "extId": 1,
+      "groupLevel": true
     },
     {
-      revenueCenterName: "Beverage",
-      extId: 2,
-      groupLevel: true
+      "revenueCenterName": "Beverage",
+      "extId": 2,
+      "groupLevel": true
     }
   ]
 ```  
@@ -587,9 +587,9 @@ storeNum        | Number | Numeric (integer) identifier for the store. Must be u
 ```
   [
     {
-      salesCategoryName: "Beverages",
-      extId: 1,
-      groupLevel: true
+      "salesCategoryName": "Beverages",
+      "extId": 1,
+      "groupLevel": true
     }
   ]
 ```
@@ -687,15 +687,15 @@ jobCodes        | IntArray | Integer array of job codes to be included in this m
 ```
   [
     {
-      hsJobId: 11878523,
-      clientId: 14935376,
-      regWage: 1,
-      posEmpId: 2069,
-      hsEmpId: 4177214,
-      storeNum: 3,
-      ovtWage: 1.5,
-      posJobId: 18,
-      primary: true
+      "hsJobId": 11878523,
+      "clientId": 14935376,
+      "regWage": 1,
+      "posEmpId": 2069,
+      "hsEmpId": 4177214,
+      "storeNum": 3,
+      "ovtWage": 1.5,
+      "posJobId": 18,
+      "primary": true
     }
   ]
 ```  
@@ -731,25 +731,25 @@ active_only     | Boolean | Boolean that defines whether or not to include termi
 ```
 [
     {
-      zipCode: 12345,
-      hireDate: "2016-11-03T10:16:38.533-05:00",
-      address: "111 Addy Way",
-      clientId: 87654321,
-      LName: "Lockman",
-      address2: "Unit 3",
-      city: "Austin",
-      mobile: "(222) 222-2222",
-      NName: "Jay",
-      altId: -1,
-      FName: "Harrison",
-      empNum: -1,
-      phone: "(333) 333-3333",
-      hsId: 987654321,
-      dob: "1981-09-16T00:00:00-05:00",
-      state: "TX",
-      storeNum: 3,
-      email: "harrison.lockman@email.com",
-      status: 1
+      "zipCode": 12345,
+      "hireDate": "2016-11-03T10:16:38.533-05:00",
+      "address": "111 Addy Way",
+      "clientId": 87654321,
+      "LName": "Lockman",
+      "address2": "Unit 3",
+      "city": "Austin",
+      "mobile": "(222) 222-2222",
+      "NName": "Jay",
+      "altId": -1,
+      "FName": "Harrison",
+      "empNum": -1,
+      "phone": "(333) 333-3333",
+      "hsId": 987654321,
+      "dob": "1981-09-16T00:00:00-05:00",
+      "state": "TX",
+      "storeNum": 3,
+      "email": "harrison.lockman@email.com",
+      "status": 1
     }
 ]
 ```  
@@ -794,12 +794,12 @@ storeNum        | Number | Numeric (integer) identifier for the store. Must be u
 ```
   [
     {
-      jobName: "Manager",
-      posId: 11,
-      clientId: 14935376,
-      hsId: 786323133,
-      defRate: 0,
-      storeNum: 3
+      "jobName": "Manager",
+      "posId": 11,
+      "clientId": 14935376,
+      "hsId": 786323133,
+      "defRate": 0,
+      "storeNum": 3
     }
   ]
 ```
@@ -831,17 +831,17 @@ group_id        | Number | Group in which the store is assigned
 ```
   [
     {
-      groupName: "HS Grill",
-      active: true,
-      groupExtId: 1,
-      storeName: "Sales Demo - Bug Test",
-      storeNum: -1,
-      city: "Fremont",
-      postalCode: "94555",
-      stateProvince: "CA",
-      streetAddress1: "1 st. address",
-      streetAddress2: "Unit 3",
-      timeZone: "US/Central"
+      "groupName": "HS Grill",
+      "active": true,
+      "groupExtId": 1,
+      "storeName": "Sales Demo - Bug Test",
+      "storeNum": -1,
+      "city": "Fremont",
+      "postalCode": "94555",
+      "stateProvince": "CA",
+      "streetAddress1": "1 st. address",
+      "streetAddress2": "Unit 3",
+      "timeZone": "US/Central"
     }
   ]
 ```
@@ -880,30 +880,30 @@ Year            | Number | Year formated yyyy
 ```
 [
     {
-      jobName: "Bartender",
-      ovtTtl: 0,
-      ovtHrs: 0,
-      clockOut: "2016-05-01T23:48:00-05:00",
-      regWage: 0,
-      clockIn: "2016-05-01T16:36:00-05:00",
-      ovtWage: 7.5,
-      breakMinutes: 0,
-      jobExtId: 18,
-      jobId: -1,
-      businessDate: {
-        month: 5,
-        year: 2016,
-        day: 1
+      "jobName": "Bartender",
+      "ovtTtl": 0,
+      "ovtHrs": 0,
+      "clockOut": "2016-05-01T23:48:00-05:00",
+      "regWage": 0,
+      "clockIn": "2016-05-01T16:36:00-05:00",
+      "ovtWage": 7.5,
+      "breakMinutes": 0,
+      "jobExtId": 18,
+      "jobId": -1,
+      "businessDate": {
+        "month": 5,
+        "year": 2016,
+        "day": 1
       },
-      regHrs: 7.2,
-      spcTtl: 7.25,
-      hsId: 929931332168,
-      spcHrs: 0,
-      ovtMins: 0,
-      extId: -2005922,
-      storeNum: 3,
-      empPosId: 2068,
-      regTtl: 0
+      "regHrs": 7.2,
+      "spcTtl": 7.25,
+      "hsId": 929931332168,
+      "spcHrs": 0,
+      "ovtMins": 0,
+      "extId": -2005922,
+      "storeNum": 3,
+      "empPosId": 2068,
+      "regTtl": 0
     }
 ]
 ```  
@@ -952,30 +952,30 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      jobName: "Bartender",
-      ovtTtl: 0,
-      ovtHrs: 0,
-      clockOut: "2016-05-01T23:48:00-05:00",
-      regWage: 0,
-      clockIn: "2016-05-01T16:36:00-05:00",
-      ovtWage: 7.5,
-      breakMinutes: 0,
-      jobExtId: 18,
-      jobId: -1,
-      businessDate: {
-        month: 5,
-        year: 2016,
-        day: 1
+      "jobName": "Bartender",
+      "ovtTtl": 0,
+      "ovtHrs": 0,
+      "clockOut": "2016-05-01T23:48:00-05:00",
+      "regWage": 0,
+      "clockIn": "2016-05-01T16:36:00-05:00",
+      "ovtWage": 7.5,
+      "breakMinutes": 0,
+      "jobExtId": 18,
+      "jobId": -1,
+      "businessDate": {
+        "month": 5,
+        "year": 2016,
+        "day": 1
       },
-      regHrs: 7.2,
-      spcTtl: 7.25,
-      hsId: 929931332168,
-      spcHrs: 0,
-      ovtMins: 0,
-      extId: -2005922,
-        storeNum: 3,
-      empPosId: 2068,
-      regTtl: 0
+      "regHrs": 7.2,
+      "spcTtl": 7.25,
+      "hsId": 929931332168,
+      "spcHrs": 0,
+      "ovtMins": 0,
+      "extId": -2005922,
+      "storeNum": 3,
+      "empPosId": 2068,
+      "regTtl": 0
     }
   ]
 ```  
@@ -1027,11 +1027,11 @@ end             | hsSimpleDate | End date for the range of data requested
 ```
   [
     {
-      dateTime: "2016-05-03T23:30:00-05:00",
-      volumeAmount: 5,
-      businessDate: "2016-05-03T00:00:00-05:00",
-      volumeType: "Guests",
-      rvcExtId: 0
+      "dateTime": "2016-05-03T23:30:00-05:00",
+      "volumeAmount": 5,
+      "businessDate": "2016-05-03T00:00:00-05:00",
+      "volumeType": "Guests",
+      "rvcExtId": 0
     }
   ]
 ```  
@@ -1068,28 +1068,28 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      jobName: "Cook",
-      ovtTtl: 0,
-      ovtHrs: 0,
-      clockOut: "2016-07-31T22:05:00-05:00",
-      regWage: 9,
-      clockIn: "2016-07-30T15:56:00-05:00",
-      ovtWage: 13.5,
-      breakMinutes: 0,
-      JobId: 16921407,
-      businessDate: {
-        month: 7,
-        year: 2016,
-        day: 31,
+      "jobName": "Cook",
+      "ovtTtl": 0,
+      "ovtHrs": 0,
+      "clockOut": "2016-07-31T22:05:00-05:00",
+      "regWage": 9,
+      "clockIn": "2016-07-30T15:56:00-05:00",
+      "ovtWage": 13.5,
+      "breakMinutes": 0,
+      "JobId": 16921407,
+      "businessDate": {
+        "month": 7,
+        "year": 2016,
+        "day": 31,
       },
-      regHours: 6.15,
-      spcTtl: 0,
-      hsId: 929931334634,
-      spcHrs: 0,
-      ovtMins: 0,
-      storeNum: 1,
-      empPosId: 1052,
-      regTtl: 55.35
+      "regHours": 6.15,
+      "spcTtl": 0,
+      "hsId": 929931334634,
+      "spcHrs": 0,
+      "ovtMins": 0,
+      "storeNum": 1,
+      "empPosId": 1052,
+      "regTtl": 55.35
     }
   ]
 ```
@@ -1137,15 +1137,15 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      hsJobId: 11878523,
-      clientId: 14935376,
-      regWage: 1,
-      posEmpId: 2069,
-      hsEmpId: 4177214,
-      storeNum: 3,
-      ovtWage: 1.5,
-      posJobId: 18,
-      primary: true
+      "hsJobId": 11878523,
+      "clientId": 14935376,
+      "regWage": 1,
+      "posEmpId": 2069,
+      "hsEmpId": 4177214,
+      "storeNum": 3,
+      "ovtWage": 1.5,
+      "posJobId": 18,
+      "primary": true
     }
   ]
 ```  
@@ -1183,25 +1183,25 @@ Year            | Number          | Year formated yyyy
 ```
   [
     {
-      zipCode: 12345,
-      hireDate: "2016-11-03T10:16:38.533-05:00",
-      address: "111 Addy Way",
-      clientId: 87654321,
-      LName: "Lockman",
-      address2: "Unit 3",
-      city: "Austin",
-      mobile: "(222) 222-2222",
-      NName: "Jay",
-      altId: -1,
-      FName: "Harrison",
-      empNum: -1,
-      phone: "(333) 333-3333",
-      hsId: 987654321,
-      dob: "1981-09-16T00:00:00-05:00",
-      state: "TX",
-      storeNum: 3,
-      email: "harrison.lockman@email.com",
-      status: 1
+      "zipCode": 12345,
+      "hireDate": "2016-11-03T10:16:38.533-05:00",
+      "address": "111 Addy Way",
+      "clientId": 87654321,
+      "LName": "Lockman",
+      "address2": "Unit 3",
+      "city": "Austin",
+      "mobile": "(222) 222-2222",
+      "NName": "Jay",
+      "altId": -1,
+      "FName": "Harrison",
+      "empNum": -1,
+      "phone": "(333) 333-3333",
+      "hsId": 987654321,
+      "dob": "1981-09-16T00:00:00-05:00",
+      "state": "TX",
+      "storeNum": 3,
+      "email": "harrison.lockman@email.com",
+      "status": 1
     }
   ]
 ```  
@@ -1249,37 +1249,39 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      "concept": "1",
-      "storeNum": "1",
+      "concept": 1,
+      "storeNum": 1,
       "workweekStartDate": {
-        "day": "11",
-        "month": "10",
-        "year": "2016"
+        "day": 11,
+        "month": 10,
+        "year": 2016
       },
-      "driverAmount": "10",
-      "intervalStartTime" : {
-        "day": "1",
-        "month": "5",
-        "year": "2016"
-      }
+      "driverAmount": 10,
+      "intervalStartDate" : {
+        "day": 1,
+        "month": 5,
+        "year": 2016
+      },
       "intervalEndDate": {
-        "day": "11",
-        "month": "10",
-        "year": "2016"
+        "day": 11,
+        "month": 10,
+        "year": 2016
       },
-      intervalStartTime: {
-        hours: 0,
-        seconds: 0,
-        militaryTime: true,
-        minutes: 0
+      "intervalStartTime": {
+        "amPm": "am",
+        "hours": 0,
+        "seconds": 0,
+        "militaryTime": true,
+        "minutes": 0
       },
-      intervalEndTime: {
-        hours: 0,
-        seconds: 0,
-        militaryTime: true,
-        minutes: 15
+      "intervalEndTime": {
+        "amPm": "am",
+        "hours": 0,
+        "seconds": 0,
+        "militaryTime": true,
+        "minutes": 15
       },
-      "rvcId": "1",
+      "rvcId": 1,
       "volumeType": "Guests"
     }
   ]
@@ -1318,10 +1320,10 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      dateTime: "2016-05-03T23:30:00-05:00",
-      businessDate: "2016-05-03T00:00:00-05:00",
-      guestCount: 113,
-      rvcExtID: 123
+      "dateTime": "2016-05-03T23:30:00-05:00",
+      "businessDate": "2016-05-03T00:00:00-05:00",
+      "guestCount": 113,
+      "rvcExtID": 123
     }
   ]
 ```  
@@ -1354,11 +1356,11 @@ isGroupLevel    | Boolean | Indicates if the revenue center is assigned at the g
 ```
 [
     {
-      "concept": "1",
-      "group": "1",
-      "isGroupLevel": "true",
-      "store": "13",
-      "rvcId": "11",
+      "concept": 1,
+      "group": 1,
+      "isGroupLevel": true,
+      "store": 13,
+      "rvcId": 11,
       "rvcName": "Bar"
     }
 ]
@@ -1395,11 +1397,11 @@ isGroupLevel    | Boolean | Indicates if the sales category is assigned at the g
 ```
 [
   {
-    "concept": "1",
-    "group": "1",
-    "isGroupLevel": "true",
-    "store": "13",
-    "salesCatId": "9",
+    "concept": 1,
+    "group": 1,
+    "isGroupLevel": true,
+    "store": 13,
+    "salesCatId": 9,
     "salesCatName": "Liquor"
   }
 ]
@@ -1434,45 +1436,45 @@ Year            | Number | Year formated yyyy
 > **Sample JSON object**
 ```
   [
-    "concept": "1",
-    "storeNum": "1",
+    "concept": 1,
+    "storeNum": 1,
     "sales": {
       "catName": "Beer",
-      "clientId": "3",
-      "empId": "123",
-        "extId": "333",
+      "clientId": 3,
+      "empId": 123,
+        "extId": 333,
         "rvc": "Revenue",
         "rvcName": "Bar",
         "salesCat": "Beer",
-        "storeNum": "3",
-        "ttl": "0",
+        "storeNum": 3,
+        "ttl": 0,
         "businessDate": {
-          "day": "1",
-          "month": "7",
-          "year": "2016"
+          "day": 1,
+          "month": 7,
+          "year": 2016
         },
         "transDate": {
-          "day": "1",
-          "month": "7",
-          "year": "2015"
+          "day": 1,
+          "month": 7,
+          "year": 2015
         },
         "transTime": {
           "amPm": "am",
-          "hours": "1",
-          "militaryTime": "true",
-          "minutes": "15",
-          "seconds": "0"
+          "hours": 1,
+          "militaryTime": true,
+          "minutes": 15,
+          "seconds": 0
         }
     },
       "start": {
-        "day": "1",
-        "month": "7",
-        "year": "2016"
+        "day": 1,
+        "month": 7,
+        "year": 2016
       },
       "end": {
-        "day": "1",
-        "month": "8",
-        "year": "2016"
+        "day": 1,
+        "month": 8,
+        "year": 2016
       }
   ]
 ```
@@ -1514,30 +1516,30 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      jobName: "Bartender",
-      ovtTtl: 0,
-      ovtHrs: 0,
-      clockOut: "2016-05-01T23:48:00-05:00",
-      regWage: 0,
-      clockIn: "2016-05-01T16:36:00-05:00",
-      ovtWage: 7.5,
-      breakMinutes: 0,
-      jobExtId: 18,
-      jobId: -1,
-      businessDate: {
-        month: 5,
-        year: 2016,
-        day: 1
+      "jobName": "Bartender",
+      "ovtTtl": 0,
+      "ovtHrs": 0,
+      "clockOut": "2016-05-01T23:48:00-05:00",
+      "regWage": 0,
+      "clockIn": "2016-05-01T16:36:00-05:00",
+      "ovtWage": 7.5,
+      "breakMinutes": 0,
+      "jobExtId": 18,
+      "jobId": -1,
+      "businessDate": {
+        "month": 5,
+        "year": 2016,
+        "day": 1
       },
-      regHrs: 7.2,
-      spcTtl: 7.25,
-      hsId: 929931332168,
-      spcHrs: 0,
-      ovtMins: 0,
-      extId: -2005922,
-        storeNum: 3,
-      empPosId: 2068,
-      regTtl: 0
+      "regHrs": 7.2,
+      "spcTtl": 7.25,
+      "hsId": 929931332168,
+      "spcHrs": 0,
+      "ovtMins": 0,
+      "extId": -2005922,
+      "storeNum": 3,
+      "empPosId": 2068,
+      "regTtl": 0
     }
   ]
 ```  
@@ -1586,8 +1588,8 @@ storeNum        | Number | Numeric (integer) identifier for the store. Must be u
     {
       "businessDate": "2014-10-05T00:00:00",
       "dateTime": "2014-10-05T06:41:00-05:00",
-      "rvcExtId": "4",
-      "volumeAmount": "1",
+      "rvcExtId": 4,
+      "volumeAmount": 1,
       "volumeType": "GUESTS"
     }
   ]
