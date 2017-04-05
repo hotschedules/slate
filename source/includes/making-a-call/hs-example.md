@@ -620,27 +620,34 @@ end             | hsSimpleDate | Last day of scheduled shifts you are requesting
 
 ```
   [
-    {
-    "outDate": {  
-      "month": 5,  
-      "year": 2016,  
-      "day": 2  
-    },  
-    "jobHsId": 1111111,  
-    "payRate": 1,  
-    "inDate": {  
-      "month": 5,  
-      "year": 2016,  
-      "day": 2  
-    },  
-    "specialPay": 0,  
-    "empHSId": 222222,  
-    "ovtMinutes": 0,  
-    "inTime": {  
-      "hours": 9,  
-      "seconds": 0,  
-      "militaryTime": true,  
-      "minutes": 0  
+      {
+     "inDate": {
+       "month": 5,
+       "year": 2016,
+       "day": 2
+     },
+     "inTime": {
+       "hours": 9,
+       "seconds": 0,
+       "militaryTime": true,
+       "minutes": 0
+      },
+      "outDate": {
+       "month": 5,
+       "year": 2016,
+       "day": 2
+     },
+     "outTime": {
+       "hours": 18,
+       "seconds": 0,
+       "militaryTime": true,
+       "minutes": 0
+      },
+     "jobHsId": 1111111,
+     "payRate": 1,
+     "specialPay": 0,
+     "empHSId": 222222,
+     "ovtMinutes": 0,
     }  
   ]
 ```  
@@ -655,6 +662,7 @@ specialPay | Number | Special Pay amounts
 empHsId    | Number | HotSchedules internal employee account ID
 ovtMinutes | Number | Total Overtime Minutes for employee
 inTime     | Object | Scheduled in time
+outTime    | Object | Scheduled out time
 
 
 
@@ -769,7 +777,7 @@ altId    | Number | Employee HR ID. This must be a unique value across the compa
 FName    | String | Employee First Name
 empNum   | Number | Employee POS ID
 phone    | String | Phone Number
-hsId     | Number | Optional HotSchedule Unique employee account ID
+hsId     | Number | HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary
 dob      | String | Date of birth
 state    | String | State 
 storeNum | Number | Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.
@@ -809,7 +817,7 @@ Key      | Type   | Description
 jobName  | String | Name for Job Code
 posId    | Number | Numeric POS ID for Job Code
 clientId | Number | Unique identifier for client provided via HotSchedules
-hsId     | Number | Optional HotSchedule Unique employee account ID
+hsId     | Number | HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary
 defRate  | Number | Default Pay Rate for a Job Code
 
 
@@ -1221,7 +1229,7 @@ altId    | Number | Employee HR ID. This must be a unique value across the compa
 FName    | String | Employee First Name
 empNum   | Number | Employee POS ID
 phone    | String | Phone Number
-hsId     | Number | Optional HotSchedule Unique employee account ID
+hsId     | Number | HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary
 dob      | String | Date of birth
 state    | String | State 
 storeNum | Number | Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.
