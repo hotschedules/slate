@@ -1540,27 +1540,34 @@ The following are curl examples of how to specify file location in your upload/d
 <p><strong>Sample JSON response:</strong></p>
 </blockquote>
 <pre class="highlight plaintext"><code>  [
-    {
-    "outDate": {  
-      "month": 5,  
-      "year": 2016,  
-      "day": 2  
-    },  
-    "jobHsId": 1111111,  
-    "payRate": 1,  
-    "inDate": {  
-      "month": 5,  
-      "year": 2016,  
-      "day": 2  
-    },  
-    "specialPay": 0,  
-    "empHSId": 222222,  
-    "ovtMinutes": 0,  
-    "inTime": {  
-      "hours": 9,  
-      "seconds": 0,  
-      "militaryTime": true,  
-      "minutes": 0  
+      {
+     "inDate": {
+       "month": 5,
+       "year": 2016,
+       "day": 2
+     },
+     "inTime": {
+       "hours": 9,
+       "seconds": 0,
+       "militaryTime": true,
+       "minutes": 0
+      },
+      "outDate": {
+       "month": 5,
+       "year": 2016,
+       "day": 2
+     },
+     "outTime": {
+       "hours": 18,
+       "seconds": 0,
+       "militaryTime": true,
+       "minutes": 0
+      },
+     "jobHsId": 1111111,
+     "payRate": 1,
+     "specialPay": 0,
+     "empHSId": 222222,
+     "ovtMinutes": 0,
     }  
   ]
 </code></pre>
@@ -1611,6 +1618,11 @@ The following are curl examples of how to specify file location in your upload/d
 <td>inTime</td>
 <td>Object</td>
 <td>Scheduled in time</td>
+</tr>
+<tr>
+<td>outTime</td>
+<td>Object</td>
+<td>Scheduled out time</td>
 </tr>
 </tbody></table>
 
@@ -1885,7 +1897,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <tr>
 <td>hsId</td>
 <td>Number</td>
-<td>Optional HotSchedule Unique employee account ID</td>
+<td>HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary</td>
 </tr>
 <tr>
 <td>dob</td>
@@ -1979,7 +1991,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <tr>
 <td>hsId</td>
 <td>Number</td>
-<td>Optional HotSchedule Unique employee account ID</td>
+<td>HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary</td>
 </tr>
 <tr>
 <td>defRate</td>
@@ -2992,7 +3004,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <tr>
 <td>hsId</td>
 <td>Number</td>
-<td>Optional HotSchedule Unique employee account ID</td>
+<td>HS unique ID of an employee that is assigned at the time the employee is created in HS. This number is not configurable but automatically assigned. This number can be obtained through the get method and is an option to include in the set. However this is not necessary</td>
 </tr>
 <tr>
 <td>dob</td>
