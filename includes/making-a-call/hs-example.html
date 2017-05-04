@@ -1908,7 +1908,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <td>Business Date information, Day, Months and Year</td>
 </tr>
 <tr>
-<td>regHours</td>
+<td>regHrs</td>
 <td>Number</td>
 <td>Regular hours represented in shift</td>
 </tr>
@@ -1999,30 +1999,31 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 </blockquote>
 <pre class="highlight plaintext"><code>  [
     {
-      "jobName": "Bartender",
-      "ovtTtl": 0,
-      "ovtHrs": 0,
-      "clockOut": "2016-05-01T23:48:00-05:00",
-      "regWage": 0,
-      "clockIn": "2016-05-01T16:36:00-05:00",
-      "ovtWage": 7.5,
       "breakMinutes": 0,
+      "empPosId": 4067,
+      "extId": -2031248,
+      "hsId": 929931332583,
       "jobExtId": 18,
       "jobId": -1,
-      "businessDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 1
-      },
-      "regHrs": 7.2,
-      "spcTtl": 7.25,
-      "hsId": 929931332168,
-      "spcHrs": 0,
+      "jobName": "Bartender",
+      "ovtHrs": 0,
       "ovtMins": 0,
-      "extId": -2005922,
-      "storeNum": 3,
-      "empPosId": 2068,
-      "regTtl": 0
+      "ovtTtl": 0,
+      "ovtWage": 6.75,
+      "regHrs": 5.1,
+      "regTtl": 22.95,
+      "regWage": 4.5,
+      "spcHrs": 0,
+      "spcTtl": 0,
+      "storeNum": 2,
+      "businessDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
+      },
+      "clockIn": "2016-04-30T09:29:00-05:00",
+      "clockOut": "2016-04-30T14:35:00-05:00",
+      "declaredTips": 0
     }
   ]
 </code></pre>
@@ -2090,7 +2091,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <td>Business Date information, Day, Months and Year</td>
 </tr>
 <tr>
-<td>regHours</td>
+<td>regHrs</td>
 <td>Number</td>
 <td>Regular hours represented in shift</td>
 </tr>
@@ -2133,6 +2134,11 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 <td>extId</td>
 <td>Number</td>
 <td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+<tr>
+<td>declaredTips</td>
+<td>Number</td>
+<td>Tip amount</td>
 </tr>
 </tbody></table>
 
@@ -2286,7 +2292,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
         "year": 2016,
         "day": 31,
       },
-      "regHours": 6.15,
+      "regHrs": 6.15,
       "spcTtl": 0,
       "hsId": 929931334634,
       "spcHrs": 0,
@@ -2361,7 +2367,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <td>Business Date information, Day, Months and Year</td>
 </tr>
 <tr>
-<td>regHours</td>
+<td>regHrs</td>
 <td>Number</td>
 <td>Regular hours represented in shift</td>
 </tr>
@@ -3337,30 +3343,31 @@ This method uses hsSimpleDate objects for dates.</p>
 </blockquote>
 <pre class="highlight plaintext"><code>  [
     {
-      "jobName": "Bartender",
-      "ovtTtl": 0,
-      "ovtHrs": 0,
-      "clockOut": "2016-05-01T23:48:00-05:00",
-      "regWage": 0,
-      "clockIn": "2016-05-01T16:36:00-05:00",
-      "ovtWage": 7.5,
       "breakMinutes": 0,
+      "empPosId": 4067,
+      "extId": -2031248,
+      "hsId": 929931332583,
       "jobExtId": 18,
       "jobId": -1,
-      "businessDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 1
-      },
-      "regHrs": 7.2,
-      "spcTtl": 7.25,
-      "hsId": 929931332168,
-      "spcHrs": 0,
+      "jobName": "Bartender",
+      "ovtHrs": 0,
       "ovtMins": 0,
-      "extId": -2005922,
-      "storeNum": 3,
-      "empPosId": 2068,
-      "regTtl": 0
+      "ovtTtl": 0,
+      "ovtWage": 6.75,
+      "regHrs": 5.1,
+      "regTtl": 22.95,
+      "regWage": 4.5,
+      "spcHrs": 0,
+      "spcTtl": 0,
+      "storeNum": 2,
+      "businessDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
+      },
+      "clockIn": "2016-04-30T09:29:00-05:00",
+      "clockOut": "2016-04-30T14:35:00-05:00",
+      "declaredTips": 0
     }
   ]
 </code></pre>
@@ -3428,7 +3435,7 @@ This method uses hsSimpleDate objects for dates.</p>
 <td>Business Date information, Day, Months and Year</td>
 </tr>
 <tr>
-<td>regHours</td>
+<td>regHrs</td>
 <td>Number</td>
 <td>Regular hours represented in shift</td>
 </tr>
@@ -3471,6 +3478,11 @@ This method uses hsSimpleDate objects for dates.</p>
 <td>extId</td>
 <td>Number</td>
 <td>Optional-Unique transaction ID for the time card record</td>
+</tr>
+<tr>
+<td>declaredTips</td>
+<td>Number</td>
+<td>Tip amount</td>
 </tr>
 </tbody></table>
 
