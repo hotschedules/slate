@@ -929,7 +929,7 @@ breakMinutes | Number | Number of non-paid break minutes in shift
 JobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
-regHours     | Number | Regular hours represented in shift
+regHrs       | Number | Regular hours represented in shift
 spcTtl       | Number | Optional-Special Pay total pay amount
 hsId         | Number | Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.
 spcHrs       | Number | Optional-Special Pay Hours
@@ -960,33 +960,34 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      "jobName": "Bartender",
-      "ovtTtl": 0,
-      "ovtHrs": 0,
-      "clockOut": "2016-05-01T23:48:00-05:00",
-      "regWage": 0,
-      "clockIn": "2016-05-01T16:36:00-05:00",
-      "ovtWage": 7.5,
       "breakMinutes": 0,
+      "empPosId": 4067,
+      "extId": -2031248,
+      "hsId": 929931332583,
       "jobExtId": 18,
       "jobId": -1,
-      "businessDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 1
-      },
-      "regHrs": 7.2,
-      "spcTtl": 7.25,
-      "hsId": 929931332168,
-      "spcHrs": 0,
+      "jobName": "Bartender",
+      "ovtHrs": 0,
       "ovtMins": 0,
-      "extId": -2005922,
-      "storeNum": 3,
-      "empPosId": 2068,
-      "regTtl": 0
+      "ovtTtl": 0,
+      "ovtWage": 6.75,
+      "regHrs": 5.1,
+      "regTtl": 22.95,
+      "regWage": 4.5,
+      "spcHrs": 0,
+      "spcTtl": 0,
+      "storeNum": 2,
+      "businessDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
+      },
+      "clockIn": "2016-04-30T09:29:00-05:00",
+      "clockOut": "2016-04-30T14:35:00-05:00",
+      "declaredTips": 0
     }
   ]
-```  
+```
   
 Key          | Type   | Description 
 -------------|--------|-------------
@@ -1001,7 +1002,7 @@ breakMinutes | Number | Number of non-paid break minutes in shift
 JobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
-regHours     | Number | Regular hours represented in shift
+regHrs       | Number | Regular hours represented in shift
 spcTtl       | Number | Optional-Special Pay total pay amount
 hsId         | Number | Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.
 spcHrs       | Number | Optional-Special Pay Hours
@@ -1010,6 +1011,7 @@ storeNum     | Number | Unique numeric store identifier.  Generally set up to mi
 empPosId     | Number | POS numeric Employee ID
 regTtl       | Number | Regular total pay amount
 extId        | Number | Optional-Unique transaction ID for the time card record
+declaredTips | Number | Tip amount
 
 
 
@@ -1090,7 +1092,7 @@ Year            | Number | Year formated yyyy
         "year": 2016,
         "day": 31,
       },
-      "regHours": 6.15,
+      "regHrs": 6.15,
       "spcTtl": 0,
       "hsId": 929931334634,
       "spcHrs": 0,
@@ -1115,7 +1117,7 @@ breakMinutes | Number | Number of non-paid break minutes in shift
 JobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
-regHours     | Number | Regular hours represented in shift
+regHrs       | Number | Regular hours represented in shift
 spcTtl       | Number | Optional-Special Pay total pay amount
 hsId         | Number | Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.
 spcHrs       | Number | Optional-Special Pay Hours
@@ -1524,33 +1526,34 @@ Year            | Number | Year formated yyyy
 ```
   [
     {
-      "jobName": "Bartender",
-      "ovtTtl": 0,
-      "ovtHrs": 0,
-      "clockOut": "2016-05-01T23:48:00-05:00",
-      "regWage": 0,
-      "clockIn": "2016-05-01T16:36:00-05:00",
-      "ovtWage": 7.5,
       "breakMinutes": 0,
+      "empPosId": 4067,
+      "extId": -2031248,
+      "hsId": 929931332583,
       "jobExtId": 18,
       "jobId": -1,
-      "businessDate": {
-        "month": 5,
-        "year": 2016,
-        "day": 1
-      },
-      "regHrs": 7.2,
-      "spcTtl": 7.25,
-      "hsId": 929931332168,
-      "spcHrs": 0,
+      "jobName": "Bartender",
+      "ovtHrs": 0,
       "ovtMins": 0,
-      "extId": -2005922,
-      "storeNum": 3,
-      "empPosId": 2068,
-      "regTtl": 0
+      "ovtTtl": 0,
+      "ovtWage": 6.75,
+      "regHrs": 5.1,
+      "regTtl": 22.95,
+      "regWage": 4.5,
+      "spcHrs": 0,
+      "spcTtl": 0,
+      "storeNum": 2,
+      "businessDate": {
+      "day": 30,
+      "month": 4,
+      "year": 2016
+      },
+      "clockIn": "2016-04-30T09:29:00-05:00",
+      "clockOut": "2016-04-30T14:35:00-05:00",
+      "declaredTips": 0
     }
   ]
-```  
+``` 
   
 Key          | Type   | Description 
 -------------|--------|-------------
@@ -1565,7 +1568,7 @@ breakMinutes | Number | Number of non-paid break minutes in shift
 JobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
-regHours     | Number | Regular hours represented in shift
+regHrs       | Number | Regular hours represented in shift
 spcTtl       | Number | Optional-Special Pay total pay amount
 hsId         | Number | Optional-Internal HotSchedules employee Account ID. Not required, will be set by the service.
 spcHrs       | Number | Optional-Special Pay Hours
@@ -1574,6 +1577,7 @@ storeNum     | Number | Unique numeric store identifier.  Generally set up to mi
 empPosId     | Number | POS numeric Employee ID
 regTtl       | Number | Regular total pay amount
 extId        | Number | Optional-Unique transaction ID for the time card record
+declaredTips | Number | Tip amount
 
 
 
