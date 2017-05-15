@@ -695,30 +695,72 @@ jobCodes        | IntArray | Integer array of job codes to be included in this m
 ```
   [
     {
-      "hsJobId": 11878523,
-      "clientId": 14935376,
-      "regWage": 1,
-      "posEmpId": 2069,
-      "hsEmpId": 4177214,
-      "storeNum": 3,
-      "ovtWage": 1.5,
-      "posJobId": 18,
-      "primary": true
+    empHSId: -1,
+    empPosId: -1,
+    jobHsId: 786323133,
+    jobPosId: 11,
+    inDate: {
+    day: 5,
+    month: 5,
+    year: 2016
+    },
+    outDate: {
+    day: 5,
+    month: 5,
+    year: 2016
+    },
+    inTime: {
+    hours: 9,
+    militaryTime: true,
+    minutes: 0,
+    seconds: 0
+    },
+    outTime: {
+    hours: 16,
+    militaryTime: true,
+    minutes: 0,
+    seconds: 0
+    },
+    weekStart: {
+    day: 2,
+    month: 5,
+    year: 2016
+    },
+    weekEnd: {
+    day: 8,
+    month: 5,
+    year: 2016
+    },
+    locationId: 787124196,
+    scheduleId: 781691586,
+    payRate: 0,
+    ovtRate: 0,
+    ovtMinutes: 0,
+    regMinutes: 420,
+    specialPay: 0
     }
   ]
 ```  
   
-Key      | Type    | Description 
----------|---------|-------------
-hsJobId  | Number  | HotSchedules internal job code ID
-clientId | Number  | Unique identifier for client provided via HotSchedules.
-regWage  | Number  | Regular hourly wage rate for employee
-posEmpId | Number  | POS numeric ID for employee
-hsEmpId  | Number  | HotSchedules internal employee account ID
-storeNum | Number  | Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.
-ovtWage  | Number  | Overtime hourly wage rate for employee
-posJobId | Number  | POS numeric ID for the job code
-primary  | Boolean | Boolean flag to designate if the job code is the primary job for the employee
+Key        | Type   | Description 
+-----------|--------|-------------
+empHsId    | Number | HotSchedules internal employee account ID
+empPosId   | Number | POS numeric Employee ID
+jobHsId    | Number | HotSchedules internal job code ID
+jobPosId   | Number | POS job code ID
+inDate     | Object | Scheduled in date
+outDate    | Object | Schedules out date
+inTime     | Object | Scheduled in time
+outTime    | Object | Scheduled out time
+weekStart  | Object | Start date of the work week
+weekEnd    | Object | End date of the work week
+locationId | Number | Location ID
+scheduleId | Number | Schedule ID
+payRate    | Number | Regular hourly pay rate for employee
+ovtRate    | Number | overtime pay rate
+ovtMinutes | Number | Total overtime minutes for employee
+regMinutes | Number | total regular minutes for employee
+specialPay | Number | Special Pay amounts
 
 
 
