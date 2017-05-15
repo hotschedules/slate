@@ -1697,15 +1697,49 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 </blockquote>
 <pre class="highlight plaintext"><code>  [
     {
-      "hsJobId": 11878523,
-      "clientId": 14935376,
-      "regWage": 1,
-      "posEmpId": 2069,
-      "hsEmpId": 4177214,
-      "storeNum": 3,
-      "ovtWage": 1.5,
-      "posJobId": 18,
-      "primary": true
+    empHSId: -1,
+    empPosId: -1,
+    jobHsId: 786323133,
+    jobPosId: 11,
+    inDate: {
+    day: 5,
+    month: 5,
+    year: 2016
+    },
+    outDate: {
+    day: 5,
+    month: 5,
+    year: 2016
+    },
+    inTime: {
+    hours: 9,
+    militaryTime: true,
+    minutes: 0,
+    seconds: 0
+    },
+    outTime: {
+    hours: 16,
+    militaryTime: true,
+    minutes: 0,
+    seconds: 0
+    },
+    weekStart: {
+    day: 2,
+    month: 5,
+    year: 2016
+    },
+    weekEnd: {
+    day: 8,
+    month: 5,
+    year: 2016
+    },
+    locationId: 787124196,
+    scheduleId: 781691586,
+    payRate: 0,
+    ovtRate: 0,
+    ovtMinutes: 0,
+    regMinutes: 420,
+    specialPay: 0
     }
   ]
 </code></pre>
@@ -1718,49 +1752,89 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 </tr>
 </thead><tbody>
 <tr>
-<td>hsJobId</td>
-<td>Number</td>
-<td>HotSchedules internal job code ID</td>
-</tr>
-<tr>
-<td>clientId</td>
-<td>Number</td>
-<td>Unique identifier for client provided via HotSchedules.</td>
-</tr>
-<tr>
-<td>regWage</td>
-<td>Number</td>
-<td>Regular hourly wage rate for employee</td>
-</tr>
-<tr>
-<td>posEmpId</td>
-<td>Number</td>
-<td>POS numeric ID for employee</td>
-</tr>
-<tr>
-<td>hsEmpId</td>
+<td>empHsId</td>
 <td>Number</td>
 <td>HotSchedules internal employee account ID</td>
 </tr>
 <tr>
-<td>storeNum</td>
+<td>empPosId</td>
 <td>Number</td>
-<td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td>
+<td>POS numeric Employee ID</td>
 </tr>
 <tr>
-<td>ovtWage</td>
+<td>jobHsId</td>
 <td>Number</td>
-<td>Overtime hourly wage rate for employee</td>
+<td>HotSchedules internal job code ID</td>
 </tr>
 <tr>
-<td>posJobId</td>
+<td>jobPosId</td>
 <td>Number</td>
-<td>POS numeric ID for the job code</td>
+<td>POS job code ID</td>
 </tr>
 <tr>
-<td>primary</td>
-<td>Boolean</td>
-<td>Boolean flag to designate if the job code is the primary job for the employee</td>
+<td>inDate</td>
+<td>Object</td>
+<td>Scheduled in date</td>
+</tr>
+<tr>
+<td>outDate</td>
+<td>Object</td>
+<td>Schedules out date</td>
+</tr>
+<tr>
+<td>inTime</td>
+<td>Object</td>
+<td>Scheduled in time</td>
+</tr>
+<tr>
+<td>outTime</td>
+<td>Object</td>
+<td>Scheduled out time</td>
+</tr>
+<tr>
+<td>weekStart</td>
+<td>Object</td>
+<td>Start date of the work week</td>
+</tr>
+<tr>
+<td>weekEnd</td>
+<td>Object</td>
+<td>End date of the work week</td>
+</tr>
+<tr>
+<td>locationId</td>
+<td>Number</td>
+<td>Location ID</td>
+</tr>
+<tr>
+<td>scheduleId</td>
+<td>Number</td>
+<td>Schedule ID</td>
+</tr>
+<tr>
+<td>payRate</td>
+<td>Number</td>
+<td>Regular hourly pay rate for employee</td>
+</tr>
+<tr>
+<td>ovtRate</td>
+<td>Number</td>
+<td>overtime pay rate</td>
+</tr>
+<tr>
+<td>ovtMinutes</td>
+<td>Number</td>
+<td>Total overtime minutes for employee</td>
+</tr>
+<tr>
+<td>regMinutes</td>
+<td>Number</td>
+<td>total regular minutes for employee</td>
+</tr>
+<tr>
+<td>specialPay</td>
+<td>Number</td>
+<td>Special Pay amounts</td>
 </tr>
 </tbody></table>
 
