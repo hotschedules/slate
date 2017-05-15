@@ -695,49 +695,49 @@ jobCodes        | IntArray | Integer array of job codes to be included in this m
 ```
   [
     {
-    empHSId: -1,
-    empPosId: -1,
-    jobHsId: 786323133,
-    jobPosId: 11,
-    inDate: {
-    day: 5,
-    month: 5,
-    year: 2016
-    },
-    outDate: {
-    day: 5,
-    month: 5,
-    year: 2016
-    },
-    inTime: {
-    hours: 9,
-    militaryTime: true,
-    minutes: 0,
-    seconds: 0
-    },
-    outTime: {
-    hours: 16,
-    militaryTime: true,
-    minutes: 0,
-    seconds: 0
-    },
-    weekStart: {
-    day: 2,
-    month: 5,
-    year: 2016
-    },
-    weekEnd: {
-    day: 8,
-    month: 5,
-    year: 2016
-    },
-    locationId: 787124196,
-    scheduleId: 781691586,
-    payRate: 0,
-    ovtRate: 0,
-    ovtMinutes: 0,
-    regMinutes: 420,
-    specialPay: 0
+      "empHSId": -1,
+      "empPosId": -1,
+      "jobHsId": 786323133,
+      "jobPosId": 11,
+      "inDate": {
+        "day": 5,
+        "month": 5,
+        "year": 2016
+      },
+      "outDate": {
+        "day": 5,
+        "month": 5,
+        "year": 2016
+      },
+      "inTime": {
+        "hours": 9,
+        "militaryTime": true,
+        "minutes": 0,
+        "seconds": 0
+      },
+      "outTime": {
+        "hours": 16,
+        "militaryTime": true,
+        "minutes": 0,
+        "seconds": 0
+      },
+      "weekStart": {
+        "day": 2,
+        "month": 5,
+        "year": 2016
+      },
+      "weekEnd": {
+        "day": 8,
+        "month": 5,
+        "year": 2016
+      },
+      "locationId": 787124196,
+      "scheduleId": 781691586,
+      "payRate": 0,
+      "ovtRate": 0,
+      "ovtMinutes": 0,
+      "regMinutes": 420,
+      "specialPay": 0
     }
   ]
 ```  
