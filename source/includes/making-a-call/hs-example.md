@@ -687,7 +687,7 @@ isScheduled     | Boolean  | Include scheduled shifts? These are shifts which ar
 isPosted        | Boolean  | These are shifts that are in schedules that have been set to the 'posted' status within HotSchedules.
 jobCodes        | IntArray | Integer array of job codes to be included in this method's return. if this parameter is null or empty, all jobs will be included.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi-dev.io/chewy/controllers/vertx/hotschedules/<concept>/<storeNum>/getShiftsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&is_house=true&is_scheduled=true&is_posted=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getShiftsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&is_house=true&is_scheduled=true&is_posted=true"`
 
 
 > **Sample JSON response:**
