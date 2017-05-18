@@ -464,7 +464,7 @@ Key          | Type   | Description
 -------------|--------|-------------
 clientId     | Object | Business Date information, Day, Months and Year
 empId        | Array  | Array of the day part total. Start Time and End Time
-extId        | Number | Total projected sales for the day part
+extId        | Number | Optional-Unique transaction ID for the sales item
 rvc          | Number | Revenue center
 rvcName      | String | Name for the revenue center associated with the location within the restaurant
 salesCat     | Number | Sales category
