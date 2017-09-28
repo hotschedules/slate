@@ -1,4 +1,4 @@
-#HotSchedules IoT Platform for Developers
+#HotSchedules IoT Platform for Developers UPDATED 9-28-17
 Restaurant operators need access to data that helps them work more productively and efficiently. Your job is to deliver it.  The HotSchedules IoT Platform for Developers can help you deliver work more productively and efficiently through a set of software modules that collect data from virtually any source in real-time and then deliver select data that is relevant, timely and actionable.
 
 Whether you work for a restaurant, a software company or for yourself - wherever you are, whatever you do - IoT Platform gives you the power to innovate faster and cheaper than ever before.
