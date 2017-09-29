@@ -90,8 +90,8 @@ var client = new Client({
 
 <p>A relative URIs can be specified as a string or an array of path elements. Relative URIs are relative to the namespace.</p>
 
-<p>client.<a href="'relative/url',%20function(err,%20data,%20ctx){}"><http-operation></a>
-client.<a href="['resources',%20'Store',%20id],%20function(err,%20data,%20ctx"><http-operation></a>{})</p>
+<p>client.<a href="'relative/url', function(err, data, ctx){}"><http-operation></a>
+client.<a href="['resources', 'Store', id], function(err, data, ctx"><http-operation></a>{})</p>
 <pre class="highlight plaintext"><code>client.[&lt;http-operation&gt;]('relative/url', function(err, data, ctx){})
 client.[&lt;http-operation&gt;](['resources', 'Store', id], function(err, data, ctx){})
 </code></pre>
@@ -100,8 +100,8 @@ client.[&lt;http-operation&gt;](['resources', 'Store', id], function(err, data, 
 
 <p>Absolute URIs start with a &rsquo;/&rsquo; character. They ignore the established namespace but honor the authority. It can be used for public API calls , /me, anything that wants to bypass the namespace. When using arrays the first element MUST include the &rsquo;/&rsquo; character as the first character.</p>
 
-<p>client.<a href="'/absolute/url',%20function(err,%20data,%20ctx){}"><http-operation></a>
-client.<a href="['/me'],%20function(err,%20data,%20ctx){}"><http-operation></a></p>
+<p>client.<a href="'/absolute/url', function(err, data, ctx){}"><http-operation></a>
+client.<a href="['/me'], function(err, data, ctx){}"><http-operation></a></p>
 <pre class="highlight plaintext"><code>client.[&lt;http-operation&gt;]('/absolute/url', function(err, data, ctx){})
 client.[&lt;http-operation&gt;](['/me'], function(err, data, ctx){})
 </code></pre>
