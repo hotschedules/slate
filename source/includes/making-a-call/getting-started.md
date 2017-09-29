@@ -12,9 +12,10 @@ The Bodhi REST API is served over HTTPS. To ensure data privacy, unencrypted HTT
 
 ##Authenticating to the API
 
-HTTP requests to the REST API are protected with HTTP Basic and HTTP Cookie authentication.  In short, you will use your HotSchedules IoT Platform account credentials (username and password) for HTTP Basic authentication. If you do not have credentials, you can signup at bodhi.space or directly here https://bodhi.space/signup/ 
 
-New process will be made available soon
+New Process will be coming soon...
+
+HTTP requests to the REST API are protected with HTTP Basic and HTTP Cookie authentication.  In short, you will use your HotSchedules IoT Platform account credentials (username and password) for HTTP Basic authentication. If you do not have credentials, you can signup at bodhi.space or directly here https://bodhi.space/signup/ 
 
 Syntax:
 `curl -ik -u username:password -X GET https://api.bodhi.space/me`
