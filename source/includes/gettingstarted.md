@@ -13,3 +13,5 @@ This documentation is intended for the developer wanting to integrate into the H
 The IoT Platform calls accounts *namespace*. A *namespace* is your secured storage location of HotSchedules’ cloud solution for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Developer Portal](http://developer.bodhi.space/), you will be able to create both a namespace and users to access that namespace. 
 
 The [HotSchedules IoT Platform Developer Portal](http://developer.bodhi.space/) has an easy sign up process to quickly get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin. 
+
+testing...
