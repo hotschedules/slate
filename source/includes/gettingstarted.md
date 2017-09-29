@@ -14,4 +14,3 @@ The IoT Platform calls accounts *namespace*. A *namespace* is your secured stora
 
 The [HotSchedules IoT Platform Developer Portal](http://developer.bodhi.space/) has an easy sign up process to quickly get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin. 
 
-ertertetertewrtewrtewrrt
