@@ -84,6 +84,19 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
   line-height: 1.5;
 }
 
+a:link {
+color: #0CA2D0;
+text-decoration:none;
+}
+a:visited {
+color: #0CA2D0;
+text-decoration:none;
+}
+a:hover {
+color: #0CA2D0;
+text-decoration:underline;
+}
+
 
 // OTHER
 ////////////////////
