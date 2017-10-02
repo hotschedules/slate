@@ -372,10 +372,9 @@ html, body {
   &>h1, &>h2, &>h3, &>h4, &>h5, &>h6, &>p, &>table, &>ul, &>ol, &>aside, &>dl {
     margin-right: $examples-width;
     padding: 0 $main-padding;
-    @include box-sizing(border-box);
+    // @include box-sizing(border-box);
     display: block;
-    @include text-shadow($main-embossed-text-shadow);
-
+    // @include text-shadow($main-embossed-text-shadow);
     @extend %left-col;
   }
 
@@ -397,10 +396,9 @@ html, body {
     margin-bottom: $h1-margin-bottom;
     margin-top: 2em;
     border-top: 1px solid #ddd;
-    background-color: #0ca2d0;
-    @include background-image(
-      linear-gradient(top, rgba(#fff,0.4), rgba(#fff, 0))
-    );
+    background-color: #0299cc;
+    color: #ffffff;
+
   }
 
   h1:first-child, div:first-child + h1 {
