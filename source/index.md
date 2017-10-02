@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: HotSchedules IoT Platform - API Reference
 
 language_tabs:
   - javascript

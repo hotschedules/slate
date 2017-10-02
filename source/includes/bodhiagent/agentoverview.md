@@ -1,4 +1,4 @@
-#Agent
+#Agent Integration
 
 ## Overview
 The Agent provides a single integration point that enables in-store and near-store data collection.

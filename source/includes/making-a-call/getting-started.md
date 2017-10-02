@@ -1,4 +1,4 @@
-#Getting started with the IoT Platform
+#Getting Started
 
 The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores. You can also do some fancy things like get social information, upload files, send push notifications and emails, and even make payments.
 
