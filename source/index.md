@@ -37,6 +37,7 @@ includes:
 
   - bodhimobile/overview
   - bodhimobile/gettingstarted
+  - soapdocs/gettingstarted
 
 
 search: true
