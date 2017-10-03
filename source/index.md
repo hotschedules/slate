@@ -35,8 +35,6 @@ includes:
   - publishing/publishtoshop
   - publishing/monitorapp
 
-  - bodhimobile/overview
-  - bodhimobile/gettingstarted
 
 
 search: true
