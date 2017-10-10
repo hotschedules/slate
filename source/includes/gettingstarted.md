@@ -10,6 +10,6 @@ This documentation is intended for the developer wanting to integrate into the H
 * Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile.  Build applications for restaurants, anywhere and anytime.
 * Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection
 
-The IoT Platform calls accounts *namespace*. A *namespace* is your secured storage location of HotSchedules cloud solution for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](http://developer.bodhi.space/), you will be able to create both a namespace and users to access that namespace. 
+Accounts in the IoT Platform are called a **namespace**. A **namespace** is a secured storage location of your HotSchedules cloud solution for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](http://developer.bodhi.space/), you will have the ability to create both a namespace and users to access that namespace. 
 
 The [HotSchedules IoT Platform Portal](http://developer.bodhi.space/) has an easy sign up process to help you get started quickly developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.
