@@ -53,6 +53,20 @@ So for example, if your organization name is my-deli, your URL would be `https:/
 
 ##IDM How to Programatically Retrieve JWT Tokens
 
+**What are JSON Web Tokens?**
+
+JSON Web Tokens (JWT), pronounced "jot", are a standard since the information they carry is transmitted via JSON.
+
+
+JSON Web Tokens work across different programming languages: JWTs work in .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell. So you can see that these can be used in many different scenarios.
+
+
+JWTs are self-contained: They will carry all the information necessary within itself. This means that a JWT will be able to transmit basic information about itself, a payload (usually user information), and a signature.
+
+
+JWTs can be passed around easily: Since JWTs are self-contained, they are perfectly used inside an HTTP header when authenticating an API. You can also pass it through the URL.
+
+
 **Endpoint**
 
 **Dev:** [https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token](https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token)
