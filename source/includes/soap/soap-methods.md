@@ -2776,7 +2776,7 @@ The outputs of this method are the arguments defined by the following table.
 </thead>
 <tbody>
 <tr>
-<<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
 <td nowrap>return</td><td>wsReturn</td><td>1..1</td><td>wsReturn object</td></tr>
 </tbody>
 </table>
