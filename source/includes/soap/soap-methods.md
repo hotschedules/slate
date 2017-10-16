@@ -2789,3 +2789,9 @@ This service is intended for third parties to be able to request and send volume
 ####setVolumeCountsV2
 ####setVolumeCountsV3
 
+#HotSchedules Community
+
+Do you have questions, comments or suggestions on improviements to this documentation? Please subscribe to the HotSchedules Community.
+
+[HotSchedules Community] (https://help.hotschedules.com/hc/en-us/community/topics)
+
