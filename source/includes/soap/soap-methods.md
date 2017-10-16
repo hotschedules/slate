@@ -2610,16 +2610,6 @@ The outputs of this method are the arguments defined by the following table.
 </soap:Envelope>
 ```
 
-
-
-
-
-
-
-
-
-
-
 ##SalesService
 This service is intended for third parties to be able to import their sales items into the HotSchedules system in a straightforward fashion. Currently there is only one method for setting sales items.
 
@@ -2746,6 +2736,166 @@ This service is intended for third parties to be able to request approved time o
 - **getApprovedPTO:** Returns a list of approved time off for the specified client and time range. The result does not support range-based time off.
 
 ####getApprovedPTO
+This method takes in a concept ID, store ID, start date, end date and returns a list of employees approved scheduled time off.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're Not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>Formatted dd</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Formatted mm</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsReturn</td><td>1..1</td><td>wsReturn object</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3050<br>API_TIME_OFF_SERVICE_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tim="http://services.hotschedules.com/api/services/TimeOffService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tim:getApprovedPTO>
+         <concept>28</concept>
+         <storeNum>408</storeNum>
+         <start>
+            <!--type: int-->
+            <day>27</day>
+            <!--type: int-->
+            <month>4</month>
+            <!--type: int-->
+            <year>2016</year>
+         </start>
+         <end>
+            <!--type: int-->
+            <day>10</day>
+            <!--type: int-->
+            <month>5</month>
+            <!--type: int-->
+            <year>2016</year>
+         </end>
+      </tim:getApprovedPTO>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:getApprovedPTOResponse xmlns:ns1="http://services.hotschedules.com/api/services/TimeOffService">
+         <return>
+            <item>
+               <clientId>408</clientId>
+               <date>2016-05-08</date>
+               <dayParts>
+                  <dayPart>Dinner</dayPart>
+                  <dayPart>Lunch</dayPart>
+               </dayParts>
+               <employeeFirstName>SAM</employeeFirstName>
+               <employeeHrId>-1</employeeHrId>
+               <employeeLastName>SMITH</employeeLastName>
+               <employeePosId>142</employeePosId>
+               <jobId>200</jobId>
+               <jobName>SERVER/200</jobName>
+               <jobRate>11.25</jobRate>
+               <timeOffHours>9.00</timeOffHours>
+               <timeOffTypeCode>VAC</timeOffTypeCode>
+            </item>
+            <item>
+               <clientId>408</clientId>
+               <date>2016-05-09</date>
+               <dayParts>
+                  <dayPart>Dinner</dayPart>
+                  <dayPart>Lunch</dayPart>
+               </dayParts>
+               <employeeFirstName>SAM</employeeFirstName>
+               <employeeHrId>-1</employeeHrId>
+               <employeeLastName>SMITH</employeeLastName>
+               <employeePosId>142</employeePosId>
+               <jobId>200</jobId>
+               <jobName>SERVER/200</jobName>
+               <jobRate>11.25</jobRate>
+               <timeOffHours>4.00</timeOffHours>
+               <timeOffTypeCode>VAC</timeOffTypeCode>
+            </item>
+            <item>
+               <clientId>408</clientId>
+               <date>2016-05-10</date>
+               <dayParts>
+                  <dayPart>Dinner</dayPart>
+                  <dayPart>Lunch</dayPart>
+               </dayParts>
+               <employeeFirstName>SAM</employeeFirstName>
+               <employeeHrId>-1</employeeHrId>
+               <employeeLastName>SMITH</employeeLastName>
+               <employeePosId>142</employeePosId>
+               <jobId>200</jobId>
+               <jobName>SERVER/200</jobName>
+               <jobRate>11.25</jobRate>
+               <timeOffHours>0</timeOffHours>
+               <timeOffTypeCode>VAC</timeOffTypeCode>
+            </item>
+         </return>
+      </ns1:getApprovedPTOResponse>
+   </soap:Body>
+</soap:Envelope>
+```
 
 ##VolumeService
 This service is intended for third parties to be able to request and send volume driver related data from/to HotSchedules. Driver items include examples such as guests, tables, entrees, etc...
