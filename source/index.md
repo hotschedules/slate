@@ -34,6 +34,9 @@ includes:
   - publishing/configurepkgjson
   - publishing/publishtoshop
   - publishing/monitorapp
+  
+  - soap/getting-started
+  - soap/soap-methods
 
 
 
