@@ -14,7 +14,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["Examples"]);
+          setupLanguages(["Example Code"]);
         });
       </script>
   </head>
@@ -29,7 +29,7 @@
     <div class="tocify-wrapper">
       <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="images/logo.png" /> </a>
         <div class="lang-selector">
-              <a href="#" data-language-name="Examples">Examples</a>
+              <a href="#" data-language-name="Example Code">Example Code</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -9055,6 +9055,165 @@ The outputs of this method are the arguments defined by the following table.</p>
 
 <h4 id="getapprovedpto">getApprovedPTO</h4>
 
+<p>This method takes in a concept ID, store ID, start date, end date and returns a list of employees approved scheduled time off.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re Not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>Formatted dd</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Formatted mm</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsReturn</td><td>1..1</td><td>wsReturn object</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3050<br>API_TIME_OFF_SERVICE_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:tim=</span><span class="s">"http://services.hotschedules.com/api/services/TimeOffService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;tim:getApprovedPTO&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>28<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>408<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;start&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>27<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>4<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/start&gt;</span>
+         <span class="nt">&lt;end&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>5<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/end&gt;</span>
+      <span class="nt">&lt;/tim:getApprovedPTO&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getApprovedPTOResponse xmlns:ns1="http://services.hotschedules.com/api/services/TimeOffService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;clientId&gt;408&lt;/clientId&gt;
+               &lt;date&gt;2016-05-08&lt;/date&gt;
+               &lt;dayParts&gt;
+                  &lt;dayPart&gt;Dinner&lt;/dayPart&gt;
+                  &lt;dayPart&gt;Lunch&lt;/dayPart&gt;
+               &lt;/dayParts&gt;
+               &lt;employeeFirstName&gt;SAM&lt;/employeeFirstName&gt;
+               &lt;employeeHrId&gt;-1&lt;/employeeHrId&gt;
+               &lt;employeeLastName&gt;SMITH&lt;/employeeLastName&gt;
+               &lt;employeePosId&gt;142&lt;/employeePosId&gt;
+               &lt;jobId&gt;200&lt;/jobId&gt;
+               &lt;jobName&gt;SERVER/200&lt;/jobName&gt;
+               &lt;jobRate&gt;11.25&lt;/jobRate&gt;
+               &lt;timeOffHours&gt;9.00&lt;/timeOffHours&gt;
+               &lt;timeOffTypeCode&gt;VAC&lt;/timeOffTypeCode&gt;
+            &lt;/item&gt;
+            &lt;item&gt;
+               &lt;clientId&gt;408&lt;/clientId&gt;
+               &lt;date&gt;2016-05-09&lt;/date&gt;
+               &lt;dayParts&gt;
+                  &lt;dayPart&gt;Dinner&lt;/dayPart&gt;
+                  &lt;dayPart&gt;Lunch&lt;/dayPart&gt;
+               &lt;/dayParts&gt;
+               &lt;employeeFirstName&gt;SAM&lt;/employeeFirstName&gt;
+               &lt;employeeHrId&gt;-1&lt;/employeeHrId&gt;
+               &lt;employeeLastName&gt;SMITH&lt;/employeeLastName&gt;
+               &lt;employeePosId&gt;142&lt;/employeePosId&gt;
+               &lt;jobId&gt;200&lt;/jobId&gt;
+               &lt;jobName&gt;SERVER/200&lt;/jobName&gt;
+               &lt;jobRate&gt;11.25&lt;/jobRate&gt;
+               &lt;timeOffHours&gt;4.00&lt;/timeOffHours&gt;
+               &lt;timeOffTypeCode&gt;VAC&lt;/timeOffTypeCode&gt;
+            &lt;/item&gt;
+            &lt;item&gt;
+               &lt;clientId&gt;408&lt;/clientId&gt;
+               &lt;date&gt;2016-05-10&lt;/date&gt;
+               &lt;dayParts&gt;
+                  &lt;dayPart&gt;Dinner&lt;/dayPart&gt;
+                  &lt;dayPart&gt;Lunch&lt;/dayPart&gt;
+               &lt;/dayParts&gt;
+               &lt;employeeFirstName&gt;SAM&lt;/employeeFirstName&gt;
+               &lt;employeeHrId&gt;-1&lt;/employeeHrId&gt;
+               &lt;employeeLastName&gt;SMITH&lt;/employeeLastName&gt;
+               &lt;employeePosId&gt;142&lt;/employeePosId&gt;
+               &lt;jobId&gt;200&lt;/jobId&gt;
+               &lt;jobName&gt;SERVER/200&lt;/jobName&gt;
+               &lt;jobRate&gt;11.25&lt;/jobRate&gt;
+               &lt;timeOffHours&gt;0&lt;/timeOffHours&gt;
+               &lt;timeOffTypeCode&gt;VAC&lt;/timeOffTypeCode&gt;
+            &lt;/item&gt;
+         &lt;/return&gt;
+      &lt;/ns1:getApprovedPTOResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
 <h2 id="volumeservice">VolumeService</h2>
 
 <p>This service is intended for third parties to be able to request and send volume driver related data from/to HotSchedules. Driver items include examples such as guests, tables, entrees, etc&hellip;</p>
@@ -9113,7 +9272,7 @@ The outputs of this method are the arguments defined by the following table.</p>
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="Examples">Examples</a>
+                <a href="#" data-language-name="Example Code">Example Code</a>
           </div>
       </div>
     </div>
