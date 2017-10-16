@@ -1,0 +1,2863 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../../images/favicon.ico" rel="icon" type="image/ico" />
+    <link href="../../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_soap includes_soap_soap-methods">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="available-soap-web-services">Available SOAP Web Services</h1>
+
+<p>The HotSchedules SOAP API provides a user-friendly way to obtain HS Data. Each service contains a <strong>sayHello</strong> call, a test method intended to be used to validate access to the service. It returns a text message indicating success.</p>
+
+<p><strong><a href="#certificationservice">CertificationService</a>:</strong> This service is intended for third parties to be able to request and set certification requests from HotSchedules.
+<br></p>
+
+<p><strong><a href="#empservice">EmpService</a></strong> This service provides operations for a third party to push or request employee and employee job data into HotSchedules.
+<br></p>
+
+<p><strong><a href="#laborservice">LaborService</a>:</strong> This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
+<br></p>
+
+<p><strong><a href="#operatingbudgetplanservice">OperatingBudgetPlanService</a>:</strong> Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.
+<br></p>
+
+<p><strong><a href="#projectedsalesservice">ProjectedSalesService</a>:</strong> This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
+<br></p>
+
+<p><strong><a href="#salesservice">SalesService</a>:</strong> This service is intended for third parties to be able to import their sales items into the HotSchedules system in a straightforward fashion. Currently there is only one method for setting sales items.
+<br></p>
+
+<p><strong><a href="#scheduleservice">ScheduleService</a>:</strong> This service is intended for third parties to be able to grab scheduled shifts from HotSchedules and import them into their POS/data warehouse/enterprise/etc.
+<br></p>
+
+<p><strong><a href="#timecardservice">TimeCardService</a>:</strong> This service is intended for third parties to be able to import their time cards into the HotSchedules system or get time cards from HotSchedules in a straightforward fashion.
+<br></p>
+
+<p><strong><a href="#timeoffservice">TimeOffService</a>:</strong> This service is intended for third parties to be able to request approved timeoff requests from HotSchedules.
+<br></p>
+
+<p><strong><a href="#volumeservice">VolumeService</a>:</strong> This service is intended for third parties to be able to request and send volume driver related data from/to HotSchedules. Driver items include examples such as guests, tables, entrees…. Etc. </p>
+
+<h2 id="certificationservice">CertificationService</h2>
+
+<p>This service is intended for third parties to be able to request and set certification requests from HotSchedules.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/CertificationService?wsdl">http://services.hotschedules.com/api/services/CertificationService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><strong>getClientCertifications:</strong> This method takes in a concept ID and a store ID and returns an array of certification objects. It is meant to get a list of all certifications for that store.
+<br></li>
+<li><strong>getEmployeeCertifications:</strong> This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.
+<br></li>
+<li><strong>removeEmployeeCertifications:</strong> This method takes in a concept ID and a store ID. It is meant to get allow you to remove certifications from a specified employee for that store.
+<br></li>
+<li><strong>setEmployeeCertiﬁcations:</strong> This method takes in a concept ID, store ID. It is meant to set certifications from a specified employee for that store.</li>
+</ul>
+
+<h4 id="getclientcertifications">getClientCertifications</h4>
+
+<p>This method takes in a concept ID and a store ID and returns client certification objects. It is meant to get a list of all certifications for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+    <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+    <span class="na">xmlns:cer=</span><span class="s">"http://services.hotschedules.com/api/services/CertificationService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;cer:getClientCertifications&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>55<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;/cer:getClientCertifications&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getClientCertificationsResponse xmlns:ns1="http://services.hotschedules.com/api/services/CertificationService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;certExtRef&gt;-1&lt;/certExtRef&gt;
+               &lt;certName&gt;Team Member Alcohol Cert&lt;/certName&gt;
+               &lt;certType&gt;2&lt;/certType&gt;
+               &lt;certTypeDescription&gt;Expires Without AutoInactivation&lt;/certTypeDescription&gt;
+               &lt;groupLevel&gt;false&lt;/groupLevel&gt;
+            &lt;/item&gt;
+            &lt;item&gt;
+               &lt;certExtRef&gt;-1&lt;/certExtRef&gt;
+               &lt;certName&gt;Alcohol Certification&lt;/certName&gt;
+               &lt;certType&gt;1&lt;/certType&gt;
+               &lt;certTypeDescription&gt;Expires With AutoInactivation&lt;/certTypeDescription&gt;
+               &lt;groupLevel&gt;false&lt;/groupLevel&gt;
+            &lt;/item&gt;
+         &lt;/return&gt;
+      &lt;/ns1:getClientCertificationsResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getemployeecertifications">getEmployeeCertifications</h4>
+
+<p>This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>empPOSId</td>
+<td>Int</td>
+<td>1..1</td>
+<td>POS numeric employee ID.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/CertificationService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262747932814"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>9iOMGex3ZDEpdw4xsAweWA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T19:37:59.328Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;cer:getEmployeeCertifications&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;empPosId&gt;</span>100<span class="nt">&lt;/empPosId&gt;</span>
+                      <span class="nt">&lt;/cer:getEmployeeCertifications&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:getEmployeeCertificationsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/CertificationService"&gt;
+                                  &lt;return&gt;
+                                              &lt;item&gt;
+                                                          &lt;certExtRef&gt;•1&lt;/certExtRef&gt;
+                                                          &lt;certName&gt;21 Day Certification&lt;/certName&gt;
+                                                          &lt;certType&gt;2&lt;/certType&gt;
+                                                          &lt;certTypeDescription&gt;Expires Without AutoInactivation&lt;/certTypeDescription&gt;
+                                                          &lt;groupLevel&gt;true&lt;/groupLevel&gt;
+                                                          &lt;empPosId&gt;100&lt;/empPosId&gt;
+                                                          &lt;expirationDate&gt;2016•11•30T00:00:00•06:00&lt;/expirationDate&gt;
+                                              &lt;/item&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:getEmployeeCertificationsResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="setemployeecertifications">setEmployeeCertifications</h4>
+
+<p>This method takes in a concept ID, store ID. It is meant to set certifications from a specified employee for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/CertificationService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262747932814"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>9iOMGex3ZDEpdw4xsAweWA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T19:37:59.328Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;cer:setEmployeeCertifications&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;certs&gt;</span>
+                                              <span class="nt">&lt;item&gt;</span>
+                                                          <span class="nt">&lt;certExtRef&gt;</span>500<span class="nt">&lt;/certExtRef&gt;</span>
+                                                          <span class="nt">&lt;certName&gt;</span>Laura Test<span class="nt">&lt;/certName&gt;</span>
+                                                          <span class="nt">&lt;certType&gt;</span>0<span class="nt">&lt;/certType&gt;</span>
+                                                          <span class="nt">&lt;certTypeDescription&gt;</span>Testingnewcert<span class="nt">&lt;/certTypeDescription&gt;</span>
+                                                          <span class="nt">&lt;groupLevel&gt;</span>1<span class="nt">&lt;/groupLevel&gt;</span>
+                                                          <span class="nt">&lt;empPosId&gt;</span>100<span class="nt">&lt;/empPosId&gt;</span>
+                                                          <span class="nt">&lt;expirationDate&gt;</span>?<span class="nt">&lt;/expirationDate&gt;</span>
+                                              <span class="nt">&lt;/item&gt;</span>
+                                  <span class="nt">&lt;/certs&gt;</span>
+                      <span class="nt">&lt;/cer:setEmployeeCertifications&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:removeEmployeeCertificationsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/CertificationService"&gt;
+                                  &lt;return&gt;
+                                              &lt;failCount&gt;0&lt;/failCount&gt;
+                                              &lt;success&gt;true&lt;/success&gt;
+                                              &lt;successCount&gt;1&lt;/successCount&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:removeEmployeeCertificationsResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="removeemployeecertifications">removeEmployeeCertifications</h4>
+
+<p>This method takes in a concept ID and a store ID. It is meant to get allow you to remove certifications from a specified employee for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/CertificationService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262747932814"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>9iOMGex3ZDEpdw4xsAweWA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T19:37:59.328Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;cer:removeEmployeeCertifications&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;certs&gt;</span>
+                                              <span class="nt">&lt;item&gt;</span>
+                                                          <span class="nt">&lt;certExtRef&gt;</span>200<span class="nt">&lt;/certExtRef&gt;</span>
+                                                          <span class="nt">&lt;certName&gt;</span>21 Day Certification<span class="nt">&lt;/certName&gt;</span>
+                                                          <span class="nt">&lt;certType&gt;</span>2<span class="nt">&lt;/certType&gt;</span>
+                                                          <span class="nt">&lt;certTypeDescription&gt;</span>Expires Without AutoInactivation<span class="nt">&lt;/certTypeDescription&gt;</span>
+                                                          <span class="nt">&lt;groupLevel&gt;</span>true<span class="nt">&lt;/groupLevel&gt;</span>
+                                                          <span class="nt">&lt;empPosId&gt;</span>100<span class="nt">&lt;/empPosId&gt;</span>
+                                                          <span class="nt">&lt;expirationDate&gt;</span>2016•11•30T00:00:00•06:00<span class="nt">&lt;/expirationDate&gt;</span>
+                                              <span class="nt">&lt;/item&gt;</span>
+                                  <span class="nt">&lt;/certs&gt;</span>
+                      <span class="nt">&lt;/cer:removeEmployeeCertifications&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:setEmployeeCertificationsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/CertificationService"&gt;
+                                  &lt;return&gt;
+                                              &lt;failCount&gt;0&lt;/failCount&gt;
+                                              &lt;success&gt;true&lt;/success&gt;
+                                              &lt;successCount&gt;1&lt;/successCount&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:setEmployeeCertificationsResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h2 id="empservice">EmpService</h2>
+
+<p>This service provides operations for a third party to push or request employee and employee job data into HotSchedules.</p>
+
+<ul>
+<li>Location: http://services.hotschedules.com/api/services/CertificationService?wsdl</li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><strong>getEmpAvailability:</strong> This method takes in a concept ID and a store ID and returns an array of wsEmpAvailability objects. It is meant to get a list of all availability for that store.
+<br></li>
+<li><strong>getEmpInfo:</strong> This method takes in a concept ID and a store ID and returns an array of wsEmpInfo objects. It is meant to get a list of all employees for that store.
+<br></li>
+<li><strong>getEmpJobs:</strong> This method takes in a concept ID and a store ID and returns an array of wsEmpJob objects. It is meant to get a list of all jobs assigned to all employees for that store.
+<br></li>
+<li><strong>getStoreEmployees:</strong> This method takes in a concept ID, store ID, a flag to determine if only active employees are returned, and returns an array of WSEmployee objects.
+<br></li>
+<li><strong>getStoreJobs:</strong> This method takes in a concept ID and a store ID, and returns an array of all jobs currently defined in HotSchedules for the given concept/store.
+<br></li>
+<li><strong>setEmpJobs:</strong> This method takes in a concept ID, store ID, and an array of WSEmpJob objects to assign jobs to individual employees. This method returns a WSReturn object.
+<br></li>
+<li><strong>setEmps:</strong> This method takes in a concept ID, store ID and an array of WSEmployee objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array of employees will be parsed on the server side to employees who need to be inserted or updated in the HS database. This method returns a WSReturn object.</li>
+</ul>
+
+<h4 id="getstoreemployees">getStoreEmployees</h4>
+
+<p>This method takes in a concept ID, store ID, a flag to determine if only active employees are returned, and returns an array of WSEmployee objects.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>boolean</td>
+<td>1..1</td>
+<td>Boolean that defines whether or not to include terminated employees in response.
+</td>
+</tr>
+<tr>
+<td>activeOnly</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsEmployeeArray</td>
+<td>1..1</td>
+<td>Array of WSEmployee objects.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3009<br>API_EMP_PERMISSION_GET_STORE_EMPS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+    <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+    <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;emp:getStoreEmployees&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>55<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;activeOnly&gt;</span>Y<span class="nt">&lt;/activeOnly&gt;</span>
+      <span class="nt">&lt;/emp:getStoreEmployees&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getStoreEmployeesResponse xmlns:ns1="http://services.hotschedules.com/api/services/EmpService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;address&gt;6504 Bridgepoint Pkwy #425&lt;/address&gt;
+               &lt;address2/&gt;
+               &lt;altId&gt;-1&lt;/altId&gt;
+               &lt;city&gt;Austin&lt;/city&gt;
+               &lt;clientId&gt;17638840&lt;/clientId&gt;
+               &lt;email/&gt;
+               &lt;empNum&gt;-1&lt;/empNum&gt;
+               &lt;FName&gt;HotSchedules&lt;/FName&gt;
+               &lt;hsId&gt;12262906&lt;/hsId&gt;
+               &lt;LName&gt;Support&lt;/LName&gt;
+               &lt;mobile/&gt;
+               &lt;NName/&gt;
+               &lt;phone&gt;(512) 123-4567&lt;/phone&gt;
+               &lt;state&gt;TX&lt;/state&gt;
+               &lt;status&gt;1&lt;/status&gt;
+               &lt;storeNum&gt;23&lt;/storeNum&gt;
+               &lt;zipCode&gt;78730&lt;/zipCode&gt;
+               &lt;dob&gt;2000-02-01T00:00:00-06:00&lt;/dob&gt;
+               &lt;hireDate&gt;2015-02-09T12:40:09.733-06:00&lt;/hireDate&gt;
+            &lt;/item&gt;
+            &lt;/return&gt;
+      &lt;/ns1:getStoreEmployeesResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getempavailability">getEmpAvailability</h4>
+
+<p>This method takes in a concept ID and a store ID and returns an array of wsEmpAvailability objects. It is meant to get a list of all employee availability for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>activeOnly</td>
+<td>bolean</td>
+<td>1..1</td>
+<td>Boolean that defines whether or not to include terminated employees in response.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsEmpAvailabilityArray</td>
+<td>1..1</td>
+<td>Array of wsEmpAvailability objects, which describes all jobs assigned to all active employees for that store.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3021<br>API_EMP_PERMISSION_GET_EMP_AVAIL<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262747932814"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>9iOMGex3ZDEpdw4xsAweWA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T19:37:59.328Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;emp:getEmpAvailability&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;activeOnly&gt;</span>true<span class="nt">&lt;/activeOnly&gt;</span>
+                      <span class="nt">&lt;/emp:getEmpAvailability&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:getEmpAvailabilityResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/EmpService"&gt;
+                                  &lt;return&gt;
+                                              &lt;item&gt;
+                                                          &lt;availabilities&gt;
+                                                                      &lt;dayName&gt;Sunday&lt;/dayName&gt;
+                                                                      &lt;dayNum&gt;1&lt;/dayNum&gt;
+                                                                      &lt;parHoursMax&gt;•1&lt;/parHoursMax&gt;
+                                                                      &lt;parHoursMin&gt;•1&lt;/parHoursMin&gt;
+                                                                      &lt;parShiftsMax&gt;•1&lt;/parShiftsMax&gt;
+                                                                      &lt;parShiftsMin&gt;•1&lt;/parShiftsMin&gt;
+                                                                      &lt;partialBeforeAfter&gt;After&lt;/partialBeforeAfter&gt;
+                                                                      &lt;partialTime&gt;11:45&lt;/partialTime&gt;
+                                                                      &lt;shiftId&gt;964362624&lt;/shiftId&gt;
+                                                                      &lt;shiftName&gt;Breakfast&lt;/shiftName&gt;
+                                                                      &lt;statusName&gt;Partially Available&lt;/statusName&gt;
+                                                                      &lt;statusNum&gt;1&lt;/statusNum&gt;
+                                                          &lt;/availabilities&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                              &lt;/item&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:getEmpAvailabilityResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getstorejobs">getStoreJobs</h4>
+
+<p>This method takes in a concept ID and a store ID, and returns an array of all jobs currently defined in HotSchedules for the given concept/store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsJobArray</td>
+<td>1..1</td>
+<td>WSJob object</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3010<br>API_EMP_PERMISSION_GET_STORE_JOBS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;emp:getStoreJobs&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>32<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;/emp:getStoreJobs&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getStoreJobsResponse xmlns:ns1="http://services.hotschedules.com/api/services/EmpService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;clientId&gt;12316576&lt;/clientId&gt;
+               &lt;defRate&gt;1.0&lt;/defRate&gt;
+               &lt;hsId&gt;1236319092&lt;/hsId&gt;
+               &lt;jobName&gt;ATO&lt;/jobName&gt;
+               &lt;posId&gt;99&lt;/posId&gt;
+               &lt;storeNum&gt;32&lt;/storeNum&gt;
+            &lt;/item&gt;
+            &lt;/return&gt;
+      &lt;/ns1:getStoreJobsResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getempinfo">getEmpInfo</h4>
+
+<p>This method takes in a concept ID and a store ID and returns an array of wsEmpInfo objects. It is meant to get a list of all employees assigned to a schedule for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>activeOnly</td>
+<td>boolean</td>
+<td>1..1</td>
+<td>Boolean that defines whether or not to include terminated employees in response.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsEmpInfoArray</td>
+<td>1..1</td>
+<td>Array of wsEmpInfo objects, which describes all jobs assigned to all active employees for that store.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3020<br>API_EMP_PERMISSION_GET_EMP_INFO<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262475127713"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>deQn1F/GUBV/fMNJ7pdatA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T18:52:31.276Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;emp:getEmpInfo&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;activeOnly&gt;</span>true<span class="nt">&lt;/activeOnly&gt;</span>
+                      <span class="nt">&lt;/emp:getEmpInfo&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soap:Envelope&gt;</span>
+      <span class="nt">&lt;soap:Body&gt;</span>
+                  <span class="nt">&lt;ns1:getEmpInfoResponse</span>
+                              <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span><span class="nt">&gt;</span>
+                              <span class="nt">&lt;return&gt;</span>
+                                          <span class="nt">&lt;item&gt;</span>
+                                                      <span class="nt">&lt;accountCreated&gt;</span>2015•11•04T10:54:22.807•06:00<span class="nt">&lt;/accountCreated&gt;</span>
+                                                      <span class="nt">&lt;assignedSchedules&gt;</span>
+                                                                  <span class="nt">&lt;extId&gt;</span>0<span class="nt">&lt;/extId&gt;</span>
+                                                                  <span class="nt">&lt;hsId&gt;</span>964330043<span class="nt">&lt;/hsId&gt;</span>
+                                                                  <span class="nt">&lt;name&gt;</span>Kitchen<span class="nt">&lt;/name&gt;</span>
+                                                      <span class="nt">&lt;/assignedSchedules&gt;</span>
+                                                      <span class="nt">&lt;assignedSchedules&gt;</span>
+                                                                  <span class="nt">&lt;extId&gt;</span>•1<span class="nt">&lt;/extId&gt;</span>
+                                                                  <span class="nt">&lt;hsId&gt;</span>964318722<span class="nt">&lt;/hsId&gt;</span>
+                                                                  <span class="nt">&lt;name&gt;</span>Meetings<span class="nt">&lt;/name&gt;</span>
+                                                      <span class="nt">&lt;/assignedSchedules&gt;</span>
+                                                      <span class="nt">&lt;assignedSchedules&gt;</span>
+                                                                  <span class="nt">&lt;extId&gt;</span>0<span class="nt">&lt;/extId&gt;</span>
+                                                                  <span class="nt">&lt;hsId&gt;</span>964330041<span class="nt">&lt;/hsId&gt;</span>
+                                                                  <span class="nt">&lt;name&gt;</span>Team Member<span class="nt">&lt;/name&gt;</span>
+                                                      <span class="nt">&lt;/assignedSchedules&gt;</span>
+                                                      <span class="nt">&lt;empHrId&gt;</span>•1<span class="nt">&lt;/empHrId&gt;</span>
+                                                      <span class="nt">&lt;empNum&gt;</span>1<span class="nt">&lt;/empNum&gt;</span>
+                                                      <span class="nt">&lt;lastUpdated&gt;</span>2015•11•09T10:29:31.123•06:00<span class="nt">&lt;/lastUpdated&gt;</span>
+                                                      <span class="nt">&lt;permissionSetName&gt;</span>Employee<span class="nt">&lt;/permissionSetName&gt;</span>
+                                          <span class="nt">&lt;/item&gt;</span>
+                                          <span class="nt">&lt;item&gt;</span>
+                                                      <span class="nt">&lt;accountCreated&gt;</span>2015•11•04T08:33:41.090•06:00<span class="nt">&lt;/accountCreated&gt;</span>
+                                                      <span class="nt">&lt;empHrId&gt;</span>•1<span class="nt">&lt;/empHrId&gt;</span>
+                                                      <span class="nt">&lt;empNum&gt;</span>•1<span class="nt">&lt;/empNum&gt;</span>
+                                                      <span class="nt">&lt;permissionSetName&gt;</span>HS ASC Support<span class="nt">&lt;/permissionSetName&gt;</span>
+                                          <span class="nt">&lt;/item&gt;</span>
+                                          <span class="nt">&lt;item&gt;</span>
+                                                      <span class="nt">&lt;accountCreated&gt;</span>2015•11•04T08:42:02.483•06:00<span class="nt">&lt;/accountCreated&gt;</span>
+                                                      <span class="nt">&lt;empHrId&gt;</span>•1<span class="nt">&lt;/empHrId&gt;</span>
+                                                      <span class="nt">&lt;empNum&gt;</span>•1<span class="nt">&lt;/empNum&gt;</span>
+                                                      <span class="nt">&lt;lastUpdated&gt;</span>2015•11•05T18:29:55.857•06:00<span class="nt">&lt;/lastUpdated&gt;</span>
+                                                      <span class="nt">&lt;permissionSetName&gt;</span>Admin ALL<span class="nt">&lt;/permissionSetName&gt;</span>
+                                          <span class="nt">&lt;/item&gt;</span>
+                                          <span class="nt">&lt;item&gt;</span>
+                                                      <span class="nt">&lt;accountCreated&gt;</span>2015•11•04T08:49:32.623•06:00<span class="nt">&lt;/accountCreated&gt;</span>
+                                                      <span class="nt">&lt;empHrId&gt;</span>•1<span class="nt">&lt;/empHrId&gt;</span>
+                                                      <span class="nt">&lt;empNum&gt;</span>•1<span class="nt">&lt;/empNum&gt;</span>
+                                                      <span class="nt">&lt;lastUpdated&gt;</span>2015•11•04T08:49:33.120•06:00<span class="nt">&lt;/lastUpdated&gt;</span>
+                                                      <span class="nt">&lt;permissionSetName&gt;</span>Default HS Support User<span class="nt">&lt;/permissionSetName&gt;</span>
+                                          <span class="nt">&lt;/item&gt;</span>
+                                          <span class="nt">&lt;item&gt;</span>
+                                                      <span class="nt">&lt;accountCreated&gt;</span>2015•11•04T08:49:33.887•06:00<span class="nt">&lt;/accountCreated&gt;</span>
+                                                      <span class="nt">&lt;empHrId&gt;</span>•1<span class="nt">&lt;/empHrId&gt;</span>
+                                                      <span class="nt">&lt;empNum&gt;</span>•1<span class="nt">&lt;/empNum&gt;</span>
+                                                      <span class="nt">&lt;lastUpdated&gt;</span>2015•11•04T08:49:34.093•06:00<span class="nt">&lt;/lastUpdated&gt;</span>
+                                                      <span class="nt">&lt;permissionSetName&gt;</span>Default HotSchedules Employee<span class="nt">&lt;/permissionSetName&gt;</span>
+                                          <span class="nt">&lt;/item&gt;</span>
+                              <span class="nt">&lt;/return&gt;</span>
+                  <span class="nt">&lt;/ns1:getEmpInfoResponse&gt;</span>
+      <span class="nt">&lt;/soap:Body&gt;</span>
+<span class="nt">&lt;/soap:Envelope&gt;</span>
+</code></pre>
+
+<h4 id="getempjobs">getEmpJobs</h4>
+
+<p>This method takes in a concept ID and a store ID and returns an array of wsEmpJob objects. It is meant to get a list of all jobs assigned to all employees for that store.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsEmpJobArray</td>
+<td>1..1</td>
+<td>Array of wsEmpJob objects, which describes all jobs assigned to all active employees for that store.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3014<br>API_EMP_PERMISSION_GET_EMP_JOBS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+          <span class="na">xmlns:emp=</span><span class="s">"http://services.hotschedules.com/api/services/EmpService"</span>
+          <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;soapenv:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span>
+                                  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+                                  <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameToken•63A716DE011BE2D649145262410123010"</span><span class="nt">&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+                                              <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry"</span><span class="nt">&gt;</span>cZvq5MrVptRUWgLIIqmYRg==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+                                              <span class="nt">&lt;wsu:Created&gt;</span>2016•01•12T18:41:41.230Z<span class="nt">&lt;/wsu:Created&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/soapenv:Header&gt;</span>
+          <span class="nt">&lt;soapenv:Body&gt;</span>
+                      <span class="nt">&lt;emp:getEmpJobs&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+                      <span class="nt">&lt;/emp:getEmpJobs&gt;</span>
+          <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:getEmpJobsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/EmpService"&gt;
+                                  &lt;return&gt;
+                                              &lt;item&gt;
+                                                          &lt;clientId&gt;19054117&lt;/clientId&gt;
+                                                          &lt;hsEmpId&gt;17896647&lt;/hsEmpId&gt;
+                                                          &lt;hsJobId&gt;27229283&lt;/hsJobId&gt;
+                                                          &lt;ovtWage&gt;14.25&lt;/ovtWage&gt;
+                                                          &lt;posEmpId&gt;1&lt;/posEmpId&gt;
+                                                          &lt;posJobId&gt;•1&lt;/posJobId&gt;
+                                                          &lt;primary&gt;true&lt;/primary&gt;
+                                                          &lt;regWage&gt;9.5&lt;/regWage&gt;
+                                                          &lt;storeNum&gt;1&lt;/storeNum&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;clientId&gt;19054117&lt;/clientId&gt;
+                                                          &lt;hsEmpId&gt;17896647&lt;/hsEmpId&gt;
+                                                          &lt;hsJobId&gt;27229285&lt;/hsJobId&gt;
+                                                          &lt;ovtWage&gt;11.25&lt;/ovtWage&gt;
+                                                          &lt;posEmpId&gt;1&lt;/posEmpId&gt;
+                                                          &lt;posJobId&gt;•1&lt;/posJobId&gt;
+                                                          &lt;primary&gt;false&lt;/primary&gt;
+                                                          &lt;regWage&gt;7.5&lt;/regWage&gt;
+                                                          &lt;storeNum&gt;1&lt;/storeNum&gt;
+                                              &lt;/item&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:getEmpJobsResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="setemps">setEmps</h4>
+
+<p>This method takes in a concept ID, store ID and an array of WSEmployee objects. Using the authentication from the username token and the conecpt and store IDs, the server will resolve which HotSchedules client this sync is for. The array of employees will be parsed on the server side to employees who need to be inserted or updated in the HS database. This method returns a WSReturn object.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>emps</td>
+<td>wsEmployeeArray</td>
+<td>1..1</td>
+<td>Array of WSEmployee objects. Each object represents an employee at this store.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>1..1</td>
+<td>WSReturn object</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3007<br>API_EMP_PERMISSION_SET_EMPS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>WSReturn object</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>dataEmpJob</td>
+<td>Employee job object. Contains job information (job code, regular and OT rates, primary flag) for a given employee job.</td>
+</tr>
+<tr>
+<td>dataEmployee</td>
+<td>Employee information object. Contains employee information (name, address, phone info, active/terminated status).</td>
+</tr>
+<tr>
+<td>dataJob</td>
+<td>General job information object. Contains job information (job code, job name, default rate).</td>
+</tr>
+<tr>
+<td>wsEmpJob</td>
+<td>Extends dataEmpJob.</td>
+</tr>
+<tr>
+<td>wsEmployee</td>
+<td>Extends dataEmployee (contains DOB, hire date, termination date).</td>
+</tr>
+<tr>
+<td>wsJob</td>
+<td>Extends dataJob.</td>
+</tr>
+<tr>
+<td>wsReturn</td>
+<td>Contains array of error strings, fail count, success flag, success count.</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Array EmpJobs</strong>
+Employee job object. Contains job information (job code, regular and OT rates, primary flag) for a given employee job.</p>
+
+<p><strong>Derived By</strong>
+Restricting anyType</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<tr><td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>hsEmpId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID</td></tr>
+<td>hsJobId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal job code ID</td></tr>
+<td>ovtWage</td><td>float</td><td>1..1</td><td>No</td><td>Overtime hourly wage rate for employee</td></tr>
+<td>posEmpId</td><td>int</td><td>1..1</td><td>No</td><td>POS numeric ID for employee</td></tr>
+<td>posJobId</td><td>int</td><td>1..1</td><td>No</td><td>POS numeric ID for the job code</td></tr>
+<td>primary</td><td>boolean</td><td>1..1</td><td>No</td><td>Boolean flag to designate if the job code is the primary job for the employee</td></tr>
+<td>regWage</td><td>float</td><td>1..1</td><td>No</td><td>Regular hourly wage rate for employee</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally, set up to mirror the client internal store IDs.</td></tr>
+<td>date</td><td>dateTime</td><td>0..1</td><td>No</td><td>Date job was added for the employee</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Complex Type wsEmpJob</p>
+
+<p><strong>Emp Array</strong>
+Employee information object. Contains employee information (name, address, phone info, active/terminated status)</p>
+
+<p><strong>Derived By</strong>
+Restricting anyType</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>address</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Address line 1</td></tr>
+<td>address2</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Address line 2</td></tr>
+<td>altId</td><td>int</td><td>1..1</td><td>No</td><td>Alternative ID for employee generally reserved for the HR ID.</td></tr>
+<td>city</td><td>string</td><td>0..1</td><td>No</td><td>City field for Address</td></tr>
+<td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>email</td><td>string</td><td>0..1</td><td>No</td><td>Employee’s email address</td></tr>
+<td>empNum</td><td>int</td><td>1..1</td><td>No</td><td>Employee POS ID</td></tr>
+<td>FName</td><td>string</td><td>0..1</td><td>No</td><td>Employee First Name</td></tr>
+<td>hsId</td><td>int</td><td>1..1</td><td>No</td><td>Optional•HotSchedule unique employee account ID</td></tr>
+<td>LName</td><td>string</td><td>0..1</td><td>No</td><td>Employee Last Name</td></tr>
+<td>mobile</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employees Mobile Phone Number</td></tr>
+<td>NName</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Nick Name</td></tr>
+<td>phone</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee phone number</td></tr>
+<td>state</td><td>string</td><td>0..1</td><td>No</td><td>State field for Address</td></tr>
+<td>status</td><td>int</td><td>1..1</td><td>No</td><td>Active = 1, Inactive = 0, Terminated =•1</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td></tr>
+<td>zipCode</td><td>string</td><td>0..1</td><td>No</td><td>Zip Code from Address</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Complex Type wsEmployee</p>
+
+<p><strong>WSJob Array</strong>
+General job information object. Contains job information (job code, job name, default rate).</p>
+
+<p><strong>Derived By</strong>
+Restricting anyType</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>defRate</td><td>float</td><td>1..1</td><td>No</td><td>Default Pay Rate for a Job Code</td></tr>
+<td>hsId</td><td>int</td><td>1..1</td><td>No</td><td>Optional•HotSchedules numeric ID for Job Code</td></tr>
+<td>jobName</td><td>string</td><td>0..1</td><td>No</td><td>Name for Job Code</td></tr>
+<td>posId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric POS ID for Job Code</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Complex Type wsJob</p>
+
+<p><strong>wsEmpJobArray</strong>
+Extends dataEmpJob.</p>
+
+<p><strong>Derived By</strong>
+Extending dataEmpJob</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>hsEmpId</td><td>int</td><td>1..1</td><td>No</td><td>Optional•HotSchedule unique employee account ID</td></tr>
+<td>hsJobId</td><td>int</td><td>1..1</td><td>No</td><td>Optional•HotSchedules internal ID for the Job Code</td></tr>
+<td>ovtWage</td><td>float</td><td>1..1</td><td>No</td><td>Overtime hourly wage for job code for the employee</td></tr>
+<td>posEmpId</td><td>int</td><td>1..1</td><td>No</td><td>POS numeric identifier for the employee</td></tr>
+<td>posJobId</td><td>int</td><td>1..1</td><td>No</td><td>POS numeric identifier for the job</td></tr>
+<td>primary</td><td>boolean</td><td>1..1</td><td>No</td><td>Flag to indicate if a job is the primary job for the employee</td></tr>
+<td>regWage</td><td>float</td><td>1..1</td><td>No</td><td>Regular hourly wage for the job for the employee</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td></tr>
+<td>date</td><td>dateTime</td><td>0..1</td><td>No</td><td>Date job was added for the employee</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Element item [type wsEmpJobArray]
+<br>
+Extends dataEmployee (contains DOB, hire date, termination date)</p>
+
+<p><strong>Derived By</strong>
+Extending dataEmployee</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>address</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Address line 1</td></tr>
+<td>address2</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Address line 2</td></tr>
+<td>altId</td><td>int</td><td>1..1</td><td>No</td><td>Alternative ID for employee generally reserved for the HR ID.</td></tr>
+<td>city</td><td>string</td><td>0..1</td><td>No</td><td>City field for Address</td></tr>
+<td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>email</td><td>string</td><td>0..1</td><td>No</td><td>Employee’s email address</td></tr>
+<td>empNum</td><td>int</td><td>1..1</td><td>No</td><td>Employee POS ID</td></tr>
+<td>FName</td><td>string</td><td>0..1</td><td>No</td><td>Employee First Name</td></tr>
+<td>hsId</td><td>int</td><td>1..1</td><td>No</td><td>Optional•HotSchedule unique employee account ID</td></tr>
+<td>LName</td><td>string</td><td>0..1</td><td>No</td><td>Employee Last Name</td></tr>
+<td>mobile</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employees Mobile Phone Number</td></tr>
+<td>NName</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee Nick Name</td></tr>
+<td>phone</td><td>string</td><td>0..1</td><td>No</td><td>Optional•Employee phone number</td></tr>
+<td>state</td><td>string</td><td>0..1</td><td>No</td><td>State field for Address</td></tr>
+<td>status</td><td>int</td><td>1..1</td><td>No</td><td>Active = 1, Inactive = 0, Terminated =•1</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td></tr>
+<td>zipCode</td><td>string</td><td>0..1</td><td>No</td><td>Zip Code from Address</td></tr>
+<td>dob</td><td>dateTime</td><td>0..1</td><td>No</td><td>Employee Date of Birth</td></tr>
+<td>hireDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Employee Hire Date</td></tr>
+<td>termDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Employee Termination date. Only required for employees with a status of •1</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Element item [type wsEmployeeArray]
+Extends dataJob.</p>
+
+<p><strong>Derived By</strong>
+Extending dataJob</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td>defRate</td><td>float</td><td>1..1</td><td>No</td><td>Default Pay Rate for a Job Code</td></tr>
+<td>hsId</td><td>int</td><td>1..1</td><td>Yes</td><td>Optional•HotSchedules numeric ID for Job Code</td></tr>
+<td>jobName</td><td>string</td><td>0..1</td><td>No</td><td>Name for Job Code</td></tr>
+<td>posId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric POS ID for Job Code</td></tr>
+<td>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Unique numeric store ID within HotSchedules. Generally set up to mirror the client internal store IDs.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Referenced By</strong>
+Element item [type wsJobArray]
+Contains array of error strings, fail count, success flag, success count.</p>
+
+<p><strong>Derived By</strong>
+Restricting anyType</p>
+
+<p><strong>Content Model</strong>
+Contains elements as defined in the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td>errors</td><td>string</td><td>0..*</td><td>Yes</td><td>Description of the error code</td></tr>
+<td>failCount</td><td>int</td><td>1..1</td><td>No</td><td>Total number of records that failed to meet basic import specifications</td></tr>
+<td>success</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicator of the success or failure</td></tr>
+<td>successCount</td><td>int</td><td>1..1</td><td>No</td><td>Total number of records that successfully met basic import specifications</td></tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>address [type dataEmployee]</td><td>Address Line 1</td></tr>
+<td nowrap>address2 [type dataEmployee]</td><td>Address Line 2</td></tr>
+<td nowrap>altId [type dataEmployee]</td><td>Alternative ID for employee generally reserved for the HR ID.</td></tr>
+<td nowrap>city [type dataEmployee]</td><td>City field for Address</td></tr>
+<td nowrap>clientId [type dataEmpJob]</td><td>Unique client ID provided via HotSchedules</td></tr>
+<td nowrap>clientId [type dataEmployee]</td><td>Unique client ID provided via HotSchedules</td></tr>
+<td nowrap>defRate [type dataJob]</td><td>Default Pay Rate for job code</td></tr>
+<td nowrap>dob [type wsEmployee]</td><td>Employee Date of Birth</td></tr>
+<td nowrap>email [type dataEmployee]</td><td>Employee email address</td></tr>
+<td nowrap>empNum [type dataEmployee]</td><td>Employee POS ID</td></tr>
+<td nowrap>errors [type wsReturn]</td><td>Error Codes</td></tr>
+<td nowrap>Exception</td><td>Exception Codes</td></tr>
+<td nowrap>failCount [type wsReturn]</td><td>Total number of records that failed to meet basic import specifications</td></tr>
+<td nowrap>FName [type dataEmployee]</td><td>Employee First Name</td></tr>
+<td nowrap>hireDate [type wsEmployee]</td><td>Employee Hire Date</td></tr>
+<td nowrap>hsEmpId [type dataEmpJob]</td><td>HotSchedules Internal employee account ID</td></tr>
+<td nowrap>hsId [type dataEmployee]</td><td>HotSchedules Internal employee account ID</td></tr>
+<td nowrap>hsId [type dataJob]</td><td>HotSchedules Internal employee account ID</td></tr>
+<td nowrap>hsJobId [type dataEmpJob]</td><td>HotSchedules Internal job code ID</td></tr>
+<td nowrap>item [type wsEmpJobArray]</td><td>All jobs assigned to all active employees for that store</td></tr>
+<td nowrap>item [type wsEmployeeArray]</td><td>All employees at this store.</td></tr>
+<td nowrap>item [type wsJobArray]</td><td>All jobs at this store.</td></tr>
+<td nowrap>jobName [type dataJob]</td><td>Address Line 1</td></tr>
+<td nowrap>LName [type dataEmployee]</td><td>Address Line 2</td></tr>
+<td nowrap>message [type Exception]</td><td>Alternative ID for employee generally reserved for the HR ID.</td></tr>
+<td nowrap>mobile [type dataEmployee]</td><td>City field for Address</td></tr>
+<td nowrap>NName [type dataEmployee]</td><td>Unique client ID provided via HotSchedules</td></tr>
+<td nowrap>ovtWage [type dataEmpJob]</td><td>Unique client ID provided via HotSchedules</td></tr>
+<td nowrap>phone [type dataEmployee]</td><td>Default Pay Rate for job code</td></tr>
+<td nowrap>posEmpId [type dataEmpJob]</td><td>Employee Date of Birth</td></tr>
+<td nowrap>posId [type dataJob]</td><td>Employee email address</td></tr>
+<td nowrap>posJobId [type dataEmpJob]</td><td>Employee POS ID</td></tr>
+<td nowrap>primary [type dataEmpJob]</td><td>Error Codes</td></tr>
+<td nowrap>regWage [type dataEmpJob]</td><td>Exception Codes</td></tr>
+<td nowrap>state [type dataEmployee]</td><td>Total number of records that failed to meet basic import specifications</td></tr>
+<td nowrap>status [type dataEmployee]</td><td>Active = 1, Inactive = 0, Terminated = o1</td></tr>
+<td nowrap>storeNum [type dataEmpJob]</td><td>Unique numeric store ID within HotSchedules. Generally, set up to mirror the client internal store IDs.</td></tr>
+<td nowrap>storeNum [type dataEmployee]</td><td>Unique numeric store ID within HotSchedules. Generally, set up to mirror the client internal store IDs.</td></tr>
+<td nowrap>storeNum [type dataJob]</td><td>Unique numeric store ID within HotSchedules. Generally, set up to mirror the client internal store IDs.</td></tr>
+<td nowrap>success [type wsReturn]</td><td>Missing description.</td></tr>
+<td nowrap>successCount [type wsReturn]</td><td>Number of records that successfully met the basic import specification</td></tr>
+<td nowrap>termDate [type wsEmployee]</td><td>Employee termination date</td></tr>
+<td nowrap>zipCode [type dataEmployee]</td><td>Zip code from Address</td></tr>
+</tbody>
+</table>
+
+<h4 id="setempjobs">setEmpJobs</h4>
+
+<p>This method takes in a concept ID, store ID, and an array of WSEmpJob objects to assign jobs to individual employees. This method returns a WSReturn object.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>1..1</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>1..1</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>jobs</td>
+<td>wsEmpJobArray</td>
+<td>1..1</td>
+<td>Array of WSEmpJob objects. Each object represents one employee job, so a single employee can have one or more employee jobs (EmpJob) assigned to him/her. Each job that the employee works will be a separate object in this
+array.
+</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>1..1</td>
+<td>WSReturn object</td>
+</tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3008<br>API_EMP_PERMISSION_SET_EMP_JOBS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="laborservice">LaborService</h2>
+
+<p>This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc. system.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/LaborService?wsdl">http://services.hotschedules.com/api/services/LaborService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><p><strong>getLaborByBusDate:</strong> This method will take a concept ID, store number, start and end dates and a labor type and return a list of total labor by job code for each interval for the business date requested for that concept, store and labor type.
+<br></p>
+
+<ul>
+<li>Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.
+<br></li>
+</ul></li>
+<li><p><strong>getLaborByJobAndInterval:</strong> This method will take a concept ID, store number, start and end dates and a labor type and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.
+<br></p>
+
+<ul>
+<li>Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.
+<br></li>
+</ul></li>
+<li><p><strong>setLaborForecastByJob:</strong> Setter of Labor forecast data for a particular store end point to update/set labor per job and xx-minute interval (xx = client interval length in minutes).</p></li>
+</ul>
+
+<h4 id="getlaborbybusdate">getLaborByBusDate</h4>
+
+<p>This method will take a concept ID, store number, start and end dates and a labor type and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
+
+<p>Intervals are configured during initial setup for the customer and are typically 30 minutes.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+  <td nowrap></td><td></td></tr></td></tr>
+<td nowrap></td><td></td><td></td></tr>
+<td nowrap>All</td>-<td>-</td><td>-</td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>hsSimpleDate</td><td>Start date for the range of data requested</td></tr>
+<td nowrap>end</td><td>hsSimpleDate</td><td>End date for the range of data requested</td></tr>
+<td nowrap>laborType</td><td>laborType</td><td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>return</td><td>wsLaborJobArray</td><td>Returns a wsLaborJobArray object, which is an array of wsLaborJob
+    objects.<br>
+    Each wsLaborJob object contains.<br><br>
+    • &nbsp;&nbsp;a
+    jobCode (which corresponds to the numeric ID that identifies this job)<br>
+    • &nbsp;&nbsp;a
+    jobName (the name for this job)<br>
+    • &nbsp;&nbsp;a
+    wsLaborInterval object, which can contain<br><br>
+    + an intervalDate object (an hsSimpleDate that determines the date for this
+    particular interval)<br>
+    + an intervalTime object (an hsSimpleTime that determines the start time for
+    this particular interval. Interval length in implied by&nbsp;&nbsp; the span
+    between two intervalTime objects)<br>
+    + a laborDate object (an enum which can be &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo;,
+    &ldquo;scheduled&rdquo;<br>
+    + an volume value (which represents the value for the laborDate type for
+    this particular interval, determined by intervalDate and intervalTime)<br><br>
+
+    <b>** </b>Note about labor types<b> **</b><br>
+    <br>
+    <b>&ldquo;scheduled&rdquo; </b>labor refers to shifts that have been scheduled and posted and
+    are assigned to an employee. This will not include house shifts or shifts
+    not assigned to an employee.<br>
+    <br>
+    <b>&ldquo;forecasted&rdquo; </b>labor refers to labor shifts generated after forecast labor
+    drivers and applying labor shift generation rules within the Activity•based
+    forecasting module in HotSchedules<br>
+    <br>
+    <b>&ldquo;optimal&rdquo; </b>labor refers to labor shifts generated by using actual labor
+    driver values and applying labor shift generation rules specified in the
+    Activity•based forecasting module in HotSchedules. It represents the labor
+    shifts that would have been generated using an exact forecast of labor
+    drivers.</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;SOAPENV:Envelope</span>
+          <span class="na">xmlns:SOAPENC=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+          <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+          <span class="na">xmlns:ns0=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+          <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/LaborService"</span>
+          <span class="na">xmlns:ns2=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+          <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema•instance"</span>
+          <span class="na">xmlns:SOAPENV=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">SOAPENV:encodingStyle=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;SOAPENV:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span> <span class="na">mustUnderstand=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>REDACTED<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordT ext"</span><span class="nt">&gt;</span>REDACTED<span class="nt">&lt;/wsse:Password&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/SOAPENV:Header&gt;</span>
+          <span class="nt">&lt;ns2:Body&gt;</span>
+                      <span class="nt">&lt;ns1:getLaborByJobAndInterval&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1101645<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;start&gt;</span>
+                                              <span class="nt">&lt;day&gt;</span>8<span class="nt">&lt;/day&gt;</span>
+                                              <span class="nt">&lt;month&gt;</span>7<span class="nt">&lt;/month&gt;</span>
+                                              <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+                                  <span class="nt">&lt;/start&gt;</span>
+                                  <span class="nt">&lt;end&gt;</span>
+                                              <span class="nt">&lt;day&gt;</span>14<span class="nt">&lt;/day&gt;</span>
+                                              <span class="nt">&lt;month&gt;</span>7<span class="nt">&lt;/month&gt;</span>
+                                              <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+                                  <span class="nt">&lt;/end&gt;</span>
+                                  <span class="nt">&lt;laborType&gt;</span>forecasted<span class="nt">&lt;/laborType&gt;</span>
+                      <span class="nt">&lt;/ns1:getLaborByJobAndInterval&gt;</span>
+          <span class="nt">&lt;/ns2:Body&gt;</span>
+<span class="nt">&lt;/SOAPENV:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:getEmpInfoResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/EmpService"&gt;
+                                  &lt;return&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•04T10:54:22.807•06:00&lt;/accountCreated&gt;
+                                                          &lt;assignedSchedules&gt;
+                                                                      &lt;extId&gt;0&lt;/extId&gt;
+                                                                      &lt;hsId&gt;964330043&lt;/hsId&gt;
+                                                                      &lt;name&gt;Kitchen&lt;/name&gt;
+                                                          &lt;/assignedSchedules&gt;
+                                                          &lt;assignedSchedules&gt;
+                                                                      &lt;extId&gt;•1&lt;/extId&gt;
+                                                                      &lt;hsId&gt;964318722&lt;/hsId&gt;
+                                                                      &lt;name&gt;Meetings&lt;/name&gt;
+                                                          &lt;/assignedSchedules&gt;
+                                                          &lt;assignedSchedules&gt;
+                                                                      &lt;extId&gt;0&lt;/extId&gt;
+                                                                      &lt;hsId&gt;964330041&lt;/hsId&gt;
+                                                                      &lt;name&gt;Team Member&lt;/name&gt;
+                                                          &lt;/assignedSchedules&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;1&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•09T10:29:31.123•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Employee&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•04T08:33:41.090•06:00&lt;/accountCreated&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                                          &lt;permissionSetName&gt;HS ASC Support&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•04T08:42:02.483•06:00&lt;/accountCreated&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•05T18:29:55.857•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Admin ALL&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•04T08:49:32.623•06:00&lt;/accountCreated&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•04T08:49:33.120•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Default HS Support User&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•04T08:49:33.887•06:00&lt;/accountCreated&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•04T08:49:34.093•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Default HotSchedules Employee&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•05T18:02:12.477•06:00&lt;/accountCreated&gt;
+                                                          &lt;assignedSchedules&gt;
+                                                                      &lt;extId&gt;0&lt;/extId&gt;
+                                                                      &lt;hsId&gt;964330043&lt;/hsId&gt;
+                                                                      &lt;name&gt;Kitchen&lt;/name&gt;
+                                                          &lt;/assignedSchedules&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;2&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•09T10:30:32.927•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Employee&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2015•11•09T09:38:47.617•06:00&lt;/accountCreated&gt;
+                                                          &lt;assignedSchedules&gt;
+                                                                      &lt;extId&gt;0&lt;/extId&gt;
+                                                                      &lt;hsId&gt;964330043&lt;/hsId&gt;
+                                                                      &lt;name&gt;Kitchen&lt;/name&gt;
+                                                          &lt;/assignedSchedules&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;3&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2015•11•09T10:29:31.170•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Employee&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                              &lt;item&gt;
+                                                          &lt;accountCreated&gt;2016•01•07T11:25:55.020•06:00&lt;/accountCreated&gt;
+                                                          &lt;empHrId&gt;•1&lt;/empHrId&gt;
+                                                          &lt;empNum&gt;•1&lt;/empNum&gt;
+                                                          &lt;lastUpdated&gt;2016•01•07T11:28:13.373•06:00&lt;/lastUpdated&gt;
+                                                          &lt;permissionSetName&gt;Admin&lt;/permissionSetName&gt;
+                                              &lt;/item&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:getEmpInfoResponse&gt;
+          &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h4>
+
+<p>This method will take a concept ID, store number, start and end dates and a labor type and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
+
+<p>Intervals are configured during initial setup for the customer and are typically 30 minutes.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap></td><td></td><td></td></tr>
+<td nowrap>All</td><td> </td><td> </td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>hsSimpleDate</td><td>Start date for the range of data requested</td></tr>
+<td nowrap>end</td><td>hsSimpleDate</td><td>End date for the range of data requested</td></tr>
+<td nowrap>laborType</td><td>laborType</td><td>Type of labor requested. Allowed types are &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo; and &ldquo;scheduled&rdquo;.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>return</td><td>wsLaborJobArray</td><td><b style="font-weight:normal;" id="docs-internal-guid-bdd39fa2-174d-fa7f-1f1d-d70a4fad8466">
+              <p dir="ltr" style="line-height:1.2;margin-top:0pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Returns a wsLaborJobArray object, which is an array of wsLaborJob objects.</span></p>
+              <p dir="ltr" style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">Each wsLaborJob object contains.</span></p>
+              <p dir="ltr" style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><br></span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:3pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">§ &nbsp;a jobCode (which corresponds to the numeric ID that identifies this job)</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">§ &nbsp;a jobName (the name for this job)</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:3pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">§ &nbsp;a wsLaborInterval object, which can contain</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:3pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><br></span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:3pt;margin-bottom:0pt;text-indent: 17pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">+ an intervalDate object (an hsSimpleDate that determines the date for this particular interval)</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;text-indent: 17pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">+ an intervalTime object (an hsSimpleTime that determines the start time for this particular interval. Interval length in implied by the span between two intervalTime objects)</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;text-indent: 17pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">+ a laborDate object (an enum which can be &ldquo;optimal&rdquo;, &ldquo;forecasted&rdquo;, &ldquo;scheduled&rdquo;</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;text-indent: 17pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">+ an volume value (which represents the value for the laborDate type for this particular interval, determined by intervalDate and intervalTime)</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><br></span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;">** Note about labor types **</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:3pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><strong>&ldquo;scheduled&rdquo;</strong> labor refers to shifts that have been scheduled and posted and are assigned to an employee. This will not include house shifts or shifts not assigned to an employee.</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><br></span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><strong>&ldquo;forecasted&rdquo;</strong> labor refers to labor shifts generated after forecast labor drivers and applying labor shift generation rules within the Activity•based forecasting module in HotSchedules</span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><br></span></p><p
+dir="ltr"
+style="line-height:1.2;margin-top:2pt;margin-bottom:0pt;"><span
+style="font-size:10pt;font-family:'Open Sans';color:#000000;background-color:transparent;font-weight:400;font-style:normal;font-variant:normal;text-decoration:none;vertical-align:baseline;white-space:pre-wrap;"><strong>&ldquo;optimal&rdquo;</strong> labor refers to labor shifts generated by using actual labor driver values and applying labor shift generation rules specified in the Activity•based forecasting module in HotSchedules. It represents the labor shifts that would have been generated using an exact forecast of labor drivers</span></p></b><br
+class="Apple-interchange-newline"></td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;SOAPENV:Envelope</span>
+          <span class="na">xmlns:SOAPENC=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+          <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"</span>
+          <span class="na">xmlns:ns0=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+          <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/LaborService"</span>
+          <span class="na">xmlns:ns2=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+          <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema•instance"</span>
+          <span class="na">xmlns:SOAPENV=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">SOAPENV:encodingStyle=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="nt">&gt;</span>
+          <span class="nt">&lt;SOAPENV:Header&gt;</span>
+                      <span class="nt">&lt;wsse:Security</span> <span class="na">mustUnderstand=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+                                  <span class="nt">&lt;wsse:UsernameToken&gt;</span>
+                                              <span class="nt">&lt;wsse:Username&gt;</span>REDACTED<span class="nt">&lt;/wsse:Username&gt;</span>
+                                              <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordT ext"</span><span class="nt">&gt;</span>REDACTED<span class="nt">&lt;/wsse:Password&gt;</span>
+                                  <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+                      <span class="nt">&lt;/wsse:Security&gt;</span>
+          <span class="nt">&lt;/SOAPENV:Header&gt;</span>
+          <span class="nt">&lt;ns2:Body&gt;</span>
+                      <span class="nt">&lt;ns1:getLaborByJobAndInterval&gt;</span>
+                                  <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+                                  <span class="nt">&lt;storeNum&gt;</span>1101645<span class="nt">&lt;/storeNum&gt;</span>
+                                  <span class="nt">&lt;start&gt;</span>
+                                              <span class="nt">&lt;day&gt;</span>8<span class="nt">&lt;/day&gt;</span>
+                                              <span class="nt">&lt;month&gt;</span>7<span class="nt">&lt;/month&gt;</span>
+                                              <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+                                  <span class="nt">&lt;/start&gt;</span>
+                                  <span class="nt">&lt;end&gt;</span>
+                                              <span class="nt">&lt;day&gt;</span>14<span class="nt">&lt;/day&gt;</span>
+                                              <span class="nt">&lt;month&gt;</span>7<span class="nt">&lt;/month&gt;</span>
+                                              <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+                                <span class="nt">&lt;/end&gt;</span>
+                                  <span class="nt">&lt;laborType&gt;</span>forecasted<span class="nt">&lt;/laborType&gt;</span>
+                      <span class="nt">&lt;/ns1:getLaborByJobAndInterval&gt;</span>
+          <span class="nt">&lt;/ns2:Body&gt;</span>
+<span class="nt">&lt;/SOAPENV:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope&gt;
+          &lt;soap:Body&gt;
+                      &lt;ns1:getLaborByJobAndIntervalResponse&gt;
+                                  &lt;return&gt;
+                                              &lt;item&gt;
+                                                          &lt;interval&gt;
+                                                                      &lt;intervalDate&gt;
+                                                                                  &lt;day&gt;8&lt;/day&gt;
+                                                                                  &lt;month&gt;7&lt;/month&gt;
+                                                                                  &lt;year&gt;2014&lt;/year&gt;
+                                                                      &lt;/intervalDate&gt;
+                                                                      &lt;intervalTime&gt;
+                                                                                  &lt;hours&gt;0&lt;/hours&gt;
+                                                                                  &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                                                                                  &lt;minutes&gt;0&lt;/minutes&gt;
+                                                                                  &lt;seconds&gt;0&lt;/seconds&gt;
+                                                                      &lt;/intervalTime&gt;
+                                                                      &lt;laborType&gt;forecasted&lt;/laborType&gt;
+                                                                      &lt;volume&gt;0.0&lt;/volume&gt;
+                                                          &lt;/interval&gt;
+                                                          &lt;interval&gt;
+                                                                      &lt;intervalDate&gt;
+                                                                                  &lt;day&gt;8&lt;/day&gt;
+                                                                                  &lt;month&gt;7&lt;/month&gt;
+                                                                                  &lt;year&gt;2014&lt;/year&gt;
+                                                                      &lt;/intervalDate&gt;
+                                                                      &lt;intervalTime&gt;
+                                                                                  &lt;hours&gt;0&lt;/hours&gt;
+                                                                                  &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                                                                                  &lt;minutes&gt;30&lt;/minutes&gt;
+                                                                                  &lt;seconds&gt;0&lt;/seconds&gt;
+                                                                      &lt;/intervalTime&gt;
+                                                                      &lt;laborType&gt;forecasted&lt;/laborType&gt;
+                                                                      &lt;volume&gt;0.0&lt;/volume&gt;
+                                                          &lt;/interval&gt;
+                                                          &lt;jobCode&gt;16000&lt;/jobCode&gt;
+                                                          &lt;jobName&gt;Crew Person&lt;/jobName&gt;
+                                              &lt;/item&gt;
+                                  &lt;/return&gt;
+                      &lt;/ns1:getLaborByJobAndIntervalResponse&gt;
+          &lt;/soap:Body&gt; &lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="setlaborforecastbyjob">setLaborForecastByJob</h4>
+
+<p>This method takes in a concept ID, store ID, business date, daypart start and end times,labor forecast and  jobExtId. Forecasted labor for the site, date, internal and job will be updated for the purpose of labor scheduling and all relevant reports. The call can be sent for a full week or single date. All intervals must be updated. A zero in the interval is an acceptable value. A null or blank is an acceptable value and will be treated as a zero. If sent for a single date only the date provided will be updated. All other dates within the week will not be impacted and any values already in the database will be retained. A full day&rsquo;s data must be sent, updating only one interval within a business date is not permitted and the call will fail.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td> </td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>jobs</td><td>wsEmpJobArray</td><td>1..1</td><td>Array of WSEmpJob objects. Each object represents one employee job, so a single employee can have one or more employee jobs (EmpJob) assigned to him/her. Each job that the employee works will be a separate object in this array.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>Formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Formatted yyyy</td></tr>
+<td nowrap>dayPartStartTime</td><td>dateTime</td><td>0..1</td><td>Day part start time</td></tr>
+<td nowrap>laborForecastMinutes</td><td>int</td><td>1..1</td><td>Minutes value</td></tr>
+<td nowrap>jobExtRef</td><td>int</td><td>1..1</td><td>Job reference id</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsReturn</td><td>1..1</td><td>WSReturn object</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Exception</td><td>Exception</td><td>perm 3008<br>
+API_EMP_PERMISSION_SET_EMP_JOBS<br>
+client not found</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:lab=</span><span class="s">"http://services.hotschedules.com/api/services/LaborService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;lab:setLaborForecastByJob&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>23<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;idata&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;item&gt;</span>
+               <span class="nt">&lt;businessDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/businessDate&gt;</span>
+               <span class="nt">&lt;dayPartStartDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/dayPartStartDate&gt;</span>
+               <span class="nt">&lt;dayPartStartTime&gt;</span>0045<span class="nt">&lt;/dayPartStartTime&gt;</span>
+               <span class="nt">&lt;laborForecastMinutes&gt;</span>15<span class="nt">&lt;/laborForecastMinutes&gt;</span>
+               <span class="nt">&lt;jobExtRef&gt;</span>11<span class="nt">&lt;/jobExtRef&gt;</span>
+            <span class="nt">&lt;/item&gt;</span>
+         <span class="nt">&lt;/idata&gt;</span>
+      <span class="nt">&lt;/lab:setLaborForecastByJob&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:lab="http://services.hotschedules.com/api/services/LaborService"&gt;
+  &lt;soapenv:Header/&gt;
+  &lt;soapenv:Body&gt;
+    &lt;lab:setLaborForecastByJob&gt;
+      &lt;concept&gt;8436&lt;/concept&gt;
+      &lt;storeNum231&lt;/storeNum&gt;
+      &lt;idata&gt;
+        &lt;item&gt;
+          &lt;businessDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/businessDate&gt;
+          &lt;dayPartStartDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/dayPartStartDate&gt;
+          &lt;dayPartStartTime&gt;0000&lt;/dayPartStartTime&gt;
+          &lt;jobExtRef&gt;55&lt;/jobExtRef&gt;
+          &lt;laborForecastMinutes&gt;1&lt;/laborForecastMinutes&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+          &lt;businessDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/businessDate&gt;
+          &lt;dayPartStartDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/dayPartStartDate&gt;
+          &lt;dayPartStartTime&gt;0030&lt;/dayPartStartTime&gt;
+          &lt;jobExtRef&gt;55&lt;/jobExtRef&gt;
+          &lt;laborForecastMinutes&gt;2&lt;/laborForecastMinutes&gt;
+        &lt;/item&gt;
+      &lt;/idata&gt;
+    &lt;/lab:setLaborForecastByJob&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
+</code></pre>
+
+<h2 id="operatingbudgetplanservice">OperatingBudgetPlanService</h2>
+
+<p>Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl">http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><strong>getLaborData:</strong> COMING SOON&hellip;</li>
+<li><strong>setLaborData:</strong> COMING SOON&hellip;</li>
+</ul>
+
+<h4 id="getlabordata">getLaborData</h4>
+
+<h4 id="setlabordata">setLaborData</h4>
+
+<h2 id="projectedlaborservice">ProjectedLaborService</h2>
+
+<p>Description: Coming Soon&hellip;</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl">http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<h4 id="coming-soon...">Coming Soon&hellip;</h4>
+
+<h2 id="projectedsalesservice">ProjectedSalesService</h2>
+
+<p>This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc. system.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/ProjectedSalesService?wsdl">http://services.hotschedules.com/api/services/ProjectedSalesService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><strong>getProjectedSales:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of WSProjectedSales objects, which represent the projected sales totals for a particular piece of time, for import into the POS.
+<br></li>
+<li><strong>getProjectedSalesV3:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of WSProjectedSales objects, which represent the projected sales totals for a particular piece of time, for import into the POS.</li>
+</ul>
+
+<h4 id="getprojectedsales">getProjectedSales</h4>
+
+<p>This method takes in a concept ID, store ID, start and end dates. It returns an array of WSProjectedSales objects, which represent the projected sales totals for a particular piece of time, for import into the POS.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap></td><td></td><td></td><td></td></tr>
+<td nowrap>All</td><td> </td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>location. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>dateTime</td><td>1..1</td><td>First day of projected sales.</td></tr>
+<td nowrap>end</td><td>dateTime</td><td>1..1</td><td>Last day of projected sales.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsProjectedSalesArray</td><td>1..1</td><td>Array of WSProjectedSales objects, which represent the projected sales totals for a particular period.</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:proj=</span><span class="s">"http://services.hotschedules.com/api/services/ProjectedSalesService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;proj:getProjectedSales&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>55<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;start&gt;</span>2017-05-01<span class="nt">&lt;/start&gt;</span>
+         <span class="nt">&lt;end&gt;</span>2017-05-30<span class="nt">&lt;/end&gt;</span>
+      <span class="nt">&lt;/proj:getProjectedSales&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getProjectedSalesResponse xmlns:ns1="http://services.hotschedules.com/api/services/ProjectedSalesService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;businessDate&gt;2017-05-01T00:00:00-05:00&lt;/businessDate&gt;
+               &lt;dateTotal&gt;4903.84&lt;/dateTotal&gt;
+               &lt;dayPartTotals&gt;
+                  &lt;dayPartEndTime&gt;1970-01-01T10:00:00-06:00&lt;/dayPartEndTime&gt;
+                  &lt;dayPartName&gt;AM&lt;/dayPartName&gt;
+                  &lt;dayPartStartTime&gt;1969-12-31T22:00:00-06:00&lt;/dayPartStartTime&gt;
+                  &lt;dayPartTotal&gt;1247.08&lt;/dayPartTotal&gt;
+               &lt;/dayPartTotals&gt;
+               &lt;dayPartTotals&gt;
+                  &lt;dayPartEndTime&gt;1969-12-31T22:00:00-06:00&lt;/dayPartEndTime&gt;
+                  &lt;dayPartName&gt;PM&lt;/dayPartName&gt;
+                  &lt;dayPartStartTime&gt;1970-01-01T10:00:00-06:00&lt;/dayPartStartTime&gt;
+                  &lt;dayPartTotal&gt;3656.76&lt;/dayPartTotal&gt;
+               &lt;/dayPartTotals&gt;
+            &lt;/item&gt;
+&lt;/return&gt;
+      &lt;/ns1:getProjectedSalesResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getprojectedsalesv3">getProjectedSalesV3</h4>
+
+<p>This method takes in a concept ID, store ID, start and end dates. It returns an array of WSProjectedSales objects, which represent the projected sales totals for a particular piece of time, for import into the POS.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>hsSimpleDate</td><td>1..1</td><td>First day of projected sales requested. This is an hsSimpleDate object.</td></tr>
+<td nowrap>end</td><td>hsSimpleDate</td><td>1..1</td><td>First day of projected sales requested. This is an hsSimpleDate object.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsProjectedSalesArray</td><td>1..1</td><td>Array of WSProjectedSales3 objects, which represent the projected sales totals for a particular period. hsSimpleDate objects are used for dates and hsSimpleTime objects for times.</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:proj=</span><span class="s">"http://services.hotschedules.com/api/services/ProjectedSalesService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;proj:getProjectedSalesV3&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>55<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;start&gt;</span>
+            <span class="nt">&lt;day&gt;</span>01<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>05<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/start&gt;</span>
+         <span class="nt">&lt;end&gt;</span>
+            <span class="nt">&lt;day&gt;</span>05<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>05<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/end&gt;</span>
+      <span class="nt">&lt;/proj:getProjectedSalesV3&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getProjectedSalesV3Response xmlns:ns1="http://services.hotschedules.com/api/services/ProjectedSalesService"&gt;
+         &lt;return&gt;
+            &lt;item&gt;
+               &lt;businessDate&gt;
+                  &lt;day&gt;1&lt;/day&gt;
+                  &lt;month&gt;5&lt;/month&gt;
+                  &lt;year&gt;2017&lt;/year&gt;
+               &lt;/businessDate&gt;
+               &lt;dateTotal&gt;4903.84&lt;/dateTotal&gt;
+               &lt;dayPartTotals&gt;
+                  &lt;dayPartEndTime&gt;
+                     &lt;amPm/&gt;
+                     &lt;hours&gt;16&lt;/hours&gt;
+                     &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                     &lt;minutes&gt;0&lt;/minutes&gt;
+                     &lt;seconds&gt;0&lt;/seconds&gt;
+                  &lt;/dayPartEndTime&gt;
+                  &lt;dayPartName&gt;AM&lt;/dayPartName&gt;
+                  &lt;dayPartStartTime&gt;
+                     &lt;amPm/&gt;
+                     &lt;hours&gt;4&lt;/hours&gt;
+                     &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                     &lt;minutes&gt;0&lt;/minutes&gt;
+                     &lt;seconds&gt;0&lt;/seconds&gt;
+                  &lt;/dayPartStartTime&gt;
+                  &lt;dayPartTotal&gt;1247.08&lt;/dayPartTotal&gt;
+               &lt;/dayPartTotals&gt;
+               &lt;dayPartTotals&gt;
+                  &lt;dayPartEndTime&gt;
+                     &lt;amPm/&gt;
+                     &lt;hours&gt;4&lt;/hours&gt;
+                     &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                     &lt;minutes&gt;0&lt;/minutes&gt;
+                     &lt;seconds&gt;0&lt;/seconds&gt;
+                  &lt;/dayPartEndTime&gt;
+                  &lt;dayPartName&gt;PM&lt;/dayPartName&gt;
+                  &lt;dayPartStartTime&gt;
+                     &lt;amPm/&gt;
+                     &lt;hours&gt;16&lt;/hours&gt;
+                     &lt;militaryTime&gt;true&lt;/militaryTime&gt;
+                     &lt;minutes&gt;0&lt;/minutes&gt;
+                     &lt;seconds&gt;0&lt;/seconds&gt;
+                  &lt;/dayPartStartTime&gt;
+                  &lt;dayPartTotal&gt;3656.76&lt;/dayPartTotal&gt;
+               &lt;/dayPartTotals&gt;
+            &lt;/item&gt;
+&lt;/return&gt;
+      &lt;/ns1:getProjectedSalesV3Response&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
+<h2 id="salesservice">SalesService</h2>
+
+<p>This service is intended for third parties to be able to import their sales items into the HotSchedules system in a straightforward fashion. Currently there is only one method for setting sales items.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/SalesService?wsdl">http://services.hotschedules.com/api/services/SalesService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><p><strong>getRVCs:</strong> This method takes in a concept ID and a store ID and returns an array of revenue centers for that store.
+<br></p>
+
+<ul>
+<li>Revenue centers will typically establish where to attribute a sale: Bar, Dining, To go, etc.Revenue centers can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group•level RVCs).
+<br>
+<br></li>
+</ul></li>
+<li><p><strong>getSalesCats:</strong>  This method takes in a concept ID and a store ID and returns an array of sales categories for that store.
+<br></p>
+
+<ul>
+<li>Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise.Sales categories can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group•level sales categories)
+<br>
+<br></li>
+</ul></li>
+<li><p><strong>getSalesItemsV3:</strong> This method takes in a concept ID, store ID and returns an array of sales items for that store. Sales items indicated which item was sold.
+<br></p></li>
+<li><p><strong>setSalesItems:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSSalesItem objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains sales items for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of sales, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
+<br></p></li>
+<li><p><strong>setSalesItemsV3:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSSalesItem objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains sales items for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of sales, every day, 6 days of it will be &ldquo;&quot;overlapping&rdquo;&ldquo; data) and will insert and update data as needed. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object. This method uses hsSimpleDate objects for dates.
+<br></p></li>
+<li><p><strong>setSalesItemsV4:</strong> Same as setSalesItemsV3 but accepts alphanum store XR.</p></li>
+</ul>
+
+<h4 id="getrvcs">getRVCs</h4>
+
+<h4 id="getsalescats">getSalesCats</h4>
+
+<h4 id="getsalesitemsv3">getSalesItemsV3</h4>
+
+<h4 id="setsalesitems">setSalesItems</h4>
+
+<h4 id="setsalesitemsv3">setSalesItemsV3</h4>
+
+<h4 id="setsalesitemsv4">setSalesItemsV4</h4>
+
+<h2 id="scheduleservice">ScheduleService</h2>
+
+<p>This service is intended for third parties to be able to grab scheduled shifts from HotSchedules and import them into their POS/data warehouse/enterprise/etc. system.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/ScheduleService?wsdl">http://services.hotschedules.com/api/services/ScheduleService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><p><strong>getLocations:</strong> This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.
+<br></p></li>
+<li><p><strong>getSchedule:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem objects, which represent one scheduled shift each, for import into the POS. This method returns a limited amount of data per shift: employee HS ID, employee POS ID, internal HS Job ID, POS Job ID, shift start date/time, shift end date/time, work week start date/time, work week end date/time.
+<br></p></li>
+<li><p><strong>getSchedule2:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem2 objects, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.&rdquo;
+<br></p></li>
+<li><p><strong>getScheduleV3:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS. This method uses hsSimpleDate objects for dates.&ldquo;
+<br></p></li>
+<li><p><strong>getShiftsV3:</strong> This method takes in a concept ID, store ID, start and end dates and three flags (isHouse, isScheduled and isPosted). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set: isHouse • includes scheduled or posted shifts that are not assigned to an employee (called &lsquo;house shifts&rsquo; in HotSchedules). isScheduled • includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted isPosted • includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules. This method returns extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.&rdquo;
+<br></p></li>
+<li><p><strong>getTemplates:</strong> Getter of client-level forecast template information Start and End dates may not be more than 30 days apart for this method.</p></li>
+</ul>
+
+<h4 id="getlocations">getLocations</h4>
+
+<h4 id="getschedule">getSchedule</h4>
+
+<h4 id="getschedule2">getSchedule2</h4>
+
+<h4 id="getschedulev3">getScheduleV3</h4>
+
+<h4 id="getshiftsv3">getShiftsV3</h4>
+
+<h4 id="gettemplates">getTemplates</h4>
+
+<h2 id="timecardservice">TimeCardService</h2>
+
+<p>This service is intended for third parties to be able to import their time cards into the HotSchedules system or get time cards from HotSchedules in a straightforward fashion.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/TimeCardService?wsdl">http://services.hotschedules.com/api/services/TimeCardService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><p><strong>getTimeCards:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of wsTimeCard3 objects, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in and clock out times. If this store is using HotSchedules&rsquo; web•based timeclock for employee clock•in, any open punches in the date range are also included in the response.
+<br></p></li>
+<li><p><strong>getTimeCardsDeclaredTips:</strong> This method takes in a concept ID, store ID, start and end dates. It returns an array of wsTimeCardsDeclaredTips objects, which represent one employee time card each including Declared Tips. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules&rsquo; web•based timeclock for employee clock•in, any open punches in the date range are also included in the response.&ldquo;
+<br></p></li>
+<li><p><strong>getTimeCardsV2:</strong> Same as getTimeCards but additionally provides double time info for each timecard.
+<br></p></li>
+<li><p><strong>setTimeCards:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCard objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &rdquo;&ldquo;overlapping&rdquo;&ldquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+<br></p></li>
+<li><p><strong>setTimeCardsDeclaredTips:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCardsDeclaredTips objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &rdquo;&ldquo;overlapping&rdquo;&ldquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+<br></p></li>
+<li><p><strong>setTimeCardsV3:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCard objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &quot;overlapping&rdquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object. This method uses hsSimpleDate objects for dates.
+<br></p></li>
+<li><p><strong>updateTimeCards:</strong> This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCard objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p></li>
+</ul>
+
+<h4 id="gettimecards">getTimeCards</h4>
+
+<h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
+
+<h4 id="gettimecardsv2">getTimeCardsV2</h4>
+
+<h4 id="gettimecardsv3">getTimeCardsV3</h4>
+
+<h4 id="settimecards">setTimeCards</h4>
+
+<h4 id="settimecardsdeclaredtips">setTimeCardsDeclaredTips</h4>
+
+<h4 id="settimecardsv3">setTimeCardsV3</h4>
+
+<h4 id="updatetimecards">updateTimeCards</h4>
+
+<h2 id="timeoffservice">TimeOffService</h2>
+
+<p>This service is intended for third parties to be able to request approved time off requests from HotSchedules.</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/TimeOffService?wsdl">http://services.hotschedules.com/api/services/TimeOffService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><strong>getApprovedPTO:</strong> Returns a list of approved time off for the specified client and time range. The result does not support range-based time off.</li>
+</ul>
+
+<h4 id="getapprovedpto">getApprovedPTO</h4>
+
+<h2 id="volumeservice">VolumeService</h2>
+
+<p>This service is intended for third parties to be able to request and send volume driver related data from/to HotSchedules. Driver items include examples such as guests, tables, entrees, etc&hellip;</p>
+
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/VolumeService?wsdl">http://services.hotschedules.com/api/services/VolumeService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+
+<ul>
+<li><p><strong>getDriversByInterval:</strong> This method takes in a concept ID, store ID, start and end dates, a volume type, and a data type and returns a list of volume counts for each interval in the date range requested. Supported Volume Types are:  “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS” Supported Data Types are: “ACTUAL”, “ADJ_FORECASTED”, and “PRE_ADJ_FORECASTED”.
+<br></p></li>
+<li><p><strong>getGuestCounts:</strong> This method will take a concept ID, store number, start and end dates and return a list of guest counts for the date range requested.
+<br></p></li>
+<li><p><strong>getVolumeCounts:</strong> This method will take a concept ID, store number, start and end dates and a volume type and return a list of volume counts for the date range requested. Supported Volume Types are: “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”
+<br></p></li>
+<li><p><strong>setForecastDrivers:</strong> This method takes in a concept ID, store ID, workweek startdate and enddate , starttime and endtime, volume amount, volume type, and a revenue center for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
+<br></p></li>
+<li><p><strong>setForecastDriversV2:</strong> Same as setForecastDrivers but accepts alphanum store XR.
+<br></p></li>
+<li><p><strong>setGuestCounts:</strong> This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+<br></p></li>
+<li><p><strong>setVolumeCountsV2:</strong> Same as setVolumeCounts but accepts alphanum store XR.
+<br></p></li>
+<li><p><strong>setVolumeCountsV3:</strong> Same as setVolumeCountsV2 but accepts custom volume types.</p></li>
+</ul>
+
+<h4 id="getdriversbyinterval">getDriversByInterval</h4>
+
+<h4 id="getguestcounts">getGuestCounts</h4>
+
+<h4 id="getvolumecounts">getVolumeCounts</h4>
+
+<h4 id="setforecastdrivers">setForecastDrivers</h4>
+
+<h4 id="setforecastdriversv2">setForecastDriversV2</h4>
+
+<h4 id="setguestcounts">setGuestCounts</h4>
+
+<h4 id="setvolumecounts">setVolumeCounts</h4>
+
+<h4 id="setvolumecountsv2">setVolumeCountsV2</h4>
+
+<h4 id="setvolumecountsv3">setVolumeCountsV3</h4>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
