@@ -2645,9 +2645,495 @@ This service is intended for third parties to be able to import their sales item
 
 
 ####getRVCs
+This method takes in a concept ID and a store ID and returns an array of revenue centers for that store.
+Revenue centers will typically establish where to attribute a sale: Bar, Dining, To go, etc.Revenue centers can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group•level RVCs).
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsRevenueCenterArray</td><td>1..1</td><td>Array of wsRevenueCenter objects, which represents all revenue centers defined for that store. This will include store and group level revenue centers, and will be flagged appropriately.</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3002<br>API_SALES_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope
+          xmlns:sal="http://services.hotschedules.com/api/services/SalesService"
+          xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+          <soapenv:Header>
+                      <wsse:Security
+                                  xmlns:wsse="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"
+                                xmlns:wsu="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd" soapenv:mustUnderstand="1">
+                                  <wsse:UsernameToken wsu:Id="UsernameToken•5A4A0145444B759EC8145272034993393">
+                                              <wsse:Username>HSAPIUser</wsse:Username>
+                                              <wsse:Password Type="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText">ao24 wO2n8gkh7lp</wsse:Password>
+                                              <wsse:Nonce EncodingType="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry">eup88j1y/qnxGKg2Rn6J4A==</wsse:Nonce>
+                                              <wsu:Created>2016•01•13T21:25:49.933Z</wsu:Created>
+                                  </wsse:UsernameToken>
+                      </wsse:Security>
+          </soapenv:Header>
+          <soapenv:Body>
+                      <sal:getRVCs>
+                                  <concept>101</concept>
+                                  <storeNum>111</storeNum>
+                      </sal:getRVCs>
+          </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+                      <ns1:getRVCsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/SalesService">
+                                  <return>
+                                              <item>
+                                                          <extId>10</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <revenueCenterName>Dine in</revenueCenterName>
+                                              </item>
+                                              <item>
+                                                          <extId>17</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <revenueCenterName>Bar</revenueCenterName>
+                                              </item>
+                                              <item>
+                                                          <extId>15</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <revenueCenterName>To go</revenueCenterName>
+                                              </item>
+                                  </return>
+                      </ns1:getRVCsResponse>
+          </soap:Body>
+</soap:Envelope>
+```
 ####getSalesCats
+This method takes in a concept ID and a store ID and returns an array of sales categories for that store. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol,
+Merchandise.Sales categories can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group•level sales categories).
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsSalesCategoryArray</td><td>1..1</td><td>Array of wsSalesCategory objects, which represents all sales categories defined for that store. This will include store and group level sales categories, and will be flagged appropriately.</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3002<br>API_SALES_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope
+          xmlns:sal="http://services.hotschedules.com/api/services/SalesService"
+          xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+          <soapenv:Header>
+                      <wsse:Security
+                                  xmlns:wsse="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•secext•1.0.xsd"
+                                  xmlns:wsu="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•wssecurity•utility•1.0.xsd" soapenv:mustUnderstand="1">
+                                  <wsse:UsernameToken wsu:Id="UsernameToken•5A4A0145444B759EC8145272075572695">
+                                              <wsse:Username>HSAPIUser</wsse:Username>
+                                              <wsse:Password Type="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•username•token•profile•1.0#PasswordText">ao24 wO2n8gkh7lp</wsse:Password>
+                                              <wsse:Nonce EncodingType="http://docs.oasis•open.org/wss/2004/01/oasis•200401•wss•soap•message•security•1.0#Base64Bina ry">HWXdmwP4l8qNEDjt4a0G9Q==</wsse:Nonce>
+                                              <wsu:Created>2016•01•13T21:32:35.726Z</wsu:Created>
+                                  </wsse:UsernameToken>
+                      </wsse:Security>
+          </soapenv:Header>
+          <soapenv:Body>
+                      <sal:getSalesCats>
+                                  <concept>101</concept>
+                                  <storeNum>111</storeNum>
+                      </sal:getSalesCats>
+          </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope
+          xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+          <soap:Body>
+                      <ns1:getSalesCatsResponse
+                                  xmlns:ns1="http://services.hotschedules.com/api/services/SalesService">
+                                  <return>
+                                              <item>
+                                                          <extId>10</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <salesCategoryName>Food</salesCategoryName>
+                                              </item>
+                                              <item>
+                                                          <extId>20</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <salesCategoryName>Beverages</salesCategoryName>
+                                              </item>
+                                              <item>
+                                                          <extId>30</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <salesCategoryName>Beer</salesCategoryName>
+                                              </item>
+                                              <item>
+                                                          <extId>40</extId>
+                                                          <groupLevel>true</groupLevel>
+                                                          <salesCategoryName>Wine</salesCategoryName>
+                                              </item>
+                                  </return>
+                      </ns1:getSalesCatsResponse>
+          </soap:Body>
+</soap:Envelope>
+```
 ####getSalesItemsV3
+This method takes in a concept ID, store ID, start and end dates.It returns an array of sales for that store.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td></td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td></td><td>Formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td></td><td>Formatted yyyy</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsSalesItem3Array</td><td>1..1</td><td>Array of WSSalesItem objects. Each object represents one sales item at this store.</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3002<br>API_SALES_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<soapenv:Envelope
+  xmlns:sal="http://services.hotschedules.com/api/services/SalesService"
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+  <soapenv:Header>
+    <wsse:Security
+      xmlns:wsse="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"
+      xmlns:wsu="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityoutilityo1.0.xsd" soapenv:mustUnderstand="1">
+      <wsse:UsernameToken wsu:Id="UsernameTokeno5A4A0145444B759EC81452722705669100">
+        <wsse:Username>HSAPIUser</wsse:Username>
+        <wsse:Password Type="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText">ao24 wO2n8gkh7lp</wsse:Password>
+        <wsse:Nonce EncodingType="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssosoapomessageosecurityo1.0#Base64Bina ry">WHQ2rdJcHsI92WDsEaBDpA==</wsse:Nonce>
+        <wsu:Created>2016o01o13T22:05:05.669Z</wsu:Created>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </soapenv:Header>
+  <soapenv:Body>
+    <sal:getSalesItemsV3>
+      <concept>101</concept>
+      <storeNum>111</storeNum>
+      <start>
+        <day>1</day>
+        <month>1</month>
+        <year>2015</year>
+      </start>
+      <end>
+        <day>1</day>
+        <month>2</month>
+        <year>2015</year>
+      </end>
+    </sal:getSalesItemsV3>
+  </soapenv:Body> </soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <soap:Body>
+    <ns1:getSalesItemsV3Response
+      xmlns:ns1="http://services.hotschedules.com/api/services/SalesService">
+      <return>
+        <item>
+          <clientId>16477839</clientId>
+          <empId>o1</empId>
+          <extId>o1</extId>
+          <rvc>o1</rvc>
+          <salesCat>o1</salesCat>
+          <storeNum>111</storeNum>
+          <ttl>13.45</ttl>
+          <businessDate>
+            <day>3</day>
+            <month>1</month>
+            <year>2015</year>
+          </businessDate>
+          <transDate>
+            <day>4</day>
+            <month>1</month>
+            <year>2015</year>
+          </transDate>
+          <transTime>
+            <hours>2</hours>
+            <militaryTime>true</militaryTime>
+            <minutes>28</minutes>
+            <seconds>35</seconds>
+          </transTime>
+        </item>
+        <item>
+          <clientId>16477839</clientId>
+          <empId>o1</empId>
+          <extId>o1</extId>
+          <rvc>o1</rvc>
+          <salesCat>o1</salesCat>
+          <storeNum>111</storeNum>
+          <ttl>0.0</ttl>
+          <businessDate>
+            <day>3</day>
+            <month>1</month>
+            <year>2015</year>
+          </businessDate>
+          <transDate>
+            <day>4</day>
+            <month>1</month>
+            <year>2015</year>
+          </transDate>
+          <transTime>
+            <hours>2</hours>
+            <militaryTime>true</militaryTime>
+            <minutes>33</minutes>
+            <seconds>19</seconds>
+          </transTime>
+        </item>
+      </return>
+    </ns1:getSalesItemsV3Response>
+  </soap:Body>
+</soap:Envelope>
+```
 ####setSalesItems
+This method takes in a concept ID, store ID, a start and end date and an array of WSSalesItem objects. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>sales</td><td>wsSalesItemArray</td><td>1..1</td><td>Array of WSSalesItem objects. Each object represents one sales item at this store.</td></tr>
+<td nowrap>start</td><td>dateTime</td><td>1..1</td><td>Business date of the first sales item in the array.</td></tr>
+<td nowrap>end</td><td>dateTime</td><td>1..1</td><td>Business date of the last sales item in the array.</td></tr>
+
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>1..1</td>
+<td>WSReturn object</td>
+</tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3002<br>API_SALES_PERMISSION<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+
 ####setSalesItemsV3
 ####setSalesItemsV4
 
