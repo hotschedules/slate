@@ -3135,7 +3135,716 @@ The outputs of this method are the arguments defined by the following table.
 
 
 ####setSalesItemsV3
+This method takes in a concept ID, store ID, a start and end date and an array of WSSalesItem objects. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
+
+This method uses hsSimpleDate objects for dates.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>sales</td><td>wsSalesItem3Array</td><td>1..1</td><td>Array of WSSalesItem objects. Each object represents one sales item at this store.</td></tr>
+<td nowrap>start</td><td>hsSimpleDate</td><td>1..1</td><td>Business date of the first sales item in the array. This method uses hsSimpleDate objects for dates.</td></tr>
+<td nowrap>end</td><td>hsSimpleDate</td><td>1..1</td><td>Business date of the last sales item in the array. This method uses hsSimpleDate objects for dates.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsReturn</td><td>1..1</td><td>WSReturn object</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Exception</td><td>Exception</td><td>perm 3002<br>
+API_SALES_PERMISSION<br>
+client not found<br>
+validation errors</td></tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>dataSalesItem</td><td>Contains sales item data (sales category, revenue center, sales amount, ID of employee that made the sale, store ID where the sale ocurred)</td></tr>
+<td nowrap>hsSimpleDate</td><td>Simple date object that excludes any time zone or locale data. Consists of day, month and year integer values.</td></tr>
+<td nowrap>hsSimpleTime</td><td>Simple time object that excludes any time zone or locale data. Consists of hour, minute and second integer values, am/pm string indicator and militaryTime flag.</td></tr>
+<td nowrap>wsReturn</td><td>Contains array of error strings, fail count, success flag, success count.</td></tr>
+<td nowrap>wsRevenueCenter</td><td>Missing description.</td></tr>
+<td nowrap>wsRevenueCenterArray</td><td>An array of wsRevenueCenterArray objects. Each wsRevenueCenter object describes the total revenue center sales for a given revenue center.<br>
+Each wsRevenueCenter object contains,<br>
+•      a RevenueCenter (which corresponds to the numeric ID that identifies this revenue center)</td></tr>
+<td nowrap>wsSalesCategory</td><td>Coming Soon</td></tr>
+<td nowrap>wsSalesCategoryArray</td><td>Array of wsSalesCategory objects, which represents all sales categories defined for that store. This will include store and group level sales categories, and will be flagged appropriately.
+</td></tr>
+<td nowrap>wsSalesItem</td><td>Extends dataSalesItem (includes business date and calendar date of the sale)</td></tr>
+<td nowrap>wsSalesItem3</td><td>Extends dataTimeCard (includes business date and hsSimpleDate object and clock in and clockout date/times as hsSimpleDate and hsSimpleTime objects)</td></tr>
+</tbody>
+</table>
+
+Contains sales item data (sales category, revenue center, sales amount, ID of employee that made the sale, store ID where the sale occurred)
+
+**Derived By**
+
+Restricting anyType
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Complex Type wsSalesItem
+  - Complex Type wsSalesItem3
+ 
+Simple date object that excludes any time zone or locale data. Consists of day, month and year integer values.
+
+**Derived By**
+
+Restricting anyType
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>No</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>No</td><td>Formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>No</td><td>Formatted yyyy</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element businessDate [type wsSalesItem3]
+  - Element transDate [type wsSalesItem3]
+ 
+Simple time object that excludes any time zone or locale data. Consists of hour, minute and second integer values, am/pm string indicator and militaryTime flag.
+
+**Derived By**
+
+Restricting anyType
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>amPm</td><td>string</td><td>0..1</td><td>No</td><td>AM or PM indicator. amPm enum. If militaryTime is set to true, amPm is ignored.</td></tr>
+<td nowrap>hours</td><td>int</td><td>1..1</td><td>No</td><td>Hour value</td></tr>
+<td nowrap>militaryTime</td><td>boolean</td><td>1..1</td><td>No</td><td>Military Time indicator</td></tr>
+<td nowrap>minutes</td><td>int</td><td>1..1</td><td>No</td><td>Minutes value</td></tr>
+<td nowrap>seconds</td><td>int</td><td>1..1</td><td>No</td><td>Seconds value</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element transTime [type wsSalesItem3]
+ 
+Contains array of error strings, fail count, success flag, success count.
+
+**Derived By**
+
+Restricting anyType
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>errors</td><td>string</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+<td nowrap>failCount</td><td>int</td><td>1..1</td><td>No</td><td>Number of records that failed to meet basic import specifications</td></tr>
+<td nowrap>success</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicator of the success or failure</td></tr>
+<td nowrap>successCount</td><td>int</td><td>1..1</td><td>No</td><td>Total number of records that successfully met basic import specifications</td></tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>revenueCenterName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element item [type wsRevenueCenterArray]
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>item</td><td>wsRevenueCenter</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>salesCategoryNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element item [type wsSalesCategoryArray]
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>item</td><td>wsSalesCategory</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+Extends dataSalesItem (includes business date and calendar date of the sale)
+
+**Derived By**
+
+Extending dataSalesItem
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td>Coming Soon</td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element item [type wsSalesItemArray]
+ 
+**Description**
+
+Extends dataTimeCard (includes business date and hsSimpleDate object and clock in and clockout date/times as hsSimpleDate and hsSimpleTime objects).
+
+**Derived By**
+
+Extending dataSalesItem
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category</td></tr>
+<td nowrap>businessDate</td><td>hsSimpleDate</td><td>0..1</td><td>No</td><td>Business date of transaction</td></tr>
+<td nowrap>transDate</td><td>hsSimpleDate</td><td>0..1</td><td>No</td><td>Date of the transaction</td></tr>
+<td nowrap>transTime</td><td>hsSimpleTime</td><td>0..1</td><td>No</td><td>Time of the transaction</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+  - Element item [type wsSalesItem3Array]
+
+**Elements: SalesItemService**
+
+**Elements**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>amPm [type hsSimpleTime]</td><td>Coming Soon</td></tr>
+<td nowrap>businessDate [type wsSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>businessDate [type wsSalesItem3]</td><td>Coming Soon</td></tr>
+<td nowrap>catName [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>clientId [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>dateTime [type wsSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>day [type hsSimpleDate]</td><td>Coming Soon</td></tr>
+<td nowrap>empId [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>errors [type wsReturn]</td><td>Coming Soon</td></tr>
+<td nowrap>Exception</td><td>Coming Soon</td></tr>
+<td nowrap>extId [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>extId [type wsRevenueCenter]</td><td>Coming Soon</td></tr>
+<td nowrap>extId [type wsSalesCategory]</td><td>Coming Soon</td></tr>
+<td nowrap>failCount [type wsReturn]</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel [type wsRevenueCent er]</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel [type wsSalesCategory]</td><td>Coming Soon</td></tr>
+<td nowrap>hours [type hsSimpleTime]</td><td>Coming Soon</td></tr>
+<td nowrap>item [type wsRevenueCenterArray]</td><td>Coming Soon</td></tr>
+<td nowrap>item [type wsSalesCategoryArray]</td><td>Coming Soon</td></tr>
+<td nowrap>item [type wsSalesItem3Array]</td><td>Coming Soon</td></tr>
+<td nowrap>item [type wsSalesItemArray]</td><td>Coming Soon</td></tr>
+<td nowrap>message [type Exception]</td><td>Coming Soon</td></tr>
+<td nowrap>militaryTime [type hsSimpleTime]</td><td>Coming Soon</td></tr>
+<td nowrap>minutes [type hsSimpleTime]</td><td>Coming Soon</td></tr>
+<td nowrap>month [type hsSimpleDate]</td><td>Coming Soon</td></tr>
+<td nowrap>revenueCenterName</td><td>Coming Soon</td></tr>
+<td nowrap>[type wsRevenueCenter]</td><td>Coming Soon</td></tr>
+<td nowrap>rvc [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>rvcName [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>salesCat [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>salesCategoryName [type</td><td>Coming Soon</td></tr>
+<td nowrap>wsSalesCategory]</td><td>Coming Soon</td></tr>
+<td nowrap>seconds [type hsSimpleTime]</td><td>Coming Soon</td></tr>
+<td nowrap>storeNum [type dataSalesItem]</td><td>Coming Soon</td></tr>
+<td nowrap>success [type wsReturn]</td><td>Coming Soon</td></tr>
+<td nowrap>successCount [type wsReturn]</td><td>Coming Soon</td></tr>
+<td nowrap>transDate [type wsSalesItem3]</td><td>Coming Soon</td></tr>
+<td nowrap>transTime [type wsSalesItem3]</td><td>Time of the transaction</td></tr>
+<td nowrap>ttl [type dataSalesItem]</td><td>Total of the sales category</td></tr>
+<td nowrap>year [type hsSimpleDate]</td><td>year yyyy format</td></tr>
+</tbody>
+</table>
+
+Type String
+
+**Referenced By**
+
+ - Complex Type hsSimpleTime
+
+Type dateTime
+
+**Referenced By**
+
+ - Complex Type wsSalesItem Type hsSimpleDate
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>No</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>No</td><td>Formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>No</td><td>Formatted yyyy</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+ - Complex Type wsSalesItem3 Type string
+
+**Referenced By**
+
+ - Complex Type dataSalesItem
+
+ - Complex Type wsSalesItem
+
+ - Complex Type wsSalesItem3
+ 
+Type int
+
+**Referenced By**
+
+ - Complex Type dataSalesItem
+
+ - Complex Type wsSalesItem
+
+ - Complex Type wsSalesItem3
+
+Type dateTime
+
+**Referenced By**
+
+ - Complex Type wsSalesItem
+
+ - Complex Type hsSimpleDate
+
+ - Complex Type dataSalesItem
+
+ - Complex Type wsSalesItem
+
+ - Complex Type wsSalesItem3 
+
+ - Complex Type wsReturn
+
+**Content Model**
+
+Contains elements as defined in the following table.
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>message</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+ - Complex Type dataSalesItem
+ - Complex Type wsSalesItem
+ - Complex Type wsSalesItem3
+ - Complex Type wsRevenueCenter
+ - Complex Type wsSalesCategory
+ - Complex Type wsReturn
+ - Complex Type wsRevenueCenter
+ - Complex Type wsSalesCategory
+ - Complex Type hsSimpleTime
+
+ <table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>revenueCenterNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+ - Complex Type wsRevenueCenterArray
+
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>salesCategoryNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+ - Complex Type wsSalesCategoryArray
+
+ <table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category</td></tr>
+<td nowrap>businessDate</td><td>hsSimpleDate</td><td>0..1</td><td>No</td><td>Business date of transaction</td></tr>
+<td nowrap>transDate</td><td>hsSimpleDate</td><td>0..1</td><td>No</td><td>Date of the transaction</td></tr>
+<td nowrap>transTime</td><td>hsSimpleTime</td><td>0..1</td><td>No</td><td>Time of the transaction</td></tr>
+</tbody>
+</table>
+
+ <table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category</td></tr>
+<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+ - Complex Type wsSalesItem
+ - Complex Type wsSalesItem3
+
+  <table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>No</td><td>Day formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>No</td><td>Month formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>No</td><td>Year formatted yyyy</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+ - Complex Type wsSalesItem3
+
+  <table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Nillable?</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>amPm</td><td>string</td><td>0..1</td><td>No</td><td>AM or PM indicator. amPm enum. If militaryTime is set to true, amPm</td></tr>
+<td nowrap>hours</td><td>int</td><td>1..1</td><td>No</td><td>is ignored.</td></tr>
+<td nowrap>militaryTime</td><td>boolean</td><td>1..1</td><td>No</td><td>Hour value</td></tr>
+<td nowrap>minutes</td><td>int</td><td>1..1</td><td>No</td><td>Military Time indicator</td></tr>
+<td nowrap>seconds</td><td>int</td><td>1..1</td><td>No</td><td>Minutes value</td></tr>
+<td nowrap></td><td></td><td></td><td></td><td>Seconds value</td></tr>
+</tbody>
+</table>
+
+**Referenced By**
+
+ - Complex Type wsSalesItem3
+ - Complex Type dataSalesItem
+ - Complex Type wsSalesItem
+ - Complex Type wsSalesItem3
+ - Complex Type hsSimpleDate
+
 ####setSalesItemsV4
+Same as **[setSalesItemsV3](#setsalesitemsv3)** but accepts alphanum store XR
 
 ##ScheduleService
 This service is intended for third parties to be able to grab scheduled shifts from HotSchedules and import them into their POS/data warehouse/enterprise/etc. system.
