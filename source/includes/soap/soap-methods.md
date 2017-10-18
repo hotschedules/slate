@@ -4184,8 +4184,7 @@ The outputs of this method are the arguments defined by the following table.
 <tr>
 <td>Exception</td>
 <td>Exception</td>
-<td>perm 3004<br>client not found
-perm 3004 API_SCHEDULE_PERMISSION
+<td>perm 3004<br>API_SCHEDULE_PERMISSION
 <br>client not found
 </td>
 </tr>
@@ -4332,8 +4331,7 @@ Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
 <tr>
 <td>Exception</td>
 <td>Exception</td>
-<td>perm 3004<br>client not found
-perm 3004 API_SCHEDULE_PERMISSION
+<td>perm 3004<br>API_SCHEDULE_PERMISSION
 <br>client not found
 </td>
 </tr>
