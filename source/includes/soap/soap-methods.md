@@ -109,6 +109,7 @@ The inputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
       <ns1:getClientCertificationsResponse xmlns:ns1="http://services.hotschedules.com/api/services/CertificationService">
@@ -212,6 +213,7 @@ The inputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -314,6 +316,7 @@ The inputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -410,6 +413,7 @@ The inputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -567,6 +571,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
       <ns1:getStoreEmployeesResponse xmlns:ns1="http://services.hotschedules.com/api/services/EmpService">
@@ -725,6 +730,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -861,6 +867,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
       <ns1:getStoreJobsResponse xmlns:ns1="http://services.hotschedules.com/api/services/EmpService">
@@ -1187,6 +1194,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope>
           <soap:Body>
                       <ns1:getEmpJobsResponse
@@ -1918,6 +1926,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -2154,6 +2163,7 @@ class="Apple-interchange-newline"></td></tr>
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope>
           <soap:Body>
                       <ns1:getLaborByJobAndIntervalResponse>
@@ -2305,6 +2315,7 @@ client not found</td></tr>
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:lab="http://services.hotschedules.com/api/services/LaborService">
@@ -2365,15 +2376,15 @@ Allows a customer to SET their budget via API. The service also allow a customer
 ####getLaborData
 ####setLaborData
 
-##ProjectedLaborService
-Description: Coming Soon...
+//##ProjectedLaborService
+//Description: Coming Soon...
 
-* Location: [http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl](http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl)
-* Protocol: SOAP
-* Default style: rpc
-* Transport protocol: SOAP over HTTP  
+//* Location: [http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl](http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl)
+//* Protocol: SOAP
+//* Default style: rpc
+//* Transport protocol: SOAP over HTTP  
 
-<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+//<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
 
 ####Coming Soon...
 
@@ -2457,6 +2468,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
       <ns1:getProjectedSalesResponse xmlns:ns1="http://services.hotschedules.com/api/services/ProjectedSalesService">
@@ -2556,6 +2568,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
    <soap:Body>
       <ns1:getProjectedSalesV3Response xmlns:ns1="http://services.hotschedules.com/api/services/ProjectedSalesService">
@@ -2739,6 +2752,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -2860,6 +2874,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
           xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
           <soap:Body>
@@ -2996,6 +3011,7 @@ The outputs of this method are the arguments defined by the following table.
 > **EXAMPLE RESPONSE:**
 
 ```
+<?xml version="1.0" encoding="UTFo8"?>
 <soap:Envelope
   xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
   <soap:Body>
@@ -3873,9 +3889,561 @@ This service is intended for third parties to be able to grab scheduled shifts f
 - **getTemplates:** Getter of client-level forecast template information Start and End dates may not be more than 30 days apart for this method.
 
 ####getLocations
+This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>dataLocationArray</td><td>1..1</td><td>Array of dataLocation objects.</td></tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<SOAPoENV:Envelope
+  xmlns:SOAPoENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:wsse="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"
+  xmlns:ns0="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns2="http://services.hotschedules.com/api/services/ScheduleService"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchemaoinstance"
+  xmlns:SOAPoENV="http://schemas.xmlsoap.org/soap/envelope/" SOAPoENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAPoENV:Header>
+    <wsse:Security mustUnderstand="true">
+      <wsse:UsernameToken>
+        <wsse:Username>REDACTED</wsse:Username>
+        <wsse:Password Type="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"
+>REDACTED</wsse:Password>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </SOAPoENV:Header>
+  <ns1:Body>
+    <ns2:getLocations>
+      <concept>1</concept>
+      <storeNum>103</storeNum>
+    </ns2:getLocations>
+  </ns1:Body>
+</SOAPoENV:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<soap:Envelope>
+  <soap:Body>
+    <ns1:getLocationsResponse>
+      <return>
+        <item>
+          <disabled>false</disabled>
+          <id>677337753</id>
+          <name>Location Name 1</name>
+        </item>
+        <item>
+          <disabled>false</disabled>
+          <id>517879406</id>
+          <name>Location Name 2</name>
+        </item>
+      </return>
+    </ns1:getLocationsResponse>
+  </soap:Body>
+</soap:Envelope>
+```
+
 ####getSchedule
+This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem objects, which represent one scheduled shift each, for import into the POS. This method returns a limited amount of data per shift: employee HS ID, employee POS ID, internal HS Job ID, POS Job ID, shift start date/time, shift end date/time, work week start date/time, work week end date/time.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>dateTime</td><td>1..1</td><td>First day of scheduled shifts you are requesting.</td></tr>
+<td nowrap>end</td><td>dateTime</td><td>1..1</td><td>Last day of scheduled shifts you are requesting.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>1..1</td>
+<td>WSReturn object</td>
+</tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3008<br>API_EMP_PERMISSION_SET_EMP_JOBS<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<SOAPoENV:Envelope
+  xmlns:SOAPoENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:wsse="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"
+  xmlns:ns0="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns2="http://services.hotschedules.com/api/services/ScheduleService"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchemaoinstance"
+  xmlns:SOAPoENV="http://schemas.xmlsoap.org/soap/envelope/" SOAPoENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAPoENV:Header>
+    <wsse:Security mustUnderstand="true">
+      <wsse:UsernameToken>
+        <wsse:Username>REDACTED</wsse:Username>
+        <wsse:Password Type="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"
+>REDACTED</wsse:Password>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </SOAPoENV:Header>
+  <ns1:Body>
+    <ns2:getSchedule>
+      <concept>1</concept>
+      <storeNum>37</storeNum>
+      <start>2014o04o18T00:00:00</start>
+      <end>2014o04o18T00:00:00</end>
+    </ns2:getSchedule>
+  </ns1:Body>
+</SOAPoENV:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<soap:Envelope>
+  <soap:Body>
+    <ns1:getScheduleResponse>
+      <return>
+        <item>
+          <empHsId>REDACTED
+          </empHSId>
+          <empPosId>REDACTED</empPosId>
+          <jobHsId>2129482342</jobHsId>
+          <jobPosId>453</jobPosId>
+          <in>2014o04o18T05:00:00o05:00</in>
+          <out>2014o04o18T16:00:00o05:00</out>
+          <weekEnd>2014o04o24T00:00:00o05:00</weekEnd>
+          <weekStart>2014o04o18T00:00:00o05:00</weekStart>
+        </item>
+        <item>
+          <empHSId>REDACTED</empHSId>
+          <empPosId>REDACTED</empPosId>
+          <jobHsId>837906321</jobHsId>
+          <jobPosId>600</jobPosId>
+          <in>2014o04o18T06:00:00o05:00</in>
+          <out>2014o04o18T14:00:00o05:00</out>
+          <weekEnd>2014o04o24T00:00:00o05:00</weekEnd>
+          <weekStart>2014o04o18T00:00:00o05:00</weekStart>
+        </item>
+      </return>
+    </ns1:getScheduleResponse>
+  </soap:Body>
+</soap:Envelope>
+```
+
 ####getSchedule2
+
+This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem2 objects, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>dateTime</td><td>1..1</td><td>First day of scheduled shifts you are requesting.</td></tr>
+<td nowrap>end</td><td>dateTime</td><td>1..1</td><td>Last day of scheduled shifts you are requesting.</td></tr>
+
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsScheduleItem2Array</td><td>1..1</td><td>Array of WSScheduleItem2 objects, which represent one scheduled shift each.</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3004<br>client not found
+perm 3004 API_SCHEDULE_PERMISSION
+<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<SOAPoENV:Envelope
+  xmlns:SOAPoENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:wsse="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"
+  xmlns:ns0="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns2="http://services.hotschedules.com/api/services/ScheduleService"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchemaoinstance"
+  xmlns:SOAPoENV="http://schemas.xmlsoap.org/soap/envelope/"
+SOAPoENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAPoENV:Header>
+    <wsse:Security mustUnderstand="true">
+      <wsse:UsernameToken>
+        <wsse:Username>REDACTED</wsse:Username>
+        <wsse:Password Type="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"
+>REDACTED</wsse:Password>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </SOAPoENV:Header>
+  <ns1:Body>
+    <ns2:getSchedule2>
+      <concept>1</concept>
+      <storeNum>37</storeNum>
+      <start>2014o04o18T00:00:00</start>
+      <end>2014o04o18T00:00:00</end>
+    </ns2:getSchedule2>
+  </ns1:Body>
+</SOAPoENV:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<soap:Envelope>
+  <soap:Body>
+    <ns1:getSchedule2Response>
+      <return>
+        <item>
+          <empHSId>REDACTED</empHSId>
+          <empPosId>REDACTED</empPosId>
+          <jobHsId>2129482342</jobHsId>
+          <jobPosId>453</jobPosId>
+          <in>2014o04o18T05:00:00o05:00</in>
+          <out>2014o04o18T16:00:00o05:00</out>
+          <weekEnd>2014o04o24T00:00:00o05:00</weekEnd>
+          <weekStart>2014o04o18T00:00:00o05:00</weekStart>
+          <locationId>578176916</locationId>
+          <ovtMinutes>0</ovtMinutes>
+          <ovtRate>0.0</ovtRate>
+          <payRate>0.0</payRate>
+          <regMinutes>660</regMinutes>
+          <scheduleId>2129477321</scheduleId>
+          <specialPay>0.0</specialPay>
+        </item>
+        <item>
+          <empHSId>REDACTED</empHSId>
+          <empPosId>REDACTED</empPosId>
+          <jobHsId>837906321</jobHsId>
+          <jobPosId>600</jobPosId>
+          <in>2014o04o18T06:00:00o05:00</in>
+          <out>2014o04o18T14:00:00o05:00</out>
+          <weekEnd>2014o04o24T00:00:00o05:00</weekEnd>
+          <weekStart>2014o04o18T00:00:00o05:00</weekStart>
+          <locationId>o1</locationId>
+          <ovtMinutes>0</ovtMinutes>
+          <ovtRate>0.0</ovtRate>
+          <payRate>24.0</payRate>
+          <regMinutes>480</regMinutes>
+          <scheduleId>2129477321</scheduleId>
+          <specialPay>0.0</specialPay>
+        </item>
+      </return>
+    </ns1:getSchedule2Response>
+  </soap:Body> </soap:Envelope>
+```
+
 ####getScheduleV3
+This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.
+This method uses hsSimpleDate objects for dates.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>start</td><td>hsSimpleDate</td><td>1..1</td><td>First day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.</td></tr>
+<td nowrap>end</td><td>hsSimpleDate</td><td>1..1</td><td>Last day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsScheduleItem3Arr ay</td><td>1..1</td><td>rray of WSScheduleItem3 objects, which represent one scheduled shift each.
+Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
+</tbody>
+</table>
+
+**Faults**
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3004<br>client not found
+perm 3004 API_SCHEDULE_PERMISSION
+<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<SOAPoENV:Envelope
+  xmlns:SOAPoENC="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:wsse="http://docs.oasisoopen.org/wss/2 004/01/oasiso200401owssowssecurityosecexto1.0.xsd"
+  xmlns:ns0="http://schemas.xmlsoap.org/soap/encoding/"
+  xmlns:ns1="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:ns2="http://services.hotschedules.com/api/services/ScheduleService"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchemaoinstance"
+  xmlns:SOAPoENV="http://schemas.xmlsoap.org/soap/envelope/" SOAPoENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+  <SOAPoENV:Header>
+    <wsse:Security mustUnderstand="true">
+      <wsse:UsernameToken>
+        <wsse:Username>REDACTED</wsse:Username>
+        <wsse:Password Type="http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"
+>REDACTED</wsse:Password>
+      </wsse:UsernameToken>
+    </wsse:Security>
+  </SOAPoENV:Header>
+  <ns1:Body>
+    <ns2:getScheduleV3>
+      <concept>1</concept>
+      <storeNum>37</storeNum>
+      <start>
+        <day>18</day>
+        <month>4</month>
+        <year>2014</year>
+      </start>
+      <end>
+        <day>18</day>
+        <month>4</month>
+        <year>2014</year>
+      </end>
+    </ns2:getScheduleV3></ns1:Body></SOAPoENV:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<?xml version="1.0" encoding="UTFo8"?>
+<soap:Envelope>
+  <soap:Body>lOCA
+    <ns1:getScheduleV3Response>
+      <return>
+        <item>
+          <empHSId>1712094</empHSId>
+          <empPosId>190</empPosId>
+          <jobHsId>489527461</jobHsId>
+          <jobPosId>120000</jobPosId>
+          <inDate>
+            <day>18</day>
+            <month>4</month>
+            <year>2014</year>
+          </inDate>
+          <inTime>
+            <hours>6</hours>
+            <militaryTime>true</militaryTime>
+            <minutes>30</minutes>
+            <seconds>0</seconds>
+          </inTime>
+          <locationId>o1</locationId>
+          <outDate>
+            <day>18</day>
+            <month>4</month>
+            <year>2014</year>
+          </outDate>
+          <outTime>
+            <hours>15</hours>
+            <militaryTime>true</militaryTime>
+            <minutes>0</minutes>
+            <seconds>0</seconds>
+          </outTime>
+          <ovtMinutes>0</ovtMinutes>
+          <ovtRate>0.0</ovtRate>
+          <payRate>0.0</payRate>
+          <regMinutes>0</regMinutes>
+          <scheduleId>o1</scheduleId>
+          <specialPay>0.0</specialPay>
+          <weekEnd>
+            <day>24</day>
+            <month>4</month>
+            <year>2014</year>
+          </weekEnd>
+          <weekStart>
+            <day>18</day>
+            <month>4</month>
+            <year>2014</year>
+          </weekStart>
+        </item>
+      </return>
+    </ns1:getScheduleV3Response>
+  </soap:Body>
+</soap:Envelope>
+```
+
+
+
+
+
+
+
+
 ####getShiftsV3
 ####getTemplates
 
