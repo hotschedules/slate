@@ -4394,7 +4394,7 @@ The outputs of this method are the arguments defined by the following table.</p>
 <tbody>
 <tr>
 <td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
-<td nowrap>return</td><td>wsScheduleItem3Arr ay</td><td>1..1</td><td>rray of WSScheduleItem3 objects, which represent one scheduled shift each.
+<td nowrap>return</td><td>wsScheduleItem3Array</td><td>1..1</td><td>Array of WSScheduleItem3 objects, which represent one scheduled shift each.
 Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
 </tbody>
 </table>
@@ -4519,7 +4519,343 @@ Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
 
 <h4 id="getshiftsv3">getShiftsV3</h4>
 
+<p>This method takes in a concept ID, store ID, start and end dates and three flags (isHouse, isScheduled and isPosted). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
+
+<p><strong>isHouse:</strong> includes scheduled or posted shifts that are not assigned to an employee (called &#39;house shifts&rsquo; in HotSchedules).</p>
+
+<p><strong>isScheduled:</strong> includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted</p>
+
+<p><strong>isPosted:</strong> includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules</p>
+
+<p>This method returns extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Day formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>Month formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Year formatted yyyy</td></tr>
+<td nowrap>isHouse</td><td>boolean</td><td>1..1</td><td>Include house shifts? These are shifts which were never assigned to someone on a schedule, or were once assigned but removed from an employee when their status, job, etc. changed.</td></tr>
+<td nowrap>isScheduled</td><td>boolean</td><td>1..1</td><td>Include scheduled shifts? These are shifts which are on a schedule that has been saved in HotSchedules, but might not have been posted</td></tr>
+<td nowrap>isPosted</td><td>boolean</td><td>1..1</td><td>These are shifts that are in schedules that have been set to the 'posted&rsquo; status within HotSchedules.</td></tr>
+<td nowrap>jobCodes</td><td>intArray</td><td>1..1</td><td>Integer array of job codes to be included in this method&rsquo;s return. if this parameter is null or empty, all jobs will be included.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsScheduleItem3Array</td><td>1..1</td><td>Array of WSScheduleItem3 objects, which represent one scheduled shift each.
+Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>perm 3004<br>API_SCHEDULE_PERMISSION
+<br>client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+  <span class="na">xmlns:sch=</span><span class="s">"http://services.hotschedules.com/api/services/ScheduleService"</span>
+  <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soapenv:Header&gt;</span>
+    <span class="nt">&lt;wsse:Security</span>
+      <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"</span>
+      <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityoutilityo1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameTokeno5A4A0145444B759EC8145271260874466"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+        <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+        <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssosoapomessageosecurityo1.0#Base64Bina ry"</span><span class="nt">&gt;</span>m2/v7Yt2bmHeTDmYvu85CA==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+        <span class="nt">&lt;wsu:Created&gt;</span>2016o01o13T19:16:48.744Z<span class="nt">&lt;/wsu:Created&gt;</span>
+      <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+    <span class="nt">&lt;/wsse:Security&gt;</span>
+  <span class="nt">&lt;/soapenv:Header&gt;</span>
+  <span class="nt">&lt;soapenv:Body&gt;</span>
+    <span class="nt">&lt;sch:getShiftsV3&gt;</span>
+      <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+      <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;start&gt;</span>
+        <span class="nt">&lt;day&gt;</span>1<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/start&gt;</span>
+      <span class="nt">&lt;end&gt;</span>
+        <span class="nt">&lt;day&gt;</span>9<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>2<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/end&gt;</span>
+      <span class="nt">&lt;isHouse&gt;</span>false<span class="nt">&lt;/isHouse&gt;</span>
+      <span class="nt">&lt;isScheduled&gt;</span>true<span class="nt">&lt;/isScheduled&gt;</span>
+      <span class="nt">&lt;isPosted&gt;</span>true<span class="nt">&lt;/isPosted&gt;</span>
+      <span class="nt">&lt;jobCodes&gt;</span>
+        <span class="cp">&lt;!ooZero or more repetitions:
+&lt;item&gt;</span>871507284<span class="nt">&lt;/item&gt;</span>oo&gt;
+<span class="nt">&lt;/jobCodes&gt;</span>
+<span class="nt">&lt;/sch:getShiftsV3&gt;</span>
+<span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soap:Envelope</span>
+  <span class="na">xmlns:soap=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soap:Body&gt;</span>
+    <span class="nt">&lt;ns1:getShiftsV3Response</span>
+      <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/ScheduleService"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;return&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;empHSId&gt;</span>17896647<span class="nt">&lt;/empHSId&gt;</span>
+          <span class="nt">&lt;empPosId&gt;</span>1<span class="nt">&lt;/empPosId&gt;</span>
+          <span class="nt">&lt;jobHsId&gt;</span>964330045<span class="nt">&lt;/jobHsId&gt;</span>
+          <span class="nt">&lt;jobPosId&gt;</span>o1<span class="nt">&lt;/jobPosId&gt;</span>
+          <span class="nt">&lt;inDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>11<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/inDate&gt;</span>
+          <span class="nt">&lt;inTime&gt;</span>
+            <span class="nt">&lt;hours&gt;</span>7<span class="nt">&lt;/hours&gt;</span>
+            <span class="nt">&lt;militaryTime&gt;</span>true<span class="nt">&lt;/militaryTime&gt;</span>
+            <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+            <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+          <span class="nt">&lt;/inTime&gt;</span>
+          <span class="nt">&lt;locationId&gt;</span>o1<span class="nt">&lt;/locationId&gt;</span>
+          <span class="nt">&lt;outDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>11<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/outDate&gt;</span>
+          <span class="nt">&lt;outTime&gt;</span>
+            <span class="nt">&lt;hours&gt;</span>15<span class="nt">&lt;/hours&gt;</span>
+            <span class="nt">&lt;militaryTime&gt;</span>true<span class="nt">&lt;/militaryTime&gt;</span>
+            <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+            <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+          <span class="nt">&lt;/outTime&gt;</span>
+          <span class="nt">&lt;ovtMinutes&gt;</span>0<span class="nt">&lt;/ovtMinutes&gt;</span>
+          <span class="nt">&lt;ovtRate&gt;</span>0.0<span class="nt">&lt;/ovtRate&gt;</span>
+          <span class="nt">&lt;payRate&gt;</span>9.5<span class="nt">&lt;/payRate&gt;</span>
+          <span class="nt">&lt;regMinutes&gt;</span>480<span class="nt">&lt;/regMinutes&gt;</span>
+          <span class="nt">&lt;scheduleId&gt;</span>964330041<span class="nt">&lt;/scheduleId&gt;</span>
+          <span class="nt">&lt;specialPay&gt;</span>0.0<span class="nt">&lt;/specialPay&gt;</span>
+          <span class="nt">&lt;weekEnd&gt;</span>
+            <span class="nt">&lt;day&gt;</span>16<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/weekEnd&gt;</span>
+          <span class="nt">&lt;weekStart&gt;</span>
+            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/weekStart&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+      <span class="nt">&lt;/return&gt;</span>
+    <span class="nt">&lt;/ns1:getShiftsV3Response&gt;</span>
+  <span class="nt">&lt;/soap:Body&gt;</span>
+<span class="nt">&lt;/soap:Envelope&gt;</span>
+</code></pre>
+
 <h4 id="gettemplates">getTemplates</h4>
+
+<p>This method takes in a concept ID, store ID, start and end dates. This method returns template information.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Day formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>1..1</td><td>Month formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Year formatted yyyy</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>Coming Soon</td><td>1..1</td><td>Coming Soon</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Exception</td>
+<td>Exception</td>
+<td>invalid start and/or end dates<br>
+perm 3004<br>
+perm 3002<br>
+API_SCHEDULE_PERMISSION<br>
+API_SCHEDULE_GET_TEMPLATES_PERMISSION<br>
+client not found
+</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+  <span class="na">xmlns:sch=</span><span class="s">"http://services.hotschedules.com/api/services/ScheduleService"</span>
+  <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soapenv:Header&gt;</span>
+    <span class="nt">&lt;wsse:Security</span>
+      <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"</span>
+      <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityoutilityo1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameTokeno63A716DE011BE2D649145262988637423"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+        <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"</span><span class="nt">&gt;</span>laura 1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+        <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssosoapomessageosecurityo1.0#Base64Bina ry"</span><span class="nt">&gt;</span>WjFLOOT1CCJWLffHSRdCnQ==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+        <span class="nt">&lt;wsu:Created&gt;</span>2016o01o12T20:18:06.374Z<span class="nt">&lt;/wsu:Created&gt;</span>
+      <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+    <span class="nt">&lt;/wsse:Security&gt;</span>
+  <span class="nt">&lt;/soapenv:Header&gt;</span>
+  <span class="nt">&lt;soapenv:Body&gt;</span>
+    <span class="nt">&lt;sch:getTemplates&gt;</span>
+      <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+      <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;start&gt;</span>
+        <span class="nt">&lt;day&gt;</span>1<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/start&gt;</span>
+      <span class="nt">&lt;end&gt;</span>
+        <span class="nt">&lt;day&gt;</span>20<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/end&gt;</span>
+    <span class="nt">&lt;/sch:getTemplates&gt;</span>
+  <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soap:Envelope</span>
+  <span class="na">xmlns:soap=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soap:Body&gt;</span>
+    <span class="nt">&lt;ns1:getTemplatesResponse</span>
+      <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/ScheduleService"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;return&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;durationMinutes&gt;</span>360<span class="nt">&lt;/durationMinutes&gt;</span>
+          <span class="nt">&lt;endTime&gt;</span>
+            <span class="nt">&lt;hours&gt;</span>16<span class="nt">&lt;/hours&gt;</span>
+            <span class="nt">&lt;militaryTime&gt;</span>true<span class="nt">&lt;/militaryTime&gt;</span>
+            <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+            <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+          <span class="nt">&lt;/endTime&gt;</span>
+          <span class="nt">&lt;jobCode&gt;</span>o1<span class="nt">&lt;/jobCode&gt;</span>
+          <span class="nt">&lt;jobName&gt;</span>Baker<span class="nt">&lt;/jobName&gt;</span>
+          <span class="nt">&lt;locationId&gt;</span>o1<span class="nt">&lt;/locationId&gt;</span>
+          <span class="nt">&lt;locationName&gt;</span>NO_LOC<span class="nt">&lt;/locationName&gt;</span>
+          <span class="nt">&lt;scheduleId&gt;</span>964330043<span class="nt">&lt;/scheduleId&gt;</span>
+          <span class="nt">&lt;scheduleName&gt;</span>Kitchen<span class="nt">&lt;/scheduleName&gt;</span>
+          <span class="nt">&lt;shiftName&gt;</span>Kitchen<span class="nt">&lt;/shiftName&gt;</span>
+          <span class="nt">&lt;startTime&gt;</span>
+            <span class="nt">&lt;hours&gt;</span>10<span class="nt">&lt;/hours&gt;</span>
+            <span class="nt">&lt;militaryTime&gt;</span>true<span class="nt">&lt;/militaryTime&gt;</span>
+            <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+            <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+          <span class="nt">&lt;/startTime&gt;</span>
+          <span class="nt">&lt;templateDesc&gt;</span>Low Volume<span class="nt">&lt;/templateDesc&gt;</span>
+          <span class="nt">&lt;templateGroupId&gt;</span>o1<span class="nt">&lt;/templateGroupId&gt;</span>
+          <span class="nt">&lt;templateGroupName&gt;</span>NOT_GROUPED<span class="nt">&lt;/templateGroupName&gt;</span>
+          <span class="nt">&lt;templateId&gt;</span>964318045<span class="nt">&lt;/templateId&gt;</span>
+          <span class="nt">&lt;templateName&gt;</span>Low Volume<span class="nt">&lt;/templateName&gt;</span>
+          <span class="nt">&lt;weekday&gt;</span>6<span class="nt">&lt;/weekday&gt;</span>
+          <span class="nt">&lt;weekdayName&gt;</span>Friday<span class="nt">&lt;/weekdayName&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+      <span class="nt">&lt;/return&gt;</span>
+    <span class="nt">&lt;/ns1:getTemplatesResponse&gt;</span>
+  <span class="nt">&lt;/soap:Body&gt;&lt;/soap:Envelope&gt;</span>
+</code></pre>
 
 <h2 id="timecardservice">TimeCardService</h2>
 
@@ -4552,7 +4888,327 @@ Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
 
 <h4 id="gettimecards">getTimeCards</h4>
 
+<p>This method takes in a concept ID, store ID, start and end dates. It returns an array of wsTimeCard3 objects, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in and clock out times. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Day formatted dd</td></tr>
+<td nowrap>Month</td><td>int</td><td>1..1</td><td>Month formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Year formatted yyyy</td></tr>
+
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsTimeCard3Array</td><td>1..1</td><td>Array of wsTimeCard3 objects. Each
+object has data for one employee punch record.
+Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Exception</td><td>Exception</td><td>perm 3003<br>
+perm 3011<br>
+API_LABOR_SERVICE<br>
+API_LABOR_PERMISSION_GET_TIMECARDS<br>
+client not found</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;SOAPoENV:Envelope</span>
+  <span class="na">xmlns:SOAPoENC=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+  <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"</span>
+  <span class="na">xmlns:ns0=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span>
+  <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/TimeCardService"</span>
+  <span class="na">xmlns:ns2=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+  <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchemaoinstance"</span>
+  <span class="na">xmlns:SOAPoENV=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+<span class="na">SOAPoENV:encodingStyle=</span><span class="s">"http://schemas.xmlsoap.org/soap/encoding/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;SOAPoENV:Header&gt;</span>
+    <span class="nt">&lt;wsse:Security</span> <span class="na">mustUnderstand=</span><span class="s">"true"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;wsse:UsernameToken&gt;</span>
+        <span class="nt">&lt;wsse:Username&gt;</span>REDACTED<span class="nt">&lt;/wsse:Username&gt;</span>
+        <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"</span>
+<span class="nt">&gt;</span>REDACTED<span class="nt">&lt;/wsse:Password&gt;</span>
+      <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+    <span class="nt">&lt;/wsse:Security&gt;</span>
+  <span class="nt">&lt;/SOAPoENV:Header&gt;</span>
+  <span class="nt">&lt;ns2:Body&gt;</span>
+    <span class="nt">&lt;ns1:getTimeCards&gt;</span>
+      <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+      <span class="nt">&lt;storeNum&gt;</span>103<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;start&gt;</span>
+        <span class="nt">&lt;day&gt;</span>25<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>2<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/start&gt;</span>
+      <span class="nt">&lt;end&gt;</span>
+        <span class="nt">&lt;day&gt;</span>25<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>2<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/end&gt;</span>
+    <span class="nt">&lt;/ns1:getTimeCards&gt;</span>
+  <span class="nt">&lt;/ns2:Body&gt;</span>
+<span class="nt">&lt;/SOAPoENV:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soap:Envelope&gt;</span>
+  <span class="nt">&lt;soap:Body&gt;</span>
+    <span class="nt">&lt;ns1:getTimeCardsResponse&gt;</span>
+      <span class="nt">&lt;return&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;breakMinutes&gt;</span>0<span class="nt">&lt;/breakMinutes&gt;</span>
+          <span class="nt">&lt;empPosId&gt;</span>210<span class="nt">&lt;/empPosId&gt;</span>
+          <span class="nt">&lt;extId&gt;</span>156393867196<span class="nt">&lt;/extId&gt;</span>
+          <span class="nt">&lt;hsId&gt;</span>156393867197<span class="nt">&lt;/hsId&gt;</span>
+          <span class="nt">&lt;jobExtId&gt;</span>12<span class="nt">&lt;/jobExtId&gt;</span>
+          <span class="nt">&lt;jobName&gt;</span>Expediter<span class="nt">&lt;/jobName&gt;</span>
+          <span class="nt">&lt;ovtHrs&gt;</span>0.0<span class="nt">&lt;/ovtHrs&gt;</span>
+          <span class="nt">&lt;ovtMins&gt;</span>0<span class="nt">&lt;/ovtMins&gt;</span>
+          <span class="nt">&lt;ovtTtl&gt;</span>0.0<span class="nt">&lt;/ovtTtl&gt;</span>
+          <span class="nt">&lt;ovtWage&gt;</span>0.0<span class="nt">&lt;/ovtWage&gt;</span>
+          <span class="nt">&lt;regHrs&gt;</span>4.6833334<span class="nt">&lt;/regHrs&gt;</span>
+          <span class="nt">&lt;regTtl&gt;</span>0.0<span class="nt">&lt;/regTtl&gt;</span>
+          <span class="nt">&lt;regWage&gt;</span>8.0<span class="nt">&lt;/regWage&gt;</span>
+          <span class="nt">&lt;spcHrs&gt;</span>0.0<span class="nt">&lt;/spcHrs&gt;</span>
+          <span class="nt">&lt;spcTtl&gt;</span>0.0<span class="nt">&lt;/spcTtl&gt;</span>
+          <span class="nt">&lt;storeNum&gt;</span>103<span class="nt">&lt;/storeNum&gt;</span>
+          <span class="nt">&lt;businessDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>25<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>2<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/businessDate&gt;</span>
+          <span class="nt">&lt;clockIn&gt;</span>2014o02o25T10:26:00o06:00<span class="nt">&lt;/clockIn&gt;</span>
+          <span class="nt">&lt;clockOut&gt;</span>2014o02o25T15:07:00o06:00<span class="nt">&lt;/clockOut&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;breakMinutes&gt;</span>0<span class="nt">&lt;/breakMinutes&gt;</span>
+          <span class="nt">&lt;empPosId&gt;</span>207<span class="nt">&lt;/empPosId&gt;</span>
+          <span class="nt">&lt;extId&gt;</span>156393867200<span class="nt">&lt;/extId&gt;</span>
+          <span class="nt">&lt;hsId&gt;</span>156393867201<span class="nt">&lt;/hsId&gt;</span>
+          <span class="nt">&lt;jobExtId&gt;</span>12<span class="nt">&lt;/jobExtId&gt;</span>
+          <span class="nt">&lt;jobName&gt;</span>Expediter<span class="nt">&lt;/jobName&gt;</span>
+          <span class="nt">&lt;ovtHrs&gt;</span>0.0<span class="nt">&lt;/ovtHrs&gt;</span>
+          <span class="nt">&lt;ovtMins&gt;</span>0<span class="nt">&lt;/ovtMins&gt;</span>
+          <span class="nt">&lt;ovtTtl&gt;</span>0.0<span class="nt">&lt;/ovtTtl&gt;</span>
+          <span class="nt">&lt;ovtWage&gt;</span>0.0<span class="nt">&lt;/ovtWage&gt;</span>
+          <span class="nt">&lt;regHrs&gt;</span>4.983333<span class="nt">&lt;/regHrs&gt;</span>
+          <span class="nt">&lt;regTtl&gt;</span>0.0<span class="nt">&lt;/regTtl&gt;</span>
+          <span class="nt">&lt;regWage&gt;</span>8.0<span class="nt">&lt;/regWage&gt;</span>
+          <span class="nt">&lt;spcHrs&gt;</span>0.0<span class="nt">&lt;/spcHrs&gt;</span>
+          <span class="nt">&lt;spcTtl&gt;</span>0.0<span class="nt">&lt;/spcTtl&gt;</span>
+          <span class="nt">&lt;storeNum&gt;</span>103<span class="nt">&lt;/storeNum&gt;</span>
+          <span class="nt">&lt;businessDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>25<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>2<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2014<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/businessDate&gt;</span>
+          <span class="nt">&lt;clockIn&gt;</span>2014o02o25T16:28:00o06:00<span class="nt">&lt;/clockIn&gt;</span>
+          <span class="nt">&lt;clockOut&gt;</span>2014o02o25T21:27:00o06:00<span class="nt">&lt;/clockOut&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+      <span class="nt">&lt;/return&gt;</span>
+    <span class="nt">&lt;/ns1:getTimeCardsResponse&gt;</span>
+  <span class="nt">&lt;/soap:Body&gt;</span>
+<span class="nt">&lt;/soap:Envelope&gt;</span>
+</code></pre>
+
 <h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
+
+<p>This method takes in a concept ID, store ID, start and end dates. It returns an array of wsTimeCard3 objects, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules&rsquo; webobased timeclock for employee clockoin, any open punches in the date range are also included in the response.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>1..1</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>day</td><td>int</td><td>1..1</td><td>Day formatted dd</td></tr>
+<td nowrap>Month</td><td>int</td><td>1..1</td><td>Month formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>1..1</td><td>Year formatted yyyy</td></tr>
+
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Occurs</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
+<td nowrap>return</td><td>wsTimeCard3Array</td><td>1..1</td><td>Array of wsTimeCard3 objects. Each
+object has data for one employee punch record.
+Dates are hsSimpleDate objects and times are hsSimpleTime objects.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Faults</strong></p>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Content</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>Exception</td><td>Exception</td><td>perm 3003<br>
+perm 3011<br>
+API_LABOR_SERVICE<br>
+API_LABOR_PERMISSION_GET_TIMECARDS<br>
+client not found</td></tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span>
+  <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
+  <span class="na">xmlns:tim=</span><span class="s">"http://services.hotschedules.com/api/services/TimeCardService"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soapenv:Header&gt;</span>
+    <span class="nt">&lt;wsse:Security</span>
+      <span class="na">xmlns:wsse=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityosecexto1.0.xsd"</span>
+      <span class="na">xmlns:wsu=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssowssecurityoutilityo1.0.xsd"</span> <span class="na">soapenv:mustUnderstand=</span><span class="s">"1"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;wsse:UsernameToken</span> <span class="na">wsu:Id=</span><span class="s">"UsernameTokeno5A4A0145444B759EC8145271596284975"</span><span class="nt">&gt;</span>
+        <span class="nt">&lt;wsse:Username&gt;</span>laura1234!<span class="nt">&lt;/wsse:Username&gt;</span>
+        <span class="nt">&lt;wsse:Password</span> <span class="na">Type=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssousernameotokenoprofileo1.0#PasswordText"</span><span class="nt">&gt;</span>laur a1234!<span class="nt">&lt;/wsse:Password&gt;</span>
+        <span class="nt">&lt;wsse:Nonce</span> <span class="na">EncodingType=</span><span class="s">"http://docs.oasisoopen.org/wss/2004/01/oasiso200401owssosoapomessageosecurityo1.0#Base64Bin ary"</span><span class="nt">&gt;</span>mafwHuh4YzpETuPwHxlC2g==<span class="nt">&lt;/wsse:Nonce&gt;</span>
+        <span class="nt">&lt;wsu:Created&gt;</span>2016o01o13T20:12:42.849Z<span class="nt">&lt;/wsu:Created&gt;</span>
+      <span class="nt">&lt;/wsse:UsernameToken&gt;</span>
+    <span class="nt">&lt;/wsse:Security&gt;</span>
+  <span class="nt">&lt;/soapenv:Header&gt;</span>
+  <span class="nt">&lt;soapenv:Body&gt;</span>
+    <span class="nt">&lt;tim:getTimeCardsDeclaredTips&gt;</span>
+      <span class="nt">&lt;concept&gt;</span>1<span class="nt">&lt;/concept&gt;</span>
+      <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+      <span class="nt">&lt;start&gt;</span>
+        <span class="nt">&lt;day&gt;</span>1<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/start&gt;</span>
+      <span class="nt">&lt;end&gt;</span>
+        <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+        <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+        <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+      <span class="nt">&lt;/end&gt;</span>
+    <span class="nt">&lt;/tim:getTimeCardsDeclaredTips&gt;</span>
+  <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
+<span class="nt">&lt;soap:Envelope</span>
+  <span class="na">xmlns:soap=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span><span class="nt">&gt;</span>
+  <span class="nt">&lt;soap:Body&gt;</span>
+    <span class="nt">&lt;ns1:getTimeCardsDeclaredTipsResponse</span>
+      <span class="na">xmlns:ns1=</span><span class="s">"http://services.hotschedules.com/api/services/TimeCardService"</span><span class="nt">&gt;</span>
+      <span class="nt">&lt;return&gt;</span>
+        <span class="nt">&lt;item&gt;</span>
+          <span class="nt">&lt;breakMinutes&gt;</span>0<span class="nt">&lt;/breakMinutes&gt;</span>
+          <span class="nt">&lt;empPosId&gt;</span>2<span class="nt">&lt;/empPosId&gt;</span>
+          <span class="nt">&lt;extId&gt;</span>844268158324<span class="nt">&lt;/extId&gt;</span>
+          <span class="nt">&lt;hsId&gt;</span>844268158325<span class="nt">&lt;/hsId&gt;</span>
+          <span class="nt">&lt;jobExtId&gt;</span>o1<span class="nt">&lt;/jobExtId&gt;</span>
+          <span class="nt">&lt;jobId&gt;</span>o1<span class="nt">&lt;/jobId&gt;</span>
+          <span class="nt">&lt;jobName&gt;</span>Baker<span class="nt">&lt;/jobName&gt;</span>
+          <span class="nt">&lt;ovtHrs&gt;</span>1.0<span class="nt">&lt;/ovtHrs&gt;</span>
+          <span class="nt">&lt;ovtMins&gt;</span>0<span class="nt">&lt;/ovtMins&gt;</span>
+          <span class="nt">&lt;ovtTtl&gt;</span>0.0<span class="nt">&lt;/ovtTtl&gt;</span>
+          <span class="nt">&lt;ovtWage&gt;</span>0.0<span class="nt">&lt;/ovtWage&gt;</span>
+          <span class="nt">&lt;regHrs&gt;</span>8.0<span class="nt">&lt;/regHrs&gt;</span>
+          <span class="nt">&lt;regTtl&gt;</span>0.0<span class="nt">&lt;/regTtl&gt;</span>
+          <span class="nt">&lt;regWage&gt;</span>0.0<span class="nt">&lt;/regWage&gt;</span>
+          <span class="nt">&lt;spcHrs&gt;</span>0.0<span class="nt">&lt;/spcHrs&gt;</span>
+          <span class="nt">&lt;spcTtl&gt;</span>0.0<span class="nt">&lt;/spcTtl&gt;</span>
+          <span class="nt">&lt;storeNum&gt;</span>1<span class="nt">&lt;/storeNum&gt;</span>
+          <span class="nt">&lt;businessDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>1<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2016<span class="nt">&lt;/year&gt;</span>
+          <span class="nt">&lt;/businessDate&gt;</span>
+          <span class="nt">&lt;clockIn&gt;</span>2016o01o10T15:00:00o06:00<span class="nt">&lt;/clockIn&gt;</span>
+          <span class="nt">&lt;clockOut&gt;</span>2016o01o11T00:00:00o06:00<span class="nt">&lt;/clockOut&gt;</span>
+          <span class="nt">&lt;declaredTips&gt;</span>0.0<span class="nt">&lt;/declaredTips&gt;</span>
+        <span class="nt">&lt;/item&gt;</span>
+      <span class="nt">&lt;/return&gt;</span>
+    <span class="nt">&lt;/ns1:getTimeCardsDeclaredTipsResponse&gt;</span>
+  <span class="nt">&lt;/soap:Body&gt;</span>
+<span class="nt">&lt;/soap:Envelope&gt;</span>
+</code></pre>
 
 <h4 id="gettimecardsv2">getTimeCardsV2</h4>
 
