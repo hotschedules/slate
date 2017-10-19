@@ -24,14 +24,14 @@ under the License.
 
 // BACKGROUND COLORS
 ////////////////////
-$nav-bg: #4A5456;
+$nav-bg: #F4F4F4;
 $examples-bg: #4A5456;
 $code-bg: #292929;
-$code-annotation-bg: #1c1c1c;
-$nav-subitem-bg: #262626;
-$nav-active-bg: #343434;
-$lang-select-border: #000;
-$lang-select-bg: #222;
+$code-annotation-bg: #1C1C1C;
+$nav-subitem-bg: #F4F4F4;
+$nav-active-bg: #CEECF6;
+$lang-select-border: #0CA2D0;
+$lang-select-bg: #0CA2D0;
 $lang-select-active-bg: $examples-bg; // feel free to change this to blue or something
 $lang-select-pressed-bg: #111; // color of language tab bg when mouse is pressed
 $main-bg: #FFFFFF;
@@ -43,9 +43,9 @@ $search-notice-bg: #c97a7e;
 
 // TEXT COLORS
 ////////////////////
-$main-text: #333; // main content text color
-$nav-text: #fff;
-$nav-active-text: #0CA2D0;
+$main-text: #4A5456; // main content text color
+$nav-text: #0CA2D0;
+$nav-active-text: #4A5456;
 $lang-select-text: #fff; // color of unselected language tab text
 $lang-select-active-text: #fff; // color of selected language tab text
 $lang-select-pressed-text: #fff; // color of language tab text when mouse is pressed
@@ -70,7 +70,7 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 ////////////////////
 %default-font {
   font-family: "Open Sans";
-  font-size: 14px;
+  font-size: 12px;
 }
 
 %header-font {
@@ -80,7 +80,7 @@ $phone-width: $tablet-width - $nav-width; // min width before reverting to mobil
 
 %code-font {
   font-family: "Open Sans";
-  font-size: 12px;
+  font-size: 14px;
   line-height: 1.5;
 }
 
@@ -100,12 +100,12 @@ text-decoration:underline;
 
 // OTHER
 ////////////////////
-$nav-active-shadow: #000;
-$nav-footer-border-color: #666;
-$nav-embossed-border-top: #000;
-$nav-embossed-border-bottom: #939393;
-$main-embossed-text-shadow: 0px 1px 0px #fff;
-$search-box-border-color: #666;
+$nav-active-shadow: #888C90;
+$nav-footer-border-color: #888C90;
+$nav-embossed-border-top: #F4F4F4;
+$nav-embossed-border-bottom: #F4F4F4;
+$main-embossed-text-shadow: 0px 0px 0px #888C90;
+$search-box-border-color: #888C90;
 
 
 ////////////////////////////////////////////////////////////////////////////////

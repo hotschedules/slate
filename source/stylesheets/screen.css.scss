@@ -117,7 +117,7 @@ html, body {
       margin: $nav-v-padding $nav-padding;
       width: $nav-width - 30;
       outline: none;
-      color: $nav-text;
+      color: #4A5456;
       border-radius: 0; /* ios has a default border radius */
     }
 
@@ -185,7 +185,7 @@ html, body {
   }
 
   li {
-    color: $nav-text;
+    color: #4a5456;
     @include transition-property('background');
     @include transition-timing-function('linear');
     @include transition-duration(230ms);
@@ -459,20 +459,23 @@ html, body {
       text-align: left;
       vertical-align: top;
       line-height: 1.6;
+      border: 1px solid #4a5456
     }
 
     th {
       padding: 5px 10px;
-      border-bottom: 1px solid #ccc;
-      vertical-align: bottom;
+      border: 1px solid #ccc;
+      vertical-align: center;
+      background-color: #f4f4f4;
     }
 
     td {
       padding: 10px;
+      border: 1px solid #ccc
     }
 
     tr:last-child {
-      border-bottom: 1px solid #ccc;
+      border: 1px solid #ccc;
     }
 
     tr:nth-child(odd)>td {
@@ -556,10 +559,10 @@ html, body {
   .search-highlight {
     padding: 2px;
     margin: -2px;
-    border-radius: 4px;
-    border: 1px solid #F7E633;
-    @include text-shadow(1px 1px 0 #666);
-    @include background(linear-gradient(bottom right, #F7E633 0%, #F1D32F 100%));
+    border-radius: 5px;
+    border: 3px solid #CCCCCC;
+    @include text-shadow(0px 0px 0 #4a5456);
+    @include background(linear-gradient(bottom right, #CEECF6 0%, #CEECF6 100%));
   }
 
   code.prettyprint {

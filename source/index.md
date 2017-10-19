@@ -2,7 +2,7 @@
 title: HotSchedules IoT Platform - API Reference
 
 language_tabs:
-  - Example Code
+  - Examples
 
 // toc_footers:
   // - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
