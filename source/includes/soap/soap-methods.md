@@ -5,7 +5,7 @@ The HotSchedules SOAP API provides a user-friendly way to obtain HS Data. Each s
 **[CertificationService](#certificationservice):** This service is intended for third parties to be able to request and set certification requests from HotSchedules.
 <br>
 
-**[EmpService](#empservice)** This service provides operations for a third party to push or request employee and employee job data into HotSchedules.
+**[EmpService](#empservice):** This service provides operations for a third party to push or request employee and employee job data into HotSchedules.
 <br>
 
 **[LaborService](#laborservice):** This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
