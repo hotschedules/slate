@@ -64,13 +64,13 @@
 &ndash; Store.employee_ids maps to each Employee.sys_id</p>
 
 <p>&ndash; Example Query: Return all stores that the specified employee is associated with<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Store?where={&#39;employee_ids&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/Store?where={&#39;employee_ids&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
 
 <p>A Store has <strong>many</strong> jobs
 &ndash;  Store.sys_id maps to StoreJob.store_id</p>
 
 <p>&ndash; Example Query: Return all jobs at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/StoreJob?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/StoreJob?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
 
 <p>An Employee has many positions (Array of EmployeePosition)</p>
 
@@ -89,26 +89,26 @@
 <p><strong>Example Queries:</strong>  </p>
 
 <p>Return all positions for a specified employee across all stores<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.name&#39;:&#39;&lt;EMPLOYEE_NAME&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.name&#39;:&#39;&lt;EMPLOYEE_NAME&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.id&#39;:&#39;&lt;EMPLOYEE_EXTERNAL_ID&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_reference.id&#39;:&#39;&lt;EMPLOYEE_EXTERNAL_ID&gt;&#39;}</code>  </p>
 
 <p>Return all positions at a specified store across all employees and jobs.<br>
 <strong>(NOTE: May include duplicates if employees have multiple positions at the same store)</strong><br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_id&#39;:&#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.name&#39;:&#39;&lt;STORE_NAME&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.name&#39;:&#39;&lt;STORE_NAME&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.id&#39;:&#39;&lt;STORE_NUMBER&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;store_reference.id&#39;:&#39;&lt;STORE_NUMBER&gt;&#39;}</code>  </p>
 
 <p>Return all employees with a specified job across all stores
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_id&#39;:&#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_id&#39;:&#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.name&#39;:&#39;&lt;JOB_NAME&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.name&#39;:&#39;&lt;JOB_NAME&gt;&#39;}</code>  </p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.id&#39;:&#39;&lt;JOB_EXTERNAL_ID&gt;&#39;}</code>  </p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;job_reference.id&#39;:&#39;&lt;JOB_EXTERNAL_ID&gt;&#39;}</code>  </p>
 
 <p>An Employee has many Stores through EmployeePosition</p>
 
@@ -119,7 +119,7 @@
 </ul>
 
 <p>&ndash; Example Query: Return an array of Store.sys_id that the employee works at
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=store_id</code></p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=store_id</code></p>
 
 <p>An Employee has many StoreJobs through EmployeePosition</p>
 
@@ -130,7 +130,7 @@
 </ul>
 
 <p>&ndash; Example Query: Return an array of StoreJob.sys_id for the specified employee<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=job_id</code></p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/EmployeePosition?where={&#39;employee_id&#39;:&#39;&lt;EMPLOYEE_ID&gt;&#39;}&amp;fields=job_id</code></p>
 
 <p>(Same as the two previous examples)  </p>
 
@@ -146,7 +146,7 @@
 * Employee.name.family_name maps to Timecard.employee_reference.name</p>
 
 <p>&ndash; Example Query: Return all timecards for a specified employee<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;employee_id&#39;: &#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/Timecard?where={&#39;employee_id&#39;: &#39;&lt;EMPLOYEE_ID&gt;&#39;}</code></p>
 
 <p>A Store has many Timecards</p>
 
@@ -157,7 +157,7 @@
 </ul>
 
 <p>&ndash; Example Query:Return all timecards for all employees at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code></p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/Timecard?where={&#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code></p>
 
 <p>A StoreJob has many Timecards</p>
 
@@ -168,10 +168,10 @@
 </ul>
 
 <p>&ndash; Example Query:Return all timecards for all employees with the specified job across all stores<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;}</code>  </p>
 
 <p>&ndash; Example Query:Return all timecards for all employees with the specified job at a specified store<br>
-<code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;, &#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
+<code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/Timecard?where={&#39;job_id&#39;: &#39;&lt;JOB_ID&gt;&#39;, &#39;store_id&#39;: &#39;&lt;STORE_ID&gt;&#39;}</code>  </p>
 
 <p>Employee payment rates:
 Base payment rates for a position are defined in the StoreJob type.  When an EmployeePosition is created, the regular, overtime, and double time rates are copied from the StoreJob and adjusted for that employee.  This allows for multiple employees to have the same job, but different payment rates.</p>

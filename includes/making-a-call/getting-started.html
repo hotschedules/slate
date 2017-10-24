@@ -37,7 +37,7 @@
 
 <p>All URLs referenced in the documentation have the following base:</p>
 
-<p><code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;</code></p>
+<p><code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;</code></p>
 
 <p>The Bodhi REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.</p>
 
@@ -46,10 +46,10 @@
 <p>HTTP requests to the REST API are protected with HTTP Basic and HTTP Cookie authentication.  In short, you will use your HotSchedules IoT Platform account credentials (username and password) for HTTP Basic authentication. If you do not have credentials, you can signup on the <a href="https://hotschedules.io/signup">HotSchedules IoT Platform Portal</a> </p>
 
 <p>Syntax:
-<code class="prettyprint">curl -ik -u username:password -X GET https://api.bodhi.space/me</code></p>
+<code class="prettyprint">curl -ik -u username:password -X GET https://api.hotschedules.io/me</code></p>
 
 <p>For example:
-<code class="prettyprint">curl -ik -u platform:user -X GET https://api.bodhi.space/me</code></p>
+<code class="prettyprint">curl -ik -u platform:user -X GET https://api.hotschedules.io/me</code></p>
 
 <p>Your results will look like this:<br>
 HTTP/1.1 200 OK<br>
@@ -64,7 +64,7 @@ Access-Control-Allow-Methods: *<br>
 Access-Control-Allow-Origin: 
 Access-Control-Expose-Headers: WWW-Authenticate, Server-Authorization, Location<br>
 Request-Time: 383<br>
-Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&rdquo;; Path=/; Domain=.bodhi.space; Secure; HTTPOnly</p>
+Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&rdquo;; Path=/; Domain=.hotschedules.io; Secure; HTTPOnly</p>
 
 <p><code class="prettyprint">{&quot;lastName&quot;:&quot;User&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:22:11.157Z&quot;,&quot;authorizations&quot;:[{&quot;namespace&quot;:&quot;bodhi-social&quot;,&quot;read&quot;:true}],&quot;profiles&quot;:[&quot;bodhi-social.user&quot;],&quot;usertype&quot;:&quot;person&quot;,&quot;firstName&quot;:&quot;Platform&quot;,&quot;sys_id&quot;:&quot;57407d23b3b82c51e5cb3afb&quot;,&quot;password&quot;:&quot;$2a$12$C/ZJYSZ4qkR5pU5yHQEkLuvcOVjP4rqLdOHlPq4zcDZt9dcYpBeMC&quot;,&quot;sys_version&quot;:1,&quot;email&quot;:&quot;customercare@hotschedules.com&quot;,&quot;username&quot;:&quot;platform&quot;,&quot;sys_type_version&quot;:12}</code></p>
 
@@ -72,13 +72,13 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 <code class="prettyprint">RUSK=&quot;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot;</code> in the example</p>
 
 <p>Now use the cookie auth to authenticate to the API<br>
-<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/me</code></p>
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/me</code></p>
 
 <p>Cookie authorization does not expire and can be used to authenticate moving forward.</p>
 
-<p>Once your Organization is setup in the platform (you can signup for free at https://developer.bodhi.space) you can access your data at https://api.bodhi.space/<organization_name> .</p>
+<p>Once your Organization is setup in the platform (you can signup for free at https://developer.hotschedules.io) you can access your data at https://api.hotschedules.io/<organization_name> .</p>
 
-<p>So for example, if your organization name is my-deli, your URL would be <code class="prettyprint">https://api.bodhi.space/my-deli</code></p>
+<p>So for example, if your organization name is my-deli, your URL would be <code class="prettyprint">https://api.hotschedules.io/my-deli</code></p>
 
 <h2 id="idm-how-to-programatically-retrieve-jwt-tokens">IDM How to Programatically Retrieve JWT Tokens</h2>
 
@@ -322,24 +322,24 @@ request(options, function (error, response, body) {
 <strong>PATCH</strong><br>
 <strong>DELETE</strong>  </p>
 
-<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <code class="prettyprint">https://api.bodhi.space/apidocs/index.html</code></p>
+<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <code class="prettyprint">https://api.hotschedules.io/apidocs/index.html</code></p>
 
 <h4 id="get">GET</h4>
 
 <p>As an example, let&rsquo;s do a <strong>GET</strong> on a store via CURL
-<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/bodhi-social/resources/Store</code></p>
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/Store</code></p>
 
 <p>This call will return the information about a store that&rsquo;s been created for the bodhi-social organization</p>
 
 <p><code class="prettyprint">[{&quot;sys_version&quot;:1,&quot;image_url&quot;:&quot;https://upload.wikimedia.org/wikipedia/commons/5/54/Golden_Gate_Bridge_0002.jpg&quot;,&quot;sys_type_version&quot;:12,&quot;address&quot;:{&quot;street_address&quot;:&quot;555 Mission&quot;,&quot;extended_address&quot;:&quot;&quot;,&quot;locality&quot;:&quot;San Francisco&quot;,&quot;region&quot;:&quot;CA&quot;,&quot;postal_code&quot;:&quot;94111&quot;,&quot;country&quot;:&quot;US&quot;},&quot;store_hours&quot;:[{&quot;days&quot;:[7,1],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;},{&quot;days&quot;:[1,2],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[2,3],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[3,4],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[4,5],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[5,6],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[6,7],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;}],&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:37:15.560Z&quot;,&quot;name&quot;:&quot;platformstore&quot;,&quot;store_number&quot;:&quot;1&quot;,&quot;display_name&quot;:&quot;Platform Store&quot;,&quot;sys_id&quot;:&quot;574080abb9a19e2dadee775b&quot;}]</code></p>
 
-<p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/Store</code>  </p>
+<p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/Store</code>  </p>
 
-<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/resources/Store</code> or using our free store manager tool at <code class="prettyprint">https://bodhi.space/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
+<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/Store</code> or using our free store manager tool at <code class="prettyprint">https://hotschedules.io/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
 
 <p>Next let&rsquo;s look up a sale for our store in bodhi-social</p>
 
-<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.bodhi.space/bodhi-social/resources/SalesTransaction</code></p>
+<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/SalesTransaction</code></p>
 
 <p>RESULT:</p>
 
@@ -347,19 +347,19 @@ request(options, function (error, response, body) {
 
 <p>We can also look up our Store using query parameters in our URL</p>
 
-<p><code class="prettyprint">curl --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.bodhi.space.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:&quot;2016-05-20&quot;%7D&amp;fields=business_day&#39;</code></p>
+<p><code class="prettyprint">curl --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:&quot;2016-05-20&quot;%7D&amp;fields=business_day&#39;</code></p>
 
 <p>OR alternatively:</p>
 
-<p><code class="prettyprint">curl -g --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={business_day:&quot;2016-05-20&quot;}&amp;fields=business_day&#39;</code></p>
+<p><code class="prettyprint">curl -g --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={business_day:&quot;2016-05-20&quot;}&amp;fields=business_day&#39;</code></p>
 
 <p>RESULT:<br>
 <code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
 
-<p>So <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={%27business_day%27:%272016-05-20%27}</code> would return all SalesTransaction&rsquo;s for the business day of 2016-05-20.
-The URL <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources/SalesTransaction?where={%27store_id%27:%27574080abb9a19e2dadee775b%27}</code> would return all SalesTransaction&rsquo;s for the store 574080abb9a19e2dadee775b (our Platform test store).</p>
+<p>So <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27business_day%27:%272016-05-20%27}</code> would return all SalesTransaction&rsquo;s for the business day of 2016-05-20.
+The URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27store_id%27:%27574080abb9a19e2dadee775b%27}</code> would return all SalesTransaction&rsquo;s for the store 574080abb9a19e2dadee775b (our Platform test store).</p>
 
-<p>All Types can be queried by any parameter within the type using a ?where={} clause. It&rsquo;s <strong>EXTREMELY</strong> important for efficiency and performance to query using indexes on your types. You can review the Types for your organization as well as the Indexes and Parameters by using our free Type Tool located at <code class="prettyprint">https://tools.bodhi.space/types</code> or by inspecting <code class="prettyprint">https://api.bodhi.space/&lt;organization_name&gt;/resources/BodhiType</code></p>
+<p>All Types can be queried by any parameter within the type using a ?where={} clause. It&rsquo;s <strong>EXTREMELY</strong> important for efficiency and performance to query using indexes on your types. You can review the Types for your organization as well as the Indexes and Parameters by using our free Type Tool located at <code class="prettyprint">https://tools.hotschedules.io/types</code> or by inspecting <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/BodhiType</code></p>
 
 <h4 id="post">POST</h4>
 
@@ -375,13 +375,13 @@ The URL <code class="prettyprint">https://api.bodhi.space/bodhi-social/resources
       &quot;scale&quot;: 2,
       &quot;value&quot;: 620
     }
-}&#39; https://api.bodhi.space/&lt;organization_name&gt;/resources/SalesTransaction</code></p>
+}&#39; https://api.hotschedules.io/&lt;organization_name&gt;/resources/SalesTransaction</code></p>
 
-<p>That command will post the json object to the SalesTransaction type. You can now GET on this type either using cURL or the free query tools available at https://tools.bodhi.space/query</p>
+<p>That command will post the json object to the SalesTransaction type. You can now GET on this type either using cURL or the free query tools available at https://tools.hotschedules.io/query</p>
 
 <h4 id="bulk-post">Bulk Post</h4>
 
-<p>All bulk operations are accessible through https://api.bodhi.space<br>
+<p>All bulk operations are accessible through https://api.hotschedules.io<br>
 The size limitation for the body is 17MB  </p>
 
 <h3 id="syntax:">Syntax:</h3>
@@ -466,7 +466,7 @@ returns <strong>404</strong> if no report was found with that id  </p>
 <p>As an example, in the above SalesTransaction example, the sys_id is 574086965eacd06aa3db036b, a PUT to the SalesTransaction based on sys_id would be as follows:</p>
 
 <p><code class="prettyprint">
-curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.bodhi.space/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b
 </code> </p>
 
 <h4 id="put-upsert">PUT Upsert</h4>
@@ -478,7 +478,7 @@ curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98b
 <p>As an example, the above PUT example can be changed to a replace by appending the ?upsert=true to the cURL command:</p>
 
 <p><code class="prettyprint">
-curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.bodhi.space/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b?upsert=true
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b?upsert=true
 </code></p>
 
 <h4 id="patch">PATCH</h4>
@@ -506,18 +506,18 @@ curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98b
 <p><strong>Examples:</strong><br>
 The following are curl examples of how to specify file location in your upload/download/delete commands.  Everything after “upload/” or “download/” in the url is used as the destination.  Note that filename is always specified in the url.  </p>
 
-<p><code class="prettyprint">curl -X POST -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code>  </p>
+<p><code class="prettyprint">curl -X POST -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code>  </p>
 
-<p><code class="prettyprint">curl -X PUT -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code></p>
+<p><code class="prettyprint">curl -X PUT -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code></p>
 
 <p><strong>Download by path:</strong><br>
-<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/download/recipes/food/BurritoRecipe.txt</code></p>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/recipes/food/BurritoRecipe.txt</code></p>
 
 <p><strong>Download by sys_id:</strong><br>
-<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/download/56f9c2b4fa92ec27934a76ae</code>  </p>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/56f9c2b4fa92ec27934a76ae</code>  </p>
 
 <p><strong>Delete a file:</strong><br>
-<code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.bodhi.space/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
+<code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
 
       </div>
       <div class="dark-box">
