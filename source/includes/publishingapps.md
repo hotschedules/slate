@@ -325,7 +325,7 @@ Examples include financial, inventory, management
 
 	In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace. _NOTE:: if new_type_required=true, troubleshooting_url should be required_
 
-- **troubleshooting_url='http://tools.bodhi.space/xxxx' _NOTE:: if new_type_required=true, troubleshooting_url should be required_**
+- **troubleshooting_url='http://tools.hotschedules.io/xxxx' _NOTE:: if new_type_required=true, troubleshooting_url should be required_**
 
 	The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
 
@@ -548,7 +548,7 @@ Example of versions/scripts using seed-data:
 
 <img src="/images/Step2.png" height=400 width="350">
 
-**3** - Login to Bodhi Shop: [https://tools.bodhi.space/shop/#/my](https://tools.bodhi.space/shop/#/my)
+**3** - Login to Bodhi Shop: [https://tools.hotschedules.io/shop/#/my](https://tools.hotschedules.io/shop/#/my)
 
 ![alt text](/images/Step3.png?raw=true)
 
@@ -568,13 +568,13 @@ Example of versions/scripts using seed-data:
 
 ![alt text](/images/Step7a.png?raw=true)
 
-**7b** - Make sure your file is found in [https://tools.bodhi.space/file-upload/#/files](https://tools.bodhi.space/file-upload/#/files). If it doesn’t exist refer back to configuring your package.json file 
+**7b** - Make sure your file is found in [https://tools.hotschedules.io/file-upload/#/files](https://tools.hotschedules.io/file-upload/#/files). If it doesn’t exist refer back to configuring your package.json file 
 
 ![alt text](/images/Step7b.png?raw=true)
 
 
 ##Monitoring Application
 
-Logs can be found here: [https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all](https://tools.bodhi.space/job-engine-manager/#/jobs?filters=all,all)
+Logs can be found here: [https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all](https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all)
 
 ![alt text](/images/Logs.png?raw=true)

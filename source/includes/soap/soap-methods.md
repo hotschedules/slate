@@ -2417,7 +2417,6 @@ The inputs of this method are the arguments defined by the following table.
 </thead>
 <tbody>
 <tr>
-<td nowrap></td><td></td><td></td><td></td></tr>
 <td nowrap>All</td><td> </td><td>1..1</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
 <td nowrap>concept</td><td>int</td><td>1..1</td><td>Numeric (integer) identifier for the</td></tr>
 <td nowrap>storeNum</td><td>int</td><td>1..1</td><td>location. Must be unique within the concept.</td></tr>
