@@ -51,7 +51,18 @@ Once your Organization is setup in the platform (you can signup for free at http
 
 So for example, if your organization name is my-deli, your URL would be `https://api.hotschedules.io/my-deli`
 
+##IDM - Creating Your Global Profile
+
+Identity Management, or IDM, allows you to sign in to multiple HotSchedules modules with one username and password.  With IDM, you'll have one place to go, and one username and password to access all things HotSchedules.  
+
+_**Please note:**_  With that said, this tool is in its early stages, and does not yet cover ALL HotSchedules modules.  The plan is to incorporate all tools by mid-2018.
+
+For more details on IDM, please click [HERE](https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile).
+
+
 ##IDM How to Programatically Retrieve JWT Tokens
+
+Note: Postman is the free tool used to generate these examples. Download [Postman](https://www.getpostman.com/postman).
 
 **What are JSON Web Tokens?**
 
@@ -272,14 +283,18 @@ request(options, function (error, response, body) {
 Now that you've authenticated to the API, let's look at some data.
 
 ##Making a call
-The HotSchedules REST API supports all the standard REST verbs  
+**Note:** If your **namespace** has been created under the new IDM model, you will not have the ability to make calls using **api.hotschedules.io**. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.
+
+<br>
+The HotSchedules REST API supports all the standard REST verbs.
+
 **GET**  
 **POST**  
 **PUT**  
 **PATCH**  
 **DELETE**  
 
-You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 'types' that will store standard information and data about your organization. Those 'types' can be viewed and reviewed at `https://api.hotschedules.io/apidocs/index.html`
+You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 'types' that will store standard information and data about your organization. Those 'types' can be viewed and reviewed at [https://api.hotschedules.io/apidocs/index.html](https://api.hotschedules.io/apidocs/index.html)
 
 ####GET
 As an example, let's do a **GET** on a store via CURL
@@ -464,4 +479,11 @@ The following are curl examples of how to specify file location in your upload/d
 
 **Delete a file:**  
 `curl -X DELETE -u <username>:<password> https://api.hotschedules.io/<organization_name>/controllers/vertx/upload/recipes/food/BurritoRecipe.txt`
+
+####Using Postman To Make a Call
+
+Postman makes API development faster, easier, and better. Postman is the most complete toolchain for API development. The most-used REST client worldwide. Designed from the ground up to support the API developer. Intuitive user interface to send requests, save responses, add tests, and create workflows Read the docs.
+
+Once you have completed the step of [retrieving your JWT Token](#idm-how-to-programatically-retrieve-jwt-tokens), you can utilize the following example to make a call to the API.
+
 
