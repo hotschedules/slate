@@ -254,7 +254,7 @@ none   |--proxy  |  proxy   | specifies the http proxy url
 ````
 c:agent-cli set-connection —h
 c:agent-cli set-connection —-help
-c:agent-cli set-connection https://api.bodhi.space
+c:agent-cli set-connection https://api.hotschedules.io
 c:agent-cli set-connection -f c:\BodhiAgent\agent1.js
 c:agent-cli set-connection —-config c:\BodhiAgent\agent1.js
 c:agent-cli set-connection --timeout 20000
@@ -339,15 +339,15 @@ none   |--connection  |  url:port   | specifies the mnagement url and port addre
 -v   |--verbose |  none   | prints more detailed information output
 
 ````
-c:agent-cli set-management https://api.bodhi.space
+c:agent-cli set-management https://api.hotschedules.io
 c:agent-cli set-management —h
 c:agent-cli set-management —-help
 c:agent-cli set-management -f c:\BodhiAgent\agent1.js
 c:agent-cli set-management —-config c:\BodhiAgent\agent1.js
 c:agent-cli set-management —-port 4444
-c:agent-cli set-management —-connection https://api.bodhi.space:4444
-c:agent-cli set-management -v https://api.bodhi.space
-c:agent-cli set-management -- verbose https://api.bodhi.space
+c:agent-cli set-management —-connection https://api.hotschedules.io:4444
+c:agent-cli set-management -v https://api.hotschedules.io
+c:agent-cli set-management -- verbose https://api.hotschedules.io
 ````
 ######Return Response
 

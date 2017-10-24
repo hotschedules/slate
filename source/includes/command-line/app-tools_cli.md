@@ -450,7 +450,7 @@ Offline controls whether the container will cache application information for of
 single_container_app the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
 Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true
 
-**installation_urls= {http://tools.bodhi.space/xxxx}**
+**installation_urls= {http://tools.hotschedules.io/xxxx}**
 
 For applications with single_container_app = true, developers can provide a set of installation url's to inform customers where to download their applications from the Google Play, Apple, and Windown stores. Developers can also specifiy a hockeyapp link or any other external URL.
 
@@ -463,7 +463,7 @@ hide_from_global_store controls whether the app is available to the general publ
 new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace.
 NOTE:: if new_type_required=true, troubleshooting_url should be required
 
-**troubleshooting_url='http://tools.bodhi.space/xxxx'**  
+**troubleshooting_url='http://tools.hotschedules.io/xxxx'**  
 
 The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
 

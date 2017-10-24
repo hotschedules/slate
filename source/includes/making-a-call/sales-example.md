@@ -20,60 +20,60 @@ A Store has many SalesTransactions
 --  SalesTransaction.store_id maps to Store.sys_id
 
 -- Example Query: Return all SalesTransactions for a store  
-`https://api.bodhi.space/<organization_name>/SalesTransaction?where={'store_id':'<store.sys_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesTransaction?where={'store_id':'<store.sys_id>'}`
 
 -- Example Query: Return all the sums of all SalesTransactions for per store for a day
-`https://api.bodhi.space/<organization_name>/resources/SalesTransaction/aggregate?pipeline=[       { $match:{'business_day':'2016-06-24'} },       { $group: { _id: '$store_id', total: { $sum: '$net_total.value' } } }    ]`
+`https://api.hotschedules.io/<organization_name>/resources/SalesTransaction/aggregate?pipeline=[       { $match:{'business_day':'2016-06-24'} },       { $group: { _id: '$store_id', total: { $sum: '$net_total.value' } } }    ]`
 
 A Store has many SalesItem  
 --  SalesItem.store_id maps to Store.sys_id
 
 -- Example Query: Return all SalesItem for a store  
-`https://api.bodhi.space/<organization_name>/SalesItem?where={'store_id':'<store.sys_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesItem?where={'store_id':'<store.sys_id>'}`
 
 A Store has many entries in SalesCategory  
 --  SalesCategory.store_id maps to Store.sys_id
 
 -- Example Query: Return all SalesCategories for a store  
-`https://api.bodhi.space/<organization_name>/SalesCategory?where={'store_id':'<store.sys_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesCategory?where={'store_id':'<store.sys_id>'}`
 
 A Store has many RevenueCenters  
 --  RevenueCenter.store_id maps to Store.sys_id
 
 -- Example Query: Return all RevenueCenters for a store  
-`https://api.bodhi.space/<organization_name>/RevenueCenter?where={'store_id':'<store.sys_id>'}`
+`https://api.hotschedules.io/<organization_name>/RevenueCenter?where={'store_id':'<store.sys_id>'}`
 
 A SalesTransaction has many SalesItems  
 --  SalesTransaction.transaction_id maps to SalesItem.transaction_id
 
 -- Example Query: Return all SalesItems for a SalesTransaction  
-`https://api.bodhi.space/<organization_name>/SalesTransaction?where={'transaction_id':'<SalesTransaction.transaction_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesTransaction?where={'transaction_id':'<SalesTransaction.transaction_id>'}`
 
 A SalesTransaction has a RevenueCenter  
 --  SalesTransaction.revenue_center.id maps to RevenueCenter.instore_id  
 --  SalesTransaction.revenue_center.name maps to RevenueCenter.display_name  
 
 -- Example Query: Return all SalesTransactions for a RevenueCenter
-`https://api.bodhi.space/<organization_name>/SalesTransaction?where={'revenue_center.id':'<RevenueCenter.instore_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesTransaction?where={'revenue_center.id':'<RevenueCenter.instore_id>'}`
 
 A SalesTransaction has an Employee  
 --  SalesTransaction.employee.id maps to Employee.external_ids.key  
 --  SalesTransaction.employee.name maps to Employee.name.formatted_name  
 
 -- Example Query: Return all SalesTransaction for an Employee
-`https://api.bodhi.space/<organization_name>/SalesItems?where={'employee.id':'<Employee.external_ids.key>'}`
+`https://api.hotschedules.io/<organization_name>/SalesItems?where={'employee.id':'<Employee.external_ids.key>'}`
 
 A SalesTransaction AND SalesItem have a day of business  
 -- Example Query: Return all SalesTransactions for business day 05/21/2016
-`https://api.bodhi.space/<organization_name>/SalesTransaction?where={'business_day':'2016-05-21'}`
+`https://api.hotschedules.io/<organization_name>/SalesTransaction?where={'business_day':'2016-05-21'}`
 
 -- Example Query: Return all SalesItems for business day 05/21/2016
-`https://api.bodhi.space/<organization_name>/SalesItems?where={'business_day':'2016-05-21'}`
+`https://api.hotschedules.io/<organization_name>/SalesItems?where={'business_day':'2016-05-21'}`
 
 A SalesItem has a SalesCategory  
 --  SalesItem.sales_category.id maps to SalesCategory.instore_id  
 --  SalesItem.sales_category.name maps to SalesCategory.display_name  
 
 -- Example Query: Return all SalesItems for a SalesCategory
-`https://api.bodhi.space/<organization_name>/SalesItems?where={'sales_category.id':'<SalesCategory.instore_id>'}`
+`https://api.hotschedules.io/<organization_name>/SalesItems?where={'sales_category.id':'<SalesCategory.instore_id>'}`
 

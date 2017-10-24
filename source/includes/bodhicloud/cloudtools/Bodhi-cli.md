@@ -98,7 +98,7 @@ In the rbc-project.json file you will see that the default evironment has been i
   "version": "0.7.10",
   "environments": {
     "Testing”: {
-      "uri": "api.bodhi.space",
+      "uri": "api.hotschedules.io",
       "username": "Teddy",
       "password": "apple",
       "namespace": "QA_testing"

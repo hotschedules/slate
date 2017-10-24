@@ -5,7 +5,7 @@ The Bodhi Job Engine is a job scheduling tool that allows an application to run 
 
 ##Installation
 
-Bodhi-jobs CLI is included with the [Bodhi CLI Tools](http://docs.bodhi.space/#bodhi-command-line-interface). See the Bodhi cli documentation for installation instructions.
+Bodhi-jobs CLI is included with the [Bodhi CLI Tools](http://docs.hotschedules.io/#bodhi-command-line-interface). See the Bodhi cli documentation for installation instructions.
 
 ##General Usage of Commands
 

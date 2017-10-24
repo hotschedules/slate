@@ -8,7 +8,7 @@ If "proxy=true" query option is specified - no cache will be used at all and req
 
 ### API endpoint
 
-`https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver?where=<query_json>`  
+`https://api.hotschedules.io/bodhi-social/controllers/vertx/cacheserver?where=<query_json>`  
 
 
 #### Yelp Data
@@ -30,10 +30,10 @@ By phone:
 
 ### Yelp query example: 
 By term and location:  
-`https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/yelp?where={"term":"KFC","location":"Emeryville","limit":3}`
+`https://api.hotschedules.io/bodhi-social/controllers/vertx/cacheserver/yelp?where={"term":"KFC","location":"Emeryville","limit":3}`
 
 By phone:  
-`https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/yelp?where={"phone":"+15555555555"}`
+`https://api.hotschedules.io/bodhi-social/controllers/vertx/cacheserver/yelp?where={"phone":"+15555555555"}`
 
 #### Wunderground Data  
 
@@ -46,9 +46,9 @@ More details about WU queries could be found here:
 
 ### Wunderground query example: 
 
-`https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/wu?where={"query":"conditions/q/CA/San_Francisco.json"}`
+`https://api.hotschedules.io/bodhi-social/controllers/vertx/cacheserver/wu?where={"query":"conditions/q/CA/San_Francisco.json"}`
 
 ####GooglePlaces data  
 
 ### Google Places query example  
-`https://api.bodhi.space/bodhi-social/controllers/vertx/cacheserver/googleplaces?where={"query":"Empire state building"}`
+`https://api.hotschedules.io/bodhi-social/controllers/vertx/cacheserver/googleplaces?where={"query":"Empire state building"}`

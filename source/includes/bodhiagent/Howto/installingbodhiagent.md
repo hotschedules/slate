@@ -15,7 +15,7 @@ Windows Phone
 
 ##### Step 1: Download Bodhi Installer and the Bodhi Mobile Application
 
-Go [developer.bodhi.space](http://developer.bodhi.space) to get the correct installer for your system
+Go [developer.hotschedules.io](http://developer.hotschedules.io) to get the correct installer for your system
 
 ![alt text](/images/agent_dl_01.png?raw=true)
 

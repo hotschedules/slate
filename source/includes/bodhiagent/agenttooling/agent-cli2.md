@@ -298,13 +298,13 @@ none   |--proxy  |  proxy   | specifies the http proxy url
 ````
 c:\[working directory]>agent-cli set-connection —h
 c:\[working directory]>agent-cli set-connection —-help
-c:\[working directory]>agent-cli set-connection https://api.bodhi.space
+c:\[working directory]>agent-cli set-connection https://api.hotschedules.io
 c:\[working directory]>agent-cli set-connection -f c:\[working directory]\agent1.js
 c:\[working directory]>agent-cli set-connection —-config c:\[working directory]\agent1.js
 c:\[working directory]>agent-cli set-connection --timeout 20000
-c:\[working directory]>agent-cli set-connection —-proxy http://proxy.bodhi.space
-c:\[working directory]>agent-cli set-connection -v https://api.bodhi.space
-c:\[working directory]>agent-cli set-connection --verbose https://api.bodhi.space
+c:\[working directory]>agent-cli set-connection —-proxy http://proxy.hotschedules.io
+c:\[working directory]>agent-cli set-connection -v https://api.hotschedules.io
+c:\[working directory]>agent-cli set-connection --verbose https://api.hotschedules.io
 ````
 #####Return Response
 
@@ -384,15 +384,15 @@ none   |--connection  |  url:port   | specifies the mnagement url and port addre
 
 #####Command Variations
 ````
-c:\[working directory]>agent-cli set-management https://api.bodhi.space
+c:\[working directory]>agent-cli set-management https://api.hotschedules.io
 c:\[working directory]>agent-cli set-management —h
 c:\[working directory]>agent-cli set-management —-help
 c:\[working directory]>agent-cli set-management -f c:\[working directory]\agent1.js
 c:\[working directory]>agent-cli set-management —-config c:\[working directory]\agent1.js
 c:\[working directory]>agent-cli set-management —-port 4444
-c:\[working directory]>agent-cli set-management —-connection https://api.bodhi.space:4444
-c:\[working directory]>agent-cli set-management -v https://api.bodhi.space
-c:\[working directory]>agent-cli set-management -- verbose https://api.bodhi.space
+c:\[working directory]>agent-cli set-management —-connection https://api.hotschedules.io:4444
+c:\[working directory]>agent-cli set-management -v https://api.hotschedules.io
+c:\[working directory]>agent-cli set-management -- verbose https://api.hotschedules.io
 ````
 #####Return Response
 

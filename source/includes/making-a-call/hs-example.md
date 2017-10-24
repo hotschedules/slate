@@ -22,7 +22,7 @@ Note: Results are currently cached with a TTL of 60 minutes.
 #### getConcepts  
 This method returns a list of concepts for a company.
 
-`curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/getConcepts"`
+`curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/getConcepts"`
 
 > **Sample JSON response:**
 
@@ -57,7 +57,7 @@ endDate         | hsSimpleDate | End date for the range of data requested
 volumeType      | driverClass  | Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, "Transactions" and “Products”
 dataType        | driverType   | Type of driver requested.  Allowed types are “ACTUAL”, “ADJ_FORECASTED”, and “PRE_ADJ_FORECASTED”
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getDriversByInterval?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&volume_type=TABLE&data_type=ACTUAL"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getDriversByInterval?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&volume_type=TABLE&data_type=ACTUAL"`
   
 > **Sample JSON response:**
 
@@ -121,7 +121,7 @@ concept         | Number  | The identifier for the location's concept. Must be u
 storeNum        | Number  | Numeric (integer) identifier for the store. Must be unique within the concept
 active_only     | Boolean | Boolean that defines whether or not to include terminated employees in response
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpAvailability?active_only=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpAvailability?active_only=true"`
 
 
 > **Sample JSON response:**
@@ -169,7 +169,7 @@ concept         | Number  | The identifier for the location's concept. Must be u
 storeNum        | Number  | Numeric (integer) identifier for the store. Must be unique within the concept.
 active_only     | Boolean | Boolean that defines whether or not to include terminated employees in response.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpInfo?active_only=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpInfo?active_only=true"`
   
   
 > **Sample JSON response:**
@@ -218,7 +218,7 @@ Query parameter | Type   | Description
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpJobs?active_only=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getEmpJobs?active_only=true"`
   
 > **Sample JSON response:**
 
@@ -259,7 +259,7 @@ Query parameter | Type   | Description
 ----------------|--------|------------
 concept         | Number | The identifier for the location's concept. Must be unique within the company.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/getGroups"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/getGroups"`
 
 > **Sample JSON response:**
 
@@ -292,7 +292,7 @@ start           | dateTime | Start date for the range of data requested.  This i
 end             | dateTime | End date for the range of data requested.  This is a basic dateTime object.
 
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getGuestCounts?start_date=2016-04-30T00:00:00&end_date=2016-05-03T00:00:00"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getGuestCounts?start_date=2016-04-30T00:00:00&end_date=2016-05-03T00:00:00"`
 
 > **Sample JSON response:**
 
@@ -329,7 +329,7 @@ start           | hsSimpleDate | Start date for the range of data requested
 end             | hsSimpleDate | End date for the range of data requested
 laborType       | laborType    | Type of labor requested. Allowed types are "optimal", "forecasted" and "scheduled".
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getLaborByBusDay?start_day=30&start_month=1&start_year=2016&end_day=5&end_month=5&end_year=2016&labor_type=optimal"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getLaborByBusDay?start_day=30&start_month=1&start_year=2016&end_day=5&end_month=5&end_year=2016&labor_type=optimal"`
 
 
 > **Sample JSON response:** 
@@ -377,7 +377,7 @@ start           | hsSimpleDate | Start date for the range of data requested
 end             | hsSimpleDate | End date for the range of data requested
 laborType       | laborType    | Type of labor requested. Allowed types are "optimal", "forecasted" and "scheduled".
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getLaborByJobAndInterval?start_day=30&start_month=1&start_year=2016&end_day=5&end_month=5&end_year=2016&labor_type=optimal"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getLaborByJobAndInterval?start_day=30&start_month=1&start_year=2016&end_day=5&end_month=5&end_year=2016&labor_type=optimal"`
 
 > **Sample JSON response:**
 
@@ -424,7 +424,7 @@ start           | hsSimpleDate | First day of projected sales requested. This is
 end             | hsSimpleDate | Last day of projected sales requested. This is an hsSimpleDate object.
 
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getSalesItemsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getSalesItemsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
 
 
 > **Sample JSON response:**
@@ -487,7 +487,7 @@ start           | hsSimpleDate | First day of projected sales requested. This is
 end             | hsSimpleDate | Last day of projected sales requested. This is an hsSimpleDate object.
 
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getProjectedSalesV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getProjectedSalesV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
 
 
 > **Sample JSON response:**
@@ -540,7 +540,7 @@ dateTotal     | Number | Total projected sales for the day part
 #### getRCVs
 Revenue center information defined for a group.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getRCVs"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getRCVs"`
 
 > **Sample JSON response:**
 
@@ -580,7 +580,7 @@ Query parameter | Type   | Description
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getSalesCats"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getSalesCats"`
 
 > **Sample JSON response:**
 
@@ -613,7 +613,7 @@ storeNum        | Number       | Numeric (integer) identifier for the store. Mus
 start           | hsSimpleDate | First day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.
 end             | hsSimpleDate | Last day of scheduled shifts you are requesting. This method uses hsSimpleDate objects for dates.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getScheduleV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getScheduleV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
 
 
 > **Sample JSON response:**
@@ -687,7 +687,7 @@ isScheduled     | Boolean  | Include scheduled shifts? These are shifts which ar
 isPosted        | Boolean  | These are shifts that are in schedules that have been set to the 'posted' status within HotSchedules.
 jobCodes        | IntArray | Integer array of job codes to be included in this method's return. if this parameter is null or empty, all jobs will be included.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getShiftsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&is_house=true&is_scheduled=true&is_posted=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getShiftsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&is_house=true&is_scheduled=true&is_posted=true"`
 
 
 > **Sample JSON response:**
@@ -773,7 +773,7 @@ concept         | Number  | The identifier for the location's concept. Must be u
 storeNum        | Number  | Numeric (integer) identifier for the store. Must be unique within the concept.
 active_only     | Boolean | Boolean that defines whether or not to include terminated employees in response.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getStoreEmployees?active_only=true"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getStoreEmployees?active_only=true"`
 
 
 > **Sample JSON response:**
@@ -836,7 +836,7 @@ Query parameter | Type   | Description
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept.
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getStoreJobs"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getStoreJobs"`
 
 
 > **Sample JSON response:**
@@ -874,7 +874,7 @@ group_id        | Number | Group in which the store is assigned
 
 
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/getStoresV2?group_id=0"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/getStoresV2?group_id=0"`
 
 > **Sample JSON response:**
 
@@ -923,7 +923,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getTimeCards?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getTimeCards?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
   
 > **Sample JSON response**
 
@@ -995,7 +995,7 @@ Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getTimeCardsDeclaredTips?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getTimeCardsDeclaredTips?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016"`
   
 > **Sample JSON object**
 
@@ -1071,7 +1071,7 @@ start           | hsSimpleDate | Start date for the range of data requested
 end             | hsSimpleDate | End date for the range of data requested
 
 
-  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getVolumeCounts?start_date=2015-04-30T00:00:00&end_date=2016-05-03T00:00:00&volume_type=TABLE"`
+  `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getVolumeCounts?start_date=2015-04-30T00:00:00&end_date=2016-05-03T00:00:00&volume_type=TABLE"`
 
 
 > **Sample JSON response:**
@@ -1113,7 +1113,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{ \"jobName\": \"Cook\", \"ovtTtl\": 0, \"ovtHrs\": 0, \"clockOut\": \"2016-07-31T22:05:00-05:00\", \"regWage\": 9, \"clockIn\": \"2016-07-30T15:56:00-05:00\", \"ovtWage\": 13.5, \"breakMinutes\": 0, \"jobId\": 16921407, \"businessDate\": { \"month\": 7, \"year\": 2016, \"day\": 31 }, \"regHrs\": 6.15, \"spcTtl\": 0, \"hsId\": 929931334634, \"spcHrs\": 0, \"ovtMins\": 0, \"storeNum\": 1, \"empPosId\": 1052, \"regTtl\": 55.35 }]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{ \"jobName\": \"Cook\", \"ovtTtl\": 0, \"ovtHrs\": 0, \"clockOut\": \"2016-07-31T22:05:00-05:00\", \"regWage\": 9, \"clockIn\": \"2016-07-30T15:56:00-05:00\", \"ovtWage\": 13.5, \"breakMinutes\": 0, \"jobId\": 16921407, \"businessDate\": { \"month\": 7, \"year\": 2016, \"day\": 31 }, \"regHrs\": 6.15, \"spcTtl\": 0, \"hsId\": 929931334634, \"spcHrs\": 0, \"ovtMins\": 0, \"storeNum\": 1, \"empPosId\": 1052, \"regTtl\": 55.35 }]"`
   
 > **Sample JSON object**
 
@@ -1182,7 +1182,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setEmpJobs?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setEmpJobs?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 
@@ -1228,7 +1228,7 @@ Day             | Number          | Day formatted dd
 Month           | Number          | Month formatted mm
 Year            | Number          | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setEmps?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setEmps?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 
@@ -1294,7 +1294,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setForecastDriversV2?start_day=30&start_month=4&start_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setForecastDriversV2?start_day=30&start_month=4&start_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 
@@ -1365,7 +1365,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setGuestCounts?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setGuestCounts?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 
@@ -1401,7 +1401,7 @@ rvcId           | Number  | Numeric ID for the revenue center associated with th
 rvcName         | String  | Name for the revenue center associated with the location within the restaurant. <br> i.e. Bar, Togo etc...
 isGroupLevel    | Boolean | Indicates if the revenue center is assigned at the group level. <br> i.e. Bar used across all locations
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setRVC?group=1&rvcId=1&rvcName=1&isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setRVC?group=1&rvcId=1&rvcName=1&isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object** 
 
@@ -1442,7 +1442,7 @@ salesCatId      | Number  | Numeric ID for the sales category associated with th
 salesCatName    | String  | Name for the sales category associated with the item sold within the restaurant. <br> i.e. Liquor, Beer, etc..
 isGroupLevel    | Boolean | Indicates if the sales category is assigned at the group level. <br> i.e. Liquor ID 2 used across all locations
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesCat?group=1&salesCatId=1&salesCatName=1&isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesCat?group=1&salesCatId=1&salesCatName=1&isGroupLevel=true" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object** 
 
@@ -1483,7 +1483,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesItemsV4?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesItemsV4?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 ```
@@ -1561,7 +1561,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setTimeCardsDeclaredTips?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setTimeCardsDeclaredTips?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 
@@ -1633,7 +1633,7 @@ Query parameter | Type   | Description
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept.
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.bodhi.space/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setVolumeCountsV2" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setVolumeCountsV2" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
 

@@ -263,7 +263,7 @@ Examples include financial, inventory, management
 
 	In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run 'out of the box' or if new custom types need to be installed on the namespace. _NOTE:: if new_type_required=true, troubleshooting_url should be required_
 
-- **troubleshooting_url='http://tools.bodhi.space/xxxx' _NOTE:: if new_type_required=true, troubleshooting_url should be required_**
+- **troubleshooting_url='http://tools.hotschedules.io/xxxx' _NOTE:: if new_type_required=true, troubleshooting_url should be required_**
 
 	The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ's or any other outbound troubleshooting you would like to provide to your customers.
 

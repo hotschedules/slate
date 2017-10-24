@@ -5,7 +5,7 @@
 Bodhi Query is a REST client that helps you be more efficient while working with the Bodhi Cloud API. It allows you to easily retrieve and manipulate data within your individual namespace.
 
 ##### Getting Started
-The Bodhi Query tool can be accessed at https://tools.bodhi.space/query. You will need your Bodhi Cloud username and password in order to login and begin transfering data.
+The Bodhi Query tool can be accessed at https://tools.hotschedules.io/query. You will need your Bodhi Cloud username and password in order to login and begin transfering data.
 
 ##### Features
 Bodhi Query can be used for the following tasks:
@@ -40,13 +40,13 @@ Next you need to specify the Type you are interested in retrieving data about. E
 
 ###### _Using POST_
 
-If you have chosen Post from the action dropdown and selected a Type to work with; you are ready to start creating instances. Enter JSON into the code box and click send. A successful POST will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.  
+If you have chosen Post from the action dropdown and selected a Type to work with; you are ready to start creating instances. Enter JSON into the code box and click send. A successful POST will display a 201 in the response box. See https://api.hotschedules.io/apidocs/index.html to learn about the Type schemas.  
 
 ![post json](/images/bq_post.png?raw=true "")
 
 ###### _Using PUT_
 
-If you have chosen Put from the action dropdown and selected a Type to work with; you are ready to start updating instances. Enter an instance id key (sys_id) into the "Instance" input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. See https://api.bodhi.space/apidocs/index.html to learn about the Type schemas.
+If you have chosen Put from the action dropdown and selected a Type to work with; you are ready to start updating instances. Enter an instance id key (sys_id) into the "Instance" input. Next, enter JSON into the code box and click send. A successful Put will display a 201 in the response box. See https://api.hotschedules.io/apidocs/index.html to learn about the Type schemas.
 
 ![instance input](/images/bq_instance.png?raw=true "")
 

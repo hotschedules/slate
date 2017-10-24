@@ -1,6 +1,6 @@
 ##Bodhi Users
 
-[Bodhi Users](https:/tools.bodhi.space/users/) is an user administration tool that allows the administrator of a namespace to add and/or remove users as well as administer user profiles to allow user access to data and applications for their namespace and/or stores.
+[Bodhi Users](https:/tools.hotschedules.io/users/) is an user administration tool that allows the administrator of a namespace to add and/or remove users as well as administer user profiles to allow user access to data and applications for their namespace and/or stores.
 
 - Administrators can manage all their users from a single page and click each user to either add/remove profiles or remove the user.
 

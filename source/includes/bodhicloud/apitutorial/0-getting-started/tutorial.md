@@ -17,7 +17,7 @@ The Bodhi Cloud API Documentation is a rich set of documentation geared towards 
 
 **How Do I Login to the Bodhi Cloud API Documentation?**
 
-* Go to [https://api.bodhi.space/apidocs/index.html](https://api.bodhi.space/apidocs/index.html)
+* Go to [https://api.hotschedules.io/apidocs/index.html](https://api.hotschedules.io/apidocs/index.html)
 * Login using the credentials provided to you from your HotSchedules [representative](mailto:contactcenter@hotschedules.com):
 
 ![CloudAPI_LogginIn](/images/CloudAPI_LoggingIn.png?raw=true "Logging in to the Bodhi API Documentation")

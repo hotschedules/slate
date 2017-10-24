@@ -1,5 +1,5 @@
 ##Bodhi Tools
-[Bodhi Tools](https://tools.bodhi.space/) is a launch pad destination for Bodhi Users. Bodhi Tools allows a user to navigate to Bodhi Types, Bodhi Query, and to the Bodhi API documentation. Bodhi Tools will be continually updated with new features and releases to enhance the Bodhi experience.
+[Bodhi Tools](https://tools.hotschedules.io/) is a launch pad destination for Bodhi Users. Bodhi Tools allows a user to navigate to Bodhi Types, Bodhi Query, and to the Bodhi API documentation. Bodhi Tools will be continually updated with new features and releases to enhance the Bodhi experience.
 
 - Bodhi Tools are for users with administrator privileges, first login:
 

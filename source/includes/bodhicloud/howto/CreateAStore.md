@@ -14,11 +14,11 @@ In order to be able to complete this tutorial, you will need to be an admin user
 ##### How To Create a Store using Bodhi API Documentation
 The Bodhi API Documentation is a full featured interactive set of documentation that also allows the user to Create, Update, and Delete using the REST APIs for each type.  This tutorial is intended to both allow the user to get familiar with how the Bodhi API Documentation as well as the minimum requirements to create a store, view the store you created through the Bodhi API Documentation.  
 
-1.Go to [https://api.bodhi.space/apidocs/index.html](https://api.bodhi.space/apidocs/index.html)
+1.Go to [https://api.hotschedules.io/apidocs/index.html](https://api.hotschedules.io/apidocs/index.html)
 
 2.Login using the credentials provided to you from your Hot Schedules Representative and click Explore.  
 
-*NOTE:* See [How Do I login to the Bodhi Cloud API Documentation](http://docs.bodhi.space/#bodhi-cloud-api-tutorials) for more details on logging in.
+*NOTE:* See [How Do I login to the Bodhi Cloud API Documentation](http://docs.hotschedules.io/#bodhi-cloud-api-tutorials) for more details on logging in.
 
 3.Onced logged in, scroll down through the types and click on Store. 
 

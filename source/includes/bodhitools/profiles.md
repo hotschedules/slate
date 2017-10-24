@@ -1,6 +1,6 @@
 ##Bodhi Profiles
 
-[Bodhi Profiles](https://tools.bodhi.space/profiles) allows the namespace administrator to manage profiles in their namespace. Profiles are groups of type-based permissions that can be edited and bulk-assigned to users in your namespace.
+[Bodhi Profiles](https://tools.hotschedules.io/profiles) allows the namespace administrator to manage profiles in their namespace. Profiles are groups of type-based permissions that can be edited and bulk-assigned to users in your namespace.
 
 - Namespace administrators can access all profiles for their users as well as create and maintain their own profiles as needed.
 

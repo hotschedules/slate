@@ -8,7 +8,7 @@ Bodhi Types is available to all users to view and interact with their data on a 
 
 ##### Getting started
 
-Bodhi Types is currently available to namespace admins at https://tools.bodhi.space .
+Bodhi Types is currently available to namespace admins at https://tools.hotschedules.io .
 
 ##### Intended Audience
 

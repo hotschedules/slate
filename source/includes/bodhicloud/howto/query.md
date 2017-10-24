@@ -9,7 +9,7 @@ In order to send queries to the Bodhi Cloud and see results the user doing the q
 Adding data to your namespace can be done in several ways:
 
 * Installing Bodhi Agent and installing the Compri Agent Application
-* Using the [Bodhi Cloud API](https://api.bodhi.space/apidocs/index.html)
+* Using the [Bodhi Cloud API](https://api.hotschedules.io/apidocs/index.html)
 
 Example Employee 
 Example Store
@@ -41,7 +41,7 @@ sort=<fieldname>:<asc or desc>,<fieldname>:<asc or desc>,...
 
 ```
 example:
-https://api.bodhi.space/<namespace>/resources/Sales?where="{name:'test'}"&fields=name&paging=limit:5,paging:1&sort=name:asc
+https://api.hotschedules.io/<namespace>/resources/Sales?where="{name:'test'}"&fields=name&paging=limit:5,paging:1&sort=name:asc
 
 
 ```

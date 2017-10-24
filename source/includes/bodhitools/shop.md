@@ -1,5 +1,5 @@
 ##Bodhi Shop
-[Bohdi Shop](https://tools.bodhi.space/shop) is a tool that allows the administrator(s) of your namespace to control and install what applications are available to the users of the namespace on their mobile device. These can be applications that are available as Bodhi Applications, your company's privately built applications or even vendor applications build by other companies and make the applications available for use.
+[Bohdi Shop](https://tools.hotschedules.io/shop) is a tool that allows the administrator(s) of your namespace to control and install what applications are available to the users of the namespace on their mobile device. These can be applications that are available as Bodhi Applications, your company's privately built applications or even vendor applications build by other companies and make the applications available for use.
 
 In order to access this tool, you need administration privileges. The administrator of your namespace can install all Mobile Applications for you. To get started, login to see the applications which are currently installed. Users with administration privileges can add new applications or remove applications.
 
