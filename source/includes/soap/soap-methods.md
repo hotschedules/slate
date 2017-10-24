@@ -2376,15 +2376,15 @@ Allows a customer to SET their budget via API. The service also allow a customer
 ####getLaborData
 ####setLaborData
 
-//##ProjectedLaborService
-//Description: Coming Soon...
+##ProjectedLaborService
+Description: Coming Soon...
 
-//* Location: [http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl](http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl)
-//* Protocol: SOAP
-//* Default style: rpc
-//* Transport protocol: SOAP over HTTP  
+* Location: [http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl](http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl)
+* Protocol: SOAP
+* Default style: rpc
+* Transport protocol: SOAP over HTTP  
 
-//<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
 
 ####Coming Soon...
 
@@ -3435,7 +3435,7 @@ Contains elements as defined in the following table.
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
 <td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
 <td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCategoryNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>salesCategoryName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
 </tbody>
 </table>
 
@@ -3482,18 +3482,19 @@ Contains elements as defined in the following table.
 </thead>
 <tbody>
 <tr>
-<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td>Coming Soon</td></tr>
-<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category.</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID.</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction.</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID.</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center.</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the
+concept.</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category.</td></tr>
+<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Business date of transaction.</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Date and time of transaction.</td></tr>
 </tbody>
 </table>
 
