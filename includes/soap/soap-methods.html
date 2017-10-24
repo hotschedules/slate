@@ -36,7 +36,7 @@
 <p><strong><a href="#certificationservice">CertificationService</a>:</strong> This service is intended for third parties to be able to request and set certification requests from HotSchedules.
 <br></p>
 
-<p><strong><a href="#empservice">EmpService</a></strong> This service provides operations for a third party to push or request employee and employee job data into HotSchedules.
+<p><strong><a href="#empservice">EmpService</a>:</strong> This service provides operations for a third party to push or request employee and employee job data into HotSchedules.
 <br></p>
 
 <p><strong><a href="#laborservice">LaborService</a>:</strong> This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
@@ -2410,15 +2410,18 @@ client not found</td></tr>
 
 <h4 id="setlabordata">setLaborData</h4>
 
-<p>//##ProjectedLaborService
-//Description: Coming Soon&hellip;</p>
+<h2 id="projectedlaborservice">ProjectedLaborService</h2>
 
-<p>//* Location: <a href="http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl">http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl</a>
-//* Protocol: SOAP
-//* Default style: rpc
-//* Transport protocol: SOAP over HTTP  </p>
+<p>Description: Coming Soon&hellip;</p>
 
-<p>//<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside></p>
+<ul>
+<li>Location: <a href="http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl">http://services.hotschedules.com/api/services/ProjectedLaborService?wsdl</a></li>
+<li>Protocol: SOAP</li>
+<li>Default style: rpc</li>
+<li>Transport protocol: SOAP over HTTP<br></li>
+</ul>
+
+<aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
 
 <h4 id="coming-soon...">Coming Soon&hellip;</h4>
 
@@ -3491,7 +3494,7 @@ Each wsRevenueCenter object contains,<br>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
 <td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
 <td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCategoryNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>salesCategoryName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
 </tbody>
 </table>
 
@@ -3540,18 +3543,19 @@ Each wsRevenueCenter object contains,<br>
 </thead>
 <tbody>
 <tr>
-<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td>Coming Soon</td></tr>
-<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
+<td nowrap>catName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the category.</td></tr>
+<td nowrap>clientId</td><td>int</td><td>1..1</td><td>No</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>empId</td><td>int</td><td>1..1</td><td>No</td><td>HotSchedules internal employee account ID.</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction.</td></tr>
+<td nowrap>rvc</td><td>int</td><td>1..1</td><td>No</td><td>Revenue Center ID.</td></tr>
+<td nowrap>rvcName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the revenue center.</td></tr>
+<td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the
+concept.</td></tr>
+<td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category.</td></tr>
+<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Business date of transaction.</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Date and time of transaction.</td></tr>
 </tbody>
 </table>
 
