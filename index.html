@@ -157,7 +157,17 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 
 <p>So for example, if your organization name is my-deli, your URL would be <code class="prettyprint">https://api.hotschedules.io/my-deli</code></p>
 
+<h2 id="idm---creating-your-global-profile">IDM - Creating Your Global Profile</h2>
+
+<p>Identity Management, or IDM, allows you to sign in to multiple HotSchedules modules with one username and password.  With IDM, you&rsquo;ll have one place to go, and one username and password to access all things HotSchedules.  </p>
+
+<p><em><strong>Please note:</strong></em>  With that said, this tool is in its early stages, and does not yet cover ALL HotSchedules modules.  The plan is to incorporate all tools by mid-2018.</p>
+
+<p>For more details on IDM, please click <a href="https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile">HERE</a>.</p>
+
 <h2 id="idm-how-to-programatically-retrieve-jwt-tokens">IDM How to Programatically Retrieve JWT Tokens</h2>
+
+<p>Note: Postman is the free tool used to generate these examples. Download <a href="https://www.getpostman.com/postman">Postman</a>.</p>
 
 <p><strong>What are JSON Web Tokens?</strong></p>
 
@@ -392,14 +402,18 @@ request(options, function (error, response, body) {
 
 <h2 id="making-a-call">Making a call</h2>
 
-<p>The HotSchedules REST API supports all the standard REST verbs<br>
-<strong>GET</strong><br>
+<p><strong>Note:</strong> If your <strong>namespace</strong> has been created under the new IDM model, you will not have the ability to make calls using <strong>api.hotschedules.io</strong>. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.</p>
+
+<p><br>
+The HotSchedules REST API supports all the standard REST verbs.</p>
+
+<p><strong>GET</strong><br>
 <strong>POST</strong><br>
 <strong>PUT</strong><br>
 <strong>PATCH</strong><br>
 <strong>DELETE</strong>  </p>
 
-<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <code class="prettyprint">https://api.hotschedules.io/apidocs/index.html</code></p>
+<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a></p>
 
 <h4 id="get">GET</h4>
 
@@ -595,6 +609,12 @@ The following are curl examples of how to specify file location in your upload/d
 
 <p><strong>Delete a file:</strong><br>
 <code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
+
+<h4 id="using-postman-to-make-a-call">Using Postman To Make a Call</h4>
+
+<p>Postman makes API development faster, easier, and better. Postman is the most complete toolchain for API development. The most-used REST client worldwide. Designed from the ground up to support the API developer. Intuitive user interface to send requests, save responses, add tests, and create workflows Read the docs.</p>
+
+<p>Once you have completed the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a>, you can utilize the following example to make a call to the API.</p>
 
           <h2 id="working-with-hotschedules-data">Working with HotSchedules data</h2>
 
