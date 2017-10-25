@@ -537,7 +537,43 @@ The following are curl examples of how to specify file location in your upload/d
 
 <p>Postman makes API development faster, easier, and better. Postman is the most complete toolchain for API development. The most-used REST client worldwide. Designed from the ground up to support the API developer. Intuitive user interface to send requests, save responses, add tests, and create workflows Read the docs.</p>
 
-<p>Once you have completed the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a>, you can utilize the following example to make a call to the API.</p>
+<p>You can make calls using both Basic Authentication using your HotSchedules IoT Platform account credentials (username and password) and the JWT Token method.</p>
+
+<p><strong>Basic Authentication Example:</strong> Let&rsquo;s do a Basic Authentication call to getEmpInfo. This method takes in a concept ID and a store ID and returns an array of wsEmpInfo objects. It is meant to get a list of all employees for that store.</p>
+
+<p><br></p>
+
+<p><strong>1.</strong> Create a new Request in Postman and name it &#39;Get Employee Info&rsquo;.</p>
+
+<p><img title="Step 1" alt="alt text" src="../../images/pms1.png?raw=false" /></p>
+
+<p><strong>2.</strong> Set the request type to &#39;GET&rsquo; and enter the following URL.
+<strong>https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURCONCEPTID/YOURSTORENUMBER/getEmpInfo?active_only=true</strong></p>
+
+<ul>
+<li>Replace the <strong>&#39;YOURNAMESPACE&rsquo;</strong>, <strong>&#39;YOURCONCEPTID&rsquo;</strong> and <strong>&#39;YOURSTORENUMBER&rsquo;</strong> with your values.</li>
+</ul>
+
+<p><img title="Step 2" alt="alt text" src="../../images/pms2.png?raw=false" /></p>
+
+<p><strong>3.</strong> Select <strong>&#39;Basic Auth&rsquo;</strong> in the Authorization section and enter your username and password.</p>
+
+<p><img title="Step 3" alt="alt text" src="../../images/pms3.png?raw=false" />
+<img title="Step 3" alt="alt text" src="../../images/pms3a.png?raw=false" /></p>
+
+<p><strong>4.</strong> Push the <strong>&#39;Send&rsquo;</strong> button to make the call and review the response in the <strong>&#39;Body&rsquo;</strong> section.</p>
+
+<p><img title="Step 4" alt="alt text" src="../../images/pms4.png?raw=false" /></p>
+
+<p><strong>5.</strong> Save the request so you can refer back and make repetitive calls to update the response.</p>
+
+<p><br><br></p>
+
+<p><strong>Note: Completing the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a> is required before you can utilize the following example to make a call to the API with your JWT Token.</strong></p>
+
+<p><strong>JWT Token Example:</strong> To perform a call using this method, follow the same steps as the Basic Authentication method with the exception of Step 3. Select <strong>&#39;Bearer Token&rsquo;</strong> as the Authorization type and enter the bearer token you received when you performed the &#39;Retrieve JWT Token&rsquo; call.</p>
+
+<p><img title="Bearer Token" alt="alt text" src="../../images/pms5.png?raw=false" /></p>
 
       </div>
       <div class="dark-box">
