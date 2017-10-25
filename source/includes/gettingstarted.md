@@ -7,9 +7,8 @@ Whether you work for a restaurant, a software company or for yourself - wherever
 This documentation is intended for the developer wanting to integrate into the HotSchedules IoT (Internet of Things) Platform by:
 
 * Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.  
-* Building mobile/html applications either as standalone html applications or to be part of Bodhi Mobile.  Build applications for restaurants, anywhere and anytime.
-* Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection
+* Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.
 
-Accounts in the IoT Platform are called a **namespace**. A **namespace** is a secured storage location of your HotSchedules cloud solution for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](https://developer.hotschedules.io), you will have the ability to create both a namespace and users to access that namespace. 
+Accounts in the IoT Platform are called a **namespace**. A **namespace** is a secured HotSchedules cloud storage location for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](https://developer.hotschedules.io), you will have the ability to create both a namespace and users to access that namespace. 
 
 The [HotSchedules IoT Platform Portal](https://developer.hotschedules.io) has an easy sign up process to help you get started quickly developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.
