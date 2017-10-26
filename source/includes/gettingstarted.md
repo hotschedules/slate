@@ -4,10 +4,10 @@ Restaurant operators need access to data and we are here to help you deliver it.
 Whether you work for a restaurant, a software company or for yourself - wherever you are, whatever you do - The HotSchedules IoT Platform gives you the power to innovate faster and cheaper than ever before.
 
 ###API Documentation
-This documentation is intended for the developer wanting to integrate into the HotSchedules IoT (Internet of Things) Platform by:
+This documentation is intended for those wanting to integrate into the HotSchedules IoT (Internet of Things) Platform.
 
-* Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.  
-* Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.
+* By Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.  
+* By Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.
 
 Accounts in the IoT Platform are called a **namespace**. A **namespace** is a secured HotSchedules cloud storage location for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](https://developer.hotschedules.io), you will have the ability to create both a namespace and users to access that namespace. 
 
