@@ -455,7 +455,6 @@ html, body {
   table {
     margin-bottom: 1em;
     overflow: auto;
-    width: 800px;
     th,td {
       text-align: left;
       vertical-align: top;
@@ -467,8 +466,7 @@ html, body {
       padding: 5px 10px;
       border: 1px solid #ccc;
       vertical-align: center;
-      background-color: #f4f4f4;
-      white-space: nowrap
+      background-color: #f4f4f4
     }
 
     td {
@@ -477,7 +475,7 @@ html, body {
     }
 
     tr:last-child {
-      border: 1px solid #ccc;
+      border: 1px solid #ccc
     }
 
     tr:nth-child(odd)>td {
