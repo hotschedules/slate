@@ -29,7 +29,261 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h2 id="working-with-hotschedules-data">Working with HotSchedules data</h2>
+        <h1 id="working-with-hotschedules-data">Working with HotSchedules data</h1>
+
+<h4 id="making-a-call">Making a call</h4>
+
+<p><strong>Note:</strong> If your <strong>namespace</strong> has been created under the new IDM model, you will not have the ability to make calls using <strong>api.hotschedules.io</strong>. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.</p>
+
+<p><br>
+The HotSchedules REST API supports all the standard REST verbs.</p>
+
+<p><strong>GET</strong><br>
+<strong>POST</strong><br>
+<strong>PUT</strong><br>
+<strong>PATCH</strong><br>
+<strong>DELETE</strong>  </p>
+
+<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a></p>
+
+<h4 id="get">GET</h4>
+
+<p>As an example, let&rsquo;s do a <strong>GET</strong> on a store via CURL
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/Store</code></p>
+
+<p>This call will return the information about a store that&rsquo;s been created for the bodhi-social organization</p>
+
+<p><code class="prettyprint">[{&quot;sys_version&quot;:1,&quot;image_url&quot;:&quot;https://upload.wikimedia.org/wikipedia/commons/5/54/Golden_Gate_Bridge_0002.jpg&quot;,&quot;sys_type_version&quot;:12,&quot;address&quot;:{&quot;street_address&quot;:&quot;555 Mission&quot;,&quot;extended_address&quot;:&quot;&quot;,&quot;locality&quot;:&quot;San Francisco&quot;,&quot;region&quot;:&quot;CA&quot;,&quot;postal_code&quot;:&quot;94111&quot;,&quot;country&quot;:&quot;US&quot;},&quot;store_hours&quot;:[{&quot;days&quot;:[7,1],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;},{&quot;days&quot;:[1,2],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[2,3],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[3,4],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[4,5],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[5,6],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[6,7],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;}],&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:37:15.560Z&quot;,&quot;name&quot;:&quot;platformstore&quot;,&quot;store_number&quot;:&quot;1&quot;,&quot;display_name&quot;:&quot;Platform Store&quot;,&quot;sys_id&quot;:&quot;574080abb9a19e2dadee775b&quot;}]</code></p>
+
+<p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/Store</code>  </p>
+
+<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/Store</code> or using our free store manager tool at <code class="prettyprint">https://hotschedules.io/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
+
+<p>Next let&rsquo;s look up a sale for our store in bodhi-social</p>
+
+<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/SalesTransaction</code></p>
+
+<p>RESULT:</p>
+
+<p><code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>We can also look up our Store using query parameters in our URL</p>
+
+<p><code class="prettyprint">curl --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:&quot;2016-05-20&quot;%7D&amp;fields=business_day&#39;</code></p>
+
+<p>OR alternatively:</p>
+
+<p><code class="prettyprint">curl -g --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={business_day:&quot;2016-05-20&quot;}&amp;fields=business_day&#39;</code></p>
+
+<p>RESULT:<br>
+<code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>So <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27business_day%27:%272016-05-20%27}</code> would return all SalesTransaction&rsquo;s for the business day of 2016-05-20.
+The URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27store_id%27:%27574080abb9a19e2dadee775b%27}</code> would return all SalesTransaction&rsquo;s for the store 574080abb9a19e2dadee775b (our Platform test store).</p>
+
+<p>All Types can be queried by any parameter within the type using a ?where={} clause. It&rsquo;s <strong>EXTREMELY</strong> important for efficiency and performance to query using indexes on your types. You can review the Types for your organization as well as the Indexes and Parameters by using our free Type Tool located at <code class="prettyprint">https://tools.hotschedules.io/types</code> or by inspecting <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/BodhiType</code></p>
+
+<h4 id="post">POST</h4>
+
+<p>To <strong>POST</strong> to a type you need to add the the header: &#39;Content-Type: application/json&rsquo; to your cURL Command</p>
+
+<p><code class="prettyprint">curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X POST -d &#39;{
+  &quot;store_id&quot;: &quot;l8zeL&quot;,
+  &quot;business_day&quot;: &quot;2016-05-13&quot;,
+  &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;,
+  &quot;transaction_id&quot;: &quot;FGHG012&quot;,
+     &quot;tender_total&quot;: {
+      &quot;code&quot;: &quot;USD&quot;,
+      &quot;scale&quot;: 2,
+      &quot;value&quot;: 620
+    }
+}&#39; https://api.hotschedules.io/&lt;organization_name&gt;/resources/SalesTransaction</code></p>
+
+<p>That command will post the json object to the SalesTransaction type. You can now GET on this type either using cURL or the free query tools available at https://tools.hotschedules.io/query</p>
+
+<h4 id="bulk-post">Bulk Post</h4>
+
+<p>All bulk operations are accessible through https://api.hotschedules.io<br>
+The size limitation for the body is 17MB  </p>
+
+<h3 id="syntax:">Syntax:</h3>
+
+<p><strong>POST</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk</code> with json body<br>
+<code class="prettyprint">{
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot; or &quot;update&quot; or &quot;upsert&quot; or &quot;invite&quot;,  * see below
+     &quot;report&quot;: true,        &lt;- optional, need a report? (default false) 
+     &quot;target&quot;: &quot;target_name”    &lt;- the name of the type (not for invite)
+  },
+  &quot;payload&quot;: [{
+    &quot;the_field&quot;: &quot;my first thing to insert or upsert or invite&quot;,
+    &quot;other_field&quot;: &quot;the_other_field&quot;
+  }, {
+    &quot;the_field&quot;: &quot;my second thing to insert or upsert&quot;,
+    &quot;other_field&quot;: &quot;the_other_field2&quot;
+  }]
+}</code>  </p>
+
+<p>The payload varies depending on the type of operation and Returns 202 with header <code class="prettyprint">bulk_id:&lt;the bulk id&gt;</code></p>
+
+<p>The result of a report, if requested, is accessible as soon as the processing is done on:</p>
+
+<p><strong>GET</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk/&lt;bulk_id&gt;</code></p>
+
+<p><strong>RESPONSE:</strong><br>
+returns <strong>200</strong> with a json array body where the order of the cells matches the order of the payload. The report can be accessed only once.<br>
+returns <strong>204</strong> if the report is not ready yet<br>
+returns <strong>404</strong> if no report was found with that id  </p>
+
+<ul>
+<li>update/upsert is only available for types not encapsulated </li>
+<li>insert on system types only BodhiUser, BodhiType and BodhiEnumeration and any not encapsulated type</li>
+</ul>
+
+<h3 id="example:">Example:</h3>
+
+<p><code class="prettyprint">{
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot;,
+    &quot;report&quot;: true,
+    &quot;target&quot;:  &quot;BulkTest&quot;
+  },
+  &quot;payload&quot;: [{
+    &quot;name&quot;: &quot;leo&quot;,
+    &quot;other_field&quot;: &quot;mauris non&quot;
+  }, {
+    &quot;name&quot;: &quot;orci&quot;,
+    &quot;other_field&quot;: &quot;sit amet justo&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;pulvinar sed nisl nunc rhoncus&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;diam cras&quot;
+  }, {
+    &quot;name&quot;: &quot;est&quot;,
+    &quot;other_field&quot;: &quot;dui nec nisi volutpat&quot;
+  }, {
+    &quot;name&quot;: &quot;lorem&quot;,
+    &quot;other_field&quot;: &quot;cursus id&quot;
+  }, {
+    &quot;name&quot;: &quot;molestie&quot;,
+    &quot;other_field&quot;: &quot;potenti nullam porttitor lacus at&quot;
+  }, {
+    &quot;name&quot;: &quot;sapien&quot;,
+    &quot;other_field&quot;: &quot;ultrices aliquet maecenas leo&quot;
+  }, {
+    &quot;name&quot;: &quot;nibh&quot;,
+    &quot;other_field&quot;: &quot;consectetuer eget rutrum at&quot;
+  }, {
+    &quot;name&quot;: &quot;luctus&quot;,
+    &quot;other_field&quot;: &quot;nisl nunc&quot;
+  }]
+}</code></p>
+
+<h4 id="put">PUT</h4>
+
+<p>The HTTP verb PUT can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PUT on sys_id</p>
+
+<p>As an example, in the above SalesTransaction example, the sys_id is 574086965eacd06aa3db036b, a PUT to the SalesTransaction based on sys_id would be as follows:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b
+</code> </p>
+
+<h4 id="put-upsert">PUT Upsert</h4>
+
+<p>Upsert is a safe way to replace an existing record, or POST a record if the entry does not currently exist.</p>
+
+<p>You can upsert by appending your URL with ?upsert=true</p>
+
+<p>As an example, the above PUT example can be changed to a replace by appending the ?upsert=true to the cURL command:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b?upsert=true
+</code></p>
+
+<h4 id="patch">PATCH</h4>
+
+<p>the HTTP verb PATCH will allow you to alter single parameters or fields within a record in your type. Patch commands follow the following sytax:
+[ { &ldquo;op&rdquo;: &ldquo;replace&rdquo;, &ldquo;path&rdquo;: &ldquo;/baz&rdquo;, &ldquo;value&rdquo;: &ldquo;boo&rdquo; }, { &ldquo;op&rdquo;: &ldquo;add&rdquo;, &ldquo;path&rdquo;: &ldquo;/hello&rdquo;, &ldquo;value&rdquo;: [&ldquo;world&rdquo;] }, { &ldquo;op&rdquo;: &ldquo;remove&rdquo;, &ldquo;path&rdquo;: &ldquo;/foo&rdquo;} ]</p>
+
+<p>The HTTP verb PATCH can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PATCH on sys_id</p>
+
+<h4 id="delete">DELETE</h4>
+
+<p>the HTTP verb DELETE will allow you to remove a record in your type. DELETE commands follow the following sytax:</p>
+
+<p>To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.</p>
+
+<h4 id="file-upload">File Upload</h4>
+
+<p>The Platform BodhiFileUpload endpoints are special types that allow a user to upload and download any file (like a dbf file from your store&rsquo;s POS).</p>
+
+<p>Metadata of your file is posted to type BodhiFileUpload on successful upload  </p>
+
+<p><strong>BodhiFileUpload example record:</strong><br>
+<code class="prettyprint">{ &quot;namespace&quot;: &quot;bodhi&quot;, &quot;original_name&quot;: &quot;profile_pic5.jpg&quot;, &quot;sys_version&quot;: 1, &quot;location&quot;: &quot;bodhi/profile_pic5.jpg&quot;, &quot;uploaded_at&quot;: &quot;2015-09-10T19:42:48+0000&quot;, &quot;sys_created_by&quot;: &quot;admin__bodhi&quot;, &quot;sys_created_at&quot;: &quot;2015-09-10T19:42:49+0000&quot;, &quot;name&quot;: &quot;profile_pic5.jpg&quot;, &quot;media_type&quot;: &quot;image/jpeg&quot;, &quot;sys_id&quot;: &quot;55f1dd39b9b5904f64c8212f&quot; }</code></p>
+
+<p><strong>Examples:</strong><br>
+The following are curl examples of how to specify file location in your upload/download/delete commands.  Everything after “upload/” or “download/” in the url is used as the destination.  Note that filename is always specified in the url.  </p>
+
+<p><code class="prettyprint">curl -X POST -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code>  </p>
+
+<p><code class="prettyprint">curl -X PUT -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code></p>
+
+<p><strong>Download by path:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/recipes/food/BurritoRecipe.txt</code></p>
+
+<p><strong>Download by sys_id:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/56f9c2b4fa92ec27934a76ae</code>  </p>
+
+<p><strong>Delete a file:</strong><br>
+<code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
+
+<h1 id="using-postman-to-make-a-call">Using Postman To Make a Call</h1>
+
+<p>Postman makes API development faster, easier, and better. Postman is the most complete toolchain for API development. The most-used REST client worldwide. Designed from the ground up to support the API developer. Intuitive user interface to send requests, save responses, add tests, and create workflows Read the docs.</p>
+
+<p>You can make calls using both Basic Authentication using your HotSchedules IoT Platform account credentials (username and password) and the JWT Token method.</p>
+
+<p><strong>Basic Authentication Example:</strong> Let&rsquo;s do a Basic Authentication call to getEmpInfo. This method takes in a concept ID and a store ID and returns an array of wsEmpInfo objects. It is meant to get a list of all employees for that store.</p>
+
+<p><br></p>
+
+<p><strong>1.</strong> Create a new Request in Postman and name it &#39;Get Employee Info&rsquo;.</p>
+
+<p><img title="Step 1" alt="alt text" src="../../images/pms1.png?raw=false" /></p>
+
+<p><strong>2.</strong> Set the request type to &#39;GET&rsquo; and enter the following URL.
+<strong>https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURCONCEPTID/YOURSTORENUMBER/getEmpInfo?active_only=true</strong></p>
+
+<ul>
+<li>Replace the <strong>&#39;YOURNAMESPACE&rsquo;</strong>, <strong>&#39;YOURCONCEPTID&rsquo;</strong> and <strong>&#39;YOURSTORENUMBER&rsquo;</strong> with your values.</li>
+</ul>
+
+<p><img title="Step 2" alt="alt text" src="../../images/pms2.png?raw=false" /></p>
+
+<p><strong>3.</strong> Select <strong>&#39;Basic Auth&rsquo;</strong> in the Authorization section and enter your username and password.</p>
+
+<p><img title="Step 3" alt="alt text" src="../../images/pms3.png?raw=false" />
+<img title="Step 3" alt="alt text" src="../../images/pms3a.png?raw=false" /></p>
+
+<p><strong>4.</strong> Push the <strong>&#39;Send&rsquo;</strong> button to make the call and review the response in the <strong>&#39;Body&rsquo;</strong> section.</p>
+
+<p><img title="Step 4" alt="alt text" src="../../images/pms4.png?raw=false" /></p>
+
+<p><strong>5.</strong> Save the request so you can refer back and make repetitive calls to update the response.</p>
+
+<p><br><br></p>
+
+<p><strong>Note: Completing the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a> is required before you can utilize the following example to make a call to the API with your JWT Token.</strong></p>
+
+<p><strong>JWT Token Example:</strong> To perform a call using this method, follow the same steps as the Basic Authentication method with the exception of Step 3. Select <strong>&#39;Bearer Token&rsquo;</strong> as the Authorization type and enter the bearer token you received when you performed the &#39;Retrieve JWT Token&rsquo; call.</p>
+
+<p><img title="Bearer Token" alt="alt text" src="../../images/pms5.png?raw=false" /></p>
+
+<h1 id="available-rest-api-methods">Available REST API METHODS</h1>
 
 <p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
 
@@ -1294,7 +1548,7 @@
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong> and three flags (<strong>isHouse</strong>, <strong>isScheduled</strong> and <strong>isPosted</strong>). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
 
-<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &lsquo;house shifts&rsquo; in HotSchedules).
+<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &#39;house shifts&rsquo; in HotSchedules).
 isScheduled - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted
 isPosted - includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</p>
 

@@ -397,9 +397,9 @@ request(options, function (error, response, body) {
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<p>Now that you&rsquo;ve authenticated to the API, let&rsquo;s look at some data.</p>
+          <h1 id="working-with-hotschedules-data">Working with HotSchedules data</h1>
 
-<h2 id="making-a-call">Making a call</h2>
+<h4 id="making-a-call">Making a call</h4>
 
 <p><strong>Note:</strong> If your <strong>namespace</strong> has been created under the new IDM model, you will not have the ability to make calls using <strong>api.hotschedules.io</strong>. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.</p>
 
@@ -478,18 +478,18 @@ The size limitation for the body is 17MB  </p>
 
 <p><strong>POST</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk</code> with json body<br>
 <code class="prettyprint">{
-    &quot;config&quot;: {
-        &quot;op&quot;: &quot;insert&quot; or &quot;update&quot; or &quot;upsert&quot; or &quot;invite&quot;,  * see below
-         &quot;report&quot;: true,                &lt;- optional, need a report? (default false) 
-         &quot;target&quot;: &quot;target_name”      &lt;- the name of the type (not for invite)
-    },
-    &quot;payload&quot;: [{
-        &quot;the_field&quot;: &quot;my first thing to insert or upsert or invite&quot;,
-        &quot;other_field&quot;: &quot;the_other_field&quot;
-    }, {
-        &quot;the_field&quot;: &quot;my second thing to insert or upsert&quot;,
-        &quot;other_field&quot;: &quot;the_other_field2&quot;
-    }]
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot; or &quot;update&quot; or &quot;upsert&quot; or &quot;invite&quot;,  * see below
+     &quot;report&quot;: true,        &lt;- optional, need a report? (default false) 
+     &quot;target&quot;: &quot;target_name”    &lt;- the name of the type (not for invite)
+  },
+  &quot;payload&quot;: [{
+    &quot;the_field&quot;: &quot;my first thing to insert or upsert or invite&quot;,
+    &quot;other_field&quot;: &quot;the_other_field&quot;
+  }, {
+    &quot;the_field&quot;: &quot;my second thing to insert or upsert&quot;,
+    &quot;other_field&quot;: &quot;the_other_field2&quot;
+  }]
 }</code>  </p>
 
 <p>The payload varies depending on the type of operation and Returns 202 with header <code class="prettyprint">bulk_id:&lt;the bulk id&gt;</code></p>
@@ -511,42 +511,42 @@ returns <strong>404</strong> if no report was found with that id  </p>
 <h3 id="example:">Example:</h3>
 
 <p><code class="prettyprint">{
-    &quot;config&quot;: {
-        &quot;op&quot;: &quot;insert&quot;,
-        &quot;report&quot;: true,
-        &quot;target&quot;:  &quot;BulkTest&quot;
-    },
-    &quot;payload&quot;: [{
-        &quot;name&quot;: &quot;leo&quot;,
-        &quot;other_field&quot;: &quot;mauris non&quot;
-    }, {
-        &quot;name&quot;: &quot;orci&quot;,
-        &quot;other_field&quot;: &quot;sit amet justo&quot;
-    }, {
-        &quot;name&quot;: &quot;nulla&quot;,
-        &quot;other_field&quot;: &quot;pulvinar sed nisl nunc rhoncus&quot;
-    }, {
-        &quot;name&quot;: &quot;nulla&quot;,
-        &quot;other_field&quot;: &quot;diam cras&quot;
-    }, {
-        &quot;name&quot;: &quot;est&quot;,
-        &quot;other_field&quot;: &quot;dui nec nisi volutpat&quot;
-    }, {
-        &quot;name&quot;: &quot;lorem&quot;,
-        &quot;other_field&quot;: &quot;cursus id&quot;
-    }, {
-        &quot;name&quot;: &quot;molestie&quot;,
-        &quot;other_field&quot;: &quot;potenti nullam porttitor lacus at&quot;
-    }, {
-        &quot;name&quot;: &quot;sapien&quot;,
-        &quot;other_field&quot;: &quot;ultrices aliquet maecenas leo&quot;
-    }, {
-        &quot;name&quot;: &quot;nibh&quot;,
-        &quot;other_field&quot;: &quot;consectetuer eget rutrum at&quot;
-    }, {
-        &quot;name&quot;: &quot;luctus&quot;,
-        &quot;other_field&quot;: &quot;nisl nunc&quot;
-    }]
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot;,
+    &quot;report&quot;: true,
+    &quot;target&quot;:  &quot;BulkTest&quot;
+  },
+  &quot;payload&quot;: [{
+    &quot;name&quot;: &quot;leo&quot;,
+    &quot;other_field&quot;: &quot;mauris non&quot;
+  }, {
+    &quot;name&quot;: &quot;orci&quot;,
+    &quot;other_field&quot;: &quot;sit amet justo&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;pulvinar sed nisl nunc rhoncus&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;diam cras&quot;
+  }, {
+    &quot;name&quot;: &quot;est&quot;,
+    &quot;other_field&quot;: &quot;dui nec nisi volutpat&quot;
+  }, {
+    &quot;name&quot;: &quot;lorem&quot;,
+    &quot;other_field&quot;: &quot;cursus id&quot;
+  }, {
+    &quot;name&quot;: &quot;molestie&quot;,
+    &quot;other_field&quot;: &quot;potenti nullam porttitor lacus at&quot;
+  }, {
+    &quot;name&quot;: &quot;sapien&quot;,
+    &quot;other_field&quot;: &quot;ultrices aliquet maecenas leo&quot;
+  }, {
+    &quot;name&quot;: &quot;nibh&quot;,
+    &quot;other_field&quot;: &quot;consectetuer eget rutrum at&quot;
+  }, {
+    &quot;name&quot;: &quot;luctus&quot;,
+    &quot;other_field&quot;: &quot;nisl nunc&quot;
+  }]
 }</code></p>
 
 <h4 id="put">PUT</h4>
@@ -609,7 +609,7 @@ The following are curl examples of how to specify file location in your upload/d
 <p><strong>Delete a file:</strong><br>
 <code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
 
-<h4 id="using-postman-to-make-a-call">Using Postman To Make a Call</h4>
+<h1 id="using-postman-to-make-a-call">Using Postman To Make a Call</h1>
 
 <p>Postman makes API development faster, easier, and better. Postman is the most complete toolchain for API development. The most-used REST client worldwide. Designed from the ground up to support the API developer. Intuitive user interface to send requests, save responses, add tests, and create workflows Read the docs.</p>
 
@@ -651,7 +651,7 @@ The following are curl examples of how to specify file location in your upload/d
 
 <p><img title="Bearer Token" alt="alt text" src="images/pms5.png?raw=false" /></p>
 
-          <h2 id="working-with-hotschedules-data">Working with HotSchedules data</h2>
+<h1 id="available-rest-api-methods">Available REST API METHODS</h1>
 
 <p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
 
@@ -1916,7 +1916,7 @@ The following are curl examples of how to specify file location in your upload/d
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong> and three flags (<strong>isHouse</strong>, <strong>isScheduled</strong> and <strong>isPosted</strong>). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
 
-<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &lsquo;house shifts&rsquo; in HotSchedules).
+<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &#39;house shifts&rsquo; in HotSchedules).
 isScheduled - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted
 isPosted - includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</p>
 
