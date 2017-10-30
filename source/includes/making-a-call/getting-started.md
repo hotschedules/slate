@@ -62,7 +62,16 @@ For more details on IDM, please click [HERE](https://help.hotschedules.com/hc/en
 
 ##IDM How to Programatically Retrieve JWT Tokens
 
-Note: Postman is the free tool used to generate these examples. Download [Postman](https://www.getpostman.com/postman).
+Before you can retrieve your token, follow these simple setup steps before proceeding.
+
+**Step 1:** Create your global profile.<br>
+**Step 2:** Obtain your API credentials from HotSchedules if you have not already done so.<br>
+**Step 3:** Login into the [Account Manager](https://tools.hotschedules.io/account/#/)<br>
+**Step 4:** In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
+**Step 5:** Enter your API credentials that was provided by hotSchedules and click save.<br>
+**Step 6:** Continue with the example below to retrieve your token.
+
+
 
 **What are JSON Web Tokens?**
 
@@ -90,31 +99,29 @@ JWTs can be passed around easily: Since JWTs are self-contained, they are perfec
 
 **Params**
 
-* grant_type 
-
+* **grant_type** 
     * Value must be "password" 
 
-* client_id
-
+* **client_id**
     * Value must be "urn:mace:oidc:hotschedules.com"
 
-* username
-
+* **username** (this is your global profile username)
     * Value should reflect the username of account you’re requesting tokens for
 
-* password
-
+* **password** (this is your global profile password)
     * Value should reflect the password of the account you’re requesting tokens for
 
 **Return**
 
 * access_token
 
-* id_token
-
 * refresh_token
 
+* id_token
+
 **Sample Call (Postman)**
+
+**Note:** Postman is the free tool used to generate these examples. Download [Postman](https://www.getpostman.com/postman).
 
 ![alt text](/images/postman.png?raw=true "Postman")  
 
@@ -208,18 +215,18 @@ request(options, function (error, response, body) {
 
 **Params**
 
-*   grant_type 
+*   **grant_type** 
     *   Value must be "refresh_token" 
-*   client_id
+*   **client_id**
     *   Value must be "urn:mace:oidc:hotschedules.com"
-*   refresh_token
+*   **refresh_token**
     *   Value should reflect the refresh token of account you're requesting tokens for
 
 **Return**
 
 *   access_token
-*   id_token
 *   refresh_token
+*   id_token  
 
 **Sample Call (Postman)**
 
