@@ -10,7 +10,6 @@ language_tabs:
 includes:
 
   - gettingstarted
-  - bodhicloud/cloudoverview
   - bodhicloud/gettingstarted
 
   - making-a-call/getting-started
