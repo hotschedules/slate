@@ -166,7 +166,14 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 
 <h2 id="idm-how-to-programatically-retrieve-jwt-tokens">IDM How to Programatically Retrieve JWT Tokens</h2>
 
-<p>Note: Postman is the free tool used to generate these examples. Download <a href="https://www.getpostman.com/postman">Postman</a>.</p>
+<p>Before you can retrieve your token, follow these simple setup steps before proceeding.</p>
+
+<p><strong>Step 1:</strong> Create your global profile.<br>
+<strong>Step 2:</strong> Obtain your API credentials from HotSchedules if you have not already done so.<br>
+<strong>Step 3:</strong> Login into the <a href="https://tools.hotschedules.io/account/#/">Account Manager</a><br>
+<strong>Step 4:</strong> In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
+<strong>Step 5:</strong> Enter your API credentials that was provided by hotSchedules and click save.<br>
+<strong>Step 6:</strong> Continue with the example below to retrieve your token.</p>
 
 <p><strong>What are JSON Web Tokens?</strong></p>
 
@@ -193,22 +200,22 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 <p><strong>Params</strong></p>
 
 <ul>
-<li><p>grant_type </p>
+<li><p><strong>grant_type</strong> </p>
 
 <ul>
 <li>Value must be &ldquo;password&rdquo; </li>
 </ul></li>
-<li><p>client_id</p>
+<li><p><strong>client_id</strong></p>
 
 <ul>
 <li>Value must be &ldquo;urn:mace:oidc:hotschedules.com&rdquo;</li>
 </ul></li>
-<li><p>username</p>
+<li><p><strong>username</strong> (this is your global profile username)</p>
 
 <ul>
 <li>Value should reflect the username of account you’re requesting tokens for</li>
 </ul></li>
-<li><p>password</p>
+<li><p><strong>password</strong> (this is your global profile password)</p>
 
 <ul>
 <li>Value should reflect the password of the account you’re requesting tokens for</li>
@@ -219,11 +226,13 @@ Set-Cookie: RUSK=&ldquo;8a6f98bb1033055fc04d644c0006789335f96c2b-username=platfo
 
 <ul>
 <li><p>access_token</p></li>
-<li><p>id_token</p></li>
 <li><p>refresh_token</p></li>
+<li><p>id_token</p></li>
 </ul>
 
 <p><strong>Sample Call (Postman)</strong></p>
+
+<p><strong>Note:</strong> Postman is the free tool used to generate these examples. Download <a href="https://www.getpostman.com/postman">Postman</a>.</p>
 
 <p><img title="Postman" alt="alt text" src="images/postman.png?raw=true" />  </p>
 
@@ -318,17 +327,17 @@ request(options, function (error, response, body) {
 <p><strong>Params</strong></p>
 
 <ul>
-<li>  grant_type 
+<li>  <strong>grant_type</strong> 
 
 <ul>
 <li>  Value must be &ldquo;refresh_token&rdquo; </li>
 </ul></li>
-<li>  client_id
+<li>  <strong>client_id</strong>
 
 <ul>
 <li>  Value must be &ldquo;urn:mace:oidc:hotschedules.com&rdquo;</li>
 </ul></li>
-<li>  refresh_token
+<li>  <strong>refresh_token</strong>
 
 <ul>
 <li>  Value should reflect the refresh token of account you&rsquo;re requesting tokens for</li>
@@ -339,8 +348,8 @@ request(options, function (error, response, body) {
 
 <ul>
 <li>  access_token</li>
-<li>  id_token</li>
 <li>  refresh_token</li>
+<li>  id_token<br></li>
 </ul>
 
 <p><strong>Sample Call (Postman)</strong></p>
