@@ -3,19 +3,9 @@ Restaurant operators need access to data and we are here to help you deliver it.
 
 Whether you work for a restaurant, a software company or for yourself - wherever you are, whatever you do - The HotSchedules IoT Platform gives you the power to innovate faster and cheaper than ever before.
 
-##IoT Platform API Overview
+##IoT Platform APIServer Overview
 The HotSchedules IoT Platform APIServer is a set of secure REST APIs that are used to store your data.  
 
 The foundation for this document is the Mongo DB reference located at [http://docs.mongodb.org/manual/reference/operator/](http://docs.mongodb.org/manual/reference/operator/).
 
 Users may be unfamiliar with the REST query syntax. Those familiar with SQL should note that the same types of SQL query operations are possible using the REST API. Users wishing to understand the mapping between SQL queries (SELECT statements) and the Query syntax - should refer to the following document: [http://docs.mongodb.org/manual/reference/sql-comparison/](http://docs.mongodb.org/manual/reference/sql-comparison/).
-
-##API Documentation
-This documentation is intended for those wanting to integrate into the HotSchedules IoT (Internet of Things) Platform.
-
-* By Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.  
-* By Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.
-
-Accounts in the IoT Platform are called a **namespace**. A namespace is a secured HotSchedules cloud storage location for your business. Your namespace is uniquely named based on your organization name. When you sign up through the [HotSchedules IoT Platform Portal](https://developer.hotschedules.io), you will have the ability to create both a namespace and users to access that namespace. 
-
-The [HotSchedules IoT Platform Portal](https://developer.hotschedules.io) has an easy sign up process to help you get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.
