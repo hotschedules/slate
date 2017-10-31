@@ -9,15 +9,17 @@ Accounts in the IoT Platform are called a **namespace**. A namespace is a secure
 The [HotSchedules IoT Platform Portal](https://developer.hotschedules.io) has an easy sign up process to help you get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.
 
 ##Access To The Cloud API 
-To access the HotSchedules IoT Platform Cloud API, you need to login with you user and password which is provided by HotSchedules.  The Cloud API is available at this location: <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a>.  
+To access the HotSchedules Cloud API, you will need to login with your user and password which is provided by HotSchedules.  The IoT Cloud API is available at this location: <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a>.  
 
-If you enter your credentials (username and password) and click Explore, you will see a list of APIs which you can access for your namespace.  The Cloud APIs are REST APIs which returns JSON for all responses.  
+If you enter your credentials (username and password) and click Explore, you will see a list of APIs which you can access for your namespace.  The Cloud APIs are REST APIs which returns JSON for all responses.
 
-Each API has examples and an opportunity to _**Try it out!**_.  You can add data using our provided types or create your own types.
 
-**NOTE:** Should you create your own type, the new type will show up in the API Methods for your namespace.
+The Cloud API has examples and an opportunity to _**Try it out!**_.  You can add data using our provided types or create your own types.
+<br><br>
 
-##Login To The Cloud API
+**NOTE:** Should you create your own type, the new type will be available in the API Methods for your namespace.
+
+##Logging In To The Cloud API
 - Go to  <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a>
 - Click Loginform from the list of Cloud API Methods
 - Click POST
