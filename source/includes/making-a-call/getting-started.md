@@ -2,54 +2,7 @@
 
 The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores. You can also do some fancy things like get social information, upload files, send push notifications and emails, and even make payments.
 
-###Base URL
-
-All URLs referenced in the documentation have the following base:
-
-`https://api.hotschedules.io/<organization_name>`
-
-The Bodhi REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.
-
-##Authenticating To The API
-
-
-HTTP requests to the REST API are protected with HTTP Basic and HTTP Cookie authentication.  In short, you will use your HotSchedules IoT Platform account credentials (username and password) for HTTP Basic authentication. If you do not have credentials, you can signup on the [HotSchedules IoT Platform Portal](https://hotschedules.io/signup) 
-
-Syntax:
-`curl -ik -u username:password -X GET https://api.hotschedules.io/me`
-
-For example:
-`curl -ik -u platform:user -X GET https://api.hotschedules.io/me`
-
-Your results will look like this:  
-HTTP/1.1 200 OK  
-Server: nginx/1.8.0  
-Date: Sat, 21 May 2016 15:22:26 GMT  
-Content-Type: application/json; charset=utf-8  
-Content-Length: 456  
-Connection: keep-alive  
-Access-Control-Allow-Credentials: true  
-Access-Control-Allow-Headers:  
-Access-Control-Allow-Methods: *  
-Access-Control-Allow-Origin: 
-Access-Control-Expose-Headers: WWW-Authenticate, Server-Authorization, Location  
-Request-Time: 383  
-Set-Cookie: RUSK="8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform"; Path=/; Domain=.hotschedules.io; Secure; HTTPOnly
-
-`{"lastName":"User","sys_created_at":"2016-05-21T15:22:11.157Z","authorizations":[{"namespace":"bodhi-social","read":true}],"profiles":["bodhi-social.user"],"usertype":"person","firstName":"Platform","sys_id":"57407d23b3b82c51e5cb3afb","password":"$2a$12$C/ZJYSZ4qkR5pU5yHQEkLuvcOVjP4rqLdOHlPq4zcDZt9dcYpBeMC","sys_version":1,"email":"customercare@hotschedules.com","username":"platform","sys_type_version":12}`
-
-
-Next, read the Set-Cookie header to get your cookie string:  
-`RUSK="8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform"` in the example
-
-Now use the cookie auth to authenticate to the API  
-`curl -ik --cookie "RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform" -X GET https://api.hotschedules.io/me`
-
-Cookie authorization does not expire and can be used to authenticate moving forward.
-
-Once your Organization is setup in the platform (you can signup for free at https://developer.hotschedules.io) you can access your data at https://api.hotschedules.io/<organization_name> .
-
-So for example, if your organization name is my-deli, your URL would be `https://api.hotschedules.io/my-deli`
+The REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.
 
 ##IDM - Creating Your Global Profile
 
