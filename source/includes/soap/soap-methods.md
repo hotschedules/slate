@@ -5120,19 +5120,24 @@ client not found</td></tr>
 </soap:Envelope>
 ```
 
-
-
-
-
-
-
-
 ####getTimeCardsV2
+Same as getTimeCards but additionally provides double time info for each timecard.
+
 ####getTimeCardsV3
+Same as getTimeCardsV2 but additionally exposes the "hsid" info for each timecard.
+
 ####setTimeCards
+This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCard objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+
+
 ####setTimeCardsDeclaredTips
+This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCardsDeclaredTips objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+
 ####setTimeCardsV3
+This method takes in a concept ID, store ID, a start and end date and an array of WSTimeCard objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object. This method uses hsSimpleDate objects for dates.
+
 ####updateTimeCards
+Similar to setTimeCards but allows for many more flags to control the timecard sync: dropCards, createIds, calculateOvertime, usePunchIds, isSalary, overrideOT, manualPunchUpdate, skipAggregation. The API was created for simulation and shall be used with caution.
 
 
 ##TimeOffService
