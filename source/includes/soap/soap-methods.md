@@ -5757,8 +5757,6 @@ The outputs of this method are the arguments defined by the following table.
 </soap:Envelope>
 ```
 
-
-
 ####setVolumeCounts
 This method takes in a concept ID, store ID, business date, date time, volume amount, volume type, and a revenue center for the purpose of submitting actual volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
@@ -5853,9 +5851,98 @@ The outputs of this method are the arguments defined by the following table.
 </soap:Envelope>
 ```
 
-
-####setVolumeCountsV2
 ####setVolumeCountsV3
+All behavior is the same as setVolumeCounts, however you can use a string value in either UPPER or lower case for the volumeTypeName object.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>businessDate</td><td>hsSimpleDate</td><td>Business date of transaction</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>Date Time of the transaction</td></tr>
+<td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
+<td nowrap>volumeAmount</td><td>Int</td><td>Value of the volume count for the transaction</td></tr>
+<td nowrap>volumeTypeName</td><td>volumeType</td><td>Supports all volumeTypes</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>WSReturn object</td>
+</tr>
+</tbody>
+</table>
+
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+   <soapenv:Body>
+      <vol:setVolumeCountsV3>
+         <concept>8436</concept>
+         <storeNum>23</storeNum>
+         <volumeData>
+            <!--Zero or more repetitions:-->
+            <item>
+               <businessDate>2017-10-05T00:00:00</businessDate>
+               <dateTime>2017-10-05T06:41:00-05:00</dateTime>
+               <rvcExtId>4</rvcExtId>
+               <volumeAmount>4</volumeAmount>
+               <volumeType>
+                  <volumeTypeName>GUESTS</volumeTypeName>
+               </volumeType>
+            </item>
+         </volumeData>
+      </vol:setVolumeCountsV3>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:setVolumeCountsV3Response xmlns:ns1="http://services.hotschedules.com/api/services/VolumeService">
+         <return>
+            <failCount>0</failCount>
+            <success>true</success>
+            <successCount>1</successCount>
+         </return>
+      </ns1:setVolumeCountsV3Response>
+   </soap:Body>
+</soap:Envelope>
+```
 
 #HotSchedules Community
 
