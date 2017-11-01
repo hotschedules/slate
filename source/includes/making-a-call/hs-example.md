@@ -1210,7 +1210,7 @@ regWage      | Number | Regular hourly pay rate
 clockIn      | String | Clock in timestamp for the shift
 ovtWage      | Number | Optional-Overtime hourly pay rate
 breakMinutes | Number | Number of non-paid break minutes in shift
-JobId        | Number | POS numeric identifier for the job
+jobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
 regHrs       | Number | Regular hours represented in shift
@@ -1283,7 +1283,7 @@ regWage      | Number | Regular hourly pay rate
 clockIn      | String | Clock in timestamp for the shift
 ovtWage      | Number | Optional-Overtime hourly pay rate
 breakMinutes | Number | Number of non-paid break minutes in shift
-JobId        | Number | POS numeric identifier for the job
+jobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
 regHrs       | Number | Regular hours represented in shift
@@ -1370,7 +1370,7 @@ Year            | Number | Year formated yyyy
       "clockIn": "2016-07-30T15:56:00-05:00",
       "ovtWage": 13.5,
       "breakMinutes": 0,
-      "JobId": 16921407,
+      "jobId": 16921407,
       "businessDate": {
         "month": 7,
         "year": 2016,
@@ -1398,7 +1398,7 @@ regWage      | Number | Regular hourly pay rate
 clockIn      | String | Clock in timestamp for the shift
 ovtWage      | Number | Optional-Overtime hourly pay rate
 breakMinutes | Number | Number of non-paid break minutes in shift
-JobId        | Number | POS numeric identifier for the job
+jobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
 regHrs       | Number | Regular hours represented in shift
@@ -1849,7 +1849,7 @@ regWage      | Number | Regular hourly pay rate
 clockIn      | String | Clock in timestamp for the shift
 ovtWage      | Number | Optional-Overtime hourly pay rate
 breakMinutes | Number | Number of non-paid break minutes in shift
-JobId        | Number | POS numeric identifier for the job
+jobId        | Number | POS numeric identifier for the job
 jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
 regHrs       | Number | Regular hours represented in shift
