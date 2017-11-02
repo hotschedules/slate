@@ -2283,6 +2283,10 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 </tr>
 </tbody></table>
 
+<h4 id="gettimecardsv2">getTimeCardsV2</h4>
+
+<p>Same as getTimeCards but additionally provides double time info for each timecard.</p>
+
 <h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of wsTimeCard3 objects</strong>, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
