@@ -8608,55 +8608,54 @@ client not found</td></tr>
 <blockquote>
 <p><strong>EXAMPLE RESPONSE:</strong></p>
 </blockquote>
-<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTFo8"?&gt;</span>
-<span class="nt">&lt;soapenv:Envelope</span>
-  <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
-  <span class="na">xmlns:lab=</span><span class="s">"http://services.hotschedules.com/api/services/LaborService"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;soapenv:Header/&gt;</span>
-  <span class="nt">&lt;soapenv:Body&gt;</span>
-    <span class="nt">&lt;lab:setLaborForecastByJob&gt;</span>
-      <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
-      <span class="nt">&lt;storeNum231</span><span class="err">&lt;/storeNum</span><span class="nt">&gt;</span>
-      <span class="nt">&lt;idata&gt;</span>
-        <span class="nt">&lt;item&gt;</span>
-          <span class="nt">&lt;businessDate&gt;</span>
-            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
-            <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
-            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
-          <span class="nt">&lt;/businessDate&gt;</span>
-          <span class="nt">&lt;dayPartStartDate&gt;</span>
-            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
-            <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
-            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
-          <span class="nt">&lt;/dayPartStartDate&gt;</span>
-          <span class="nt">&lt;dayPartStartTime&gt;</span>0000<span class="nt">&lt;/dayPartStartTime&gt;</span>
-          <span class="nt">&lt;jobExtRef&gt;</span>55<span class="nt">&lt;/jobExtRef&gt;</span>
-          <span class="nt">&lt;laborForecastMinutes&gt;</span>1<span class="nt">&lt;/laborForecastMinutes&gt;</span>
-        <span class="nt">&lt;/item&gt;</span>
-        <span class="nt">&lt;item&gt;</span>
-          <span class="nt">&lt;businessDate&gt;</span>
-            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
-            <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
-            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
-          <span class="nt">&lt;/businessDate&gt;</span>
-          <span class="nt">&lt;dayPartStartDate&gt;</span>
-            <span class="nt">&lt;day&gt;</span>10<span class="nt">&lt;/day&gt;</span>
-            <span class="nt">&lt;month&gt;</span>9<span class="nt">&lt;/month&gt;</span>
-            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
-          <span class="nt">&lt;/dayPartStartDate&gt;</span>
-          <span class="nt">&lt;dayPartStartTime&gt;</span>0030<span class="nt">&lt;/dayPartStartTime&gt;</span>
-          <span class="nt">&lt;jobExtRef&gt;</span>55<span class="nt">&lt;/jobExtRef&gt;</span>
-          <span class="nt">&lt;laborForecastMinutes&gt;</span>2<span class="nt">&lt;/laborForecastMinutes&gt;</span>
-        <span class="nt">&lt;/item&gt;</span>
-      <span class="nt">&lt;/idata&gt;</span>
-    <span class="nt">&lt;/lab:setLaborForecastByJob&gt;</span>
-  <span class="nt">&lt;/soapenv:Body&gt;</span>
-<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+<pre class="highlight plaintext"><code>&lt;soapenv:Envelope
+  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:lab="http://services.hotschedules.com/api/services/LaborService"&gt;
+  &lt;soapenv:Header/&gt;
+  &lt;soapenv:Body&gt;
+    &lt;lab:setLaborForecastByJob&gt;
+      &lt;concept&gt;8436&lt;/concept&gt;
+      &lt;storeNum231&lt;/storeNum&gt;
+      &lt;idata&gt;
+        &lt;item&gt;
+          &lt;businessDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/businessDate&gt;
+          &lt;dayPartStartDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/dayPartStartDate&gt;
+          &lt;dayPartStartTime&gt;0000&lt;/dayPartStartTime&gt;
+          &lt;jobExtRef&gt;55&lt;/jobExtRef&gt;
+          &lt;laborForecastMinutes&gt;1&lt;/laborForecastMinutes&gt;
+        &lt;/item&gt;
+        &lt;item&gt;
+          &lt;businessDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/businessDate&gt;
+          &lt;dayPartStartDate&gt;
+            &lt;day&gt;10&lt;/day&gt;
+            &lt;month&gt;9&lt;/month&gt;
+            &lt;year&gt;2017&lt;/year&gt;
+          &lt;/dayPartStartDate&gt;
+          &lt;dayPartStartTime&gt;0030&lt;/dayPartStartTime&gt;
+          &lt;jobExtRef&gt;55&lt;/jobExtRef&gt;
+          &lt;laborForecastMinutes&gt;2&lt;/laborForecastMinutes&gt;
+        &lt;/item&gt;
+      &lt;/idata&gt;
+    &lt;/lab:setLaborForecastByJob&gt;
+  &lt;/soapenv:Body&gt;
+&lt;/soapenv:Envelope&gt;
 </code></pre>
 
 <h2 id="operatingbudgetplanservice">OperatingBudgetPlanService</h2>
 
-<p>Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.</p>
+<p>Enables a customer to GET their budget via API. The service also allow a customer to SET their labor budget data.</p>
 
 <ul>
 <li>Location: <a href="http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl">http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl</a></li>
@@ -8668,17 +8667,143 @@ client not found</td></tr>
 <aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
 
 <ul>
-<li><strong>getLaborData:</strong> COMING SOON&hellip;</li>
-<li><strong>setLaborData:</strong> COMING SOON&hellip;</li>
+<li><strong>getLaborData:</strong> Enables a customer to GET their labor budget data. </li>
+<li><strong>setLaborData:</strong> Enables a customer to SET their labor budget data.</li>
 </ul>
 
 <h4 id="getlabordata">getLaborData</h4>
 
-<p>COMING SOON&hellip;</p>
+<p>This method takes in a concept ID, store ID and a data Type ID. In order to utilize the method, customer must have 3031 &ldquo;API - API Operating Budget Plan Service - Set OBP&rdquo; permission enabled.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td> </td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>dataTypeId</td><td>int</td><td>The id of Labor Budget Type (LaborDollars, LaborPercent, SPLH, GPLH, LH100, LaborHours types). The ids correspond to labor budget types in the following way: 0 - LaborDollars, 1 - LaborPercent, 2 - SPLH, 3 - GPLH, 4 - LH100, 5 - LaborHours. This parameter is mandatory. If you pass a non existing type (10, for instance), an error will appear. dataTypeId value must be integer from 0 to 5.</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
+<td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
+<td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
+<td nowrap>id</td><td>int</td><td>id of the job</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:oper=</span><span class="s">"http://services.hotschedules.com/api/services/OperatingBudgetPlanService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;oper:getLaborData&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>23<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;dataTypeId&gt;</span>1<span class="nt">&lt;/dataTypeId&gt;</span>
+      <span class="nt">&lt;/oper:getLaborData&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:getLaborDataResponse xmlns:ns1="http://services.hotschedules.com/api/services/OperatingBudgetPlanService"&gt;
+         &lt;return&gt;
+            &lt;dataTypeId&gt;1&lt;/dataTypeId&gt;
+            &lt;jobs&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;1&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.8&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;2&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.65&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;3&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.54&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;4&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.6&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;5&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.7&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;6&lt;/dayOfWeek&gt;
+                  &lt;value&gt;1.9&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;days&gt;
+                  &lt;dayOfWeek&gt;7&lt;/dayOfWeek&gt;
+                  &lt;value&gt;2.0&lt;/value&gt;
+               &lt;/days&gt;
+               &lt;id&gt;-1&lt;/id&gt;
+            &lt;/jobs&gt;
+         &lt;/return&gt;
+      &lt;/ns1:getLaborDataResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
 
 <h4 id="setlabordata">setLaborData</h4>
 
-<p>COMING SOON&hellip;</p>
+<p>This method takes in a concept ID, store ID, data Type ID, day of the week, value, and ID.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
+<td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
+<td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
+<td nowrap>id</td><td>int</td><td>id of the job</td>
+</tr>
+</tbody>
+</table>
 
 <h2 id="projectedsalesservice">ProjectedSalesService</h2>
 
@@ -12020,7 +12145,307 @@ Each wsLaborJob object contains<br>
 
 <h4 id="setforecastdrivers">setForecastDrivers</h4>
 
+<p>This method takes in a concept ID, store ID, workweek startdate and enddate , starttime and endtime, volume amount, volume type, and a revenue center for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>WorkWeekStartDate</td><td>hsSimpleDate</td><td>Day, Month and Year</td></tr>
+<td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
+<td nowrap>DriverAmount</td><td>Int</td><td>Value of the driver amount for the transaction</td></tr>
+<td nowrap>volumeType</td><td>volumeType</td><td>Supported Volume Types are: “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”</td></tr>
+</tbody>
+</table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>WSReturn objects.</td>
+</tr>
+</tbody>
+</table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:vol=</span><span class="s">"http://services.hotschedules.com/api/services/VolumeService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;vol:setForecastDrivers&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>23<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;workweekStartDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/workweekStartDate&gt;</span>
+         <span class="nt">&lt;driverData&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;item&gt;</span>
+               <span class="nt">&lt;driverAmount&gt;</span>1000<span class="nt">&lt;/driverAmount&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalEndDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/intervalEndDate&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalEndTime&gt;</span>
+                  <span class="c">&lt;!--Optional:--&gt;</span>
+                  <span class="nt">&lt;amPm&gt;</span>1<span class="nt">&lt;/amPm&gt;</span>
+                  <span class="nt">&lt;hours&gt;</span>6<span class="nt">&lt;/hours&gt;</span>
+                  <span class="nt">&lt;militaryTime&gt;</span>false<span class="nt">&lt;/militaryTime&gt;</span>
+                  <span class="nt">&lt;minutes&gt;</span>30<span class="nt">&lt;/minutes&gt;</span>
+                  <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+               <span class="nt">&lt;/intervalEndTime&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalStartDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/intervalStartDate&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalStartTime&gt;</span>
+                  <span class="c">&lt;!--Optional:--&gt;</span>
+                  <span class="nt">&lt;amPm&gt;</span>1<span class="nt">&lt;/amPm&gt;</span>
+                  <span class="nt">&lt;hours&gt;</span>6<span class="nt">&lt;/hours&gt;</span>
+                  <span class="nt">&lt;militaryTime&gt;</span>false<span class="nt">&lt;/militaryTime&gt;</span>
+                  <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+                  <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+               <span class="nt">&lt;/intervalStartTime&gt;</span>
+               <span class="nt">&lt;rvcId&gt;</span>4<span class="nt">&lt;/rvcId&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;volumeType&gt;</span>SALES<span class="nt">&lt;/volumeType&gt;</span>
+            <span class="nt">&lt;/item&gt;</span>
+         <span class="nt">&lt;/driverData&gt;</span>
+      <span class="nt">&lt;/vol:setForecastDrivers&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:setForecastDriversResponse xmlns:ns1="http://services.hotschedules.com/api/services/VolumeService"&gt;
+         &lt;return&gt;
+            &lt;failCount&gt;0&lt;/failCount&gt;
+            &lt;success&gt;true&lt;/success&gt;
+            &lt;successCount&gt;1&lt;/successCount&gt;
+         &lt;/return&gt;
+      &lt;/ns1:setForecastDriversResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
+
 <h4 id="setforecastdriversv2">setForecastDriversV2</h4>
+
+<p>This method takes in a concept ID, store ID, workweek, startdate, enddate, starttime, endtime, volume amount, volume type, and a revenue center for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.</p>
+
+<p><strong>Input (Literal)</strong>
+The inputs of this method are the arguments defined by the following table.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>int</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>int</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>Day</td>
+<td>int</td>
+<td>Day formatted dd</td>
+</tr>
+<tr>
+<td>Month</td>
+<td>int</td>
+<td>Month formatted mm</td>
+</tr>
+<tr>
+<td>Year</td>
+<td>int</td>
+<td>Year formated yyyy</td>
+</tr>
+</tbody></table>
+
+<p><strong>Output (Literal)</strong>
+The outputs of this method are the arguments defined by the following table.</p>
+
+<table><thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>concept</td>
+<td>int</td>
+<td>The identifier for the location&rsquo;s concept. Must be unique within the company, contact HotSchedules if you&rsquo;re not sure about this value.</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>int</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>workweekStartDate</td>
+<td>hsSimpledate</td>
+<td>Start date of the work week</td>
+</tr>
+<tr>
+<td>driverAmount</td>
+<td>int</td>
+<td>Quantity of driver for interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalStartTime</td>
+<td>dateTime</td>
+<td>The hour, minutes, and seconds corresponding to the start of the interval expressed in the record. Interval times are local to the store’s time zone.</td>
+</tr>
+<tr>
+<td>intervalEndTime</td>
+<td>dateTime</td>
+<td>The hour, minutes, and seconds corresponding to the end of the interval expressed in the record. Interval times are local to the store’s time zone.</td>
+</tr>
+<tr>
+<td>intervalStartDate</td>
+<td>hsSimpledate</td>
+<td>The date corresponding to the start of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>intervalEndDate</td>
+<td>hsSimpledate</td>
+<td>The date corresponding to the end of the interval expressed in the record</td>
+</tr>
+<tr>
+<td>rvcId</td>
+<td>int</td>
+<td>Numeric ID for the revenue center associated with the location within the restaurant</td>
+</tr>
+<tr>
+<td>volumeType</td>
+<td>String</td>
+<td>Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, &ldquo;Transactions&rdquo; and “Products”.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:vol=</span><span class="s">"http://services.hotschedules.com/api/services/VolumeService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;vol:setForecastDriversV2&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>23<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;workweekStartDate&gt;</span>
+            <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+            <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+            <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/workweekStartDate&gt;</span>
+         <span class="nt">&lt;driverData&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;item&gt;</span>
+               <span class="nt">&lt;driverAmount&gt;</span>500<span class="nt">&lt;/driverAmount&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalEndDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/intervalEndDate&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalEndTime&gt;</span>
+                  <span class="c">&lt;!--Optional:--&gt;</span>
+                  <span class="nt">&lt;amPm&gt;</span>1<span class="nt">&lt;/amPm&gt;</span>
+                  <span class="nt">&lt;hours&gt;</span>6<span class="nt">&lt;/hours&gt;</span>
+                  <span class="nt">&lt;militaryTime&gt;</span>false<span class="nt">&lt;/militaryTime&gt;</span>
+                  <span class="nt">&lt;minutes&gt;</span>30<span class="nt">&lt;/minutes&gt;</span>
+                  <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+               <span class="nt">&lt;/intervalEndTime&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalStartDate&gt;</span>
+                  <span class="nt">&lt;day&gt;</span>28<span class="nt">&lt;/day&gt;</span>
+                  <span class="nt">&lt;month&gt;</span>8<span class="nt">&lt;/month&gt;</span>
+                  <span class="nt">&lt;year&gt;</span>2017<span class="nt">&lt;/year&gt;</span>
+               <span class="nt">&lt;/intervalStartDate&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;intervalStartTime&gt;</span>
+                  <span class="c">&lt;!--Optional:--&gt;</span>
+                  <span class="nt">&lt;amPm&gt;</span>1<span class="nt">&lt;/amPm&gt;</span>
+                  <span class="nt">&lt;hours&gt;</span>6<span class="nt">&lt;/hours&gt;</span>
+                  <span class="nt">&lt;militaryTime&gt;</span>false<span class="nt">&lt;/militaryTime&gt;</span>
+                  <span class="nt">&lt;minutes&gt;</span>0<span class="nt">&lt;/minutes&gt;</span>
+                  <span class="nt">&lt;seconds&gt;</span>0<span class="nt">&lt;/seconds&gt;</span>
+               <span class="nt">&lt;/intervalStartTime&gt;</span>
+               <span class="nt">&lt;rvcId&gt;</span>4<span class="nt">&lt;/rvcId&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;volumeType&gt;</span>GUESTS<span class="nt">&lt;/volumeType&gt;</span>
+            <span class="nt">&lt;/item&gt;</span>
+         <span class="nt">&lt;/driverData&gt;</span>
+      <span class="nt">&lt;/vol:setForecastDriversV2&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:setForecastDriversV2Response xmlns:ns1="http://services.hotschedules.com/api/services/VolumeService"&gt;
+         &lt;return&gt;
+            &lt;failCount&gt;0&lt;/failCount&gt;
+            &lt;success&gt;true&lt;/success&gt;
+            &lt;successCount&gt;1&lt;/successCount&gt;
+         &lt;/return&gt;
+      &lt;/ns1:setForecastDriversV2Response&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
 
 <h4 id="setguestcounts">setGuestCounts</h4>
 
