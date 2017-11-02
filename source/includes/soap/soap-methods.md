@@ -5779,7 +5779,7 @@ The inputs of this method are the arguments defined by the following table.
 <td nowrap>dateTime</td><td>dateTime</td><td>Date Time of the transaction</td></tr>
 <td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
 <td nowrap>volumeAmount</td><td>Int</td><td>Value of the volume count for the transaction</td></tr>
-<td nowrap>volumeType</td><td>volumeType</td><td>Supported Volume Types are: “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”</td></tr>
+<td nowrap>volumeType</td><td>volumeType</td><td>Supported Volume Types (UPPERCASE): “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”</td></tr>
 </tbody>
 </table>
 
@@ -5873,7 +5873,8 @@ The inputs of this method are the arguments defined by the following table.
 <td nowrap>dateTime</td><td>dateTime</td><td>Date Time of the transaction</td></tr>
 <td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
 <td nowrap>volumeAmount</td><td>Int</td><td>Value of the volume count for the transaction</td></tr>
-<td nowrap>volumeTypeName</td><td>volumeType</td><td>Supports all volumeTypes</td></tr>
+<td nowrap>volumeTypeName</td><td>volumeType</td><td>Supported Volume Types: "Sales", "Guests", "Tables", "Entrees", "Deliveries", "Products", "Transactions", "Plates", "KitchenUnits", "LBW", "Items", "TFE", "Member Check In".
+</td></tr>
 </tbody>
 </table>
 
