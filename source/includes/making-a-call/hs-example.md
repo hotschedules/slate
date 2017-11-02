@@ -1224,6 +1224,9 @@ regTtl       | Number | Regular total pay amount
 extId        | Number | Optional-Unique transaction ID for the time card record
 
 
+#### getTimeCardsV2
+Same as getTimeCards but additionally provides double time info for each timecard.
+
 
 #### getTimeCardsDeclaredTips
 This method takes in a **concept ID**, **store ID**, **start** and **end dates**. It returns an **array of wsTimeCard3 objects**, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules' web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.
