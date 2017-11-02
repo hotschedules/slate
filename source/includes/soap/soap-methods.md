@@ -2410,7 +2410,7 @@ The outputs of this method are the arguments defined by the following table.
 <td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
 <td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
 <td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
-<td nowrap>id</td><td>int</td><td>id of the job</td>
+<td nowrap>id</td><td>int</td><td>posJobId of the job</td>
 </tr>
 </tbody>
 </table>
@@ -2497,10 +2497,57 @@ The inputs of this method are the arguments defined by the following table.
 <td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
 <td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
 <td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
-<td nowrap>id</td><td>int</td><td>id of the job</td>
+<td nowrap>id</td><td>int</td><td>posJobId of the job</td>
 </tr>
 </tbody>
 </table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <oper:setLaborData>
+         <concept>8436</concept>
+         <storeNum>23</storeNum>
+         <budget>
+            <!--type: int-->
+            <dataTypeId>3</dataTypeId>
+            <!--Zero or more repetitions:-->
+            <jobs>
+               <!--Zero or more repetitions:-->
+               <days>
+                  <!--type: int-->
+                  <dayOfWeek>5</dayOfWeek>
+                  <!--type: double-->
+                  <value>1.65</value>
+               </days>
+               <!--type: int-->
+               <id>6</id>
+            </jobs>
+         </budget>
+      </oper:setLaborData>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:setLaborDataResponse xmlns:ns1="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+         <return>
+            <failCount>0</failCount>
+            <success>true</success>
+            <successCount>2</successCount>
+         </return>
+      </ns1:setLaborDataResponse>
+   </soap:Body>
+</soap:Envelope>
+```
 
 ##ProjectedSalesService
 This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc. system.
