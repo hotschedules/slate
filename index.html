@@ -8712,7 +8712,7 @@ The outputs of this method are the arguments defined by the following table.</p>
 <td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
 <td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
 <td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
-<td nowrap>id</td><td>int</td><td>id of the job</td>
+<td nowrap>id</td><td>int</td><td>posJobId of the job</td>
 </tr>
 </tbody>
 </table>
@@ -8800,10 +8800,57 @@ The inputs of this method are the arguments defined by the following table.</p>
 <td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
 <td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
 <td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
-<td nowrap>id</td><td>int</td><td>id of the job</td>
+<td nowrap>id</td><td>int</td><td>posJobId of the job</td>
 </tr>
 </tbody>
 </table>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:oper=</span><span class="s">"http://services.hotschedules.com/api/services/OperatingBudgetPlanService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;oper:setLaborData&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>8436<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>23<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;budget&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;dataTypeId&gt;</span>3<span class="nt">&lt;/dataTypeId&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;jobs&gt;</span>
+               <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+               <span class="nt">&lt;days&gt;</span>
+                  <span class="c">&lt;!--type: int--&gt;</span>
+                  <span class="nt">&lt;dayOfWeek&gt;</span>5<span class="nt">&lt;/dayOfWeek&gt;</span>
+                  <span class="c">&lt;!--type: double--&gt;</span>
+                  <span class="nt">&lt;value&gt;</span>1.65<span class="nt">&lt;/value&gt;</span>
+               <span class="nt">&lt;/days&gt;</span>
+               <span class="c">&lt;!--type: int--&gt;</span>
+               <span class="nt">&lt;id&gt;</span>6<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;/jobs&gt;</span>
+         <span class="nt">&lt;/budget&gt;</span>
+      <span class="nt">&lt;/oper:setLaborData&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<blockquote>
+<p><strong>EXAMPLE RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>&lt;soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"&gt;
+   &lt;soap:Body&gt;
+      &lt;ns1:setLaborDataResponse xmlns:ns1="http://services.hotschedules.com/api/services/OperatingBudgetPlanService"&gt;
+         &lt;return&gt;
+            &lt;failCount&gt;0&lt;/failCount&gt;
+            &lt;success&gt;true&lt;/success&gt;
+            &lt;successCount&gt;2&lt;/successCount&gt;
+         &lt;/return&gt;
+      &lt;/ns1:setLaborDataResponse&gt;
+   &lt;/soap:Body&gt;
+&lt;/soap:Envelope&gt;
+</code></pre>
 
 <h2 id="projectedsalesservice">ProjectedSalesService</h2>
 
