@@ -2312,7 +2312,6 @@ client not found</td></tr>
 > **EXAMPLE RESPONSE:**
 
 ```
-<?xml version="1.0" encoding="UTFo8"?>
 <soapenv:Envelope
   xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
   xmlns:lab="http://services.hotschedules.com/api/services/LaborService">
@@ -2359,7 +2358,7 @@ client not found</td></tr>
 ```
 
 ##OperatingBudgetPlanService
-Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.
+Enables a customer to GET their budget via API. The service also allow a customer to SET their labor budget data.
 
 * Location: [http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl](http://services.hotschedules.com/api/services/OperatingBudgetPlanService?wsdl)
 * Protocol: SOAP
@@ -2367,14 +2366,141 @@ Allows a customer to SET their budget via API. The service also allow a customer
 * Transport protocol: SOAP over HTTP  
 
 <aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
-- **getLaborData:** COMING SOON...
-- **setLaborData:** COMING SOON...
+- **getLaborData:** Enables a customer to GET their labor budget data. 
+- **setLaborData:** Enables a customer to SET their labor budget data.
 
 ####getLaborData
-COMING SOON...
+This method takes in a concept ID, store ID and a data Type ID. In order to utilize the method, customer must have 3031 "API - API Operating Budget Plan Service - Set OBP" permission enabled.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td> </td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>dataTypeId</td><td>int</td><td>The id of Labor Budget Type (LaborDollars, LaborPercent, SPLH, GPLH, LH100, LaborHours types). The ids correspond to labor budget types in the following way: 0 - LaborDollars, 1 - LaborPercent, 2 - SPLH, 3 - GPLH, 4 - LH100, 5 - LaborHours. This parameter is mandatory. If you pass a non existing type (10, for instance), an error will appear. dataTypeId value must be integer from 0 to 5.</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
+<td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
+<td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
+<td nowrap>id</td><td>int</td><td>id of the job</td>
+</tr>
+</tbody>
+</table>
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <oper:getLaborData>
+         <concept>8436</concept>
+         <storeNum>23</storeNum>
+         <dataTypeId>1</dataTypeId>
+      </oper:getLaborData>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:getLaborDataResponse xmlns:ns1="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+         <return>
+            <dataTypeId>1</dataTypeId>
+            <jobs>
+               <days>
+                  <dayOfWeek>1</dayOfWeek>
+                  <value>1.8</value>
+               </days>
+               <days>
+                  <dayOfWeek>2</dayOfWeek>
+                  <value>1.65</value>
+               </days>
+               <days>
+                  <dayOfWeek>3</dayOfWeek>
+                  <value>1.54</value>
+               </days>
+               <days>
+                  <dayOfWeek>4</dayOfWeek>
+                  <value>1.6</value>
+               </days>
+               <days>
+                  <dayOfWeek>5</dayOfWeek>
+                  <value>1.7</value>
+               </days>
+               <days>
+                  <dayOfWeek>6</dayOfWeek>
+                  <value>1.9</value>
+               </days>
+               <days>
+                  <dayOfWeek>7</dayOfWeek>
+                  <value>2.0</value>
+               </days>
+               <id>-1</id>
+            </jobs>
+         </return>
+      </ns1:getLaborDataResponse>
+   </soap:Body>
+</soap:Envelope>
+```
 
 ####setLaborData
-COMING SOON...
+This method takes in a concept ID, store ID, data Type ID, day of the week, value, and ID.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>dataTypeID</td><td>int</td><td>integer from 0 to 5</td></tr>
+<td nowrap>dayOfWeek</td><td>int</td><td>the day of week (is valid for values from Sunday (1) to Saturday (7)</td></tr>
+<td nowrap>value</td><td>int</td><td>actual volume of work</td></tr>
+<td nowrap>id</td><td>int</td><td>id of the job</td>
+</tr>
+</tbody>
+</table>
 
 ##ProjectedSalesService
 This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc. system.
@@ -5664,7 +5790,242 @@ Each wsLaborJob object contains<br>
 ```
 
 ####setForecastDrivers
+This method takes in a concept ID, store ID, workweek startdate and enddate , starttime and endtime, volume amount, volume type, and a revenue center for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
+<td nowrap>WorkWeekStartDate</td><td>hsSimpleDate</td><td>Day, Month and Year</td></tr>
+<td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
+<td nowrap>DriverAmount</td><td>Int</td><td>Value of the driver amount for the transaction</td></tr>
+<td nowrap>volumeType</td><td>volumeType</td><td>Supported Volume Types are: “TABLE”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Argument</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>return</td>
+<td>wsReturn</td>
+<td>WSReturn objects.</td>
+</tr>
+</tbody>
+</table>
+
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:vol="http://services.hotschedules.com/api/services/VolumeService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <vol:setForecastDrivers>
+         <concept>8436</concept>
+         <storeNum>23</storeNum>
+         <workweekStartDate>
+            <day>28</day>
+            <month>8</month>
+            <year>2017</year>
+         </workweekStartDate>
+         <driverData>
+            <!--Zero or more repetitions:-->
+            <item>
+               <driverAmount>1000</driverAmount>
+               <!--Optional:-->
+               <intervalEndDate>
+                  <day>28</day>
+                  <month>8</month>
+                  <year>2017</year>
+               </intervalEndDate>
+               <!--Optional:-->
+               <intervalEndTime>
+                  <!--Optional:-->
+                  <amPm>1</amPm>
+                  <hours>6</hours>
+                  <militaryTime>false</militaryTime>
+                  <minutes>30</minutes>
+                  <seconds>0</seconds>
+               </intervalEndTime>
+               <!--Optional:-->
+               <intervalStartDate>
+                  <day>28</day>
+                  <month>8</month>
+                  <year>2017</year>
+               </intervalStartDate>
+               <!--Optional:-->
+               <intervalStartTime>
+                  <!--Optional:-->
+                  <amPm>1</amPm>
+                  <hours>6</hours>
+                  <militaryTime>false</militaryTime>
+                  <minutes>0</minutes>
+                  <seconds>0</seconds>
+               </intervalStartTime>
+               <rvcId>4</rvcId>
+               <!--Optional:-->
+               <volumeType>SALES</volumeType>
+            </item>
+         </driverData>
+      </vol:setForecastDrivers>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:setForecastDriversResponse xmlns:ns1="http://services.hotschedules.com/api/services/VolumeService">
+         <return>
+            <failCount>0</failCount>
+            <success>true</success>
+            <successCount>1</successCount>
+         </return>
+      </ns1:setForecastDriversResponse>
+   </soap:Body>
+</soap:Envelope>
+```
+
+
+
 ####setForecastDriversV2
+This method takes in a concept ID, store ID, workweek, startdate, enddate, starttime, endtime, volume amount, volume type, and a revenue center for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+Argument | Type   | Description
+----------------|--------|------------
+concept         | int | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
+storeNum        | int | Numeric (integer) identifier for the store. Must be unique within the concept.
+Day             | int | Day formatted dd
+Month           | int | Month formatted mm
+Year            | int | Year formated yyyy
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+Argument               | Type   | Description 
+------------------|--------|-------------
+concept           | int | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
+storeNum          | int | Numeric (integer) identifier for the store. Must be unique within the concept.
+workweekStartDate | hsSimpledate | Start date of the work week
+driverAmount      | int | Quantity of driver for interval expressed in the record
+intervalStartTime | dateTime | The hour, minutes, and seconds corresponding to the start of the interval expressed in the record. Interval times are local to the store’s time zone. 
+intervalEndTime   | dateTime | The hour, minutes, and seconds corresponding to the end of the interval expressed in the record. Interval times are local to the store’s time zone. 
+intervalStartDate | hsSimpledate | The date corresponding to the start of the interval expressed in the record
+intervalEndDate   | hsSimpledate | The date corresponding to the end of the interval expressed in the record
+rvcId             | int | Numeric ID for the revenue center associated with the location within the restaurant
+volumeType        | String | Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, "Transactions" and “Products”.
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:vol="http://services.hotschedules.com/api/services/VolumeService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <vol:setForecastDriversV2>
+         <concept>8436</concept>
+         <storeNum>23</storeNum>
+         <workweekStartDate>
+            <day>28</day>
+            <month>8</month>
+            <year>2017</year>
+         </workweekStartDate>
+         <driverData>
+            <!--Zero or more repetitions:-->
+            <item>
+               <driverAmount>500</driverAmount>
+               <!--Optional:-->
+               <intervalEndDate>
+                  <day>28</day>
+                  <month>8</month>
+                  <year>2017</year>
+               </intervalEndDate>
+               <!--Optional:-->
+               <intervalEndTime>
+                  <!--Optional:-->
+                  <amPm>1</amPm>
+                  <hours>6</hours>
+                  <militaryTime>false</militaryTime>
+                  <minutes>30</minutes>
+                  <seconds>0</seconds>
+               </intervalEndTime>
+               <!--Optional:-->
+               <intervalStartDate>
+                  <day>28</day>
+                  <month>8</month>
+                  <year>2017</year>
+               </intervalStartDate>
+               <!--Optional:-->
+               <intervalStartTime>
+                  <!--Optional:-->
+                  <amPm>1</amPm>
+                  <hours>6</hours>
+                  <militaryTime>false</militaryTime>
+                  <minutes>0</minutes>
+                  <seconds>0</seconds>
+               </intervalStartTime>
+               <rvcId>4</rvcId>
+               <!--Optional:-->
+               <volumeType>GUESTS</volumeType>
+            </item>
+         </driverData>
+      </vol:setForecastDriversV2>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+> **EXAMPLE RESPONSE:**
+
+```
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+   <soap:Body>
+      <ns1:setForecastDriversV2Response xmlns:ns1="http://services.hotschedules.com/api/services/VolumeService">
+         <return>
+            <failCount>0</failCount>
+            <success>true</success>
+            <successCount>1</successCount>
+         </return>
+      </ns1:setForecastDriversV2Response>
+   </soap:Body>
+</soap:Envelope>
+```
+
+
+
+
+
 ####setGuestCounts
 This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
