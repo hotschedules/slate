@@ -21,7 +21,7 @@ Before you can retrieve your token, follow these simple setup steps before proce
 **Step 2:** Obtain your API credentials from HotSchedules if you have not already done so.<br>
 **Step 3:** Login into the [Account Manager](https://tools.hotschedules.io/account/#/)<br>
 **Step 4:** In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
-**Step 5:** Enter your API credentials that was provided by hotSchedules and click save.<br>
+**Step 5:** Enter your API credentials as provided by hotSchedules and click save.<br>
 **Step 6:** Continue with the example below to retrieve your token.
 
 
