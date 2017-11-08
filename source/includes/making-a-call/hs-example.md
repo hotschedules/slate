@@ -277,6 +277,7 @@ This method returns a list of concepts for a company.
 ]
 ```
 
+
 Key   | Type   | Description 
 ------|--------|-------------
 extId | Number | Concept external ID
@@ -369,26 +370,40 @@ active_only     | Boolean | Boolean that defines whether or not to include termi
 
 ```
 [
-  {
-    "empNum": 2013,
-    "availabilities": [
-      {
-        "parHoursMax": -1,
-        "parShiftsMax": -1,
-        "shiftId": 781691610,
-        "shiftName": "PM",
-        "parHoursMin": -1,
-        "parShiftsMin": -1,
-        "dayName": "Friday",
-        "partialBeforeAfter": "",
-        "statusName": "Not Available",
-        "dayNum": 6,
-        "partialTime": "",
-        "statusNum": 3
-      }
-    ],
-    "empHrId": -1
-  }
+    {
+        "availabilities": [
+            {
+                "dayName": "Sunday",
+                "dayNum": 1,
+                "parHoursMax": -1,
+                "parHoursMin": -1,
+                "parShiftsMax": -1,
+                "parShiftsMin": -1,
+                "partialBeforeAfter": null,
+                "partialTime": null,
+                "shiftId": 1582006201,
+                "shiftName": "AM",
+                "statusName": "Not Available",
+                "statusNum": 3
+            },
+            {
+                "dayName": "Sunday",
+                "dayNum": 1,
+                "parHoursMax": -1,
+                "parHoursMin": -1,
+                "parShiftsMax": -1,
+                "parShiftsMin": -1,
+                "partialBeforeAfter": null,
+                "partialTime": null,
+                "shiftId": 1582006202,
+                "shiftName": "PM",
+                "statusName": "Not Available",
+                "statusNum": 3
+            }
+        ],
+        "empHrId": -1,
+        "empNum": 9801
+    }
 ]
 ```
 
@@ -416,27 +431,46 @@ active_only     | Boolean | Boolean that defines whether or not to include termi
 > **Sample JSON response:**
 
 ```  
-  [
+[
     {
-      "lastUpdated": "2015-07-10T17:32:55.753-05:00",
-      "accountCreated": "2012-12-28T13:31:25.913-06:00",
-      "permissionSetName": "Employee",
-      "empNum": 2001,
-      "assignedSchedules": [
-        {
-          "hsId": 781691496,
-          "name": "Bartender",
-          "extId": 0
+        "accountCreated": "2017-05-04T10:18:46.957-05:00",
+        "empHrId": -1,
+        "empNum": -1,
+        "lastUpdated": "2017-05-04T10:18:47.040-05:00",
+        "permissionSetName": "Default HotSchedules Employee"
+    },
+    {
+        "accountCreated": "2017-07-07T10:05:48.820-05:00",
+        "assignedSchedules": {
+            "extId": -1,
+            "hsId": 1050941698,
+            "name": "FOH"
         },
-        {
-          "hsId": 781691492,
-          "name": "Server",
-          "extId": 0
-        }
-      ],
-      "empHrId": -1
+        "empHrId": -1,
+        "empNum": 9898,
+        "lastUpdated": "2017-10-13T13:59:36.523-05:00",
+        "permissionSetName": "Employee"
+    },
+    {
+        "accountCreated": "2017-05-04T10:18:46.817-05:00",
+        "empHrId": -1,
+        "empNum": -1,
+        "lastUpdated": "2017-07-07T10:00:20.487-05:00",
+        "permissionSetName": "Default HS Support User"
+    },
+    {
+        "accountCreated": "2017-10-13T12:48:57.903-05:00",
+        "assignedSchedules": {
+            "extId": -1,
+            "hsId": 1050941698,
+            "name": "FOH"
+        },
+        "empHrId": -1,
+        "empNum": 9801,
+        "lastUpdated": "2017-10-13T12:50:58.597-05:00",
+        "permissionSetName": "Employee"
     }
-  ]
+]
 ```
 
 Key               | Type   | Description 
@@ -464,18 +498,18 @@ storeNum        | Number | Numeric (integer) identifier for the store. Must be u
 > **Sample JSON response:**
 
 ``` 
-[ 
-  {
-    "hsJobId": 11878523,
-    "clientId": 14935376,
-    "regWage": 1,
-    "posEmpId": 2069,
-    "hsEmpId": 4177214,
-    "storeNum": 3,
-    "ovtWage": 1.5,
-    "posJobId": 18,
-    "primary": true
-  }
+[
+    {
+        "clientId": 25124840,
+        "hsEmpId": 587378309,
+        "hsJobId": 27134060,
+        "ovtWage": 22.5,
+        "posEmpId": 9898,
+        "posJobId": 1099,
+        "primary": true,
+        "regWage": 15,
+        "storeNum": 98
+    }
 ]
 ```  
 
@@ -505,20 +539,20 @@ concept         | Number | The identifier for the location's concept. Must be un
 > **Sample JSON response:**
 
 ```
-  [
+[
     {
-      "name": "HotSchedules",
-      "extId": 0,
-      "conceptExtId": 1
+        "conceptExtId": 3714,
+        "extId": 0,
+        "name": "Colin Law"
     }
-  ]
+]
 ```  
   
 Key          | Type   | Description 
 -------------|--------|-------------
-name         | String | Group name
-extId        | Number | Group external ID
 conceptExtId | Number | Concept external ID
+extId        | Number | Group external ID
+name         | String | Group name
 
 
 
