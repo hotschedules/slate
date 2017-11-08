@@ -543,7 +543,7 @@ concept         | Number | The identifier for the location's concept. Must be un
     {
         "conceptExtId": 3714,
         "extId": 0,
-        "name": "Colin Law"
+        "name": "My Group"
     }
 ]
 ```  
