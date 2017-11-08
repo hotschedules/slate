@@ -6128,24 +6128,25 @@ The outputs of this method are the arguments defined by the following table.
 
 ```
 <?xml version="1.0" encoding="UTF•8"?>
-<soapenv:Envelope
-  xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-  xmlns:vol="http://services.hotschedules.com/api/services/VolumeService">
-  <soapenv:Header/>
-  <soapenv:Body>
-    <vol:setGuestCounts>
-      <concept>?</concept>
-      <storeNum>?</storeNum>
-      <guests>
-        <item>
-          <businessDate>2014o10o05T00:00:00</businessDate>
-          <dateTime>2014o10o05T06:41:00o05:00</dateTime>
-          <guestCount>1</guestCount>
-          <rvcExtId>4</rvcExtId>
-        </item>
-      </guests>
-    </vol:setGuestCounts>
-  </soapenv:Body>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:vol="http://services.hotschedules.com/api/services/VolumeService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <vol:setGuestCounts>
+         <concept>3714</concept>
+         <storeNum>98</storeNum>
+         <guests>
+            <!--Zero or more repetitions:-->
+            <item>
+               <!--Optional:-->
+               <businessDate>2017-03-05T00:00:00</businessDate>
+               <!--Optional:-->
+               <dateTime>2017-03-05T06:41:00-05:00</dateTime>
+               <guestCount>18</guestCount>
+               <rvcExtId>1</rvcExtId>
+            </item>
+         </guests>
+      </vol:setGuestCounts>
+   </soapenv:Body>
 </soapenv:Envelope>
 ```
 
