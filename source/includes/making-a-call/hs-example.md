@@ -249,6 +249,7 @@ The HotSchedules REST API provides a user-friendly way to obtain HS Data.
 Please ensure that API access has been enabled for your HotSchedules account. Contact customer service 1-866-753-3853 for access or questions.
 
 The url path can look like any of the following, depending on which type is being queried:
+
 <br>
 `../hotschedules/<concept_id>/<store_id>/<type_method>?`
 <br>
