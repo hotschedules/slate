@@ -310,12 +310,12 @@ The following are curl examples of how to specify file location in your upload/d
 <blockquote>
 <p><strong>Sample JSON response:</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>  [
+<pre class="highlight plaintext"><code>[
     {
-      "name": "HotSchedules",
-      "extId": 13
+        "extId": 3714,
+        "name": "HotSchedules"
     }
-  ]
+]
 </code></pre>
 
 <table><thead>
@@ -326,14 +326,14 @@ The following are curl examples of how to specify file location in your upload/d
 </tr>
 </thead><tbody>
 <tr>
-<td>name</td>
-<td>String</td>
-<td>Concept Name</td>
-</tr>
-<tr>
 <td>extId</td>
 <td>Number</td>
 <td>Concept external ID</td>
+</tr>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Concept Name</td>
 </tr>
 </tbody></table>
 
@@ -387,38 +387,38 @@ The following are curl examples of how to specify file location in your upload/d
 <blockquote>
 <p><strong>Sample JSON response:</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>  [
+<pre class="highlight plaintext"><code>[
     {
-      "driverAmount": 0,
-      "driverClass": "TABLE",
-      "intervalStartTime": {
-        "hours": 0,
-        "seconds": 0,
-        "militaryTime": true,
-        "minutes": 0
-      },
-      "intervalEndDate": {
-        "month": 4,
-        "year": 2016,
-        "day": 30
-      },
-      "intervalEndTime": {
-        "hours": 0,
-        "seconds": 0,
-        "militaryTime": true,
-        "minutes": 15
-      },
-      "conceptExtRef": 1,
-      "storeExtRef": 3,
-      "companyExtRef": 234542,
-      "driverType": "ACTUAL",
-      "intervalStartDate": {
-        "month": 4,
-        "year": 2016,
-        "day": 30
-      }
+        "companyExtRef": 264319,
+        "conceptExtRef": 3714,
+        "driverAmount": 0,
+        "driverClass": "TABLE",
+        "driverType": "ACTUAL",
+        "intervalEndDate": {
+            "day": 1,
+            "month": 10,
+            "year": 2017
+        },
+        "intervalEndTime": {
+            "hours": 0,
+            "militaryTime": true,
+            "minutes": 30,
+            "seconds": 0
+        },
+        "intervalStartDate": {
+            "day": 1,
+            "month": 10,
+            "year": 2017
+        },
+        "intervalStartTime": {
+            "hours": 0,
+            "militaryTime": true,
+            "minutes": 0,
+            "seconds": 0
+        },
+        "storeExtRef": 98
     }
-  ]
+]
 </code></pre>
 
 <table><thead>
