@@ -1211,14 +1211,20 @@ The following are curl examples of how to specify file location in your upload/d
 <blockquote>
 <p><strong>Sample JSON response:</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>  [
+<pre class="highlight plaintext"><code>[
     {
-      "dateTime": "2016-04-30T11:00:00-05:00",
-      "businessDate": "2016-04-30T00:00:00-05:00",
-      "rvcExtId": 1,
-      "guestCount": 2
+        "businessDate": "2017-02-05T00:00:00-06:00",
+        "dateTime": "2017-02-05T05:41:00-06:00",
+        "guestCount": 8,
+        "rvcExtId": 1
+    },
+    {
+        "businessDate": "2017-03-05T00:00:00-06:00",
+        "dateTime": "2017-03-05T05:41:00-06:00",
+        "guestCount": 18,
+        "rvcExtId": 1
     }
-  ]
+]
 </code></pre>
 
 <table><thead>
@@ -1229,24 +1235,24 @@ The following are curl examples of how to specify file location in your upload/d
 </tr>
 </thead><tbody>
 <tr>
-<td>dateTime</td>
-<td>String</td>
-<td>Date time of the transaction</td>
-</tr>
-<tr>
 <td>businessDate</td>
 <td>String</td>
 <td>Business date of transaction</td>
 </tr>
 <tr>
-<td>rvcExtId</td>
-<td>Number</td>
-<td>Represents the numeric revenue center ID associated with the guest</td>
+<td>dateTime</td>
+<td>String</td>
+<td>Date time of the transaction</td>
 </tr>
 <tr>
 <td>guestCount</td>
 <td>Number</td>
 <td>Number of guests for the transaction</td>
+</tr>
+<tr>
+<td>rvcExtId</td>
+<td>Number</td>
+<td>Represents the numeric revenue center ID associated with the guest</td>
 </tr>
 </tbody></table>
 
