@@ -572,22 +572,28 @@ end             | dateTime | End date for the range of data requested.  This is 
 > **Sample JSON response:**
 
 ```
-  [
+[
     {
-      "dateTime": "2016-04-30T11:00:00-05:00",
-      "businessDate": "2016-04-30T00:00:00-05:00",
-      "rvcExtId": 1,
-      "guestCount": 2
+        "businessDate": "2017-02-05T00:00:00-06:00",
+        "dateTime": "2017-02-05T05:41:00-06:00",
+        "guestCount": 8,
+        "rvcExtId": 1
+    },
+    {
+        "businessDate": "2017-03-05T00:00:00-06:00",
+        "dateTime": "2017-03-05T05:41:00-06:00",
+        "guestCount": 18,
+        "rvcExtId": 1
     }
-  ]
+]
 ```  
   
 Key          | Type   | Description 
 -------------|--------|-------------
-dateTime     | String | Date time of the transaction
 businessDate | String | Business date of transaction
-rvcExtId     | Number | Represents the numeric revenue center ID associated with the guest 
+dateTime     | String | Date time of the transaction
 guestCount   | Number | Number of guests for the transaction
+rvcExtId     | Number | Represents the numeric revenue center ID associated with the guest 
 
 
 
