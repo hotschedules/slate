@@ -269,19 +269,18 @@ This method returns a list of concepts for a company.
 > **Sample JSON response:**
 
 ```
-  [
+[
     {
-      "name": "HotSchedules",
-      "extId": 13
+        "extId": 3714,
+        "name": "HotSchedules"
     }
-  ]
+]
 ```
 
 Key   | Type   | Description 
 ------|--------|-------------
-name  | String | Concept Name
 extId | Number | Concept external ID
-
+name  | String | Concept Name
 
 
 #### getDriversByInterval  
@@ -304,38 +303,38 @@ dataType        | driverType   | Type of driver requested.  Allowed types are â€
 > **Sample JSON response:**
 
 ```
-  [
+[
     {
-      "driverAmount": 0,
-      "driverClass": "TABLE",
-      "intervalStartTime": {
-        "hours": 0,
-        "seconds": 0,
-        "militaryTime": true,
-        "minutes": 0
-      },
-      "intervalEndDate": {
-        "month": 4,
-        "year": 2016,
-        "day": 30
-      },
-      "intervalEndTime": {
-        "hours": 0,
-        "seconds": 0,
-        "militaryTime": true,
-        "minutes": 15
-      },
-      "conceptExtRef": 1,
-      "storeExtRef": 3,
-      "companyExtRef": 234542,
-      "driverType": "ACTUAL",
-      "intervalStartDate": {
-        "month": 4,
-        "year": 2016,
-        "day": 30
-      }
+        "companyExtRef": 264319,
+        "conceptExtRef": 3714,
+        "driverAmount": 0,
+        "driverClass": "TABLE",
+        "driverType": "ACTUAL",
+        "intervalEndDate": {
+            "day": 1,
+            "month": 10,
+            "year": 2017
+        },
+        "intervalEndTime": {
+            "hours": 0,
+            "militaryTime": true,
+            "minutes": 30,
+            "seconds": 0
+        },
+        "intervalStartDate": {
+            "day": 1,
+            "month": 10,
+            "year": 2017
+        },
+        "intervalStartTime": {
+            "hours": 0,
+            "militaryTime": true,
+            "minutes": 0,
+            "seconds": 0
+        },
+        "storeExtRef": 98
     }
-  ]
+]
 ```
   
 Key               | Type    | Description 
