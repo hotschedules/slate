@@ -241,7 +241,6 @@ __https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURC
 
 ![alt text](/images/pms5.png?raw=false "Bearer Token")
 
-
 #Available REST API Methods
 
 The HotSchedules REST API provides a user-friendly way to obtain HS Data.  
@@ -265,6 +264,7 @@ Note: Results are currently cached with a TTL of 60 minutes.
 This method returns a list of concepts for a company.
 
 `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/getConcepts"`
+
 
 > **Sample JSON response:**
 
