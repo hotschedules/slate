@@ -12592,24 +12592,25 @@ The outputs of this method are the arguments defined by the following table.</p>
 <p><strong>EXAMPLE:</strong></p>
 </blockquote>
 <pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
-<span class="nt">&lt;soapenv:Envelope</span>
-  <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span>
-  <span class="na">xmlns:vol=</span><span class="s">"http://services.hotschedules.com/api/services/VolumeService"</span><span class="nt">&gt;</span>
-  <span class="nt">&lt;soapenv:Header/&gt;</span>
-  <span class="nt">&lt;soapenv:Body&gt;</span>
-    <span class="nt">&lt;vol:setGuestCounts&gt;</span>
-      <span class="nt">&lt;concept&gt;</span>?<span class="nt">&lt;/concept&gt;</span>
-      <span class="nt">&lt;storeNum&gt;</span>?<span class="nt">&lt;/storeNum&gt;</span>
-      <span class="nt">&lt;guests&gt;</span>
-        <span class="nt">&lt;item&gt;</span>
-          <span class="nt">&lt;businessDate&gt;</span>2014o10o05T00:00:00<span class="nt">&lt;/businessDate&gt;</span>
-          <span class="nt">&lt;dateTime&gt;</span>2014o10o05T06:41:00o05:00<span class="nt">&lt;/dateTime&gt;</span>
-          <span class="nt">&lt;guestCount&gt;</span>1<span class="nt">&lt;/guestCount&gt;</span>
-          <span class="nt">&lt;rvcExtId&gt;</span>4<span class="nt">&lt;/rvcExtId&gt;</span>
-        <span class="nt">&lt;/item&gt;</span>
-      <span class="nt">&lt;/guests&gt;</span>
-    <span class="nt">&lt;/vol:setGuestCounts&gt;</span>
-  <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:vol=</span><span class="s">"http://services.hotschedules.com/api/services/VolumeService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;vol:setGuestCounts&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>3714<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>98<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;guests&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;item&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;businessDate&gt;</span>2017-03-05T00:00:00<span class="nt">&lt;/businessDate&gt;</span>
+               <span class="c">&lt;!--Optional:--&gt;</span>
+               <span class="nt">&lt;dateTime&gt;</span>2017-03-05T06:41:00-05:00<span class="nt">&lt;/dateTime&gt;</span>
+               <span class="nt">&lt;guestCount&gt;</span>18<span class="nt">&lt;/guestCount&gt;</span>
+               <span class="nt">&lt;rvcExtId&gt;</span>1<span class="nt">&lt;/rvcExtId&gt;</span>
+            <span class="nt">&lt;/item&gt;</span>
+         <span class="nt">&lt;/guests&gt;</span>
+      <span class="nt">&lt;/vol:setGuestCounts&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
 <span class="nt">&lt;/soapenv:Envelope&gt;</span>
 </code></pre>
 
