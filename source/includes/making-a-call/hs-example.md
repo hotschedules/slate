@@ -1769,8 +1769,9 @@ Year            | Number | Year formated yyyy
   `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setSalesItemsV4?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
 > **Sample JSON object**
+
 ```
-  [
+[
     "concept": 1,
     "storeNum": 1,
     "sales": {
@@ -1811,7 +1812,7 @@ Year            | Number | Year formated yyyy
         "month": 8,
         "year": 2016
       }
-  ]
+]
 ```
 
 Key          | Type   | Description 
