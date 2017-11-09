@@ -204,6 +204,24 @@ Postman makes API development faster, easier, and better. Postman is the most co
 
 You can make calls using both Basic Authentication using your HotSchedules IoT Platform account credentials (username and password) and the JWT Token method.
 
+We have created a Postman collection for your use:
+
+<div id="btn" style="padding-left: 30px;">
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="caea705a1c30e38ea420"></div></div>
+
+
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
+
 
 **Basic Authentication Example:** Let's do a Basic Authentication call to getEmpInfo. This method takes in a concept ID and a store ID and returns an array of wsEmpInfo objects. It is meant to get a list of all employees for that store.
 
