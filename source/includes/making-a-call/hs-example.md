@@ -204,7 +204,7 @@ Postman makes API development faster, easier, and better. Postman is the most co
 
 You can make calls using both Basic Authentication using your HotSchedules IoT Platform account credentials (username and password) and the JWT Token method.
 
-We have created a Postman collection for your use:
+We have created a Postman collection to enable you with making calls to the REST API.
 
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
