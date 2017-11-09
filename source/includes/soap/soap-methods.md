@@ -3388,11 +3388,11 @@ validation errors</td></tr>
 <td nowrap>hsSimpleDate</td><td>Simple date object that excludes any time zone or locale data. Consists of day, month and year integer values.</td></tr>
 <td nowrap>hsSimpleTime</td><td>Simple time object that excludes any time zone or locale data. Consists of hour, minute and second integer values, am/pm string indicator and militaryTime flag.</td></tr>
 <td nowrap>wsReturn</td><td>Contains array of error strings, fail count, success flag, success count.</td></tr>
-<td nowrap>wsRevenueCenter</td><td>Missing description.</td></tr>
+<td nowrap>wsRevenueCenter</td><td>Contains revenue center objects (RVC ID (external ref ID), RVC name)</td></tr>
 <td nowrap>wsRevenueCenterArray</td><td>An array of wsRevenueCenterArray objects. Each wsRevenueCenter object describes the total revenue center sales for a given revenue center.<br>
 Each wsRevenueCenter object contains,<br>
 •      a RevenueCenter (which corresponds to the numeric ID that identifies this revenue center)</td></tr>
-<td nowrap>wsSalesCategory</td><td>Coming Soon</td></tr>
+<td nowrap>wsSalesCategory</td><td>Contains sales category objects (salesCategoryName, extId, groupLevel)</td></tr>
 <td nowrap>wsSalesCategoryArray</td><td>Array of wsSalesCategory objects, which represents all sales categories defined for that store. This will include store and group level sales categories, and will be flagged appropriately.
 </td></tr>
 <td nowrap>wsSalesItem</td><td>Extends dataSalesItem (includes business date and calendar date of the sale)</td></tr>
@@ -3532,7 +3532,7 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>errors</td><td>string</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+<td nowrap>errors</td><td>string</td><td>0..*</td><td>Yes</td><td>Error messages</td></tr>
 <td nowrap>failCount</td><td>int</td><td>1..1</td><td>No</td><td>Number of records that failed to meet basic import specifications</td></tr>
 <td nowrap>success</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicator of the success or failure</td></tr>
 <td nowrap>successCount</td><td>int</td><td>1..1</td><td>No</td><td>Total number of records that successfully met basic import specifications</td></tr>
@@ -3553,8 +3553,8 @@ Contains elements as defined in the following table.
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
 <td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
-<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>revenueCenterName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>revenueCenterName</td><td>string</td><td>0..1</td><td>No</td><td>Revenue center name.</td></tr>
 </tbody>
 </table>
 
@@ -3575,7 +3575,7 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>item</td><td>wsRevenueCenter</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+<td nowrap>item</td><td>wsRevenueCenter</td><td>0..*</td><td>Yes</td><td>Contains revenue center objects (RVC ID (external ref ID), RVC name)</td></tr>
 </tbody>
 </table>
 
@@ -3593,8 +3593,8 @@ Contains elements as defined in the following table.
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
 <td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric ID from the external system associated with the transaction</td></tr>
-<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCategoryName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>salesCategoryName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the sales category.</td></tr>
 </tbody>
 </table>
 
@@ -3615,7 +3615,7 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>item</td><td>wsSalesCategory</td><td>0..*</td><td>Yes</td><td>Coming Soon</td></tr>
+<td nowrap>item</td><td>wsSalesCategory</td><td>0..*</td><td>Yes</td><td>Contains sales category objects (salesCategoryName, extId, groupLevel)</td></tr>
 </tbody>
 </table>
 
@@ -3718,43 +3718,43 @@ Contains elements as defined in the following table.
 </thead>
 <tbody>
 <tr>
-<td nowrap>amPm [type hsSimpleTime]</td><td>Coming Soon</td></tr>
-<td nowrap>businessDate [type wsSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>businessDate [type wsSalesItem3]</td><td>Coming Soon</td></tr>
-<td nowrap>catName [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>clientId [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>dateTime [type wsSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>day [type hsSimpleDate]</td><td>Coming Soon</td></tr>
-<td nowrap>empId [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>errors [type wsReturn]</td><td>Coming Soon</td></tr>
-<td nowrap>Exception</td><td>Coming Soon</td></tr>
-<td nowrap>extId [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>extId [type wsRevenueCenter]</td><td>Coming Soon</td></tr>
-<td nowrap>extId [type wsSalesCategory]</td><td>Coming Soon</td></tr>
-<td nowrap>failCount [type wsReturn]</td><td>Coming Soon</td></tr>
-<td nowrap>groupLevel [type wsRevenueCent er]</td><td>Coming Soon</td></tr>
-<td nowrap>groupLevel [type wsSalesCategory]</td><td>Coming Soon</td></tr>
-<td nowrap>hours [type hsSimpleTime]</td><td>Coming Soon</td></tr>
-<td nowrap>item [type wsRevenueCenterArray]</td><td>Coming Soon</td></tr>
-<td nowrap>item [type wsSalesCategoryArray]</td><td>Coming Soon</td></tr>
-<td nowrap>item [type wsSalesItem3Array]</td><td>Coming Soon</td></tr>
-<td nowrap>item [type wsSalesItemArray]</td><td>Coming Soon</td></tr>
-<td nowrap>message [type Exception]</td><td>Coming Soon</td></tr>
-<td nowrap>militaryTime [type hsSimpleTime]</td><td>Coming Soon</td></tr>
-<td nowrap>minutes [type hsSimpleTime]</td><td>Coming Soon</td></tr>
-<td nowrap>month [type hsSimpleDate]</td><td>Coming Soon</td></tr>
-<td nowrap>revenueCenterName</td><td>Coming Soon</td></tr>
-<td nowrap>[type wsRevenueCenter]</td><td>Coming Soon</td></tr>
-<td nowrap>rvc [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>rvcName [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>salesCat [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>salesCategoryName [type</td><td>Coming Soon</td></tr>
-<td nowrap>wsSalesCategory]</td><td>Coming Soon</td></tr>
-<td nowrap>seconds [type hsSimpleTime]</td><td>Coming Soon</td></tr>
-<td nowrap>storeNum [type dataSalesItem]</td><td>Coming Soon</td></tr>
-<td nowrap>success [type wsReturn]</td><td>Coming Soon</td></tr>
-<td nowrap>successCount [type wsReturn]</td><td>Coming Soon</td></tr>
-<td nowrap>transDate [type wsSalesItem3]</td><td>Coming Soon</td></tr>
+<td nowrap>amPm [type hsSimpleTime]</td><td>AM or PM indicator.</td></tr>
+<td nowrap>businessDate [type wsSalesItem]</td><td>Business date of transaction.</td></tr>
+<td nowrap>businessDate [type wsSalesItem3]</td><td>Business date of transaction.</td></tr>
+<td nowrap>catName [type dataSalesItem]</td><td>Category name.</td></tr>
+<td nowrap>clientId [type dataSalesItem]</td><td>Unique identifier for client provided via HotSchedules.</td></tr>
+<td nowrap>dateTime [type wsSalesItem]</td><td>Date time of transaction.</td></tr>
+<td nowrap>day [type hsSimpleDate]</td><td>Day formatted dd.</td></tr>
+<td nowrap>empId [type dataSalesItem]</td><td>Employee ID.</td></tr>
+<td nowrap>errors [type wsReturn]</td><td>Error messages.</td></tr>
+<td nowrap>Exception</td><td>Message for the exception</td></tr>
+<td nowrap>extId [type dataSalesItem]</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>extId [type wsRevenueCenter]</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>extId [type wsSalesCategory]</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>failCount [type wsReturn]</td><td>Total number of records that failed to meet basic import specifications.</td></tr>
+<td nowrap>groupLevel [type wsRevenueCenter]</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>groupLevel [type wsSalesCategory]</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>hours [type hsSimpleTime]</td><td>Number of hours.</td></tr>
+<td nowrap>item [type wsRevenueCenterArray]</td><td>Array of wsRevenueCenter objects, which represents all revenue centers defined for that store. This will include store and group level revenue centers, and will be flagged appropriately.</td></tr>
+<td nowrap>item [type wsSalesCategoryArray]</td><td>Array of wsSalesCategory objects, which represents all sales categories defined for that store. This will include store and group level sales categories, and will be flagged appropriately.</td></tr>
+<td nowrap>item [type wsSalesItem3Array]</td><td>Array of WSSalesItem objects. Each object represents one sales item at this store.</td></tr>
+<td nowrap>item [type wsSalesItemArray]</td><td>Array of WSSalesItem objects. Each object represents one sales item at this store.</td></tr>
+<td nowrap>message [type Exception]</td><td>Information about an exception that has been caught.</td></tr>
+<td nowrap>militaryTime [type hsSimpleTime]</td><td>Military Time indicator.</td></tr>
+<td nowrap>minutes [type hsSimpleTime]</td><td>Minute value.</td></tr>
+<td nowrap>month [type hsSimpleDate]</td><td>Month value.</td></tr>
+<td nowrap>revenueCenterName</td><td>Revenue center name.</td></tr>
+<td nowrap>[type wsRevenueCenter]</td><td>Contains revenue center objects (RVC ID (external ref ID), RVC name).</td></tr>
+<td nowrap>rvc [type dataSalesItem]</td><td>Revenue Center.</td></tr>
+<td nowrap>rvcName [type dataSalesItem]</td><td>Name for the revenue center associated with the location within the restaurant.</td></tr>
+<td nowrap>salesCat [type dataSalesItem]</td><td>Sales category.</td></tr>
+<td nowrap>salesCategoryName [type</td><td>Name of the sales category.</td></tr>
+<td nowrap>wsSalesCategory]</td><td>Contains sales category objects (salesCategoryName, extId, groupLevel)</td></tr>
+<td nowrap>seconds [type hsSimpleTime]</td><td>Seconds value.</td></tr>
+<td nowrap>storeNum [type dataSalesItem]</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>success [type wsReturn]</td><td>Indicator of the success or failure</td></tr>
+<td nowrap>successCount [type wsReturn]</td><td>Total number of records that successfully met basic import specifications.</td></tr>
+<td nowrap>transDate [type wsSalesItem3]</td><td>Transaction date.</td></tr>
 <td nowrap>transTime [type wsSalesItem3]</td><td>Time of the transaction</td></tr>
 <td nowrap>ttl [type dataSalesItem]</td><td>Total of the sales category</td></tr>
 <td nowrap>year [type hsSimpleDate]</td><td>year yyyy format</td></tr>
@@ -3848,7 +3848,7 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>message</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>message</td><td>string</td><td>0..1</td><td>No</td><td>Return message</td></tr>
 </tbody>
 </table>
 
@@ -3858,8 +3858,6 @@ Contains elements as defined in the following table.
  - Complex Type wsRevenueCenter
  - Complex Type wsSalesCategory
  - Complex Type wsReturn
- - Complex Type wsRevenueCenter
- - Complex Type wsSalesCategory
  - Complex Type hsSimpleTime
 
  <table>
@@ -3875,9 +3873,9 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>revenueCenterName</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>revenueCenterName</td><td>string</td><td>0..1</td><td>No</td><td>Revenue center name.</td></tr>
 </tbody>
 </table>
 
@@ -3898,9 +3896,9 @@ Contains elements as defined in the following table.
 <tbody>
 <tr>
 <td nowrap>Sequence</td><td></td><td>1..1</td><td></td><td></td></tr>
-<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>salesCategoryNa me</td><td>string</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>extId</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>groupLevel</td><td>boolean</td><td>1..1</td><td>No</td><td>Indicates if the revenue center is assigned at the group level.</td></tr>
+<td nowrap>salesCategoryName</td><td>string</td><td>0..1</td><td>No</td><td>Name of the sales category.</td></tr>
 </tbody>
 </table>
 
@@ -3958,8 +3956,8 @@ Contains elements as defined in the following table.
 <td nowrap>salesCat</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the sales category</td></tr>
 <td nowrap>storeNum</td><td>int</td><td>1..1</td><td>No</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
 <td nowrap>ttl</td><td>float</td><td>1..1</td><td>No</td><td>Total of the sales category</td></tr>
-<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
-<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Coming Soon</td></tr>
+<td nowrap>businessDate</td><td>dateTime</td><td>0..1</td><td>No</td><td>Business date of transaction</td></tr>
+<td nowrap>dateTime</td><td>dateTime</td><td>0..1</td><td>No</td><td>Date time of the transaction</td></tr>
 </tbody>
 </table>
 
@@ -4820,7 +4818,7 @@ The outputs of this method are the arguments defined by the following table.
 <tbody>
 <tr>
 <td nowrap>All</td><td></td><td>1..1</td><td></td></tr>
-<td nowrap>return</td><td>Coming Soon</td><td>1..1</td><td>Coming Soon</td></tr>
+<td nowrap>return</td><td>Template objects</td><td>1..1</td><td>Returns a list of template objects.</td></tr>
 </tbody>
 </table>
 

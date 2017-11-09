@@ -269,6 +269,7 @@ This method returns a list of concepts for a company.
 
 > **Sample JSON response:**
 
+
 ```
 [
     {
@@ -303,6 +304,7 @@ dataType        | driverType   | Type of driver requested.  Allowed types are â€
   `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getDriversByInterval?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&volume_type=TABLE&data_type=ACTUAL"`
   
 > **Sample JSON response:**
+
 
 ```
 [
