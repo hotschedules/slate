@@ -1394,7 +1394,7 @@ Day             | Number | Day formatted dd
 Month           | Number | Month formatted mm
 Year            | Number | Year formated yyyy
 
-  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/1/1/setTimeCardsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{ \"jobName\": \"Cook\", \"ovtTtl\": 0, \"ovtHrs\": 0, \"clockOut\": \"2016-07-31T22:05:00-05:00\", \"regWage\": 9, \"clockIn\": \"2016-07-30T15:56:00-05:00\", \"ovtWage\": 13.5, \"breakMinutes\": 0, \"jobId\": 16921407, \"businessDate\": { \"month\": 7, \"year\": 2016, \"day\": 31 }, \"regHrs\": 6.15, \"spcTtl\": 0, \"hsId\": 929931334634, \"spcHrs\": 0, \"ovtMins\": 0, \"storeNum\": 1, \"empPosId\": 1052, \"regTtl\": 55.35 }]"`
+  `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setTimeCardsV3?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{ \"jobName\": \"Cook\", \"ovtTtl\": 0, \"ovtHrs\": 0, \"clockOut\": \"2016-07-31T22:05:00-05:00\", \"regWage\": 9, \"clockIn\": \"2016-07-30T15:56:00-05:00\", \"ovtWage\": 13.5, \"breakMinutes\": 0, \"jobId\": 16921407, \"businessDate\": { \"month\": 7, \"year\": 2016, \"day\": 31 }, \"regHrs\": 6.15, \"spcTtl\": 0, \"hsId\": 929931334634, \"spcHrs\": 0, \"ovtMins\": 0, \"storeNum\": 1, \"empPosId\": 1052, \"regTtl\": 55.35 }]"`
   
 > **Sample JSON object**
 
