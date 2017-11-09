@@ -1518,12 +1518,13 @@ Year            | Number          | Year formated yyyy
 > **Sample JSON object**
 
 ```
-  [
+[
     {
-      "zipCode": 12345,
-      "hireDate": "2016-11-03T10:16:38.533-05:00",
+      "zipCode": 78681,
+      "hireDate": "2017-08-03T10:16:38.533-05:00",
+      "termDate": "2017-11-05T10:16:38.533-05:00",
       "address": "111 Addy Way",
-      "clientId": 87654321,
+      "clientId": 25124840,
       "LName": "Lockman",
       "address2": "Unit 3",
       "city": "Austin",
@@ -1533,10 +1534,10 @@ Year            | Number          | Year formated yyyy
       "FName": "Harrison",
       "empNum": -1,
       "phone": "(333) 333-3333",
-      "hsId": 987654321,
+      "hsId": 587378309,
       "dob": "1981-09-16T00:00:00-05:00",
       "state": "TX",
-      "storeNum": 3,
+      "storeNum": 98,
       "email": "harrison.lockman@email.com",
       "status": 1
     }
@@ -1547,6 +1548,7 @@ Key      | Type   | Description
 ---------|--------|-------------
 zipCode  | Number | Zip Code 
 hireDate | String | Employee Hire Date
+termDate | String | Employee Termination Date
 address  | String | Employee Address line 1
 clientId | Number | Unique identifier for client provided via HotSchedules
 LName    | String | Employee Last Name
