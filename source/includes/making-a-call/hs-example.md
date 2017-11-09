@@ -265,10 +265,7 @@ Note: Results are currently cached with a TTL of 60 minutes.
 This method returns a list of concepts for a company.
 
 `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/getConcepts"`
-
-
 > **Sample JSON response:**
-
 
 ```
 [
@@ -279,7 +276,6 @@ This method returns a list of concepts for a company.
 ]
 ```
 
-
 Key   | Type   | Description 
 ------|--------|-------------
 extId | Number | Concept external ID
@@ -288,7 +284,6 @@ name  | String | Concept Name
 
 #### getDriversByInterval  
 This method will take a **concept ID**, **store number**, **start** and **end dates**, **volume type**, and **data type** and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.
-
 
 Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.
 
@@ -304,7 +299,6 @@ dataType        | driverType   | Type of driver requested.  Allowed types are â€
   `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getDriversByInterval?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016&volume_type=TABLE&data_type=ACTUAL"`
   
 > **Sample JSON response:**
-
 
 ```
 [
