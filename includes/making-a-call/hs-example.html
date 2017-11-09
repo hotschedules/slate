@@ -3546,52 +3546,51 @@ This method uses hsSimpleDate objects for dates.</p>
 <p><code class="prettyprint">curl -X PUT -H &quot;Content-Type:application/json&quot; -u &lt;username&gt;:&lt;password&gt; &quot;https://api.hotschedules.io/&lt;namespace&gt;/controllers/vertx/hotschedules/&lt;concept&gt;/&lt;storeNum&gt;/setSalesItemsV4?start_day=30&amp;start_month=4&amp;start_year=2016&amp;end_day=5&amp;end_month=5&amp;end_year=2016&quot; -d &quot;[{json_object_1}, {json_object_2}, {json_object_3}...]&quot;</code></p>
 
 <blockquote>
-<p><strong>Sample JSON object</strong>
-<code class="prettyprint">
-  [
-    &quot;concept&quot;: 1,
-    &quot;storeNum&quot;: 1,
-    &quot;sales&quot;: {
-      &quot;catName&quot;: &quot;Beer&quot;,
-      &quot;clientId&quot;: 3,
-      &quot;empId&quot;: 123,
-        &quot;extId&quot;: 333,
-        &quot;rvc&quot;: &quot;Revenue&quot;,
-        &quot;rvcName&quot;: &quot;Bar&quot;,
-        &quot;salesCat&quot;: &quot;Beer&quot;,
-        &quot;storeNum&quot;: 3,
-        &quot;ttl&quot;: 0,
-        &quot;businessDate&quot;: {
-          &quot;day&quot;: 1,
-          &quot;month&quot;: 7,
-          &quot;year&quot;: 2016
+<p><strong>Sample JSON object</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    "concept": 1,
+    "storeNum": 1,
+    "sales": {
+      "catName": "Beer",
+      "clientId": 3,
+      "empId": 123,
+        "extId": 333,
+        "rvc": "Revenue",
+        "rvcName": "Bar",
+        "salesCat": "Beer",
+        "storeNum": 3,
+        "ttl": 0,
+        "businessDate": {
+          "day": 1,
+          "month": 7,
+          "year": 2016
         },
-        &quot;transDate&quot;: {
-          &quot;day&quot;: 1,
-          &quot;month&quot;: 7,
-          &quot;year&quot;: 2015
+        "transDate": {
+          "day": 1,
+          "month": 7,
+          "year": 2015
         },
-        &quot;transTime&quot;: {
-          &quot;amPm&quot;: &quot;am&quot;,
-          &quot;hours&quot;: 1,
-          &quot;militaryTime&quot;: true,
-          &quot;minutes&quot;: 15,
-          &quot;seconds&quot;: 0
+        "transTime": {
+          "amPm": "am",
+          "hours": 1,
+          "militaryTime": true,
+          "minutes": 15,
+          "seconds": 0
         }
     },
-      &quot;start&quot;: {
-        &quot;day&quot;: 1,
-        &quot;month&quot;: 7,
-        &quot;year&quot;: 2016
+      "start": {
+        "day": 1,
+        "month": 7,
+        "year": 2016
       },
-      &quot;end&quot;: {
-        &quot;day&quot;: 1,
-        &quot;month&quot;: 8,
-        &quot;year&quot;: 2016
+      "end": {
+        "day": 1,
+        "month": 8,
+        "year": 2016
       }
-  ]
-</code></p>
-</blockquote>
+]
+</code></pre>
 
 <table><thead>
 <tr>
