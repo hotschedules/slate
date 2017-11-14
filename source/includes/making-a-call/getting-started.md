@@ -91,10 +91,12 @@ curl -X POST \
   -H 'content-type: application/x-www-form-urlencoded' \
   
   -d 'grant_type=password&client_id=urn%3Amace%3Aoidc%3Ahotschedules.com&username=username&password=password'
+```
+
+>**Sample Call (Node)**
 
 
-**Sample Call (Node)**
-
+```
 var request = require("request");
 
 var options = { method: 'POST',
@@ -128,7 +130,6 @@ request(options, function (error, response, body) {
 ```
 
 >**Sample Results**
-
 
 ```
 {

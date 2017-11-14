@@ -11,7 +11,7 @@ an in-store appliance and software agent.
 **The IoT Platform is built on open standards and integrates with:**
 
 * In-store data sources, such as POS systems, equipment, scheduling systems (e.g. HotSchedules) and sensors (e.g., thermometers, energy meters, batteries, HVAC)  
-* Near-store apps (e.g. Yelp, weather data, traffic data, Facebook) and  
+* Near-store apps (e.g. Yelp, weather data, traffic data, Facebook)  
 * Above-store apps such as inventory management, ordering systems (e.g.Macromatix), accounting) and other internet connected services  
 
 

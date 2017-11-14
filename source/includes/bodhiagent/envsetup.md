@@ -34,9 +34,7 @@ long | short | arg    | description
 ###Arguments
 The cli interprets the first argument (non-option) as the action. All subseuqent arguements are command specific. 
 
-
-Each action is described below
-
+Each action is described below:
 
 ###Informational Commands
 

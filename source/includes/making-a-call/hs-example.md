@@ -170,9 +170,7 @@ the HTTP verb PATCH will allow you to alter single parameters or fields within a
 The HTTP verb PATCH can be used on any type as long as there's a unique index on the field or fields. You can always PATCH on sys_id
 
 ####DELETE
-the HTTP verb DELETE will allow you to remove a record in your type. DELETE commands follow the following sytax:
-
-To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.
+the HTTP verb DELETE will allow you to remove a record in your type. To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.
 
 ####File Upload
 The Platform BodhiFileUpload endpoints are special types that allow a user to upload and download any file (like a dbf file from your store's POS).
@@ -227,11 +225,11 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <br>
 
-**1.** Create a new Request in Postman and name it 'Get Employee Info'.
+**1.** Create a new Request in Postman and name it **'Get Employee Info'**.
 
 ![alt text](/images/pms1.png?raw=false "Step 1")
 
-**2.** Set the request type to 'GET' and enter the following URL.
+**2.** Set the request type to **'GET'** and enter the following URL.
 __https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURCONCEPTID/YOURSTORENUMBER/getEmpInfo?active_only=true__
   
   - Replace the **'YOURNAMESPACE'**, **'YOURCONCEPTID'** and **'YOURSTORENUMBER'** with your values.
@@ -252,7 +250,7 @@ __https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURC
 
 <br><br>
 
-**Note: Completing the step of [retrieving your JWT Token](#idm-how-to-programatically-retrieve-jwt-tokens) is required before you can utilize the following example to make a call to the API with your JWT Token.**
+**NOTE: Completing the step of [retrieving your JWT Token](#idm-how-to-programatically-retrieve-jwt-tokens) is required before you can utilize the following example to make a call to the API with your JWT Token.**
 
 **JWT Token Example:** To perform a call using this method, follow the same steps as the Basic Authentication method with the exception of Step 3. Select **'Bearer Token'** as the Authorization type and enter the bearer token you received when you performed the 'Retrieve JWT Token' call.
 
@@ -277,7 +275,9 @@ The url path can look like any of the following, depending on which type is bein
 
 <aside class="notice"> <strong>FETCHING DATA METHODS</strong> </aside>
 
-Note: Results are currently cached with a TTL of 60 minutes.
+**Note:** Results are currently cached with a TTL of 60 minutes.
+
+What is TTL? _Time to live or hop limit is a mechanism that limits the lifespan or lifetime of data in a computer or network_
 
 #### getConcepts  
 This method returns a list of concepts for a company.
@@ -965,9 +965,9 @@ outTime    | Object | Scheduled out time
 #### getShiftsV3
 This method takes in a **concept ID**, **store ID**, **start** and **end dates** and three flags (**isHouse**, **isScheduled** and **isPosted**). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:
 
-isHouse - includes scheduled or posted shifts that are not assigned to an employee (called 'house shifts' in HotSchedules).
-isScheduled - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted
-isPosted - includes shifts that are in schedules that have been set to the 'posted' status within HotSchedules.
+ * **isHouse** - includes scheduled or posted shifts that are not assigned to an employee (called 'house shifts' in HotSchedules).
+ * **isScheduled** - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted.
+ * **isPosted** - includes shifts that are in schedules that have been set to the 'posted' status within HotSchedules.
 
 This method returns extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.
 
@@ -1279,7 +1279,7 @@ extId        | Number | Optional-Unique transaction ID for the time card record
 
 
 #### getTimeCardsV2
-Same as getTimeCards but additionally provides double time info for each timecard.
+Same as **getTimeCards** but additionally provides double time info for each timecard.
 
 
 #### getTimeCardsDeclaredTips
