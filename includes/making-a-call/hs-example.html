@@ -212,9 +212,7 @@ curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98b
 
 <h4 id="delete">DELETE</h4>
 
-<p>the HTTP verb DELETE will allow you to remove a record in your type. DELETE commands follow the following sytax:</p>
-
-<p>To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.</p>
+<p>the HTTP verb DELETE will allow you to remove a record in your type. To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.</p>
 
 <h4 id="file-upload">File Upload</h4>
 
@@ -268,11 +266,11 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p><br></p>
 
-<p><strong>1.</strong> Create a new Request in Postman and name it &#39;Get Employee Info&rsquo;.</p>
+<p><strong>1.</strong> Create a new Request in Postman and name it <strong>&#39;Get Employee Info&rsquo;</strong>.</p>
 
 <p><img title="Step 1" alt="alt text" src="../../images/pms1.png?raw=false" /></p>
 
-<p><strong>2.</strong> Set the request type to &#39;GET&rsquo; and enter the following URL.
+<p><strong>2.</strong> Set the request type to <strong>&#39;GET&rsquo;</strong> and enter the following URL.
 <strong>https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURCONCEPTID/YOURSTORENUMBER/getEmpInfo?active_only=true</strong></p>
 
 <ul>
@@ -294,7 +292,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p><br><br></p>
 
-<p><strong>Note: Completing the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a> is required before you can utilize the following example to make a call to the API with your JWT Token.</strong></p>
+<p><strong>NOTE: Completing the step of <a href="#idm-how-to-programatically-retrieve-jwt-tokens">retrieving your JWT Token</a> is required before you can utilize the following example to make a call to the API with your JWT Token.</strong></p>
 
 <p><strong>JWT Token Example:</strong> To perform a call using this method, follow the same steps as the Basic Authentication method with the exception of Step 3. Select <strong>&#39;Bearer Token&rsquo;</strong> as the Authorization type and enter the bearer token you received when you performed the &#39;Retrieve JWT Token&rsquo; call.</p>
 
@@ -317,7 +315,9 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <aside class="notice"> <strong>FETCHING DATA METHODS</strong> </aside>
 
-<p>Note: Results are currently cached with a TTL of 60 minutes.</p>
+<p><strong>Note:</strong> Results are currently cached with a TTL of 60 minutes.</p>
+
+<p>What is TTL? <em>Time to live or hop limit is a mechanism that limits the lifespan or lifetime of data in a computer or network</em></p>
 
 <h4 id="getconcepts">getConcepts</h4>
 
@@ -1605,9 +1605,11 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong> and three flags (<strong>isHouse</strong>, <strong>isScheduled</strong> and <strong>isPosted</strong>). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
 
-<p>isHouse - includes scheduled or posted shifts that are not assigned to an employee (called &#39;house shifts&rsquo; in HotSchedules).
-isScheduled - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted
-isPosted - includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</p>
+<ul>
+<li><strong>isHouse</strong> - includes scheduled or posted shifts that are not assigned to an employee (called &#39;house shifts&rsquo; in HotSchedules).</li>
+<li><strong>isScheduled</strong> - includes shifts that are in schedules that have been saved in HotSchedules, but might not have been posted.</li>
+<li><strong>isPosted</strong> - includes shifts that are in schedules that have been set to the &#39;posted&rsquo; status within HotSchedules.</li>
+</ul>
 
 <p>This method returns extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.</p>
 
@@ -2342,7 +2344,7 @@ isPosted - includes shifts that are in schedules that have been set to the &#39;
 
 <h4 id="gettimecardsv2">getTimeCardsV2</h4>
 
-<p>Same as getTimeCards but additionally provides double time info for each timecard.</p>
+<p>Same as <strong>getTimeCards</strong> but additionally provides double time info for each timecard.</p>
 
 <h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
 
@@ -2825,32 +2827,17 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
 </tr>
 <tr>
-<td>start_day</td>
+<td>Day</td>
 <td>Number</td>
 <td>Day formatted dd</td>
 </tr>
 <tr>
-<td>start_month</td>
+<td>Month</td>
 <td>Number</td>
 <td>Month formatted mm</td>
 </tr>
 <tr>
-<td>start_year</td>
-<td>Number</td>
-<td>Year formated yyyy</td>
-</tr>
-<tr>
-<td>end_day</td>
-<td>Number</td>
-<td>Day formatted dd</td>
-</tr>
-<tr>
-<td>end_month</td>
-<td>Number</td>
-<td>Month formatted mm</td>
-</tr>
-<tr>
-<td>end_year</td>
+<td>Year</td>
 <td>Number</td>
 <td>Year formated yyyy</td>
 </tr>
@@ -2957,32 +2944,17 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <td>Array of WSEmployee objects. Each object represents an employee at this store.</td>
 </tr>
 <tr>
-<td>start_day</td>
+<td>Day</td>
 <td>Number</td>
 <td>Day formatted dd</td>
 </tr>
 <tr>
-<td>start_month</td>
+<td>Month</td>
 <td>Number</td>
 <td>Month formatted mm</td>
 </tr>
 <tr>
-<td>start_year</td>
-<td>Number</td>
-<td>Year formated yyyy</td>
-</tr>
-<tr>
-<td>end_day</td>
-<td>Number</td>
-<td>Day formatted dd</td>
-</tr>
-<tr>
-<td>end_month</td>
-<td>Number</td>
-<td>Month formatted mm</td>
-</tr>
-<tr>
-<td>end_year</td>
+<td>Year</td>
 <td>Number</td>
 <td>Year formated yyyy</td>
 </tr>
