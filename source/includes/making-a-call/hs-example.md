@@ -1456,7 +1456,6 @@ clockIn      | String | Clock in timestamp for the shift
 ovtWage      | Number | Optional-Overtime hourly pay rate
 breakMinutes | Number | Number of non-paid break minutes in shift
 jobId        | Number | POS numeric identifier for the job
-jobExtId     | Number | POS numeric Job Code ID
 businessDate | Array  | Business Date information, Day, Months and Year
 regHrs       | Number | Regular hours represented in shift
 spcTtl       | Number | Optional-Special Pay total pay amount
