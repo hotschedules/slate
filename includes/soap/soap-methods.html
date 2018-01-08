@@ -42,7 +42,7 @@
 <p><strong><a href="#laborservice">LaborService</a>:</strong> This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
 <br></p>
 
-<p><strong><a href="#operatingbudgetplanservice">OperatingBudgetPlanService</a>:</strong> Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.
+<p><strong><a href="#operatingbudgetplanservice">OperatingBudgetPlanService</a>:</strong> Allows a customer to SET their budget via API. You can submit multiple job data throughout a week for the same data type id. The service also allow a customer to GET their labor budget data.
 <br></p>
 
 <p><strong><a href="#projectedsalesservice">ProjectedSalesService</a>:</strong> This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
@@ -2581,6 +2581,93 @@ The inputs of this method are the arguments defined by the following table.</p>
       &lt;/ns1:setLaborDataResponse&gt;
    &lt;/soap:Body&gt;
 &lt;/soap:Envelope&gt;
+</code></pre>
+
+<h4 id="getlabordataforweek">getLaborDataForWeek</h4>
+
+<p>Get multiple job data throughout a week for the same data type id.</p>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:oper=</span><span class="s">"http://services.hotschedules.com/api/services/OperatingBudgetPlanService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;oper:getLaborDataForWeek&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>3<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>3<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;startDate&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>3<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>3<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>3<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/startDate&gt;</span>
+         <span class="nt">&lt;endDate&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>3<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>3<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>3<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/endDate&gt;</span>
+         <span class="nt">&lt;dataTypeId&gt;</span>3<span class="nt">&lt;/dataTypeId&gt;</span>
+      <span class="nt">&lt;/oper:getLaborDataForWeek&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
+</code></pre>
+
+<h4 id="setlabordataforweek">setLaborDataForWeek</h4>
+
+<p>Set multiple job data throughout a week for the same data type id.</p>
+
+<blockquote>
+<p><strong>EXAMPLE:</strong></p>
+</blockquote>
+<pre class="highlight xml"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF•8"?&gt;</span>
+<span class="nt">&lt;soapenv:Envelope</span> <span class="na">xmlns:soapenv=</span><span class="s">"http://schemas.xmlsoap.org/soap/envelope/"</span> <span class="na">xmlns:oper=</span><span class="s">"http://services.hotschedules.com/api/services/OperatingBudgetPlanService"</span><span class="nt">&gt;</span>
+   <span class="nt">&lt;soapenv:Header/&gt;</span>
+   <span class="nt">&lt;soapenv:Body&gt;</span>
+      <span class="nt">&lt;oper:setLaborDataForWeek&gt;</span>
+         <span class="nt">&lt;concept&gt;</span>3<span class="nt">&lt;/concept&gt;</span>
+         <span class="nt">&lt;storeNum&gt;</span>3<span class="nt">&lt;/storeNum&gt;</span>
+         <span class="nt">&lt;startDate&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>3<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>3<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>3<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/startDate&gt;</span>
+         <span class="nt">&lt;endDate&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;day&gt;</span>3<span class="nt">&lt;/day&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;month&gt;</span>3<span class="nt">&lt;/month&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;year&gt;</span>3<span class="nt">&lt;/year&gt;</span>
+         <span class="nt">&lt;/endDate&gt;</span>
+         <span class="nt">&lt;budget&gt;</span>
+            <span class="c">&lt;!--type: int--&gt;</span>
+            <span class="nt">&lt;dataTypeId&gt;</span>3<span class="nt">&lt;/dataTypeId&gt;</span>
+            <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+            <span class="nt">&lt;jobs&gt;</span>
+               <span class="c">&lt;!--Zero or more repetitions:--&gt;</span>
+               <span class="nt">&lt;days&gt;</span>
+                  <span class="c">&lt;!--type: int--&gt;</span>
+                  <span class="nt">&lt;dayOfWeek&gt;</span>3<span class="nt">&lt;/dayOfWeek&gt;</span>
+                  <span class="c">&lt;!--type: double--&gt;</span>
+                  <span class="nt">&lt;value&gt;</span>1.051732E7<span class="nt">&lt;/value&gt;</span>
+               <span class="nt">&lt;/days&gt;</span>
+               <span class="c">&lt;!--type: int--&gt;</span>
+               <span class="nt">&lt;id&gt;</span>3<span class="nt">&lt;/id&gt;</span>
+            <span class="nt">&lt;/jobs&gt;</span>
+         <span class="nt">&lt;/budget&gt;</span>
+      <span class="nt">&lt;/oper:setLaborDataForWeek&gt;</span>
+   <span class="nt">&lt;/soapenv:Body&gt;</span>
+<span class="nt">&lt;/soapenv:Envelope&gt;</span>
 </code></pre>
 
 <h2 id="projectedsalesservice">ProjectedSalesService</h2>
