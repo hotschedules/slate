@@ -11,7 +11,7 @@ The HotSchedules SOAP API provides a user-friendly way to obtain HS Data. Each s
 **[LaborService](#laborservice):** This service is intended for third parties to be able to request labor data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
 <br>
 
-**[OperatingBudgetPlanService](#operatingbudgetplanservice):** Allows a customer to SET their budget via API. The service also allow a customer to GET their labor budget data.
+**[OperatingBudgetPlanService](#operatingbudgetplanservice):** Allows a customer to SET their budget via API. You can submit multiple job data throughout a week for the same data type id. The service also allow a customer to GET their labor budget data.
 <br>
 
 **[ProjectedSalesService](#projectedsalesservice):** This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc.
@@ -2548,6 +2548,92 @@ The inputs of this method are the arguments defined by the following table.
    </soap:Body>
 </soap:Envelope>
 ```
+
+####getLaborDataForWeek
+Get multiple job data throughout a week for the same data type id.
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <oper:getLaborDataForWeek>
+         <concept>3</concept>
+         <storeNum>3</storeNum>
+         <startDate>
+            <!--type: int-->
+            <day>3</day>
+            <!--type: int-->
+            <month>3</month>
+            <!--type: int-->
+            <year>3</year>
+         </startDate>
+         <endDate>
+            <!--type: int-->
+            <day>3</day>
+            <!--type: int-->
+            <month>3</month>
+            <!--type: int-->
+            <year>3</year>
+         </endDate>
+         <dataTypeId>3</dataTypeId>
+      </oper:getLaborDataForWeek>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
+####setLaborDataForWeek
+Set multiple job data throughout a week for the same data type id.
+
+> **EXAMPLE:**
+
+```
+<?xml version="1.0" encoding="UTF•8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:oper="http://services.hotschedules.com/api/services/OperatingBudgetPlanService">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <oper:setLaborDataForWeek>
+         <concept>3</concept>
+         <storeNum>3</storeNum>
+         <startDate>
+            <!--type: int-->
+            <day>3</day>
+            <!--type: int-->
+            <month>3</month>
+            <!--type: int-->
+            <year>3</year>
+         </startDate>
+         <endDate>
+            <!--type: int-->
+            <day>3</day>
+            <!--type: int-->
+            <month>3</month>
+            <!--type: int-->
+            <year>3</year>
+         </endDate>
+         <budget>
+            <!--type: int-->
+            <dataTypeId>3</dataTypeId>
+            <!--Zero or more repetitions:-->
+            <jobs>
+               <!--Zero or more repetitions:-->
+               <days>
+                  <!--type: int-->
+                  <dayOfWeek>3</dayOfWeek>
+                  <!--type: double-->
+                  <value>1.051732E7</value>
+               </days>
+               <!--type: int-->
+               <id>3</id>
+            </jobs>
+         </budget>
+      </oper:setLaborDataForWeek>
+   </soapenv:Body>
+</soapenv:Envelope>
+```
+
 
 ##ProjectedSalesService
 This service is intended for third parties to be able to grab projected sales data from HotSchedules and import it into their POS/data warehouse/enterprise/etc. system.
