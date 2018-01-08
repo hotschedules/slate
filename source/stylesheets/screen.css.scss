@@ -51,10 +51,10 @@ html, body {
 @mixin embossed-bg {
   @include background(
     linear-gradient(top,
-                    rgba(#000, 0.2),
+                    rgba(#FFF, 0.2),
                     rgba(#000, 0) 8px),
     linear-gradient(bottom,
-                    rgba(#000, 0.2),
+                    rgba(#FFF, 0.2),
                     rgba(#000, 0) 8px),
     linear-gradient(top,
                     rgba($nav-embossed-border-top, 1),
