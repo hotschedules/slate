@@ -4517,7 +4517,7 @@ SOAPoENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
 
 ####getScheduleV3
 This method takes in a concept ID, store ID, start and end dates. It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.
-This method uses hsSimpleDate objects for dates.
+This method uses hsSimpleDate objects for dates. Note that the date referenced is the calendar date and not the business date.
 
 **Input (Literal)**
 The inputs of this method are the arguments defined by the following table.
