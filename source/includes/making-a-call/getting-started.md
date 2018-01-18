@@ -17,7 +17,7 @@ For more details on IDM, please click [HERE](https://help.hotschedules.com/hc/en
 
 Before you can retrieve your token, follow these simple setup steps before proceeding.
 
-**Step 1:** Create your global profile.<br>
+**Step 1:** [Create your global profile] (https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile).<br>
 **Step 2:** Obtain your API credentials from HotSchedules if you have not already done so.<br>
 **Step 3:** Login into the [Account Manager](https://tools.hotschedules.io/account/#/)<br>
 **Step 4:** In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
