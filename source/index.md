@@ -21,6 +21,9 @@ includes:
   - bodhiagent/Howto/installingbodhiagent
   - bodhiagent/create-agent/create-app
 
+  - soap/getting-started
+  - soap/soap-methods
+
   - bodhiagent/create-agent/agent-configure
   - bodhiagent/create-agent/agent-source
   - bodhiagent/create-agent/agent-extension
@@ -34,8 +37,7 @@ includes:
   - publishing/publishtoshop
   - publishing/monitorapp
   
-  - soap/getting-started
-  - soap/soap-methods
+
 
 
 
