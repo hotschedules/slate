@@ -1,4 +1,4 @@
-#HotSchedules SOAP Web Services
+#HotSchedules Canonical
 
 ##Introduction
 ###Note: This Documentation Is Currently Being Updated For This Environment
