@@ -4974,1346 +4974,6 @@ figure 32  </p>
 
           <h2 id="creating-an-agent-application">Creating an Agent Application</h2>
 
-          <h4 id="configuring-agent-application">Configuring Agent Application</h4>
-
-<h3 id="parameters">Parameters</h3>
-
-<p>Mutable environmental variables that can be modified in Agent Manager. Values can overwrite default settings.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>description</td>
-<td>String</td>
-<td>Description in Agent manager application</td>
-</tr>
-<tr>
-<td>type</td>
-<td>String</td>
-<td>Expected data type of parameter value</td>
-</tr>
-<tr>
-<td>setting</td>
-<td>String</td>
-<td>Assigned variable name to this parameter</td>
-</tr>
-<tr>
-<td>required</td>
-<td>Boolean</td>
-<td>True or False</td>
-</tr>
-<tr>
-<td>default</td>
-<td>String</td>
-<td>The default value of the parameter if not set</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Parameters example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>parameters : {
-        master_id: {
-            description : 'System ID of Master Agent',
-            setting     : 'master_id',
-            type        : 'string',
-            required    : true
-        },
-        role: {
-            description : 'Role of Master Agent for Slave to assume',
-            type        : 'string',
-            setting     : 'role',
-            required    : true
-        }
-}
-</code></pre>
-
-<h3 id="extensions">Extensions</h3>
-
-<p>Extensions are injected dependencies that your application can refer to. Your application may use one or more extensions. Extensions can provide potential configuration components or actual runtime components. Extensions are a good way to design resuable components that can be shared and reused across projects. Extensions are loaded in the order in which they are specified.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>module</td>
-<td>String</td>
-<td>Yes</td>
-<td>By default searches node_modules folder. Relative path also accepted.</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Extensions example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>extensions  : [
-        { module: './lib/plugin.js' },
-        { module: 'agent-ext-timers' }
-]
-</code></pre>
-
-<h3 id="settings">Settings</h3>
-
-<p>A Setting is an Object that represents static configuration data. Parameters can overwrite a setting if the property matches a parameter key.
-These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
-
-<ol>
-<li>Agent.json settings object (highest precedence)</li>
-<li>Any settings within the js/json files in the settings folder</li>
-<li>Any settings added by an extension (lowest precedence)</li>
-</ol>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>property</td>
-<td>String</td>
-<td>Yes</td>
-<td>Name of your property</td>
-</tr>
-<tr>
-<td>value</td>
-<td>String, Function, Boolean, Number, Object</td>
-<td>Yes</td>
-<td>The value of your setting</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Settings example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>settings: [
-        {
-            property: 'master_id',
-            value: '588f9fc508a94349cc1ad3b8'
-        },
-        {
-            property: 'role',
-            value   : 'pos-monitor'
-        }
-]
-</code></pre>
-
-<h3 id="counters">Counters</h3>
-
-<p>Tracks the number of times specific application events occur and are logged found in the Agent heartbeat. Each counter can subscribe to an array of application events.</p>
-
-<blockquote>
-<p><strong>Counters example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code> counters: {
-        activations : ['app:monitor'],
-        success     : ['app:success'],
-        stopped     : ['app:stopped'],
-        failed      : ['app:failed' ]
-}
-</code></pre>
-
-<h3 id="sources">Sources</h3>
-
-<p>An object that sources external events. Sources bind events to listeners and emits application level events. Any counters, handlers and pipelines subscribed to source events are initiated.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Yes</td>
-<td>Unique identifier (within the context&rsquo;s handler)</td>
-</tr>
-<tr>
-<td>provider</td>
-<td>String or Function</td>
-<td>Yes</td>
-<td>A function or reference to a plugin that creates an object</td>
-</tr>
-<tr>
-<td>args</td>
-<td>Array of Strings, Functions, Objects, Booleans</td>
-<td>Optional</td>
-<td>A list of dependencies used by the source</td>
-</tr>
-<tr>
-<td>bindings</td>
-<td>Object</td>
-<td>Optional</td>
-<td>A Map that routes external events to internal topics</td>
-</tr>
-<tr>
-<td>factory</td>
-<td>String</td>
-<td>Optional</td>
-<td>An enumeration that describes alternate instantiation behavior for the service constructor, function, literal</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Sources example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>sources: [ 
-        {
-           name: 'sampleSource',
-           provider: 'compris:dir',
-           args: ['$settings:rootPath'],
-           bindings: { 'created' : 'read' }
-        } 
-]
-</code></pre>
-
-<h3 id="services">Services</h3>
-
-<p>A Service is an Object that represents a concrete extension of the API. Services are singletons.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Yes</td>
-<td>Unique identifier (within the context&rsquo;s handler)</td>
-</tr>
-<tr>
-<td>provider</td>
-<td>String or Function</td>
-<td>Yes</td>
-<td>A function or reference to a plugin that creates an object</td>
-</tr>
-<tr>
-<td>args</td>
-<td>Array of Strings, Functions, Objects, Booleans</td>
-<td>Optional</td>
-<td>A list of the dependencies used by the service</td>
-</tr>
-<tr>
-<td>factory</td>
-<td>String (Constructor, Function, Literal)</td>
-<td>Optional</td>
-<td>An enumeration that describes alternate instantiation behavior for the service</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Services example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>services: [
-        {
-            name: 'cloud',
-            provider: 'connection:resources'
-        }
-]
-</code></pre>
-
-<h3 id="handlers">Handlers</h3>
-
-<p>A Handler is a Function that responds to events within an application. </p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Yes</td>
-<td>Unique identifier (within the context&rsquo;s handler)</td>
-</tr>
-<tr>
-<td>subscriptions</td>
-<td>Array <String></td>
-<td>Yes</td>
-<td>String of application level events that will initiate this handler</td>
-</tr>
-<tr>
-<td>fn</td>
-<td>String or Function</td>
-<td>Yes</td>
-<td>A function or reference to a plugin will handle the events</td>
-</tr>
-<tr>
-<td>props</td>
-<td>Object</td>
-<td>Optional</td>
-<td>A list of properties available to the instance</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Handlers example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>handlers: [
-        {
-            name            : 'Monitor Master Agent',
-            subscriptions   : ['app:monitor'],
-            fn              : '$plugins:handler:monitor',
-            props           : {
-                master_role : '$setting:role',
-                conn        : '$service:cloud',
-                master_id   : '$setting:master_id',
-                getInfo     : '$plugins:core:info',
-                identity    : '$plugins:core:identity',
-            }
-        },
-        {
-            name            : 'Update Agent Role',
-            subscriptions   : ['app:update'],
-            fn              : '$plugins:handler:update',
-            props           : {
-                conn        : '$service:cloud',
-            }
-        }
-]
-</code></pre>
-
-<h3 id="pipelines">Pipelines</h3>
-
-<p>Similar to handlers, pipeline(s) are subscribed to event(s). The difference being that pipelines execute a series of steps rather than just one function. 
-Each pipeline step should follow the single responsiblity principle. Each step is given two arguments - input and a callback.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Required</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Yes</td>
-<td>Unique identifier</td>
-</tr>
-<tr>
-<td>subscriptions</td>
-<td>Array</td>
-<td>Yes</td>
-<td>String of application level events that will initiate this pipeline</td>
-</tr>
-<tr>
-<td>steps</td>
-<td>Array</td>
-<td>Yes</td>
-<td>Takes an array of objects described below</td>
-</tr>
-<tr>
-<td>failed</td>
-<td>String</td>
-<td>Optional</td>
-<td>Emits mapped event based on the state of the pipeline</td>
-</tr>
-<tr>
-<td>success</td>
-<td>String</td>
-<td>Optional</td>
-<td>Emits mapped event based on the state of the pipeline</td>
-</tr>
-<tr>
-<td>done</td>
-<td>String</td>
-<td>Optional</td>
-<td>Emits mapped event based on the state of the pipeline</td>
-</tr>
-</tbody></table>
-
-<p><strong>Pipeline.steps</strong></p>
-
-<p><em>pipeline</em> | Object <br></p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>fn</td>
-<td>Functional plugin reference. See pipeline and fn description below</td>
-</tr>
-<tr>
-<td>props</td>
-<td>Optional dependencies to be injected in the pipeline function context</td>
-</tr>
-</tbody></table>
-
-<p><strong>Pipeline.fn(input, callback)</strong> </p>
-
-<p><em>input</em> | Object <br>
-Initially an empty object. Later becomes whatever the result of the previous pipeline step is.</p>
-
-<p><em>callback</em> | Function <br>
-Needs to be invoked with a possible error arguement and an optional result to be passed in to the next step. 
-If an error is passed in, it will stop the pipeline and the failed event will be emitted.</p>
-
-<p>Context of this callback includes core methods described below as well as Pipeline.props injected during configuration.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>logger</td>
-<td>Logs viewable in Agent Manager</td>
-</tr>
-<tr>
-<td>publish</td>
-<td>EventEmitter that takes in a event and message</td>
-</tr>
-<tr>
-<td>name</td>
-<td>Pipeline.name</td>
-</tr>
-<tr>
-<td>event</td>
-<td>Name of event that triggered the pipeline</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Pipelines example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>// pipeline breakdown of handlers
-
-    pipelines: [
-        {
-            name: 'Monitor Master Agent',
-            subscriptions: ['app:monitor'],
-            steps: [
-                { fn: '$plugins:core:identity:addAgentInfo'     },
-                { fn: '$plugins:main:checkMasterAgentStatus'    },
-                { fn: '$plugins:main:processAgentStatus'        }
-            ],
-            stopped : 'app:stopped',
-            failed  : 'app:failed'
-        },
-        {
-            name: 'Update Status',
-            subscriptions: ['app:update'],
-            steps: [
-                { fn: '$plugins:main:patchAgentRole'    },
-                { fn: '$plugins:main:syncAgent'         }
-            ],
-            stopped : 'app:stopped',
-            failed  : 'app:failed'
-        }
-]
-</code></pre>
-
-<h3 id="init">Init</h3>
-
-<p>Init is a function that is given a callback as its only argument.
-This callback must be invoked in order to intialize the application. 
-The keyword &ldquo;this&rdquo; refers to the application&rsquo;s reactive context</p>
-
-<blockquote>
-<p><strong>Init example</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>init: function(done){
-
-        this.publish('app:initialized');
-
-        console.log('###################################');
-        console.log('## ' + pkg.name.toUpperCase());
-        console.log('## v' + pkg.version);
-        console.log('###################################');
-
-        done();
-}
-</code></pre>
-
-          <h4 id="creating-an-agent-source">Creating an Agent Source</h4>
-
-<p>Returns a function that instantiates an Agent source. See sample code that watches for any directory changes using npm watch.</p>
-
-<blockquote>
-<p><strong>Sample Code:</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>var fs      = require('fs-extra');
-var watch   = require('watch');
-
-module.exports = function dirSrc() {
-    var path        = arguments[0];
-    var source      = {};
-    source.routers  = {};
-
-    var bind = function bindDir(bindings, emitter, done) {
-        var logger = this.logger;
-
-        logger.info('Ensuring ', path, 'exists...');
-
-        if (!path) return done('Expected path to exist. Please ensure args array is properly configured.');
-
-        fs.ensureDir(path, function (err) {
-            if (err) return done(err);
-
-            logger.info(path, 'ensured.');
-            /*
-                bindings = { 'created' : 'read' }
-                emitter = fn()  { context.emit.apply(context, arguments); }
-                done = fn()      { return exit(done, source); }
-
-                YOU HAVE TO CALL DONE OR ELSE THE REST OF THE APP WILL NOT LOAD
-                KICK LISTEN OR IT WILL NOT HEAR
-            */
-
-            // routes = ['created']
-            var routes = Object.keys(bindings);
-
-            /*
-                routers = {
-
-                        emitter(event, arguments);
-                    }
-                }
-            */
-            routes.forEach(function (event) {
-                source.routers[event] = function () {
-                    emitter(bindings[event], { path: arguments[0], detail: arguments[1] });
-                }
-            });
-
-            done();
-        });
-    };
-
-    /*
-        SOURCES GET LOADED BEFORE INIT
-            ENSURE DIR BEFORE SETTING MONITORS
-    */
-    var listen = function listenDir(cb) {
-        watch.createMonitor(path, function (monitor) {
-            source.monitor = monitor;
-            ['created', 'changed', 'removed'].forEach(function (e) {
-                if (source.routers[e]) {
-                    source.monitor.on(e, function (file, detail) {
-                        source.routers[e](file, detail);
-                    });
-                }
-            });
-        });
-    };
-
-    var close = function closeDir() {
-        source.monitor.stop();
-    };
-
-    return function (cb) {
-        cb(null, { bind: bind, listen: listen, close: close})
-    }
-};
-</code></pre>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>bind</td>
-<td>Function</td>
-<td>Responsible for binding application level events when a source level event occurs</td>
-</tr>
-<tr>
-<td>listen</td>
-<td>Function</td>
-<td>Creates EventEmitter that emit application level events based on bind</td>
-</tr>
-<tr>
-<td>close</td>
-<td>Function</td>
-<td>Destroy existing EventEmitter for the source</td>
-</tr>
-</tbody></table>
-
-          <h4 id="creating-an-agent-extension">Creating an Agent Extension</h4>
-
-<p>Returns an Agent extension object.</p>
-
-<table><thead>
-<tr>
-<th>Property</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>Name of extension used primarily for debugging purposes</td>
-</tr>
-<tr>
-<td>attach</td>
-<td>Function</td>
-<td>Attach the specified extension to this instance, extending the <code class="prettyprint">ReactiveContext</code> with new functionality with the implicit registerPlugin method</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>Sample Code:</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>module.exports = {
-    name        : 'plugin',
-
-    attach      : function (overloads, done) {
-
-        /** LOAD HANDLERS **/
-        this.registerPlugin(['handler', 'monitor'   ], require('./handlers/monitor.js'  ));
-        this.registerPlugin(['handler', 'update'    ], require('./handlers/update.js'   ));
-
-        done();
-    }
-};
-</code></pre>
-
-          <h4 id="agent-path-resolution">Agent Path Resolution</h4>
-
-<p>Every extension, service and setting can be injected through namespacing </p>
-
-<table><thead>
-<tr>
-<th>Type</th>
-<th>Reference</th>
-<th>Sample</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>extension</td>
-<td>&ldquo;$plugins&rdquo;</td>
-<td>&ldquo;$plugins:myFunction&rdquo;</td>
-</tr>
-<tr>
-<td>service</td>
-<td>&ldquo;$service&rdquo;</td>
-<td>&ldquo;$service:cloud&rdquo;</td>
-</tr>
-<tr>
-<td>setting</td>
-<td>&ldquo;$setting&rdquo;</td>
-<td>&ldquo;$setting:jobInterval&rdquo;</td>
-</tr>
-</tbody></table>
-
-          <h1 id="job-engine">Job Engine</h1>
-
-<h2 id="creating-a-job-engine-application">Creating a job engine application</h2>
-
-<p><strong>Introduction</strong> <br>
-Bodhi Job Engine is a job scheduler running on node.js and MongoDB. The engine is designed to run scheduled cloud-to-cloud data transactions, e.g. requesting data from web APIs, pushing data to the Bodhi cloud, etc.</p>
-
-          <p><strong>Work Functions</strong> <br>
-Jobs must be built in a specific format in order for Bodhi Job Engine to recognize and run them properly. The job should contain an <strong>index.js</strong> file that follows this structure:</p>
-
-<blockquote>
-<p><strong>index.js</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>module.exports = function work(context, done){
-    //the work of your job
-    done(errThatOccurred, messageToReport, stateToSave);
-};
-
-</code></pre>
-
-<p><strong>Context Object</strong> <br></p>
-
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>connection</td>
-<td>bodhi-js-client</td>
-<td><a href="https://www.npmjs.com/package/bodhi-driver-superagent">https://www.npmjs.com/package/bodhi-driver-superagent</a></td>
-</tr>
-<tr>
-<td>settings</td>
-<td>Object</td>
-<td>immutable configuration options associated with this job</td>
-</tr>
-<tr>
-<td>state</td>
-<td>Object</td>
-<td>mutable persistent state from previous runs</td>
-</tr>
-<tr>
-<td>meta</td>
-<td>Object</td>
-<td>immutable metadata about the job</td>
-</tr>
-</tbody></table>
-
-<blockquote>
-<p><strong>meta</strong></p>
-</blockquote>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-
-</span><span class="p">}</span><span class="w">
-
-</span></code></pre>
-
-<p><strong>Job Metadata</strong> <br></p>
-
-<table><thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>name</td>
-<td>String</td>
-<td>name of the job</td>
-</tr>
-<tr>
-<td>package</td>
-<td>String</td>
-<td>package name</td>
-</tr>
-<tr>
-<td>version</td>
-<td>String</td>
-<td>semantic package version</td>
-</tr>
-<tr>
-<td>namespace</td>
-<td>String</td>
-<td>namespace of the job</td>
-</tr>
-<tr>
-<td>lastRun</td>
-<td>Data</td>
-<td>last time the job ran</td>
-</tr>
-</tbody></table>
-
-<p><strong>Callback</strong> <br>
-A job must be completed by calling the callback</p>
-
-<table><thead>
-<tr>
-<th>arg</th>
-<th>type</th>
-<th>required</th>
-<th>description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>err</td>
-<td>Error</td>
-<td>optional</td>
-<td>if err != null then the job did not process properly</td>
-</tr>
-<tr>
-<td>message</td>
-<td>String</td>
-<td>optional</td>
-<td>a string to be recorded in the message</td>
-</tr>
-<tr>
-<td>state</td>
-<td>Object</td>
-<td>optional</td>
-<td>the state to persist for the next run</td>
-</tr>
-</tbody></table>
-
-<p><strong>Example Job: Hello World</strong></p>
-
-<blockquote>
-<p><strong>This is a very basic Hello World job.</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>module.exports = function(options, done){
-  console.log('HELLO WORLD!');
-
-  if(err){
-    done(err);
-  }
-  else{
-    done();
-  }
-};
-</code></pre>
-
-<p><strong>Example Job: Get and Use Some Data</strong></p>
-
-<blockquote>
-<p><strong>Get and use data</strong></p>
-</blockquote>
-<pre class="highlight plaintext"><code>module.exports = function(options, done){
-
-  var client = options.connection;
-  var data   = options.state;
-  data.storestuff = [];
-
-  client.get(['resources', 'Store'].join('/'), function(err, data, ctx){
-    if(err){
-      done(err);
-    }
-    else{
-      data.forEach(function(store){
-        data.storestuff.push(store.store_name + ' is an awesome store!');
-      });
-    }
-  });
-
-  var json = {
-
-    "data1": "some data you need to post",
-    "data2": "also data you need to post"
-  };
-
-  client.post(['resources', 'aCustomType'].join('/'), json, function(err, data, ctx){
-
-    if(err){
-      done(err);
-    }
-    else{
-      console.log('Server says: ', ctx);
-      done();
-    }
-  });
-};
-
-</code></pre>
-
-<p>This is a less basic example job that uses HTTP requests and stores data in the &ldquo;state&rdquo; property of the options object. Data stored in the state property persists between jobs and is available in the next execution of the job.</p>
-
-          <h1 id="publishing-applications">Publishing Applications</h1>
-
-<h2 id="overview">Overview</h2>
-
-<p>To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  </p>
-
-          <h2 id="configuring-package.json">Configuring package.json</h2>
-
-<p>To publish your application, add the following directory structure for your application:</p>
-<pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
-            /public/
-</code></pre>
-
-<ul>
-<li>Folder (npm app-name)
-
-<ul>
-<li>index.js</li>
-<li>LICENSE (standard apache license file)</li>
-<li>package.json (example provided below) </li>
-<li>public (folder) 
-
-<ul>
-<li>app_icon.png</li>
-<li>NewType1.json file (optional)</li>
-<li>NewType2.json file (optional)</li>
-<li>NewType3.json file (optional)</li>
-</ul></li>
-</ul></li>
-</ul>
-
-<p>To publish an app into the IoT Platform you have to zip up the following: <br>
-index.js  <br>
-LICENSE <br>
-package.json</p>
-<pre class="highlight plaintext"><code>    folder=&lt;public&gt;
-      app_icon.png
-      NewType1.json file (optional)
-      NewType2.json file (optional)
-      NewType3.json file (optional)
-      ...
-</code></pre>
-
-<h3 id="example-package.json-for-mobile-applications">Example package.json for Mobile Applications</h3>
-
-<p>By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:</p>
-
-<ul>
-<li><p><strong>index.html</strong></p>
-
-<p>If you open this file it say Click Me and a Welcome will appear above Click Me</p></li>
-<li><p><strong>LICENSE</strong>
-This is the apache2 license file that needs to be with all applications you plan to build</p></li>
-<li><p><strong>README.md</strong></p>
-
-<p>README.md are directions to get started developing your mobile application</p></li>
-<li><p><strong>image_home.png</strong>
-Image_home.png is the background image for index.html</p></li>
-<li><p><strong>package.json</strong>:</p>
-
-<p>This is the example package.json that you will cutomize based on your application needs.  To the right is a formatted version of the sample package.json that is included in HS Template&rsquo;s zip file.</p></li>
-</ul>
-<pre class="highlight plaintext"><code>package.json that gets includes with HS Template's zip file:
-
-{
-    "name": "HSappTemplate",
-    "version": "0.0.0",
-    "title": "HSappTemplate",
-    "description": "New application Hello, World!",
-    "profile": {
-        "name": "HSappTemplate",
-        "dml": {
-            "BodhiApplication": {
-                "select": {}
-            }
-        }
-    },
-    "settings": {
-        "publisher": "",
-        "categories": [""],
-        "offline": false,
-        "navigationBar": "auto",
-        "location": "S3",
-        "storage": "s3",
-        "type":"mobile"
-    },
-    "dependencies": {
-        "bodhi-mobile":"*" 
-        },
-    "autoUpdateVersion": true
-}
-
-</code></pre>
-
-<h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
-<pre class="highlight plaintext"><code>Example of package.json for agent or job applications:
-#!javascript
-
-{
-  "name": "app-package-name",
-  "version": "0.0.1",
-  "title": "Application Title",
-  "description": "Short Application Description.",
-  "profile": {
-    "name": "app-package-name",
-    "dml": {
-      “BodhiApplication": {
-       "select": {},
-       "update":{},
-       "delete":{},
-       "insert":{}
-      },
-      "NewType1": {
-        "select": {}
-      },
-      "NewType2": {
-        "select": {}
-      }
-    }
-  },
-  "settings": {
-    "categories": [
-      "Aloha",
-      "POS"
-    ],
-    "publisher": "your company",
-    "npm_package_name": "app-package-name",
-
-
-if you have any related apps you want to install together::
-"related-apps": [
-      "bodhi.aloha-app-transactions",
-      "bodhi.aloha-app-store"
-    ],
-    "public_path": "public",
-    "global_store_icon": "public/icon.png",
-   "location": "S3",
-   "storage": "s3",
-   "type": "agent",    
-(type can be “job”, “agent”, “mobile”, “web” )   
- "new_type_required": true,
-  "install": {
-"new": {
-"model": [
-{
-"type": "enumeration",
-"name": "TypeName",
-"object": "Enumerations/TypeName.json"
-},
-{
-"type": "embedded_type",
-"name": "InventoryPurchaseOrder",
-"object": "Types/InventoryPurchaseOrder.json"
-},
-{ "type": "custom_type",
-"name": "TypeName2",
-"object": "Types/TypeName2.json"
-}
-],
-"post-type-install": [
-{"action": "POST",
-"object": "Data/DataFile.json",
-"path": "/resources/DataFile"
-}
-]
-if you have any parameters required to be used with the app we add this section:: 
- "agent_parameters": {
-      "interval": {
-        "description": "How often to execute a grind",
-        "required": true,
-        "type": "string",
-        "default": "every 15 minutes",
-        "position": 1
-      }
-    }
-  },
-  "autoUpdateVersion": false
-}
-
-</code></pre>
-
-<h3 id="description-of-package.json-contents">Description of package.json contents</h3>
-
-<p><strong>name=&ldquo;HSappTemplate&rdquo; <em>required</em></strong></p>
-
-<p>The name of your application must match the name of the profile</p>
-
-<p><strong>&ldquo;version&rdquo;: &ldquo;0.0.1&rdquo; <em>required</em></strong></p>
-
-<p>Ideally this is the version of your application that gets posted as versions show for Agent Application in the Agent Event Logs so keeping this version the same as your Agent Application that is published is highly recommended.</p>
-
-<p><strong>&ldquo;title&rdquo;: &ldquo;Application Title&rdquo; <em>required</em></strong></p>
-
-<p>This is the title that will show on the HotSchedules Store once you publish your application to the HotSchedules Store.</p>
-
-<p><strong>&ldquo;description&rdquo;: &ldquo;Short Application Description.&rdquo; <em>required</em></strong></p>
-
-<p>The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of &ldquo;Learn More&rdquo; button. </p>
-
-<p><strong>&ldquo;profile&rdquo;: {} <em>required</em></strong></p>
-
-<p>The profile section contains the following required sections:</p>
-
-<ul>
-<li><p><strong>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo; <em>required</em> and must match name above</strong></p>
-
-<p>The profile name must match the application name that is described in the main part of the package.json (see name=&ldquo;app-package-name&rdquo; <em>required</em> above)</p></li>
-<li><p><strong>&ldquo;dml&rdquo;: {}</strong></p>
-
-<p>DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
-</ul>
-
-<p><strong>&ldquo;settings&rdquo;:{} <em>required</em></strong></p>
-
-<p>The settings is the main section of package.json contains the following sections:</p>
-
-<ul>
-<li><p><strong>&ldquo;categories&rdquo;: [] <em>optional</em></strong></p>
-
-<p>A list of comma separated categories your application would fit into. The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
-Examples include financial, inventory, management</p></li>
-<li><p><strong>&ldquo;publisher&rdquo;: &ldquo;your company&rdquo; <em>required</em></strong></p>
-
-<p>This is the name of your company or your name if you are self-represented.</p></li>
-<li><p><strong>&ldquo;npm_package_name&rdquo;: &ldquo;app-package-name&rdquo; <em>required if building an Agent App or Job App</em></strong></p></li>
-<li><p><strong>&ldquo;related-apps&rdquo;: [] <em>optional</em></strong>
-Define the array of related applications as a comma separated based on the application(s)&rsquo; global package name. 
-Example: 
-    &ldquo;related-apps&rdquo;: [
-        &ldquo;bodhi.aloha-app-transactions&rdquo;,
-        &ldquo;bodhi.aloha-app-store&rdquo;
-        ]</p></li>
-<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> </p>
-
-<p>Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
-<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong></p>
-
-<p>NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
-<li><p><strong>&ldquo;public_path&rdquo;: &ldquo;public&rdquo; <em>required</em></strong></p>
-
-<p>Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.   </p></li>
-<li><p><strong>&ldquo;global_store_icon&rdquo;: &ldquo;public/icon.png&rdquo; <em>required</em></strong></p>
-
-<p>In the settings section, Global Store Icon is your icon for your application.</p></li>
-<li><p><strong>&ldquo;location&rdquo;: &ldquo;S3&rdquo; <em>optional</em></strong></p>
-
-<p>In the settings section, you define where your published app resides (S3 or artifactory).  S3 is the preferred location.  The Agent Apps used to use &ldquo;storage&rdquo;: &ldquo;s3&rdquo;, so that needs to be included in the settings sections as well for agent apps to compatibility.</p></li>
-<li><p><strong>&ldquo;type&rdquo;: &ldquo;mobile&rdquo; <em>required</em></strong></p>
-
-<p>In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p></li>
-<li><p><strong>&ldquo;new_type_required&rdquo;: true <em>optional</em></strong></p>
-
-<p>In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace. <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</p></li>
-<li><p><strong>troubleshooting_url=&#39;http://tools.hotschedules.io/xxxx&rsquo; <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</strong></p>
-
-<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p></li>
-</ul>
-
-<p><strong>agent_parameters/job_parameters</strong></p>
-
-<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
-
-<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
-
-<p>The following are examples of parameters that can be set for agent or the job applications respectively:</p>
-
-<p>Agent Parameters example:</p>
-<pre class="highlight plaintext"><code>Example of agent parameters that can be defined for an agent application:
-
-    "agent_parameters": {
-      "config_file_path": {
-        "description": "Config file location",
-        "required": true,
-        "type": "string",
-        "default": "",
-        "setting": "config_file_path"
-      },
-      "data_dir": {
-        "description": "Folder location to save database files for the agent app",
-        "required": true,
-        "type": "string",
-        "default": "C:/bodhiAgent/node_modules/merit-agent-labor/_xmloutput/",
-        "setting": "data_dir"
-      },
-      "number_of_days_to_query": {
-        "description": "Limit query to this number of days",
-        "required": true,
-        "type": "integer",
-        "default": 60,
-        "setting": "number_of_days_to_query"
-      },
-      "interval": {
-        "description": "How often to execute a grind",
-        "required": true,
-        "type": "string",
-        "default": "every 12 hours",
-        "setting": "interval"
-      },
-      "local_storage_ignore_flag": {
-        "description": "Ignore local storage and write all data",
-        "required": true,
-        "type": "boolean",
-        "default": false,
-        "setting": "local_storage_ignore_flag"
-      }
-    }
-</code></pre>
-
-<ul>
-<li>All Parameters have the following 
-This example sets up four parameters: timing_expression, brink_location, accessToken and uri.</li>
-</ul>
-<pre class="highlight plaintext"><code>Job Parameters example:
-    "job_parameters": {
-      "timing_expression": {
-        "description": "How often to execute a job",
-        "repeat": true,
-        "type": "string",
-        "default": "60 minutes"
-      },
-      "brink_location": {
-        "description": "The alpha numeric string provided by the Brink POS API to identify the store location, e.g. tSm8y1TMSk7J4ZMyQBpeTg==",
-        "type": "string",
-        "required": true,
-        "setting": "brink_location"
-      },
-      "accessToken": {
-        "description": "The alpha numeric string provided by the Brink POS API to authenticate the user",
-        "type": "string",
-        "required": true,
-        "setting": "accessToken"
-      },
-      "uri": {
-        "description": "The url for the Brink POS API service e.g. https://api2.brinkpos.net/",
-        "type": "string",
-        "required": true,
-        "setting": "uri"
-      }
-    }
-</code></pre>
-
-<p><strong>offline=true/false</strong>  </p>
-
-<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.</p>
-
-<p><strong>single_container_app=true/false</strong>  </p>
-
-<p>single_container_app tells the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
-Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
-
-<p><strong>hide_from_global_store=true/false</strong>  </p>
-
-<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
-
-<p><strong>new_type_required=true/false</strong>  </p>
-
-<p>new_type_required tells the installer of the app in the global app store if the app will run &#39;out of the box&rsquo; or if new custom types need to be installed on the namespace.
-NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
-
-<p><strong>screenshots{}</strong> </p>
-
-<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published and the path should be relative to the public_path.</p>
-
-<p><strong>data_dir:{}</strong></p>
-
-<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
-
-<p><strong>&ldquo;autoUpdateVersion&rdquo;: &ldquo;false&rdquo;</strong></p>
-
-<p>This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
-
-<p><strong>Example Type Definition</strong></p>
-
-<p>This is an example of an enumeration, embedded_type and custom_type.  </p>
-
-<p><em>NOTE:</em> All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: This example shows the objects as folders under the application&rsquo;s root directory.  This is where you define your json for each type.  There is a one to one correspondence of the type declared in package.json to the json defining that type in the folder under the application.</p>
-<pre class="highlight plaintext"><code>Defining your custom schema/types example:
-"install": {
-"new": {
-"model": [
-{
-"type": "enumeration",
-"name": "TypeName",
-"object": "Enumerations/TypeName.json"
-},
-{
-"type": "embedded_type",
-"name": "InventoryPurchaseOrder",
-"object": "Types/InventoryPurchaseOrder.json"
-},
-{ "type": "custom_type",
-"name": "TypeName2",
-"object": "Types/TypeName2.json"
-}
-],
-"post-type-install": [
-{"action": "POST",
-"object": "Data/DataFile.json",
-"path": "/resources/DataFile"
-}
-]
-</code></pre>
-
-<p><strong>Adding Scripts and Versioning: &ldquo;versions&rdquo;: [..]</strong></p>
-
-<p>To make an application script available set the following in the settings section of your package.json:</p>
-
-<ul>
-<li>version - current script version (might be bound to the current application version)</li>
-<li>bundle - a jar name (by default it is &ldquo;script-<version>.jar&rdquo;)</li>
-<li>pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.</li>
-<li>post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.</li>
-<li>main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:</li>
-<li>Example json can be found to in the javascript section &gt;&gt;&gt;&gt;&gt;&gt;</li>
-</ul>
-<pre class="highlight plaintext"><code>Template for adding scripts/versions to package.json
-versions:[
-{
-    "version": "&lt;script_version&gt;",
-    "bundle": "&lt;jar_name&gt;",
-    "pre-type-install": {
-      "main": "&lt;main_class_name&gt;"
-    },
-    "post-type-install": {
-      "main": "&lt;main_class_name&gt;"
-    }
-]
-</code></pre>
-<pre class="highlight plaintext"><code>Example of versions/scripts using seed-data:
-    "versions": [
-      {
-        "bundle": "installer.jar", 
-        "post-type-install": {}, 
-        "pre-type-install": {}, 
-        "seed-data": [
-          {
-            "action": "POST", 
-            "object": "Data/measurements.json", 
-            "path": "/resources/InventoryUnitOfMeasure"
-          }, 
-          {
-            "action": "POST", 
-            "object": "Data/conversions.json", 
-            "path": "/resources/InventoryUomConversion"
-          }
-        ], 
-        "version": "new"
-      }, 
-      {
-        "bundle": "upgrade-3.0.0.jar", 
-        "post-type-install": {
-          "main": "com.bodhi.vertx.appinstaller.script.DeveloperScript"
-        }, 
-        "version": "2.7.19"
-      }
-    ]
-</code></pre>
-
-          <h2 id="publishing-to-shop">Publishing to shop</h2>
-
-<p><strong>1</strong> - Ensure that you have your package.json, LICENSE and index.html in the root folder of your application. Note that index.html can be an empty file.</p>
-
-<p><img src="/images/Step1.png" height=250 width="250"></p>
-
-<p><strong>2</strong> - Zip/compress your files. Note that the files we are compressing are the files itself not the project folder.</p>
-
-<p><img src="/images/Step2.png" height=400 width="350"></p>
-
-<p><strong>3</strong> - Login to Bodhi Shop: <a href="https://tools.hotschedules.io/shop/#/my">https://tools.hotschedules.io/shop/#/my</a></p>
-
-<p><img alt="alt text" src="images/Step3.png?raw=true" /></p>
-
-<p><strong>4</strong> - Click Publish App.</p>
-
-<p><img alt="alt text" src="images/Step4.png?raw=true" /></p>
-
-<p><strong>5</strong> - Upload zip file.</p>
-
-<p><img alt="alt text" src="images/Step5.png?raw=true" /></p>
-
-<p><strong>6</strong> - Verify fields are correct then publish.</p>
-
-<p><img alt="alt text" src="images/Step6.png?raw=true" /></p>
-
-<p><strong>7a</strong> - Verify that your application is successfully published.</p>
-
-<p><img alt="alt text" src="images/Step7a.png?raw=true" /></p>
-
-<p><strong>7b</strong> - Make sure your file is found in <a href="https://tools.hotschedules.io/file-upload/#/files">https://tools.hotschedules.io/file-upload/#/files</a>. If it doesn’t exist refer back to configuring your package.json file </p>
-
-<p><img alt="alt text" src="images/Step7b.png?raw=true" /></p>
-
-          <h2 id="monitoring-application">Monitoring Application</h2>
-
-<p>Logs can be found here: <a href="https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all">https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all</a></p>
-
-<p><img alt="alt text" src="images/Logs.png?raw=true" /></p>
-
           <h1 id="hotschedules-canonical">HotSchedules Canonical</h1>
 
 <h2 id="introduction">Introduction</h2>
@@ -12929,6 +11589,1346 @@ The outputs of this method are the arguments defined by the following table.</p>
 <p>Do you have questions, comments or suggestions on improviements to this documentation? Please subscribe to the HotSchedules Community.</p>
 
 <p><a href="https://help.hotschedules.com/hc/en-us/community/topics">HotSchedules Community</a></p>
+
+          <h4 id="configuring-agent-application">Configuring Agent Application</h4>
+
+<h3 id="parameters">Parameters</h3>
+
+<p>Mutable environmental variables that can be modified in Agent Manager. Values can overwrite default settings.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>description</td>
+<td>String</td>
+<td>Description in Agent manager application</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>Expected data type of parameter value</td>
+</tr>
+<tr>
+<td>setting</td>
+<td>String</td>
+<td>Assigned variable name to this parameter</td>
+</tr>
+<tr>
+<td>required</td>
+<td>Boolean</td>
+<td>True or False</td>
+</tr>
+<tr>
+<td>default</td>
+<td>String</td>
+<td>The default value of the parameter if not set</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Parameters example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>parameters : {
+        master_id: {
+            description : 'System ID of Master Agent',
+            setting     : 'master_id',
+            type        : 'string',
+            required    : true
+        },
+        role: {
+            description : 'Role of Master Agent for Slave to assume',
+            type        : 'string',
+            setting     : 'role',
+            required    : true
+        }
+}
+</code></pre>
+
+<h3 id="extensions">Extensions</h3>
+
+<p>Extensions are injected dependencies that your application can refer to. Your application may use one or more extensions. Extensions can provide potential configuration components or actual runtime components. Extensions are a good way to design resuable components that can be shared and reused across projects. Extensions are loaded in the order in which they are specified.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>module</td>
+<td>String</td>
+<td>Yes</td>
+<td>By default searches node_modules folder. Relative path also accepted.</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Extensions example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>extensions  : [
+        { module: './lib/plugin.js' },
+        { module: 'agent-ext-timers' }
+]
+</code></pre>
+
+<h3 id="settings">Settings</h3>
+
+<p>A Setting is an Object that represents static configuration data. Parameters can overwrite a setting if the property matches a parameter key.
+These values will take the highest precedence in the processing of settings. The precedence rules are:</p>
+
+<ol>
+<li>Agent.json settings object (highest precedence)</li>
+<li>Any settings within the js/json files in the settings folder</li>
+<li>Any settings added by an extension (lowest precedence)</li>
+</ol>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>property</td>
+<td>String</td>
+<td>Yes</td>
+<td>Name of your property</td>
+</tr>
+<tr>
+<td>value</td>
+<td>String, Function, Boolean, Number, Object</td>
+<td>Yes</td>
+<td>The value of your setting</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Settings example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>settings: [
+        {
+            property: 'master_id',
+            value: '588f9fc508a94349cc1ad3b8'
+        },
+        {
+            property: 'role',
+            value   : 'pos-monitor'
+        }
+]
+</code></pre>
+
+<h3 id="counters">Counters</h3>
+
+<p>Tracks the number of times specific application events occur and are logged found in the Agent heartbeat. Each counter can subscribe to an array of application events.</p>
+
+<blockquote>
+<p><strong>Counters example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code> counters: {
+        activations : ['app:monitor'],
+        success     : ['app:success'],
+        stopped     : ['app:stopped'],
+        failed      : ['app:failed' ]
+}
+</code></pre>
+
+<h3 id="sources">Sources</h3>
+
+<p>An object that sources external events. Sources bind events to listeners and emits application level events. Any counters, handlers and pipelines subscribed to source events are initiated.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>String or Function</td>
+<td>Yes</td>
+<td>A function or reference to a plugin that creates an object</td>
+</tr>
+<tr>
+<td>args</td>
+<td>Array of Strings, Functions, Objects, Booleans</td>
+<td>Optional</td>
+<td>A list of dependencies used by the source</td>
+</tr>
+<tr>
+<td>bindings</td>
+<td>Object</td>
+<td>Optional</td>
+<td>A Map that routes external events to internal topics</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>String</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service constructor, function, literal</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Sources example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>sources: [ 
+        {
+           name: 'sampleSource',
+           provider: 'compris:dir',
+           args: ['$settings:rootPath'],
+           bindings: { 'created' : 'read' }
+        } 
+]
+</code></pre>
+
+<h3 id="services">Services</h3>
+
+<p>A Service is an Object that represents a concrete extension of the API. Services are singletons.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
+</tr>
+<tr>
+<td>provider</td>
+<td>String or Function</td>
+<td>Yes</td>
+<td>A function or reference to a plugin that creates an object</td>
+</tr>
+<tr>
+<td>args</td>
+<td>Array of Strings, Functions, Objects, Booleans</td>
+<td>Optional</td>
+<td>A list of the dependencies used by the service</td>
+</tr>
+<tr>
+<td>factory</td>
+<td>String (Constructor, Function, Literal)</td>
+<td>Optional</td>
+<td>An enumeration that describes alternate instantiation behavior for the service</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Services example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>services: [
+        {
+            name: 'cloud',
+            provider: 'connection:resources'
+        }
+]
+</code></pre>
+
+<h3 id="handlers">Handlers</h3>
+
+<p>A Handler is a Function that responds to events within an application. </p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique identifier (within the context&rsquo;s handler)</td>
+</tr>
+<tr>
+<td>subscriptions</td>
+<td>Array <String></td>
+<td>Yes</td>
+<td>String of application level events that will initiate this handler</td>
+</tr>
+<tr>
+<td>fn</td>
+<td>String or Function</td>
+<td>Yes</td>
+<td>A function or reference to a plugin will handle the events</td>
+</tr>
+<tr>
+<td>props</td>
+<td>Object</td>
+<td>Optional</td>
+<td>A list of properties available to the instance</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Handlers example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>handlers: [
+        {
+            name            : 'Monitor Master Agent',
+            subscriptions   : ['app:monitor'],
+            fn              : '$plugins:handler:monitor',
+            props           : {
+                master_role : '$setting:role',
+                conn        : '$service:cloud',
+                master_id   : '$setting:master_id',
+                getInfo     : '$plugins:core:info',
+                identity    : '$plugins:core:identity',
+            }
+        },
+        {
+            name            : 'Update Agent Role',
+            subscriptions   : ['app:update'],
+            fn              : '$plugins:handler:update',
+            props           : {
+                conn        : '$service:cloud',
+            }
+        }
+]
+</code></pre>
+
+<h3 id="pipelines">Pipelines</h3>
+
+<p>Similar to handlers, pipeline(s) are subscribed to event(s). The difference being that pipelines execute a series of steps rather than just one function. 
+Each pipeline step should follow the single responsiblity principle. Each step is given two arguments - input and a callback.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Yes</td>
+<td>Unique identifier</td>
+</tr>
+<tr>
+<td>subscriptions</td>
+<td>Array</td>
+<td>Yes</td>
+<td>String of application level events that will initiate this pipeline</td>
+</tr>
+<tr>
+<td>steps</td>
+<td>Array</td>
+<td>Yes</td>
+<td>Takes an array of objects described below</td>
+</tr>
+<tr>
+<td>failed</td>
+<td>String</td>
+<td>Optional</td>
+<td>Emits mapped event based on the state of the pipeline</td>
+</tr>
+<tr>
+<td>success</td>
+<td>String</td>
+<td>Optional</td>
+<td>Emits mapped event based on the state of the pipeline</td>
+</tr>
+<tr>
+<td>done</td>
+<td>String</td>
+<td>Optional</td>
+<td>Emits mapped event based on the state of the pipeline</td>
+</tr>
+</tbody></table>
+
+<p><strong>Pipeline.steps</strong></p>
+
+<p><em>pipeline</em> | Object <br></p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>fn</td>
+<td>Functional plugin reference. See pipeline and fn description below</td>
+</tr>
+<tr>
+<td>props</td>
+<td>Optional dependencies to be injected in the pipeline function context</td>
+</tr>
+</tbody></table>
+
+<p><strong>Pipeline.fn(input, callback)</strong> </p>
+
+<p><em>input</em> | Object <br>
+Initially an empty object. Later becomes whatever the result of the previous pipeline step is.</p>
+
+<p><em>callback</em> | Function <br>
+Needs to be invoked with a possible error arguement and an optional result to be passed in to the next step. 
+If an error is passed in, it will stop the pipeline and the failed event will be emitted.</p>
+
+<p>Context of this callback includes core methods described below as well as Pipeline.props injected during configuration.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>logger</td>
+<td>Logs viewable in Agent Manager</td>
+</tr>
+<tr>
+<td>publish</td>
+<td>EventEmitter that takes in a event and message</td>
+</tr>
+<tr>
+<td>name</td>
+<td>Pipeline.name</td>
+</tr>
+<tr>
+<td>event</td>
+<td>Name of event that triggered the pipeline</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Pipelines example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>// pipeline breakdown of handlers
+
+    pipelines: [
+        {
+            name: 'Monitor Master Agent',
+            subscriptions: ['app:monitor'],
+            steps: [
+                { fn: '$plugins:core:identity:addAgentInfo'     },
+                { fn: '$plugins:main:checkMasterAgentStatus'    },
+                { fn: '$plugins:main:processAgentStatus'        }
+            ],
+            stopped : 'app:stopped',
+            failed  : 'app:failed'
+        },
+        {
+            name: 'Update Status',
+            subscriptions: ['app:update'],
+            steps: [
+                { fn: '$plugins:main:patchAgentRole'    },
+                { fn: '$plugins:main:syncAgent'         }
+            ],
+            stopped : 'app:stopped',
+            failed  : 'app:failed'
+        }
+]
+</code></pre>
+
+<h3 id="init">Init</h3>
+
+<p>Init is a function that is given a callback as its only argument.
+This callback must be invoked in order to intialize the application. 
+The keyword &ldquo;this&rdquo; refers to the application&rsquo;s reactive context</p>
+
+<blockquote>
+<p><strong>Init example</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>init: function(done){
+
+        this.publish('app:initialized');
+
+        console.log('###################################');
+        console.log('## ' + pkg.name.toUpperCase());
+        console.log('## v' + pkg.version);
+        console.log('###################################');
+
+        done();
+}
+</code></pre>
+
+          <h4 id="creating-an-agent-source">Creating an Agent Source</h4>
+
+<p>Returns a function that instantiates an Agent source. See sample code that watches for any directory changes using npm watch.</p>
+
+<blockquote>
+<p><strong>Sample Code:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>var fs      = require('fs-extra');
+var watch   = require('watch');
+
+module.exports = function dirSrc() {
+    var path        = arguments[0];
+    var source      = {};
+    source.routers  = {};
+
+    var bind = function bindDir(bindings, emitter, done) {
+        var logger = this.logger;
+
+        logger.info('Ensuring ', path, 'exists...');
+
+        if (!path) return done('Expected path to exist. Please ensure args array is properly configured.');
+
+        fs.ensureDir(path, function (err) {
+            if (err) return done(err);
+
+            logger.info(path, 'ensured.');
+            /*
+                bindings = { 'created' : 'read' }
+                emitter = fn()  { context.emit.apply(context, arguments); }
+                done = fn()      { return exit(done, source); }
+
+                YOU HAVE TO CALL DONE OR ELSE THE REST OF THE APP WILL NOT LOAD
+                KICK LISTEN OR IT WILL NOT HEAR
+            */
+
+            // routes = ['created']
+            var routes = Object.keys(bindings);
+
+            /*
+                routers = {
+
+                        emitter(event, arguments);
+                    }
+                }
+            */
+            routes.forEach(function (event) {
+                source.routers[event] = function () {
+                    emitter(bindings[event], { path: arguments[0], detail: arguments[1] });
+                }
+            });
+
+            done();
+        });
+    };
+
+    /*
+        SOURCES GET LOADED BEFORE INIT
+            ENSURE DIR BEFORE SETTING MONITORS
+    */
+    var listen = function listenDir(cb) {
+        watch.createMonitor(path, function (monitor) {
+            source.monitor = monitor;
+            ['created', 'changed', 'removed'].forEach(function (e) {
+                if (source.routers[e]) {
+                    source.monitor.on(e, function (file, detail) {
+                        source.routers[e](file, detail);
+                    });
+                }
+            });
+        });
+    };
+
+    var close = function closeDir() {
+        source.monitor.stop();
+    };
+
+    return function (cb) {
+        cb(null, { bind: bind, listen: listen, close: close})
+    }
+};
+</code></pre>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>bind</td>
+<td>Function</td>
+<td>Responsible for binding application level events when a source level event occurs</td>
+</tr>
+<tr>
+<td>listen</td>
+<td>Function</td>
+<td>Creates EventEmitter that emit application level events based on bind</td>
+</tr>
+<tr>
+<td>close</td>
+<td>Function</td>
+<td>Destroy existing EventEmitter for the source</td>
+</tr>
+</tbody></table>
+
+          <h4 id="creating-an-agent-extension">Creating an Agent Extension</h4>
+
+<p>Returns an Agent extension object.</p>
+
+<table><thead>
+<tr>
+<th>Property</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>Name of extension used primarily for debugging purposes</td>
+</tr>
+<tr>
+<td>attach</td>
+<td>Function</td>
+<td>Attach the specified extension to this instance, extending the <code class="prettyprint">ReactiveContext</code> with new functionality with the implicit registerPlugin method</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>Sample Code:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>module.exports = {
+    name        : 'plugin',
+
+    attach      : function (overloads, done) {
+
+        /** LOAD HANDLERS **/
+        this.registerPlugin(['handler', 'monitor'   ], require('./handlers/monitor.js'  ));
+        this.registerPlugin(['handler', 'update'    ], require('./handlers/update.js'   ));
+
+        done();
+    }
+};
+</code></pre>
+
+          <h4 id="agent-path-resolution">Agent Path Resolution</h4>
+
+<p>Every extension, service and setting can be injected through namespacing </p>
+
+<table><thead>
+<tr>
+<th>Type</th>
+<th>Reference</th>
+<th>Sample</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>extension</td>
+<td>&ldquo;$plugins&rdquo;</td>
+<td>&ldquo;$plugins:myFunction&rdquo;</td>
+</tr>
+<tr>
+<td>service</td>
+<td>&ldquo;$service&rdquo;</td>
+<td>&ldquo;$service:cloud&rdquo;</td>
+</tr>
+<tr>
+<td>setting</td>
+<td>&ldquo;$setting&rdquo;</td>
+<td>&ldquo;$setting:jobInterval&rdquo;</td>
+</tr>
+</tbody></table>
+
+          <h1 id="job-engine">Job Engine</h1>
+
+<h2 id="creating-a-job-engine-application">Creating a job engine application</h2>
+
+<p><strong>Introduction</strong> <br>
+Bodhi Job Engine is a job scheduler running on node.js and MongoDB. The engine is designed to run scheduled cloud-to-cloud data transactions, e.g. requesting data from web APIs, pushing data to the Bodhi cloud, etc.</p>
+
+          <p><strong>Work Functions</strong> <br>
+Jobs must be built in a specific format in order for Bodhi Job Engine to recognize and run them properly. The job should contain an <strong>index.js</strong> file that follows this structure:</p>
+
+<blockquote>
+<p><strong>index.js</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>module.exports = function work(context, done){
+    //the work of your job
+    done(errThatOccurred, messageToReport, stateToSave);
+};
+
+</code></pre>
+
+<p><strong>Context Object</strong> <br></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>connection</td>
+<td>bodhi-js-client</td>
+<td><a href="https://www.npmjs.com/package/bodhi-driver-superagent">https://www.npmjs.com/package/bodhi-driver-superagent</a></td>
+</tr>
+<tr>
+<td>settings</td>
+<td>Object</td>
+<td>immutable configuration options associated with this job</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Object</td>
+<td>mutable persistent state from previous runs</td>
+</tr>
+<tr>
+<td>meta</td>
+<td>Object</td>
+<td>immutable metadata about the job</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p><strong>meta</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p><strong>Job Metadata</strong> <br></p>
+
+<table><thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>String</td>
+<td>name of the job</td>
+</tr>
+<tr>
+<td>package</td>
+<td>String</td>
+<td>package name</td>
+</tr>
+<tr>
+<td>version</td>
+<td>String</td>
+<td>semantic package version</td>
+</tr>
+<tr>
+<td>namespace</td>
+<td>String</td>
+<td>namespace of the job</td>
+</tr>
+<tr>
+<td>lastRun</td>
+<td>Data</td>
+<td>last time the job ran</td>
+</tr>
+</tbody></table>
+
+<p><strong>Callback</strong> <br>
+A job must be completed by calling the callback</p>
+
+<table><thead>
+<tr>
+<th>arg</th>
+<th>type</th>
+<th>required</th>
+<th>description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>err</td>
+<td>Error</td>
+<td>optional</td>
+<td>if err != null then the job did not process properly</td>
+</tr>
+<tr>
+<td>message</td>
+<td>String</td>
+<td>optional</td>
+<td>a string to be recorded in the message</td>
+</tr>
+<tr>
+<td>state</td>
+<td>Object</td>
+<td>optional</td>
+<td>the state to persist for the next run</td>
+</tr>
+</tbody></table>
+
+<p><strong>Example Job: Hello World</strong></p>
+
+<blockquote>
+<p><strong>This is a very basic Hello World job.</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>module.exports = function(options, done){
+  console.log('HELLO WORLD!');
+
+  if(err){
+    done(err);
+  }
+  else{
+    done();
+  }
+};
+</code></pre>
+
+<p><strong>Example Job: Get and Use Some Data</strong></p>
+
+<blockquote>
+<p><strong>Get and use data</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>module.exports = function(options, done){
+
+  var client = options.connection;
+  var data   = options.state;
+  data.storestuff = [];
+
+  client.get(['resources', 'Store'].join('/'), function(err, data, ctx){
+    if(err){
+      done(err);
+    }
+    else{
+      data.forEach(function(store){
+        data.storestuff.push(store.store_name + ' is an awesome store!');
+      });
+    }
+  });
+
+  var json = {
+
+    "data1": "some data you need to post",
+    "data2": "also data you need to post"
+  };
+
+  client.post(['resources', 'aCustomType'].join('/'), json, function(err, data, ctx){
+
+    if(err){
+      done(err);
+    }
+    else{
+      console.log('Server says: ', ctx);
+      done();
+    }
+  });
+};
+
+</code></pre>
+
+<p>This is a less basic example job that uses HTTP requests and stores data in the &ldquo;state&rdquo; property of the options object. Data stored in the state property persists between jobs and is available in the next execution of the job.</p>
+
+          <h1 id="publishing-applications">Publishing Applications</h1>
+
+<h2 id="overview">Overview</h2>
+
+<p>To publish application for the IoT Platform, you need to follow a few simple steps to describe your application.  </p>
+
+          <h2 id="configuring-package.json">Configuring package.json</h2>
+
+<p>To publish your application, add the following directory structure for your application:</p>
+<pre class="highlight plaintext"><code>    /&lt;app-name&gt;/
+            /public/
+</code></pre>
+
+<ul>
+<li>Folder (npm app-name)
+
+<ul>
+<li>index.js</li>
+<li>LICENSE (standard apache license file)</li>
+<li>package.json (example provided below) </li>
+<li>public (folder) 
+
+<ul>
+<li>app_icon.png</li>
+<li>NewType1.json file (optional)</li>
+<li>NewType2.json file (optional)</li>
+<li>NewType3.json file (optional)</li>
+</ul></li>
+</ul></li>
+</ul>
+
+<p>To publish an app into the IoT Platform you have to zip up the following: <br>
+index.js  <br>
+LICENSE <br>
+package.json</p>
+<pre class="highlight plaintext"><code>    folder=&lt;public&gt;
+      app_icon.png
+      NewType1.json file (optional)
+      NewType2.json file (optional)
+      NewType3.json file (optional)
+      ...
+</code></pre>
+
+<h3 id="example-package.json-for-mobile-applications">Example package.json for Mobile Applications</h3>
+
+<p>By Clicking on HS Template you get a package.zip file that is downloaded to your desktop that contains the following:</p>
+
+<ul>
+<li><p><strong>index.html</strong></p>
+
+<p>If you open this file it say Click Me and a Welcome will appear above Click Me</p></li>
+<li><p><strong>LICENSE</strong>
+This is the apache2 license file that needs to be with all applications you plan to build</p></li>
+<li><p><strong>README.md</strong></p>
+
+<p>README.md are directions to get started developing your mobile application</p></li>
+<li><p><strong>image_home.png</strong>
+Image_home.png is the background image for index.html</p></li>
+<li><p><strong>package.json</strong>:</p>
+
+<p>This is the example package.json that you will cutomize based on your application needs.  To the right is a formatted version of the sample package.json that is included in HS Template&rsquo;s zip file.</p></li>
+</ul>
+<pre class="highlight plaintext"><code>package.json that gets includes with HS Template's zip file:
+
+{
+    "name": "HSappTemplate",
+    "version": "0.0.0",
+    "title": "HSappTemplate",
+    "description": "New application Hello, World!",
+    "profile": {
+        "name": "HSappTemplate",
+        "dml": {
+            "BodhiApplication": {
+                "select": {}
+            }
+        }
+    },
+    "settings": {
+        "publisher": "",
+        "categories": [""],
+        "offline": false,
+        "navigationBar": "auto",
+        "location": "S3",
+        "storage": "s3",
+        "type":"mobile"
+    },
+    "dependencies": {
+        "bodhi-mobile":"*" 
+        },
+    "autoUpdateVersion": true
+}
+
+</code></pre>
+
+<h3 id="example-of-package.json-for-agent-or-job-applications">Example of Package.json for agent or job Applications</h3>
+<pre class="highlight plaintext"><code>Example of package.json for agent or job applications:
+#!javascript
+
+{
+  "name": "app-package-name",
+  "version": "0.0.1",
+  "title": "Application Title",
+  "description": "Short Application Description.",
+  "profile": {
+    "name": "app-package-name",
+    "dml": {
+      “BodhiApplication": {
+       "select": {},
+       "update":{},
+       "delete":{},
+       "insert":{}
+      },
+      "NewType1": {
+        "select": {}
+      },
+      "NewType2": {
+        "select": {}
+      }
+    }
+  },
+  "settings": {
+    "categories": [
+      "Aloha",
+      "POS"
+    ],
+    "publisher": "your company",
+    "npm_package_name": "app-package-name",
+
+
+if you have any related apps you want to install together::
+"related-apps": [
+      "bodhi.aloha-app-transactions",
+      "bodhi.aloha-app-store"
+    ],
+    "public_path": "public",
+    "global_store_icon": "public/icon.png",
+   "location": "S3",
+   "storage": "s3",
+   "type": "agent",    
+(type can be “job”, “agent”, “mobile”, “web” )   
+ "new_type_required": true,
+  "install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+if you have any parameters required to be used with the app we add this section:: 
+ "agent_parameters": {
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 15 minutes",
+        "position": 1
+      }
+    }
+  },
+  "autoUpdateVersion": false
+}
+
+</code></pre>
+
+<h3 id="description-of-package.json-contents">Description of package.json contents</h3>
+
+<p><strong>name=&ldquo;HSappTemplate&rdquo; <em>required</em></strong></p>
+
+<p>The name of your application must match the name of the profile</p>
+
+<p><strong>&ldquo;version&rdquo;: &ldquo;0.0.1&rdquo; <em>required</em></strong></p>
+
+<p>Ideally this is the version of your application that gets posted as versions show for Agent Application in the Agent Event Logs so keeping this version the same as your Agent Application that is published is highly recommended.</p>
+
+<p><strong>&ldquo;title&rdquo;: &ldquo;Application Title&rdquo; <em>required</em></strong></p>
+
+<p>This is the title that will show on the HotSchedules Store once you publish your application to the HotSchedules Store.</p>
+
+<p><strong>&ldquo;description&rdquo;: &ldquo;Short Application Description.&rdquo; <em>required</em></strong></p>
+
+<p>The description is the application description that will be displayed with the title for your application when displayed in the HotSchedules Store.  Description will be part of &ldquo;Learn More&rdquo; button. </p>
+
+<p><strong>&ldquo;profile&rdquo;: {} <em>required</em></strong></p>
+
+<p>The profile section contains the following required sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;name&rdquo;: &ldquo;HSappTemplate&rdquo; <em>required</em> and must match name above</strong></p>
+
+<p>The profile name must match the application name that is described in the main part of the package.json (see name=&ldquo;app-package-name&rdquo; <em>required</em> above)</p></li>
+<li><p><strong>&ldquo;dml&rdquo;: {}</strong></p>
+
+<p>DML=Data Manipulation Language and this section describes what operations you plan to use on the schema or types within your application.  Usually you define the type and what operations you want to allow on the type such as select, update, delete, insert and/or aggregate. How you describe your DML section depends on what types you access and how you access/manipulate them.</p></li>
+</ul>
+
+<p><strong>&ldquo;settings&rdquo;:{} <em>required</em></strong></p>
+
+<p>The settings is the main section of package.json contains the following sections:</p>
+
+<ul>
+<li><p><strong>&ldquo;categories&rdquo;: [] <em>optional</em></strong></p>
+
+<p>A list of comma separated categories your application would fit into. The categories array allows you to give the HotSchedules Store taxonomical information about how your app relates to other applications. 
+Examples include financial, inventory, management</p></li>
+<li><p><strong>&ldquo;publisher&rdquo;: &ldquo;your company&rdquo; <em>required</em></strong></p>
+
+<p>This is the name of your company or your name if you are self-represented.</p></li>
+<li><p><strong>&ldquo;npm_package_name&rdquo;: &ldquo;app-package-name&rdquo; <em>required if building an Agent App or Job App</em></strong></p></li>
+<li><p><strong>&ldquo;related-apps&rdquo;: [] <em>optional</em></strong>
+Define the array of related applications as a comma separated based on the application(s)&rsquo; global package name. 
+Example: 
+    &ldquo;related-apps&rdquo;: [
+        &ldquo;bodhi.aloha-app-transactions&rdquo;,
+        &ldquo;bodhi.aloha-app-store&rdquo;
+        ]</p></li>
+<li><p><strong>&ldquo;offline&rdquo;: false <em>Required for mobile application</em></strong> </p>
+
+<p>Offline is for mobile applications and tells the mobile container (HotSchedules Passbook). Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the Bodhi Cloud if the app has write permissions.  </p></li>
+<li><p><strong>&ldquo;navigationBar&rdquo;: &ldquo;auto&rdquo;</strong></p>
+
+<p>NavigationBar is for mobile applications and tells the mobile container (HotSchedules Passbook) to automatically use the built in navigation bar.</p></li>
+<li><p><strong>&ldquo;public_path&rdquo;: &ldquo;public&rdquo; <em>required</em></strong></p>
+
+<p>Public path is the folder that hold any screenshots, icons, and/or type definitions.  The Public Path is a location off of root of your application that allows developers to save items that should be publicly visible and available. The Public Path folder should contain screenshots and Icons that the global app store can use. The global_store_icon as well as the screenshots settings objects should all be relative paths to the public path.   </p></li>
+<li><p><strong>&ldquo;global_store_icon&rdquo;: &ldquo;public/icon.png&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, Global Store Icon is your icon for your application.</p></li>
+<li><p><strong>&ldquo;location&rdquo;: &ldquo;S3&rdquo; <em>optional</em></strong></p>
+
+<p>In the settings section, you define where your published app resides (S3 or artifactory).  S3 is the preferred location.  The Agent Apps used to use &ldquo;storage&rdquo;: &ldquo;s3&rdquo;, so that needs to be included in the settings sections as well for agent apps to compatibility.</p></li>
+<li><p><strong>&ldquo;type&rdquo;: &ldquo;mobile&rdquo; <em>required</em></strong></p>
+
+<p>In the settings section, you define the type of application (job, agent, mobile or web) you are publishing.  The &ldquo;type&rdquo;=&ldquo;job&rdquo; define your application to run inside job engine through Job Engine Manager.  The &ldquo;type&rdquo;=&ldquo;agent&rdquo; defines your application to run with the agent based on a defined role.  The &ldquo;type&rdquo;=&ldquo;mobile&rdquo; defines your application to run in a mobile container usually HotSchedules Passbook.  The &ldquo;type&rdquo;=&ldquo;web&rdquo; defines your application to run as a web application. </p></li>
+<li><p><strong>&ldquo;new_type_required&rdquo;: true <em>optional</em></strong></p>
+
+<p>In the settings section, if you are adding new types as described below, then this flag should be set to true. new_type_required tells the installer of the app in the global app store if the app will run &lsquo;out of the box&rsquo; or if new custom types need to be installed on the namespace. <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</p></li>
+<li><p><strong>troubleshooting_url=&#39;http://tools.hotschedules.io/xxxx&rsquo; <em>NOTE:: if new_type_required=true, troubleshooting</em>url should be required_</strong></p>
+
+<p>The troubleshooting_url is the URL where the customer can find additional information about how to install custom types on their namespace to get an app to function correctly. This can also be used to FAQ&rsquo;s or any other outbound troubleshooting you would like to provide to your customers.</p></li>
+</ul>
+
+<p><strong>agent_parameters/job_parameters</strong></p>
+
+<p>Depending on your application needs, you may want to have parameters setup for your applications.  Both Agent and Job applications can take parameters.  The agent/job_parameters contain information about any parameters that the agent or job requires to run.  They contain data_dir formatted information containing description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined. Application parameters will be saved under settings so the application should use parameters from settings.</p>
+
+<p>NOTE: The hidden parameter option will not be visible to the user in the installation process but will be written under the application settings.</p>
+
+<p>The following are examples of parameters that can be set for agent or the job applications respectively:</p>
+
+<p>Agent Parameters example:</p>
+<pre class="highlight plaintext"><code>Example of agent parameters that can be defined for an agent application:
+
+    "agent_parameters": {
+      "config_file_path": {
+        "description": "Config file location",
+        "required": true,
+        "type": "string",
+        "default": "",
+        "setting": "config_file_path"
+      },
+      "data_dir": {
+        "description": "Folder location to save database files for the agent app",
+        "required": true,
+        "type": "string",
+        "default": "C:/bodhiAgent/node_modules/merit-agent-labor/_xmloutput/",
+        "setting": "data_dir"
+      },
+      "number_of_days_to_query": {
+        "description": "Limit query to this number of days",
+        "required": true,
+        "type": "integer",
+        "default": 60,
+        "setting": "number_of_days_to_query"
+      },
+      "interval": {
+        "description": "How often to execute a grind",
+        "required": true,
+        "type": "string",
+        "default": "every 12 hours",
+        "setting": "interval"
+      },
+      "local_storage_ignore_flag": {
+        "description": "Ignore local storage and write all data",
+        "required": true,
+        "type": "boolean",
+        "default": false,
+        "setting": "local_storage_ignore_flag"
+      }
+    }
+</code></pre>
+
+<ul>
+<li>All Parameters have the following 
+This example sets up four parameters: timing_expression, brink_location, accessToken and uri.</li>
+</ul>
+<pre class="highlight plaintext"><code>Job Parameters example:
+    "job_parameters": {
+      "timing_expression": {
+        "description": "How often to execute a job",
+        "repeat": true,
+        "type": "string",
+        "default": "60 minutes"
+      },
+      "brink_location": {
+        "description": "The alpha numeric string provided by the Brink POS API to identify the store location, e.g. tSm8y1TMSk7J4ZMyQBpeTg==",
+        "type": "string",
+        "required": true,
+        "setting": "brink_location"
+      },
+      "accessToken": {
+        "description": "The alpha numeric string provided by the Brink POS API to authenticate the user",
+        "type": "string",
+        "required": true,
+        "setting": "accessToken"
+      },
+      "uri": {
+        "description": "The url for the Brink POS API service e.g. https://api2.brinkpos.net/",
+        "type": "string",
+        "required": true,
+        "setting": "uri"
+      }
+    }
+</code></pre>
+
+<p><strong>offline=true/false</strong>  </p>
+
+<p>Offline controls whether the container will cache application information for offline use. If offline=true and the user launches the application, any data that was previously loaded will be available when the device is offline. This will also enable queuing of data to write to the IoT Platform if the application has write permissions.</p>
+
+<p><strong>single_container_app=true/false</strong>  </p>
+
+<p>single_container_app tells the container know whether the app should be displayed with a menu (a collection of apps) or as a standalone single app.
+Bodhi Mobile has single_container_app = false. Bodhi Reveal has single_container_app = true</p>
+
+<p><strong>hide_from_global_store=true/false</strong>  </p>
+
+<p>hide_from_global_store controls whether the app is available to the general public to see in the global app store. Apps like Settings which cannot be removed should have hide_from_global_store=true</p>
+
+<p><strong>new_type_required=true/false</strong>  </p>
+
+<p>new_type_required tells the installer of the app in the global app store if the app will run &#39;out of the box&rsquo; or if new custom types need to be installed on the namespace.
+NOTE:: if new_type_required=true, troubleshooting_url should be required</p>
+
+<p><strong>screenshots{}</strong> </p>
+
+<p>The screenshots array contains relative paths to screenshots which the Global App Store will use for display purposes. These files should be included in the app folder that is published and the path should be relative to the public_path.</p>
+
+<p><strong>data_dir:{}</strong></p>
+
+<p>The data_dir formatted information contains a description, a required flag, type string and an optional position which is set will position the parameter in the order set 0, 1, 2, etc if not set then the parameter will be displayed in the order it&rsquo;s defined.</p>
+
+<p><strong>&ldquo;autoUpdateVersion&rdquo;: &ldquo;false&rdquo;</strong></p>
+
+<p>This flag prevents autoUpdate version of the app each time you publish.  If you mark this false, you need to manually bump the version of the app each time you update it.  </p>
+
+<p><strong>Example Type Definition</strong></p>
+
+<p>This is an example of an enumeration, embedded_type and custom_type.  </p>
+
+<p><em>NOTE:</em> All enumerations must be declared first, embedded_type must be after enumerations and custom_types have to be defined after enumerations and embedded_types: This example shows the objects as folders under the application&rsquo;s root directory.  This is where you define your json for each type.  There is a one to one correspondence of the type declared in package.json to the json defining that type in the folder under the application.</p>
+<pre class="highlight plaintext"><code>Defining your custom schema/types example:
+"install": {
+"new": {
+"model": [
+{
+"type": "enumeration",
+"name": "TypeName",
+"object": "Enumerations/TypeName.json"
+},
+{
+"type": "embedded_type",
+"name": "InventoryPurchaseOrder",
+"object": "Types/InventoryPurchaseOrder.json"
+},
+{ "type": "custom_type",
+"name": "TypeName2",
+"object": "Types/TypeName2.json"
+}
+],
+"post-type-install": [
+{"action": "POST",
+"object": "Data/DataFile.json",
+"path": "/resources/DataFile"
+}
+]
+</code></pre>
+
+<p><strong>Adding Scripts and Versioning: &ldquo;versions&rdquo;: [..]</strong></p>
+
+<p>To make an application script available set the following in the settings section of your package.json:</p>
+
+<ul>
+<li>version - current script version (might be bound to the current application version)</li>
+<li>bundle - a jar name (by default it is &ldquo;script-<version>.jar&rdquo;)</li>
+<li>pre-type-install - a marker for pre-install script presence. If this tag is absent - pre-install script will not be executed.</li>
+<li>post-type-install - a marker for post-install script presence. If this tag is absent - post-install script will not be executed.</li>
+<li>main - fully qulified script class name (by default it is com.bodhi.vertx.appinstaller.script.PreInstall for pre install scripts and com.bodhi.vertx.appinstaller.script.PostInstall for post install scripts:</li>
+<li>Example json can be found to in the javascript section &gt;&gt;&gt;&gt;&gt;&gt;</li>
+</ul>
+<pre class="highlight plaintext"><code>Template for adding scripts/versions to package.json
+versions:[
+{
+    "version": "&lt;script_version&gt;",
+    "bundle": "&lt;jar_name&gt;",
+    "pre-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    },
+    "post-type-install": {
+      "main": "&lt;main_class_name&gt;"
+    }
+]
+</code></pre>
+<pre class="highlight plaintext"><code>Example of versions/scripts using seed-data:
+    "versions": [
+      {
+        "bundle": "installer.jar", 
+        "post-type-install": {}, 
+        "pre-type-install": {}, 
+        "seed-data": [
+          {
+            "action": "POST", 
+            "object": "Data/measurements.json", 
+            "path": "/resources/InventoryUnitOfMeasure"
+          }, 
+          {
+            "action": "POST", 
+            "object": "Data/conversions.json", 
+            "path": "/resources/InventoryUomConversion"
+          }
+        ], 
+        "version": "new"
+      }, 
+      {
+        "bundle": "upgrade-3.0.0.jar", 
+        "post-type-install": {
+          "main": "com.bodhi.vertx.appinstaller.script.DeveloperScript"
+        }, 
+        "version": "2.7.19"
+      }
+    ]
+</code></pre>
+
+          <h2 id="publishing-to-shop">Publishing to shop</h2>
+
+<p><strong>1</strong> - Ensure that you have your package.json, LICENSE and index.html in the root folder of your application. Note that index.html can be an empty file.</p>
+
+<p><img src="/images/Step1.png" height=250 width="250"></p>
+
+<p><strong>2</strong> - Zip/compress your files. Note that the files we are compressing are the files itself not the project folder.</p>
+
+<p><img src="/images/Step2.png" height=400 width="350"></p>
+
+<p><strong>3</strong> - Login to Bodhi Shop: <a href="https://tools.hotschedules.io/shop/#/my">https://tools.hotschedules.io/shop/#/my</a></p>
+
+<p><img alt="alt text" src="images/Step3.png?raw=true" /></p>
+
+<p><strong>4</strong> - Click Publish App.</p>
+
+<p><img alt="alt text" src="images/Step4.png?raw=true" /></p>
+
+<p><strong>5</strong> - Upload zip file.</p>
+
+<p><img alt="alt text" src="images/Step5.png?raw=true" /></p>
+
+<p><strong>6</strong> - Verify fields are correct then publish.</p>
+
+<p><img alt="alt text" src="images/Step6.png?raw=true" /></p>
+
+<p><strong>7a</strong> - Verify that your application is successfully published.</p>
+
+<p><img alt="alt text" src="images/Step7a.png?raw=true" /></p>
+
+<p><strong>7b</strong> - Make sure your file is found in <a href="https://tools.hotschedules.io/file-upload/#/files">https://tools.hotschedules.io/file-upload/#/files</a>. If it doesn’t exist refer back to configuring your package.json file </p>
+
+<p><img alt="alt text" src="images/Step7b.png?raw=true" /></p>
+
+          <h2 id="monitoring-application">Monitoring Application</h2>
+
+<p>Logs can be found here: <a href="https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all">https://tools.hotschedules.io/job-engine-manager/#/jobs?filters=all,all</a></p>
+
+<p><img alt="alt text" src="images/Logs.png?raw=true" /></p>
 
       </div>
       <div class="dark-box">
