@@ -1,4 +1,4 @@
-#HS Canonical Methods  
+#HS Canonical Available Services
 
 The HotSchedules SOAP API provides a user-friendly way to obtain HS Data. Each service contains a **sayHello** call, a test method intended to be used to validate access to the service. It returns a text message indicating success.
 
