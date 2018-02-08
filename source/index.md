@@ -15,14 +15,14 @@ includes:
   - making-a-call/getting-started
   - making-a-call/hs-example
 
+  - soap/getting-started
+  - soap/soap-methods
+
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
   - bodhiagent/envsetup
   - bodhiagent/Howto/installingbodhiagent
   - bodhiagent/create-agent/create-app
-
-  - soap/getting-started
-  - soap/soap-methods
 
   - bodhiagent/create-agent/agent-configure
   - bodhiagent/create-agent/agent-source
