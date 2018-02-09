@@ -16,7 +16,6 @@ includes:
   - making-a-call/hs-example
 
   - soap/getting-started
-  - soap/soap-methods
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
