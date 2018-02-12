@@ -14,7 +14,7 @@
 
       <script>
         $(function() {
-          setupLanguages(["Examples"]);
+          setupLanguages(["Code Examples"]);
         });
       </script>
   </head>
@@ -29,7 +29,7 @@
     <div class="tocify-wrapper">
       <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="images/logo.png" /> </a>
         <div class="lang-selector">
-              <a href="#" data-language-name="Examples">Examples</a>
+              <a href="#" data-language-name="Code Examples">Code Examples</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -630,7 +630,9 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p><img title="Bearer Token" alt="alt text" src="images/pms5.png?raw=false" /></p>
 
-<h1 id="rest-services">REST Services</h1>
+<h1 id="hs-rest-canonical-service">HS REST Canonical Service</h1>
+
+<h2 id="introduction">Introduction</h2>
 
 <p>The HotSchedules REST API provides a user-friendly way to obtain HS Data.  </p>
 
@@ -4283,7 +4285,7 @@ This method uses hsSimpleDate objects for dates.</p>
 </tr>
 </tbody></table>
 
-          <h1 id="soap-services">SOAP Services</h1>
+          <h1 id="hs-soap-canonical-service">HS SOAP Canonical Service</h1>
 
 <h2 id="introduction">Introduction</h2>
 
@@ -10893,11 +10895,180 @@ The outputs of this method are the arguments defined by the following table.</p>
 &lt;/soap:Envelope&gt;
 </code></pre>
 
-<h1 id="hotschedules-community">HotSchedules Community</h1>
+          <h1 id="hotschedules-pos-canonical-service">HotSchedules POS Canonical Service</h1>
 
-<p>Do you have questions, comments or suggestions on improviements to this documentation? Please subscribe to the HotSchedules Community.</p>
+<p>This section will be used to define what canonical is and what the different POS canonical data types are. </p>
 
-<p><a href="https://help.hotschedules.com/hc/en-us/community/topics">HotSchedules Community</a></p>
+<p>A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  </p>
+
+<p>Canonical has two types of files that it can generate depending on the circumstance.</p>
+
+<ul>
+<li><p>StoreInfo - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.</p></li>
+<li><p>StoreBusinessDay - These files are generated on a schedule and will be for things like sales and labor summaries. </p></li>
+</ul>
+
+<p>Below you will find descriptions for each canonical type that we use. </p>
+
+<h2 id="posemployee">PosEmployee</h2>
+
+<p><strong>A list of employees pulled from the point of sale.</strong><br></p>
+
+<ul>
+<li> <strong>Name</strong> - The first and last name of the employee.<br></li>
+<li> <strong>Nickname</strong> - The employee’s nickname or assumed moniker.<br></li>
+<li> <strong>Birthdate</strong> - The employee’s date of birth.<br></li>
+<li> <strong>Addresses</strong> - The street, city, state, zipcode, and country assigned to an employee.<br></li>
+<li> <strong>Emails</strong> - The employee’s email address.<br> </li>
+<li> <strong>Status</strong> - Whether or not the employee is terminated.<br></li>
+<li> <strong>Employment_period</strong> - The span of time between the employee’s hire date and last day.<br> </li>
+<li> <strong>Instore_id</strong> - The point of sale id given to the employee.<br></li>
+<li> <strong>Hr_id</strong> - The ID given to the employee by the company.<br> </li>
+<li> <strong>Phone_numbers</strong> - The employee’s phone number.</li>
+</ul>
+
+<h2 id="posjob">Posjob</h2>
+
+<p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
+
+<ul>
+<li> <strong>Instore_name</strong> - The name of the job code.<br></li>
+<li> <strong>Instore_id</strong> - The point of sale ID given to the job code.<br></li>
+<li> <strong>regular _rate</strong> - The pay rate attached to the job code.<br></li>
+<li> <strong>Overtime_rate</strong> - The overtime rate attached to the job.<br></li>
+<li> <strong>Doubletime_rate</strong> - The doubletime rate assigned to the job.</li>
+</ul>
+
+<h2 id="posemployeeposition">PosEmployeePosition</h2>
+
+<p><strong>The job code assigned to the employee in the point of sale.</strong><br></p>
+
+<ul>
+<li> <strong>DEmployee_reference</strong> - The employee’s POS ID.<br></li>
+<li> <strong>DJob_reference</strong> - The job code’s POS ID. <br></li>
+<li> <strong>DRegular_rate</strong> - The job code rate given to the employee. <br></li>
+<li> <strong>DOvertime_rate</strong> - The overtime rate given to the employee.<br></li>
+<li> <strong>DDoubletime_rate</strong> - The doubletime rate give to the employee. <br></li>
+<li> <strong>DPosSalesCategory</strong> - The sales categories listed in the point of sale. <br></li>
+<li> <strong>DInstore_id</strong> - The point of sale ID given to the sales category. <br></li>
+<li> <strong>DName</strong> - The name of the assigned sales category.</li>
+</ul>
+
+<h2 id="posrevenuecenter">PosRevenueCenter</h2>
+
+<p><strong>The revenue centers listed in the point of sale.</strong><br></p>
+
+<ul>
+<li> <strong>DInstore_id</strong> - The point of sale ID given to the revenue center. <br></li>
+<li> <strong>DName</strong> - The name of the revenue center. <br></li>
+</ul>
+
+<h2 id="posmenu">PosMenu</h2>
+
+<p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br></p>
+
+<ul>
+<li> <strong>DName</strong> - The name of the menu <br></li>
+<li> <strong>DCategory</strong> - The category assigned to a menu.<br></li>
+<li> <strong>DItems</strong> - The items that make up a menu. <br></li>
+<li> <strong>DModifiers</strong> - The modifiers that can be used by items in the menu. <br></li>
+</ul>
+
+<h2 id="posmenuitems">PosMenuItems</h2>
+
+<p><strong>The items that can be used in all of the different menus.</strong><br></p>
+
+<ul>
+<li> <strong>DId</strong> - The point of sale ID given to a menu item. <br></li>
+<li> <strong>DName</strong> - The name of the item in the point of sale. <br></li>
+<li> <strong>DCategory</strong> - The category that an item is assigned to. <br></li>
+<li> <strong>DDescription</strong> - an extension of the name that can provide further information about the item. <br></li>
+<li> <strong>DUnit_price</strong> - The default menu price of the item. <br></li>
+<li> <strong>DPrices</strong> - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br></li>
+</ul>
+
+<h2 id="posmenumodifiers">PosMenumodifiers</h2>
+
+<p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br></p>
+
+<ul>
+<li> <strong>Id</strong> - The given point of sale ID for the menu modifier.<br></li>
+<li> <strong>Name</strong> - The name of the menu modifier. <br></li>
+<li> <strong>Description</strong> - A longer version of the name that can provide further insight into the name. <br></li>
+<li> <strong>Unit_price</strong> - The default menu price for a particular modifier. <br></li>
+<li> <strong>Prices</strong> - Any other prices outside of the menu price that is associated with the modifier. <br></li>
+</ul>
+
+<h2 id="pospunch">PosPunch</h2>
+
+<p><strong>The punch records that are present in the point of sale system.</strong><br></p>
+
+<ul>
+<li> <strong>DEmployee_reference</strong> - the employee’s given point of sale ID. <br></li>
+<li> <strong>DJob_reference</strong> - The given point of sale ID for the job code that is assigned to the employee. <br></li>
+<li> <strong>DBusiness_day</strong> - The business day that the employee has worked. <br></li>
+<li> <strong>DStarted_at</strong> - The time that the employee started working at. <br></li>
+<li> <strong>DEnded_at</strong> - The time that the employee stopped working at.<br></li>
+<li> <strong>DTotal_minutes_worked</strong> - The total amount of time that the employee worked. <br></li>
+<li> <strong>DBreaks</strong> - The number of breaks that the employee took. <br></li>
+<li> <strong>DRegular_rate</strong> - The regular rate that the employee is working at<br></li>
+<li> <strong>DOvertime_rate</strong> - The overtime rate that the employee is working at<br></li>
+<li> <strong>DDoubletime_rate</strong> - The doubletime rate that the employee is working at. <br></li>
+<li> <strong>DDeclared_tips</strong> - The declared tips that the employee has. <br></li>
+<li> <strong>DCash_tips</strong> - The cash tips that the employee has. <br></li>
+<li> <strong>DCredit_tips</strong> - The credit tips that the employee has. <br></li>
+</ul>
+
+<h2 id="poscheck">PosCheck</h2>
+
+<p><strong>The different transactions at a restaurant.</strong><br></p>
+
+<ul>
+<li> <strong>DCheck_id</strong> - The point of sale ID given to the transaction. <br></li>
+<li> <strong>DVoided</strong> - Whether or not the transaction was voided. <br></li>
+<li> <strong>DCanceled</strong> - Whether or not the check was cancelled. <br></li>
+<li> <strong>DEmployee_reference</strong> - The point of sale ID given to the employee who handled the transaction. <br></li>
+<li> <strong>DTable_id</strong> - The point of sale ID given to the table. <br></li>
+<li> <strong>DRegister_id</strong> - The point of sale ID given to the register.<br></li>
+<li> <strong>DShift_id</strong> - The given point of sale ID for the shift. <br></li>
+<li> <strong>DOpened_at</strong> - When the transaction was opened. <br></li>
+<li> <strong>DClosed_at</strong> - When the transaction was closed. <br></li>
+<li> <strong>DGuest_count</strong> - The total number of guests that were present for the transaction. <br></li>
+<li> <strong>DItem_count</strong> - The total number of items on the transaction. <br></li>
+<li> <strong>DNet_total</strong> - The total without taxes or coupons applied to it. <br></li>
+<li> <strong>DGross_total</strong> - The total including taxes and coupons. <br></li>
+<li> <strong>DDiscount_total</strong> - The total after any discounts have been applied to it. <br></li>
+<li> <strong>DTax_total</strong> - The total with the tax applied to it. <br></li>
+<li> <strong>DTender_total</strong> - The total amount of dollars paid. <br></li>
+<li> <strong>DChange_total</strong> - The total amount of change paid. <br></li>
+<li> <strong>DGratuity_total</strong> - Any gratuity that was given to the transaction.<br></li>
+<li> <strong>DVoid_total</strong> - if the check was voided how much was it for. <br></li>
+<li> <strong>DItems</strong> - The items that are on the transaction. <br></li>
+</ul>
+
+<h2 id="poscheckitem">PosCheckItem</h2>
+
+<p><strong>The items that make up a transaction. Items listed here roll into PosCheck.</strong><br></p>
+
+<ul>
+<li> <strong>DItem_code</strong> - The given POS ID for the item.<br></li>
+<li> <strong>DUnit_price</strong> - The menu price of the check item. <br></li>
+<li> <strong>DQuantity</strong> - The amount of the item on the transaction. <br></li>
+<li> <strong>DSales_category</strong> - The sales category assigned to the item. <br></li>
+<li> <strong>DNet_total</strong> - The total dollar amount of the item on the check without taxes or coupons applied to it. <br></li>
+<li> <strong>DGross_total</strong> - The total dollar amount of the item on the check with taxes and coupons applied to it. <br></li>
+<li> <strong>DTax_total</strong> - The total amount of taxes. <br></li>
+<li> <strong>DDiscount_total</strong> - The total amount of discounts that have been applied to the check. <br></li>
+<li> <strong>DVoid_total</strong> - If the check was voided this is its total. <br></li>
+<li> <strong>DVoided</strong> - Whether or not the check was voided. <br></li>
+<li> <strong>DDiscounted</strong> - whether or not the check was discounted. <br></li>
+<li> <strong>DPosVolumeItem</strong> - A dynamic driver that can represent things like guest counts, entree counts, and table counts. <br></li>
+<li> <strong>DDatetime</strong> - The date that the amount being presented was captured. <br></li>
+<li> <strong>DAmount</strong> - The total amount being presented by the driver. <br></li>
+<li> <strong>DVolume_type</strong> - The type of volume that is being displayed. <br></li>
+<li> <strong>DRevenue_center</strong> - The revenue center that data is being pulled from. <br></li>
+<li> <strong>DEmployee_reference</strong> - The point of sale ID given to the employee whose data you are viewing (?) </li>
+</ul>
 
           <h1 id="agent-integration">Agent Integration</h1>
 
@@ -12930,10 +13101,16 @@ versions:[
 
 <p><img alt="alt text" src="images/Logs.png?raw=true" /></p>
 
+          <h1 id="hotschedules-community">HotSchedules Community</h1>
+
+<p>Do you have questions, comments or suggestions on improviements to this documentation? Please subscribe to the HotSchedules Community.</p>
+
+<p><a href="https://help.hotschedules.com/hc/en-us/community/topics">HotSchedules Community</a></p>
+
       </div>
       <div class="dark-box">
           <div class="lang-selector">
-                <a href="#" data-language-name="Examples">Examples</a>
+                <a href="#" data-language-name="Code Examples">Code Examples</a>
           </div>
       </div>
     </div>
