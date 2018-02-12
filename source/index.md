@@ -2,7 +2,7 @@
 title: HotSchedules IoT Platform - API Reference
 
 language_tabs:
-  - Examples
+  - Code Examples
 
 // toc_footers:
   // - <a href='http://github.com/tripit/slate'>Documentation Powered by Slate</a>
@@ -16,6 +16,8 @@ includes:
   - making-a-call/hs-example
 
   - soap/getting-started
+
+  - POS/getting-started
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
@@ -35,6 +37,7 @@ includes:
   - publishing/configurepkgjson
   - publishing/publishtoshop
   - publishing/monitorapp
+  - hs-community
   
 
 

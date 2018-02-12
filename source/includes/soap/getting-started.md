@@ -1,4 +1,4 @@
-#SOAP Services
+#HS SOAP Canonical Service
 
 ##Introduction
 ###Note: This Documentation Is Currently Being Updated For This Environment
@@ -6481,12 +6481,6 @@ The outputs of this method are the arguments defined by the following table.
    </soap:Body>
 </soap:Envelope>
 ```
-
-#HotSchedules Community
-
-Do you have questions, comments or suggestions on improviements to this documentation? Please subscribe to the HotSchedules Community.
-
-[HotSchedules Community] (https://help.hotschedules.com/hc/en-us/community/topics)
 
 
 

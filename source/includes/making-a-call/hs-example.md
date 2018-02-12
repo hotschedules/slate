@@ -257,7 +257,9 @@ __https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURC
 
 ![alt text](/images/pms5.png?raw=false "Bearer Token")
 
-#REST Services
+#HS REST Canonical Service
+
+##Introduction
 
 The HotSchedules REST API provides a user-friendly way to obtain HS Data.  
 
