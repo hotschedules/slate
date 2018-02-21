@@ -1,4 +1,4 @@
-#HS Canonical Service
+#Canonical Service
 
 ##Introduction
 ###Note: This Documentation Is Currently Being Updated For This Environment
