@@ -1,4 +1,4 @@
-#HS POS Canonical Service
+#POS Canonical Service
 
 This section will be used to define what canonical is and what the different POS canonical data types are. 
 
