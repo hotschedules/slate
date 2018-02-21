@@ -281,7 +281,7 @@ The url path can look like any of the following, depending on which type is bein
 
 What is TTL? _Time to live or hop limit is a mechanism that limits the lifespan or lifetime of data in a computer or network_
 
-#### getConcepts  
+##getConcepts  
 This method returns a list of concepts for a company.
 
 `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/getConcepts"`
@@ -302,7 +302,7 @@ extId | Number | Concept external ID
 name  | String | Concept Name
 
 
-#### getDriversByInterval  
+##getDriversByInterval  
 This method will take a **concept ID**, **store number**, **start** and **end dates**, **volume type**, and **data type** and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.
 
 Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.
@@ -370,7 +370,7 @@ driverType        | String  | Type of driver requested. Allowed types are: “AC
 
 
 
-#### getEmpAvailability  
+##getEmpAvailability  
 
 This method takes in a **concept ID** and a **store ID** and returns an **array of wsEmpAvailability objects**. It is meant to get a list of all employee availability for that store.
 
@@ -432,7 +432,7 @@ empHrId        | Number  | Employee HR ID
 
 
 
-#### getEmpInfo  
+##getEmpInfo  
 
 This method takes in a **concept ID** and a **store ID** and returns an **array of wsEmpInfo** objects. It is meant to get a list of all employees for that store.
 
@@ -501,7 +501,7 @@ empHrId           | Number | Employees HR ID
 
 
 
-#### getEmpJobs
+##getEmpJobs
 
 This method takes in a **concept ID** and a **store ID** and returns an **array of wsEmpJob** objects. It is meant to get a list of all jobs assigned to all employees for that store.
 
@@ -544,7 +544,7 @@ primary  | Boolean | Boolean flag to designate if the job code is the primary jo
 
 
 
-#### getGroups
+##getGroups
 This method takes in a **concept ID** and returns group information for the concept.
 
 Query parameter | Type   | Description
@@ -573,7 +573,7 @@ name         | String | Group name
 
 
 
-#### getGuestCounts
+##getGuestCounts
 This method will take a **concept ID**, **store number**, **start** and **end dates** and return a list of guest counts for the date range requested.
 
 Query parameter | Type     | Description
@@ -614,7 +614,7 @@ rvcExtId     | Number | Represents the numeric revenue center ID associated with
 
 
 
-#### getLaborByBusDay
+##getLaborByBusDay
 This method will take a **concept ID**, **store number**, **start** and **end dates** and a **labor type** and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.
 
 Intervals are configured during initial setup for the customer and are typically 30 minutes.
@@ -662,7 +662,7 @@ laborType    | String | Type of labor requested. Allowed types are "optimal", "f
 volume       | String | Number of employees based on demand at that interval
 
 
-#### getLaborByJobAndInterval
+##getLaborByJobAndInterval
 This method will take a **concept ID**, **store number**, **start** and **end dates** and a **labor type** and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.
 
 Intervals are configured during initial setup for the customer and are typically 30 minutes.
@@ -710,7 +710,7 @@ volume       | String | Number of employees based on demand at that interval
 
 
 
-#### getSalesItemsV3
+##getSalesItemsV3
 
 This method takes in a **concept ID**, **store ID**, **start** and **end dates**.It returns an array of sales for that store. 
 
@@ -773,7 +773,7 @@ transDate    | Object | Transaction data
 transTime    | Object | Transaction time
 
 
-#### getProjectedSalesV3
+##getProjectedSalesV3
 
 This method will take a **concept ID**, **store number**, **start** and **end dates**. This method uses hsSimpleDate objects for dates and hsSimpleTime objects for times.
 
@@ -835,7 +835,7 @@ dateTotal     | Number | Total projected sales for the day part
 
 
 
-#### getRCVs
+##getRCVs
 Revenue center information defined for a group.
 
   `curl -X GET -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/getRCVs"`
@@ -870,7 +870,7 @@ groupLevel        | Boolean | Indicates if the revenue center was created at a g
 
 
 
-#### getSalesCats
+##getSalesCats
 This method takes in a **concept ID** and a **store ID** and returns an **array of sales categories** for that store. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise.Sales categories can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group-level sales categories).
 
 Query parameter | Type   | Description
@@ -901,7 +901,7 @@ groupLevel        | Boolean | Indicates if the revenue center was created at a g
 
 
 
-#### getScheduleV3
+##getScheduleV3
 This method takes in a **concept ID**, **store ID**, **start** and **end dates**. It returns an **array of WSScheduleItem3 objects**, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.This method uses hsSimpleDate objects for dates. Note that the date referenced is the calendar date and not the business date.
 
 Query parameter | Type         | Description
@@ -964,7 +964,7 @@ outTime    | Object | Scheduled out time
 
 
 
-#### getShiftsV3
+##getShiftsV3
 This method takes in a **concept ID**, **store ID**, **start** and **end dates** and three flags (**isHouse**, **isScheduled** and **isPosted**). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:
 
  * **isHouse** - includes scheduled or posted shifts that are not assigned to an employee (called 'house shifts' in HotSchedules).
@@ -1062,7 +1062,7 @@ specialPay | Number | Special Pay amounts
 
 
 
-#### getStoreEmployees
+##getStoreEmployees
 This method takes in a **concept ID**, **store ID**, a flag to determine if only active employees are returned, and returns an **array of WSEmployee objects**.
 
 Query parameter | Type    | Description
@@ -1126,7 +1126,7 @@ status   | Number | Active = 1, Inactive = 0, Terminated = -1
 
 
 
-#### getStoreJobs
+##getStoreJobs
 This method takes in a **concept ID** and a **store ID**, and returns an array of all jobs currently defined in HotSchedules for the given concept/store.
 
 Query parameter | Type   | Description
@@ -1162,7 +1162,7 @@ defRate  | Number | Default Pay Rate for a Job Code
 
 
 
-#### getStoresV2
+##getStoresV2
 Returns information about the stores within a group.
 
 Query parameter | Type   | Description
@@ -1210,7 +1210,7 @@ timeZone       | String  | Store timezone
 
 
 
-#### getTimeCards
+##getTimeCards
 This method takes in a **concept ID**, **store ID**, **start** and **end dates**. It returns an **array of wsTimeCard3 objects**, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in and clock out times. If this store is using HotSchedules' web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.
 
 Query parameter | Type   | Description
@@ -1280,11 +1280,11 @@ regTtl       | Number | Regular total pay amount
 extId        | Number | Optional-Unique transaction ID for the time card record
 
 
-#### getTimeCardsV2
+##getTimeCardsV2
 Same as **getTimeCards** but additionally provides double time info for each timecard.
 
 
-#### getTimeCardsDeclaredTips
+##getTimeCardsDeclaredTips
 This method takes in a **concept ID**, **store ID**, **start** and **end dates**. It returns an **array of wsTimeCard3 objects**, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules' web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.
 
 Query parameter | Type   | Description
@@ -1359,7 +1359,7 @@ declaredTips | Number | Tip amount
 
 
 
-#### getVolumeCounts
+##getVolumeCounts
 This method will take a **concept ID**, **store number**, **start** and **end dates** and a **volume type** and return a list of volume counts for the date range requested.
 Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”.
 
@@ -1403,7 +1403,7 @@ rvcExtId     | Number | Represents the numeric revenue center ID associated with
 
 
 
-#### setTimeCardsV3
+##setTimeCardsV3
 Extends dataTimeCard (includes business date and clock in and clockout date/times).
 
 Query parameter | Type   | Description
@@ -1471,7 +1471,7 @@ extId        | Number | Optional-Unique transaction ID for the time card record
 
 
 
-#### setEmpJobs
+##setEmpJobs
 This method takes in a **concept ID**, **store ID**, and an **array of WSEmpJob** objects to assign jobs to individual employees. This method returns a WSReturn object.
 
 Query parameter | Type   | Description
@@ -1516,7 +1516,7 @@ primary  | Boolean | Boolean flag to designate if the job code is the primary jo
 
 
 
-#### setEmps
+##setEmps
 This method takes in a **concept ID**, **store ID** and an **array of WSEmployee objects**. Using the authentication from the username token and the conecpt and store IDs, the server will resolve which HotSchedules client this sync is for. The array of employees will be parsed on the server side to employees who need to be inserted or updated in the HS database. This method returns a WSReturn object.
 
 Query parameter | Type            | Description
@@ -1584,7 +1584,7 @@ status   | Number | Active = 1, Inactive = 0, Terminated = -1
 
 
 
-#### setForecastDriversV2
+##setForecastDriversV2
 
 This method takes in a **concept ID**, **store ID**, **workweek**, **startdate**, **enddate**, **starttime**, **endtime**, **volume amount**, **volume type**, and a **revenue center** for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
 
@@ -1656,7 +1656,7 @@ volumeType        | String | Classification of driver requested. Allowed types w
 
 
 
-#### setGuestCounts
+##setGuestCounts
 This method takes in a **concept ID**, **store ID**, **business date**, **date time**, **guest count** and a **revenue center** for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
 Query parameter | Type   | Description
@@ -1691,7 +1691,7 @@ rvcExtID          | Number | Numeric ID for the revenue center associated with t
 
 
 
-#### setRVC
+##setRVC
 This method takes in a **concept ID** and a **store ID** and returns an **array of revenue centers** for that store.
 
 Query parameter | Type    | Description
@@ -1730,7 +1730,7 @@ rvcName           | String  | Name for the revenue center associated with the lo
 isGroupLevel      | Boolean | Indicates if the revenue center is assigned at the group level. <br> i.e. Bar used across all locations
 
 
-#### setSalesCat
+##setSalesCat
 
 This method allows you to add the sales category associated with menu items. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise. Sales categories can be local to a particular store.
 
@@ -1772,7 +1772,7 @@ salesCatName      | String  | Name for the sales category associated with the it
 isGroupLevel      | Boolean | Indicates if the sales category is assigned at the group level. <br> i.e. Liquor ID 2 used across all locations
 
 
-#### setSalesItemsV4
+##setSalesItemsV4
 
 This method takes in a **concept ID**, **store ID**, a **start** and **end date** and an **array of WSSalesItem objects**. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains sales items for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of sales, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
 This method uses hsSimpleDate objects for dates.
@@ -1853,7 +1853,7 @@ start        | Object | Start date for the range of data requested
 end          | Object | End date for the range of data requested
 
 
-#### setTimeCardsDeclaredTips
+##setTimeCardsDeclaredTips
 This method takes in a **concept ID**, **store ID**, a **start** and **end date** and an **array of WSTimeCardsDeclaredTips** objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
 Query parameter | Type   | Description
@@ -1926,7 +1926,7 @@ declaredTips | Number | Tip amount
 
 
 
-#### setVolumeCountsV2
+##setVolumeCountsV2
 
 This method takes in a **concept ID**, **store ID**, **business date**, **date time**, **volume amount**, **volume type**, and a **revenue center** for the purpose of submitting actual volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
