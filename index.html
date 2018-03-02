@@ -9412,10 +9412,12 @@ client not found
 <p>This service is intended for third parties to be able to import their time cards into the HotSchedules system or get time cards from HotSchedules in a straightforward fashion.</p>
 
 <ul>
-<li>Location: <a href="http://services.hotschedules.com/api/services/TimeCardService?wsdl">http://services.hotschedules.com/api/services/TimeCardService?wsdl</a></li>
-<li>Protocol: SOAP</li>
-<li>Default style: rpc</li>
-<li>Transport protocol: SOAP over HTTP<br></li>
+<li>Set a timecard with no UTC offset, it&rsquo;s stored as Central (does not have the client&rsquo;s tz as an attribute)</li>
+<li><p>Set a timecard with a UTC offset, it&rsquo;s converted to the Central equivalent</p></li>
+<li><p>Location: <a href="http://services.hotschedules.com/api/services/TimeCardService?wsdl">http://services.hotschedules.com/api/services/TimeCardService?wsdl</a></p></li>
+<li><p>Protocol: SOAP</p></li>
+<li><p>Default style: rpc</p></li>
+<li><p>Transport protocol: SOAP over HTTP  </p></li>
 </ul>
 
 <aside class="notice"> <strong>AVAILABLE METHODS</strong> </aside>
