@@ -5628,7 +5628,7 @@ This service is intended for third parties to be able to request and send volume
 - **setForecastDriversV2:** Same as setForecastDrivers but accepts alphanum store XR.
 <br>
 
-- **setGuestCounts:** This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+- **setGuestCounts:** This method takes in a concept ID, store ID, business date, date time, guest count (must be a positive integer) and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 <br>
 
 - **setVolumeCountsV2:** Same as setVolumeCounts but accepts alphanum store XR.
@@ -6202,7 +6202,7 @@ volumeType        | String | Classification of driver requested. Allowed types w
 
 
 ####setGuestCounts
-This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+This method takes in a concept ID, store ID, business date, date time, guest count (must be a positive integer) and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
 **Input (Literal)**
 The inputs of this method are the arguments defined by the following table.
@@ -6221,7 +6221,7 @@ The inputs of this method are the arguments defined by the following table.
 <td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
 <td nowrap>businessDate</td><td>hsSimpleDate</td><td>Business date of transaction</td></tr>
 <td nowrap>dateTime</td><td>dateTime</td><td>Date Time of the transaction</td></tr>
-<td nowrap>guestCount</td><td>Int</td><td>Number of guests for the transaction</td></tr>
+<td nowrap>guestCount</td><td>Int</td><td>Number of guests for the transaction (must be a positive integer)</td></tr>
 <td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
 </tbody>
 </table>
