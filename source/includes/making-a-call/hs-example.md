@@ -1657,7 +1657,7 @@ volumeType        | String | Classification of driver requested. Allowed types w
 
 
 ##setGuestCounts
-This method takes in a **concept ID**, **store ID**, **business date**, **date time**, **guest count** and a **revenue center** for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+This method takes in a **concept ID**, **store ID**, **business date**, **date time**, **guest count (must be a positive integer)** and a **revenue center** for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
 Query parameter | Type   | Description
 ----------------|--------|------------
@@ -1686,7 +1686,7 @@ Key               | Type   | Description
 ------------------|--------|-------------
 businessDate      | String | Business date of transaction
 dateTime          | String | Date Time of the transaction
-guestCount        | Number | Number of guests for the transaction
+guestCount        | Number | Number of guests for the transaction (must be a positive integer)
 rvcExtID          | Number | Numeric ID for the revenue center associated with the transaction
 
 
