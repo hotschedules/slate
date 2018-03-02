@@ -9986,7 +9986,7 @@ The outputs of this method are the arguments defined by the following table.</p>
 <br></p></li>
 <li><p><strong>setForecastDriversV2:</strong> Same as setForecastDrivers but accepts alphanum store XR.
 <br></p></li>
-<li><p><strong>setGuestCounts:</strong> This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+<li><p><strong>setGuestCounts:</strong> This method takes in a concept ID, store ID, business date, date time, guest count (must be a positive integer) and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server•side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 <br></p></li>
 <li><p><strong>setVolumeCountsV2:</strong> Same as setVolumeCounts but accepts alphanum store XR.
 <br></p></li>
@@ -10616,7 +10616,7 @@ The outputs of this method are the arguments defined by the following table.</p>
 
 <h4 id="setguestcounts">setGuestCounts</h4>
 
-<p>This method takes in a concept ID, store ID, business date, date time, guest count and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
+<p>This method takes in a concept ID, store ID, business date, date time, guest count (must be a positive integer) and a revenue center for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The serveroside logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
 
 <p><strong>Input (Literal)</strong>
 The inputs of this method are the arguments defined by the following table.</p>
@@ -10635,7 +10635,7 @@ The inputs of this method are the arguments defined by the following table.</p>
 <td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the store. Must be unique within the concept.</td></tr>
 <td nowrap>businessDate</td><td>hsSimpleDate</td><td>Business date of transaction</td></tr>
 <td nowrap>dateTime</td><td>dateTime</td><td>Date Time of the transaction</td></tr>
-<td nowrap>guestCount</td><td>Int</td><td>Number of guests for the transaction</td></tr>
+<td nowrap>guestCount</td><td>Int</td><td>Number of guests for the transaction (must be a positive integer)</td></tr>
 <td nowrap>rvcExtID</td><td>int</td><td>Numeric ID for the revenue center associated with the transaction</td></tr>
 </tbody>
 </table>
