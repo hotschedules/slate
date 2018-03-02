@@ -5063,6 +5063,9 @@ client not found
 ##TimeCardService
 This service is intended for third parties to be able to import their time cards into the HotSchedules system or get time cards from HotSchedules in a straightforward fashion.
 
+* Set a timecard with no UTC offset, it's stored as Central (does not have the client's tz as an attribute)
+* Set a timecard with a UTC offset, it's converted to the Central equivalent
+
 * Location: [http://services.hotschedules.com/api/services/TimeCardService?wsdl](http://services.hotschedules.com/api/services/TimeCardService?wsdl)
 * Protocol: SOAP
 * Default style: rpc
