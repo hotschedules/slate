@@ -3241,7 +3241,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 
 <h2 id="setguestcounts">setGuestCounts</h2>
 
-<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>guest count</strong> and a <strong>revenue center</strong> for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>guest count (must be a positive integer)</strong> and a <strong>revenue center</strong> for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
 
 <table><thead>
 <tr>
@@ -3312,7 +3312,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 <tr>
 <td>guestCount</td>
 <td>Number</td>
-<td>Number of guests for the transaction</td>
+<td>Number of guests for the transaction (must be a positive integer)</td>
 </tr>
 <tr>
 <td>rvcExtID</td>
