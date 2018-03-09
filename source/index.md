@@ -17,7 +17,6 @@ includes:
 
   - soap/getting-started
 
-  - POS/getting-started
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
