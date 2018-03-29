@@ -31,6 +31,8 @@
       <div class="content">
         <h1 id="pos-canonical-service">POS Canonical Service</h1>
 
+<h2 id="introduction">Introduction</h2>
+
 <p>This section will be used to define what canonical is and what the different POS canonical data types are. </p>
 
 <p>A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  </p>
@@ -38,11 +40,25 @@
 <p>Canonical has two types of files that it can generate depending on the circumstance.</p>
 
 <ul>
-<li><p>StoreInfo - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.</p></li>
-<li><p>StoreBusinessDay - These files are generated on a schedule and will be for things like sales and labor summaries. </p></li>
+<li><p><strong>StoreInfo</strong> - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.</p></li>
+<li><p><strong>StoreBusinessDay</strong> - These files are generated on a schedule and will be for things like sales and labor summaries. </p></li>
 </ul>
 
-<p>Below you will find descriptions for each canonical type that we use. </p>
+<p>Using our RESTful service, a call can be made to endpoints to <strong>GET</strong> data. The minimum base call is the url to the endpoint and a page limit.</p>
+
+<p>HTTP Status Codes provide a description of the sucess or failure of a call: <a href="https://httpstatuses.com">https://httpstatuses.com</a></p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1">Base Call</a> <br> <code class="prettyprint">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1</code></p>
+
+<p>Using a field in the  <strong>where</strong>  or <strong>fields</strong> clause will narrow the focus to specific data.</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;paging=limit:25,page:1">Where:</a> <br><code class="prettyprint">https://api.hotschedules.io/NAMESAPCE/resources/PosCheck?where={&quot;guest_count&quot;: { &quot;$eq&quot;: &quot;1&quot; }}&amp;paging=limit:25,page:1</code></p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1">Fields:</a> <br> <code class="prettyprint">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={&quot;guest_count&quot;: { &quot;$eq&quot;: &quot;1&quot; }}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1</code></p>
+
+<p>COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications</p>
+
+<p>Below you will find descriptions for each canonical type that we use and the available fields. </p>
 
 <h2 id="posemployee">PosEmployee</h2>
 
