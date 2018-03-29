@@ -15,8 +15,8 @@ includes:
   - making-a-call/getting-started
   - making-a-call/hs-example
 
+  - POS/getting-started
   - soap/getting-started
-
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted

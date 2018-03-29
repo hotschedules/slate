@@ -31,6 +31,8 @@ The HotSchedules SOAP API provides a user-friendly way to obtain HS Data. Each s
 
 **[VolumeService](#volumeservice):** This service is intended for third parties to be able to request and send volume driver related data from/to HotSchedules. Driver items include examples such as guests, tables, entrees…. Etc. 
 
+HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
+
 ##CertificationService
 
 This service is intended for third parties to be able to request and set certification requests from HotSchedules.

@@ -1,4 +1,5 @@
 #POS Canonical Service
+## Introduction
 
 This section will be used to define what canonical is and what the different POS canonical data types are. 
 
@@ -6,11 +7,26 @@ A canonical data module (also known as CDM) in general terms is something used t
 
 Canonical has two types of files that it can generate depending on the circumstance.
 
-  * StoreInfo - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.
+  * **StoreInfo** - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.
 
-  * StoreBusinessDay - These files are generated on a schedule and will be for things like sales and labor summaries. 
+  * **StoreBusinessDay** - These files are generated on a schedule and will be for things like sales and labor summaries. 
 
-Below you will find descriptions for each canonical type that we use. 
+Using our RESTful service, a call can be made to endpoints to **GET** data. The minimum base call is the url to the endpoint and a page limit.
+
+HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
+
+
+[Base Call] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1) <br> ```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1```
+
+Using a field in the  **where**  or **fields** clause will narrow the focus to specific data.
+
+[Where:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1) <br>```https://api.hotschedules.io/NAMESAPCE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1```
+
+[Fields:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1) <br> ```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1```
+
+COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
+
+Below you will find descriptions for each canonical type that we use and the available fields. 
 
 ##PosEmployee
 **A list of employees pulled from the point of sale.**<br>

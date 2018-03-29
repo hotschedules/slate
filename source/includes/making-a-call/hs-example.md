@@ -268,6 +268,8 @@ Please ensure that API access has been enabled for your HotSchedules account. Co
 
 The url path can look like any of the following, depending on which type is being queried:
 
+HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
+
 <br>
 `../hotschedules/<concept_id>/<store_id>/<type_method>?`
 <br>
