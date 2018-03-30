@@ -4468,16 +4468,11 @@ This method uses hsSimpleDate objects for dates.</p>
 
 <p>Example: To get a count of a number of items</p>
 
-<p>[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}]]</p>
-
-<p>(https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}]
-)</p>
+<p>https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}]</p>
 
 <p>Example: How many items sold over a time period</p>
 
-<p>[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}]]</p>
-
-<p>(https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}])</p>
+<p>https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}]</p>
 
 <h2 id="poscheckitem">PosCheckItem</h2>
 
