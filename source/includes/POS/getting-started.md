@@ -156,4 +156,4 @@ Below you will find descriptions for each canonical type that we use and the ava
 *  **Amount** - The total amount being presented by the driver. <br>
 *  **Volume_type** - The type of volume that is being displayed. <br>
 *  **Revenue_center** - The revenue center that data is being pulled from. <br>
-*  **Employee_reference** - The point of sale ID given to the employee whose data you are viewing (?) 
+*  **Employee_reference** - The point of sale ID given to the employee whose data you are viewing.
