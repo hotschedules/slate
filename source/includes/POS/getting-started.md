@@ -20,13 +20,21 @@ HTTP Status Codes provide a description of the sucess or failure of a call: [htt
 
 Using a field in the  **where**  or **fields** clause will narrow the focus to specific data.
 
-[Where:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1) <br>```https://api.hotschedules.io/NAMESAPCE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1```
+[Where:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1) <br>```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1```
 
 [Fields:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1) <br> ```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1```
 
 COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
 
-Below you will find descriptions for each canonical type that we use and the available fields. 
+Below you will find descriptions for each canonical type that we use and the available fields.
+
+<aside class="notice"> <strong>QUERY StoreInfo</strong> </aside> 
+
+PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, and PosMenuItem are only types that are queryable via StoreInfo.
+
+Example: To get a list of employees for a specific store and associated values, this would be the query string used
+
+(https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1)
 
 ##PosEmployee
 **A list of employees pulled from the point of sale.**<br>
@@ -136,6 +144,10 @@ Below you will find descriptions for each canonical type that we use and the ava
 *  **Gratuity_total** - Any gratuity that was given to the transaction.<br>
 *  **Void_total** - if the check was voided how much was it for. <br>
 *  **Items** - The items that are on the transaction. <br>
+
+<aside class="notice"> <strong>QUERY PosCheck</strong> </aside> 
+
+PosCheckItem are only queryable via PosCheck.
 
 ##PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
