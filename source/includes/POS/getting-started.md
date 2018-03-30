@@ -149,6 +149,20 @@ Example: To get a list of employees for a specific store and associated values, 
 
 PosCheckItem are only queryable via PosCheck.
 
+Example: To get a count of a number of items
+
+[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"5a1653d772bd660b0e9270bc"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}]]
+
+(https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"5a1653d772bd660b0e9270bc"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}]
+)
+
+
+Example: How many items sold over a time period
+
+[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"5a1653d772bd660b0e9270bc"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}]]
+
+(https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"5a1653d772bd660b0e9270bc"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}])
+
 ##PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
 
