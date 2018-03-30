@@ -34,7 +34,7 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, and PosMenu
 
 Example: To get a list of employees for a specific store and associated values, this would be the query string used
 
-(https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1)
 
 ##PosEmployee
 **A list of employees pulled from the point of sale.**<br>
