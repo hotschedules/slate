@@ -51,22 +51,6 @@ sys_id: "5a1653d772bd660b0e9270bc"
 {
 name: "store_test_05",
 sys_id: "5a1653d79534035f755308cf"
-},
-{
-name: "store_test_08",
-sys_id: "5a1653d772bd660b0e9270bd"
-},
-{
-name: "store_test_10",
-sys_id: "5a1653d74014d535f30d6904"
-},
-{
-name: "store_test_13",
-sys_id: "5a25aedcee05ab5f1f2325cc"
-},
-{
-name: "store_test_11",
-sys_id: "5a25a670731c142e5e25f7a9"
 }
 ]
 ```
