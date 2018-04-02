@@ -55,9 +55,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##StoreInfo
-
-####PosEmployee
+##PosEmployee
 **A list of employees pulled from the point of sale.**<br>
 
 *  **Name** - The first and last name of the employee.<br>
@@ -178,6 +176,7 @@ PosCheckItem are only queryable via PosCheck.
 **Example:** How many items sold over a time period
 
 [https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}] ] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}])
+
 
 ##PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
