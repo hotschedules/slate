@@ -43,8 +43,6 @@ Example: To get a list of employees for a specific store and associated values, 
 > **EXAMPLE JSON RESPONSE:**
 
 ```
-[
-{
 name: "store_test_07",
 sys_id: "5a1653d772bd660b0e9270bc"
 },
