@@ -34,7 +34,42 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, and PosMenu
 
 Example: To get a list of employees for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "STORENUMBER" }}&fields=store_employees,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
+
+**Note:** store_number is the sys_id of the store you are running the call for. To retrieve the list of sys_id's for all stores, use the following call.
+
+[https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESAPCE/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
+
+> **EXAMPLE JSON RESPONSE:**
+
+```
+[
+{
+name: "store_test_07",
+sys_id: "5a1653d772bd660b0e9270bc"
+},
+{
+name: "store_test_05",
+sys_id: "5a1653d79534035f755308cf"
+},
+{
+name: "store_test_08",
+sys_id: "5a1653d772bd660b0e9270bd"
+},
+{
+name: "store_test_10",
+sys_id: "5a1653d74014d535f30d6904"
+},
+{
+name: "store_test_13",
+sys_id: "5a25aedcee05ab5f1f2325cc"
+},
+{
+name: "store_test_11",
+sys_id: "5a25a670731c142e5e25f7a9"
+}
+]
+```
 
 ##PosEmployee
 **A list of employees pulled from the point of sale.**<br>
