@@ -55,7 +55,9 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##PosEmployee
+##StoreInfo
+
+####PosEmployee
 **A list of employees pulled from the point of sale.**<br>
 
 *  **Name** - The first and last name of the employee.<br>
