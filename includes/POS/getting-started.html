@@ -227,13 +227,13 @@ sys_id: "5a1653d79534035f755308cf"
 
 <p>PosCheckItem are only queryable via PosCheck.</p>
 
-<p>Example: To get a count of a number of items</p>
+<p><strong>Example:</strong> To get a count of a number of items</p>
 
-<p><a href="https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%225a1653d772bd660b0e9270bc%22}},{%22$unwind%22:%22$items%22},{$project:{items:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:%22$items.item_code%22,count:{%22$sum%22:1}}}]">https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
+<p><a href="https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:%22$items.item_code%22,count:{%22$sum%22:1}}}]">https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
 
-<p>Example: How many items sold over a time period</p>
+<p><strong>Example:</strong> How many items sold over a time period</p>
 
-<p>https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;5a1653d772bd660b0e9270bc&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}]</p>
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1,business_day:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:{items:%22$items.item_code%22,business_day:%22$business_day%22},count:{%22$sum%22:1}}}]">https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
 
 <h2 id="poscheckitem">PosCheckItem</h2>
 
