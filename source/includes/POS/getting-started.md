@@ -16,13 +16,13 @@ Using our RESTful service, a call can be made to endpoints to **GET** data. The 
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
 
 
-[Base Call] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1) <br> ```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1```
+**Base Call:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1)
 
 Using a field in the  **where**  or **fields** clause will narrow the focus to specific data.
 
-[Where:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1) <br>```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1```
+**Where:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1)
 
-[Fields:] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1) <br> ```https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1```
+**Fields:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1)
 
 COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
 
