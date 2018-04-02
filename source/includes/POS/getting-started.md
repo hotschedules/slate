@@ -32,7 +32,7 @@ Below you will find descriptions for each canonical type that we use and the ava
 
 PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, and PosMenuItem are only types that are queryable via StoreInfo.
 
-Example: To get a list of employees for a specific store and associated values, this would be the query string used
+**Example:** To get a list of employees for a specific store and associated values, this would be the query string used
 
 [https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
 
