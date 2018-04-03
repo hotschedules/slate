@@ -37,14 +37,7 @@
 
 <p>A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  </p>
 
-<p>Canonical has two types of files that it can generate depending on the circumstance.</p>
-
-<ul>
-<li><p><strong>StoreInfo</strong> - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.</p></li>
-<li><p><strong>StoreBusinessDay</strong> - These files are generated on a schedule and will be for things like sales and labor summaries. </p></li>
-</ul>
-
-<p>Using our RESTful service, a call can be made to endpoints to <strong>GET</strong> data. The minimum base call is the url to the endpoint and a page limit.</p>
+<p>Using our RESTful service, a call can be made to <strong>GET</strong> data from the API. Examples of the various calls are listed below with sample JSON Outputs.</p>
 
 <p>HTTP Status Codes provide a description of the sucess or failure of a call: <a href="https://httpstatuses.com">https://httpstatuses.com</a></p>
 
@@ -55,8 +48,6 @@
 <p><strong>Where:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={&ldquo;guest_count&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;1&rdquo; }}&amp;paging=limit:25,page:1</a></p>
 
 <p><strong>Fields:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={&ldquo;guest_count&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;1&rdquo; }}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1</a></p>
-
-<p>COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications</p>
 
 <p>Below you will find descriptions for each canonical type that we use and the available fields.</p>
 
@@ -87,7 +78,9 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="posemployee">PosEmployee</h2>
+<h2 id="getting-data-from-clarifi">Getting Data From Clarifi</h2>
+
+<h3 id="posemployee">PosEmployee</h3>
 
 <p><strong>A list of employees pulled from the point of sale.</strong><br></p>
 
@@ -143,7 +136,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="posjob">Posjob</h2>
+<h3 id="posjob">Posjob</h3>
 
 <p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
 
@@ -154,6 +147,10 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Overtime_rate</strong> - The overtime rate attached to the job.<br></li>
 <li> <strong>Doubletime_rate</strong> - The doubletime rate assigned to the job.</li>
 </ul>
+
+<p><strong>Example:</strong> To get a list of jobs for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_number%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=store_jobs,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_number&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=store_jobs,name&amp;paging=limit:25,page:1</a></p>
 
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
@@ -183,7 +180,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="posemployeeposition">PosEmployeePosition</h2>
+<h3 id="posemployeeposition">PosEmployeePosition</h3>
 
 <p><strong>The job code assigned to the employee in the point of sale.</strong><br></p>
 
@@ -197,6 +194,10 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Instore_id</strong> - The point of sale ID given to the sales category. <br></li>
 <li> <strong>Name</strong> - The name of the assigned sales category.</li>
 </ul>
+
+<p><strong>Example:</strong> To get a list of positions for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_number%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=employee_positions,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_number&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=employee_positions,name&amp;paging=limit:25,page:1</a></p>
 
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
@@ -236,7 +237,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="posrevenuecenter">PosRevenueCenter</h2>
+<h3 id="posrevenuecenter">PosRevenueCenter</h3>
 
 <p><strong>The revenue centers listed in the point of sale.</strong><br></p>
 
@@ -244,6 +245,10 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Instore_id</strong> - The point of sale ID given to the revenue center. <br></li>
 <li> <strong>Name</strong> - The name of the revenue center. <br></li>
 </ul>
+
+<p><strong>Example:</strong> To get a list of revenue centers for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_number%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=revenue_centers,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_number&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=revenue_centers,name&amp;paging=limit:25,page:1</a></p>
 
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
@@ -272,7 +277,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="posmenu">PosMenu</h2>
+<h3 id="posmenu">PosMenu</h3>
 
 <p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br>
 <strong>Note:</strong> PosMenu is nested within StoreInfo <br></p>
@@ -284,7 +289,7 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Modifiers</strong> - The modifiers that can be used by items in the menu. <br></li>
 </ul>
 
-<h2 id="posmenuitems">PosMenuItems</h2>
+<h3 id="posmenuitems">PosMenuItems</h3>
 
 <p><strong>The items that can be used in all of the different menus.</strong><br>
 <strong>Note:</strong> PosMenuItems are nested within StoreInfo <br></p>
@@ -298,7 +303,7 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Prices</strong> - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br></li>
 </ul>
 
-<h2 id="posmenumodifiers">PosMenumodifiers</h2>
+<h3 id="posmenumodifiers">PosMenumodifiers</h3>
 
 <p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br>
 <strong>Note:</strong> PosMenumodifiers are nested within StoreInfo <br></p>
@@ -310,6 +315,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Unit_price</strong> - The default menu price for a particular modifier. <br></li>
 <li> <strong>Prices</strong> - Any other prices outside of the menu price that is associated with the modifier. <br></li>
 </ul>
+
+<p><strong>Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%225a1653d772bd660b0e9270bc%22%20}}&amp;fields=store_menus&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;5a1653d772bd660b0e9270bc&rdquo; }}&amp;fields=store_menus&amp;paging=limit:25,page:1</a></p>
 
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
@@ -389,7 +396,7 @@ sys_id: "5a1653d79534035f755308cf"
       </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="pospunch">PosPunch</h2>
+<h3 id="pospunch">PosPunch</h3>
 
 <p><strong>The punch records that are present in the point of sale system.</strong><br></p>
 
@@ -408,6 +415,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Cash_tips</strong> - The cash tips that the employee has. <br></li>
 <li> <strong>Credit_tips</strong> - The credit tips that the employee has. <br></li>
 </ul>
+
+<p><strong>Example:</strong> get punch records <a href="https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={%22store_id%22:%20{%20%22$eq%22:%20%225a1653d772bd660b0e9270bc%22%20}}&amp;fields=employee_reference&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;5a1653d772bd660b0e9270bc&rdquo; }}&amp;fields=employee_reference&amp;paging=limit:25,page:1</a></p>
 
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
@@ -458,7 +467,7 @@ sys_id: "5a1653d79534035f755308cf"
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h2 id="poscheck">PosCheck</h2>
+<h3 id="poscheck">PosCheck</h3>
 
 <p><strong>The different transactions at a restaurant.</strong><br></p>
 
@@ -583,7 +592,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 <p>PosCheckItem are only queryable via PosCheck.</p>
 
-<h2 id="poscheckitem">PosCheckItem</h2>
+<h3 id="poscheckitem">PosCheckItem</h3>
 
 <p><strong>The items that make up a transaction. Items listed here roll into PosCheck.</strong><br></p>
 
@@ -646,6 +655,15 @@ count: 17
 }
 ]
 </code></pre>
+
+<h2 id="setting-data-in-clarifi">Setting Data In Clarifi</h2>
+
+<p>COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications</p>
+
+<ul>
+<li><p><strong>StoreInfo</strong> - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.</p></li>
+<li><p><strong>StoreBusinessDay</strong> - These files are generated on a schedule and will be for things like sales and labor summaries. </p></li>
+</ul>
 
       </div>
       <div class="dark-box">
