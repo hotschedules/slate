@@ -43,6 +43,7 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItem
 > **EXAMPLE JSON RESPONSE:**
 
 ```
+[
 {
 name: "store_test_07",
 sys_id: "5a1653d772bd660b0e9270bc"
@@ -51,6 +52,7 @@ sys_id: "5a1653d772bd660b0e9270bc"
 name: "store_test_05",
 sys_id: "5a1653d79534035f755308cf"
 }
+]
 ```
 
 ##PosEmployee
