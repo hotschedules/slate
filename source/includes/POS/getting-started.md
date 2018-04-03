@@ -601,10 +601,6 @@ count: 17
 
 ##FileUpload
 <aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
-**Setting Data In Clarifi**
 
-COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
 
-  * **StoreInfo** - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.
-
-  * **StoreBusinessDay** - These files are generated on a schedule and will be for things like sales and labor summaries. 
+COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
