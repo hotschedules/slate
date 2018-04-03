@@ -1,17 +1,11 @@
 #POS Canonical Service
-## Introduction
+##Introduction
 
 This section will be used to define what canonical is and what the different POS canonical data types are. 
 
 A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  
 
-Canonical has two types of files that it can generate depending on the circumstance.
-
-  * **StoreInfo** - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.
-
-  * **StoreBusinessDay** - These files are generated on a schedule and will be for things like sales and labor summaries. 
-
-Using our RESTful service, a call can be made to endpoints to **GET** data. The minimum base call is the url to the endpoint and a page limit.
+Using our RESTful service, a call can be made to **GET** data from the API. Examples of the various calls are listed below with sample JSON Outputs.
 
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
 
@@ -23,8 +17,6 @@ Using a field in the  **where**  or **fields** clause will narrow the focus to s
 **Where:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1)
 
 **Fields:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1)
-
-COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
 
 Below you will find descriptions for each canonical type that we use and the available fields.
 
@@ -55,7 +47,8 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##PosEmployee
+##Getting Data From Clarifi
+###PosEmployee
 **A list of employees pulled from the point of sale.**<br>
 
 *  **Name** - The first and last name of the employee.<br>
@@ -108,7 +101,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##Posjob
+###Posjob
 **A list of job codes from the customer’s point of sale system.**<br>
 
 *  **Instore_name** - The name of the job code.<br>
@@ -116,6 +109,10 @@ sys_id: "5a1653d79534035f755308cf"
 *  **regular _rate** - The pay rate attached to the job code.<br>
 *  **Overtime_rate** - The overtime rate attached to the job.<br>
 *  **Doubletime_rate** - The doubletime rate assigned to the job.
+
+**Example:** To get a list of jobs for a specific store and associated values, this would be the query string used
+
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -145,7 +142,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##PosEmployeePosition
+###PosEmployeePosition
 **The job code assigned to the employee in the point of sale.**<br>
 
 *  **Employee_reference** - The employee’s POS ID.<br>
@@ -156,6 +153,10 @@ sys_id: "5a1653d79534035f755308cf"
 *  **PosSalesCategory** - The sales categories listed in the point of sale. <br>
 *  **Instore_id** - The point of sale ID given to the sales category. <br>
 *  **Name** - The name of the assigned sales category.
+
+**Example:** To get a list of positions for a specific store and associated values, this would be the query string used
+
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -195,11 +196,15 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##PosRevenueCenter
+###PosRevenueCenter
 **The revenue centers listed in the point of sale.**<br>
 
 *  **Instore_id** - The point of sale ID given to the revenue center. <br>
 *  **Name** - The name of the revenue center. <br>
+
+**Example:** To get a list of revenue centers for a specific store and associated values, this would be the query string used
+
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -228,7 +233,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##PosMenu
+###PosMenu
 **Different menu types. Examples can include things like a brunch or dinner menu.**<br>
 **Note:** PosMenu is nested within StoreInfo <br>
 
@@ -237,7 +242,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Items** - The items that make up a menu. <br>
 *  **Modifiers** - The modifiers that can be used by items in the menu. <br>
 
-##PosMenuItems
+
+###PosMenuItems
 **The items that can be used in all of the different menus.**<br>
 **Note:** PosMenuItems are nested within StoreInfo <br>
 
@@ -248,7 +254,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Unit_price** - The default menu price of the item. <br>
 *  **Prices** - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br>
 
-##PosMenumodifiers
+
+###PosMenumodifiers
 **Things like ketchup that can be used in tandem with a menu item.**<br>
 **Note:** PosMenumodifiers are nested within StoreInfo <br>
 
@@ -257,6 +264,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Description** - A longer version of the name that can provide further insight into the name. <br>
 *  **Unit_price** - The default menu price for a particular modifier. <br>
 *  **Prices** - Any other prices outside of the menu price that is associated with the modifier. <br>
+
+**Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:** [https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1)
 
 
 > **EXAMPLE JSON RESPONSE:**
@@ -337,7 +346,7 @@ sys_id: "5a1653d79534035f755308cf"
       }
 ```
 
-##PosPunch
+###PosPunch
 **The punch records that are present in the point of sale system.**<br>
 
 *  **Employee_reference** - the employee’s given point of sale ID. <br>
@@ -353,6 +362,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Declared_tips** - The declared tips that the employee has. <br>
 *  **Cash_tips** - The cash tips that the employee has. <br>
 *  **Credit_tips** - The credit tips that the employee has. <br>
+
+**Example:** get punch records [https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -403,7 +414,7 @@ sys_id: "5a1653d79534035f755308cf"
   }
 ```
 
-##PosCheck
+###PosCheck
 **The different transactions at a restaurant.**<br>
 
 *  **Check_id** - The point of sale ID given to the transaction. <br>
@@ -526,7 +537,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 PosCheckItem are only queryable via PosCheck.
 
-##PosCheckItem
+###PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
 
 *  **Item_code** - The given POS ID for the item.<br>
@@ -586,3 +597,11 @@ count: 17
 }
 ]
 ```
+
+##Setting Data In Clarifi
+
+COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
+
+  * **StoreInfo** - Only updated when new data is available. For example, a StoreInfo file will include employee data that only sends when it is updated.
+
+  * **StoreBusinessDay** - These files are generated on a schedule and will be for things like sales and labor summaries. 
