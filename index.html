@@ -4320,7 +4320,7 @@ This method uses hsSimpleDate objects for dates.</p>
 
 <aside class="notice"> <strong>QUERY StoreInfo</strong> </aside> 
 
-<p>PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, and PosMenuItem are only types that are queryable via StoreInfo.</p>
+<p>PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItems and PosMenumodifiers are only types that are queryable via StoreInfo.</p>
 
 <p><strong>Example:</strong> To get a list of employees for a specific store and associated values, this would be the query string used</p>
 
@@ -4333,17 +4333,15 @@ This method uses hsSimpleDate objects for dates.</p>
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
 </blockquote>
-<pre class="highlight plaintext"><code>[
-{
-name: "store_test_07",
-sys_id: "5a1653d772bd660b0e9270bc"
-},
-{
-name: "store_test_05",
-sys_id: "5a1653d79534035f755308cf"
-}
-]
-</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+</span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"store_test_07"</span><span class="p">,</span><span class="w">
+</span><span class="err">sys_id</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="w">
+</span><span class="p">}</span><span class="err">,</span><span class="w">
+</span><span class="p">{</span><span class="w">
+</span><span class="err">name</span><span class="p">:</span><span class="w"> </span><span class="s2">"store_test_05"</span><span class="p">,</span><span class="w">
+</span><span class="err">sys_id</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d79534035f755308cf"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h2 id="posemployee">PosEmployee</h2>
 
@@ -4362,6 +4360,45 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Phone_numbers</strong> - The employee’s phone number.</li>
 </ul>
 
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "store_employees": [
+      {
+        "name": {
+          "family_name": "DO NOT REMOVE",
+          "given_name": "ATO TRAINING 5"
+        },
+        "nickname": "ATO TRAINING 5",
+        "birthdate": null,
+        "addresses": [
+          {
+            "street_address": null,
+            "extended_address": null,
+            "locality": null,
+            "region": null,
+            "postal_code": null,
+            "country": null
+          }
+        ],
+        "status": "Active",
+        "employment_period": {
+          "from": "2018-04-03T00:00:00.000Z"
+        },
+        "instore_id": "905",
+        "hr_id": "",
+        "phone_numbers": [],
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
 <h2 id="posjob">Posjob</h2>
 
 <p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
@@ -4373,6 +4410,34 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Overtime_rate</strong> - The overtime rate attached to the job.<br></li>
 <li> <strong>Doubletime_rate</strong> - The doubletime rate assigned to the job.</li>
 </ul>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "store_jobs": [
+      {
+        "instore_name": "Server",
+        "instore_id": "1",
+        "regular_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "overtime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
 
 <h2 id="posemployeeposition">PosEmployeePosition</h2>
 
@@ -4389,6 +4454,44 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Name</strong> - The name of the assigned sales category.</li>
 </ul>
 
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "employee_positions": [
+      {
+        "employee_reference": {
+          "id": "905",
+          "name": "ATO TRAINING 5 DO NOT REMOVE"
+        },
+        "job_reference": {
+          "id": "12"
+        },
+        "regular_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "overtime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "doubletime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
 <h2 id="posrevenuecenter">PosRevenueCenter</h2>
 
 <p><strong>The revenue centers listed in the point of sale.</strong><br></p>
@@ -4398,9 +4501,37 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Name</strong> - The name of the revenue center. <br></li>
 </ul>
 
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "revenue_centers": [
+      {
+        "name": "Dining",
+        "instore_id": "1",
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      },
+      {
+        "name": "Bar Downstairs",
+        "instore_id": "2",
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
 <h2 id="posmenu">PosMenu</h2>
 
-<p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br></p>
+<p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br>
+<strong>Note:</strong> PosMenu is nested within StoreInfo <br></p>
 
 <ul>
 <li> <strong>Name</strong> - The name of the menu <br></li>
@@ -4411,7 +4542,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 <h2 id="posmenuitems">PosMenuItems</h2>
 
-<p><strong>The items that can be used in all of the different menus.</strong><br></p>
+<p><strong>The items that can be used in all of the different menus.</strong><br>
+<strong>Note:</strong> PosMenuItems are nested within StoreInfo <br></p>
 
 <ul>
 <li> <strong>Id</strong> - The point of sale ID given to a menu item. <br></li>
@@ -4424,7 +4556,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 <h2 id="posmenumodifiers">PosMenumodifiers</h2>
 
-<p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br></p>
+<p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br>
+<strong>Note:</strong> PosMenumodifiers are nested within StoreInfo <br></p>
 
 <ul>
 <li> <strong>Id</strong> - The given point of sale ID for the menu modifier.<br></li>
@@ -4433,6 +4566,84 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Unit_price</strong> - The default menu price for a particular modifier. <br></li>
 <li> <strong>Prices</strong> - Any other prices outside of the menu price that is associated with the modifier. <br></li>
 </ul>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"store_menus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Printers"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400520"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expo Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expo Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400521"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fry Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fry Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400522"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grill Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grill Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400523"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saute Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saute Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400524"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR UP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR UP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400525"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR BAR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR BAR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"modifiers"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h2 id="pospunch">PosPunch</h2>
 
@@ -4453,6 +4664,55 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Cash_tips</strong> - The cash tips that the employee has. <br></li>
 <li> <strong>Credit_tips</strong> - The credit tips that the employee has. <br></li>
 </ul>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"employee_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"395"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"job_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"business_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-10T12:32:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-11T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total_minutes_worked"</span><span class="p">:</span><span class="w"> </span><span class="mi">928</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"overtime_minutes_worked"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breaks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"regular_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"overtime_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tips"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"declared_tips"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itccsb/5a1653d772bd660b0e9270bc/20180331/StoreBusinessDay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"79e5a5c698d0c09fd66fb927d97b3dae"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-28T13:13:20.165Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin__itccsb"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_type_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31T17:00:24.001Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin__itccsb"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5abb94f03d0408724e91e8db"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
 
 <h2 id="poscheck">PosCheck</h2>
 
@@ -4481,17 +4741,103 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Items</strong> - The items that are on the transaction. <br></li>
 </ul>
 
-<aside class="notice"> <strong>QUERY PosCheck</strong> </aside> 
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"business_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"check_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60025"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"employee_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"922"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"net_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"gross_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">58198</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"discount_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tender_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">70198</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"shift_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"revenue_center"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"opened_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T19:19:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"canceled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"itccsb/5a1653d772bd660b0e9270bc/20180326/StoreBusinessDay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"item_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55032"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sales_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"gross_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"net_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"tax_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"discount_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"void_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"discounted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"guest_count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"voided"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T23:00:30.351Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin__itccsb"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_type_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-27T12:24:00.269Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin__itccsb"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ab97b8f9534036231f8b72a"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice"> <strong>QUERY PosCheck</strong> </aside>
 
 <p>PosCheckItem are only queryable via PosCheck.</p>
-
-<p><strong>Example:</strong> To get a count of a number of items</p>
-
-<p><a href="https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:%22$items.item_code%22,count:{%22$sum%22:1}}}]">https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
-
-<p><strong>Example:</strong> How many items sold over a time period</p>
-
-<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1,business_day:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:{items:%22$items.item_code%22,business_day:%22$business_day%22},count:{%22$sum%22:1}}}]">https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
 
 <h2 id="poscheckitem">PosCheckItem</h2>
 
@@ -4516,6 +4862,46 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Revenue_center</strong> - The revenue center that data is being pulled from. <br></li>
 <li> <strong>Employee_reference</strong> - The point of sale ID given to the employee whose data you are viewing.</li>
 </ul>
+
+<p><strong>Example:</strong> To get a count of a number of items</p>
+
+<p><a href="https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:%22$items.item_code%22,count:{%22$sum%22:1}}}]">https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+{
+_id: "55136",
+count: 630
+}
+]
+</code></pre>
+
+<p><strong>Example:</strong> How many items sold over a time period</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1,business_day:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:{items:%22$items.item_code%22,business_day:%22$business_day%22},count:{%22$sum%22:1}}}]">https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+{
+_id: {
+items: "55136",
+business_day: "2018-04-01"
+},
+count: 26
+},
+{
+_id: {
+items: "55136",
+business_day: "2018-04-02"
+},
+count: 17
+}
+]
+</code></pre>
 
           <h1 id="canonical-service">Canonical Service</h1>
 
