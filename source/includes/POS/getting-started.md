@@ -38,7 +38,7 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItem
 
 **Note:** store_number is the sys_id of the store you are running the call for. To retrieve the list of sys_id's for all stores, use the following call.
 
-[https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESAPCE/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -549,7 +549,7 @@ PosCheckItem are only queryable via PosCheck.
 
 **Example:** To get a count of a number of items
 
-[https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}] ] (https://api.hotschedules.io/itccsb/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}])
+[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}] ] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}])
 
 > **EXAMPLE JSON RESPONSE:**
 
