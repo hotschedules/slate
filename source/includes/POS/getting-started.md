@@ -69,6 +69,43 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Hr_id** - The ID given to the employee by the company.<br> 
 *  **Phone_numbers** - The employee’s phone number.
 
+> **EXAMPLE JSON RESPONSE:**
+
+```
+  {
+    "store_employees": [
+      {
+        "name": {
+          "family_name": "DO NOT REMOVE",
+          "given_name": "ATO TRAINING 5"
+        },
+        "nickname": "ATO TRAINING 5",
+        "birthdate": null,
+        "addresses": [
+          {
+            "street_address": null,
+            "extended_address": null,
+            "locality": null,
+            "region": null,
+            "postal_code": null,
+            "country": null
+          }
+        ],
+        "status": "Active",
+        "employment_period": {
+          "from": "2018-04-03T00:00:00.000Z"
+        },
+        "instore_id": "905",
+        "hr_id": "",
+        "phone_numbers": [],
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      },
+```
+
 ##Posjob
 **A list of job codes from the customer’s point of sale system.**<br>
 
