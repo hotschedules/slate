@@ -37,6 +37,8 @@
 
 <p>A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  </p>
 
+<aside class="notice"> <strong>Getting Data From Clarifi</strong> </aside>
+
 <p>Using our RESTful service, a call can be made to <strong>GET</strong> data from the API. Examples of the various calls are listed below with sample JSON Outputs.</p>
 
 <p>HTTP Status Codes provide a description of the sucess or failure of a call: <a href="https://httpstatuses.com">https://httpstatuses.com</a></p>
@@ -78,9 +80,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h2 id="getting-data-from-clarifi">Getting Data From Clarifi</h2>
-
-<h3 id="posemployee">PosEmployee</h3>
+<h2 id="posemployee">PosEmployee</h2>
 
 <p><strong>A list of employees pulled from the point of sale.</strong><br></p>
 
@@ -136,7 +136,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h3 id="posjob">Posjob</h3>
+<h2 id="posjob">Posjob</h2>
 
 <p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
 
@@ -180,7 +180,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h3 id="posemployeeposition">PosEmployeePosition</h3>
+<h2 id="posemployeeposition">PosEmployeePosition</h2>
 
 <p><strong>The job code assigned to the employee in the point of sale.</strong><br></p>
 
@@ -237,7 +237,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h3 id="posrevenuecenter">PosRevenueCenter</h3>
+<h2 id="posrevenuecenter">PosRevenueCenter</h2>
 
 <p><strong>The revenue centers listed in the point of sale.</strong><br></p>
 
@@ -277,7 +277,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 </code></pre>
 
-<h3 id="posmenu">PosMenu</h3>
+<h2 id="posmenu">PosMenu</h2>
 
 <p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br>
 <strong>Note:</strong> PosMenu is nested within StoreInfo <br></p>
@@ -289,7 +289,7 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Modifiers</strong> - The modifiers that can be used by items in the menu. <br></li>
 </ul>
 
-<h3 id="posmenuitems">PosMenuItems</h3>
+<h2 id="posmenuitems">PosMenuItems</h2>
 
 <p><strong>The items that can be used in all of the different menus.</strong><br>
 <strong>Note:</strong> PosMenuItems are nested within StoreInfo <br></p>
@@ -303,7 +303,7 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Prices</strong> - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br></li>
 </ul>
 
-<h3 id="posmenumodifiers">PosMenumodifiers</h3>
+<h2 id="posmenumodifiers">PosMenumodifiers</h2>
 
 <p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br>
 <strong>Note:</strong> PosMenumodifiers are nested within StoreInfo <br></p>
@@ -396,7 +396,7 @@ sys_id: "5a1653d79534035f755308cf"
       </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h3 id="pospunch">PosPunch</h3>
+<h2 id="pospunch">PosPunch</h2>
 
 <p><strong>The punch records that are present in the point of sale system.</strong><br></p>
 
@@ -467,7 +467,7 @@ sys_id: "5a1653d79534035f755308cf"
   </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<h3 id="poscheck">PosCheck</h3>
+<h2 id="poscheck">PosCheck</h2>
 
 <p><strong>The different transactions at a restaurant.</strong><br></p>
 
@@ -592,7 +592,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 <p>PosCheckItem are only queryable via PosCheck.</p>
 
-<h3 id="poscheckitem">PosCheckItem</h3>
+<h2 id="poscheckitem">PosCheckItem</h2>
 
 <p><strong>The items that make up a transaction. Items listed here roll into PosCheck.</strong><br></p>
 
@@ -656,7 +656,11 @@ count: 17
 ]
 </code></pre>
 
-<h2 id="setting-data-in-clarifi">Setting Data In Clarifi</h2>
+<h2 id="fileupload">FileUpload</h2>
+
+<aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
+
+<p><strong>Setting Data In Clarifi</strong></p>
 
 <p>COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications</p>
 
