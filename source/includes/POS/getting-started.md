@@ -5,6 +5,8 @@ This section will be used to define what canonical is and what the different POS
 
 A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  
 
+<aside class="notice"> <strong>Getting Data From Clarifi</strong> </aside>
+
 Using our RESTful service, a call can be made to **GET** data from the API. Examples of the various calls are listed below with sample JSON Outputs.
 
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
@@ -47,8 +49,8 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-##Getting Data From Clarifi
-###PosEmployee
+
+##PosEmployee
 **A list of employees pulled from the point of sale.**<br>
 
 *  **Name** - The first and last name of the employee.<br>
@@ -101,7 +103,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-###Posjob
+##Posjob
 **A list of job codes from the customer’s point of sale system.**<br>
 
 *  **Instore_name** - The name of the job code.<br>
@@ -142,7 +144,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-###PosEmployeePosition
+##PosEmployeePosition
 **The job code assigned to the employee in the point of sale.**<br>
 
 *  **Employee_reference** - The employee’s POS ID.<br>
@@ -196,7 +198,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-###PosRevenueCenter
+##PosRevenueCenter
 **The revenue centers listed in the point of sale.**<br>
 
 *  **Instore_id** - The point of sale ID given to the revenue center. <br>
@@ -233,7 +235,7 @@ sys_id: "5a1653d79534035f755308cf"
 ]
 ```
 
-###PosMenu
+##PosMenu
 **Different menu types. Examples can include things like a brunch or dinner menu.**<br>
 **Note:** PosMenu is nested within StoreInfo <br>
 
@@ -243,7 +245,7 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Modifiers** - The modifiers that can be used by items in the menu. <br>
 
 
-###PosMenuItems
+##PosMenuItems
 **The items that can be used in all of the different menus.**<br>
 **Note:** PosMenuItems are nested within StoreInfo <br>
 
@@ -254,8 +256,7 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Unit_price** - The default menu price of the item. <br>
 *  **Prices** - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br>
 
-
-###PosMenumodifiers
+##PosMenumodifiers
 **Things like ketchup that can be used in tandem with a menu item.**<br>
 **Note:** PosMenumodifiers are nested within StoreInfo <br>
 
@@ -346,7 +347,7 @@ sys_id: "5a1653d79534035f755308cf"
       }
 ```
 
-###PosPunch
+##PosPunch
 **The punch records that are present in the point of sale system.**<br>
 
 *  **Employee_reference** - the employee’s given point of sale ID. <br>
@@ -414,7 +415,7 @@ sys_id: "5a1653d79534035f755308cf"
   }
 ```
 
-###PosCheck
+##PosCheck
 **The different transactions at a restaurant.**<br>
 
 *  **Check_id** - The point of sale ID given to the transaction. <br>
@@ -537,7 +538,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 PosCheckItem are only queryable via PosCheck.
 
-###PosCheckItem
+##PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
 
 *  **Item_code** - The given POS ID for the item.<br>
@@ -598,7 +599,9 @@ count: 17
 ]
 ```
 
-##Setting Data In Clarifi
+##FileUpload
+<aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
+**Setting Data In Clarifi**
 
 COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications
 
