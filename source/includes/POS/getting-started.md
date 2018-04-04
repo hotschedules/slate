@@ -654,7 +654,7 @@ The example provided below has been created using Postman. Configure Postman usi
 ![Configuration](/images/postmanbody.png?raw=true)
 
 The configuration will enable you to pass in your bearer token and my namespace, and do a **PUT** to
-files.hotschedules.io/files/raw/<store_id>/<filename>
+files.hotschedules.io/files/raw/store_id/filename
 
 You'll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.
 
