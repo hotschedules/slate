@@ -1,0 +1,486 @@
+{
+  "name": "storeinfotestfile",
+  "store_number": "2662",
+  "concept": "8436",
+  "store_id": "5a997e4a490d05496aae228b",
+  "store": {
+    "name": "airwavescafe",
+    "display_name": "Airwaves Cafe",
+    "store_number": "2662",
+    "concept": "8436",
+    "status": "Active",
+    "address": {
+      "street_address": "2702 B Parker Road",
+      "extended_address": "null",
+      "locality": "Round Rock",
+      "region": "TX",
+      "postal_code": "78681",
+      "country": "US"
+    },
+    "telephone": "",
+    "timezone": "US/Central",
+    "external_ids": [],
+    "pos_data": [],
+    "currency": "USD",
+    "store_hours": [],
+    "store_id": "5a997e4a490d05496aae228b",
+    "business_day_start_hour": 4,
+    "business_day_end_hour": 23
+  },
+  "store_employees": [
+    {
+      "name": {
+        "family_name": "Peter",
+        "given_name": "Pan"
+      },
+      "nickname": "Pan",
+      "addresses": [
+        {
+          "street_address": "TMx3714",
+          "extended_address": "",
+          "locality": "",
+          "region": "",
+          "postal_code": "",
+          "country": "US"
+        }
+      ],
+      "instore_id": "1",
+      "hr_id": "46373",
+      "phone_numbers": [
+        "2565855384"
+      ],
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "StoreInfo Test File",
+        "id": "3714"
+      },
+      "employment_period": {
+        "from": "2018-04-02T08:47:19.982Z"
+      },
+      "birthdate": "1978-09-09T05:00:00.000Z",
+      "status": "Active"
+    },
+    {
+      "name": {
+        "family_name": "Shawn",
+        "given_name": "White"
+      },
+      "nickname": "Skater",
+      "addresses": [
+        {
+          "street_address": "TMx3714",
+          "extended_address": "",
+          "locality": "",
+          "region": "",
+          "postal_code": "",
+          "country": "US"
+        }
+      ],
+      "instore_id": "2",
+      "hr_id": "633280",
+      "phone_numbers": [
+        "5129204907"
+      ],
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      },
+      "employment_period": {
+        "from": "2018-04-02T08:47:19.983Z"
+      },
+      "birthdate": "1985-10-08T05:00:00.000Z",
+      "status": "Active"
+    }
+  ],
+  "employee_positions": [
+    {
+      "employee_reference": {
+        "id": "1"
+      },
+      "job_reference": {
+        "id": "500"
+      },
+      "regular_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "overtime_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "doubletime_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "employee_reference": {
+        "id": "2"
+      },
+      "job_reference": {
+        "id": "108"
+      },
+      "regular_rate": {
+        "value": 1000,
+        "scale": 2,
+        "code": "USD"
+      },
+      "overtime_rate": {
+        "value": 1500,
+        "scale": 2,
+        "code": "USD"
+      },
+      "doubletime_rate": {
+        "value": 2000,
+        "scale": 2,
+        "code": "USD"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    }
+  ],
+  "revenue_centers": [
+    {
+      "name": "All Departments",
+      "instore_id": "0",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "DINING",
+      "instore_id": "1",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "BAR/SA/IND",
+      "instore_id": "3",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "SERVER TRAIN",
+      "instore_id": "5",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "BAR TRAIN.",
+      "instore_id": "6",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "TO GO",
+      "instore_id": "8",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "OPERATIONS",
+      "instore_id": "10",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "ONLINE ORDER",
+      "instore_id": "11",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    }
+  ],
+  "store_jobs": [
+    {
+      "instore_name": "EGM",
+      "instore_id": "500",
+      "regular_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "overtime_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "instore_name": "PIVOT TRNG",
+      "instore_id": "108",
+      "regular_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "overtime_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "instore_name": "Server Setup",
+      "instore_id": "113",
+      "regular_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "overtime_rate": {
+        "value": 0,
+        "scale": 2,
+        "code": "USD"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    }
+  ],
+  "sales_categories": [
+    {
+      "name": "SALES",
+      "instore_id": "1",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    },
+    {
+      "name": "FOOD",
+      "instore_id": "2",
+      "store_id": "5a997e4a490d05496aae228b",
+      "content_url": "[]",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      }
+    }
+  ],
+  "store_menus": [
+    {
+      "name": "SALES",
+      "store_reference": {
+        "name": "StoreInfo Test File",
+        "id": "3714"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "category": [
+        {
+          "id": "1",
+          "name": "SALES"
+        }
+      ],
+      "items": [],
+      "modifiers": [],
+      "content_url": "[]"
+    },
+    {
+      "name": "FOOD",
+      "store_reference": {
+        "name": "Airwaves Cafe",
+        "id": "2662"
+      },
+      "store_id": "5a997e4a490d05496aae228b",
+      "category": [
+        {
+          "id": "2",
+          "name": "FOOD"
+        }
+      ],
+      "items": [],
+      "modifiers": [],
+      "content_url": "[]"
+    }
+  ],
+  "sys_version": 38269,
+  "sys_created_at": "2017-12-14T20:28:38.911Z",
+  "sys_created_by": "admin__theposthatrefreshes",
+  "sys_type_version": 2,
+  "sys_modified_at": "2018-04-02T08:47:23.711Z",
+  "sys_modified_by": "admin__theposthatrefreshes",
+  "company_id": "964307885",
+  "store_payments": [
+    {
+      "name": "ONLINEPAY",
+      "id": "222"
+    },
+    {
+      "name": "CONTRACTOR CHRG",
+      "id": "223"
+    },
+    {
+      "name": "CASHDROP",
+      "id": "224"
+    },
+    {
+      "name": "INVALIDCC",
+      "id": "226"
+    },
+    {
+      "name": "SMART CRD",
+      "id": "227"
+    },
+    {
+      "name": "DEBIT CC",
+      "id": "228"
+    },
+    {
+      "name": "DEBIT",
+      "id": "229"
+    },
+    {
+      "name": "CARD FEE",
+      "id": "231"
+    },
+    {
+      "name": "TIP DISTRIBUTION",
+      "id": "232"
+    },
+    {
+      "name": "EXCHANGE",
+      "id": "233"
+    },
+    {
+      "name": "EMPLOYEE",
+      "id": "234"
+    },
+    {
+      "name": "OVER/SHORT",
+      "id": "235"
+    },
+    {
+      "name": "SERVICE CHARGE",
+      "id": "236"
+    },
+    {
+      "name": "TIPS",
+      "id": "237"
+    },
+    {
+      "name": "CREDIT",
+      "id": "238"
+    },
+    {
+      "name": "GCERTF",
+      "id": "239"
+    },
+    {
+      "name": "GC SLD",
+      "id": "242"
+    },
+    {
+      "name": "GC RDM",
+      "id": "243"
+    },
+    {
+      "name": "CHECK",
+      "id": "244"
+    },
+    {
+      "name": "G. CERT",
+      "id": "245"
+    },
+    {
+      "name": "HOUSE",
+      "id": "246"
+    },
+    {
+      "name": "CARTE",
+      "id": "247"
+    },
+    {
+      "name": "DINERS",
+      "id": "248"
+    },
+    {
+      "name": "DISCVR",
+      "id": "249"
+    },
+    {
+      "name": "AMEX",
+      "id": "250"
+    },
+    {
+      "name": "MASTER",
+      "id": "251"
+    },
+    {
+      "name": "VISA",
+      "id": "252"
+    },
+    {
+      "name": "BAL RND",
+      "id": "254"
+    },
+    {
+      "name": "CASH",
+      "id": "255"
+    }
+  ],
+  "sys_id": "5a32def6731c145f9e1dc7c6"
+}

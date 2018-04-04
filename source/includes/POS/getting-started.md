@@ -681,4 +681,19 @@ Your files will be visible in your File Manager.
 
 Once the file arrives in the namespace, the Airwaves job will activate and Airwaves will put the file through the API server, basically unpacking all the data within the file and making it available for other applications to consume.
 
+The following example files (StoreInfoMMDDYR.json and StoreBusinessDayMMDDYR.json) are provided for download.
+
+**Best Practice:** Name your json file and your zip file using a simliar naming convention.
+
+i.e. StoreInfo040418.json and StoreInfo040418.zip
+
+<a href="http://docs.hotschedules.io/images/StoreInfoMMDDYR.json" target="_blank">StoreInfoMMDDYR.json</a>
+
+<a href="http://docs.hotschedules.io/images/StoreBusinessDayMMDDYR.json" target="_blank">StoreBusinessDayMMDDYR.json</a>
+
+
+**Note:** You will create a separate zip file for each file as you will POST each file separately when you submit your call to upload data into Clarifi. 
+
+
+
 
