@@ -4930,7 +4930,39 @@ count: 17
 
 <p>The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.</p>
 
+<p><strong>Configure Header</strong></p>
+
 <p><img alt="Configuration" src="images/postmanheader.png?raw=true" /></p>
+
+<p><strong>Configure Body</strong></p>
+
+<p><img alt="Configuration" src="images/postmanbody.png?raw=true" /></p>
+
+<p>The configuration will enable you to pass in your bearer token and my namespace, and do a <strong>PUT</strong> to
+files.hotschedules.io/files/raw/<store_id>/<filename></p>
+
+<p>You&rsquo;ll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.</p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+        "namespace": "theposthatrefreshes",
+        "name": "StoreInfo6.zip",
+        "original_name": "StoreInfo6.zip",
+        "location": "theposthatrefreshes/5a997e4a490d05496aae228b/StoreInfo6.zip",
+        "media_type": "application/zip",
+        "uploaded_at": "2018-04-03T22:11:27.725Z",
+        "bucket": "raw",
+        "BodhiAsyncStatus": "/theposthatrefreshes/resources/BodhiAsyncStatus/5ac3fc0ff4a7c05f0ead361b"
+    }
+]
+</code></pre>
+
+<p>Your files will be visible in your File Manager.</p>
+
+<p><img alt="Configuration" src="images/filemanager.png?raw=true" /></p>
 
           <h1 id="canonical-service">Canonical Service</h1>
 
