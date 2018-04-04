@@ -631,7 +631,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <br>
 
-**Install the Airwaves app:** Login to your namespace and use the Bodhi Sjop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.
+**Install the Airwaves app:** Login to your namespace and use the Bodhi Shop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.
 
 
 ![Install Airwaves](/images/airwaves.png?raw=true)
