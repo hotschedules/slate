@@ -610,3 +610,8 @@ Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusine
 * A namespace running the Airwaves job
 * Your files (StoreInfo and StoreBusinessDay)
 * Method to pass data to the API (Postman for example)
+
+The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.
+
+![alt text](/images/postmanheader.png?raw=true)
+
