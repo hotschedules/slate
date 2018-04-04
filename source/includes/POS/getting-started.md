@@ -611,7 +611,7 @@ Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusine
 * Your files (StoreInfo and StoreBusinessDay)
 * Method to pass data to the API (Postman for example)
 
-We have created a Postman collection to enable you with making calls to the REST API. The Collection includes examples for POSTing to the File Upload Endpoint. 
+We have created a Postman collection to enable you with posting data to the POS Canonical Service. The Collection includes examples for POSTing to the File Upload Endpoint. The examples are titled "StoreInfo" and "StoreBusinessDay".
 
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
