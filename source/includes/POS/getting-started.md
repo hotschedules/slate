@@ -611,6 +611,18 @@ Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusine
 * Your files (StoreInfo and StoreBusinessDay)
 * Method to pass data to the API (Postman for example)
 
+**Install the Airwaves app:** Login to your namespace and use the Bodhi Sjop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.
+
+
+![Install Airwaves](/images/airwaves.png?raw=true)
+
+Once installed, Airwaves will be available in the Job Manager.
+
+![Configuration](/images/airwavesjob.png?raw=true)
+
+
+**Configure Postman**
+
 The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.
 
 **Configure Header**
@@ -646,5 +658,7 @@ You'll be passing in a .zip file that contains your data, and attach the zip as 
 Your files will be visible in your File Manager.
 
 ![Configuration](/images/filemanager.png?raw=true)
+
+Once the file arrives in the namespace, the Airwaves job will activate and Airwaves will put the file through the API server, basically unpacking all the data within the file and making it available for other applications to consume.
 
 
