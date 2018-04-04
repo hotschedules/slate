@@ -613,5 +613,38 @@ Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusine
 
 The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.
 
+**Configure Header**
+
 ![Configuration](/images/postmanheader.png?raw=true)
+
+**Configure Body**
+
+![Configuration](/images/postmanbody.png?raw=true)
+
+The configuration will enable you to pass in your bearer token and my namespace, and do a **PUT** to
+files.hotschedules.io/files/raw/<store_id>/<filename>
+
+You'll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.
+
+> **EXAMPLE JSON RESPONSE:**
+
+```
+[
+    {
+        "namespace": "theposthatrefreshes",
+        "name": "StoreInfo6.zip",
+        "original_name": "StoreInfo6.zip",
+        "location": "theposthatrefreshes/5a997e4a490d05496aae228b/StoreInfo6.zip",
+        "media_type": "application/zip",
+        "uploaded_at": "2018-04-03T22:11:27.725Z",
+        "bucket": "raw",
+        "BodhiAsyncStatus": "/theposthatrefreshes/resources/BodhiAsyncStatus/5ac3fc0ff4a7c05f0ead361b"
+    }
+]
+```
+
+Your files will be visible in your File Manager.
+
+![Configuration](/images/filemanager.png?raw=true)
+
 
