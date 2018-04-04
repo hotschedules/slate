@@ -4928,6 +4928,16 @@ count: 17
 <li>Method to pass data to the API (Postman for example)</li>
 </ul>
 
+<p><strong>Install the Airwaves app:</strong> Login to your namespace and use the Bodhi Sjop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.</p>
+
+<p><img alt="Install Airwaves" src="images/airwaves.png?raw=true" /></p>
+
+<p>Once installed, Airwaves will be available in the Job Manager.</p>
+
+<p><img alt="Configuration" src="images/airwavesjob.png?raw=true" /></p>
+
+<p><strong>Configure Postman</strong></p>
+
 <p>The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.</p>
 
 <p><strong>Configure Header</strong></p>
@@ -4963,6 +4973,8 @@ files.hotschedules.io/files/raw/<store_id>/<filename></p>
 <p>Your files will be visible in your File Manager.</p>
 
 <p><img alt="Configuration" src="images/filemanager.png?raw=true" /></p>
+
+<p>Once the file arrives in the namespace, the Airwaves job will activate and Airwaves will put the file through the API server, basically unpacking all the data within the file and making it available for other applications to consume.</p>
 
           <h1 id="canonical-service">Canonical Service</h1>
 
