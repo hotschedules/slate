@@ -603,7 +603,7 @@ count: 17
 <aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
 
 
-Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
+Use the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
 
 **What you'll need:**
 
