@@ -603,4 +603,10 @@ count: 17
 <aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
 
 
-COMING SOON: Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
+Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
+
+**What you'll need:**
+
+* A namespace running the Airwaves job
+* Your files (StoreInfo and StoreBusinessDay)
+* Method to pass data to the API (Postman for example)
