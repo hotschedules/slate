@@ -613,5 +613,5 @@ Using the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusine
 
 The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.
 
-![alt text](/images/postmanheader.png?raw=true)
+![Configuration](/images/postmanheader.png?raw=true)
 
