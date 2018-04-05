@@ -95,7 +95,7 @@ sys_id: "5a1653d79534035f755308cf"
         "hr_id": "",
         "phone_numbers": [],
         "store_id": "5a1653d772bd660b0e9270bc",
-        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
         "store_reference": {
           "id": "7"
         }
@@ -136,7 +136,7 @@ sys_id: "5a1653d79534035f755308cf"
           "code": "USD"
         },
         "store_id": "5a1653d772bd660b0e9270bc",
-        "content_url": "itccsb/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
         "store_reference": {
           "id": "7"
         }
@@ -407,10 +407,10 @@ sys_id: "5a1653d79534035f755308cf"
     "key": "79e5a5c698d0c09fd66fb927d97b3dae",
     "sys_version": 4,
     "sys_created_at": "2018-03-28T13:13:20.165Z",
-    "sys_created_by": "admin__namespace",
+    "sys_created_by": "admin",
     "sys_type_version": 6,
     "sys_modified_at": "2018-03-31T17:00:24.001Z",
-    "sys_modified_by": "admin__namespace",
+    "sys_modified_by": "admin",
     "sys_id": "5abb94f03d0408724e91e8db"
   }
 ```
