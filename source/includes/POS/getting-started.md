@@ -28,9 +28,9 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItem
 
 **Example:** To get a list of employees for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
 
-**Note:** store_number is the sys_id of the store you are running the call for. To retrieve the list of sys_id's for all stores, use the following call.
+**Note:** store_id is the sys_id of the store you are running the call for. To retrieve the list of sys_id's for all stores, use the following call.
 
 [https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
 
