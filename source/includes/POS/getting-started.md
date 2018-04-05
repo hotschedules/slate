@@ -114,7 +114,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of jobs for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -158,7 +158,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of positions for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -206,7 +206,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of revenue centers for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_number": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
