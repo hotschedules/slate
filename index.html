@@ -4317,9 +4317,9 @@ This method uses hsSimpleDate objects for dates.</p>
 
 <p><strong>Example:</strong> To get a list of employees for a specific store and associated values, this would be the query string used</p>
 
-<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_number%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=store_employees,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_number&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=store_employees,name&amp;paging=limit:25,page:1</a></p>
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=store_employees,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=store_employees,name&amp;paging=limit:25,page:1</a></p>
 
-<p><strong>Note:</strong> store_number is the sys_id of the store you are running the call for. To retrieve the list of sys_id&rsquo;s for all stores, use the following call.</p>
+<p><strong>Note:</strong> store_id is the sys_id of the store you are running the call for. To retrieve the list of sys_id&rsquo;s for all stores, use the following call.</p>
 
 <p><a href="https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&amp;paging=limit:25,page:1</a></p>
 
