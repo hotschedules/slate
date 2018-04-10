@@ -38,8 +38,6 @@ The Query Tool can be used to get or set data to any of the POSTypes listed belo
 ![Bodhi Tools Page](/images/bqt5.png?raw=true)
 
 
-
-
 Using our RESTful service, a call can be made to **GET** data from the API. Examples of the various calls are listed below with sample JSON Outputs. The file spec is available for download providing the data points and the expected data type for each field.
 
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
@@ -664,7 +662,7 @@ The BodhiFileUpload endpoint is special type that allows a user to upload files 
 * Your files (StoreInfo and StoreBusinessDay)
 * Method to pass data to the API (HS Bodhi Query Tool or Postman for example)
 
-At a minimum, your files need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
+At a minimum, your file need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
 
 
 **Login to your namespace:** [https://tools.hotschedules.io] (https://tools.hotschedules.io)
