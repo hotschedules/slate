@@ -752,11 +752,6 @@ The following example files (StoreInfoMMDDYR.json and StoreBusinessDayMMDDYR.jso
 
 i.e. StoreInfo040418.json and StoreInfo040418.zip
 
-<a href="http://docs.hotschedules.io/images/StoreInfoMMDDYR.json" target="_blank">StoreInfoMMDDYR.json</a>
+<a href="http://docs.hotschedules.io/images/StoreInfoMMDDYR.json" download><img border="0" src="/images/jsonicon.png" alt="Download File StoreInfoMMDDYR.json" width="32" height="32">StoreInfoMMDDYR.json</a>
 
-<a href="http://docs.hotschedules.io/images/StoreBusinessDayMMDDYR.json" target="_blank">StoreBusinessDayMMDDYR.json</a>
-
-
-
-
-
+<a href="http://docs.hotschedules.io/images/StoreBusinessDayMMDDYR.json" download><img border="0" src="/images/jsonicon.png" alt="Download File StoreBusinessDayMMDDYR.json" width="32" height="32">StoreBusinessDayMMDDYR.json</a>
