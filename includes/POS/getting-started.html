@@ -29,7 +29,7 @@
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
-        <h1 id="pos-canonical-service">POS Canonical Service</h1>
+        <h1 id="clarifi-api-service">Clarifi API Service</h1>
 
 <h2 id="introduction">Introduction</h2>
 
@@ -97,6 +97,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Phone_numbers</strong> - The employee’s phone number.</li>
 </ul>
 
+<p><a href="/images/PosEmployee.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
 <blockquote>
 <p><strong>EXAMPLE JSON RESPONSE:</strong></p>
 </blockquote>
@@ -139,6 +141,8 @@ sys_id: "5a1653d79534035f755308cf"
 <h2 id="posjob">Posjob</h2>
 
 <p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
+
+<p><a href="/images/PosJob.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
 
 <ul>
 <li> <strong>Instore_name</strong> - The name of the job code.<br></li>
@@ -183,6 +187,8 @@ sys_id: "5a1653d79534035f755308cf"
 <h2 id="posemployeeposition">PosEmployeePosition</h2>
 
 <p><strong>The job code assigned to the employee in the point of sale.</strong><br></p>
+
+<p><a href="/images/PosEmployeePosition.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
 
 <ul>
 <li> <strong>Employee_reference</strong> - The employee’s POS ID.<br></li>
@@ -239,7 +245,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 <h2 id="posrevenuecenter">PosRevenueCenter</h2>
 
-<p><strong>The revenue centers listed in the point of sale.</strong><br></p>
+<p><strong>The revenue centers listed in the point of sale.</strong><br>
+<a href="/images/PosRevenueCenter.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
 
 <ul>
 <li> <strong>Instore_id</strong> - The point of sale ID given to the revenue center. <br></li>
@@ -289,6 +296,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Modifiers</strong> - The modifiers that can be used by items in the menu. <br></li>
 </ul>
 
+<p><a href="/images/PosMenu.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
 <h2 id="posmenuitems">PosMenuItems</h2>
 
 <p><strong>The items that can be used in all of the different menus.</strong><br>
@@ -303,6 +312,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Prices</strong> - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br></li>
 </ul>
 
+<p><a href="/images/PosMenuItems.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
 <h2 id="posmenumodifiers">PosMenumodifiers</h2>
 
 <p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br>
@@ -315,6 +326,8 @@ sys_id: "5a1653d79534035f755308cf"
 <li> <strong>Unit_price</strong> - The default menu price for a particular modifier. <br></li>
 <li> <strong>Prices</strong> - Any other prices outside of the menu price that is associated with the modifier. <br></li>
 </ul>
+
+<p><a href="/images/PosMenumodifiers.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
 
 <p><strong>Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%225a1653d772bd660b0e9270bc%22%20}}&amp;fields=store_menus&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;5a1653d772bd660b0e9270bc&rdquo; }}&amp;fields=store_menus&amp;paging=limit:25,page:1</a></p>
 
@@ -400,6 +413,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 <p><strong>The punch records that are present in the point of sale system.</strong><br></p>
 
+<p><a href="/images/PosPunch.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
 <ul>
 <li> <strong>Employee_reference</strong> - the employee’s given point of sale ID. <br></li>
 <li> <strong>Job_reference</strong> - The given point of sale ID for the job code that is assigned to the employee. <br></li>
@@ -470,6 +485,8 @@ sys_id: "5a1653d79534035f755308cf"
 <h2 id="poscheck">PosCheck</h2>
 
 <p><strong>The different transactions at a restaurant.</strong><br></p>
+
+<p><a href="/images/PosCheck.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
 
 <ul>
 <li> <strong>Check_id</strong> - The point of sale ID given to the transaction. <br></li>
@@ -596,6 +613,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 <p><strong>The items that make up a transaction. Items listed here roll into PosCheck.</strong><br></p>
 
+<p><a href="/images/PosCheckItem.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
 <ul>
 <li> <strong>Item_code</strong> - The given POS ID for the item.<br></li>
 <li> <strong>Unit_price</strong> - The menu price of the check item. <br></li>
@@ -656,11 +675,13 @@ count: 17
 ]
 </code></pre>
 
-<h2 id="fileupload">FileUpload</h2>
+<h2 id="getting-data-into-clarifi">Getting Data into Clarifi</h2>
 
 <aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
 
-<p>Use the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.</p>
+<p>The BodhiFileUpload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.</p>
+
+<p><strong>FileUpload EndPoint URL:</strong> https://files.hotschedules.io/files/raw/store_id/filename</p>
 
 <p><strong>What you&rsquo;ll need:</strong></p>
 
@@ -710,7 +731,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 <p><img alt="Configuration" src="../../images/postmanbody.png?raw=true" /></p>
 
 <p>The configuration will enable you to pass in your bearer token and my namespace, and do a <strong>PUT</strong> to
-files.hotschedules.io/files/raw/store_id/filename</p>
+<a href="https://files.hotschedules.io/files/raw/store_id/filename">https://files.hotschedules.io/files/raw/store_id/filename</a></p>
 
 <p>You&rsquo;ll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.</p>
 
