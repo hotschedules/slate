@@ -7,7 +7,40 @@ A canonical data module (also known as CDM) in general terms is something used t
 
 <aside class="notice"> <strong>Getting Data From Clarifi</strong> </aside>
 
-Using our RESTful service, a call can be made to **GET** data from the API. Examples of the various calls are listed below with sample JSON Outputs.
+HotSchedules provides a tool called "Bodhi Query" which can be used to interact with the Clarifi API. Using the query tool will allow you to get store data such as the "sys_id". The query tool also alllows the user to to use RESTful verbs to get, set and update data within Clarifi.
+
+To familiarize yourself with the query tool, start by logging into to your namespace.
+
+**Login to your namespace:** [https://tools.hotschedules.io] (https://tools.hotschedules.io)
+
+Once you have authenticated to your namespace, you will be on the tools page where you will select "Bodhi Query"
+
+![Bodhi Tools Page](/images/bqt1.png?raw=true)
+
+The Bodhi Query tool will allow you to use the **GET** verb to access dta relevant to your store. Let's use the Query tool to get the sys_id of a store.
+
+In the primary window, there are 2 select boxes. Box 1 is where you will select the verb type and box 2 provides the service from which to access.
+
+In this example, we are using the **GET** verb and the **API** service to get the store data. In the "Type Name" field, enter "Store" and click the send button. A list of store for your namespace will be returned.Within the body of the JSON response, locate the sys_id.
+
+![Bodhi Tools Page](/images/bqt2.png?raw=true)
+
+![Bodhi Tools Page](/images/bqt3.png?raw=true)
+
+
+Now that we have the sys_id of a store, we will use "Package" to query the StoreInfo of a specific store. Selec the **GET** verb as the method and the **Package** as the service type. In the "Type Name" field enter "StoreIno". To narrow to a specific store, we will use the **Where** clause. Enter "store_id" in the first field and the "sys_id" in the 2nd field and then select the send button. The results of your call will be displayed in the main body of the query tool.
+
+![Bodhi Tools Page](/images/bqt4.png?raw=true)
+
+
+The Query Tool can be used to get or set data to any of the POSTypes listed below. As noted in this documentation, you can try different calls using the **Where** and **Fields** paramaters to narrow data to more specific details. 
+
+![Bodhi Tools Page](/images/bqt5.png?raw=true)
+
+
+
+
+Using our RESTful service, a call can be made to **GET** data from the API. Examples of the various calls are listed below with sample JSON Outputs. The file spec is available for download providing the data points and the expected data type for each field.
 
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
 
@@ -629,9 +662,31 @@ The BodhiFileUpload endpoint is special type that allows a user to upload files 
 
 * A namespace running the Airwaves job
 * Your files (StoreInfo and StoreBusinessDay)
-* Method to pass data to the API (Postman for example)
+* Method to pass data to the API (HS Bodhi Query Tool or Postman for example)
 
-We have created a Postman collection to enable you with posting data to the POS Canonical Service. The Collection includes examples for POSTing to the File Upload Endpoint. The examples are titled "StoreInfo" and "StoreBusinessDay".
+At a minimum, your files need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
+
+
+**Login to your namespace:** [https://tools.hotschedules.io] (https://tools.hotschedules.io)
+
+
+**Install the Airwaves app:** Login to your namespace and use the Bodhi Shop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.
+
+
+![Install Airwaves](/images/airwaves.png?raw=true)
+
+Once installed, Airwaves will be available in the Job Manager.
+
+![Configuration](/images/airwavesjob.png?raw=true)
+
+
+**You're ready to start posting data to Clarifi.**
+
+To **POST** data into Clarifi, you will need to create 2 files and upload those to BodhiFileUpload endpoint. When the files are received, Airwaves listens for those files, consumes them and transforms them into Canonical data for consumption by Clarifi applications.
+
+**Note:** You will create a separate zip file for each file as you will POST each file separately when you submit your call to upload data into Clarifi.  
+
+We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for POSTing to the File Upload Endpoint. The examples are titled "StoreInfo" and "StoreBusinessDay".
 
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
@@ -650,16 +705,6 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </script>
 
 <br>
-
-**Install the Airwaves app:** Login to your namespace and use the Bodhi Shop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.
-
-
-![Install Airwaves](/images/airwaves.png?raw=true)
-
-Once installed, Airwaves will be available in the Job Manager.
-
-![Configuration](/images/airwavesjob.png?raw=true)
-
 
 **Configure Postman**
 
@@ -711,8 +756,6 @@ i.e. StoreInfo040418.json and StoreInfo040418.zip
 
 <a href="http://docs.hotschedules.io/images/StoreBusinessDayMMDDYR.json" target="_blank">StoreBusinessDayMMDDYR.json</a>
 
-
-**Note:** You will create a separate zip file for each file as you will POST each file separately when you submit your call to upload data into Clarifi. 
 
 
 
