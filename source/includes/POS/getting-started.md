@@ -665,6 +665,9 @@ The BodhiFileUpload endpoint is special type that allows a user to upload files 
 At a minimum, your file need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
 
 
+<aside class="notice"> <strong>Let's Get Started</strong> </aside>
+
+
 **Login to your namespace:** [https://tools.hotschedules.io] (https://tools.hotschedules.io)
 
 
