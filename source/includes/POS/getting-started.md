@@ -1,4 +1,4 @@
-#POS Canonical Service
+#Clarifi API Service
 ##Introduction
 
 This section will be used to define what canonical is and what the different POS canonical data types are. 
@@ -64,6 +64,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Hr_id** - The ID given to the employee by the company.<br> 
 *  **Phone_numbers** - The employee’s phone number.
 
+<a href="/images/PosEmployee.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 > **EXAMPLE JSON RESPONSE:**
 
 ```
@@ -106,6 +108,8 @@ sys_id: "5a1653d79534035f755308cf"
 ##Posjob
 **A list of job codes from the customer’s point of sale system.**<br>
 
+<a href="/images/PosJob.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 *  **Instore_name** - The name of the job code.<br>
 *  **Instore_id** - The point of sale ID given to the job code.<br>
 *  **regular _rate** - The pay rate attached to the job code.<br>
@@ -146,6 +150,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 ##PosEmployeePosition
 **The job code assigned to the employee in the point of sale.**<br>
+
+<a href="/images/PosEmployeePosition.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
 
 *  **Employee_reference** - The employee’s POS ID.<br>
 *  **Job_reference** - The job code’s POS ID. <br>
@@ -200,6 +206,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 ##PosRevenueCenter
 **The revenue centers listed in the point of sale.**<br>
+<a href="/images/PosRevenueCenter.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
 
 *  **Instore_id** - The point of sale ID given to the revenue center. <br>
 *  **Name** - The name of the revenue center. <br>
@@ -244,6 +251,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Items** - The items that make up a menu. <br>
 *  **Modifiers** - The modifiers that can be used by items in the menu. <br>
 
+<a href="/images/PosMenu.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 
 ##PosMenuItems
 **The items that can be used in all of the different menus.**<br>
@@ -256,6 +265,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Unit_price** - The default menu price of the item. <br>
 *  **Prices** - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br>
 
+<a href="/images/PosMenuItems.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 ##PosMenumodifiers
 **Things like ketchup that can be used in tandem with a menu item.**<br>
 **Note:** PosMenumodifiers are nested within StoreInfo <br>
@@ -265,6 +276,8 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Description** - A longer version of the name that can provide further insight into the name. <br>
 *  **Unit_price** - The default menu price for a particular modifier. <br>
 *  **Prices** - Any other prices outside of the menu price that is associated with the modifier. <br>
+
+<a href="/images/PosMenumodifiers.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
 
 **Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:** [https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1)
 
@@ -350,6 +363,8 @@ sys_id: "5a1653d79534035f755308cf"
 ##PosPunch
 **The punch records that are present in the point of sale system.**<br>
 
+<a href="/images/PosPunch.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 *  **Employee_reference** - the employee’s given point of sale ID. <br>
 *  **Job_reference** - The given point of sale ID for the job code that is assigned to the employee. <br>
 *  **Business_day** - The business day that the employee has worked. <br>
@@ -417,6 +432,8 @@ sys_id: "5a1653d79534035f755308cf"
 
 ##PosCheck
 **The different transactions at a restaurant.**<br>
+
+<a href="/images/PosCheck.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
 
 *  **Check_id** - The point of sale ID given to the transaction. <br>
 *  **Voided** - Whether or not the transaction was voided. <br>
@@ -541,6 +558,8 @@ PosCheckItem are only queryable via PosCheck.
 ##PosCheckItem
 **The items that make up a transaction. Items listed here roll into PosCheck.**<br>
 
+<a href="/images/PosCheckItem.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
+
 *  **Item_code** - The given POS ID for the item.<br>
 *  **Unit_price** - The menu price of the check item. <br>
 *  **Quantity** - The amount of the item on the transaction. <br>
@@ -599,11 +618,12 @@ count: 17
 ]
 ```
 
-##FileUpload
+##Getting Data into Clarifi
 <aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
 
+The BodhiFileUpload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
 
-Use the [FILEUPLOAD ENDPOINT] Process to post files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
+**FileUpload EndPoint URL:** https://files.hotschedules.io/files/raw/store_id/filename
 
 **What you'll need:**
 
@@ -654,7 +674,7 @@ The example provided below has been created using Postman. Configure Postman usi
 ![Configuration](/images/postmanbody.png?raw=true)
 
 The configuration will enable you to pass in your bearer token and my namespace, and do a **PUT** to
-files.hotschedules.io/files/raw/store_id/filename
+[https://files.hotschedules.io/files/raw/store_id/filename] (https://files.hotschedules.io/files/raw/store_id/filename)
 
 You'll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.
 

@@ -1,4 +1,4 @@
-#Canonical Service
+#SOAP API Service
 
 ##Introduction
 ###Note: This Documentation Is Currently Being Updated For This Environment

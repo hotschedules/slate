@@ -257,7 +257,7 @@ __https://api.hotschedules.io/YOURNAMESPACE/controllers/vertx/hotschedules/YOURC
 
 ![alt text](/images/pms5.png?raw=false "Bearer Token")
 
-#REST Service
+#REST API Service
 
 ##Introduction
 
