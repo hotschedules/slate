@@ -61,13 +61,11 @@
 <p>This documentation is intended for those wanting to integrate into the HotSchedules IoT (Internet of Things) Platform.</p>
 
 <ul>
-<li>By Building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.<br></li>
-<li>By Building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.</li>
+<li>by building applications to the the HotSchedules IoT Platform Cloud APIs with access to real-time transactional and analytical data.<br></li>
+<li>by building a data integration application into your point of sale system to be stored and accessed from our cloud solution utilizing a single integration point for data collection.</li>
 </ul>
 
-<p>Accounts in the IoT Platform are called a <strong>namespace</strong>. A namespace is a secured HotSchedules cloud storage location for your business. Your namespace is uniquely named based on your organization name. When you sign up through the <a href="https://developer.hotschedules.io">HotSchedules IoT Platform Portal</a>, you will have the ability to create both a namespace and users to access that namespace. </p>
-
-<p>The <a href="https://developer.hotschedules.io">HotSchedules IoT Platform Portal</a> has an easy sign up process to help you get started developing your application for the IoT Platform.  In just a few short clicks, your IoT platform application development can begin.</p>
+<p>Accounts in the IoT Platform are called a <strong>namespaces</strong>. Namespaces are secured HotSchedules cloud storage locations for your business. Your namespaces are uniquely named based on your organization name.</p>
 
 <h2 id="access-to-the-cloud-api">Access To The Cloud API</h2>
 
@@ -106,7 +104,7 @@
 
           <h1 id="getting-started">Getting Started</h1>
 
-<p>The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores. You can also do some fancy things like get social information, upload files, send push notifications and emails, and even make payments.</p>
+<p>The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores.</p>
 
 <p>The REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.</p>
 
@@ -118,7 +116,7 @@
 
 <p>For more details on IDM, please click <a href="https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile">HERE</a>.</p>
 
-<h2 id="idm-how-to-programatically-retrieve-jwt-tokens">IDM How to Programatically Retrieve JWT Tokens</h2>
+<h2 id="idm-how-to-programmatically-retrieve-jwt-tokens">IDM How to Programmatically Retrieve JWT Tokens</h2>
 
 <p>Before you can retrieve your token, follow these simple setup steps before proceeding.</p>
 
@@ -131,17 +129,15 @@
 
 <p><strong>What are JSON Web Tokens?</strong></p>
 
-<p>JSON Web Tokens (JWT), pronounced &ldquo;jot&rdquo;, are a standard since the information they carry is transmitted via JSON.</p>
+<p>JSON Web Tokens (JWT) are a standard since the information they carry is transmitted via JSON.</p>
 
-<p>JSON Web Tokens work across different programming languages: JWTs work in .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell. So you can see that these can be used in many different scenarios.</p>
+<p>JSON Web Tokens work across different programming languages: JWTs work in .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell.</p>
 
 <p>JWTs are self-contained: They will carry all the information necessary within itself. This means that a JWT will be able to transmit basic information about itself, a payload (usually user information), and a signature.</p>
 
-<p>JWTs can be passed around easily: Since JWTs are self-contained, they are perfectly used inside an HTTP header when authenticating an API. You can also pass it through the URL.</p>
+<p>JWTs can be passed around easily: Since JWTs are self-contained, they are perfectly used inside an HTTPS header when authenticating an API. You can also pass it through the URL.</p>
 
 <p><strong>Endpoint</strong></p>
-
-<p><strong>Dev:</strong> <a href="https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token">https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token</a></p>
 
 <p><strong>Prod:</strong> <a href="https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token">https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token</a></p>
 
@@ -268,8 +264,6 @@ request(options, function (error, response, body) {
 
 <p><strong>Endpoint</strong></p>
 
-<p><strong>Dev:</strong> <a href="https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token">https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token</a></p>
-
 <p><strong>Prod:</strong> <a href="https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token">https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token</a></p>
 
 <p><strong>Header</strong> </p>
@@ -365,8 +359,6 @@ request(options, function (error, response, body) {
 
 <h4 id="making-a-call">Making a call</h4>
 
-<p><strong>Note:</strong> If your <strong>namespace</strong> has been created under the new IDM model, you will not have the ability to make calls using <strong>api.hotschedules.io</strong>. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.</p>
-
 <p><br>
 The HotSchedules REST API supports all the standard REST verbs.</p>
 
@@ -389,7 +381,7 @@ The HotSchedules REST API supports all the standard REST verbs.</p>
 
 <p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/Store</code>  </p>
 
-<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/Store</code> or using our free store manager tool at <code class="prettyprint">https://hotschedules.io/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
+<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/Store</code> or using our store manager tool at <code class="prettyprint">https://hotschedules.io/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
 
 <p>Next let&rsquo;s look up a sale for our store in bodhi-social</p>
 
