@@ -1,7 +1,6 @@
 #Working with HotSchedules data
 
 ####Making a call
-**Note:** If your **namespace** has been created under the new IDM model, you will not have the ability to make calls using **api.hotschedules.io**. Please refer to the section on using Postman to make a call. You will need to have retrieved your JWT Token before you can use this method.
 
 <br>
 The HotSchedules REST API supports all the standard REST verbs.
@@ -24,7 +23,7 @@ This call will return the information about a store that's been created for the 
 
 You can also get the JSON payload by navigating directly to this URL `https://api.hotschedules.io/bodhi-social/resources/Store`  
 
-You can create your own store for your organization either by executing a **POST** command (see below) to `https://api.hotschedules.io/<organization_name>/resources/Store` or using our free store manager tool at `https://hotschedules.io/store-manager` . Either way, a store is a critical anchor for information in the Platform.
+You can create your own store for your organization either by executing a **POST** command (see below) to `https://api.hotschedules.io/<organization_name>/resources/Store` or using our store manager tool at `https://hotschedules.io/store-manager` . Either way, a store is a critical anchor for information in the Platform.
 
 Next let's look up a sale for our store in bodhi-social
 

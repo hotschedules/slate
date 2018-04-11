@@ -1,6 +1,6 @@
 #Getting Started
 
-The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores. You can also do some fancy things like get social information, upload files, send push notifications and emails, and even make payments.
+The HotSchedules IoT Platform (Bodhi) REST API allows you to query meta-data about your stores, labor, sales, and HotSchedules Agents running in your stores.
 
 The REST API is served over HTTPS. To ensure data privacy, unencrypted HTTP is not supported.
 
@@ -13,7 +13,7 @@ _**Please note:**_  With that said, this tool is in its early stages, and does n
 For more details on IDM, please click [HERE](https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile).
 
 
-##IDM How to Programatically Retrieve JWT Tokens
+##IDM How to Programmatically Retrieve JWT Tokens
 
 Before you can retrieve your token, follow these simple setup steps before proceeding.
 
@@ -28,21 +28,19 @@ Before you can retrieve your token, follow these simple setup steps before proce
 
 **What are JSON Web Tokens?**
 
-JSON Web Tokens (JWT), pronounced "jot", are a standard since the information they carry is transmitted via JSON.
+JSON Web Tokens (JWT) are a standard since the information they carry is transmitted via JSON.
 
 
-JSON Web Tokens work across different programming languages: JWTs work in .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell. So you can see that these can be used in many different scenarios.
+JSON Web Tokens work across different programming languages: JWTs work in .NET, Python, Node.js, Java, PHP, Ruby, Go, JavaScript, and Haskell.
 
 
 JWTs are self-contained: They will carry all the information necessary within itself. This means that a JWT will be able to transmit basic information about itself, a payload (usually user information), and a signature.
 
 
-JWTs can be passed around easily: Since JWTs are self-contained, they are perfectly used inside an HTTP header when authenticating an API. You can also pass it through the URL.
+JWTs can be passed around easily: Since JWTs are self-contained, they are perfectly used inside an HTTPS header when authenticating an API. You can also pass it through the URL.
 
 
 **Endpoint**
-
-**Dev:** [https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token](https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token)
 
 **Prod:** [https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token](https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token)
 
@@ -158,7 +156,6 @@ request(options, function (error, response, body) {
 
 **Endpoint**
 
-**Dev:** [https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token](https://login.bodhi-dev.io/auth/realms/hotschedules/protocol/openid-connect/token)
 
 **Prod:** [https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token](https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token)
 
