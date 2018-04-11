@@ -302,6 +302,120 @@ Key   | Type   | Description
 extId | Number | Concept external ID
 name  | String | Concept Name
 
+##getClientCertifications
+
+This method takes in a **concept ID** and a **store ID** and returns client certification objects. It is meant to get a list of all certifications for that store.
+
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td>1..1</td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>The identifier for the location's concept. Must be unique within the company. Contact HotSchedules if you're not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+</tbody>
+</table>
+
+##getEmployeeCertifications
+
+This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.
+
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>All</td>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>Concept</td>
+<td>Int</td>
+<td>The identifier for the location's concept. Must be unique within the company. Contact HotSchedules if you're not sure about this value.
+</td>
+</tr>
+<tr>
+<td>storeNum</td>
+<td>Int</td>
+<td>Numeric (integer) identifier for the store. Must be unique within the concept.</td>
+</tr>
+<tr>
+<td>empPOSId</td>
+<td>Int</td>
+<td>POS numeric employee ID.</td>
+</tr>
+</tbody>
+</table>
+
+##getLocations
+This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.
+
+The inputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Query parameters</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+</tbody>
+</table>
+
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Query parameter</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>All</td><td></td><td></td></tr>
+<td nowrap>return</td><td>dataLocationArray</td><td>Array of dataLocation objects.</td></tr>
+</tbody>
+</table>
+
 
 ##getDriversByInterval  
 This method will take a **concept ID**, **store number**, **start** and **end dates**, **volume type**, and **data type** and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.
