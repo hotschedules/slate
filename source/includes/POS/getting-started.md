@@ -1,7 +1,7 @@
 #Clarifi API Service
 ##Introduction
 
-This section will be used to define what canonical is and what the different POS canonical data types are. 
+This section defines what canonical is and what the different POS canonical data types are for getting data from Clarifi. 
 
 A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  
 
@@ -649,8 +649,8 @@ count: 17
 ]
 ```
 
-##Getting Data into Clarifi
-<aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
+##POSTing Data to Clarifi
+<aside class="notice"> <strong>How To POST data to Clarifi</strong> </aside>
 
 The BodhiFileUpload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
 
@@ -662,7 +662,7 @@ The BodhiFileUpload endpoint is special type that allows a user to upload files 
 * Your files (StoreInfo and StoreBusinessDay)
 * Method to pass data to the API (HS Bodhi Query Tool or Postman for example)
 
-At a minimum, your file need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
+At a minimum, your file needs to include a full business day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.
 
 
 <aside class="notice"> <strong>Let's Get Started</strong> </aside>
