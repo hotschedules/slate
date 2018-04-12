@@ -693,6 +693,8 @@ To **POST** data into Clarifi, you will need to create 2 files and upload those 
 
 We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for validating the JSON data in your StoreInfo and StoreBusinessDay files and POSTing to the File Upload Endpoint. The examples are titled "Validate StoreInfo", "Validate StoreBusinessDay", "StoreInfo" and "StoreBusinessDay".
 
+Select the "Run In Postman" button below to open the collection in Postman to start testing.
+
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
 data-postman-action="collection/import"
@@ -713,6 +715,20 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 **Configure Postman**
 
+To validate your JSON data for StoreInfo or StoreBusinessDay, you'll **POST** the data to the "validate" endpoint and receive a JSON repsonse upon success or failure.
+
+Validate Endpoint URL: https://api.hotschedules.io/NAMESPACE/validate/**StoreInfo** or **StoreBusinessDay**
+
+**Please see the example in the Postman Collection for configuration settings** 
+
+The following is an example of a **Success** message.
+
+
+{
+    "valid": true,
+    "sys_type_version": "1"
+}
+
 The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.
 
 **Configure Header**
@@ -723,7 +739,7 @@ The example provided below has been created using Postman. Configure Postman usi
 
 ![Configuration](/images/postmanbody.png?raw=true)
 
-The configuration will enable you to pass in your bearer token and my namespace, and do a **PUT** to
+The configuration will enable you to pass in your bearer token and namespace, and do a **PUT** to
 [https://files.hotschedules.io/files/raw/store_id/filename] (https://files.hotschedules.io/files/raw/store_id/filename)
 
 You'll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.
