@@ -652,9 +652,9 @@ count: 17
 ##POSTing Data to Clarifi
 <aside class="notice"> <strong>How To POST data to Clarifi</strong> </aside>
 
-The BodhiFileUpload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
+The File Upload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.
 
-**FileUpload EndPoint URL:** https://files.hotschedules.io/files/raw/store_id/filename
+**File Upload EndPoint URL:** https://files.hotschedules.io/files/raw/store_id/filename
 
 **What you'll need:**
 
@@ -683,7 +683,7 @@ Once installed, Airwaves will be available in the Job Manager.
 
 **You're ready to start posting data to Clarifi.**
 
-To **POST** data into Clarifi, you will need to create 2 files and upload those to BodhiFileUpload endpoint. When the files are received, Airwaves listens for those files, consumes them and transforms them into Canonical data for consumption by Clarifi applications.
+To **POST** data into Clarifi, you will need to create 2 files and upload those to File Upload endpoint. When the files are received, Airwaves listens for those files, consumes them and transforms them into Canonical data for consumption by Clarifi applications.
 
 **Note:** You will create a separate zip file for each file as you will POST each file separately when you submit your call to upload data into Clarifi. Attached are the file spec for each file type and further in this example, completed example files are provided for download.
 
