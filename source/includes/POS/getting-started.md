@@ -713,7 +713,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <br>
 
-To **validate** your JSON data to ensure it's well formed for StoreInfo or StoreBusinessDay before you create your files, you can **POST** the data to the "validate" endpoint and receive a JSON repsonse upon success or failure.
+To **validate** your JSON data to ensure it's well formed before you create your files, you can **POST** the data to the "validate" endpoint and receive a JSON repsonse upon success or failure.
 
 Validate Endpoint URL: https://api.hotschedules.io/NAMESPACE/validate/**StoreInfo** or **StoreBusinessDay**
 
