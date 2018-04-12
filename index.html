@@ -4396,7 +4396,7 @@ This method uses hsSimpleDate objects for dates.</p>
 
 <h2 id="introduction">Introduction</h2>
 
-<p>This section will be used to define what canonical is and what the different POS canonical data types are. </p>
+<p>This section defines what canonical is and what the different POS canonical data types are for getting data from Clarifi. </p>
 
 <p>A canonical data module (also known as CDM) in general terms is something used to take the language of one application and translate it into the language of another. So for us, canonical is how we take the million different ways that a point of sale might define something like an employee’s status and translate it into a single language that can be used by our products.  </p>
 
@@ -5066,9 +5066,9 @@ count: 17
 ]
 </code></pre>
 
-<h2 id="getting-data-into-clarifi">Getting Data into Clarifi</h2>
+<h2 id="posting-data-to-clarifi">POSTing Data to Clarifi</h2>
 
-<aside class="notice"> <strong>Setting Data In Clarifi</strong> </aside>
+<aside class="notice"> <strong>How To POST data to Clarifi</strong> </aside>
 
 <p>The BodhiFileUpload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.</p>
 
@@ -5082,7 +5082,7 @@ count: 17
 <li>Method to pass data to the API (HS Bodhi Query Tool or Postman for example)</li>
 </ul>
 
-<p>At a minimum, your file need to include a full day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.</p>
+<p>At a minimum, your file needs to include a full business day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.</p>
 
 <aside class="notice"> <strong>Let&rsquo;s Get Started</strong> </aside>
 
