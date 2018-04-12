@@ -641,13 +641,15 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 <br>
 <code class="prettyprint">../hotschedules/&lt;type_method&gt;?</code></p>
 
+<h2 id="available-methods">Available Methods</h2>
+
 <aside class="notice"> <strong>FETCHING DATA METHODS</strong> </aside>
 
 <p><strong>Note:</strong> Results are currently cached with a TTL of 60 minutes.</p>
 
 <p>What is TTL? <em>Time to live or hop limit is a mechanism that limits the lifespan or lifetime of data in a computer or network</em></p>
 
-<h2 id="getconcepts">getConcepts</h2>
+<h4 id="getconcepts">getConcepts</h4>
 
 <p>This method returns a list of concepts for a company.</p>
 
@@ -683,7 +685,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getclientcertifications">getClientCertifications</h2>
+<h4 id="getclientcertifications">getClientCertifications</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns client certification objects. It is meant to get a list of all certifications for that store.</p>
 
@@ -718,7 +720,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tbody>
 </table>
 
-<h2 id="getemployeecertifications">getEmployeeCertifications</h2>
+<h4 id="getemployeecertifications">getEmployeeCertifications</h4>
 
 <p>This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.</p>
 
@@ -757,7 +759,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tbody>
 </table>
 
-<h2 id="getlocations">getLocations</h2>
+<h4 id="getlocations">getLocations</h4>
 
 <p>This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.</p>
 
@@ -796,7 +798,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tbody>
 </table>
 
-<h2 id="getdriversbyinterval">getDriversByInterval</h2>
+<h4 id="getdriversbyinterval">getDriversByInterval</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong>, <strong>volume type</strong>, and <strong>data type</strong> and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.</p>
 
@@ -939,7 +941,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getempavailability">getEmpAvailability</h2>
+<h4 id="getempavailability">getEmpAvailability</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpAvailability objects</strong>. It is meant to get a list of all employee availability for that store.</p>
 
@@ -1034,7 +1036,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getempinfo">getEmpInfo</h2>
+<h4 id="getempinfo">getEmpInfo</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpInfo</strong> objects. It is meant to get a list of all employees for that store.</p>
 
@@ -1148,7 +1150,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getempjobs">getEmpJobs</h2>
+<h4 id="getempjobs">getEmpJobs</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of wsEmpJob</strong> objects. It is meant to get a list of all jobs assigned to all employees for that store.</p>
 
@@ -1245,7 +1247,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getgroups">getGroups</h2>
+<h4 id="getgroups">getGroups</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and returns group information for the concept.</p>
 
@@ -1301,7 +1303,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getguestcounts">getGuestCounts</h2>
+<h4 id="getguestcounts">getGuestCounts</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and return a list of guest counts for the date range requested.</p>
 
@@ -1384,7 +1386,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getlaborbybusday">getLaborByBusDay</h2>
+<h4 id="getlaborbybusday">getLaborByBusDay</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>labor type</strong> and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
 
@@ -1479,7 +1481,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h2>
+<h4 id="getlaborbyjobandinterval">getLaborByJobAndInterval</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>labor type</strong> and return a list of total labor by job code for each interval in the date range requested for that concept, store and labor type.</p>
 
@@ -1574,7 +1576,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getsalesitemsv3">getSalesItemsV3</h2>
+<h4 id="getsalesitemsv3">getSalesItemsV3</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>.It returns an array of sales for that store. </p>
 
@@ -1706,7 +1708,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getprojectedsalesv3">getProjectedSalesV3</h2>
+<h4 id="getprojectedsalesv3">getProjectedSalesV3</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong>. This method uses hsSimpleDate objects for dates and hsSimpleTime objects for times.</p>
 
@@ -1804,7 +1806,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getrcvs">getRCVs</h2>
+<h4 id="getrcvs">getRCVs</h4>
 
 <p>Revenue center information defined for a group.</p>
 
@@ -1856,7 +1858,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getsalescats">getSalesCats</h2>
+<h4 id="getsalescats">getSalesCats</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of sales categories</strong> for that store. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise.Sales categories can be local to a particular store, or defined in HotSchedules as belonging to an entire group (called group-level sales categories).</p>
 
@@ -1917,7 +1919,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getschedulev3">getScheduleV3</h2>
+<h4 id="getschedulev3">getScheduleV3</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of WSScheduleItem3 objects</strong>, which represent one scheduled shift each, for import into the POS. This method returns the same data as getSchedule, plus extended scheduled shift data, including location ID, regular pay rate, OT pay rate, scheduled regular minutes, scheduled OT minutes (if any), scheduled special pay (if any) and the unique schedule ID, internal to HS.This method uses hsSimpleDate objects for dates. Note that the date referenced is the calendar date and not the business date.</p>
 
@@ -2042,7 +2044,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getshiftsv3">getShiftsV3</h2>
+<h4 id="getshiftsv3">getShiftsV3</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong> and three flags (<strong>isHouse</strong>, <strong>isScheduled</strong> and <strong>isPosted</strong>). It returns an array of WSScheduleItem3 objects, which represent one scheduled shift each. What shifts are returned depends on the flags set:</p>
 
@@ -2256,7 +2258,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getstoreemployees">getStoreEmployees</h2>
+<h4 id="getstoreemployees">getStoreEmployees</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a flag to determine if only active employees are returned, and returns an <strong>array of WSEmployee objects</strong>.</p>
 
@@ -2418,7 +2420,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getstorejobs">getStoreJobs</h2>
+<h4 id="getstorejobs">getStoreJobs</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong>, and returns an array of all jobs currently defined in HotSchedules for the given concept/store.</p>
 
@@ -2492,7 +2494,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getstoresv2">getStoresV2</h2>
+<h4 id="getstoresv2">getStoresV2</h4>
 
 <p>Returns information about the stores within a group.</p>
 
@@ -2601,7 +2603,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="gettimecards">getTimeCards</h2>
+<h4 id="gettimecards">getTimeCards</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of wsTimeCard3 objects</strong>, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in and clock out times. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
 
@@ -2783,11 +2785,11 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="gettimecardsv2">getTimeCardsV2</h2>
+<h4 id="gettimecardsv2">getTimeCardsV2</h4>
 
 <p>Same as <strong>getTimeCards</strong> but additionally provides double time info for each timecard.</p>
 
-<h2 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h2>
+<h4 id="gettimecardsdeclaredtips">getTimeCardsDeclaredTips</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>start</strong> and <strong>end dates</strong>. It returns an <strong>array of wsTimeCard3 objects</strong>, which represent one employee time card each. Each time card has information for one employee punch record, including business date, regular and OT minutes and wages, clock in, clock out times and declared tips. If this store is using HotSchedules&rsquo; web-based timeclock for employee clock-in, any open punches in the date range are also included in the response.</p>
 
@@ -2975,7 +2977,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 </tr>
 </tbody></table>
 
-<h2 id="getvolumecounts">getVolumeCounts</h2>
+<h4 id="getvolumecounts">getVolumeCounts</h4>
 
 <p>This method will take a <strong>concept ID</strong>, <strong>store number</strong>, <strong>start</strong> and <strong>end dates</strong> and a <strong>volume type</strong> and return a list of volume counts for the date range requested.
 Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIVERIES”, “PRODUCTS”, and “TRANSACTIONS”.</p>
@@ -3066,7 +3068,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 
 <aside class="notice"> <strong>WRITING DATA METHODS</strong> </aside>
 
-<h2 id="settimecardsv3">setTimeCardsV3</h2>
+<h4 id="settimecardsv3">setTimeCardsV3</h4>
 
 <p>Extends dataTimeCard (includes business date and clock in and clockout date/times).</p>
 
@@ -3241,7 +3243,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setempjobs">setEmpJobs</h2>
+<h4 id="setempjobs">setEmpJobs</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, and an <strong>array of WSEmpJob</strong> objects to assign jobs to individual employees. This method returns a WSReturn object.</p>
 
@@ -3353,7 +3355,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setemps">setEmps</h2>
+<h4 id="setemps">setEmps</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong> and an <strong>array of WSEmployee objects</strong>. Using the authentication from the username token and the conecpt and store IDs, the server will resolve which HotSchedules client this sync is for. The array of employees will be parsed on the server side to employees who need to be inserted or updated in the HS database. This method returns a WSReturn object.</p>
 
@@ -3536,7 +3538,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setforecastdriversv2">setForecastDriversV2</h2>
+<h4 id="setforecastdriversv2">setForecastDriversV2</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>workweek</strong>, <strong>startdate</strong>, <strong>enddate</strong>, <strong>starttime</strong>, <strong>endtime</strong>, <strong>volume amount</strong>, <strong>volume type</strong>, and a <strong>revenue center</strong> for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.</p>
 
@@ -3678,7 +3680,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setguestcounts">setGuestCounts</h2>
+<h4 id="setguestcounts">setGuestCounts</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>guest count (must be a positive integer)</strong> and a <strong>revenue center</strong> for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
 
@@ -3760,7 +3762,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setrvc">setRVC</h2>
+<h4 id="setrvc">setRVC</h4>
 
 <p>This method takes in a <strong>concept ID</strong> and a <strong>store ID</strong> and returns an <strong>array of revenue centers</strong> for that store.</p>
 
@@ -3859,7 +3861,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setsalescat">setSalesCat</h2>
+<h4 id="setsalescat">setSalesCat</h4>
 
 <p>This method allows you to add the sales category associated with menu items. Sales categories will typically establish what kind of item was sold: Food, Beverage, Alcohol, Merchandise. Sales categories can be local to a particular store.</p>
 
@@ -3959,7 +3961,7 @@ Supported Volume Types are:  “TABLES”, “ENTRÉE”, “GUESTS”, “DELIV
 </tr>
 </tbody></table>
 
-<h2 id="setsalesitemsv4">setSalesItemsV4</h2>
+<h4 id="setsalesitemsv4">setSalesItemsV4</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a <strong>start</strong> and <strong>end date</strong> and an <strong>array of WSSalesItem objects</strong>. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains sales items for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of sales, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the sales items are already in the HS database and do not need to be updated, then nothing will change. The method returns a WSReturn object.
 This method uses hsSimpleDate objects for dates.</p>
@@ -4131,7 +4133,7 @@ This method uses hsSimpleDate objects for dates.</p>
 </tr>
 </tbody></table>
 
-<h2 id="settimecardsdeclaredtips">setTimeCardsDeclaredTips</h2>
+<h4 id="settimecardsdeclaredtips">setTimeCardsDeclaredTips</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, a <strong>start</strong> and <strong>end date</strong> and an <strong>array of WSTimeCardsDeclaredTips</strong> objects. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains time cards for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the time cards are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
 
@@ -4319,7 +4321,7 @@ This method uses hsSimpleDate objects for dates.</p>
 </tr>
 </tbody></table>
 
-<h2 id="setvolumecountsv2">setVolumeCountsV2</h2>
+<h4 id="setvolumecountsv2">setVolumeCountsV2</h4>
 
 <p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong>, <strong>business date</strong>, <strong>date time</strong>, <strong>volume amount</strong>, <strong>volume type</strong>, and a <strong>revenue center</strong> for the purpose of submitting actual volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be &ldquo;overlapping&rdquo; data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.</p>
 
