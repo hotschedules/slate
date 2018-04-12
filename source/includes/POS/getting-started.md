@@ -691,7 +691,7 @@ To **POST** data into Clarifi, you will need to create 2 files and upload those 
 
 <a href="http://docs.hotschedules.io/images/StoreBusinessDay.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download StoreBusinessDay.json File Spec</a>
 
-We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for POSTing to the File Upload Endpoint. The examples are titled "StoreInfo" and "StoreBusinessDay".
+We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for validating the JSON data in your StoreInfo and StoreBusinessDay files and POSTing to the File Upload Endpoint. The examples are titled "Validate StoreInfo", "Validate StoreBusinessDay", "StoreInfo" and "StoreBusinessDay".
 
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
