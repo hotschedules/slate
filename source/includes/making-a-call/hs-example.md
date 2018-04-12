@@ -2,6 +2,8 @@
 
 ####Making a call
 
+**Please Note:** Through our standard service offering, HotSchedules will support up to 100 calls per hour, per store with bursts not to exceed 20 calls per minute per store. At this service level, the API will have a rate limit and status code 429 will return for calls beyond those limits.
+
 <br>
 The HotSchedules REST API supports all the standard REST verbs.
 
