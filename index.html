@@ -5108,6 +5108,8 @@ count: 17
 
 <p>We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for validating the JSON data in your StoreInfo and StoreBusinessDay files and POSTing to the File Upload Endpoint. The examples are titled &ldquo;Validate StoreInfo&rdquo;, &ldquo;Validate StoreBusinessDay&rdquo;, &ldquo;StoreInfo&rdquo; and &ldquo;StoreBusinessDay&rdquo;.</p>
 
+<p>Select the &ldquo;Run In Postman&rdquo; button below to open the collection in Postman to start testing.</p>
+
 <div id="btn" style="padding-left: 30px;">
 <div class="postman-run-button"
 data-postman-action="collection/import"
@@ -5127,6 +5129,19 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p><strong>Configure Postman</strong></p>
 
+<p>To validate your JSON data for StoreInfo or StoreBusinessDay, you&rsquo;ll <strong>POST</strong> the data to the &ldquo;validate&rdquo; endpoint and receive a JSON repsonse upon success or failure.</p>
+
+<p>Validate Endpoint URL: https://api.hotschedules.io/NAMESPACE/validate/<strong>StoreInfo</strong> or <strong>StoreBusinessDay</strong></p>
+
+<p><strong>Please see the example in the Postman Collection for configuration settings</strong> </p>
+
+<p>The following is an example of a <strong>Success</strong> message.</p>
+
+<p>{
+    &ldquo;valid&rdquo;: true,
+    &ldquo;sys_type_version&rdquo;: &ldquo;1&rdquo;
+}</p>
+
 <p>The example provided below has been created using Postman. Configure Postman using the following example to POST your file to the API.</p>
 
 <p><strong>Configure Header</strong></p>
@@ -5137,7 +5152,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 <p><img alt="Configuration" src="images/postmanbody.png?raw=true" /></p>
 
-<p>The configuration will enable you to pass in your bearer token and my namespace, and do a <strong>PUT</strong> to
+<p>The configuration will enable you to pass in your bearer token and namespace, and do a <strong>PUT</strong> to
 <a href="https://files.hotschedules.io/files/raw/store_id/filename">https://files.hotschedules.io/files/raw/store_id/filename</a></p>
 
 <p>You&rsquo;ll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.</p>
