@@ -1,0 +1,1388 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>API Documentation</title>
+
+    <link href="../images/favicon.ico" rel="icon" type="image/ico" />
+    <link href="../stylesheets/screen.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" type="text/css" media="print" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+      <script src="../javascripts/all_nosearch.js" type="text/javascript"></script>
+
+  </head>
+
+  <body class="includes includes_introduction">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <a class="bodhi-logo" href="http://docs.bodhi.space"> <img src="../images/logo.png" /> </a>
+      <div id="toc">
+      </div>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="hotschedules-iot-platform">HotSchedules IoT Platform</h1>
+
+<p>The HotSchedules Bodhi Platform is a set of REST APIs that power the Clarifi suite of applications - gathering data from a variety of sources and allowing a restaurant manager to gain both just-in-time as well as forward-looking insights into how they can improve their business.</p>
+
+<p>This document is meant to be a resource for software developers who want to interact with our data set.  We will be taking a particular eye towards interacting with existing point-of-sale and existing labor schedule data, as well as how to pass in point-of-sale data in our canonical data model, so that applications can consume it.</p>
+
+<h2 id="building-blocks"><strong>Building Blocks</strong></h2>
+
+<p>The Bodhi Platform is built as a series of <strong>namespaces</strong>.  A <strong>namespace</strong> represents the data store for 1 company, and has a collection of <strong>stores</strong> under it.  A store represents a single venue, and some of the elements of a store are what you would expect from a venue: address, business hours, etc.</p>
+
+<p><strong>Users</strong> can be created within a namespace and assigned to a set of stores within a hierarchy, and assigned <strong>profiles</strong> that are sets of permissions to control what they can or cannot do within various applications.</p>
+
+<p>An <strong>admin</strong> profile represents the top level of permissions within a namespace, and is needed in order to GET and POST data to our REST APIs.</p>
+
+<p>For our purposes within this document, we are going to refer to users as people or machines who have access to a username and password that has the admin profile within their namespace, and can thus authenticate to the API.</p>
+
+<p>To move forward, make sure you have acquired the following:</p>
+
+<ul>
+<li>A namespace</li>
+<li>A username and password with the admin profile</li>
+</ul>
+
+<p>We will be using Postman as our tool to test and validate many of the elements discussed within this doc, so we highly recommend taking a moment to download it and familiarize yourself with its functionality.  Our Platform also includes a Query tool and additional interactive docs that you can use to interact with our dataset (keep reading!).</p>
+
+<h2 id="urls"><strong>URLs</strong></h2>
+
+<p>The Bodhi Platform is built around a central URL:  <a href="https://api.hotschedules.io">https://api.hotschedules.io</a>.  We also have components and applications available at other tiers such as,</p>
+
+<p><a href="https://tools.hotschedules.io">https://tools.hotschedules.io</a></p>
+
+<p><a href="https://apps.hotschedules.io">https://apps.hotschedules.io</a></p>
+
+<p>The syntax of your URL will include your namespace name within it.  For example, a call to return data about all of the Stores in your namespace would look like this:</p>
+
+<p><a href="https://api.hotschedules.io/&lt;namespace&gt;/resources/Store">https://api.hotschedules.io/<namespace>/resources/Store</a></p>
+
+<p>You’ll be seeing this a lot.  Our API uses Mongo DB for storage, so to learn more about this foundation, see this link: <a href="http://docs.mongodb.org/manual/reference/operator">http://docs.mongodb.org/manual/reference/operator</a></p>
+
+<p>You may be unfamiliar with the REST query syntax.  If you’re familiar with SQL, you should note the same types of SQL query operations are possible using the REST API.  </p>
+
+<p>To learn more about the semantic differences, see this document: <a href="http://docs.mongodb.org/manual/reference/sql-comparison">http://docs.mongodb.org/manual/reference/sql-comparison</a>.  No need to do it right now - you can come back to it later!</p>
+
+<h2 id="tokens"><strong>Tokens</strong></h2>
+
+<p>Authenticating to the REST API requires generating a JWT, or Java Web Token.  For more information around JWTs, see this link: https://jwt.io/introduction/</p>
+
+<p>Internally, we refer to capturing and refreshing JWTs as “IDM” or “Identity Management” &ndash; so if you see or hear reference to IDM, they are talking about authenticating a user via a JWT (as opposed to a simple username/password combo).</p>
+
+<p>For more details on IDM, please click <a href="https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile">HERE</a>.</p>
+
+<p>Before you can retrieve your token, follow these simple setup steps before proceeding.</p>
+
+<p><strong>Step 1:</strong> <a href="https://help.hotschedules.com/hc/en-us/articles/115001464671-IDM-Creating-Your-Global-Profile">Create your global profile</a>.<br>
+<strong>Step 2:</strong> Obtain your API credentials from HotSchedules if you have not already done so.<br>
+<strong>Step 3:</strong> Login into the <a href="https://tools.hotschedules.io/account/#/">Account Manager</a><br>
+<strong>Step 4:</strong> In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
+<strong>Step 5:</strong> Enter your API credentials as provided by hotSchedules and click save.<br>
+<strong>Step 6:</strong> Continue with the example below to retrieve your token.</p>
+
+<p>Your application will need to not only pass a JWT as part of requests it makes to the REST API, but also refresh that token programmatically when it expires.</p>
+
+<p>To generate a JWT, you’ll need to POST your request to the following URL:
+https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token</p>
+
+<p>With the following information:</p>
+
+<p><strong>Header</strong> </p>
+
+<ul>
+<li>content-type: application/x-www-form-urlencoded</li>
+</ul>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li><p><strong>grant_type</strong> </p>
+
+<ul>
+<li>Value must be &ldquo;password&rdquo; </li>
+</ul></li>
+<li><p><strong>client_id</strong></p>
+
+<ul>
+<li>Value must be &ldquo;urn:mace:oidc:hotschedules.com&rdquo;</li>
+</ul></li>
+<li><p><strong>username</strong> (this is your global profile username)</p>
+
+<ul>
+<li>Value should reflect the username of account you’re requesting tokens for</li>
+</ul></li>
+<li><p><strong>password</strong> (this is your global profile password)</p>
+
+<ul>
+<li>Value should reflect the password of the account you’re requesting tokens for</li>
+</ul></li>
+</ul>
+
+<p>You should return 3 items:</p>
+
+<ul>
+<li>Access token</li>
+<li>Refresh_token</li>
+<li>Id_token</li>
+</ul>
+
+<p><strong>The Id_token is your JWT &ndash; save that!</strong></p>
+
+<p>Here’s an example response (with the JWT bolded)</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/tokenimg.png?raw=true" /></p>
+
+<p>The tokens generally are active for 8 hours, and thus would need to be refreshed on that schedule.  Refreshing the token is very similar, just hit this URL:</p>
+
+<p><a href="https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token">https://login.hotschedules.io/auth/realms/hotschedules/protocol/openid-connect/token</a></p>
+
+<p><strong>Header</strong> </p>
+
+<ul>
+<li>content-type: application/x-www-form-urlencoded</li>
+</ul>
+
+<p><strong>Params</strong></p>
+
+<ul>
+<li><p><strong>grant_type</strong> </p>
+
+<ul>
+<li>Value must be &ldquo;refresh_token&rdquo; </li>
+</ul></li>
+<li><p><strong>client_id</strong></p>
+
+<ul>
+<li>Value must be &ldquo;urn:mace:oidc:hotschedules.com&rdquo;</li>
+</ul></li>
+<li><p><strong>refresh_token</strong></p>
+
+<ul>
+<li>Value should reflect the token you are attempting to refresh</li>
+</ul></li>
+</ul>
+
+<p>As a human interacting with this data, generating a new token each time is handy to do, but your application should eventually automate the process of refreshing its token.</p>
+
+<p><strong>Now that you know how to authenticate to the REST API, let’s create a Store!</strong></p>
+
+<h2 id="creating-a-store">Creating A Store</h2>
+
+<p>We have a namespace, but we have no stores to post any data to!  Let’s fix that right now.</p>
+
+<p>As mentioned before, the Store endpoint is:
+<a href="https://api.hotschedules.io/&lt;namespace&gt;/resources/Store">https://api.hotschedules.io/<namespace>/resources/Store</a></p>
+
+<p>The Store endpoint allows you to post and receive a great deal of information about the configuration of your store - addresses, contact information, business hours, an identifying image, etc.  </p>
+
+<p>The minimum amount of data to pass in to create a Store in your namespace, and the expected types, are:</p>
+
+<p>{
+    &ldquo;name&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;display_name&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;store_number&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;organization_id&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;concept&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;status&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;website_url&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;telephone&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;timezone&rdquo;: &ldquo;String&rdquo;,
+    &ldquo;organization_name&rdquo;: &ldquo;String&rdquo;
+}</p>
+
+<p>If you replace the “Strings” in the above example with actual data corresponding with your restaurant, POST that to the URL above with your JWT as the bearer token, you should receive a Status: 201 response with the text: “Created”.<br>
+Success!  Nicely done, you’ve created your first store.</p>
+
+<p>If you get an error message, the Store endpoint will give you some additional information about an object that may be misattributed, or an error in the syntax.</p>
+
+<p><strong>What are all these IDs?</strong></p>
+
+<p>You’ll be interacting with several different types of IDs throughout this process, and it’s important to keep these straight.
+Many of these IDs are meant as an “external reference” value, to match an ID that may be in place within a different application, either within the Clarifi ecosystem or external, as opposed to a “sys_id” which is meant to identify a particular object within the Mongodb database the REST API is calling.</p>
+
+<p>A “concept ID” is a value meant to indicate a grouping of stores, so each store will need its own “store_number” and multiple stores can roll up to a single “concept” ID.</p>
+
+<h2 id="introducing-the-bodhi-query-tool">Introducing the Bodhi Query Tool</h2>
+
+<p>Before we move away from interacting with Stores and start interacting with individual components, it’s time to familiarize yourself with the Query tool - a handy way to interact with the API within our product itself!</p>
+
+<p>The Query tool can be found at this URL:
+<a href="https://tools.hotschedules.io/query">https://tools.hotschedules.io/query</a></p>
+
+<p>The Query tool will save you a lot of time, in that it has a UI that will allow you to input the parameters you are attempting to search, auto-fill in with available options, and provide you with the output as well as the final URL you can use to access your data.</p>
+
+<p>In the top nav bar, enter Store and click Send.  As long as the drop down on the left is set to GET, you will be performing a GET on the Store type and the API should return all the data about Stores in your namespace.</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu1.JPG?raw=true" /></p>
+
+<p>If, in the previous step, you went hog wild and created several stores, you may want to search just for one particular store, maybe the first one you created.  So let’s look at how the UI allows you to narrow your search.  In this case let’s grab the sys_id of one particular store, and then do a GET to get <em>just</em> the data related to that Store object.</p>
+
+<p>In the Fields box, click to open the drop down of available fields, and choose display_name and sys_id.  Click Send!</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu2.JPG?raw=true" /></p>
+
+<p>In my namespace, this returns just the display_name and sys_id of all my stores:</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu3.JPG?raw=true" /></p>
+
+<p>If I want to just see the data for my store “Airwaves Cafe”, I can then plug the sys_id in the “where” clause of the tool:</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu4.JPG?raw=true" /></p>
+
+<p>As you gain more experience with the Bodhi REST API, it is likely that the Query tool will become a very good friend of yours.</p>
+
+<p>Now that we’re able to authenticate to the API,  create and get objects, and use the Query tool, let’s talk about POS data.</p>
+
+<h1 id="clarifi-api-service---pos-canonical">Clarifi API Service - POS Canonical</h1>
+
+<p>We have built multiple POS integrations that source raw data in a variety of ways - SQL queries, DBF files, APIs - and transform that data into a generalized format that we refer to as “canonical”.  Since different POS’s have different object names, types, and other architectures, transforming that data into a canonical format helps provide a standard dataset that the different Clarifi applications to call to and consume in order to provide value to their users.</p>
+
+<p>Thus, if you are tasked with building a POS integration of your own to enable your customers to use Clarifi, then you will need to pass in some canonical data.  So let’s take a look at what it is!</p>
+
+<p><strong>StoreInfo</strong> and <strong>StoreBusinessDay</strong></p>
+
+<p>There are two main components to the Clarifi POS canonical data model.  We collect <strong>definitions</strong> of elements at a store - the employees, their job codes and pay rates, menu items and their pricing, sales categories, revenue centers, and more!  These elements collectively we refer to as StoreInfo.  Secondly, we collect events that occur at the store - the transactions that were generated, the items that were sold, sales totals, timecards that are generated, and more.  These items were collectively refer to as StoreBusinessDay.</p>
+
+<ul>
+<li><p>StoreInfo = definition of elements</p></li>
+<li><p>StoreBusinessDay = events involving those elements</p></li>
+</ul>
+
+<p>For example, a StoreBusinessDay timecard may indicate that Employee #12 clocked in as Job 26 at 3:00pm - a Clarifi application would take this data from StoreBusinessDay and be able to lookup to StoreInfo that Employee #12 is named David and Job 26 is Bartender, and give information to an end user about Jason clocking in as a Bartender.</p>
+
+<p>Let’s take a look at the Types of data that make up StoreInfo and StoreBusinessDay, and then we’ll take a look at how exactly to pass that information into our REST API.
+<strong>StoreInfo types</strong></p>
+
+<p>PosEmployee</p>
+
+<p>PosEmployee’s represent a list of data about the employee profiles that are housed in the POS.</p>
+
+<p>Here’s a breakdown:
+* Name - The first and last name of the employee
+* Nickname - The employee’s nickname or assumed moniker.
+* Birthdate - the employee’s date of birth
+* Addresses - The street, city, state, zipcode, and country assigned to the employee
+* Emails - the employee’s email address
+* Status - whether or not the employee is terminated
+* Employment Period - the span of time between the employee’s hire date and last day.
+* Instore_id - A ID meant to identify the employee at the store level
+* HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)
+* Phone Numbers - the employee’s phone numbers</p>
+
+<p><sample spec></p>
+
+<p>PosJob
+    A comprehensive list of jobs or roles available for employees to clock in as.</p>
+
+<p>PosEmployeePosition
+An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.</p>
+
+<p>PosRevenueCenter
+    A list of revenue centers within a venue, such as “Bar” “Patio” “Dining Room”, etc.  </p>
+
+<p>PosSalesCategory
+A list of types of items being sold at this venue, such as “Food”, “Liquor” ,“Beer”, “NA Bev”, “Retail”, etc.</p>
+
+<p>PosMenu
+    A list of menus available within the POS, such as “Dinner”, “Happy Hour”, etc</p>
+
+<p>PosMenuItems
+    A list of menu items and pricing available for sale at the venu.  </p>
+
+<p>PosMenuModifiers
+A list of menu items that would be classified as modifiers, i.e. attachments to menu items.</p>
+
+<p><strong>StoreBusinessDay Types</strong></p>
+
+<p>PosPunch</p>
+
+<p>PosCheck</p>
+
+<p>PosCheckItem</p>
+
+<h2 id="do-i-have-to-send-you-all-this-stuff?">Do I have to send you <em>all</em> this stuff?</h2>
+
+<p>Not at all!  As we get deeper into building and validating the data itself, you’ll find that some fields are required and some are not.  If a field is required but is irrelevant to your business, you can leave it with a null value.
+For instance, you may only have a single menu at your venue.  In that case, you would populate a single PosMenu, and your PosMenuItems would roll up to that PosMenu.  Similarly, if you haven’t collected your employee email addresses, your PosEmployee’s do not need to have that field filled out.</p>
+
+<p>We have some validation tools we’ll discuss later on to hone in on what is and is not required.</p>
+
+<h2 id="getting-data-from-clarifi">Getting Data From Clarifi</h2>
+
+<aside class="notice"> <strong>Getting Data From Clarifi</strong> </aside>
+
+<p>HotSchedules provides a tool called &ldquo;Bodhi Query&rdquo; which can be used to interact with the Clarifi API. Using the query tool will allow you to get store data such as the &ldquo;sys_id&rdquo;. The query tool also alllows the user to to use RESTful verbs to get, set and update data within Clarifi.</p>
+
+<p>To familiarize yourself with the query tool, start by logging into to your namespace.</p>
+
+<p><strong>Login to your namespace:</strong> <a href="https://tools.hotschedules.io">https://tools.hotschedules.io</a></p>
+
+<p>Once you have authenticated to your namespace, you will be on the tools page where you will select &ldquo;Bodhi Query&rdquo;</p>
+
+<p><img alt="Bodhi Tools Page" src="../images/bqt1.png?raw=true" /></p>
+
+<p>The Bodhi Query tool will allow you to use the <strong>GET</strong> verb to access dta relevant to your store. Let&rsquo;s use the Query tool to get the sys_id of a store.</p>
+
+<p>In the primary window, there are 2 select boxes. Box 1 is where you will select the verb type and box 2 provides the service from which to access.</p>
+
+<p>In this example, we are using the <strong>GET</strong> verb and the <strong>API</strong> service to get the store data. In the &ldquo;Type Name&rdquo; field, enter &ldquo;Store&rdquo; and click the send button. A list of store for your namespace will be returned.Within the body of the JSON response, locate the sys_id.</p>
+
+<p><img alt="Bodhi Tools Page" src="../images/bqt2.png?raw=true" /></p>
+
+<p><img alt="Bodhi Tools Page" src="../images/bqt3.png?raw=true" /></p>
+
+<p>Now that we have the sys_id of a store, we will use &ldquo;Package&rdquo; to query the StoreInfo of a specific store. Selec the <strong>GET</strong> verb as the method and the <strong>Package</strong> as the service type. In the &ldquo;Type Name&rdquo; field enter &ldquo;StoreIno&rdquo;. To narrow to a specific store, we will use the <strong>Where</strong> clause. Enter &ldquo;store_id&rdquo; in the first field and the &ldquo;sys_id&rdquo; in the 2nd field and then select the send button. The results of your call will be displayed in the main body of the query tool.</p>
+
+<p><img alt="Bodhi Tools Page" src="../images/bqt4.png?raw=true" /></p>
+
+<p>The Query Tool can be used to get or set data to any of the POSTypes listed below. As noted in this documentation, you can try different calls using the <strong>Where</strong> and <strong>Fields</strong> paramaters to narrow data to more specific details. </p>
+
+<p><img alt="Bodhi Tools Page" src="../images/bqt5.png?raw=true" /></p>
+
+<p>Using our RESTful service, a call can be made to <strong>GET</strong> data from the API. Examples of the various calls are listed below with sample JSON Outputs. The file spec is available for download providing the data points and the expected data type for each field.</p>
+
+<p>HTTP Status Codes provide a description of the sucess or failure of a call: <a href="https://httpstatuses.com">https://httpstatuses.com</a></p>
+
+<p><strong>Base Call:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1</a></p>
+
+<p>Using a field in the  <strong>where</strong>  or <strong>fields</strong> clause will narrow the focus to specific data.</p>
+
+<p><strong>Where:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={&ldquo;guest_count&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;1&rdquo; }}&amp;paging=limit:25,page:1</a></p>
+
+<p><strong>Fields:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={%22guest_count%22:%20{%20%22$eq%22:%20%221%22%20}}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={&ldquo;guest_count&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;1&rdquo; }}&amp;fields=table_id,check_id,shift_id&amp;paging=limit:25,page:1</a></p>
+
+<p>Below you will find descriptions for each canonical type that we use and the available fields.</p>
+
+<aside class="notice"> <strong>QUERY StoreInfo</strong> </aside> 
+
+<p>PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItems and PosMenumodifiers are only types that are queryable via StoreInfo.</p>
+
+<p><strong>Example:</strong> To get a list of employees for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=store_employees,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=store_employees,name&amp;paging=limit:25,page:1</a></p>
+
+<p><strong>Note:</strong> store_id is the sys_id of the store you are running the call for. To retrieve the list of sys_id&rsquo;s for all stores, use the following call.</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+{
+name: "store_test_07",
+sys_id: "5a1653d772bd660b0e9270bc"
+},
+{
+name: "store_test_05",
+sys_id: "5a1653d79534035f755308cf"
+}
+]
+</code></pre>
+
+<h4 id="posemployee">PosEmployee</h4>
+
+<p><strong>A list of employees pulled from the point of sale.</strong><br></p>
+
+<ul>
+<li> <strong>Name</strong> - The first and last name of the employee.<br></li>
+<li> <strong>Nickname</strong> - The employee’s nickname or assumed moniker.<br></li>
+<li> <strong>Birthdate</strong> - The employee’s date of birth.<br></li>
+<li> <strong>Addresses</strong> - The street, city, state, zipcode, and country assigned to an employee.<br></li>
+<li> <strong>Emails</strong> - The employee’s email address.<br> </li>
+<li> <strong>Status</strong> - Whether or not the employee is terminated.<br></li>
+<li> <strong>Employment_period</strong> - The span of time between the employee’s hire date and last day.<br> </li>
+<li> <strong>Instore_id</strong> - The point of sale id given to the employee.<br></li>
+<li> <strong>Hr_id</strong> - The ID given to the employee by the company.<br> </li>
+<li> <strong>Phone_numbers</strong> - The employee’s phone number.</li>
+</ul>
+
+<p><a href="/images/PosEmployee.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "store_employees": [
+      {
+        "name": {
+          "family_name": "DO NOT REMOVE",
+          "given_name": "ATO TRAINING 5"
+        },
+        "nickname": "ATO TRAINING 5",
+        "birthdate": null,
+        "addresses": [
+          {
+            "street_address": null,
+            "extended_address": null,
+            "locality": null,
+            "region": null,
+            "postal_code": null,
+            "country": null
+          }
+        ],
+        "status": "Active",
+        "employment_period": {
+          "from": "2018-04-03T00:00:00.000Z"
+        },
+        "instore_id": "905",
+        "hr_id": "",
+        "phone_numbers": [],
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
+<h4 id="posjob">Posjob</h4>
+
+<p><strong>A list of job codes from the customer’s point of sale system.</strong><br></p>
+
+<p><a href="/images/PosJob.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Instore_name</strong> - The name of the job code.<br></li>
+<li> <strong>Instore_id</strong> - The point of sale ID given to the job code.<br></li>
+<li> <strong>regular _rate</strong> - The pay rate attached to the job code.<br></li>
+<li> <strong>Overtime_rate</strong> - The overtime rate attached to the job.<br></li>
+<li> <strong>Doubletime_rate</strong> - The doubletime rate assigned to the job.</li>
+</ul>
+
+<p><strong>Example:</strong> To get a list of jobs for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=store_jobs,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=store_jobs,name&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "store_jobs": [
+      {
+        "instore_name": "Server",
+        "instore_id": "1",
+        "regular_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "overtime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
+<h4 id="posemployeeposition">PosEmployeePosition</h4>
+
+<p><strong>The job code assigned to the employee in the point of sale.</strong><br></p>
+
+<p><a href="/images/PosEmployeePosition.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Employee_reference</strong> - The employee’s POS ID.<br></li>
+<li> <strong>Job_reference</strong> - The job code’s POS ID. <br></li>
+<li> <strong>Regular_rate</strong> - The job code rate given to the employee. <br></li>
+<li> <strong>Overtime_rate</strong> - The overtime rate given to the employee.<br></li>
+<li> <strong>Doubletime_rate</strong> - The doubletime rate give to the employee. <br></li>
+<li> <strong>PosSalesCategory</strong> - The sales categories listed in the point of sale. <br></li>
+<li> <strong>Instore_id</strong> - The point of sale ID given to the sales category. <br></li>
+<li> <strong>Name</strong> - The name of the assigned sales category.</li>
+</ul>
+
+<p><strong>Example:</strong> To get a list of positions for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=employee_positions,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=employee_positions,name&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "employee_positions": [
+      {
+        "employee_reference": {
+          "id": "905",
+          "name": "ATO TRAINING 5 DO NOT REMOVE"
+        },
+        "job_reference": {
+          "id": "12"
+        },
+        "regular_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "overtime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "doubletime_rate": {
+          "value": 0,
+          "scale": 2,
+          "code": "USD"
+        },
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
+<h4 id="posrevenuecenter">PosRevenueCenter</h4>
+
+<p><strong>The revenue centers listed in the point of sale.</strong><br>
+<a href="/images/PosRevenueCenter.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Instore_id</strong> - The point of sale ID given to the revenue center. <br></li>
+<li> <strong>Name</strong> - The name of the revenue center. <br></li>
+</ul>
+
+<p><strong>Example:</strong> To get a list of revenue centers for a specific store and associated values, this would be the query string used</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%22sys_id%22%20}}&amp;fields=revenue_centers,name&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;sys_id&rdquo; }}&amp;fields=revenue_centers,name&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+  {
+    "revenue_centers": [
+      {
+        "name": "Dining",
+        "instore_id": "1",
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      },
+      {
+        "name": "Bar Downstairs",
+        "instore_id": "2",
+        "store_id": "5a1653d772bd660b0e9270bc",
+        "content_url": "namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo",
+        "store_reference": {
+          "id": "7"
+        }
+      }
+]
+</code></pre>
+
+<h4 id="posmenu">PosMenu</h4>
+
+<p><strong>Different menu types. Examples can include things like a brunch or dinner menu.</strong><br>
+<strong>Note:</strong> PosMenu is nested within StoreInfo <br></p>
+
+<ul>
+<li> <strong>Name</strong> - The name of the menu <br></li>
+<li> <strong>Category</strong> - The category assigned to a menu.<br></li>
+<li> <strong>Items</strong> - The items that make up a menu. <br></li>
+<li> <strong>Modifiers</strong> - The modifiers that can be used by items in the menu. <br></li>
+</ul>
+
+<p><a href="/images/PosMenu.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<h4 id="posmenuitems">PosMenuItems</h4>
+
+<p><strong>The items that can be used in all of the different menus.</strong><br>
+<strong>Note:</strong> PosMenuItems are nested within StoreInfo <br></p>
+
+<ul>
+<li> <strong>Id</strong> - The point of sale ID given to a menu item. <br></li>
+<li> <strong>Name</strong> - The name of the item in the point of sale. <br></li>
+<li> <strong>Category</strong> - The category that an item is assigned to. <br></li>
+<li> <strong>Description</strong> - an extension of the name that can provide further information about the item. <br></li>
+<li> <strong>Unit_price</strong> - The default menu price of the item. <br></li>
+<li> <strong>Prices</strong> - If that item has a different price associated with it outside of the default. For example a cocktail might have a happy hour price outside of the menu price. <br></li>
+</ul>
+
+<p><a href="/images/PosMenuItems.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<h4 id="posmenumodifiers">PosMenumodifiers</h4>
+
+<p><strong>Things like ketchup that can be used in tandem with a menu item.</strong><br>
+<strong>Note:</strong> PosMenumodifiers are nested within StoreInfo <br></p>
+
+<ul>
+<li> <strong>Id</strong> - The given point of sale ID for the menu modifier.<br></li>
+<li> <strong>Name</strong> - The name of the menu modifier. <br></li>
+<li> <strong>Description</strong> - A longer version of the name that can provide further insight into the name. <br></li>
+<li> <strong>Unit_price</strong> - The default menu price for a particular modifier. <br></li>
+<li> <strong>Prices</strong> - Any other prices outside of the menu price that is associated with the modifier. <br></li>
+</ul>
+
+<p><a href="/images/PosMenumodifiers.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<p><strong>Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:</strong> <a href="https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={%22store_id%22:%20{%20%22$eq%22:%20%225a1653d772bd660b0e9270bc%22%20}}&amp;fields=store_menus&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;5a1653d772bd660b0e9270bc&rdquo; }}&amp;fields=store_menus&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"store_menus"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"namespace/5a1653d772bd660b0e9270bc/20180403/StoreInfo"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Test Printers"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400520"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expo Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Expo Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400521"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fry Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fry Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400522"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grill Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Grill Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400523"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saute Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Saute Test"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400524"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR UP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR UP"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"400525"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR BAR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SVR BAR"</span><span class="p">,</span><span class="w">
+            </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+              </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">],</span><span class="w">
+        </span><span class="s2">"modifiers"</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="pospunch">PosPunch</h4>
+
+<p><strong>The punch records that are present in the point of sale system.</strong><br></p>
+
+<p><a href="/images/PosPunch.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Employee_reference</strong> - the employee’s given point of sale ID. <br></li>
+<li> <strong>Job_reference</strong> - The given point of sale ID for the job code that is assigned to the employee. <br></li>
+<li> <strong>Business_day</strong> - The business day that the employee has worked. <br></li>
+<li> <strong>Started_at</strong> - The time that the employee started working at. <br></li>
+<li> <strong>Ended_at</strong> - The time that the employee stopped working at.<br></li>
+<li> <strong>Total_minutes_worked</strong> - The total amount of time that the employee worked. <br></li>
+<li> <strong>Breaks</strong> - The number of breaks that the employee took. <br></li>
+<li> <strong>Regular_rate</strong> - The regular rate that the employee is working at<br></li>
+<li> <strong>Overtime_rate</strong> - The overtime rate that the employee is working at<br></li>
+<li> <strong>Doubletime_rate</strong> - The doubletime rate that the employee is working at. <br></li>
+<li> <strong>Declared_tips</strong> - The declared tips that the employee has. <br></li>
+<li> <strong>Cash_tips</strong> - The cash tips that the employee has. <br></li>
+<li> <strong>Credit_tips</strong> - The credit tips that the employee has. <br></li>
+</ul>
+
+<p><strong>Example:</strong> get punch records <a href="https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={%22store_id%22:%20{%20%22$eq%22:%20%225a1653d772bd660b0e9270bc%22%20}}&amp;fields=employee_reference&amp;paging=limit:25,page:1">https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={&ldquo;store_id&rdquo;: { &ldquo;$eq&rdquo;: &ldquo;5a1653d772bd660b0e9270bc&rdquo; }}&amp;fields=employee_reference&amp;paging=limit:25,page:1</a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"employee_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"395"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"job_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"business_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-10"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"started_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-10T12:32:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"ended_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2008-01-11T04:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"total_minutes_worked"</span><span class="p">:</span><span class="w"> </span><span class="mi">928</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"overtime_minutes_worked"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"breaks"</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span><span class="w">
+    </span><span class="s2">"regular_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"overtime_rate"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tips"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"declared_tips"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"namespace/5a1653d772bd660b0e9270bc/20180331/StoreBusinessDay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"79e5a5c698d0c09fd66fb927d97b3dae"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-28T13:13:20.165Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_type_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-31T17:00:24.001Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5abb94f03d0408724e91e8db"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h4 id="poscheck">PosCheck</h4>
+
+<p><strong>The different transactions at a restaurant.</strong><br></p>
+
+<p><a href="/images/PosCheck.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Check_id</strong> - The point of sale ID given to the transaction. <br></li>
+<li> <strong>Voided</strong> - Whether or not the transaction was voided. <br></li>
+<li> <strong>Canceled</strong> - Whether or not the check was cancelled. <br></li>
+<li> <strong>Employee_reference</strong> - The point of sale ID given to the employee who handled the transaction. <br></li>
+<li> <strong>Table_id</strong> - The point of sale ID given to the table. <br></li>
+<li> <strong>Register_id</strong> - The point of sale ID given to the register.<br></li>
+<li> <strong>Shift_id</strong> - The given point of sale ID for the shift. <br></li>
+<li> <strong>Opened_at</strong> - When the transaction was opened. <br></li>
+<li> <strong>Closed_at</strong> - When the transaction was closed. <br></li>
+<li> <strong>Guest_count</strong> - The total number of guests that were present for the transaction. <br></li>
+<li> <strong>Item_count</strong> - The total number of items on the transaction. <br></li>
+<li> <strong>Net_total</strong> - The total without taxes or coupons applied to it. <br></li>
+<li> <strong>Gross_total</strong> - The total including taxes and coupons. <br></li>
+<li> <strong>Discount_total</strong> - The total after any discounts have been applied to it. <br></li>
+<li> <strong>Tax_total</strong> - The total with the tax applied to it. <br></li>
+<li> <strong>Tender_total</strong> - The total amount of dollars paid. <br></li>
+<li> <strong>Change_total</strong> - The total amount of change paid. <br></li>
+<li> <strong>Gratuity_total</strong> - Any gratuity that was given to the transaction.<br></li>
+<li> <strong>Void_total</strong> - if the check was voided how much was it for. <br></li>
+<li> <strong>Items</strong> - The items that are on the transaction. <br></li>
+</ul>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight json"><code><span class="w">  </span><span class="p">{</span><span class="w">
+    </span><span class="s2">"business_day"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"check_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60025"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"employee_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"922"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"net_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"gross_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">58198</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"discount_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"tender_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">70198</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"shift_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"revenue_center"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"opened_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T18:00:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"closed_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T19:19:00.000Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"canceled"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"item_count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"content_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"namespace/5a1653d772bd660b0e9270bc/20180326/StoreBusinessDay"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"store_reference"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7"</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="s2">"store_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5a1653d772bd660b0e9270bc"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+      </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"item_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"55032"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"sales_category"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"4"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"gross_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"net_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"tax_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"unit_price"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">500</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"discount_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"void_total"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"value"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"scale"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="s2">"discounted"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="s2">"guest_count"</span><span class="p">:</span><span class="w"> </span><span class="s2">"42"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"voided"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-26T23:00:30.351Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_created_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_type_version"</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-03-27T12:24:00.269Z"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_modified_by"</span><span class="p">:</span><span class="w"> </span><span class="s2">"admin"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"sys_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5ab97b8f9534036231f8b72a"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<aside class="notice"> <strong>QUERY PosCheck</strong> </aside>
+
+<p>PosCheckItem are only queryable via PosCheck.</p>
+
+<h4 id="poscheckitem">PosCheckItem</h4>
+
+<p><strong>The items that make up a transaction. Items listed here roll into PosCheck.</strong><br></p>
+
+<p><a href="/images/PosCheckItem.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a></p>
+
+<ul>
+<li> <strong>Item_code</strong> - The given POS ID for the item.<br></li>
+<li> <strong>Unit_price</strong> - The menu price of the check item. <br></li>
+<li> <strong>Quantity</strong> - The amount of the item on the transaction. <br></li>
+<li> <strong>Sales_category</strong> - The sales category assigned to the item. <br></li>
+<li> <strong>Net_total</strong> - The total dollar amount of the item on the check without taxes or coupons applied to it. <br></li>
+<li> <strong>Gross_total</strong> - The total dollar amount of the item on the check with taxes and coupons applied to it. <br></li>
+<li> <strong>Tax_total</strong> - The total amount of taxes. <br></li>
+<li> <strong>Discount_total</strong> - The total amount of discounts that have been applied to the check. <br></li>
+<li> <strong>Void_total</strong> - If the check was voided this is its total. <br></li>
+<li> <strong>Voided</strong> - Whether or not the check was voided. <br></li>
+<li> <strong>Discounted</strong> - whether or not the check was discounted. <br></li>
+<li> <strong>PosVolumeItem</strong> - A dynamic driver that can represent things like guest counts, entree counts, and table counts. <br></li>
+<li> <strong>Datetime</strong> - The date that the amount being presented was captured. <br></li>
+<li> <strong>Amount</strong> - The total amount being presented by the driver. <br></li>
+<li> <strong>Volume_type</strong> - The type of volume that is being displayed. <br></li>
+<li> <strong>Revenue_center</strong> - The revenue center that data is being pulled from. <br></li>
+<li> <strong>Employee_reference</strong> - The point of sale ID given to the employee whose data you are viewing.</li>
+</ul>
+
+<p><strong>Example:</strong> To get a count of a number of items</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:%22$items.item_code%22,count:{%22$sum%22:1}}}]">https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{_id:&ldquo;$items.item_code&rdquo;,count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+{
+_id: "55136",
+count: 630
+}
+]
+</code></pre>
+
+<p><strong>Example:</strong> How many items sold over a time period</p>
+
+<p><a href="https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:%22sys_id%22}},{%22$unwind%22:%22$items%22},{$project:{items:1,business_day:1}},{$match:{items.item_code:%2255136%22}},{$group:{_id:{items:%22$items.item_code%22,business_day:%22$business_day%22},count:{%22$sum%22:1}}}]">https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:&ldquo;sys_id&rdquo;}},{&ldquo;$unwind&rdquo;:&ldquo;$items&rdquo;},{$project:{items:1,business_day:1}},{$match:{items.item_code:&ldquo;55136&rdquo;}},{$group:{<em>id:{items:&ldquo;$items.item_code&rdquo;,business_day:&ldquo;$business</em>day&rdquo;},count:{&ldquo;$sum&rdquo;:1}}}] </a></p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+{
+_id: {
+items: "55136",
+business_day: "2018-04-01"
+},
+count: 26
+},
+{
+_id: {
+items: "55136",
+business_day: "2018-04-02"
+},
+count: 17
+}
+]
+</code></pre>
+
+<h2 id="sending-canonical-data-over-the-rest-api">Sending Canonical Data Over the REST API</h2>
+
+<p>In order to send data into the Clarifi ecosystem, your application will need to construct StoreInfo and StoreBusinessDay files and pass them over a RESTful endpoint to a particular location within your namespace, at which point those files will be parsed out and made available via the API.</p>
+
+<h2 id="files?-i-just-want-to-get-and-set!">Files?  I Just Want to GET and SET!</h2>
+
+<p>In order to understand how to upload data into the REST API, we have to introduce a new term.  A job is a webservice within your namespace assigned to a particular store that can perform a particular function, either on an event-based schedule or on a user-configured timer.  Jobs can perform many functions within your namespace, such as calling to a variety of endpoints and packaging up the results, populating a UI for an end user to interact with, or flushing data that is no longer needed.</p>
+
+<p>Clarifi applications are powered by jobs that run on the backend and move data throughout the ecosystem.  As mentioned, jobs can either run on a schedule, or based on events.  The Bodhi REST API utilizes SQS, a tool that allows applications to generate messages that other applications can listen for in order to know when to activate.  For more information, check out this link: <a href="https://aws.amazon.com/sqs/">https://aws.amazon.com/sqs/</a>.</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu5.JPG?raw=true" /></p>
+
+<p>Here’s how our POS integrations work: Our Agent application generates raw data from the machine and sends it up into the namespace in a “raw” bucket.  The act of a new file landing in the raw bucket generates an SNS message.  A “transform” job is listening for that SNS message, and so upon receiving it, it activates, running its service to transform the raw data into Canonical data and make it available via our API server.  Upon completion of the job, the files are now placed in a “processed” bucket, generating a new SNS message.  Other applications listening for that SNS message now know to activate.</p>
+
+<p>That means that you <em>can</em> just GET and SET data over our API, however you’d be doing it here:</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu6.JPG?raw=true" /></p>
+
+<p>Only applications that run on timers would be able to access this data.  A job that calls to the PosPunch endpoints every 30 minutes for example, would work just fine.  However, a job that is listening for the SNS message (for example, to alert that the availability of a particular menu item has dropped below an acceptable threshold) would have no way of knowing your data is there.</p>
+
+<p>Therefore, you need to introduce your data into the ecosystem earlier in the chain:</p>
+
+<p><img title="ID_token" alt="alt text" src="../images/qu7.JPG?raw=true" /></p>
+
+<p>By doing this, you can be assured that Clarifi applications will be empowered to consume your data properly and thus provide value to your customers!</p>
+
+<h2 id="what’s-airwaves?">What’s Airwaves?</h2>
+
+<p>Airwaves is a job that you will need to install on your namespace that will listen for raw StoreInfo and StoreBusinessDay files that you POST into your namespace, parsing the data within, moving it through the API server, and generating an SNS message for downstream applications.</p>
+
+<p>To install Airwaves, you’ll need to go to the Bodhi Shop.  The Bodhi Shop is a place within your namespace where you can install and configure a variety of jobs and applications.  Here’s a link:
+https://tools.hotschedules.io/shop/#/all?appType=job
+Find Airwaves from the list of available jobs and install.</p>
+
+<aside class="notice"> <strong>How To POST data to Clarifi</strong> </aside>
+
+<p>The File Upload endpoint is special type that allows a user to upload files (StoreInfo and StoreBusinessDay) to be consumed by Clarifi Applications.</p>
+
+<p><strong>File Upload EndPoint URL:</strong> https://files.hotschedules.io/files/raw/store_id/filename</p>
+
+<p><strong>What you&rsquo;ll need:</strong></p>
+
+<ul>
+<li>A namespace running the Airwaves job</li>
+<li>Your files (StoreInfo and StoreBusinessDay)</li>
+<li>Method to pass data to the API (HS Bodhi Query Tool or Postman for example)</li>
+</ul>
+
+<p>At a minimum, your file needs to include a full business day of data. For example, if you are posting sales at 10:00am and then again at 11:00am, your 11:00am file needs include all the data you posted at 10:00am as well as the data from 10:00am to 11:00am.</p>
+
+<aside class="notice"> <strong>Let&rsquo;s Get Started</strong> </aside>
+
+<p><strong>Login to your namespace:</strong> <a href="https://tools.hotschedules.io">https://tools.hotschedules.io</a></p>
+
+<p><strong>Install the Airwaves app:</strong> Login to your namespace and use the Bodhi Shop to install the Airwaves App. This app is required to consume the files you will POST later in this example and enable Clarifi to consume the data for the apps within Clarifi.</p>
+
+<p><img alt="Install Airwaves" src="../images/airwaves.png?raw=true" /></p>
+
+<p>Once installed, Airwaves will be available in the Job Manager.</p>
+
+<p><img alt="Configuration" src="../images/airwavesjob.png?raw=true" /></p>
+
+<p><strong>You&rsquo;re ready to start posting data to Clarifi.</strong></p>
+
+<p>To <strong>POST</strong> data into Clarifi, you will need to create 2 files and upload those to File Upload endpoint. When the files are received, Airwaves listens for those files, consumes them and transforms them into Canonical data for consumption by Clarifi applications.</p>
+
+<p><strong>Note:</strong> You will create a separate zip file for each file as you will POST each file separately when you submit your call to upload data into Clarifi. Attached are the file spec for each file type and further in this example, completed example files are provided for download.</p>
+
+<p><a href="http://docs.hotschedules.io/images/StoreInfo.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download StoreInfo.json File Spec</a></p>
+
+<p><a href="http://docs.hotschedules.io/images/StoreBusinessDay.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download StoreBusinessDay.json File Spec</a></p>
+
+<p>We have created a Postman collection to enable you to test posting data to the POS Canonical Service. The Collection includes examples for validating the JSON data in your StoreInfo and StoreBusinessDay files and POSTing to the File Upload Endpoint. The examples are titled &ldquo;Validate StoreInfo&rdquo;, &ldquo;Validate StoreBusinessDay&rdquo;, &ldquo;StoreInfo&rdquo; and &ldquo;StoreBusinessDay&rdquo;.</p>
+
+<p>Select the <strong>&ldquo;Run In Postman&rdquo;</strong> button below to open the collection in Postman to start testing.</p>
+
+<div id="btn" style="padding-left: 30px;">
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="caea705a1c30e38ea420"></div></div>
+
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
+
+<p><br></p>
+
+<p>To <strong>validate</strong> your JSON data to ensure it&rsquo;s well formed before you create your files, you can <strong>POST</strong> the data to the &ldquo;validate&rdquo; endpoint and receive a JSON repsonse upon success or failure.</p>
+
+<p>Validate Endpoint URL: https://api.hotschedules.io/NAMESPACE/validate/<strong>StoreInfo</strong> or <strong>StoreBusinessDay</strong></p>
+
+<p>The following is an example of a <strong>Success</strong> message.</p>
+
+<p>{
+    &ldquo;valid&rdquo;: true,
+    &ldquo;sys_type_version&rdquo;: &ldquo;1&rdquo;
+}</p>
+
+<p>The example provided below has been created using Postman. Configure Postman using the following example to <strong>POST</strong> your file to the API.</p>
+
+<p><strong>Configure Header</strong></p>
+
+<p><img alt="Configuration" src="../images/postmanheader.png?raw=true" /></p>
+
+<p><strong>Configure Body</strong></p>
+
+<p><img alt="Configuration" src="../images/postmanbody.png?raw=true" /></p>
+
+<p>The configuration will enable you to pass in your bearer token and namespace, and do a <strong>PUT</strong> to
+<a href="https://files.hotschedules.io/files/raw/store_id/filename">https://files.hotschedules.io/files/raw/store_id/filename</a></p>
+
+<p>You&rsquo;ll be passing in a .zip file that contains your data, and attach the zip as part of the body. Postman will show a success message.</p>
+
+<blockquote>
+<p><strong>EXAMPLE JSON RESPONSE:</strong></p>
+</blockquote>
+<pre class="highlight plaintext"><code>[
+    {
+        "namespace": "theposthatrefreshes",
+        "name": "StoreInfo6.zip",
+        "original_name": "StoreInfo6.zip",
+        "location": "theposthatrefreshes/5a997e4a490d05496aae228b/StoreInfo6.zip",
+        "media_type": "application/zip",
+        "uploaded_at": "2018-04-03T22:11:27.725Z",
+        "bucket": "raw",
+        "BodhiAsyncStatus": "/theposthatrefreshes/resources/BodhiAsyncStatus/5ac3fc0ff4a7c05f0ead361b"
+    }
+]
+</code></pre>
+
+<p>Your files will be visible in your File Manager.</p>
+
+<p><img alt="Configuration" src="../images/filemanager.png?raw=true" /></p>
+
+<p>Once the file arrives in the namespace, the Airwaves job will activate and Airwaves will put the file through the API server, basically unpacking all the data within the file and making it available for other applications to consume.</p>
+
+<p>The following example files (StoreInfoMMDDYR.json and StoreBusinessDayMMDDYR.json) are provided for download.</p>
+
+<p><strong>Best Practice:</strong> Name your json file and your zip file using a simliar naming convention.</p>
+
+<p>i.e. StoreInfo040418.json and StoreInfo040418.zip</p>
+
+<p><a href="http://docs.hotschedules.io/images/StoreInfoMMDDYR.json" download><img border="0" src="/images/jsonicon.png" alt="Download File StoreInfoMMDDYR.json" width="32" height="32">StoreInfoMMDDYR.json</a></p>
+
+<p><a href="http://docs.hotschedules.io/images/StoreBusinessDayMMDDYR.json" download><img border="0" src="/images/jsonicon.png" alt="Download File StoreBusinessDayMMDDYR.json" width="32" height="32">StoreBusinessDayMMDDYR.json</a></p>
+
+<h2 id="working-with-hotschedules-labor-and-schedule-data">Working with HotSchedules Labor and Schedule Data</h2>
+
+<p>So far we have been focusing on interacting with POS data.  However, perhaps you want to interact with labor or schedule data that has been generated within HS Labor.  HS Labor offers a SOAP API that returns a variety of data, and the Bodhi REST API offers a proxy of those endpoints.  This basically means that instead of having to change your calls to use (for example):
+https://soap.hotschedules.com/ws/getStoreEmployees (not a real URL)</p>
+
+<p>You can use the REST API’s URL and auth mechanism:</p>
+
+<p><a href="https://api.hotschedules.io/namespace/services/hotschedules/concept_id/store_id/getStoreEmployees">https://api.hotschedules.io/namespace/services/hotschedules/concept_id/store_id/getStoreEmployees</a> (not a real URL)</p>
+
+<p>In order to utilize the HS SOAP proxy, you will need to acquire HS SOAP credentials and put them in a tool called the BodhiUserKeychain.  Luckily, these credentials do not expire, so doing this once will set you up for life.</p>
+
+<p>Follow these simple setup steps before proceeding.</p>
+
+<p><strong>Step 1:</strong> Obtain your API credentials from HotSchedules if you have not already done so.<br>
+<strong>Step 2:</strong> Login into the <a href="https://tools.hotschedules.io/account/#/">Account Manager</a><br>
+<strong>Step 3:</strong> In the upper right corner, select the wrench icon, then keychain, then your namespace.<br>
+<strong>Step 4:</strong> Enter your API credentials as provided by hotSchedules and click save.<br>
+<strong>Step 5:</strong> Continue with the example below to retrieve your token.</p>
+
+<h4 id="making-a-call">Making a call</h4>
+
+<p><strong>Please Note:</strong> Through our standard service offering, HotSchedules will support up to 100 calls per hour, per store with bursts not to exceed 20 calls per minute per store. At this service level, the API will have a rate limit and status code 429 will return for calls beyond those limits.</p>
+
+<p><br>
+The HotSchedules REST API supports all the standard REST verbs.</p>
+
+<p><strong>GET</strong><br>
+<strong>POST</strong><br>
+<strong>PUT</strong><br>
+<strong>PATCH</strong><br>
+<strong>DELETE</strong>  </p>
+
+<p>You can access these verbs for each of the types in the HotSchedules system. When an organization is created in the HotSchedules Platform, the organization automatically gets 32 &lsquo;types&rsquo; that will store standard information and data about your organization. Those &#39;types&rsquo; can be viewed and reviewed at <a href="https://api.hotschedules.io/apidocs/index.html">https://api.hotschedules.io/apidocs/index.html</a></p>
+
+<h4 id="get">GET</h4>
+
+<p>As an example, let&rsquo;s do a <strong>GET</strong> on a store via CURL
+<code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/Store</code></p>
+
+<p>This call will return the information about a store that&rsquo;s been created for the bodhi-social organization</p>
+
+<p><code class="prettyprint">[{&quot;sys_version&quot;:1,&quot;image_url&quot;:&quot;https://upload.wikimedia.org/wikipedia/commons/5/54/Golden_Gate_Bridge_0002.jpg&quot;,&quot;sys_type_version&quot;:12,&quot;address&quot;:{&quot;street_address&quot;:&quot;555 Mission&quot;,&quot;extended_address&quot;:&quot;&quot;,&quot;locality&quot;:&quot;San Francisco&quot;,&quot;region&quot;:&quot;CA&quot;,&quot;postal_code&quot;:&quot;94111&quot;,&quot;country&quot;:&quot;US&quot;},&quot;store_hours&quot;:[{&quot;days&quot;:[7,1],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;},{&quot;days&quot;:[1,2],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[2,3],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[3,4],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[4,5],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[5,6],&quot;start&quot;:&quot;1200&quot;,&quot;end&quot;:&quot;0200&quot;},{&quot;days&quot;:[6,7],&quot;start&quot;:&quot;0500&quot;,&quot;end&quot;:&quot;0000&quot;}],&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_created_at&quot;:&quot;2016-05-21T15:37:15.560Z&quot;,&quot;name&quot;:&quot;platformstore&quot;,&quot;store_number&quot;:&quot;1&quot;,&quot;display_name&quot;:&quot;Platform Store&quot;,&quot;sys_id&quot;:&quot;574080abb9a19e2dadee775b&quot;}]</code></p>
+
+<p>You can also get the JSON payload by navigating directly to this URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/Store</code>  </p>
+
+<p>You can create your own store for your organization either by executing a <strong>POST</strong> command (see below) to <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/Store</code> or using our store manager tool at <code class="prettyprint">https://hotschedules.io/store-manager</code> . Either way, a store is a critical anchor for information in the Platform.</p>
+
+<p>Next let&rsquo;s look up a sale for our store in bodhi-social</p>
+
+<p><code class="prettyprint">curl -ik --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; -X GET https://api.hotschedules.io/bodhi-social/resources/SalesTransaction</code></p>
+
+<p>RESULT:</p>
+
+<p><code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>We can also look up our Store using query parameters in our URL</p>
+
+<p><code class="prettyprint">curl --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io.io/bodhi-social/resources/SalesTransaction?where=%7Bbusiness_day:&quot;2016-05-20&quot;%7D&amp;fields=business_day&#39;</code></p>
+
+<p>OR alternatively:</p>
+
+<p><code class="prettyprint">curl -g --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=platform&quot; &#39;https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={business_day:&quot;2016-05-20&quot;}&amp;fields=business_day&#39;</code></p>
+
+<p>RESULT:<br>
+<code class="prettyprint">[{&quot;order_number&quot;:10184,&quot;item_count&quot;:1,&quot;store_id&quot;:&quot;574080abb9a19e2dadee775b&quot;,&quot;employee&quot;:{&quot;id&quot;:&quot;5151&quot;,&quot;name&quot;:&quot;Ted Morrison&quot;},&quot;business_day&quot;:&quot;2016-05-20&quot;,&quot;revenue_center&quot;:{&quot;id&quot;:&quot;2&quot;,&quot;name&quot;:&quot;Restaraunt&quot;},&quot;type&quot;:{&quot;id&quot;:&quot;4&quot;,&quot;name&quot;:&quot;1&quot;},&quot;timestamp&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;transaction_id&quot;:&quot;557605fc4c32e071180a46042016-05-2010184&quot;,&quot;net_total&quot;:{&quot;value&quot;:325,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;discount_total&quot;:{&quot;value&quot;:0,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tax_total&quot;:{&quot;value&quot;:23,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;gross_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;tender_total&quot;:{&quot;value&quot;:348,&quot;code&quot;:&quot;USD&quot;,&quot;scale&quot;:2},&quot;order_opened_at&quot;:&quot;2016-05-21T03:33:00.000Z&quot;,&quot;order_closed_at&quot;:&quot;2016-05-21T03:34:00.000Z&quot;,&quot;guest_count&quot;:1,&quot;sys_version&quot;:1,&quot;sys_created_at&quot;:&quot;2016-05-21T16:02:30.800Z&quot;,&quot;sys_created_by&quot;:&quot;admin__bodhi-social&quot;,&quot;sys_type_version&quot;:12,&quot;sys_id&quot;:&quot;574086965eacd06aa3db036b&quot;}]</code></p>
+
+<p>So <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27business_day%27:%272016-05-20%27}</code> would return all SalesTransaction&rsquo;s for the business day of 2016-05-20.
+The URL <code class="prettyprint">https://api.hotschedules.io/bodhi-social/resources/SalesTransaction?where={%27store_id%27:%27574080abb9a19e2dadee775b%27}</code> would return all SalesTransaction&rsquo;s for the store 574080abb9a19e2dadee775b (our Platform test store).</p>
+
+<p>All Types can be queried by any parameter within the type using a ?where={} clause. It&rsquo;s <strong>EXTREMELY</strong> important for efficiency and performance to query using indexes on your types. You can review the Types for your organization as well as the Indexes and Parameters by using our free Type Tool located at <code class="prettyprint">https://tools.hotschedules.io/types</code> or by inspecting <code class="prettyprint">https://api.hotschedules.io/&lt;organization_name&gt;/resources/BodhiType</code></p>
+
+<h4 id="post">POST</h4>
+
+<p>To <strong>POST</strong> to a type you need to add the the header: &#39;Content-Type: application/json&rsquo; to your cURL Command</p>
+
+<p><code class="prettyprint">curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X POST -d &#39;{
+  &quot;store_id&quot;: &quot;l8zeL&quot;,
+  &quot;business_day&quot;: &quot;2016-05-13&quot;,
+  &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;,
+  &quot;transaction_id&quot;: &quot;FGHG012&quot;,
+     &quot;tender_total&quot;: {
+      &quot;code&quot;: &quot;USD&quot;,
+      &quot;scale&quot;: 2,
+      &quot;value&quot;: 620
+    }
+}&#39; https://api.hotschedules.io/&lt;organization_name&gt;/resources/SalesTransaction</code></p>
+
+<p>That command will post the json object to the SalesTransaction type. You can now GET on this type either using cURL or the free query tools available at https://tools.hotschedules.io/query</p>
+
+<h4 id="bulk-post">Bulk Post</h4>
+
+<p>All bulk operations are accessible through https://api.hotschedules.io<br>
+The size limitation for the body is 17MB  </p>
+
+<h3 id="syntax:">Syntax:</h3>
+
+<p><strong>POST</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk</code> with json body<br>
+<code class="prettyprint">{
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot; or &quot;update&quot; or &quot;upsert&quot; or &quot;invite&quot;,  * see below
+     &quot;report&quot;: true,        &lt;- optional, need a report? (default false) 
+     &quot;target&quot;: &quot;target_name”    &lt;- the name of the type (not for invite)
+  },
+  &quot;payload&quot;: [{
+    &quot;the_field&quot;: &quot;my first thing to insert or upsert or invite&quot;,
+    &quot;other_field&quot;: &quot;the_other_field&quot;
+  }, {
+    &quot;the_field&quot;: &quot;my second thing to insert or upsert&quot;,
+    &quot;other_field&quot;: &quot;the_other_field2&quot;
+  }]
+}</code>  </p>
+
+<p>The payload varies depending on the type of operation and Returns 202 with header <code class="prettyprint">bulk_id:&lt;the bulk id&gt;</code></p>
+
+<p>The result of a report, if requested, is accessible as soon as the processing is done on:</p>
+
+<p><strong>GET</strong> <code class="prettyprint">/&lt;organization_name&gt;/bulk/&lt;bulk_id&gt;</code></p>
+
+<p><strong>RESPONSE:</strong><br>
+returns <strong>200</strong> with a json array body where the order of the cells matches the order of the payload. The report can be accessed only once.<br>
+returns <strong>204</strong> if the report is not ready yet<br>
+returns <strong>404</strong> if no report was found with that id  </p>
+
+<ul>
+<li>update/upsert is only available for types not encapsulated </li>
+<li>insert on system types only BodhiUser, BodhiType and BodhiEnumeration and any not encapsulated type</li>
+</ul>
+
+<h3 id="example:">Example:</h3>
+
+<p><code class="prettyprint">{
+  &quot;config&quot;: {
+    &quot;op&quot;: &quot;insert&quot;,
+    &quot;report&quot;: true,
+    &quot;target&quot;:  &quot;BulkTest&quot;
+  },
+  &quot;payload&quot;: [{
+    &quot;name&quot;: &quot;leo&quot;,
+    &quot;other_field&quot;: &quot;mauris non&quot;
+  }, {
+    &quot;name&quot;: &quot;orci&quot;,
+    &quot;other_field&quot;: &quot;sit amet justo&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;pulvinar sed nisl nunc rhoncus&quot;
+  }, {
+    &quot;name&quot;: &quot;nulla&quot;,
+    &quot;other_field&quot;: &quot;diam cras&quot;
+  }, {
+    &quot;name&quot;: &quot;est&quot;,
+    &quot;other_field&quot;: &quot;dui nec nisi volutpat&quot;
+  }, {
+    &quot;name&quot;: &quot;lorem&quot;,
+    &quot;other_field&quot;: &quot;cursus id&quot;
+  }, {
+    &quot;name&quot;: &quot;molestie&quot;,
+    &quot;other_field&quot;: &quot;potenti nullam porttitor lacus at&quot;
+  }, {
+    &quot;name&quot;: &quot;sapien&quot;,
+    &quot;other_field&quot;: &quot;ultrices aliquet maecenas leo&quot;
+  }, {
+    &quot;name&quot;: &quot;nibh&quot;,
+    &quot;other_field&quot;: &quot;consectetuer eget rutrum at&quot;
+  }, {
+    &quot;name&quot;: &quot;luctus&quot;,
+    &quot;other_field&quot;: &quot;nisl nunc&quot;
+  }]
+}</code></p>
+
+<h4 id="put">PUT</h4>
+
+<p>The HTTP verb PUT can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PUT on sys_id</p>
+
+<p>As an example, in the above SalesTransaction example, the sys_id is 574086965eacd06aa3db036b, a PUT to the SalesTransaction based on sys_id would be as follows:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b
+</code> </p>
+
+<h4 id="put-upsert">PUT Upsert</h4>
+
+<p>Upsert is a safe way to replace an existing record, or POST a record if the entry does not currently exist.</p>
+
+<p>You can upsert by appending your URL with ?upsert=true</p>
+
+<p>As an example, the above PUT example can be changed to a replace by appending the ?upsert=true to the cURL command:</p>
+
+<p><code class="prettyprint">
+curl -ik -H &#39;Content-Type: application/json&#39; --cookie &quot;RUSK=8a6f98bb1033055fc04d644c0006789335f96c2b-username=foo&quot; -X PUT -d &#39;{ &quot;store_id&quot;: &quot;l8zeL&quot;, &quot;business_day&quot;: &quot;2016-05-13&quot;, &quot;timestamp&quot;: &quot;2016-05-12T05:58:31.296Z&quot;, &quot;transaction_id&quot;: &quot;FGHG012&quot;, &quot;tender_total&quot;: { &quot;code&quot;: &quot;USD&quot;, &quot;scale&quot;: 2, &quot;value&quot;: 620 } }&#39; https://api.hotschedules.io/tutorial/resources/SalesTransaction/574086965eacd06aa3db036b?upsert=true
+</code></p>
+
+<h4 id="patch">PATCH</h4>
+
+<p>the HTTP verb PATCH will allow you to alter single parameters or fields within a record in your type. Patch commands follow the following sytax:
+[ { &ldquo;op&rdquo;: &ldquo;replace&rdquo;, &ldquo;path&rdquo;: &ldquo;/baz&rdquo;, &ldquo;value&rdquo;: &ldquo;boo&rdquo; }, { &ldquo;op&rdquo;: &ldquo;add&rdquo;, &ldquo;path&rdquo;: &ldquo;/hello&rdquo;, &ldquo;value&rdquo;: [&ldquo;world&rdquo;] }, { &ldquo;op&rdquo;: &ldquo;remove&rdquo;, &ldquo;path&rdquo;: &ldquo;/foo&rdquo;} ]</p>
+
+<p>The HTTP verb PATCH can be used on any type as long as there&rsquo;s a unique index on the field or fields. You can always PATCH on sys_id</p>
+
+<h4 id="delete">DELETE</h4>
+
+<p>the HTTP verb DELETE will allow you to remove a record in your type. To delete multiple records, include a ?where={} in your URL to narrow or expand then number of records removed.</p>
+
+<h4 id="file-upload">File Upload</h4>
+
+<p>The Platform BodhiFileUpload endpoints are special types that allow a user to upload and download any file (like a dbf file from your store&rsquo;s POS).</p>
+
+<p>Metadata of your file is posted to type BodhiFileUpload on successful upload  </p>
+
+<p><strong>BodhiFileUpload example record:</strong><br>
+<code class="prettyprint">{ &quot;namespace&quot;: &quot;bodhi&quot;, &quot;original_name&quot;: &quot;profile_pic5.jpg&quot;, &quot;sys_version&quot;: 1, &quot;location&quot;: &quot;bodhi/profile_pic5.jpg&quot;, &quot;uploaded_at&quot;: &quot;2015-09-10T19:42:48+0000&quot;, &quot;sys_created_by&quot;: &quot;admin__bodhi&quot;, &quot;sys_created_at&quot;: &quot;2015-09-10T19:42:49+0000&quot;, &quot;name&quot;: &quot;profile_pic5.jpg&quot;, &quot;media_type&quot;: &quot;image/jpeg&quot;, &quot;sys_id&quot;: &quot;55f1dd39b9b5904f64c8212f&quot; }</code></p>
+
+<p><strong>Examples:</strong><br>
+The following are curl examples of how to specify file location in your upload/download/delete commands.  Everything after “upload/” or “download/” in the url is used as the destination.  Note that filename is always specified in the url.  </p>
+
+<p><code class="prettyprint">curl -X POST -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code>  </p>
+
+<p><code class="prettyprint">curl -X PUT -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt -F &quot;upload1=@THE_FILE&quot;</code></p>
+
+<p><strong>Download by path:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/recipes/food/BurritoRecipe.txt</code></p>
+
+<p><strong>Download by sys_id:</strong><br>
+<code class="prettyprint">curl -X GET -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/download/56f9c2b4fa92ec27934a76ae</code>  </p>
+
+<p><strong>Delete a file:</strong><br>
+<code class="prettyprint">curl -X DELETE -u &lt;username&gt;:&lt;password&gt; https://api.hotschedules.io/&lt;organization_name&gt;/controllers/vertx/upload/recipes/food/BurritoRecipe.txt</code></p>
+
+<p>We have created a Postman collection to enable you with making calls to the REST API.</p>
+
+<div id="btn" style="padding-left: 30px;">
+<div class="postman-run-button"
+data-postman-action="collection/import"
+data-postman-var-1="caea705a1c30e38ea420"></div></div>
+
+<script type="text/javascript">
+  (function (p,o,s,t,m,a,n) {
+    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
+    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
+      (n = o.createElement("script")),
+      (n.id = s+t), (n.async = 1), (n.src = m), n
+    ));
+  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
+</script>
+
+      </div>
+      <div class="dark-box">
+      </div>
+    </div>
+  </body>
+</html>
