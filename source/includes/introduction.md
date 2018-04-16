@@ -31,7 +31,7 @@ The Bodhi Platform is built around a central URL:  [https://api.hotschedules.io]
 
 The syntax of your URL will include your namespace name within it.  For example, a call to return data about all of the Stores in your namespace would look like this:
 
-[https://api.hotschedules.io/<namespace>/resources/Store] (https://api.hotschedules.io/<namespace>/resources/Store)
+[https://api.hotschedules.io/namespace/resources/Store] (https://api.hotschedules.io/namespace/resources/Store)
 
 You’ll be seeing this a lot.  Our API uses Mongo DB for storage, so to learn more about this foundation, see this link: [http://docs.mongodb.org/manual/reference/operator] (http://docs.mongodb.org/manual/reference/operator)
 
@@ -124,7 +124,7 @@ As a human interacting with this data, generating a new token each time is handy
 We have a namespace, but we have no stores to post any data to!  Let’s fix that right now.
 
 As mentioned before, the Store endpoint is:
-[https://api.hotschedules.io/<namespace>/resources/Store] (https://api.hotschedules.io/<namespace>/resources/Store
+[https://api.hotschedules.io/namespace/resources/Store] (https://api.hotschedules.io/namespace/resources/Store
 )
 
 The Store endpoint allows you to post and receive a great deal of information about the configuration of your store - addresses, contact information, business hours, an identifying image, etc.  
@@ -292,13 +292,13 @@ Using our RESTful service, a call can be made to **GET** data from the API. Exam
 HTTP Status Codes provide a description of the sucess or failure of a call: [https://httpstatuses.com] (https://httpstatuses.com)
 
 
-**Base Call:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?paging=limit:25,page:1)
+**Base Call:** [https://api.hotschedules.io/namespace/resources/PosCheck?paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/PosCheck?paging=limit:25,page:1)
 
 Using a field in the  **where**  or **fields** clause will narrow the focus to specific data.
 
-**Where:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1)
+**Where:** [https://api.hotschedules.io/namespace/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&paging=limit:25,page:1)
 
-**Fields:** [https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1)
+**Fields:** [https://api.hotschedules.io/namespace/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/PosCheck?where={"guest_count": { "$eq": "1" }}&fields=table_id,check_id,shift_id&paging=limit:25,page:1)
 
 Below you will find descriptions for each canonical type that we use and the available fields.
 
@@ -308,11 +308,11 @@ PosEmployee, PosJob, PosEmployeePosition, PosRevenueCenter, PosMenu, PosMenuItem
 
 **Example:** To get a list of employees for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_employees,name&paging=limit:25,page:1)
 
 **Note:** store_id is the sys_id of the store you are running the call for. To retrieve the list of sys_id's for all stores, use the following call.
 
-[https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
+[https://api.hotschedules.io/namespace/resources/Store?fields=name,sys_id&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/Store?fields=name,sys_id&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -398,7 +398,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of jobs for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=store_jobs,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -444,7 +444,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of positions for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=employee_positions,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -493,7 +493,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 **Example:** To get a list of revenue centers for a specific store and associated values, this would be the query string used
 
-[https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1)
+[https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "sys_id" }}&fields=revenue_centers,name&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -559,7 +559,7 @@ sys_id: "5a1653d79534035f755308cf"
 
 <a href="/images/PosMenumodifiers.json" download><img border="0" src="/images/jsonicon.png" alt="Download File Spec" width="32" height="32">Download File Spec</a>
 
-**Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:** [https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1)
+**Example Call to retrieve PosMenu, PosMenuItems and PosMenumodifiers:** [https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/StoreInfo?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=store_menus&paging=limit:25,page:1)
 
 
 > **EXAMPLE JSON RESPONSE:**
@@ -659,7 +659,7 @@ sys_id: "5a1653d79534035f755308cf"
 *  **Cash_tips** - The cash tips that the employee has. <br>
 *  **Credit_tips** - The credit tips that the employee has. <br>
 
-**Example:** get punch records [https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1] (https://api.hotschedules.io/NAMESPACE/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1)
+**Example:** get punch records [https://api.hotschedules.io/namespace/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1] (https://api.hotschedules.io/namespace/resources/PosPunch?where={"store_id": { "$eq": "5a1653d772bd660b0e9270bc" }}&fields=employee_reference&paging=limit:25,page:1)
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -860,7 +860,7 @@ PosCheckItem are only queryable via PosCheck.
 
 **Example:** To get a count of a number of items
 
-[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}] ] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}])
+[https://api.hotschedules.io/namespace/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}] ] (https://api.hotschedules.io/namespace/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1}},{$match:{items.item_code:"55136"}},{$group:{_id:"$items.item_code",count:{"$sum":1}}}])
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -875,7 +875,7 @@ count: 630
 
 **Example:** How many items sold over a time period
 
-[https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}] ] (https://api.hotschedules.io/NAMESPACE/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}])
+[https://api.hotschedules.io/namespace/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}] ] (https://api.hotschedules.io/namespace/resources/PosCheck/aggregate?pipeline=[{$match:{store_id:"sys_id"}},{"$unwind":"$items"},{$project:{items:1,business_day:1}},{$match:{items.item_code:"55136"}},{$group:{_id:{items:"$items.item_code",business_day:"$business_day"},count:{"$sum":1}}}])
 
 > **EXAMPLE JSON RESPONSE:**
 
@@ -1000,7 +1000,7 @@ data-postman-var-1="caea705a1c30e38ea420"></div></div>
 
 To **validate** your JSON data to ensure it's well formed before you create your files, you can **POST** the data to the "validate" endpoint and receive a JSON repsonse upon success or failure.
 
-Validate Endpoint URL: https://api.hotschedules.io/NAMESPACE/validate/**StoreInfo** or **StoreBusinessDay**
+Validate Endpoint URL: https://api.hotschedules.io/namespace/validate/**StoreInfo** or **StoreBusinessDay**
 
 The following is an example of a **Success** message.
 
