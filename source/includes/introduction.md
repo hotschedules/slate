@@ -207,6 +207,7 @@ There are two main components to the Clarifi POS canonical data model.  We colle
 For example, a StoreBusinessDay timecard may indicate that Employee #12 clocked in as Job 26 at 3:00pm - a Clarifi application would take this data from StoreBusinessDay and be able to lookup to StoreInfo that Employee #12 is named David and Job 26 is Bartender, and give information to an end user about Jason clocking in as a Bartender.
 
 Let’s take a look at the Types of data that make up StoreInfo and StoreBusinessDay, and then we’ll take a look at how exactly to pass that information into our REST API.
+
 **StoreInfo types**
 
 PosEmployee
@@ -260,7 +261,8 @@ PosCheckItem
 ##Do I have to send you _all_ this stuff?
 
 Not at all!  As we get deeper into building and validating the data itself, you’ll find that some fields are required and some are not.  If a field is required but is irrelevant to your business, you can leave it with a null value.
-For instance, you may only have a single menu at your venue.  In that case, you would populate a single PosMenu, and your PosMenuItems would roll up to that PosMenu.  Similarly, if you haven’t collected your employee email addresses, your PosEmployee’s do not need to have that field filled out.
+
+For instance, you may only have a single menu at your venue.  In that case, you would populate a single PosMenu, and your PosMenuItems would roll up to that PosMenu. Similarly, if you haven’t collected your employee email addresses, your PosEmployee’s do not need to have that field filled out.
 
 We have some validation tools we’ll discuss later on to hone in on what is and is not required.
 
