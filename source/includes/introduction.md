@@ -190,7 +190,7 @@ As you gain more experience with the Bodhi REST API, it is likely that the Query
 
 Now that we’re able to authenticate to the API,  create and get objects, and use the Query tool, let’s talk about POS data.
 
-#Clarifi API Service - POS Canonical
+#Clarifi API Service
 
 We have built multiple POS integrations that source raw data in a variety of ways - SQL queries, DBF files, APIs - and transform that data into a generalized format that we refer to as “canonical”.  Since different POS’s have different object names, types, and other architectures, transforming that data into a canonical format helps provide a standard dataset that the different Clarifi applications to call to and consume in order to provide value to their users.
 
