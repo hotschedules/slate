@@ -210,52 +210,38 @@ Let’s take a look at the Types of data that make up StoreInfo and StoreBusines
 
 **StoreInfo types**
 
-PosEmployee
-
-PosEmployee’s represent a list of data about the employee profiles that are housed in the POS.
+**_PosEmployee:_** PosEmployee’s represent a list of data about the employee profiles that are housed in the POS.
 
 Here’s a breakdown:
-* Name - The first and last name of the employee
-* Nickname - The employee’s nickname or assumed moniker.
-* Birthdate - the employee’s date of birth
-* Addresses - The street, city, state, zipcode, and country assigned to the employee
-* Emails - the employee’s email address
-* Status - whether or not the employee is terminated
-* Employment Period - the span of time between the employee’s hire date and last day.
-* Instore_id - A ID meant to identify the employee at the store level
-* HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)
-* Phone Numbers - the employee’s phone numbers
 
-<sample spec>
+*  Name - The first and last name of the employee
+*  Nickname - The employee’s nickname or assumed moniker.
+*  Birthdate - the employee’s date of birth
+*  Addresses - The street, city, state, zipcode, and country assigned to the employee
+*  Emails - the employee’s email address
+*  Status - whether or not the employee is terminated
+*  Employment Period - the span of time between the employee’s hire date and last day.
+*  Instore_id - A ID meant to identify the employee at the store level
+*  HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)
+*  Phone Numbers - the employee’s phone numbers
 
-	PosJob
-	A comprehensive list of jobs or roles available for employees to clock in as.
+**Additional StoreInfo type:** A full breakdown of each type can be found in the **Clarifi API Service** section.
 
-	PosEmployeePosition
-An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.
-
-	PosRevenueCenter
-	A list of revenue centers within a venue, such as “Bar” “Patio” “Dining Room”, etc.  
-
-	PosSalesCategory
-A list of types of items being sold at this venue, such as “Food”, “Liquor” ,“Beer”, “NA Bev”, “Retail”, etc.
-
-	PosMenu
-	A list of menus available within the POS, such as “Dinner”, “Happy Hour”, etc
-
-	PosMenuItems
-	A list of menu items and pricing available for sale at the venu.  
-
-	PosMenuModifiers
-A list of menu items that would be classified as modifiers, i.e. attachments to menu items.
+**_PosJob:_** A comprehensive list of jobs or roles available for employees to clock in as.<br>
+**_pmPosEmployeePosition:_** An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.<br>
+**_PosRevenueCenter:_** A list of revenue centers within a venue, such as “Bar” “Patio” “Dining Room”, etc.<br>
+**_PosSalesCategory:_** A list of types of items being sold at this venue, such as “Food”, “Liquor” ,“Beer”, “NA Bev”, “Retail”, etc.<br>
+**_PosMenu:_** A list of menus available within the POS, such as “Dinner”, “Happy Hour”, etc<br>
+**_PosMenuItems:_** A list of menu items and pricing available for sale at the venue.<br>
+**_PosMenuModifiers:_** A list of menu items that would be classified as modifiers, i.e. attachments to menu items.
 
 **StoreBusinessDay Types**
 
-PosPunch
-
-PosCheck
-
-PosCheckItem
+**_PosPunch:_** The punch records that are present in the point of sale system.
+<br>
+**_PosCheck:_** The different transactions at a restaurant.
+<br>
+**_PosCheckItem:_** The items that make up a transaction. Items listed here roll into PosCheck.
 
 
 ##Do I have to send you _all_ this stuff?
