@@ -10,7 +10,13 @@ language_tabs:
 includes:
 
   - introduction
+  - gettingstarted
+  - bodhicloud/gettingstarted
+
+  - making-a-call/getting-started
   - making-a-call/hs-example
+
+  - POS/getting-started
 
   - bodhiagent/agentoverview
   - bodhiagent/gettingstarted
