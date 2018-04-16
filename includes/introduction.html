@@ -242,7 +242,7 @@ Many of these IDs are meant as an “external reference” value, to match an ID
 
 <p>Now that we’re able to authenticate to the API,  create and get objects, and use the Query tool, let’s talk about POS data.</p>
 
-<h1 id="clarifi-api-service---pos-canonical">Clarifi API Service - POS Canonical</h1>
+<h1 id="clarifi-api-service">Clarifi API Service</h1>
 
 <p>We have built multiple POS integrations that source raw data in a variety of ways - SQL queries, DBF files, APIs - and transform that data into a generalized format that we refer to as “canonical”.  Since different POS’s have different object names, types, and other architectures, transforming that data into a canonical format helps provide a standard dataset that the different Clarifi applications to call to and consume in order to provide value to their users.</p>
 
@@ -259,8 +259,9 @@ Many of these IDs are meant as an “external reference” value, to match an ID
 
 <p>For example, a StoreBusinessDay timecard may indicate that Employee #12 clocked in as Job 26 at 3:00pm - a Clarifi application would take this data from StoreBusinessDay and be able to lookup to StoreInfo that Employee #12 is named David and Job 26 is Bartender, and give information to an end user about Jason clocking in as a Bartender.</p>
 
-<p>Let’s take a look at the Types of data that make up StoreInfo and StoreBusinessDay, and then we’ll take a look at how exactly to pass that information into our REST API.
-<strong>StoreInfo types</strong></p>
+<p>Let’s take a look at the Types of data that make up StoreInfo and StoreBusinessDay, and then we’ll take a look at how exactly to pass that information into our REST API.</p>
+
+<p><strong>StoreInfo types</strong></p>
 
 <p>PosEmployee</p>
 
@@ -311,8 +312,9 @@ A list of menu items that would be classified as modifiers, i.e. attachments to 
 
 <h2 id="do-i-have-to-send-you-all-this-stuff?">Do I have to send you <em>all</em> this stuff?</h2>
 
-<p>Not at all!  As we get deeper into building and validating the data itself, you’ll find that some fields are required and some are not.  If a field is required but is irrelevant to your business, you can leave it with a null value.
-For instance, you may only have a single menu at your venue.  In that case, you would populate a single PosMenu, and your PosMenuItems would roll up to that PosMenu.  Similarly, if you haven’t collected your employee email addresses, your PosEmployee’s do not need to have that field filled out.</p>
+<p>Not at all!  As we get deeper into building and validating the data itself, you’ll find that some fields are required and some are not.  If a field is required but is irrelevant to your business, you can leave it with a null value.</p>
+
+<p>For instance, you may only have a single menu at your venue.  In that case, you would populate a single PosMenu, and your PosMenuItems would roll up to that PosMenu. Similarly, if you haven’t collected your employee email addresses, your PosEmployee’s do not need to have that field filled out.</p>
 
 <p>We have some validation tools we’ll discuss later on to hone in on what is and is not required.</p>
 
