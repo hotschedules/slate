@@ -263,52 +263,40 @@ Many of these IDs are meant as an “external reference” value, to match an ID
 
 <p><strong>StoreInfo types</strong></p>
 
-<p>PosEmployee</p>
+<p><strong><em>PosEmployee:</em></strong> PosEmployee’s represent a list of data about the employee profiles that are housed in the POS.</p>
 
-<p>PosEmployee’s represent a list of data about the employee profiles that are housed in the POS.</p>
+<p>Here’s a breakdown:</p>
 
-<p>Here’s a breakdown:
-* Name - The first and last name of the employee
-* Nickname - The employee’s nickname or assumed moniker.
-* Birthdate - the employee’s date of birth
-* Addresses - The street, city, state, zipcode, and country assigned to the employee
-* Emails - the employee’s email address
-* Status - whether or not the employee is terminated
-* Employment Period - the span of time between the employee’s hire date and last day.
-* Instore_id - A ID meant to identify the employee at the store level
-* HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)
-* Phone Numbers - the employee’s phone numbers</p>
+<ul>
+<li> Name - The first and last name of the employee</li>
+<li> Nickname - The employee’s nickname or assumed moniker.</li>
+<li> Birthdate - the employee’s date of birth</li>
+<li> Addresses - The street, city, state, zipcode, and country assigned to the employee</li>
+<li> Emails - the employee’s email address</li>
+<li> Status - whether or not the employee is terminated</li>
+<li> Employment Period - the span of time between the employee’s hire date and last day.</li>
+<li> Instore_id - A ID meant to identify the employee at the store level</li>
+<li> HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)</li>
+<li> Phone Numbers - the employee’s phone numbers</li>
+</ul>
 
-<p><sample spec></p>
+<p><strong>Additional StoreInfo type:</strong> A full breakdown of each type can be found in the <strong>Clarifi API Service</strong> section.</p>
 
-<p>PosJob
-    A comprehensive list of jobs or roles available for employees to clock in as.</p>
-
-<p>PosEmployeePosition
-An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.</p>
-
-<p>PosRevenueCenter
-    A list of revenue centers within a venue, such as “Bar” “Patio” “Dining Room”, etc.  </p>
-
-<p>PosSalesCategory
-A list of types of items being sold at this venue, such as “Food”, “Liquor” ,“Beer”, “NA Bev”, “Retail”, etc.</p>
-
-<p>PosMenu
-    A list of menus available within the POS, such as “Dinner”, “Happy Hour”, etc</p>
-
-<p>PosMenuItems
-    A list of menu items and pricing available for sale at the venu.  </p>
-
-<p>PosMenuModifiers
-A list of menu items that would be classified as modifiers, i.e. attachments to menu items.</p>
+<p><strong><em>PosJob:</em></strong> A comprehensive list of jobs or roles available for employees to clock in as.<br>
+<strong><em>pmPosEmployeePosition:</em></strong> An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.<br>
+<strong><em>PosRevenueCenter:</em></strong> A list of revenue centers within a venue, such as “Bar” “Patio” “Dining Room”, etc.<br>
+<strong><em>PosSalesCategory:</em></strong> A list of types of items being sold at this venue, such as “Food”, “Liquor” ,“Beer”, “NA Bev”, “Retail”, etc.<br>
+<strong><em>PosMenu:</em></strong> A list of menus available within the POS, such as “Dinner”, “Happy Hour”, etc<br>
+<strong><em>PosMenuItems:</em></strong> A list of menu items and pricing available for sale at the venue.<br>
+<strong><em>PosMenuModifiers:</em></strong> A list of menu items that would be classified as modifiers, i.e. attachments to menu items.</p>
 
 <p><strong>StoreBusinessDay Types</strong></p>
 
-<p>PosPunch</p>
-
-<p>PosCheck</p>
-
-<p>PosCheckItem</p>
+<p><strong><em>PosPunch:</em></strong> The punch records that are present in the point of sale system.
+<br>
+<strong><em>PosCheck:</em></strong> The different transactions at a restaurant.
+<br>
+<strong><em>PosCheckItem:</em></strong> The items that make up a transaction. Items listed here roll into PosCheck.</p>
 
 <h2 id="do-i-have-to-send-you-all-this-stuff?">Do I have to send you <em>all</em> this stuff?</h2>
 
