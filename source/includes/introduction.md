@@ -225,7 +225,7 @@ Here’s a breakdown:
 *  HR ID - An ID meant to identify the employee at a company level (i.e. across multiple stores)
 *  Phone Numbers - the employee’s phone numbers
 
-**Additional StoreInfo type:** A full breakdown of each type can be found in the **Clarifi API Service** section.
+**Additional StoreInfo types:** A full breakdown of each type can be found in the **Clarifi API Service** section.
 
 **_PosJob:_** A comprehensive list of jobs or roles available for employees to clock in as.<br>
 **_pmPosEmployeePosition:_** An employee position indicates which PosEmployees are assigned which PosJobs, along with their designated payrate.<br>
