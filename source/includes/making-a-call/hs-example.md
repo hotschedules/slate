@@ -1445,7 +1445,7 @@ status   | Number | Active = 1, Inactive = 0, Terminated = -1
 
 ####setForecastDriversV2
 
-This method takes in a **concept ID**, **store ID**, **workweek**, **startdate**, **enddate**, **starttime**, **endtime**, **volume amount**, **volume type**, and a **revenue center** for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
+This method takes in a **startdate**, **enddate**, **starttime**, **endtime**, **volume amount**, **volume type**, and a **revenue center** for the purpose of submitting forecasted volume drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains volume driver counts for a range of dates, corresponding to the start and end dates. The server side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change.
 
 Query parameter | Type   | Description
 ----------------|--------|------------
@@ -1460,39 +1460,32 @@ Year            | Number | Year formated yyyy
 > **Sample JSON object**
 
 ```
-  [
+[
     {
-      "concept": 1,
-      "storeNum": 1,
-      "workweekStartDate": {
-        "day": 11,
-        "month": 10,
-        "year": 2016
-      },
       "driverAmount": 10,
       "intervalStartDate" : {
-        "day": 1,
-        "month": 5,
-        "year": 2016
+        "day": 15,
+        "month": 4,
+        "year": 2018
       },
       "intervalEndDate": {
-        "day": 11,
-        "month": 10,
-        "year": 2016
+        "day": 15,
+        "month": 4,
+        "year": 2018
       },
       "intervalStartTime": {
-        "amPm": "am",
-        "hours": 0,
+        "amPm": "pm",
+        "hours": 1,
         "seconds": 0,
-        "militaryTime": true,
+        "militaryTime": false,
         "minutes": 0
       },
       "intervalEndTime": {
-        "amPm": "am",
-        "hours": 0,
+        "amPm": "pm",
+        "hours": 1,
         "seconds": 0,
-        "militaryTime": true,
-        "minutes": 15
+        "militaryTime": false,
+        "minutes": 30
       },
       "rvcId": 1,
       "volumeType": "Guests"
