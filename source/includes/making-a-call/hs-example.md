@@ -1509,15 +1509,18 @@ volumeType        | String | Classification of driver requested. Allowed types w
 
 
 ####setGuestCounts
-This method takes in a **concept ID**, **store ID**, **business date**, **date time**, **guest count (must be a positive integer)** and a **revenue center** for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
+This method takes in a **concept ID**, **store ID**, **start and end date**, **business date**, **date time**, **guest count (must be a positive integer)** and a **revenue center** for the purpose of submitting actual guest count drivers to HotSchedules from a third party system or point of sale. Using the authentication from the username token and the concept and store IDs, the server will resolve which HotSchedules client this sync is for. The array contains guest counts for a range of dates, corresponding to the start and end dates. The server-side logic can handle overlapping data (i.e. if you sync 7 days worth of time cards, every day, 6 days of it will be "overlapping" data) and will insert and update data as needed. If the guest are already in the HS database and do not need to be updated, then nothing will change. This method returns a WSReturn object.
 
 Query parameter | Type   | Description
 ----------------|--------|------------
 concept         | Number | The identifier for the location's concept. Must be unique within the company, contact HotSchedules if you're not sure about this value.
 storeNum        | Number | Numeric (integer) identifier for the store. Must be unique within the concept.
-Day             | Number | Day formatted dd
-Month           | Number | Month formatted mm
-Year            | Number | Year formated yyyy
+start_day             | Number | Day formatted dd
+start_month           | Number | Month formatted mm
+start_year            | Number | Year formated yyyy
+end_day             | Number | Day formatted dd
+end_month           | Number | Month formatted mm
+end_year            | Number | Year formated yyyy
 
   `curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setGuestCounts?start_day=30&start_month=4&start_year=2016&end_day=5&end_month=5&end_year=2016" -d "[{json_object_1}, {json_object_2}, {json_object_3}...]"`
   
