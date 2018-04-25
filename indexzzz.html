@@ -1792,7 +1792,7 @@ request(options, function (error, response, body) {
 
 <h4 id="getemployeecertifications">getEmployeeCertifications</h4>
 
-<p>This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.</p>
+<p>This method takes in a <strong>concept ID</strong>, <strong>store ID</strong> and <strong>employee POS ID</strong> and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.</p>
 
 <p>The inputs of this method are the arguments defined by the following table.</p>
 
@@ -1805,11 +1805,6 @@ request(options, function (error, response, body) {
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>All</td>
-<td></td>
-<td></td>
-</tr>
 <tr>
 <td>Concept</td>
 <td>Int</td>
@@ -1831,7 +1826,7 @@ request(options, function (error, response, body) {
 
 <h4 id="getlocations">getLocations</h4>
 
-<p>This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.</p>
+<p>This method takes in a <strong>concept ID</strong> and <strong>store ID</strong>. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.</p>
 
 <p>The inputs of this method are the arguments defined by the following table.</p>
 
@@ -1845,7 +1840,6 @@ request(options, function (error, response, body) {
 </thead>
 <tbody>
 <tr>
-<td nowrap>All</td><td></td><td></td></tr>
 <td nowrap>concept</td><td>int</td><td>The identifier for the location&rsquo;s concept/group. Must be unique within the company. Contact HotSchedules if you&rsquo;re not sure about this value.</td></tr>
 <td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
 </tbody>
