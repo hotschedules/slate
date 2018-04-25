@@ -143,14 +143,13 @@ The outputs of this method are the arguments defined by the following table.
 </thead>
 <tbody>
 <tr>
-<td nowrap>All</td><td></td><td></td></tr>
 <td nowrap>return</td><td>dataLocationArray</td><td>Array of dataLocation objects.</td></tr>
 </tbody>
 </table>
 
 
 ####getDriversByInterval  
-This method will take a **concept ID**, **store number**, **start** and **end dates**, **volume type**, and **data type** and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.
+This method will take a **concept ID**, **store number**, **start and end dates**, **volume type**, and **data type** and return a list of total driver amount for each interval in the date range requested for that concept, store and labor type.
 
 Intervals are configured during initial setup for the customer and are typically 30 minutes or 15 minutes.
 
