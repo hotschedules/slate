@@ -63,12 +63,6 @@ The inputs of this method are the arguments defined by the following table.
 </thead>
 <tbody>
 <tr>
-<td>All</td>
-<td></td>
-<td>1..1</td>
-<td></td>
-</tr>
-<tr>
 <td>Concept</td>
 <td>Int</td>
 <td>The identifier for the location's concept. Must be unique within the company. Contact HotSchedules if you're not sure about this value.
