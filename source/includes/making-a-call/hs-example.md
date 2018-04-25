@@ -78,7 +78,7 @@ The inputs of this method are the arguments defined by the following table.
 
 ####getEmployeeCertifications
 
-This method takes in a concept ID, store ID and employee POS ID and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.
+This method takes in a **concept ID**, **store ID** and **employee POS ID** and returns an array of employee certificate objects. It is meant to get a list of all employee certification information for an employee for that store.
 
 The inputs of this method are the arguments defined by the following table.
 
@@ -92,11 +92,6 @@ The inputs of this method are the arguments defined by the following table.
 </tr>
 </thead>
 <tbody>
-<tr>
-<td>All</td>
-<td></td>
-<td></td>
-</tr>
 <tr>
 <td>Concept</td>
 <td>Int</td>
@@ -117,7 +112,7 @@ The inputs of this method are the arguments defined by the following table.
 </table>
 
 ####getLocations
-This method takes in a concept ID and store ID. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.
+This method takes in a **concept ID** and **store ID**. It returns an array of dataLocation objects, each of which represent one HotSchedules schedule location.
 
 The inputs of this method are the arguments defined by the following table.
 
@@ -131,7 +126,6 @@ The inputs of this method are the arguments defined by the following table.
 </thead>
 <tbody>
 <tr>
-<td nowrap>All</td><td></td><td></td></tr>
 <td nowrap>concept</td><td>int</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
 <td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
 </tbody>
