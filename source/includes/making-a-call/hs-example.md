@@ -1804,3 +1804,49 @@ dateTime     | String | Date time of transaction
 rvcExtId     | Number | Represents the numeric revenue center ID associated with the guest 
 volumeAmount | Number | Value of the volume count for the transaction
 volumeType   | String | Classification of driver requested. Allowed types would be all of the classifications supported from API, HSC, or FTP integration.  “Guests”, “Tables”, “Entrees”, “Deliveries”, "Transactions" and “Products”.
+
+####setLaborForecastByJob
+This method takes in a concept ID, store ID, business date, daypart start and end times,labor forecast and  jobExtId. Forecasted labor for the site, date, internal and job will be updated for the purpose of labor scheduling and all relevant reports. The call can be sent for a full week or single date. All intervals must be updated. A zero in the interval is an acceptable value. A null or blank is an acceptable value and will be treated as a zero. If sent for a single date only the date provided will be updated. All other dates within the week will not be impacted and any values already in the database will be retained. A full day's data must be sent, updating only one interval within a business date is not permitted and the call will fail.
+
+**Input (Literal)**
+The inputs of this method are the arguments defined by the following table.
+
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>concept</td><td>int</td><td>The identifier for the location's concept/group. Must be unique within the company. Contact HotSchedules if you're not sure about this value.</td></tr>
+<td nowrap>storeNum</td><td>int</td><td>Numeric (integer) identifier for the location. Must be unique within the concept.</td></tr>
+<td nowrap>jobs</td><td>wsEmpJobArray</td><td>Array of WSEmpJob objects. Each object represents one employee job, so a single employee can have one or more employee jobs (EmpJob) assigned to him/her. Each job that the employee works will be a separate object in this array.</td></tr>
+<td nowrap>day</td><td>int</td><td>Formatted dd</td></tr>
+<td nowrap>month</td><td>int</td><td>Formatted mm</td></tr>
+<td nowrap>year</td><td>int</td><td>Formatted yyyy</td></tr>
+<td nowrap>dayPartStartTime</td><td>dateTime</td><td>Day part start time</td></tr>
+<td nowrap>laborForecastMinutes</td><td>int</td><td>Minutes value</td></tr>
+<td nowrap>jobExtRef</td><td>int</td><td>Job reference id</td></tr>
+</tbody>
+</table>
+
+**Output (Literal)**
+The outputs of this method are the arguments defined by the following table.
+
+<table>
+<thead>
+<tr>
+<th>Key</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td nowrap>return</td><td>wsReturn</td><td>WSReturn object</td></tr>
+</tbody>
+</table>
