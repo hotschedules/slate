@@ -1808,14 +1808,11 @@ volumeType   | String | Classification of driver requested. Allowed types would 
 ####setLaborForecastByJob
 This method takes in a concept ID, store ID, business date, daypart start and end times,labor forecast and  jobExtId. Forecasted labor for the site, date, internal and job will be updated for the purpose of labor scheduling and all relevant reports. The call can be sent for a full week or single date. All intervals must be updated. A zero in the interval is an acceptable value. A null or blank is an acceptable value and will be treated as a zero. If sent for a single date only the date provided will be updated. All other dates within the week will not be impacted and any values already in the database will be retained. A full day's data must be sent, updating only one interval within a business date is not permitted and the call will fail.
 
-**Input (Literal)**
-The inputs of this method are the arguments defined by the following table.
-
 
 <table>
 <thead>
 <tr>
-<th>Key</th>
+<th>Query Paramater</th>
 <th>Type</th>
 <th>Description</th>
 </tr>
@@ -1834,8 +1831,29 @@ The inputs of this method are the arguments defined by the following table.
 </tbody>
 </table>
 
-**Output (Literal)**
-The outputs of this method are the arguments defined by the following table.
+`curl -X PUT -H "Content-Type:application/json" -u <username>:<password> "https://api.hotschedules.io/<namespace>/controllers/vertx/hotschedules/<concept>/<storeNum>/setLaborForecastByJob"`
+
+> **Sample JSON object**
+
+```
+[
+{  
+   "businessDate":{  
+      "day":3,
+      "month":9,
+      "year":2018
+   },
+   "dayPartStartDate":{  
+      "day":3,
+      "month":9,
+      "year":2018
+   },
+   "dayPartStartTime":1145,
+   "laborForecastMinutes":15,
+   "jobExtRef":11
+}
+]
+```  
 
 <table>
 <thead>
