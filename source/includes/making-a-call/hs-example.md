@@ -1854,17 +1854,3 @@ This method takes in a concept ID, store ID, business date, daypart start and en
 }
 ]
 ```  
-
-<table>
-<thead>
-<tr>
-<th>Key</th>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td nowrap>return</td><td>wsReturn</td><td>WSReturn object</td></tr>
-</tbody>
-</table>
