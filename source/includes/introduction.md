@@ -2,7 +2,7 @@
 
 The HotSchedules Bodhi Platform is a set of REST APIs that power the Clarifi suite of applications - gathering data from a variety of sources and allowing a restaurant manager to gain both just-in-time as well as forward-looking insights into how they can improve their business.
 
-This document is meant to be a resource for software developers who want to interact with our data set.  We will be taking a particular eye towards interacting with existing point-of-sale and existing labor schedule data, as well as how to pass in point-of-sale data in our canonical data model, so that applications can consume it.
+This document is meant to be a resource for software developers who want to interact with our data set.  We will be taking a particular eye towards interacting with existing point-of-sale and existing labor schedule data, as well as how to pass in point-of-sale data in our canonical data model, so that applications can consume it.    _
 
 ##**Building Blocks**
 
